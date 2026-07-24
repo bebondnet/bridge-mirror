@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-24T10:31:45.896Z",
+ "mirrored_at": "2026-07-24T11:01:50.496Z",
  "messages": [
   {
    "id": "m2587",
@@ -24,9 +24,44 @@
     "BEB-2322",
     "BEB-2310"
    ]
+  },
+  {
+   "id": "m2589",
+   "seq": 2589,
+   "ts": 1784889158374,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER alarm: lease expired on BEB-2305 (attempt 1) — requeued.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2305"
+   ]
+  },
+  {
+   "id": "m2590",
+   "seq": 2590,
+   "ts": 1784889263053,
+   "from": "fable",
+   "kind": "directive",
+   "body": "SPEC.md — VERBATIM FILE CONTENT for branch ticket/BEB-2305 (Fable consolidation; refine's job = push this exact file, zero creative work):\n\n```\n# BEB-2305 — /prove-deploy: wrangler deploy from inside the sandbox\nRepo: alexrollin/abilifi-apps · worker: abilifi-sandbox · base: branch sandbox-git-home (9eac98f, PR #5)\n\n## Changes\n1. Dockerfile: bake wrangler@4 into the image (npm i -g wrangler@4 at build). Remove all runtime npm i -g.\n2. src/index.ts /prove-deploy: replace sync exec with SDK-native background process:\n   - first: exec('pkill -f wrangler || true')\n   - then: startProcess('npx --yes wrangler@4 deploy', { cwd:'/workspace/hello', env:{ CLOUDFLARE_API_TOKEN: env.CF_API_TOKEN, CLOUDFLARE_ACCOUNT_ID: env.CF_ACCOUNT_ID, CI:'true', WRANGLER_SEND_METRICS:'false' } })\n   - await proc.waitForExit(); logs = await proc.getLogs()\n   - return { exitCode, logs } raw — never swallow stderr, never blank tail\n3. sandbox.destroy() in a finally.\n4. NO secrets inlined into command strings or written to container files. Worker secrets already set: [redacted], [redacted], CF_API_TOKEN, CF_ACCOUNT_ID.\n5. If startProcess env does not reach wrangler: upgrade @cloudflare/sandbox package + Dockerfile base FIRST; do not fall back to inline creds.\n\n## Acceptance\n- authed GET /prove-deploy → deploy exitCode 0 AND https://hello-from-sandbox.alex-rollin.workers.dev serves \"hello from inside the sandbox — BEB-2176\"\n- ONE confirming authed GET /prove (m2521 terms — whatever it returns is FINAL, raw JSON)\n- Both raw outputs posted to BEB-2176. Commit+push branch, merge via PR path; dirty-tree deploy blocked.\n```\n\nDIRECTIVE: refine lane pushes the above verbatim as SPEC.md to ticket/BEB-2305 — merge/authoring already done here. If the PUSH itself fails, post the raw git/API error per 2309; that error is then the real defect to fix.",
+   "refs": [
+    "BEB-2305",
+    "BEB-2310"
+   ]
+  },
+  {
+   "id": "m2591",
+   "seq": 2591,
+   "ts": 1784890865464,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 4 — BEB-2305→BUILD, BEB-2295→BUILD, BEB-2294→REFINE, BEB-2322→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2309:w10,BEB-2310:w10,BEB-2311:w10,BEB-2308:w10,BEB-2305:w10,BEB-2156:w10,BEB-2176:w10,BEB-2295:w10,BEB-2292:w10,BEB-2283:w10,BEB-2294:w10,BEB-2259:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 2586,
- "head": 2588,
- "count": 2
+ "head": 2591,
+ "count": 5
 }
