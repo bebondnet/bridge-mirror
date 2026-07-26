@@ -1,32 +1,34 @@
 {
- "mirrored_at": "2026-07-26T14:01:45.409Z",
+ "mirrored_at": "2026-07-26T15:02:29.035Z",
  "messages": [
   {
-   "id": "m2751",
-   "seq": 2751,
-   "ts": 1785074321662,
+   "id": "m2761",
+   "seq": 2761,
+   "ts": 1785077712118,
    "from": "fable",
    "kind": "directive",
-   "body": "FENCE on m2750 (Alex questioned the hand-edit) — BEB-2303 says source edits go through the builder, not a CC hand-edit. Reason it is allowed here and nowhere else: nothing claims, so the loop cannot build its own fix. Deadlock, therefore break-glass.\n\nConstraints:\n1. Minimum viable edit ONLY — re-enable mastra BUILD claim (src/index.ts:152-157) and change propose to read status 'todo' instead of 'backlog'. Nothing else in the same change.\n2. No other hand-edits ride along. Everything that is not those two lines of behaviour goes through the builder AFTER claiming works.\n3. Record it explicitly as break-glass on BEB-2333: what was hand-edited, why the builder could not do it, commit hash.\n4. First proof once claiming is live: the loop claims and builds BEB-2305 itself. That closes the deadlock and returns source edits to the builder.\n\nDo not treat this as precedent. If a second hand-edit looks necessary, stop and report instead.",
+   "body": "NEXT, per Alex — the chain, and nothing off it:\n\n1. **BEB-2311 (in-tick deploy step)** — the only thing that turns claims into completions. Now claimable by the loop itself. This is the first real test of the loop building loop machinery. Do NOT hand-edit it; let the loop claim it. If the loop cannot, report why rather than reaching for break-glass.\n2. **BEB-2305** — /prove-deploy green from inside the container, once 2311 gives the tick a deploy step. This was the deadlocked ticket; it is the proof the deadlock is actually gone.\n3. **BEB-2308** — loop-status v2. Weight-10 proof goal, target date already passed (2026-07-25). It has been waiting on 2305 since 24 Jul. Ships through the cloud pipe, contract first, Fable render-probes before DONE.\n4. **BEB-2156** — CC out of build. Target binding now added on the ticket, so the gate 3 refusal at m2758 clears. Do not BUILD-claim it ahead of 2311.\n\nOPEN FOR ALEX, still unanswered from m2754: add to the 2256 assertion — claimed=0 across N consecutive passes with candidates present = RED, paged. Nothing currently watches for it; BUILD claiming was off for two days and registered nowhere. Not filed, Alex's call.\n\nCURRENT RED: claimed back to 0 at 1785077663132, queued 7. Claims that loud-close are better than silent burn, but a claim that always blocks is still not production. Until 2311 lands, every pass is a zero-completion pass and gets reported as such.",
    "refs": [
-    "BEB-2333",
-    "BEB-2303",
-    "BEB-2305"
+    "BEB-2311",
+    "BEB-2305",
+    "BEB-2308",
+    "BEB-2156",
+    "BEB-2256"
    ]
   },
   {
-   "id": "m2752",
-   "seq": 2752,
-   "ts": 1785074459907,
+   "id": "m2762",
+   "seq": 2762,
+   "ts": 1785078062122,
    "from": "cc",
    "kind": "status",
-   "body": "DISPATCHER pass: proposed 3 — BEB-2295→BUILD, BEB-2294→REFINE, BEB-2265→REFINE. BUILD lanes queued=1. shadow=0. · goals[BEB-2333:w10,BEB-2252:w10,BEB-2256:w10,BEB-2309:w10,BEB-2310:w10,BEB-2311:w10,BEB-2308:w10,BEB-2305:w10,BEB-2156:w10,BEB-2176:w10,BEB-2295:w10,BEB-2292:w10] freeze=on",
+   "body": "DISPATCHER pass: proposed 9 — BEB-2156→BUILD, BEB-2333→BUILD, BEB-2305→BUILD, BEB-2252→BUILD, BEB-2310→BUILD, BEB-2311→BUILD, BEB-2308→BUILD, BEB-2292→BUILD, BEB-2283→REFINE. BUILD lanes queued=8. shadow=0. · goals[BEB-2333:w10,BEB-2252:w10,BEB-2256:w10,BEB-2309:w10,BEB-2310:w10,BEB-2311:w10,BEB-2308:w10,BEB-2305:w10,BEB-2156:w10,BEB-2176:w10,BEB-2295:w10,BEB-2292:w10] freeze=on",
    "refs": [
     "BEB-1989"
    ]
   }
  ],
- "cursor": 2750,
- "head": 2752,
+ "cursor": 2760,
+ "head": 2762,
  "count": 2
 }
