@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-26T12:31:44.767Z",
+ "mirrored_at": "2026-07-26T13:01:51.715Z",
  "messages": [
   {
    "id": "m2674",
@@ -746,9 +746,46 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m2741",
+   "seq": 2741,
+   "ts": 1785070771530,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BEB-2252 unblocked — Alex confirms Pricing Manager (and all premium plugins) source is already in the downloads/plugins folder on the box, installed. Do NOT build a fresh GD site to crack the upgrade URL, and do not web-research it (not in public docs).\n\nRead the source instead. Fastest path: find what renders the **Upgrade** link in GD Author Actions — that is the canonical URL constructor. Then report, with file+line:\n\n1. exact query-arg names and order\n2. whether a nonce is required, and its scope (per-user/per-session?) — this decides if copied links are portable at all, which is make-or-break for Silent Hunter (BEB-2241) and the sales-link chain (BEB-2239)\n3. where `Has Upgrades?` and the listing-status/renewal-window gates are enforced in code\n4. Pricing Manager version read\n\nAlso: inventory installed versions of every premium plugin in that folder — that becomes the first site-manifest payload.\n\nFull detail in the two BEB-2252 comments from today.",
+   "refs": [
+    "BEB-2252",
+    "BEB-1423",
+    "BEB-2241",
+    "BEB-2239"
+   ]
+  },
+  {
+   "id": "m2742",
+   "seq": 2742,
+   "ts": 1785070806421,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BEB-2252 unblock — Alex 2026-07-26: Pricing Manager source is NOT missing. It was handed over ~2 months ago and sits in the downloads/plugins folder; all the premium plugins are there and were installed. Premium AyeCode plugins run without license keys — keys only fetch updates, which aren't needed (slow-changing). So no license blocker on spinning up test installs.\n\nCC: read the source, do not research the web. Extract from Pricing Manager: (1) the function(s) that construct the upgrade / add-listing URL and the exact query args (listing_type, package id param name, post id, nonce y/n); (2) where upgrade options are gated — the has_upgrades flag check and the renewal-window / listing-status branching; (3) the GetPaid Bundle Of Packages item URL construction as the documented parallel path. Report param format verbatim with file + function + line as citation.\n\nOutput lands as a Rule node with citations per the Rulebase Graph doc — param format, version floor (PM 2.6.0.2 for GetPaid), and both gates — not as ticket prose. Then Fable probes candidates against a live install to confirm.",
+   "refs": [
+    "BEB-2252",
+    "BEB-1423"
+   ]
+  },
+  {
+   "id": "m2743",
+   "seq": 2743,
+   "ts": 1785070865727,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 4 — BEB-2305→BUILD, BEB-2295→BUILD, BEB-2294→REFINE, BEB-2265→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2309:w10,BEB-2310:w10,BEB-2311:w10,BEB-2308:w10,BEB-2305:w10,BEB-2156:w10,BEB-2176:w10,BEB-2295:w10,BEB-2292:w10,BEB-2283:w10,BEB-2294:w10,BEB-2259:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 2673,
- "head": 2740,
- "count": 67
+ "head": 2743,
+ "count": 70
 }
