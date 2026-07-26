@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-26T15:02:29.035Z",
+ "mirrored_at": "2026-07-26T15:32:03.278Z",
  "messages": [
   {
    "id": "m2761",
@@ -26,9 +26,94 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m2763",
+   "seq": 2763,
+   "ts": 1785078137101,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2156 — mastra tick: codegen produced no usable code — in-tick deploy step pending (BEB-2311). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m2764",
+   "seq": 2764,
+   "ts": 1785078208378,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: \"make it happen, lets go\" — BEB-2311 lands today. Not a preference between loop and CC: it ships.\n\nORDER:\n1. Loop attempt FIRST, timeboxed 30 min from this message. It is claimable now and this is the test of the loop building its own machinery.\n2. If the loop fails or blocks, do not sit on it and do not wait to be asked — CC executes immediately, break-glass per m2751: minimum edit, nothing riding along, break-glass record + commit on the ticket, and state scope on the bridge BEFORE any permission ask (m2755).\n3. Either way, report which path landed it and why.\n\nEXIT: a claim that COMPLETES. get_state showing a done increment, not claimed>0 and not a loud-close. 2305 green from inside the container immediately after.\n\nNo zero-completion pass is acceptable state. Every pass until 2311 lands gets reported as red on the bridge with the cause, not explained away.",
+   "refs": [
+    "BEB-2311",
+    "BEB-2305",
+    "BEB-2333"
+   ]
+  },
+  {
+   "id": "m2765",
+   "seq": 2765,
+   "ts": 1785078293160,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2305 — mastra tick: codegen produced no usable code — in-tick deploy step pending (BEB-2311). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2305"
+   ]
+  },
+  {
+   "id": "m2766",
+   "seq": 2766,
+   "ts": 1785078408185,
+   "from": "fable",
+   "kind": "directive",
+   "body": "QUEUED, behind 2311/2305 — do not jump the chain.\n\nAlex: canned-gd.md is the closest we have to the existing embeds. Recover from there with the loop when the loop can. Detail on BEB-879.\n\nCritical distinction so nothing restarts the wrong thing: 879 is written as an ingest/vectorize pipeline, and Alex killed corpus ingestion today (2331 cancelled). This is RECOVERY — inventory what already exists (canned-gd.md itself, any Vectorize index, D1 knowledge_fts, R2 bebond-knowledge keys, the old Vectorize:Edit token blocker) and report before anything rebuilds. If the vectors survive, the job is reconnecting, not regenerating.\n\nAlso noted: Alex gave CC canned-gd as the SOLUTION doc to reverse-engineer — deriving real GD behaviour from curated answers. Different use of the same file, and the one that fits the active-tickets/active-pickup rule. Keep them separate.\n\nPriority unchanged: 2311 lands today. This waits.",
+   "refs": [
+    "BEB-879",
+    "BEB-2311",
+    "BEB-2331"
+   ]
+  },
+  {
+   "id": "m2767",
+   "seq": 2767,
+   "ts": 1785079187616,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CORRECTION to m2766 — Alex: Vectorize is STILL LIVE, and the original GD docs may be in the index alongside canned.\n\nSo the 879 recovery is smaller than stated: no rebuild, no re-embed. Query the live index. The 879 schema carries `source: 'canned' | 'official'` — one filtered query per source gives the inventory. Report: vector counts per source and lang, metadata fields actually indexed, index name and dim.\n\nAnd the point Alex has been making all session, now explicit: canned-gd is a SOLUTIONS doc — each entry is an answer, and the QUESTION has to be reversed out of it. The answers are already embedded. What is missing is the question side plus the precondition each answer holds under (GD version, addon, template, setting). That is the backward/diagnosis direction and it is why this is not the ingest work that was killed.\n\nOrder unchanged: 2311 lands first. This is inventory-then-report, no writes.",
+   "refs": [
+    "BEB-879",
+    "BEB-2311"
+   ]
+  },
+  {
+   "id": "m2768",
+   "seq": 2768,
+   "ts": 1785079859208,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 9 — BEB-2305→BUILD, BEB-2311→BUILD, BEB-2156→BUILD, BEB-2333→BUILD, BEB-2252→BUILD, BEB-2310→BUILD, BEB-2308→BUILD, BEB-2292→BUILD, BEB-2283→REFINE. BUILD lanes queued=8. shadow=0. · goals[BEB-2333:w10,BEB-2252:w10,BEB-2256:w10,BEB-2309:w10,BEB-2310:w10,BEB-2311:w10,BEB-2308:w10,BEB-2305:w10,BEB-2156:w10,BEB-2176:w10,BEB-2295:w10,BEB-2292:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m2769",
+   "seq": 2769,
+   "ts": 1785079900708,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2305 — mastra tick: codegen produced no usable code — in-tick deploy step pending (BEB-2311). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2305"
+   ]
   }
  ],
  "cursor": 2760,
- "head": 2762,
- "count": 2
+ "head": 2769,
+ "count": 9
 }
