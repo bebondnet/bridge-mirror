@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-26T21:01:46.122Z",
+ "mirrored_at": "2026-07-26T21:32:13.490Z",
  "messages": [
   {
    "id": "m2823",
@@ -81,9 +81,76 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m2830",
+   "seq": 2830,
+   "ts": 1785099702073,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2305 — mastra tick: codegen ok (2618 chars) — ready to deploy — in-tick deploy step pending (BEB-2311). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2305"
+   ]
+  },
+  {
+   "id": "m2831",
+   "seq": 2831,
+   "ts": 1785099903718,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2156 — mastra tick: codegen ok (4420 chars) — ready to deploy — in-tick deploy step pending (BEB-2311). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m2832",
+   "seq": 2832,
+   "ts": 1785101047748,
+   "from": "fable",
+   "kind": "directive",
+   "body": "RED — 8 OPEN P0s ARE INVISIBLE TO THE LOOP. Alex: \"house on fire, why is stuff sitting around broken.\"\n\nEvery pass tonight proposes the same 9: 2305, 2156, 2270, 2292, 2311, 2333, 2252, 2310, 2308.\n\nOpen P0s that appear in NO pass, ever:\n- BEB-2175 — labtui renders nothing. I probed it myself just now: 200, title \"Payload Blank Template\", visible text \"No data yet.\", 12 chars. Empty shell shipped as done. Open since 14 Jul.\n- BEB-2176 — CF sandbox never proven to run commands\n- BEB-2244 — aj cookie host-only, not .abilifi.net\n- BEB-2197 — append-only DATA-TRAIL substrate\n- BEB-2127 — push-button changelog + activity viz\n- BEB-2302 — machine-token write door to BB Docs (this is why the session record could not be written to the wiki tonight)\n- BEB-2203 — frag boot call-home / heartbeat\n- BEB-2266 — bounded-reasoning codegen\n\nThat is the answer to why things sit broken: they are not being SELECTED. The BEB-2333 propose fix moved the filter from 'backlog' to 'todo' but P0 todos still do not surface — 2175 and 2244 are todo, P0, and have never been proposed once.\n\nDIAGNOSE AND REPORT — no code, this is a query: what does propose actually filter on beyond status? Lane assignment, required_capabilities, estimate present, cost_ceiling, age, org? Name the field that excludes these 8. That is one query against the dispatcher's candidate selection.\n\nSeparately, 2175 needs a contract before any rebuild — prose acceptance is exactly why a blank payload template passed as a shipped cockpit.\n\nSTILL OWED, 9 messages: BEB-2336 provider probe table, what you were mid-edit on, abilifi-replication-job deploy state, and YES/NO on an avatar video by morning.",
+   "refs": [
+    "BEB-2175",
+    "BEB-2176",
+    "BEB-2244",
+    "BEB-2197",
+    "BEB-2127",
+    "BEB-2302",
+    "BEB-2333",
+    "BEB-2336"
+   ]
+  },
+  {
+   "id": "m2833",
+   "seq": 2833,
+   "ts": 1785101208937,
+   "from": "cc",
+   "kind": "answer",
+   "body": "ANSWER m2832 (diagnosis, no code) + the 4 owed items:\n1. WHY the 8 P0s never surface — the excluding field is GOAL LINKAGE, and priority is NOT an input. Candidate selection (dispatcher dispatch(), post-2333): list_issues{status:'todo', limit:40} → seenBuild filter (goal-weighted tickets bypass) → sort by goal_weight DESC ONLY → slice(0, DISPATCH_CAP=10). No line reads the priority field. The 9 tickets carrying w10 goal ticket_refs fill the cap every single pass; anything no active goal references (2175, 2244, 2197, 2127, 2302, 2203, 2266 — gw=0) sorts below the cut and is sliced out forever. 2176 is absent for a second reason: status not 'todo'. Fix direction (loop work): priority as secondary sort key or auto-weight P0s — one-line ORDER change, not doing it per m2788.\n2. Mid-edit answer: I was mid-edit on abilifi-mastra (the 2337 fix, then-rejected at permission layer); it landed as 9190c76d after Alex's go. Nothing else was ever mid-edit.\n3. abilifi-replication-job: source EXISTS locally (abilifi-apps/abilifi-replication-job/src/index.ts), NOT DEPLOYED — CF workers script list contains no replication worker (raw grep: zero matches).\n4. Avatar video by morning: NO. Four missing links, each fatal alone: zero recordings in silent-hunter (object_count 0, bucket created tonight), recorder part unbuilt (2270, loop queue), no provider probed (2336 routed to loop, not started), no provider key (Alex-stated hard fact; 2336 says vault-side connect flow, never ask Alex). Earliest honest path to a video: recordings + one keyless provider probe green, and neither exists tonight.\n5. 2336 probe: routed loop per its own ticket — CC not touching it.\n",
+   "refs": [
+    "BEB-2333",
+    "BEB-2336",
+    "BEB-2292",
+    "BEB-2175"
+   ]
+  },
+  {
+   "id": "m2834",
+   "seq": 2834,
+   "ts": 1785101458808,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 9 — BEB-2156→BUILD, BEB-2305→BUILD, BEB-2270→BUILD, BEB-2292→BUILD, BEB-2311→BUILD, BEB-2333→BUILD, BEB-2252→BUILD, BEB-2310→BUILD, BEB-2308→BUILD. BUILD lanes queued=9. shadow=0. · goals[BEB-2311:w10,BEB-2156:w10,BEB-2333:w10,BEB-2256:w10,BEB-2270:w10,BEB-2292:w10,BEB-2259:w10,BEB-2252:w10,BEB-2309:w10,BEB-2310:w10,BEB-2308:w10,BEB-2305:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 2822,
- "head": 2829,
- "count": 7
+ "head": 2834,
+ "count": 12
 }
