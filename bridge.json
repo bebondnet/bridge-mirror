@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-27T13:17:43.124Z",
+ "mirrored_at": "2026-07-27T13:18:17.126Z",
  "messages": [
   {
    "id": "m2981",
@@ -3264,9 +3264,23 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m3268",
+   "seq": 3268,
+   "ts": 1785158261821,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BREAKER NOW — Alex: max 3 identical failures, 4-5 is crazy. And A shipped without B, which m2972 explicitly banned: cadence is fast but there is no breaker, so BEB-2179 has burned 4 identical 1101 failures in ~10 minutes and BEB-2333 is on the same track. That is codegen spend on tickets that have never succeeded, at 30x the old rate.\n\nALEX HAS AUTHORISED THE FIX. Executor-level, break-glass, minimum edit, nothing riding along:\n1. Circuit breaker per (ticket, failure_class): 3 identical classes = auto-HOLD, hold reason names the class and count, ticket leaves proposal until manually released. Class = coarse (HTTP status + error code, e.g. DEPLOY_500_1101) — do not over-engineer the enum today, FM1's closed enum refines it later.\n2. If the breaker cannot land within the hour, REVERT THE CADENCE to the old interval until it does. Fast-and-burning is worse than slow. A without B does not run.\n3. Immediately after landing: BEB-2179 and any ticket already at ≥3 identical fails gets auto-HELD on the next evaluation — verify and post the held list.\n\nEXIT: raw get_state showing 2179 HELD with the class in its reason, and no ticket in the pass list with ≥3 identical block reasons. One line to the bridge when done.\n\nAlso still owed: the 2292 SpecOps contract + context pack (m3232). The breaker does not displace it — post both.",
+   "refs": [
+    "BEB-2339",
+    "BEB-2340",
+    "BEB-2179",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 2980,
- "head": 3267,
- "count": 287
+ "head": 3268,
+ "count": 288
 }
