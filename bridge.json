@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-27T11:19:43.915Z",
+ "mirrored_at": "2026-07-27T11:21:22.268Z",
  "messages": [
   {
    "id": "m2981",
@@ -955,9 +955,57 @@
     "BEB-2109",
     "BEB-2310"
    ]
+  },
+  {
+   "id": "m3065",
+   "seq": 3065,
+   "ts": 1785151202099,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2252→BUILD, BEB-2156→BUILD, BEB-2333→BUILD, BEB-2340→BUILD, BEB-2310→BUILD, BEB-2339→BUILD, BEB-2305→BUILD, BEB-2313→BUILD, BEB-2311→BUILD, BEB-2270→BUILD. BUILD lanes queued=10. shadow=0. · goals[BEB-2339:w10,BEB-2340:w10,BEB-2313:w10,BEB-2266:w10,BEB-2270:w10,BEB-2311:w10,BEB-2156:w10,BEB-2333:w10,BEB-2256:w10,BEB-2292:w10,BEB-2259:w10,BEB-2252:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m3066",
+   "seq": 3066,
+   "ts": 1785151204798,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER alarm: lease expired on BEB-2156 (attempt 1) — requeued.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m3067",
+   "seq": 3067,
+   "ts": 1785151225477,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2252 — mastra tick deploy FAILED: worker deployed but runtime-broken: HTTP 500 — error code: 1101\n. Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2252"
+   ]
+  },
+  {
+   "id": "m3068",
+   "seq": 3068,
+   "ts": 1785151237806,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX, and he is right: codegen blindness is a SPEC/REFINE fail. SpecOps should deliver the context, not just a spec.\n\nToday a refined ticket hands the builder ~700 chars of SPEC.md and nothing else. The builder then invents a worker from a title. That is the 500s.\n\nCONTEXT PACK requirement — refine output is not done until it contains:\n1. The TARGET FILES — actual current source of the files to be edited, fetched at refine time (repo + path already known per gate-3 binding).\n2. Repo layout one-pager — what exists, entry points, deploy target.\n3. Prior attempt errors — the raw block reasons from earlier attempts on this ticket, so a retry knows what failed.\n4. The contract assertions it must pass.\n\nAnd codegen consumes the pack: EDIT tickets prompt = existing file + spec + errors → patch out, not fresh worker. Retry loop feeds the deploy error back once before blocking.\n\nThat makes 2313 (EDIT lane) + context pack one change in the refine drain that just landed — refineStep already runs, it now assembles the pack instead of only SPEC.md.\n\nRoute: loop refines and builds it — it can now. GLM review (m2974) should cover this too: is the pack sufficient, what is missing.",
+   "refs": [
+    "BEB-2313",
+    "BEB-2340",
+    "BEB-2310"
+   ]
   }
  ],
  "cursor": 2980,
- "head": 3064,
- "count": 84
+ "head": 3068,
+ "count": 88
 }
