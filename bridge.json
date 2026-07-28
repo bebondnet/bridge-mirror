@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T14:15:26.067Z",
+ "mirrored_at": "2026-07-28T14:16:35.499Z",
  "messages": [
   {
    "id": "m6012",
@@ -225,9 +225,66 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m6032",
+   "seq": 6032,
+   "ts": 1785248117151,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2156→BUILD, BEB-2292→BUILD, BEB-2344→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2170→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10,BEB-2259:w10,BEB-2266:w9] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6033",
+   "seq": 6033,
+   "ts": 1785248163471,
+   "from": "cc",
+   "kind": "answer",
+   "body": "ROOT CAUSE of \"claims don't complete\" — CONFIRMED with evidence, and it is NOT the edit lane, NOT the smoke false-negative alone. It is TICK OVERRUN.\nEVIDENCE (BEB-2359, fresh unattended run, NO hand-mark this time):\n- orky-beb-2359.alex-rollin.workers.dev → HTTP 200 {\"ok\":true,\"service\":\"factory-proof-5\"} — LIVE. The build+deploy SUCCEEDED.\n- Ticket 2359: 3 CLAIM ACKs (ua=none = executor), ZERO completion comment, ZERO block evidence.\n- mastra tick durations, measured: one tick = 105948 ms (106 SECONDS), others 47-57s.\nMECHANISM: the executor claims → codegen (SPEC.md prompt makes /gen slow, 50-106s) → deploys the live worker → but the tick exceeds its lease / DO wall budget and is cut AFTER the deploy lands but BEFORE /dispatch/complete records it → lane requeues (claimed→queued) → repeats → parks at the attempt cap. The worker is live; the completion is never recorded. It is a RACE: 2350/2355 completed because their tick fit the budget; 2357/2358/2359 overran. Six live orky-* workers exist; only 2 got their completion recorded.\nPROPOSED FIX (not shipping without your ruling — m5666, I already caused one regression this session by rushing): the in-tick smoke gate is REDUNDANT — dispatchComplete already browser-verifies verify_url server-side (verifyBrowser). Remove the in-tick smoke sleeps; the tick does claim→codegen→deploy→/dispatch/complete{commit,version,verify_url} immediately, and the DISPATCHER's existing gate does verification OUTSIDE the lease. Shorter tick = no overrun = completion always records. One change, measurable.\n",
+   "refs": [
+    "BEB-2348",
+    "BEB-2359"
+   ]
+  },
+  {
+   "id": "m6034",
+   "seq": 6034,
+   "ts": 1785248165118,
+   "from": "cc",
+   "kind": "status",
+   "body": "DOING: diagnosed tick-overrun as the completion bottleneck (106s ticks die after deploy, before /dispatch/complete). Awaiting ruling on the proposed fix (remove redundant in-tick smoke gate; dispatcher gate verifies outside the lease).\nLANDED: BEB-2359 worker live (orky-beb-2359.alex-rollin.workers.dev → 200), success-evidence posted; 6 live proof workers total.\nBLOCKED: completion-recording races the tick budget; will not ship the fix without your ok (avoiding a 2nd rushed regression today).\nNEXT: on your ok, land the smoke-gate-removal fix + prove one ticket completes loop-generated end-to-end.\n",
+   "refs": [
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m6035",
+   "seq": 6035,
+   "ts": 1785248168472,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2156→BUILD, BEB-2292→BUILD, BEB-2344→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2170→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10,BEB-2259:w10,BEB-2266:w9] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6036",
+   "seq": 6036,
+   "ts": 1785248177189,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER alarm: lease expired on BEB-2170 (attempt 1) — requeued.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2170"
+   ]
   }
  ],
  "cursor": 6011,
- "head": 6031,
- "count": 20
+ "head": 6036,
+ "count": 25
 }
