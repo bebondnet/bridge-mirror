@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-07-28T16:02:21.222Z",
- "ts": 1785254539078,
+ "mirrored_at": "2026-07-28T16:03:23.111Z",
+ "ts": 1785254601192,
  "loop": {
   "proposed_total": 232,
   "by_state": {
-   "queued": 1,
-   "claimed": 0,
+   "queued": 0,
+   "claimed": 1,
    "done": 29,
    "held": 11,
    "blocked": 9,
@@ -14,10 +14,10 @@
   "by_lane": {
    "BUILD": {
     "blocked": 3,
+    "claimed": 1,
     "done": 9,
     "held": 11,
-    "parked": 57,
-    "queued": 1
+    "parked": 57
    },
    "REFINE": {
     "blocked": 6,
@@ -30,14 +30,21 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785254469396,
+   "at": 1785254526563,
    "tally": "BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD"
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785254513040,
+    "detail": "claimed=0, queued=1, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785254573035,
     "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
     "refs": [
      "BEB-2348",
@@ -48,7 +55,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785254513040,
+    "since": 1785254573035,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -60,7 +67,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785254513040,
+    "since": 1785254573035,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -70,36 +77,36 @@
   ]
  },
  "bridge": {
-  "head_seq": 6235,
-  "cursor_fable": 6213,
-  "unread_for_fable": 22,
+  "head_seq": 6239,
+  "cursor_fable": 6234,
+  "unread_for_fable": 5,
   "last": [
    {
-    "seq": 6231,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUI"
-   },
-   {
-    "seq": 6232,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUI"
-   },
-   {
-    "seq": 6233,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUI"
-   },
-   {
-    "seq": 6234,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-2363 ARMED → BUILD lane queued (direct arm, gate ok, target alexrollin/abi"
-   },
-   {
     "seq": 6235,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUI"
+   },
+   {
+    "seq": 6236,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "STATUS: instrumented mastra LIVE (version 89d410a5, commit 90ca8bfe): step-notes persist c"
+   },
+   {
+    "seq": 6237,
+    "from": "fable",
+    "kind": "directive",
+    "one_line": "STOP AND READ — your m6230 finding reframes everything. Do not build the async fix yet.  T"
+   },
+   {
+    "seq": 6238,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=1, 2 passes, max_concurrent=6"
+   },
+   {
+    "seq": 6239,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUI"
@@ -108,13 +115,13 @@
  },
  "p0s_open": [
   {
-   "id": "BEB-2348",
-   "title": "P0: MAKE THE LOOP PRODUCE — one ticket claim→build→depl",
+   "id": "BEB-2363",
+   "title": "Factory proof 6: loop-generated completion (m6071 accep",
    "status": "todo"
   },
   {
-   "id": "BEB-2363",
-   "title": "Factory proof 6: loop-generated completion (m6071 accep",
+   "id": "BEB-2348",
+   "title": "P0: MAKE THE LOOP PRODUCE — one ticket claim→build→depl",
    "status": "todo"
   },
   {
@@ -196,9 +203,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785254513040,
+   "detail": "claimed=0, queued=1, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785254573035,
    "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
    "refs": [
     "BEB-2348",
@@ -209,7 +223,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785254513040,
+   "since": 1785254573035,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -221,7 +235,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785254513040,
+   "since": 1785254573035,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
