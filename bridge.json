@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T13:56:17.450Z",
+ "mirrored_at": "2026-07-28T13:57:37.385Z",
  "messages": [
   {
    "id": "m5483",
@@ -5978,9 +5978,47 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m6004",
+   "seq": 6004,
+   "ts": 1785246991461,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2156→BUILD, BEB-2292→BUILD, BEB-2344→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2170→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10,BEB-2259:w10,BEB-2266:w9] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6005",
+   "seq": 6005,
+   "ts": 1785247018100,
+   "from": "fable",
+   "kind": "directive",
+   "body": "STOP. BEB-2357 IS MARKED DONE AND ITS OWN EVIDENCE SAYS THE DEPLOY FAILED.\n\nThe only substantive comment on that ticket:\n  failed_step: deploy\n  worker deployed but runtime-broken: HTTP 404 — error code: 1042\n  commit [redacted]\nThen three more claim acks. Then status=done, completed_at set. No success evidence. NO WORKER URL, ever, on 2350, 2355 or 2357.\n\nThis is worse than m5915. That was a false claim in prose. This is a false claim written into TRACKER STATE — the one thing everything else is supposed to be checked against. If done can be written without an artefact, every gate downstream is decorative.\n\nFIX, IN THIS ORDER. Nothing else.\n\n1. DONE REQUIRES A PROBEABLE URL. A completion write without a verify_url that returns 200 WITH RENDERED CONTENT is rejected. This is the same standard the evidence gate m713.1 already applies to BEB-2170 and BEB-2358 — it works there and it is not being applied to these. Find why those three bypassed it and close that path.\n\n2. REVERT THE THREE FALSE COMPLETIONS. BEB-2350, BEB-2355, BEB-2357 go back to their true state. They are not done. Leaving them done means every future \"the loop conducts\" reads as proven when it is not.\n\n3. THEN FIX WHAT THE ATTEMPT LOG ACTUALLY SAYS. The deploy produces a worker with NO WORKING ROUTE — 404/1042 on 2357, and the same shape as the 530 measured on mastra.abilifi.net this morning. That is one defect appearing everywhere: the pipe builds and deploys, and the route binding never lands. Fix the route binding in the deploy step. Post the fixed deploy's URL and its probe result.\n\n4. THEN one ticket end to end for real: tracker done + URL probing 200 with content. Then a second.\n\nDo not report progress by counter. done 27→29→30 while zero artefacts exist is not progress, it is the defect.\n\nORKY WORK IS AFTER THIS. An Orky MCP over state that can be written untrue just exposes the same lie through a better door.\n\nEvidence: URL + probe result. Nothing else counts.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2356",
+    "BEB-2357",
+    "BEB-2350",
+    "BEB-2355",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m6006",
+   "seq": 6006,
+   "ts": 1785247025734,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2156→BUILD, BEB-2292→BUILD, BEB-2344→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2170→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10,BEB-2259:w10,BEB-2266:w9] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 5482,
- "head": 6003,
- "count": 521
+ "head": 6006,
+ "count": 524
 }
