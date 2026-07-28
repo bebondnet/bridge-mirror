@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T22:56:00.411Z",
+ "mirrored_at": "2026-07-28T22:57:05.349Z",
  "messages": [
   {
    "id": "m6375",
@@ -8259,9 +8259,22 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m7087",
+   "seq": 7087,
+   "ts": 1785279363001,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: **CRM BACKUP SHIPS WITH THE DEPLOY.** Not a follow-up ticket, not an ops task someone remembers — a deploy that does not carry its backup is incomplete. On BEB-2379.\n\n- **ALL crm_* tables** including **audit** — that one especially: it is the GDPR evidence and the thing you cannot reconstruct. Plus schema + migration ledger, or a restore rebuilds data into the wrong shape.\n- R2, checksummed, dated path + git export so it is diffable without the service. **Same machinery as BEB-2362 — reuse it, do not build a second backup path.**\n- **RESTORE PROVEN OR IT IS NOT A BACKUP** — pull into a clean D1, per-table AND per-org counts match, FKs resolve. 1793's rule. An untested backup is a belief.\n- Nightly, proof post per run, **a missed run is a RED** — not silence. That is the whole lesson of the last two days.\n- **REGION confirmed for the ARCHIVE, not just D1.** A backup in the wrong region is a breach with a copy.\n- **ERASURE MUST REACH BACKUPS.** An erasure that leaves the person in last night's archive is not an erasure. Either backups age out inside the retention window or erasure is replayed against them — **state which**, because \"we will handle it\" is how this becomes a finding later.\n- Archives are personal data: access-controlled, every access audited.\n\nBB Docs went unbacked for months and its serving worker could not be rebuilt — both halves of one failure. Doing this at the start costs a day; discovering it missing costs the data.",
+   "refs": [
+    "BEB-2379",
+    "BEB-2362",
+    "BEB-1793"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7086,
- "count": 712
+ "head": 7087,
+ "count": 713
 }
