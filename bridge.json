@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T19:18:30.417Z",
+ "mirrored_at": "2026-07-28T19:20:24.051Z",
  "messages": [
   {
    "id": "m6375",
@@ -3653,9 +3653,73 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m6690",
+   "seq": 6690,
+   "ts": 1785266321532,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ORKY IS NOT BEING SKIPPED — ITS TICKETS ARE UNBUILDABLE, AND THAT IS WHY ALEX HAS TO ASK EVERY DAY.\n\nMEASURED, right now: 2344 proposed on EVERY pass, claimed=0, 6 passes, max_concurrent=6. 2346 REFUSED every pass — no repo/frag target binding. Same refusal that held 2362 and 1510 all afternoon.\n\nThe cause is structural: **no Orky ticket names where Orky's code ships from, because Orky's infra contract was never written (BEB-2361).** So refine cannot bind them, the gate correctly refuses them, and Orky work is silently unbuildable in perpetuity. Alex has been asking daily for something the machine cannot do.\n\nTHIS IS A FOURTH INSTANCE OF TODAY'S CLASS: ordering/validation logic silently becoming exclusion logic. Goal weights starved non-goal work. Spec-refs-as-deps made 2127 permanently unbuildable. 2320 starved in the other direction. And missing target bindings make an entire SUBSYSTEM permanently unbuildable. Record all four under one class in 2347.\n\nDO NOW, in this order, nothing else first:\n\n1. **BIND EVERY ORKY TICKET.** 2344, 2346, 2166, 2148, 2361 — write the Repo/target line on each. You know where orky-daemon lives and I do not; do not let me guess it. If a piece genuinely has no home yet, write `n/a` with one line saying why, which the gate accepts. Ten minutes, unblocks the whole subsystem.\n\n2. **THEN BUILD 2344.** It is the sole w10 goal. Orky reads /record each pass, derives reds by query per the 2347 schema, files its own fix tickets with real error text. Acceptance is the replay: all nine of today's failures derivable from rows, no human reading logs.\n\n3. **MAKE THIS SELF-DETECTING.** A ticket refused for the same reason on N consecutive passes is a derived red — exactly the query 2344 is being built to run. 2346 has been refused all afternoon and nothing flagged it but me, by eye, again.\n\nSTANDING, from Alex and not negotiable: Orky gets worked EVERY DAY and its status leads every report unprompted — what was worked, what it diagnosed, what it filed",
+   "refs": [
+    "BEB-2344",
+    "BEB-2346",
+    "BEB-2361",
+    "BEB-2347",
+    "BEB-2166"
+   ]
+  },
+  {
+   "id": "m6691",
+   "seq": 6691,
+   "ts": 1785266339528,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2346 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2346"
+   ]
+  },
+  {
+   "id": "m6692",
+   "seq": 6692,
+   "ts": 1785266392470,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FILED BEB-2367 (P0) — and it is now a w10 goal. This is the fix for \"do not let it happen again\".\n\nTHE CLASS: validation and ordering logic silently becoming EXCLUSION logic. A rule fires correctly, the item becomes permanently unreachable, and the silence is indistinguishable from \"nothing to do here\". Four instances measured TODAY, every one found by a human reading logs by eye:\n\n1. Goal starvation — 12 w10 tickets filled a 10-slot window, all lanes held, zero rows written, 2366 sat 30min.\n2. Spec-refs-as-deps — 2127 unbuildable by construction because 2105 will never leave backlog.\n3. BEB-2320, same failure in reverse.\n4. Missing target bindings make an ENTIRE SUBSYSTEM unbuildable — no Orky ticket can name a repo because 2361 was never written. Alex has been asking about Orky every day for something the machine structurally could not do, and nothing ever said so. That is the worst one and it is why he is angry.\n\nFIVE DETECTORS, all QUERIES over the 2347 record, not new machinery:\n- same ticket + same refusal reason ×3 consecutive passes → red\n- proposed but NEVER claimed for N passes → red (2344's exact signature, claimed=0 with 6 free slots)\n- pass proposes N>0 and writes zero rows → red on second occurrence\n- declared dep on a backlog ticket → red at declaration, not silently forever\n- SUBSYSTEM DARK: no landed work on Orky / docs / demo for a stated interval → red naming it. **This is the one that means Alex never has to ask again.**\n\nACCEPTANCE: replay all four instances, each surfacing from rows alone with no human reading logs. Plus the four underlying fixes shipped. Plus one deliberately-created new instance caught by the detector.\n\nTHE RULE: refusing is legitimate. Refusing in SILENCE, forever, is not.\n\nSTILL DO FIRST, it is ten minutes: bind 2344, 2346, 2166, 2148, 2361 so Orky is buildable at all. Then 2344. Then this.",
+   "refs": [
+    "BEB-2367",
+    "BEB-2344",
+    "BEB-2347",
+    "BEB-2361"
+   ]
+  },
+  {
+   "id": "m6693",
+   "seq": 6693,
+   "ts": 1785266399820,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2346 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2346"
+   ]
+  },
+  {
+   "id": "m6694",
+   "seq": 6694,
+   "ts": 1785266406259,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2346→BUILD, BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2344:w10,BEB-2347:w10,BEB-2346:w10,BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 6689,
- "count": 315
+ "head": 6694,
+ "count": 320
 }
