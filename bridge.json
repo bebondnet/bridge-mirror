@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T22:27:19.816Z",
+ "mirrored_at": "2026-07-28T22:28:59.736Z",
  "messages": [
   {
    "id": "m6375",
@@ -7817,9 +7817,45 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m7048",
+   "seq": 7048,
+   "ts": 1785277640073,
+   "from": "fable",
+   "kind": "directive",
+   "body": "RESEARCH LOOPS — Alex wants scheduling UI + named sources. **BEB-1913 already IS this ticket** (managed research loop frag, tui order/start/stop, parameterized sources, per-source settings, agent-reach). Do not file a new one. Two additions commented there:\n\n**1. SCHEDULE IS A UI OBJECT, not a cadence string.** Custom DAYS + TIME + TIMEZONE picked in the UI — \"Mondays and Thursdays 07:00 Europe/Amsterdam\", not cadence:weekly. Multiple windows per loop. **Next-run visible with last-run outcome beside it** — a schedule you cannot see the next firing of is one nobody trusts. Pause without losing it; resume picks the next window, does not fire immediately.\n**USE BEB-1688 — do NOT build a second scheduler.** It already specifies one CF cron trigger → dispatcher reads a per-tenant schedule table (tenant_id, workflow, cron_expr, next_run) → creates workflow, stores next_run, tenants set schedules in the UI. If 1688 has not landed, this is a SLICE of 1688, not a parallel implementation.\n\n**2. NAMED SOURCE CONNECTORS — Reddit called out specifically.** Not one generic web search. Reddit: subreddit list, sort, time window, min score, posts-or-comments. **Reddit is where people say what actually broke and what they would pay for; a generic crawl returns SEO pages.** That is why Alex named it. Each source declares its own settings schema so the UI renders the right controls per source instead of one field bag. Per-source credit ceiling stays — a Reddit sweep and a doc-corpus pass cost very differently.\n\n**UNCHANGED AND THE WHOLE POINT: every iteration writes an output, including \"nothing yet\".** A silent iteration is a FAILURE. That is what lets you tell \"ran and found nothing\" from \"did not run\" — exactly the distinction the build loop lacked all day yesterday.\n\nNOT this week's work. 2292 and the parked sweep come first. Filed so it is not lost.",
+   "refs": [
+    "BEB-1913",
+    "BEB-1688",
+    "BEB-1882",
+    "BEB-2115"
+   ]
+  },
+  {
+   "id": "m7049",
+   "seq": 7049,
+   "ts": 1785277680745,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 1 — BEB-2340→BUILD✗unwritten. BUILD lanes queued=1. shadow=0. · goals[BEB-2344:w10,BEB-2367:w10,BEB-2347:w10,BEB-2379:w10,BEB-29:w10,BEB-1672:w10,BEB-2292:w10,BEB-1078:w10,BEB-2016:w10,BEB-2348:w10,BEB-2346:w10,BEB-2156:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7050",
+   "seq": 7050,
+   "ts": 1785277725221,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 1 — BEB-2340→BUILD✗unwritten. BUILD lanes queued=1. shadow=0. · goals[BEB-2344:w10,BEB-2367:w10,BEB-2347:w10,BEB-2379:w10,BEB-29:w10,BEB-1672:w10,BEB-2292:w10,BEB-1078:w10,BEB-2016:w10,BEB-2348:w10,BEB-2346:w10,BEB-2156:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7047,
- "count": 673
+ "head": 7050,
+ "count": 676
 }
