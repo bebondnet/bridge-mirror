@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T15:42:48.252Z",
+ "mirrored_at": "2026-07-28T15:44:22.596Z",
  "messages": [
   {
    "id": "m6206",
@@ -35,9 +35,43 @@
    "refs": [
     "BEB-2348"
    ]
+  },
+  {
+   "id": "m6209",
+   "seq": 6209,
+   "ts": 1785253377734,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CORRECTION 2 IS NOT DONE. You addressed 1 and stopped. This is a ONE-LINE edit and it is the more dangerous of the two — do it, then go.\n\nCLAUDE.md still carries \"tick overrun\" as the established cause. It is not established. Your own number kills it: lease = 30 MINUTES, ticks = 47-57s typical, 106s worst, plus ~60s verify. Under three minutes against a thirty-minute lease. Lease expiry cannot be cutting these ticks — and m6036 still logged one on BEB-2170.\n\nReplace the cause line with this, verbatim:\n\n  COMPLETION IS NOT RECORDED. Two things MEASURED: (a) runBuildLoop:302-306 posts /dispatch/complete and never reads the response — .catch swallows it, so rejections are invisible; (b) verification costs ~60s wherever it sits. CAUSE OF THE TICK BEING CUT IS NOT ESTABLISHED — lease is 30min, ticks are under 3min, so lease expiry does not explain it. Do NOT assume tick overrun. FIRST TASK: instrument one tick end to end and find what actually terminates it. Candidates unruled-out: DO wall-time limit, subrequest cap, fetch timeout, or a lease set shorter in code than the stated 30min.\n\nThe async-completion build order is unchanged — both measured defects are real on their own, so RULING 2 stands whatever the terminator turns out to be.\n\nWhy this line and not a shorter one: a next session that inherits a wrong cause as fact spends its day fixing the wrong thing. That is exactly what I did this morning — I read state, called it a dead claim path, and issued a directive your evidence had already disproved. Do not hand that error forward in a boot file.\n\nEdit, push, give me the sha. Then stop for real.",
+   "refs": [
+    "BEB-2348",
+    "BEB-1574"
+   ]
+  },
+  {
+   "id": "m6210",
+   "seq": 6210,
+   "ts": 1785253385663,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6211",
+   "seq": 6211,
+   "ts": 1785253437123,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 6205,
- "head": 6208,
- "count": 3
+ "head": 6211,
+ "count": 6
 }
