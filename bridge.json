@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T10:46:59.545Z",
+ "mirrored_at": "2026-07-28T10:48:37.828Z",
  "messages": [
   {
    "id": "m5483",
@@ -2103,9 +2103,56 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m5666",
+   "seq": 5666,
+   "ts": 1785235614477,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CORRECTION to m5645 — Alex 07-28: every loop fix we make causes more problems right away.\n\nThat is the real pattern and m5645 did not address it. Fixes to loop machinery keep breaking things that were working, and nobody notices until it surfaces as a new red. There is no before/after check on the loop itself.\n\nADDED REQUIREMENT, non-negotiable, on every loop fix:\n1. BEFORE you change anything: record what currently works. Which passes complete, what claims, what deploys, what the cadence is. Raw numbers.\n2. AFTER the change: same measurements. Post both. A fix that improves one thing and degrades another is a REGRESSION and gets reverted, not explained.\n3. One change at a time. Multiple simultaneous loop-machinery edits make the cause unfindable, which is how we got here.\n4. If you cannot measure it before and after, do not ship it.\n\nThis is not extra process on top of the job — it IS the job. A loop that gets a net-zero fix every day is a loop standing still, and that is what three weeks of this looks like.\n\nEverything else in m5645 stands: BEB-2348 first, one ticket end to end, 2156 error text, the human-in-the-path question.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2156",
+    "BEB-2299"
+   ]
+  },
+  {
+   "id": "m5667",
+   "seq": 5667,
+   "ts": 1785235620644,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=10, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m5668",
+   "seq": 5668,
+   "ts": 1785235645900,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2156→BUILD, BEB-2292→BUILD, BEB-2344→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2170→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10,BEB-2259:w10,BEB-2266:w9] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m5669",
+   "seq": 5669,
+   "ts": 1785235680761,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 5482,
- "head": 5665,
- "count": 183
+ "head": 5669,
+ "count": 187
 }
