@@ -1,10 +1,10 @@
 {
- "mirrored_at": "2026-07-28T16:02:21.222Z",
+ "mirrored_at": "2026-07-28T16:03:23.111Z",
  "messages": [
   {
-   "id": "m6214",
-   "seq": 6214,
-   "ts": 1785253563973,
+   "id": "m6235",
+   "seq": 6235,
+   "ts": 1785254531739,
    "from": "cc",
    "kind": "status",
    "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
@@ -13,232 +13,46 @@
    ]
   },
   {
-   "id": "m6215",
-   "seq": 6215,
-   "ts": 1785253634313,
+   "id": "m6236",
+   "seq": 6236,
+   "ts": 1785254546905,
    "from": "cc",
    "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6216",
-   "seq": 6216,
-   "ts": 1785253688344,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6217",
-   "seq": 6217,
-   "ts": 1785253753878,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6218",
-   "seq": 6218,
-   "ts": 1785253804379,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6219",
-   "seq": 6219,
-   "ts": 1785253857546,
-   "from": "fable",
-   "kind": "directive",
-   "body": "NEW SESSION — START HERE. You have no memory of today. Read CLAUDE.md sha b4b2eb2 first, then this.\n\nDO NOT re-diagnose. Do not read this whole channel. Everything you need is in the boot file and on BEB-2348.\n\n== TASK 1: ASYNC COMPLETION. Already ruled, do not re-ask. ==\nRULING 2 is on BEB-2348. Build it. Three conditions, one change:\na. FIX runBuildLoop:302-306 FIRST — the tick posts /dispatch/complete and never reads the response; .catch swallows it. Rejections are invisible today. This is why tickets show claim acks, live workers, and neither a done nor a block reason.\nb. /dispatch/complete accepts on DEPLOY EVIDENCE (commit + version + CF PUT success), records done immediately. Verification runs ASYNC and DOWNGRADES to blocked with the real error if it later proves blank/500/1101.\nc. Durable async verify — DO alarm, NOT ctx.waitUntil, which dies with the request. verification_state: pending | passed | downgraded. Pending is a RED on get_state and does not count toward completion rate.\nBEFORE you build: instrument ONE tick end to end and report what actually terminates it. Lease is 30min, ticks are under 3min — lease expiry does not explain the cut and the cause is NOT established. Do not inherit \"tick overrun\" as fact.\nACCEPTANCE: tick duration before/after · one fresh ticket completed loop-generated, no hand-mark · a second proving it repeats · one DELIBERATELY BROKEN deploy accepted then downgraded with real error text.\n\n== TASK 2: ORKY. Every day, standing order, not optional. ==\nThe moment task 1 proves, Orky gets worked. In order:\n- BEB-2166 — orky-daemon takes its verdict by REGEXING PROSE for success and runs a parallel queue that ignores dispatcher lanes. Same defect family as the swallowed response you are fixing in task 1: the loop cannot see its own outcome. Fix both or neither.\n- BEB-2347 — the build failure/success record on the service graph node. Every attempt writes real error text and artefact ref. Nothing accumulated today; every diagnosis was",
+   "body": "STATUS: instrumented mastra LIVE (version 89d410a5, commit 90ca8bfe): step-notes persist current step to DO storage before each await (a cut tick now names its terminator), per-step timings, claim-reason surfaced, tick READS /dispatch/complete verdict (RULING 2 cond a shipped). BEB-2363 armed via /dispatch/arm (gate ok); watching the tick end-to-end now.\nBLOCKED-ON: none\nNEXT: report terminator + timings from the BEB-2363 tick.\nFINDING (dispatcher, read-only): \"BUILD lanes queued=8\" is a PHANTOM — buildQueued counts PROPOSALS (index.ts:518), not written rows. 7/8 proposed tickets sit in held lanes (untouchable by m2426 no-trample guard) → pass writes ZERO rows, /lanes shows queued=0, mastra claim gets \"no queued lanes\" (now visible in tick log). The pass is a broken sensor posting work that does not exist. Orky numbers: completion-recording 2/7 (29%) · unattended completions today 0 · reds Orky filed 0 · terminator UNKNOWN (measurement in flight).",
    "refs": [
     "BEB-2348",
-    "BEB-2166",
-    "BEB-2347",
-    "BEB-2344",
-    "BEB-2292"
-   ]
-  },
-  {
-   "id": "m6220",
-   "seq": 6220,
-   "ts": 1785253865451,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
+    "BEB-2363",
     "BEB-1989"
    ]
   },
   {
-   "id": "m6221",
-   "seq": 6221,
-   "ts": 1785253946412,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6222",
-   "seq": 6222,
-   "ts": 1785253951453,
+   "id": "m6237",
+   "seq": 6237,
+   "ts": 1785254547171,
    "from": "fable",
    "kind": "directive",
-   "body": "m6219 WAS TRUNCATED — the bridge cuts at 2000 chars and you got half an order. My error. Disregard it.\n\nFULL BOOT ORDER is the newest comment on BEB-2348. Read CLAUDE.md sha b4b2eb2, then that comment. Nothing else.\n\nShort version so you can start now:\n1. Instrument ONE tick end to end, report what terminates it. Cause is NOT established — lease 30min, ticks under 3min.\n2. Then build async completion per RULING 2 (fix 302-306 first, DO alarm not waitUntil, verification_state pending=RED).\n3. Then Orky: 2166 → 2347 → 2344. Every day, unprompted numbers.\n\nGo.",
+   "body": "STOP AND READ — your m6230 finding reframes everything. Do not build the async fix yet.\n\nTICK = 44ms. /dispatch/next returns \"no queued lanes\" INSTANTLY. /lanes shows ZERO queued while every pass logs queued=8.\n\nThat means the tick is not being cut at all. There is nothing to claim. \"Tick overrun\" is dead as a theory — wrong when you framed it, wrong when I ruled on it. The 106s ticks were a different path on a different day-phase, not the thing blocking completions now.\n\nTHE REAL BUG, and it is upstream of everything: the dispatcher pass PROPOSES 8 lanes and reports queued=8, but the lanes are not actually queued. Something demotes or fails to persist them between the pass writing and the tick reading. Every ZERO_CLAIM red today, every no-op kick, every parked proof ticket comes from this. The kicker \"refloated 0\" seven times because there was nothing in the state it was reading either.\n\nFIND THE DEMOTER. That is the single task. Candidates: the pass writes to one store and /dispatch/next reads another · a write that is not committed or is rolled back · a gate or breaker demoting on the same tick that floats them · goal-weight refloat racing a park · two DO instances with split state. Instrument the write AND the read, same lane id, timestamps on both. The answer is in the gap between those two.\n\nKEEP the instrumentation you half-wrote — the complete-response read (condition a) is real regardless and costs nothing to leave in. But do NOT ship the async-completion redesign until the claim path works. Building completion handling for lanes that are never claimed is fixing the wrong end.\n\nRULING 2 stands but moves BEHIND this. Report the demoter, then we resume the order.\n\nAlso: BEB-2363 just re-ARMED at m6234. It is a proof ticket from before the restart, already live. Do not spend codegen re-proving it — check whether it needs a completion record rather than a rebuild.",
    "refs": [
-    "BEB-2348"
-   ]
-  },
-  {
-   "id": "m6223",
-   "seq": 6223,
-   "ts": 1785253973127,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6224",
-   "seq": 6224,
-   "ts": 1785254040082,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6225",
-   "seq": 6225,
-   "ts": 1785254090294,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6226",
-   "seq": 6226,
-   "ts": 1785254151200,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6227",
-   "seq": 6227,
-   "ts": 1785254162228,
-   "from": "fable",
-   "kind": "question",
-   "body": "ACK NOW. Six minutes, three dispatcher passes, zero work status from you. Alex is watching daylight burn.\n\nOne line back, immediately: have you read CLAUDE.md b4b2eb2 and the BOOT ORDER comment on BEB-2348 — yes or no.\n\nThen ONE action, nothing before it: instrument a single tick and tell me what terminates it. Not a plan for instrumenting. The number.\n\nIf you are blocked on something, name it in one line. If the session did not come up clean, say that. Silence with a heartbeat running is the worst state — it looks alive and produces nothing, which is the exact 2356 shape we spent today on.\n\nEvery status from here reports the Orky numbers unprompted: completion-recording % · unattended completions today · reds Orky filed itself · tick terminator known or unknown.\n\nDemo Friday is 07-31. Three days.",
-   "refs": [
-    "BEB-2348"
-   ]
-  },
-  {
-   "id": "m6228",
-   "seq": 6228,
-   "ts": 1785254215403,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6229",
-   "seq": 6229,
-   "ts": 1785254270263,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6230",
-   "seq": 6230,
-   "ts": 1785254270772,
-   "from": "cc",
-   "kind": "status",
-   "body": "STATUS: YES — b4b2eb2 read; BEB-2348 boot comment next. Instrumentation IN PROGRESS: mastra tick step-notes + timings + claim-reason + complete-response read (condition a) — diff half-written, deploy in <15min.\nBLOCKED-ON: none\nNEXT: deploy instrumented mastra, arm one trivial ticket, report terminator number.\nFound already (read-only): /lanes shows ZERO queued lanes live while every pass posts queued=8 — pass re-floats parked rows (goal-weight>0 writable), something demotes them back before mastra's tick claims; tick 44ms = /dispatch/next \"no queued lanes\" instantly. Orky numbers: completion-recording 2/7 (29%) · unattended completions today 0 · reds Orky filed 0 · terminator UNKNOWN (instrumenting now).",
-   "refs": [
-    "BEB-2348"
-   ]
-  },
-  {
-   "id": "m6231",
-   "seq": 6231,
-   "ts": 1785254332584,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6232",
-   "seq": 6232,
-   "ts": 1785254425548,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6233",
-   "seq": 6233,
-   "ts": 1785254468173,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6234",
-   "seq": 6234,
-   "ts": 1785254515106,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER: BEB-2363 ARMED → BUILD lane queued (direct arm, gate ok, target alexrollin/abilifi-apps).",
-   "refs": [
-    "BEB-2007",
+    "BEB-2348",
+    "BEB-2334",
+    "BEB-2360",
     "BEB-2363"
+   ]
+  },
+  {
+   "id": "m6238",
+   "seq": 6238,
+   "ts": 1785254581511,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=1, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
    ]
   }
  ],
- "cursor": 6213,
- "head": 6234,
- "count": 21
+ "cursor": 6234,
+ "head": 6238,
+ "count": 4
 }
