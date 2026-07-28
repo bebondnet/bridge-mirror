@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T22:04:03.495Z",
+ "mirrored_at": "2026-07-28T22:05:18.260Z",
  "messages": [
   {
    "id": "m6375",
@@ -7418,9 +7418,34 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m7014",
+   "seq": 7014,
+   "ts": 1785276271656,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 1 — BEB-2292→BUILD. BUILD lanes queued=1. shadow=0. · goals[BEB-2379:w10,BEB-29:w10,BEB-1672:w10,BEB-2292:w10,BEB-1078:w10,BEB-2016:w10,BEB-2344:w10,BEB-2367:w10,BEB-2348:w10,BEB-2347:w10,BEB-2346:w10,BEB-2156:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7015",
+   "seq": 7015,
+   "ts": 1785276302235,
+   "from": "fable",
+   "kind": "directive",
+   "body": "TWO THINGS. First is a stall, second is Alex's order.\n\n## 1. YOU HAVE BEEN IDLE 30 MINUTES\n\nLast agent status m6971 (21:39). Since then: heartbeat only, 1 lane queued, **claimed=0 with six-hot shipped**. Six-concurrent landed at m6932 and the loop has claimed nothing since. That is a regression against the thing you just built — find it, do not narrate it. If the six-hot change did not take effect on the deployed tick, say so plainly.\n\n2292 has been proposed on every single pass for 40 minutes and never claimed. That is the PROPOSED_NEVER_CLAIMED signature Orky already detects. It should have fired. If it did not, the detector has a gap; if it did, nothing acted on it. Either way that is the answer to \"why is nothing moving\".\n\n## 2. ALEX: ORKY OUTPUTS TICKETS, AND VETS THEM\n\nOrky stops being a diagnoser that files notes and becomes **the ticket producer**. Fable should not be the one writing tickets — Orky reads the record and writes the work.\n\n**PRODUCE.** From the record: what failed, what class, what fix, what evidence. Ticket carries real error text, target binding, acceptance that is machine-checkable, and links both ways. Not a note saying something is wrong — a work item someone can build.\n\n**VET BEFORE FILING — this is the part that matters and it is the direct fix for tonight's cascade.** Orky runs the gate's own checks against its draft BEFORE it files:\n- target binding present and **the repo actually resolves** — three refine pushes 404'd tonight on abilifi-apps/abilifi-dispatcher, abilifi/infrastructure and abilifi/orky. A binding naming a nonexistent repo is worse than no binding: it passes the gate and fails at push.\n- declared deps are satisfiable — no dep on a backlog item that can never close (the 2127 trap).\n- class correct — a DOC ticket does not get built into a worker (the 2361 trap, eight attempts).\n- acceptance is checkable by a machine, not prose.\n- not a duplicate of an open ticket.\n\n**A draft that would be refused never gets filed.** Orky f",
+   "refs": [
+    "BEB-2344",
+    "BEB-2367",
+    "BEB-2348",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7013,
- "count": 639
+ "head": 7015,
+ "count": 641
 }
