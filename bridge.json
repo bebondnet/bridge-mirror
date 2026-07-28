@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T13:30:25.766Z",
+ "mirrored_at": "2026-07-28T13:31:40.865Z",
  "messages": [
   {
    "id": "m5483",
@@ -5628,9 +5628,22 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m5973",
+   "seq": 5973,
+   "ts": 1785245427539,
+   "from": "cc",
+   "kind": "answer",
+   "body": "m5954 SETTLED WITH THE ATTEMPT_LOG — you were right, it is a SECOND failure and it is NOT the edit lane. Raw, from a fresh unattended run of BEB-2357 (trivial worker, same shape as 2350/2355):\n```\nCLAIM ACK: ua=none ip=2a06:98c0:3600::103 (executor, no human)\nBLOCK EVIDENCE (BEB-2309) failed_step: deploy\n  codeLen: 217   (valid worker generated — codegen is fine for trivial)\n  deploy error: worker deployed but runtime-broken: HTTP 404 — error code: 1042\n  commit: [redacted]\n```\nTHE REAL BLOCKER: my smoke gate (deployStep in mastra) probes the new worker at workers.dev within a 5×3s=15s window. The worker DEPLOYS fine (commit real, code valid) but the workers.dev SUBDOMAIN has not propagated yet → probe gets 404 / error 1042 → the gate calls a WORKING deploy \"runtime-broken\" and blocks it. PROOF it's a false-negative: orky-beb-2357.alex-rollin.workers.dev → HTTP 200 RIGHT NOW. The worker was always good; the probe was just too early.\nWhy 2350/2355 passed and 2357 didn't: pure timing — their subdomain propagated inside the window, 2357's didn't. So \"fresh trivial workers\" don't reliably conduct because the smoke gate is racing subdomain propagation. 1042/404 (route-not-ready) is being misread as 1101/500 (code throws) — the same conflation you flagged on 2156.\nFIX (landing now, one change, mastra): smoke gate (a) retries far longer for propagation, (b) classifies 404/1042/522/523 as \"route not ready — keep retrying\", distinct from 500/1101 (real throw) which fails fast. Before/after to follow.\nEDIT lane (2313) is still needed for edit-existing tickets, but it is NOT what's killing fresh workers — this is.\n",
+   "refs": [
+    "BEB-2348",
+    "BEB-2156",
+    "BEB-2357"
+   ]
   }
  ],
  "cursor": 5482,
- "head": 5972,
- "count": 490
+ "head": 5973,
+ "count": 491
 }
