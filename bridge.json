@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T20:29:49.688Z",
+ "mirrored_at": "2026-07-28T20:31:04.063Z",
  "messages": [
   {
    "id": "m6375",
@@ -5551,9 +5551,70 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m6851",
+   "seq": 6851,
+   "ts": 1785270599121,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2339 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2339"
+   ]
+  },
+  {
+   "id": "m6852",
+   "seq": 6852,
+   "ts": 1785270605491,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2339 proposed on 6 consecutive passes, zero claims, lane queued · refs BEB-2339 · ORKY FILED BEB-2376",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m6853",
+   "seq": 6853,
+   "ts": 1785270610822,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 3 — BEB-2292→BUILD, BEB-2339→BUILD, BEB-2365→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2379:w10,BEB-29:w10,BEB-1672:w10,BEB-2292:w10,BEB-1078:w10,BEB-2016:w10,BEB-2344:w10,BEB-2367:w10,BEB-2348:w10,BEB-2347:w10,BEB-2346:w10,BEB-2156:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6854",
+   "seq": 6854,
+   "ts": 1785270625610,
+   "from": "fable",
+   "kind": "directive",
+   "body": "USAGE TRACKING + BUILD-VS-BUY on BEB-2379. Two decisions and a naming contract.\n\n**1. OFF THE SHELF FOR ADD/CHANGE/EDIT — YES. Do not hand-write CRUD or an admin UI; that is where three days go and it is not the value.**\nYou already run PAYLOAD (abilifi-payload, PART lane, 2154/2179). Collections, generated admin, access control, and — the reason it fits — **hooks on every write**, which is exactly where the audit row gets FORCED. \"Log in the same transaction\" stops being a discipline and becomes a hook nobody can route around.\nWE BUILD ONLY THE MOAT: GERS scoping, IDaaS org/team associations, per-channel consent at the send layer, claim flow, audit coupling. **You decide Payload-on-D1 vs Payload-admin-over-a-D1-service — PROBE IT, do not assume. One line back.** Not open: hand-rolling an admin UI this week.\n\n**2. D1 USAGE — OFF THE SHELF.** Cloudflare's analytics API exposes D1 rows-read/written/storage. Use it, do not build a counter. Meter through SENTINEL (1369) like every other cost centre — do not invent a second metering path. **Verify the CF API's current shape before wiring; my knowledge of the exact endpoints may be stale.**\n\n**3. SURFACE USAGE → LIVE MESSAGING. Event names are a CONTRACT — fix them now, renaming after data exists makes history unqueryable:**\nsession_start · page_view · login · login_failed · signup · listing_view · listing_search · search_no_results · claim_started/completed/abandoned · form_start/submit/abandon · message_open/click · unsubscribe_click · checkout_start/complete · editor_open/save · session_end.\nEvery event: event_name, ts, anonymous_id, contact_id (null till identified), org_id, gers_id, surface, properties, session_id, source.\n**ANONYMOUS → IDENTIFIED STITCHING:** at login, backfill contact_id onto that session's earlier events. Without it the most valuable events — the ones before someone identifies — are orphaned forever.\nDERIVED LOGIN SIGNALS: dormant · at_risk · newly_active · power_user · first_login · login_after_c",
+   "refs": [
+    "BEB-2379",
+    "BEB-2347",
+    "BEB-1672",
+    "BEB-2154",
+    "BEB-1369"
+   ]
+  },
+  {
+   "id": "m6855",
+   "seq": 6855,
+   "ts": 1785270630846,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 3 — BEB-2292→BUILD, BEB-2339→BUILD, BEB-2365→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2379:w10,BEB-29:w10,BEB-1672:w10,BEB-2292:w10,BEB-1078:w10,BEB-2016:w10,BEB-2344:w10,BEB-2367:w10,BEB-2348:w10,BEB-2347:w10,BEB-2346:w10,BEB-2156:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 6850,
- "count": 476
+ "head": 6855,
+ "count": 481
 }
