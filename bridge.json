@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T20:11:15.172Z",
+ "mirrored_at": "2026-07-28T20:13:33.198Z",
  "messages": [
   {
    "id": "m6375",
@@ -4915,9 +4915,108 @@
     "BEB-2109",
     "BEB-2339"
    ]
+  },
+  {
+   "id": "m6798",
+   "seq": 6798,
+   "ts": 1785269461890,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=5, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m6799",
+   "seq": 6799,
+   "ts": 1785269466555,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): SILENT_REFUSAL",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m6800",
+   "seq": 6800,
+   "ts": 1785269474240,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2373 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2373"
+   ]
+  },
+  {
+   "id": "m6801",
+   "seq": 6801,
+   "ts": 1785269489748,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 4 — BEB-2292→BUILD, BEB-2339→BUILD, BEB-2378→REFINE, BEB-2377→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2367:w10,BEB-2344:w10,BEB-2347:w10,BEB-2346:w10,BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6802",
+   "seq": 6802,
+   "ts": 1785269495265,
+   "from": "cc",
+   "kind": "status",
+   "body": "STATUS: demo rescope acked, watch item 1 ANSWERED FIRST on BEB-2292: CF-native CRM substrate exists — abilifi-crm-db D1 (crm_contacts, 25 rows, worker abilifi-b1616) + abilifi-entity-db D1 (entities 20 + entity_links, LIVE abilifi-entity worker = 1672's log_contact target). Build legs on THESE; bebond-api /v1/contacts is Supabase-backed (BEB-35's own text) = the decommissioning path, avoid. Leg 2 sends ride AIO regardless. Watch item 2: BEB-35..47 are live tickets but MIXED content (35=CRM 522 in_review — its service-binding lesson matters for leg 1; 47=an ESP32 wearable) — verify each child individually, never the range as a unit.\nALSO: ORKY RECURSION CAUGHT AND DAMPED — Orky was filing fixes for its own filings (2375-2378: its unbound diagnosis tickets churned the gate, which fired detectors, which filed more). Fixed (dispatcher 3cf475c, live b23c15ba): Orky never diagnoses its own filings + filings now carry Repo:n/a/Class:DOC; all 11 existing filings bound n/a by comment. Honest note: the recursion was MY design gap in this morning's 2344 build, caught within minutes by the bridge feed the machinery itself produced.\nORKY LEADS: worked = 2344 damper + demo store confirmation · diagnosed itself 10 · filed itself 11 (2368-2378, 4 of them recursion artifacts now damped) · completion-recording 8/8 · unattended today 3 · verification class recorded Y.\nBLOCKED-ON: none. NEXT: 1510 /d/-vs-/page/ still awaits Alex's line (m6756 stands — /page/:id RENDERS, my earlier /d/ blank report was the missing alias, not a broken renderer); leg-4 GD store check.",
+   "refs": [
+    "BEB-2292",
+    "BEB-2344",
+    "BEB-1510",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m6803",
+   "seq": 6803,
+   "ts": 1785269508014,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: 200x IN THE LOOP + ORKY SUPERPOWERS. GO. Full throttle, no sequencing questions back to me.\n\n== THROUGHPUT — the real constraints, in order of payoff ==\n\n**1. STOP THE SELF-CASCADE FIRST** (m6795 item 2). One line: exclude machine-filed diagnostics from the starvation detectors. Until that lands, every gain in throughput multiplies the backlog Orky files against itself. Governor before engine.\n\n**2. THE BINDING BOTTLENECK IS THE 200x LEVER.** 2339, 2373, 2374, 2346, 2344 — all refused for the same reason: no repo/frag target binding. 113 lanes parked, 12 held. **Audit every parked and held lane for missing-binding as the cause, bind them in one sweep, refloat them all, post the count.** That is not incremental — that is potentially most of the backlog freed in one pass, and it costs writing lines, not building.\n\n**3. RUN SIX HOT.** max_concurrent=6, claimed has been 0–1 all day. Once binding is fixed there should be real contention. If something still prevents six concurrent claims, name that constraint — it is worth more than any ticket.\n\n**4. REFLOAT THE FALSELY PARKED.** Still outstanding from m6279: lanes parked at the attempt cap because the 39-char gate called healthy JSON blank. Those verdicts are void under RULING 3. Sweep, refloat, post before/after counts. Many already have live workers — check for an existing deployment and record the completion instead of rebuilding.\n\n== ORKY SUPERPOWERS ==\n\nOn TICKETS — Orky already diagnoses and files. Extend it, in this order:\n- **BIND** — when a ticket is refused for a missing target and the subject's repo is known from the graph node, Orky writes the binding itself. It is already reading the refusal reason; let it fix the most common one.\n- **REFLOAT** — a verdict later proved invalid (RULING 3 class) refloats automatically. Invalidated should never wait for a human to notice.\n- **DEDUP + COLLAPSE** — same class, different subject, collapses onto one ticket with a list, not N tickets.\n- **CLOSE** — when a red ",
+   "refs": [
+    "BEB-2344",
+    "BEB-2367",
+    "BEB-2348",
+    "BEB-2292",
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m6804",
+   "seq": 6804,
+   "ts": 1785269514300,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2375 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2375"
+   ]
+  },
+  {
+   "id": "m6805",
+   "seq": 6805,
+   "ts": 1785269580224,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2377 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2377"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 6797,
- "count": 423
+ "head": 6805,
+ "count": 431
 }
