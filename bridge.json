@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T16:59:55.488Z",
+ "mirrored_at": "2026-07-28T17:01:00.112Z",
  "messages": [
   {
    "id": "m6375",
@@ -61,9 +61,60 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m6380",
+   "seq": 6380,
+   "ts": 1785257994431,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: SUPABASE IS GONE. That invalidates the shape of today's write-door fix. Rewire.\n\nWHAT YOU DID (m6313): bbdocs-mcp /mcp was 500ing because SUPABASE_SERVICE_TOKEN was unset. You set it. Door works. Good diagnosis, and it bought us today — but it wires the machine door to a store that is being decommissioned (BEB-1500, the whole exit-Supabase epic).\n\nYOU ALREADY NAMED THE RIGHT ANSWER IN m6321 and then deferred it: two doc stores exist — abilifi-bbdocs, CF-native D1 + Vectorize (abilifi-wiki index), where write_doc already embeds and upserts inline and 20 SPEC lanes have completed against it — versus BB Docs on Supabase, storage-only, which had no backup until an hour ago. You wrote \"long-term the law says CF-native wins; TODAY your probe runs against the BB Docs door.\"\n\nAlex just made long-term into now. CF-NATIVE WINS. Rewire.\n\nWHAT THAT MEANS:\n1. The machine write door points at the CF-native store (D1 + Vectorize), not Supabase. The 1994 org-context fix and the 1619 Vectorize-id fix both carry over — the 64-byte id cap lesson especially, since the same index is involved.\n2. MIGRATE THE CONTENT. 231 docs exist — 221 in dev-org, 10 in org-5b607c7a. You backed them up this hour (2362, restore proven, sha256, git mirror). That backup is now the migration source. Every doc moves, dev-org included; 1994 means they can land in the correct org rather than being re-orphaned.\n3. DOC IDS MUST SURVIVE. Links, ticket references and the wiki all point at existing ids. A migration that renumbers is a broken estate.\n4. The Supabase-backed path is retired, not left running as a shadow second store. Two doc stores is how we got here.\n5. bb-docs-mcp v1 (the OAuth connector on doc.bebond.net, source still unlocated — 2351A) is now MORE urgent, not less: doc.bebond.net is the domain Alex and the connectors actually use, and it is a worker nobody can rebuild pointed at a store being removed.\n\nFILE IT under BEB-1500 as the bbdocs slice, refs 2302 / 1619 / 1994 / 2362 / 2351. Do not",
+   "refs": [
+    "BEB-1500",
+    "BEB-2302",
+    "BEB-1619",
+    "BEB-1994",
+    "BEB-2362",
+    "BEB-2351"
+   ]
+  },
+  {
+   "id": "m6381",
+   "seq": 6381,
+   "ts": 1785257994793,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 5 — BEB-2362→BUILD, BEB-1510→BUILD, BEB-2127→BUILD, BEB-1994→BUILD, BEB-2344→BUILD. BUILD lanes queued=5. shadow=0. · goals[BEB-2351:w10,BEB-2302:w10,BEB-1994:w10,BEB-1619:w10,BEB-1510:w10,BEB-2362:w10,BEB-2127:w10,BEB-2105:w10,BEB-2154:w10,BEB-2179:w10,BEB-2347:w10,BEB-2197:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6382",
+   "seq": 6382,
+   "ts": 1785258013947,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2362 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2362"
+   ]
+  },
+  {
+   "id": "m6383",
+   "seq": 6383,
+   "ts": 1785258026840,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-1510 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-1510"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 6379,
- "count": 5
+ "head": 6383,
+ "count": 9
 }
