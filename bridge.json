@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T16:38:34.525Z",
+ "mirrored_at": "2026-07-28T16:39:29.460Z",
  "messages": [
   {
    "id": "m6246",
@@ -1005,9 +1005,45 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m6331",
+   "seq": 6331,
+   "ts": 1785256703154,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6332",
+   "seq": 6332,
+   "ts": 1785256714991,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DISREGARD THE ARCHITECTURE IN m6299 AND m6304. Alex called it and he is right. Deliverable stands, my design was wrong twice.\n\nI ordered a notification surface bolted onto the end. You cannot add changelogs late — they are an EMISSION of the loop, standing, always on, for everything, from the start.\n\nFull correction is the newest comment on BEB-2347. Short form:\n\n1. EVERY state transition emits an event — proposed, armed, refused, claimed, codegen, deploy, complete-posted, complete-accepted/rejected-with-reason, verified, downgraded, parked, refloated. Not just completions. Today's whole story was FAILURES; a success-only log would have been blank all day.\n2. ONE append-only durable store (2197 trail, on the 2347 node). Never process memory.\n3. EVERYTHING is a VIEW over that stream: activity log = raw · changelog = completions filtered · talkies = generated from changelog · get_state = aggregate · Orky diagnosis = query. If any of them needs its own writer, the design is wrong.\n4. BACKFILL SINCE THE START. Reconstruct today from bridge, ticket comments, live workers + version ids. Mark backfilled, never invent. Unrecoverable = recorded as a known gap.\n5. No state change without an event, forever. A transition that emits nothing is a BUG — same class as the swallowed ok:false.\n\nSEQUENCE: stream first (that IS 2347, specced, still not queued) → activity view → changelog → talkies.\n\nThis is why Alex has 40 tickets and zero notifications: every one asked for a view, nobody ever built the stream.\n\n2347 moves to the front, alongside ruling 3.",
+   "refs": [
+    "BEB-2347",
+    "BEB-2197",
+    "BEB-2127",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m6333",
+   "seq": 6333,
+   "ts": 1785256750496,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 6245,
- "head": 6330,
- "count": 85
+ "head": 6333,
+ "count": 88
 }
