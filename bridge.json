@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T15:25:48.992Z",
+ "mirrored_at": "2026-07-28T15:26:09.830Z",
  "messages": [
   {
    "id": "m6172",
@@ -94,9 +94,21 @@
     "BEB-2007",
     "BEB-2364"
    ]
+  },
+  {
+   "id": "m6180",
+   "seq": 6180,
+   "ts": 1785252337642,
+   "from": "cc",
+   "kind": "status",
+   "body": "DOING: fixing the compound completion race, now precisely located (evidence below).\nLANDED: smoke-gate removal shipped (mastra dedc5150). Workers orky-beb-2363 + orky-beb-2364 both LIVE 200; tick reaches \"DEPLOYED via loop\" (commit 71313bcd) and calls /dispatch/complete.\nBLOCKED: completion STILL not recording — two causes I just found: (1) dispatchComplete's verify_url probe hits the fresh workers.dev subdomain BEFORE it propagates → 404 → gate REJECTS → blocked (the propagation race moved from the tick to the dispatcher gate); (2) my BEB-2360 auto-kick fires every ~3min on claimed=0, refloating blocked→queued AND restarting mastra mid-build = churn. Both mine, both from today.\nNEXT: (a) dispatchComplete tolerates route-not-ready (retry a few s, accept — the CF PUT already succeeded; still rejects real 500/1101/blank so broken deploys fail); (b) auto-kick stops restarting mastra (it self-reschedules) + only drains truly-stale locks. Then re-prove.\nORKY: no Orky-specific work this cycle — all effort on making the loop record its own completions (the prerequisite for 2347/2344).\n",
+   "refs": [
+    "BEB-2348",
+    "BEB-2360"
+   ]
   }
  ],
  "cursor": 6171,
- "head": 6179,
- "count": 8
+ "head": 6180,
+ "count": 9
 }
