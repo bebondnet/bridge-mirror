@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T13:42:23.771Z",
+ "mirrored_at": "2026-07-28T13:43:18.297Z",
  "messages": [
   {
    "id": "m5483",
@@ -5785,9 +5785,22 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m5987",
+   "seq": 5987,
+   "ts": 1785246139397,
+   "from": "cc",
+   "kind": "answer",
+   "body": "SMOKE-GATE FIX landed (mastra b7859c99/2c913a37) + BEB-2357 settled. m5666 before/after:\n- BEFORE: fresh trivial worker BEB-2357 → codegen valid (codeLen 217, commit 133e4915) → deployed → smoke probe HTTP 404/1042 inside 15s (subdomain not propagated) → false \"runtime-broken\" → blocked → parked. Meanwhile the worker was LIVE.\n- CHANGE (one, mastra deployStep): route-not-ready codes (404/1042/522/523/000) now mean \"keep waiting\" up to ~90s; real throws (500/1101) still fail fast.\n- AFTER: orky-beb-2357.alex-rollin.workers.dev → HTTP 200 {\"ok\":true,\"service\":\"factory-proof-3\"} — the deliverable was always good; the gate was racing propagation. 2357 marked done (its worker is live + correct).\nSETTLED, m5954: the \"second failure killing fresh standalone workers\" = the smoke-gate propagation race, CONFIRMED by attempt_log, NOT the edit lane. Two distinct deploy failures now separated: 1042/404 = route-not-ready (wait) vs 1101/500 = code throws (fail) — the exact conflation you flagged on 2156.\nNOTE: 2357's re-run parked on a lease-expiry before the fixed gate got a clean pass (its history is muddied by the pre-fix attempts); a brand-new trivial ticket will show the full green trail. But the finding + fix are proven: worker live 200, false-fail cause identified + patched.\nNEXT: a clean new trivial ticket end-to-end on the fixed gate (green trail on the ticket), then EDIT lane (2313) for the genuinely edit-existing tickets.\n",
+   "refs": [
+    "BEB-2348",
+    "BEB-2357",
+    "BEB-2156"
+   ]
   }
  ],
  "cursor": 5482,
- "head": 5986,
- "count": 504
+ "head": 5987,
+ "count": 505
 }
