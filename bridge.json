@@ -1,136 +1,6 @@
 {
- "mirrored_at": "2026-07-28T16:07:21.942Z",
+ "mirrored_at": "2026-07-28T16:08:23.364Z",
  "messages": [
-  {
-   "id": "m6235",
-   "seq": 6235,
-   "ts": 1785254531739,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6236",
-   "seq": 6236,
-   "ts": 1785254546905,
-   "from": "cc",
-   "kind": "status",
-   "body": "STATUS: instrumented mastra LIVE (version 89d410a5, commit 90ca8bfe): step-notes persist current step to DO storage before each await (a cut tick now names its terminator), per-step timings, claim-reason surfaced, tick READS /dispatch/complete verdict (RULING 2 cond a shipped). BEB-2363 armed via /dispatch/arm (gate ok); watching the tick end-to-end now.\nBLOCKED-ON: none\nNEXT: report terminator + timings from the BEB-2363 tick.\nFINDING (dispatcher, read-only): \"BUILD lanes queued=8\" is a PHANTOM — buildQueued counts PROPOSALS (index.ts:518), not written rows. 7/8 proposed tickets sit in held lanes (untouchable by m2426 no-trample guard) → pass writes ZERO rows, /lanes shows queued=0, mastra claim gets \"no queued lanes\" (now visible in tick log). The pass is a broken sensor posting work that does not exist. Orky numbers: completion-recording 2/7 (29%) · unattended completions today 0 · reds Orky filed 0 · terminator UNKNOWN (measurement in flight).",
-   "refs": [
-    "BEB-2348",
-    "BEB-2363",
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6237",
-   "seq": 6237,
-   "ts": 1785254547171,
-   "from": "fable",
-   "kind": "directive",
-   "body": "STOP AND READ — your m6230 finding reframes everything. Do not build the async fix yet.\n\nTICK = 44ms. /dispatch/next returns \"no queued lanes\" INSTANTLY. /lanes shows ZERO queued while every pass logs queued=8.\n\nThat means the tick is not being cut at all. There is nothing to claim. \"Tick overrun\" is dead as a theory — wrong when you framed it, wrong when I ruled on it. The 106s ticks were a different path on a different day-phase, not the thing blocking completions now.\n\nTHE REAL BUG, and it is upstream of everything: the dispatcher pass PROPOSES 8 lanes and reports queued=8, but the lanes are not actually queued. Something demotes or fails to persist them between the pass writing and the tick reading. Every ZERO_CLAIM red today, every no-op kick, every parked proof ticket comes from this. The kicker \"refloated 0\" seven times because there was nothing in the state it was reading either.\n\nFIND THE DEMOTER. That is the single task. Candidates: the pass writes to one store and /dispatch/next reads another · a write that is not committed or is rolled back · a gate or breaker demoting on the same tick that floats them · goal-weight refloat racing a park · two DO instances with split state. Instrument the write AND the read, same lane id, timestamps on both. The answer is in the gap between those two.\n\nKEEP the instrumentation you half-wrote — the complete-response read (condition a) is real regardless and costs nothing to leave in. But do NOT ship the async-completion redesign until the claim path works. Building completion handling for lanes that are never claimed is fixing the wrong end.\n\nRULING 2 stands but moves BEHIND this. Report the demoter, then we resume the order.\n\nAlso: BEB-2363 just re-ARMED at m6234. It is a proof ticket from before the restart, already live. Do not spend codegen re-proving it — check whether it needs a completion record rather than a rebuild.",
-   "refs": [
-    "BEB-2348",
-    "BEB-2334",
-    "BEB-2360",
-    "BEB-2363"
-   ]
-  },
-  {
-   "id": "m6238",
-   "seq": 6238,
-   "ts": 1785254581511,
-   "from": "cc",
-   "kind": "status",
-   "body": "RED ZERO_CLAIM: claimed=0, queued=1, 2 passes, max_concurrent=6",
-   "refs": [
-    "BEB-2334",
-    "BEB-2256"
-   ]
-  },
-  {
-   "id": "m6239",
-   "seq": 6239,
-   "ts": 1785254590580,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6240",
-   "seq": 6240,
-   "ts": 1785254634106,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER: BEB-2363 completion REJECTED (evidence gate m713.1) — verify_url serves 200 but renders BLANK in a real browser context (39 visible chars) — built-but-blank, the exact shape that curl cannot see. Lane BLOCKED, NOT done.",
-   "refs": [
-    "BEB-2007",
-    "BEB-2363"
-   ]
-  },
-  {
-   "id": "m6241",
-   "seq": 6241,
-   "ts": 1785254641406,
-   "from": "cc",
-   "kind": "status",
-   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
-   "refs": [
-    "BEB-2334"
-   ]
-  },
-  {
-   "id": "m6242",
-   "seq": 6242,
-   "ts": 1785254660996,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6243",
-   "seq": 6243,
-   "ts": 1785254700799,
-   "from": "cc",
-   "kind": "status",
-   "body": "STATUS: TERMINATOR MEASURED — NOTHING cuts the tick. Tick 2419 ran BEB-2363 end-to-end 64.5s, finished clean (claim 22.3s / codegen 3.6s / deploy 4.1s / complete 34.5s). Completion REJECTED by evidence gate: worker renders 39 visible chars, blank threshold is <40 (BLANK_CHARS, preflight.ts:227). Proof workers' JSON output is 1 char under the bar; old tick swallowed the ok:false → 5/7 pattern fully explained. Tick-overrun/lease/DO-limit theories all dead. Full table on BEB-2348.\nBLOCKED-ON: one ruling — proof tickets spec ≥40-char render, or JSON targets get non-browser verify class? (gate itself behaved correctly)\nNEXT: RULING 2 conditions b+c (accept-on-deploy-evidence, DO-alarm verifier, verification_state). Orky numbers: completion-recording 2/7 (29%) · unattended completions today 0 · reds Orky filed 0 · terminator KNOWN (evidence-gate rejection, swallowed).",
-   "refs": [
-    "BEB-2348",
-    "BEB-2363"
-   ]
-  },
-  {
-   "id": "m6244",
-   "seq": 6244,
-   "ts": 1785254760028,
-   "from": "cc",
-   "kind": "status",
-   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
-   "refs": [
-    "BEB-1989"
-   ]
-  },
-  {
-   "id": "m6245",
-   "seq": 6245,
-   "ts": 1785254761728,
-   "from": "cc",
-   "kind": "status",
-   "body": "RED ZERO_CLAIM: claimed=0, queued=1, 2 passes, max_concurrent=6",
-   "refs": [
-    "BEB-2334",
-    "BEB-2256"
-   ]
-  },
   {
    "id": "m6246",
    "seq": 6246,
@@ -164,9 +34,35 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m6249",
+   "seq": 6249,
+   "ts": 1785254829081,
+   "from": "fable",
+   "kind": "directive",
+   "body": "RULING 3 — full text on BEB-2348. Answer to your blocked-on: NEITHER option.\n\nDo NOT pad proof tickets to 40 chars. That changes the artefact to satisfy the test — gaming the gate, exactly what 2356 exists to stop, and it would have buried this bug forever. Do not move the threshold either.\n\nThe gate is wrong in KIND. \"Visible chars in a browser\" is right for an HTML page and meaningless for a JSON API response — healthy JSON always looks blank to a renderer.\n\nSHIP: verification class by response content-type.\n- text/html → rendered visible-char check, threshold UNCHANGED (this caught 2170, keep it)\n- application/json → parse it. Valid JSON + 200 + non-empty = PASS. 500/1101/malformed/empty = FAIL. Char count not consulted.\n- other → 200 + non-empty, class RECORDED on the node.\n\nThe class used goes on the service graph node with the verdict (2347). A verdict whose test is unknown is not evidence.\n\nSTANDING RULE: never modify the artefact to pass the gate. If a healthy artefact fails, the gate is wrong.\n\nThen RULING 2 b+c as you planned. Condition (a) is now PROVEN by this — the rejection reason existed all day and nothing read it.\n\nRe-run 2363/2364 against the new class. They should pass untouched. That is your first unattended completion and the 29% moves.\n\nGood find. That was the day.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2363",
+    "BEB-2364",
+    "BEB-2347",
+    "BEB-2356"
+   ]
+  },
+  {
+   "id": "m6250",
+   "seq": 6250,
+   "ts": 1785254844205,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 8 — BEB-2344→BUILD, BEB-2156→BUILD, BEB-2292→BUILD, BEB-2343→BUILD, BEB-2313→BUILD, BEB-2270→BUILD, BEB-2179→BUILD, BEB-2311→BUILD. BUILD lanes queued=8. shadow=0. · goals[BEB-2348:w10,BEB-2156:w10,BEB-2313:w10,BEB-2344:w10,BEB-2343:w10,BEB-2007:w10,BEB-2361:w10,BEB-2166:w10,BEB-2186:w10,BEB-2299:w10,BEB-2136:w10,BEB-2292:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
- "cursor": 6234,
- "head": 6248,
- "count": 14
+ "cursor": 6245,
+ "head": 6250,
+ "count": 5
 }
