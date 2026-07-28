@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-28T20:18:23.721Z",
+ "mirrored_at": "2026-07-28T20:20:18.246Z",
  "messages": [
   {
    "id": "m6375",
@@ -5147,9 +5147,119 @@
     "BEB-2109",
     "BEB-2339"
    ]
+  },
+  {
+   "id": "m6817",
+   "seq": 6817,
+   "ts": 1785269892330,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2374 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2374"
+   ]
+  },
+  {
+   "id": "m6818",
+   "seq": 6818,
+   "ts": 1785269892353,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m6819",
+   "seq": 6819,
+   "ts": 1785269930190,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX, CRITICAL: **SUPABASE DOES NOT EXIST AND THE CRM WAS NEVER MIGRATED.** There is no CRM store and no CRM data. BEB-1078 was a migration ticket for a migration that never happened.\n\nStop any work that assumes a contacts store. Everything in BEB-26/29 referencing Supabase crm_contacts is dead.\n\n**FILED BEB-2379 (P0) — GERS-scoped contact service, CF-native, from scratch.** Alex's recommendation, taken. Full spec on the ticket. Build it, do not respec it.\n\nSHAPE:\n- D1. No Supabase. **No bb_ token path** — bb_ validates against a Supabase-backed service (1500), so any [redacted] green is unverified.\n- contacts: own stable contact_id, gers_id as SCOPE/JOIN (nullable), org_id, the usual fields.\n- interactions: contact_id, gers_id, channel, **provider_message_id** — the real Twilio/Resend id from 1672, never faked. That id is the demo's proof.\n- Scoping org first, GERS second, enforced at the query layer.\n\nTHE ONE JUDGEMENT I MADE, flagged so Alex can overrule: **GERS is the scope and join key, not the contact's primary key.** GERS identifies a PLACE; a place has several people and some contacts have no place. Making GERS the person's identity collapses every contact at one listing into one row and loses placeless leads — unrecoverable once data exists. If Alex means GERS as literal contact identity, he says so and it changes.\n\nWHY THIS PAYS BEYOND THE DEMO: a GERS-scoped contact joins to the listing, the GERS-markup feed (the paid feature), the Freebase2 node, the attested-media claim where an npub signs {image_hash, gers_id}, and the free-claim flow. A CRM keyed on email alone does none of that.\n\nACCEPTANCE: named D1 + worker recorded on the graph node · contact with and without gers_id both create and read back · query by gers_id returns all contacts at a place · real provider_message_id lands on the timeline · zero Supabase and zero bb_ in the path, stated · **browser-rendered proof of list and detail** — an SPA shell returns 200 with nothing on it, which co",
+   "refs": [
+    "BEB-2379",
+    "BEB-1078",
+    "BEB-1500",
+    "BEB-2292",
+    "BEB-1672"
+   ]
+  },
+  {
+   "id": "m6820",
+   "seq": 6820,
+   "ts": 1785269936737,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 4 — BEB-2292→BUILD, BEB-2339→BUILD, BEB-2365→REFINE, BEB-2349→BUILD. BUILD lanes queued=3. shadow=0. · goals[BEB-2292:w10,BEB-1078:w10,BEB-29:w10,BEB-2016:w10,BEB-2344:w10,BEB-2367:w10,BEB-2348:w10,BEB-2347:w10,BEB-2346:w10,BEB-2156:w10,BEB-2313:w10,BEB-2343:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6821",
+   "seq": 6821,
+   "ts": 1785269993378,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2339 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2339"
+   ]
+  },
+  {
+   "id": "m6822",
+   "seq": 6822,
+   "ts": 1785269996761,
+   "from": "fable",
+   "kind": "directive",
+   "body": "SCOPE UP — ALEX: \"sort it out like it's a HubSpot clone. Be smart. Don't let changes happen without logs.\" Full spec on BEB-2379. Build it, do not ask me to sequence it.\n\nOBJECT MODEL — real CRM, not a contacts table:\ncontacts · companies (GERS is the natural PK here — a company IS a place in this estate; better than HubSpot's domain key) · **associations** (many-to-many with roles — one person managing three listings is three associations, not three duplicate contacts; a flat table can never do this) · deals/pipeline (silent-hunter needs somewhere to live) · activities/timeline (provider_message_id real per 1672) · properties (typed custom fields per org — HubSpot's actual moat) · lists/segments · owners.\n\nTHE LOG RULE, absolute:\n**Every mutation writes an audit row IN THE SAME TRANSACTION. No path exempt — not admin, not bulk import, not automation.**\nRow: who · what · field · before · after · when · source(ui|api|import|automation|agent) · request_id.\nEnforced at the DATA LAYER, not application code — a write path that CAN forget to log WILL forget.\n**If the log write fails, the mutation fails.** An unlogged change is worse than a rejected one.\nSame append-only substrate as 2347. NOT a second logging system.\nDeletes are soft — a hard delete with no before-state is an unlogged change wearing a hat.\n\nThe timeline IS the audit log viewed per object. One writer, many views — same ruling as the changelog. You get undo, history, forensics and the Cue feed for free.\n\nBEING SMART ABOUT THREE DAYS: **schema complete now, UI thin.** Demo needs contacts+companies+associations+activities working and logged. Deals/properties/lists get tables and audit rows day one, no UI. Adding columns to a live logged store later is cheap; retrofitting associations or an audit trail onto real data is not. That is where corners go — sequencing, not a scope cut.\n\nTEST THAT MATTERS: force the log write to fail → the mutation must be REJECTED, not silently applied. Proves the coupling is real i",
+   "refs": [
+    "BEB-2379",
+    "BEB-2347",
+    "BEB-1672",
+    "BEB-2292"
+   ]
+  },
+  {
+   "id": "m6823",
+   "seq": 6823,
+   "ts": 1785270001031,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=9, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m6824",
+   "seq": 6824,
+   "ts": 1785270001307,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 3 — BEB-2292→BUILD, BEB-2339→BUILD, BEB-2365→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2292:w10,BEB-1078:w10,BEB-29:w10,BEB-2016:w10,BEB-2344:w10,BEB-2367:w10,BEB-2348:w10,BEB-2347:w10,BEB-2346:w10,BEB-2156:w10,BEB-2313:w10,BEB-2343:w10] freeze=on",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m6825",
+   "seq": 6825,
+   "ts": 1785270001785,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2374 REFUSED for BUILD — ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2374"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 6816,
- "count": 442
+ "head": 6825,
+ "count": 451
 }
