@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T07:17:21.008Z",
+ "mirrored_at": "2026-07-29T07:17:46.608Z",
  "messages": [
   {
    "id": "m6375",
@@ -12565,9 +12565,23 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m7472",
+   "seq": 7472,
+   "ts": 1785309456628,
+   "from": "cc",
+   "kind": "status",
+   "body": "STATUS: BEB-2385 WATCHDOG BUILT AND LIVE — abilifi-watchdog worker deployed (67db7677): own wrangler.toml/cron * * * * */KV, zero shared DO with the dispatcher, exact m7439 logic (STALE 180s, SETTLE 90s, MAX_KICKS 2, kick judged by last_pass MOVEMENT never the 200, SMS after 2 failed kicks with 30min cooldown — degrades LOUD to bridge+SMS_UNCONFIGURED row until ALEX_SMS_TO secret is set, number is not in my hands). Every check → the 2347 record via a new authed POST /record door. HEARTBEAT_MISSING now computed AT READ TIME in /status so get_state shows a dead loop DURING the outage. Daily stall stats per m7445 live in the worker (uptime/stalled/count/longest/recovered_by, wall-clock so a zero-pass day reads 0% not 100%; pre-watchdog days read UNKNOWN not healthy; 07:00 Amsterdam bridge line). Commits: 2625e99+731caa2 (dispatcher), 488741e (watchdog).\nLIVE ACCEPTANCE, NO STAGING NEEDED: the watchdog found the loop stale on its FIRST check and kicked — because THE DISPATCHER CRON IS GENUINELY NOT FIRING (zero cron events in a 70s tail; the 2.5h outage's third layer). The watchdog is now carrying the loop at a ~3min worst-case kick cadence — liveness guaranteed while the cron mystery is chased. Also fixed en route: the pass row is now the HEARTBEAT, written on idle passes too — a quiet loop is no longer indistinguishable from a dead one (that ambiguity would have made the watchdog kick healthy idle).\nOPEN: dispatcher cron-not-firing root cause (CF-side trigger vs scheduled handler — worker redeploys today are the suspect) · ALEX_SMS_TO secret for the SMS leg · acceptance test 2 (SMS with real provider id) waits on that number.\nORKY LEADS: worked = 2385 built+live+kicking · diagnosed itself 15 · filed itself 16 · completion-recording 8/8 (+3 disputed) · unattended 07-29 0 · verification class recorded Y.\nBLOCKED-ON: ALEX_SMS_TO (one secret) for the SMS acceptance leg. Everything else moving. NEXT: cron root-cause, then Cue.",
+   "refs": [
+    "BEB-2385",
+    "BEB-2347",
+    "BEB-2334",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7471,
- "count": 1097
+ "head": 7472,
+ "count": 1098
 }
