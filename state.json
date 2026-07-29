@@ -1,28 +1,29 @@
 {
- "mirrored_at": "2026-07-29T09:15:18.052Z",
- "ts": 1785316517102,
+ "mirrored_at": "2026-07-29T09:15:40.944Z",
+ "ts": 1785316540044,
  "loop": {
   "proposed_total": 265,
   "by_state": {
-   "queued": 6,
-   "claimed": 0,
+   "queued": 5,
+   "claimed": 1,
    "done": 41,
    "held": 17,
-   "blocked": 17,
-   "parked": 118
+   "blocked": 16,
+   "parked": 119
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 6,
+    "blocked": 5,
     "done": 19,
     "held": 14,
-    "parked": 60
+    "parked": 61
    },
    "REFINE": {
     "blocked": 10,
+    "claimed": 1,
     "held": 3,
     "parked": 58,
-    "queued": 2
+    "queued": 1
    },
    "SPEC": {
     "blocked": 1,
@@ -38,9 +39,16 @@
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785316447532,
+    "detail": "claimed=0, queued=7, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785316507528,
     "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
     "refs": [
      "BEB-2348",
@@ -51,7 +59,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -63,7 +71,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -113,9 +121,24 @@
     }
    },
    {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1785260889405,
+    "detail": "BEB-2127 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over a · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-2127"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over an empty D1). Worse than failing: a shell deploys green and verifies 200 while rendering nothing, so the build looks done. This needs the UI lane, not a codegen build.\",\n  \"evidence\": \"declared in the ticket: \\\"URGENT: working push-button changelog + Three.js activity visualization demo for city funding presentation TOMORROW\\\" (m938 wall, proven by BEB-2127)\",\n  \"fix_ref\": \"BEB-2127 / m938\"\n }\n]",
+     "subject": "BEB-2127"
+    },
+    "fix_ticket": "BEB-2406"
+   },
+   {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "BEB-2348 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2348"
@@ -129,7 +152,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
     "refs": [
      "BEB-2292"
@@ -143,7 +166,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "BEB-2175 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2175"
@@ -157,7 +180,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "BEB-2302 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2302"
@@ -171,7 +194,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "BEB-2127 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2127"
@@ -180,13 +203,12 @@
      "cls": "proposed-never-claimed",
      "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2127"
-    },
-    "fix_ticket": "BEB-2405"
+    }
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785316447532,
+    "since": 1785316507528,
     "detail": "BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2396"
@@ -200,16 +222,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 7646,
+  "head_seq": 7647,
   "cursor_fable": 6374,
-  "unread_for_fable": 1272,
+  "unread_for_fable": 1273,
   "last": [
-   {
-    "seq": 7642,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 — BEB-2379→BUILD✗unwritten, BEB-2348→SPEC, BEB-2394→BUILD✗unw"
-   },
    {
     "seq": 7643,
     "from": "cc",
@@ -233,6 +249,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane BLOCKED: BEB-2127 — preflight HELD (BEB-2134) — CODEGEN_WALL: the delivera"
+   },
+   {
+    "seq": 7647,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · REPEAT_FAILER[BEB-2127]→BEB-2406"
    }
   ]
  },
@@ -326,9 +348,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785316447532,
+   "detail": "claimed=0, queued=7, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785316507528,
    "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
    "refs": [
     "BEB-2348",
@@ -339,7 +368,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -351,7 +380,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -401,9 +430,24 @@
    }
   },
   {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1785260889405,
+   "detail": "BEB-2127 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over a · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-2127"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over an empty D1). Worse than failing: a shell deploys green and verifies 200 while rendering nothing, so the build looks done. This needs the UI lane, not a codegen build.\",\n  \"evidence\": \"declared in the ticket: \\\"URGENT: working push-button changelog + Three.js activity visualization demo for city funding presentation TOMORROW\\\" (m938 wall, proven by BEB-2127)\",\n  \"fix_ref\": \"BEB-2127 / m938\"\n }\n]",
+    "subject": "BEB-2127"
+   },
+   "fix_ticket": "BEB-2406"
+  },
+  {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "BEB-2348 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2348"
@@ -417,7 +461,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
    "refs": [
     "BEB-2292"
@@ -431,7 +475,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "BEB-2175 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2175"
@@ -445,7 +489,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "BEB-2302 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2302"
@@ -459,7 +503,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "BEB-2127 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2127"
@@ -468,13 +512,12 @@
     "cls": "proposed-never-claimed",
     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2127"
-   },
-   "fix_ticket": "BEB-2405"
+   }
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785316447532,
+   "since": 1785316507528,
    "detail": "BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2396"
