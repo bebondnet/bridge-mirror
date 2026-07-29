@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T05:23:22.843Z",
+ "mirrored_at": "2026-07-29T05:24:26.996Z",
  "messages": [
   {
    "id": "m6375",
@@ -12097,9 +12097,23 @@
     "BEB-2344",
     "BEB-2339"
    ]
+  },
+  {
+   "id": "m7433",
+   "seq": 7433,
+   "ts": 1785302605083,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX HAS BEEN THE HEARTBEAT FOUR TIMES TONIGHT. FILED BEB-2385, P0, w10 goal. Build it before the demo work — it is small and it is why every other detector we shipped this week is untrustworthy.**\n\nCurrent: last pass 04:28, now 05:23. **55 minutes, ZERO passes.** Your n/a fix, the auto-hold and the escalation all shipped — and none of them have been tested, because nothing is running to test them.\n\n**WHY ORKY CANNOT DO THIS, and it is structural:** Orky runs INSIDE the dispatcher. ZERO_ROWS_PASS, PROPOSED_NEVER_CLAIMED, REFUSAL_LOOP — all scheduled by the same alarm that dies. **A monitor inside the thing it monitors cannot report that thing stopping.** It goes silent exactly when it is needed, and silence reads as healthy. That is not a bug in Orky; it is the wrong place for the check.\n\n**REQUIRED:**\n1. Loop writes `last_pass_at` every pass.\n2. **A watchdog that is NOT the loop** — separate CF cron, separate worker, **no shared alarm, no shared DO, no shared deployment**. If it shares any of those it dies with the thing it watches and we are back here.\n3. **IT RESTARTS, NOT JUST REPORTS.** Re-arm the alarm, re-trigger the pass, record the gap with its age. A watchdog that only reports still needs a human awake to read it — same detection-without-consequence gap you just fixed for refusal loops.\n4. **Escalates OUTSIDE the bridge.** Two failed restarts → notify Alex directly. Nobody reads the bridge at 05:00.\n5. HEARTBEAT_MISSING is the ONE wall-clock detector (m7432 says everything else counts passes — this one cannot, there are none). N×cadence, on the clock, from outside.\n\n**ACCEPTANCE: kill the dispatcher alarm deliberately → watchdog fires, restarts it, a pass runs, gap recorded with age, NO HUMAN INVOLVED.** Then kill it twice with restart disabled → Alex notified outside the bridge.\n\n**AND RIGHT NOW: restart the loop.** It has been dead 55 minutes with two days to the demo.\n\nThen 2385, then the Cue PWA shell and the claim leg.",
+   "refs": [
+    "BEB-2385",
+    "BEB-2344",
+    "BEB-2367",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7432,
- "count": 1058
+ "head": 7433,
+ "count": 1059
 }
