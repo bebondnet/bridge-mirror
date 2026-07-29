@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T10:47:43.140Z",
+ "mirrored_at": "2026-07-29T10:48:31.612Z",
  "messages": [
   {
    "id": "m6375",
@@ -16567,9 +16567,34 @@
     "BEB-2007",
     "BEB-2412"
    ]
+  },
+  {
+   "id": "m7817",
+   "seq": 7817,
+   "ts": 1785322065862,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2348→SPEC[blocked], BEB-2292→BUILD, BEB-2379→BUILD[blocked], BEB-2175→SPEC[blocked], BEB-2302→BUILD✗unwritten, BEB-1994→BUILD✗unwritten, BEB-1619→BUILD[blocked], BEB-1510→BUILD[blocked], BEB-2411→SPEC[blocked], BEB-2396→SPEC✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2127:w10,BEB-2394:w10,BEB-2292:w10,BEB-2397:w10,BEB-2344:w10,BEB-2385:w10,BEB-2156:w10,BEB-2340:w10,BEB-2347:w10,BEB-2367:w10,BEB-2379:w10,BEB-29:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7818",
+   "seq": 7818,
+   "ts": 1785322099560,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX: get the codegen-wall fix done as soon as viz is done — today.**\n\n**Not all of BEB-2412 today. But most of it can be nearly free if you build the viz deliberately.**\n\n## EXTRACT TEMPLATES FROM THE VIZ BUILD — do this, it costs almost nothing\n\nYou are about to build, in 2127:\n- a **changelog list** rendering real completions → that IS the `list` template\n- a **Three.js scene** with mount, resize, teardown → that IS the `canvas` template, **and canvas is the exact shape that walled four times**\n\n**Build them as registered parts with .part.md and registry entries, not as one-off code inside the changelog page.** Same effort, and the template library is a third done the moment viz ships. If you build them inline, we pay for them again next week.\n\nThat is two of the six: `list` and `canvas`. `detail` may fall out of the click-a-node panel — take it if it does, do not force it.\n\n## THEN ONE THING: BEB-2313, THE EDIT LANE\n\nAlready specced, already 2 days overdue, and it is the piece that makes everything else cheaper — patching a working part beats generating from nothing, every time. **BEB-2225's source-edit machinery already has the properties** (whole file to the model, reject a rewrite under 60% as truncation, node --check, revert on failure, commit not deploy). Wire it to the UI path.\n\n**Success test:** a UI ticket modifies an existing part instead of emitting a fresh worker, proven on a real change.\n\n## NEXT WEEK, NOT TODAY\n\nTemplates 3-6 (form, table, status) · `Template:` in the refine binding · the `CODEGEN_SHELL` contract element check.\n\n**Why not today, plainly:** Friday still needs Cue hand-built, and doing six templates plus classification plus a new gate on top of that produces six half-templates and a demo that slips. **The shell detector especially must not be rushed** — a gate that wrongly rejects real work is worse than the wall it replaces.\n\n## SO, TODAY, IN ORDER\n\n1. **2127 viz** — six steps, and extract `list` + `canvas` as registered parts whil",
+   "refs": [
+    "BEB-2127",
+    "BEB-2412",
+    "BEB-2313",
+    "BEB-2394"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7816,
- "count": 1442
+ "head": 7818,
+ "count": 1444
 }
