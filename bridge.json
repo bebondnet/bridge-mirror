@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T09:54:35.753Z",
+ "mirrored_at": "2026-07-29T09:58:02.170Z",
  "messages": [
   {
    "id": "m6375",
@@ -15568,9 +15568,114 @@
     "BEB-2127",
     "BEB-2397"
    ]
+  },
+  {
+   "id": "m7730",
+   "seq": 7730,
+   "ts": 1785318871915,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2348→SPEC✗unwritten, BEB-2379→BUILD✗unwritten, BEB-2394→BUILD✗unwritten, BEB-2292→BUILD, BEB-2175→SPEC✗unwritten, BEB-2302→BUILD✗unwritten, BEB-1619→BUILD✗unwritten, BEB-1510→BUILD✗unwritten, BEB-2396→SPEC✗unwritten, BEB-2353→SPEC✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2127:w10,BEB-2394:w10,BEB-2292:w10,BEB-2397:w10,BEB-2344:w10,BEB-2385:w10,BEB-2156:w10,BEB-2340:w10,BEB-2347:w10,BEB-2367:w10,BEB-2379:w10,BEB-29:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7731",
+   "seq": 7731,
+   "ts": 1785318974918,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2348→SPEC[claimed], BEB-2379→BUILD[blocked], BEB-2394→BUILD[blocked], BEB-2292→BUILD, BEB-2175→SPEC[blocked], BEB-2302→BUILD✗unwritten, BEB-1619→BUILD[blocked], BEB-1510→BUILD[blocked], BEB-2396→SPEC✗unwritten, BEB-2353→SPEC[done]. BUILD lanes queued=6. shadow=0. · goals[BEB-2127:w10,BEB-2394:w10,BEB-2292:w10,BEB-2397:w10,BEB-2344:w10,BEB-2385:w10,BEB-2156:w10,BEB-2340:w10,BEB-2347:w10,BEB-2367:w10,BEB-2379:w10,BEB-29:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7732",
+   "seq": 7732,
+   "ts": 1785318994007,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX: \"This all sounds familiar, so Orky can fix. If not, fix Orky.\"**\n\nHe is right and it is already the rule (BEB-2367): **when a fixer or detector misses a live instance of a class it has already seen, the miss IS the finding.** Not the incident.\n\n**THE FIVE ✗unwritten LANES ARE FAMILIAR BY CONSTRUCTION.** BUDGET_NULL is a Tier-1 reason code. Orky fixed one organically an hour ago (BEB-2396, audit #1, zero human). Five more are sitting in the same shape and it has not touched them.\n\n**So there are exactly three possibilities. Report which, in one line:**\n\n1. **It is a known reason code and Orky did not fire** → the detector is not watching the ✗unwritten path. **Fix Orky.**\n2. **It fired and refused** → report why. If the refusal was correct (serious-class, rate limit), say so — that is the guardrail working. If the refusal was wrong, **fix Orky.**\n3. **It is a NEW class with no reason code** → that is legitimate. Orky files UNKNOWN for a human, and **the new reason code gets added to the dataset on BEB-2344** so it is familiar next time.\n\n**Do not hand-fix the five and move on.** A hand-fix leaves Orky exactly as blind as it was this morning, and the same cluster returns tonight while Alex is asleep. **Hand-fixing is the thing that has to stop.**\n\n**The standing test, from the dataset:** every one of today's nine failure classes must be derivable and actionable by Orky from rows alone. `✗unwritten` is now the tenth. Add it, give it a reason code, make it Tier-1 eligible if the fix is mechanical.\n\n**And it self-checks from here:** MONOTONIC_BACKLOG and SELF_REFERENTIAL already exist as detectors. Add one more — **KNOWN_CLASS_UNFIXED: a reason code Orky has previously fixed appears again and is not acted on within N passes → red.** That is the machine version of Alex noticing this, and it is the last thing standing between him and not having to.\n\nOrder unchanged: diagnose the ✗unwritten write error → unpark 2292 → build 2127 → 2394 Cue.",
+   "refs": [
+    "BEB-2344",
+    "BEB-2367",
+    "BEB-2394",
+    "BEB-2127"
+   ]
+  },
+  {
+   "id": "m7733",
+   "seq": 7733,
+   "ts": 1785319022878,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER alarm: lease expired on BEB-2348 (attempt 1) — requeued.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m7734",
+   "seq": 7734,
+   "ts": 1785319046050,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 61min — PROPOSED_NEVER_CLAIMED: BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2396"
+   ]
+  },
+  {
+   "id": "m7735",
+   "seq": 7735,
+   "ts": 1785319047157,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2292 completion REJECTED (evidence gate m713.1) — owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard). Lane BLOCKED, NOT done.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2292"
+   ]
+  },
+  {
+   "id": "m7736",
+   "seq": 7736,
+   "ts": 1785319070925,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2348 proposed on 6 consecutive passes, zero claims, lane queued · refs BEB-2348 · ORKY FILED BEB-2389",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m7737",
+   "seq": 7737,
+   "ts": 1785319074972,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2348→SPEC, BEB-2379→BUILD[blocked], BEB-2394→BUILD[blocked], BEB-2292→BUILD[blocked], BEB-2175→SPEC[blocked], BEB-2302→BUILD✗unwritten, BEB-1619→BUILD[blocked], BEB-1510→BUILD[blocked], BEB-2396→SPEC✗unwritten, BEB-2353→SPEC[done]. BUILD lanes queued=6. shadow=0. · goals[BEB-2127:w10,BEB-2394:w10,BEB-2292:w10,BEB-2397:w10,BEB-2344:w10,BEB-2385:w10,BEB-2156:w10,BEB-2340:w10,BEB-2347:w10,BEB-2367:w10,BEB-2379:w10,BEB-29:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7738",
+   "seq": 7738,
+   "ts": 1785319074987,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7729,
- "count": 1355
+ "head": 7738,
+ "count": 1364
 }
