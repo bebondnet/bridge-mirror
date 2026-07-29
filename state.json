@@ -1,27 +1,27 @@
 {
- "mirrored_at": "2026-07-29T08:57:32.055Z",
- "ts": 1785315450983,
+ "mirrored_at": "2026-07-29T08:58:30.667Z",
+ "ts": 1785315509738,
  "loop": {
   "proposed_total": 265,
   "by_state": {
-   "queued": 10,
-   "claimed": 0,
+   "queued": 8,
+   "claimed": 1,
    "done": 40,
-   "held": 15,
+   "held": 16,
    "blocked": 15,
    "parked": 119
   },
   "by_lane": {
    "BUILD": {
     "blocked": 5,
+    "claimed": 1,
     "done": 18,
     "held": 14,
-    "parked": 61,
-    "queued": 2
+    "parked": 61
    },
    "REFINE": {
     "blocked": 10,
-    "held": 1,
+    "held": 2,
     "parked": 58,
     "queued": 7
    },
@@ -38,9 +38,16 @@
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785315427524,
+    "detail": "claimed=0, queued=10, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785315487524,
     "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
     "refs": [
      "BEB-2348",
@@ -51,7 +58,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -63,7 +70,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -85,9 +92,24 @@
     }
    },
    {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1785315199193,
+    "detail": "BEB-2367 refused 3× in 30min — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-2367"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-2367"
+    },
+    "fix_ticket": "BEB-2402"
+   },
+   {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "BEB-2367 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2367"
@@ -101,7 +123,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "BEB-2348 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2348"
@@ -115,7 +137,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
     "refs": [
      "BEB-2292"
@@ -129,7 +151,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "BEB-2302 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2302"
@@ -143,7 +165,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "BEB-2351 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2351"
@@ -157,7 +179,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785315427524,
+    "since": 1785315487524,
     "detail": "BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2396"
@@ -167,26 +189,23 @@
      "error": "lane state absent; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2396"
     }
+   },
+   {
+    "code": "HEARTBEAT_MISSING",
+    "severity": "red",
+    "since": 1785315325058,
+    "detail": "no dispatcher pass for 3min (expected ≤3min) — computed at read time, BEB-2385",
+    "refs": [
+     "BEB-2385"
+    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 7597,
+  "head_seq": 7599,
   "cursor_fable": 6374,
-  "unread_for_fable": 1223,
+  "unread_for_fable": 1225,
   "last": [
-   {
-    "seq": 7593,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 — BEB-2379→BUILD✗unwritten, BEB-2397→BUILD, BEB-2367→BUILD, B"
-   },
-   {
-    "seq": 7594,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2396 proposed on 6 consecutive passes, zero claims, lane a"
-   },
    {
     "seq": 7595,
     "from": "cc",
@@ -204,6 +223,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 — BEB-2379→BUILD✗unwritten, BEB-2397→BUILD, BEB-2367→BUILD, B"
+   },
+   {
+    "seq": 7598,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2367 REFUSED for BUILD — no repo/frag target binding (or \""
+   },
+   {
+    "seq": 7599,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · SILENT_REFUSAL[BEB-2367]→BEB-2402"
    }
   ]
  },
@@ -214,6 +245,11 @@
    "status": "todo"
   },
   {
+   "id": "BEB-2367",
+   "title": "P0: SILENT EXCLUSION — rules that make work permanently",
+   "status": "todo"
+  },
+  {
    "id": "BEB-2379",
    "title": "P0: GERS-SCOPED CONTACT SERVICE — CF-native CRM from sc",
    "status": "todo"
@@ -221,11 +257,6 @@
   {
    "id": "BEB-2347",
    "title": "Build-loop failure+success record on the service touch ",
-   "status": "todo"
-  },
-  {
-   "id": "BEB-2367",
-   "title": "P0: SILENT EXCLUSION — rules that make work permanently",
    "status": "todo"
   },
   {
@@ -297,9 +328,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785315427524,
+   "detail": "claimed=0, queued=10, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785315487524,
    "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
    "refs": [
     "BEB-2348",
@@ -310,7 +348,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -322,7 +360,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -344,9 +382,24 @@
    }
   },
   {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1785315199193,
+   "detail": "BEB-2367 refused 3× in 30min — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-2367"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-2367"
+   },
+   "fix_ticket": "BEB-2402"
+  },
+  {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "BEB-2367 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2367"
@@ -360,7 +413,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "BEB-2348 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2348"
@@ -374,7 +427,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
    "refs": [
     "BEB-2292"
@@ -388,7 +441,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "BEB-2302 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2302"
@@ -402,7 +455,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "BEB-2351 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2351"
@@ -416,7 +469,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785315427524,
+   "since": 1785315487524,
    "detail": "BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2396"
@@ -426,6 +479,15 @@
     "error": "lane state absent; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2396"
    }
+  },
+  {
+   "code": "HEARTBEAT_MISSING",
+   "severity": "red",
+   "since": 1785315325058,
+   "detail": "no dispatcher pass for 3min (expected ≤3min) — computed at read time, BEB-2385",
+   "refs": [
+    "BEB-2385"
+   ]
   }
  ]
 }
