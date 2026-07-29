@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-07-29T12:12:24.897Z",
- "ts": 1785327143383,
+ "mirrored_at": "2026-07-29T12:13:31.489Z",
+ "ts": 1785327210341,
  "loop": {
-  "proposed_total": 272,
+  "proposed_total": 273,
   "by_state": {
-   "queued": 0,
-   "claimed": 1,
-   "done": 41,
+   "queued": 1,
+   "claimed": 0,
+   "done": 42,
    "held": 20,
    "blocked": 25,
    "parked": 119
@@ -14,15 +14,15 @@
   "by_lane": {
    "BUILD": {
     "blocked": 4,
-    "claimed": 1,
-    "done": 19,
+    "done": 20,
     "held": 17,
     "parked": 61
    },
    "REFINE": {
     "blocked": 11,
     "held": 3,
-    "parked": 58
+    "parked": 58,
+    "queued": 1
    },
    "SPEC": {
     "blocked": 10,
@@ -32,21 +32,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785327025933,
-   "tally": "BEB-2412→BUILD[held], BEB-2302→BUILD✗unwritten, BEB-2416→BUILD[claimed], BEB-1615→SPEC[blocked], BEB-2414→SPEC[blocked], BEB-2348→SPEC[blocked], BEB-2292→BUILD, BEB-2379→BUILD[blocked], BEB-2396→SPEC✗unwritten, BEB-2411→SPEC[blocked]"
+   "at": 1785327127251,
+   "tally": "BEB-2416→BUILD[done], BEB-2302→BUILD✗unwritten, BEB-1615→SPEC[blocked], BEB-2414→SPEC[blocked], BEB-2348→SPEC[blocked], BEB-2292→BUILD, BEB-2379→BUILD[blocked], BEB-2175→SPEC[blocked], BEB-2417→BUILD, BEB-2396→SPEC✗unwritten"
   },
   "reds": [
    {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1785326827534,
-    "detail": "claimed=0, queued=1, 5 passes, max_concurrent=6",
-    "refs": []
-   },
-   {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785327067524,
+    "since": 1785327187535,
     "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
     "refs": [
      "BEB-2348",
@@ -57,7 +50,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785327067524,
+    "since": 1785327187535,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -69,7 +62,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785327067524,
+    "since": 1785327187535,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -94,7 +87,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785322142620,
-    "detail": "BEB-2412 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over a · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2412 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over a",
     "refs": [
      "BEB-2412"
     ],
@@ -102,8 +95,7 @@
      "cls": "repeat-failer",
      "error": "[\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over an empty D1). Worse than failing: a shell deploys green and verifies 200 while rendering nothing, so the build looks done. This needs the UI lane, not a codegen build.\",\n  \"evidence\": \"declared in the ticket: \\\"canvas      a mounted scene loop (Three.js), resize, teardown\\\" (m938 wall, proven by BEB-2127)\",\n  \"fix_ref\": \"BEB-2127 / m938\"\n }\n]",
      "subject": "BEB-2412"
-    },
-    "fix_ticket": "BEB-2418"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -122,7 +114,21 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785327067524,
+    "since": 1785327187535,
+    "detail": "BEB-2412 proposed on 6 consecutive passes, zero claims, lane held",
+    "refs": [
+     "BEB-2412"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state held; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2412"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785327187535,
     "detail": "BEB-2302 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2302"
@@ -136,7 +142,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785327067524,
+    "since": 1785327187535,
     "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
     "refs": [
      "BEB-2292"
@@ -150,7 +156,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785327067524,
+    "since": 1785327187535,
     "detail": "BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2396"
@@ -164,48 +170,43 @@
   ]
  },
  "bridge": {
-  "head_seq": 7972,
+  "head_seq": 7977,
   "cursor_fable": 6374,
-  "unread_for_fable": 1598,
+  "unread_for_fable": 1603,
   "last": [
    {
-    "seq": 7968,
+    "seq": 7973,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 — BEB-2302→BUILD✗unwritten, BEB-2416→BUILD, BEB-2412→BUILD, B"
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2412 proposed on 6 consecutive passes, zero claims, lane h"
    },
    {
-    "seq": 7969,
+    "seq": 7974,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2412 — preflight HELD (BEB-2134) — CODEGEN_WALL: the delivera"
+    "one_line": "DISPATCHER verification PASSED: BEB-2416 — https://orky-beb-2416.alex-rollin.workers.dev/ "
    },
    {
-    "seq": 7970,
+    "seq": 7975,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED REPEAT_FAILER: BEB-2412 failing at preflight 3× in 24h — [  {   \"class\": \"CODEGEN_WALL"
+    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
    },
    {
-    "seq": 7971,
+    "seq": 7976,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 — BEB-2302→BUILD✗unwritten, BEB-2416→BUILD[claimed], BEB-2412"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2416 — commit 9"
    },
    {
-    "seq": 7972,
+    "seq": 7977,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 — BEB-2412→BUILD[held], BEB-2302→BUILD✗unwritten, BEB-2416→BU"
+    "one_line": "DISPATCHER pass: proposed 10 — BEB-2416→BUILD[done], BEB-2302→BUILD✗unwritten, BEB-1615→SP"
    }
   ]
  },
  "p0s_open": [
-  {
-   "id": "BEB-2416",
-   "title": "P0: CC NEEDS A QUEUE — hand-work pull loop, runs 24h un",
-   "status": "todo"
-  },
   {
    "id": "BEB-2302",
    "title": "Need: machine-token write door to BB Docs — SPEC lane d",
@@ -260,6 +261,11 @@
    "id": "BEB-1619",
    "title": "🔴 FIX THE WIKI: bbdocs doc write MUST trigger the wiki",
    "status": "todo"
+  },
+  {
+   "id": "BEB-2351",
+   "title": "P0: NO WORKER WITHOUT RECOVERABLE SOURCE — recover bb-d",
+   "status": "todo"
   }
  ],
  "surfaces": [
@@ -290,16 +296,9 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1785326827534,
-   "detail": "claimed=0, queued=1, 5 passes, max_concurrent=6",
-   "refs": []
-  },
-  {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785327067524,
+   "since": 1785327187535,
    "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER",
    "refs": [
     "BEB-2348",
@@ -310,7 +309,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785327067524,
+   "since": 1785327187535,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -322,7 +321,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785327067524,
+   "since": 1785327187535,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -347,7 +346,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785322142620,
-   "detail": "BEB-2412 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over a · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2412 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over a",
    "refs": [
     "BEB-2412"
    ],
@@ -355,8 +354,7 @@
     "cls": "repeat-failer",
     "error": "[\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell instead (BEB-2127: a 36-line shell over an empty D1). Worse than failing: a shell deploys green and verifies 200 while rendering nothing, so the build looks done. This needs the UI lane, not a codegen build.\",\n  \"evidence\": \"declared in the ticket: \\\"canvas      a mounted scene loop (Three.js), resize, teardown\\\" (m938 wall, proven by BEB-2127)\",\n  \"fix_ref\": \"BEB-2127 / m938\"\n }\n]",
     "subject": "BEB-2412"
-   },
-   "fix_ticket": "BEB-2418"
+   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -375,7 +373,21 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785327067524,
+   "since": 1785327187535,
+   "detail": "BEB-2412 proposed on 6 consecutive passes, zero claims, lane held",
+   "refs": [
+    "BEB-2412"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state held; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2412"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785327187535,
    "detail": "BEB-2302 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2302"
@@ -389,7 +401,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785327067524,
+   "since": 1785327187535,
    "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
    "refs": [
     "BEB-2292"
@@ -403,7 +415,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785327067524,
+   "since": 1785327187535,
    "detail": "BEB-2396 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2396"
