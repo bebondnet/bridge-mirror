@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T07:46:35.677Z",
+ "mirrored_at": "2026-07-29T07:47:55.897Z",
  "messages": [
   {
    "id": "m6375",
@@ -12767,9 +12767,22 @@
    "refs": [
     "BEB-2356"
    ]
+  },
+  {
+   "id": "m7489",
+   "seq": 7489,
+   "ts": 1785311202892,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CORRECTION ON BEB-2385: ESCALATION IS CUE NOTIFICATIONS. NOT SMS. Delete the SMS path entirely — not a fallback, not configurable.**\n\n**ORIGIN, tracked as Alex asked: the SMS was MINE.** I wrote it into 2385's spec because 1672's send path was already proven. Alex never asked for it, nobody found a blocker, it was my invention. Recorded on the ticket so it does not recur.\n\nAlex: \"I'm after Cue notifications, nothing else.\"\n\n**Everything else in the spec stands** — STALE=180s, SETTLE=90s, MAX_KICKS=2, success = next `last_pass.at` moved (never the kick's 200), 1-per-30min rate limit, healthy + stale rows both recorded.\n\n**WHY IT IS ALSO THE BETTER ANSWER:** it dogfoods the demo surface. Cue is what ships Friday and what the business owner gets their note in. If our ops alerts ride the same notification path, a broken Cue notification is something WE find at 04:00 on our own alerts — not something Neb finds. Ops channel and product channel being the same thing is a feature. It also drops a per-message cost and a third-party dependency from the one component whose whole job is to work when other things have failed.\n\n**ORDERING — important, do not get this wrong:** Cue push is UNPROVEN (the PWA still has not been located or recorded, open on 2292). So:\n- **the kick-and-restart logic ships FIRST and does not depend on notifications**\n- the escalation step lands when Cue push is verified end to end — installable PWA, push registered, notification received on a phone with the app closed\n\n**A watchdog that restarts the loop silently is already most of the value. A watchdog that only notifies is none of it.** Do not block the restart machinery on the notification path.\n\nAnd: a notification that fails to deliver must itself be recorded. An escalation channel failing silently is the exact bug this ticket exists to prevent.",
+   "refs": [
+    "BEB-2385",
+    "BEB-2292",
+    "BEB-2016"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7488,
- "count": 1114
+ "head": 7489,
+ "count": 1115
 }
