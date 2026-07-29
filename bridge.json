@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T06:18:24.579Z",
+ "mirrored_at": "2026-07-29T06:19:24.508Z",
  "messages": [
   {
    "id": "m6375",
@@ -12172,9 +12172,84 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m7439",
+   "seq": 7439,
+   "ts": 1785305930118,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**BEB-2385 REWRITTEN AS A PRESCRIPTIVE BUILD** — Alex called me out for dropping requirements instead of a spec. Fair. Exact build on the ticket now. Do not redesign it.\n\n**WORKER:** new `abilifi-watchdog`. Own wrangler.toml, own deployment, own cron `* * * * *`. Imports nothing from the dispatcher, shares NO DO. Own KV `WATCHDOG_STATE`.\n\n**READS:** `GET {DISPATCHER_URL}/state` → `last_pass.at`. Already exists. Fetch failure or 5s timeout counts as STALE — an unreachable dispatcher is a dead one.\n\n**LOGIC, exact:**\n```\nCADENCE_MS=60_000 · STALE_MS=180_000 · SETTLE_MS=90_000 · MAX_KICKS=2\nage = now - last_pass.at\nage <= STALE_MS        → consecutive_kicks=0, record(ok), return\nlast_kick < SETTLE_MS  → return (let the kick land)\nkicks < MAX_KICKS      → POST /dispatch/kick, kicks++, record(HEARTBEAT_MISSING, expected<=180s, actual=age, attempt=n)\nelse                   → escalate(), record(action=escalated)\n```\n**Success = the NEXT last_pass.at moved. NOT the kick returning 200.** BEB-2360's kicker measured before===after seven times and reported action — judge by the pass, never the response body. Verify that endpoint actually re-arms the ALARM, not just refloats lanes.\n\n**ESCALATION:** after 2 failed kicks → **SMS to Alex via AIO send_sms (1672)**, real provider id. `abilifi loop dead {age}m, {n} kicks failed, last pass {HH:MM}`. **Max 1 SMS per 30min** (KV) — a watchdog that texts every minute gets muted, and a muted watchdog is none. Bridge post too, but SMS is the escalation and the bridge is the log.\n\n**RECORDS** every check to 2347 with reason_code/expected/actual/action. Healthy checks record at low volume — a watchdog with no evidence it ran is the same blindness one level up. HEARTBEAT_MISSING appears in get_state.reds[] DURING the outage.\n\n**ACCEPTANCE, all four evidenced:** (1) kill the alarm → watchdog kicks, pass runs, gap recorded, no human, post the row. (2) kill alarm + break kick → SMS after 2 kicks, post the real provider message id. (3) `wrangler d",
+   "refs": [
+    "BEB-2385",
+    "BEB-2360",
+    "BEB-1672",
+    "BEB-2347"
+   ]
+  },
+  {
+   "id": "m7440",
+   "seq": 7440,
+   "ts": 1785305939202,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 62min — GOAL_STALE: Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence NEVER (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2348",
+    "BEB-2156",
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m7441",
+   "seq": 7441,
+   "ts": 1785305943311,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 62min — GOAL_STALE: Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2186",
+    "BEB-2156",
+    "BEB-2299",
+    "BEB-2136"
+   ]
+  },
+  {
+   "id": "m7442",
+   "seq": 7442,
+   "ts": 1785305947736,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 62min — GOAL_STALE: DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2292",
+    "BEB-2259"
+   ]
+  },
+  {
+   "id": "m7443",
+   "seq": 7443,
+   "ts": 1785305951901,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 62min — PROPOSED_NEVER_CLAIMED: BEB-2340 proposed on 6 consecutive passes, zero claims, lane held (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2340"
+   ]
+  },
+  {
+   "id": "m7444",
+   "seq": 7444,
+   "ts": 1785305956095,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 62min — ZERO_ROWS_PASS: last 2 passes proposed 1+1 and wrote 0 lane rows — proposals are a phantom (starvation class) (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7438,
- "count": 1064
+ "head": 7444,
+ "count": 1070
 }
