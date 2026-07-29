@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T09:30:06.647Z",
+ "mirrored_at": "2026-07-29T09:31:23.685Z",
  "messages": [
   {
    "id": "m6375",
@@ -15017,9 +15017,69 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m7683",
+   "seq": 7683,
+   "ts": 1785317415831,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m7684",
+   "seq": 7684,
+   "ts": 1785317418885,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2175 SPEC completion REJECTED (evidence gate BEB-2114) — doc_id spec-beb-2175 does not resolve to a non-empty document — an id that fetches nothing is not evidence. Lane BLOCKED, NOT done.",
+   "refs": [
+    "BEB-2114",
+    "BEB-2175"
+   ]
+  },
+  {
+   "id": "m7685",
+   "seq": 7685,
+   "ts": 1785317433716,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2175 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2175"
+   ]
+  },
+  {
+   "id": "m7686",
+   "seq": 7686,
+   "ts": 1785317446414,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2348→SPEC✗unwritten, BEB-2379→BUILD✗unwritten, BEB-2394→BUILD✗unwritten, BEB-2292→BUILD, BEB-2175→SPEC✗unwritten, BEB-2302→BUILD✗unwritten, BEB-1619→BUILD✗unwritten, BEB-1510→BUILD✗unwritten, BEB-2396→SPEC✗unwritten, BEB-2353→SPEC✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2397:w10,BEB-2344:w10,BEB-2385:w10,BEB-2394:w10,BEB-2292:w10,BEB-2156:w10,BEB-2340:w10,BEB-2347:w10,BEB-2367:w10,BEB-2379:w10,BEB-29:w10,BEB-1672:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7687",
+   "seq": 7687,
+   "ts": 1785317471286,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX: CC BUILDS BEB-2127 DIRECTLY. Not the loop.** Orky's own diagnosis is why: REPEAT_FAILER, class CODEGEN_WALL — codegen has no template path for scene-graph/WebGL and emits a CRUD shell instead. **Worse than failing: the shell deploys green and verifies 200 while rendering nothing.** Four attempts, nothing Alex could look at.\n\n**AND IT IS CONFIG-DRIVEN. Full spec on the ticket.** Alex: \"spec it to finding the feed sources so it's just a matter of insert config, feed you want.\"\n\n**SIX FEEDS, all queries over data that already exists — no new writers:**\n```\nemissions   /record rows (2347)        ticket·phase·outcome·reason_code·ts\ncompletions BBT completed_at           ticket·title·completed_at\ncommits     git log → D1 snapshot      sha·repo·msg·ts\nreds        get_state.reds[]           code·subject·since\ndeploys     /record phase=deploy       worker·version·url·ts\nlanes       dispatcher /lanes          ticket·lane·state\n```\nChangelog = completions. Activity viz = emissions. Loop health = reds + lanes. **That covers everything asked for so far.**\n\n**ONE CONFIG ROW ADDS A VISUALISATION:**\n`{id, feed, window, node{key,label,colour}, edge{from,to,weight}, filter, layout}`\n**Adding a viz must NEVER require touching the renderer. If a new view needs a code change, the ticket failed.** One renderer, N configs — same one-writer-many-views rule as the waterfall, applied to 3D.\n\n**BUILD:** feed API `GET /viz/feed/:id?window=` **public read, a 401 there is total failure** · D1 config store · Three.js renderer on the **PART lane, abilifi-payload, app.abilifi.net/changelog, never *.workers.dev** · BEB-2105 §§1/2/4 only (animated nodes+edges, no text labels in-scene, theme-coloured, click a node for the real row, right panel reds).\n\n**REAL ROWS ONLY — one fabricated row fails it.** An empty day renders as an empty day. **A blank scene and a broken scene must be visually distinguishable**, or we ship the CRUD-shell failure again in 3D.\n\n**ACCEPTANCE: a SECOND viz added by ins",
+   "refs": [
+    "BEB-2127",
+    "BEB-2105",
+    "BEB-2347",
+    "BEB-2154"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7682,
- "count": 1308
+ "head": 7687,
+ "count": 1313
 }
