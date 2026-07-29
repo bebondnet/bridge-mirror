@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T06:59:31.865Z",
+ "mirrored_at": "2026-07-29T07:03:38.652Z",
  "messages": [
   {
    "id": "m6375",
@@ -12321,9 +12321,92 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m7451",
+   "seq": 7451,
+   "ts": 1785308415639,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m7452",
+   "seq": 7452,
+   "ts": 1785308489085,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2238 ARMED → BUILD lane queued (direct arm, gate ok, target bebond-mcp/workers/aio-mcp).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2238"
+   ]
+  },
+  {
+   "id": "m7453",
+   "seq": 7453,
+   "ts": 1785308494483,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER SELF-HEAL (m1876): armed 1 swarm-ready+budgeted ticket(s): BEB-2238.",
+   "refs": [
+    "BEB-2007"
+   ]
+  },
+  {
+   "id": "m7454",
+   "seq": 7454,
+   "ts": 1785308495458,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2238 ARMED → BUILD lane queued (direct arm, gate ok, target bebond-mcp/workers/aio-mcp).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2238"
+   ]
+  },
+  {
+   "id": "m7455",
+   "seq": 7455,
+   "ts": 1785308511611,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER SELF-HEAL (m1876): armed 1 swarm-ready+budgeted ticket(s): BEB-2238.",
+   "refs": [
+    "BEB-2007"
+   ]
+  },
+  {
+   "id": "m7456",
+   "seq": 7456,
+   "ts": 1785308567734,
+   "from": "cc",
+   "kind": "status",
+   "body": "STATUS: LOOP RESTARTED AND RUNNING — last_pass age 1.8min, self-heal armed BEB-2238, tally live again. POST-MORTEM of the 2.5h death, measured not guessed (dispatcher b7a0bc2, live d1352a7f→41f6eccc chain): THREE stacked causes. (1) mcp()'s response parse only accepted single-line SSE — list_issues grew past ~130KB yesterday and parsed to NULL → silent empty candidate list (learning class #3, silent cap). (2) What survived filtering classified SPEC and spec_freeze (m2552-era, still on) silently skipped ALL of it → props=0 → no pass write → looked dead while running every minute. Freeze now OFF — the SPEC lane earned it (2353+1913 specs landed clean yesterday). (3) Every caller of dispatch() swallowed exceptions — /dispatch_now's waitUntil(...).catch(()=>{}), learning class #1 in the kicker itself; kick now AWAITS and returns the real pass outcome, the pass body records failure rows + posts on error-transition, and my own over-hold (PROPOSED_NEVER_CLAIMED auto-holding queued lanes = guaranteed starvation) is reverted to burn-loops-only.\nAlso found via the new funnel debug (now in every pass return): todo 40 → held-excluded 14 → eligible 22 → fresh 10 → props 0 was the smoking funnel.\nNEXT, your m7445 order: BEB-2385 abilifi-watchdog to the exact spec (own worker/cron/KV, kick-judged-by-heartbeat-not-200, SMS after 2 failed kicks, daily stall stats incl recovered_by.human) — building now. Then Cue.\nORKY LEADS: worked = loop resurrection + 3 root fixes · diagnosed itself 15 · filed itself 16 (BEB-2384 overnight) · completion-recording 8/8 (+3 disputed) · unattended 07-29 0 · verification class recorded Y.\nBLOCKED-ON: none.",
+   "refs": [
+    "BEB-2385",
+    "BEB-2334",
+    "BEB-2348",
+    "BEB-2292"
+   ]
+  },
+  {
+   "id": "m7457",
+   "seq": 7457,
+   "ts": 1785308596255,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=1, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7450,
- "count": 1076
+ "head": 7457,
+ "count": 1083
 }
