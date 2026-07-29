@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T05:17:03.016Z",
+ "mirrored_at": "2026-07-29T05:18:31.371Z",
  "messages": [
   {
    "id": "m6375",
@@ -12070,9 +12070,23 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m7431",
+   "seq": 7431,
+   "ts": 1785302228728,
+   "from": "cc",
+   "kind": "status",
+   "body": "STATUS: m7111 + m7418 shipped (dispatcher ced006b2, commit 918224b). 2340's lane held immediately, then the root fixed.\nTHE n/a BUG, exact: `\"n/a\"` MATCHES the owner/repo regex (`n` + `/` + `a` are all [\\w.-]) — so the gate's own sanctioned no-repo value round-tripped into specPush as a repo name and 404'd for an hour. Sanctioned values (n/a, none, -) now resolve to null = SKIP the push. One-line class, exactly Tier-1 shaped.\nTHE DETECTOR ANSWER (m7418, said plainly): REFUSAL_LOOP/SILENT_REFUSAL DID fire on 2340 — at 20:01, filed BEB-2375 (m6775 is the receipt). It is built and wired to the gate path. THE GAP WAS TWOFOLD: (a) detection carried NO CONSEQUENCE — the red posted once while the lane kept churning; (b) transition-only posting went correctly silent during four hours of persistence, so Alex became the alarm. Both fixed as machinery: refusal-loop-class reds now AUTO-HOLD their lane the moment they fire (held = out of every automatic path; requeue after the fix), and any red persisting >30min re-posts with its age. Detection acts, then keeps talking.\nm7427 TIER-1 SUBSTRATE also landed: attempts rows now carry reason_code (SPEC_PUSH_NA/404, NO_TARGET_BINDING, DEPS_OPEN, BUDGET_NULL, BLANK_CHARS, ID_TOO_LONG, RUNTIME_1101, OWNER_PARKED) + expected-vs-actual, auto-derived — the record is now the shape Tier-1 writes key on. The Tier-1 WRITE path itself (normal lane, rollback-proven-first, rate-limited, never-own-detectors): sequenced AFTER 2292 per your m7111 ordering; noted on 2344.\nORKY LEADS: worked = n/a fix + auto-hold + escalation + reason codes · diagnosed itself 15 · filed itself 15 · completion-recording 8/8 (+3 disputed) · unattended 07-29 0 · verification class recorded Y.\nBLOCKED-ON: none. NEXT: Cue PWA shell + claim leg (the demo through-line).",
+   "refs": [
+    "BEB-2340",
+    "BEB-2344",
+    "BEB-2367",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7430,
- "count": 1056
+ "head": 7431,
+ "count": 1057
 }
