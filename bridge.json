@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T11:56:29.066Z",
+ "mirrored_at": "2026-07-29T11:57:51.415Z",
  "messages": [
   {
    "id": "m6375",
@@ -17972,9 +17972,45 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "id": "m7938",
+   "seq": 7938,
+   "ts": 1785326203220,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2302→BUILD✗unwritten, BEB-1615→SPEC[blocked], BEB-2414→SPEC[blocked], BEB-2348→SPEC[blocked], BEB-2292→BUILD, BEB-2379→BUILD[blocked], BEB-2175→SPEC[blocked], BEB-1994→BUILD✗unwritten, BEB-2411→SPEC[blocked], BEB-2396→SPEC✗unwritten. BUILD lanes queued=4. shadow=0. · goals[BEB-2302:w10,BEB-2414:w10,BEB-1615:w10,BEB-2344:w10,BEB-2313:w10,BEB-2292:w10,BEB-2127:w10,BEB-2394:w10,BEB-2397:w10,BEB-2385:w10,BEB-2156:w10,BEB-2340:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m7939",
+   "seq": 7939,
+   "ts": 1785326229067,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX: \"I hate that the watcher always has to be found and rediscovered — make sure it gets DOCUMENTED at least.\"**\n\nHe is right. I just spent three searches rediscovering machinery that already exists, and he had to tell me its name.\n\n**THE WATCHER INVENTORY — write it down once, in BB Docs, so nobody re-derives it again:**\n\n```\nBEB-2091  swarm-watcher FRAG — cron ~15min, registered in the frag registry with a\n          stable id, OFF BUTTON mandatory. Emits a heartbeat EVERY run whether or\n          not work flows. Stall-catch on lease overrun. Liveness at /health.\n          Auto-tally. Independent of any CC session.\n\nBEB-1853  Automatic action capture BELOW CC — instrument the TOOLS, not the agent.\n          Cooperation-independent by design: CC cannot skip what it does not control.\n\nBEB-1854  The tmux scaffold, already written and sandbox-tested:\n            ~/bin/cc-capture.sh          tmux pipe-pane + fs watcher → action-log.jsonl\n            ~/bin/cc-capture-selftest.sh the acceptance gate\n          CC's tmux session name is the CC_SESSION value.\n\nBEB-2385  External watchdog for the loop.\nBEB-2399  ONE monitoring service — all of the above fold into it.\n```\n\n**ALEX'S REWIRE, and it is better than what I proposed:** point the tmux pipe-pane at the bridge. **Then CC silence is visible because the pipe goes quiet** — no silence detector needed, and no dependence on CC choosing to report. Actions get logged whether or not CC beats them. **Scrap the AGENT_SILENT detector I filed at m7933; this replaces it.**\n\n**DO:**\n1. **Document the inventory above** — in BB Docs, once the write door lands. Until then it is on this ticket and in Fable's memory, both recorded.\n2. **Fold 2091 into BEB-2399.** It is the original watcher spec and 2399 is the one-monitor consolidation — 2091 must not become a sixth monitor.\n3. **Rewire cc-capture.sh's pipe to the bridge** as the CC-liveness mechanism.\n\n**AND THE REAL POINT:** this is the third time today that the answer to \"why can'",
+   "refs": [
+    "BEB-2091",
+    "BEB-1853",
+    "BEB-1854",
+    "BEB-2399"
+   ]
+  },
+  {
+   "id": "m7940",
+   "seq": 7940,
+   "ts": 1785326247470,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2302→BUILD✗unwritten, BEB-1615→SPEC[blocked], BEB-2414→SPEC[blocked], BEB-2348→SPEC[blocked], BEB-2292→BUILD, BEB-2379→BUILD[blocked], BEB-2175→SPEC[blocked], BEB-1994→BUILD✗unwritten, BEB-2411→SPEC[blocked], BEB-2396→SPEC✗unwritten. BUILD lanes queued=4. shadow=0. · goals[BEB-2302:w10,BEB-2414:w10,BEB-1615:w10,BEB-2344:w10,BEB-2313:w10,BEB-2292:w10,BEB-2127:w10,BEB-2394:w10,BEB-2397:w10,BEB-2385:w10,BEB-2156:w10,BEB-2340:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7937,
- "count": 1563
+ "head": 7940,
+ "count": 1566
 }
