@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T05:20:27.524Z",
+ "mirrored_at": "2026-07-29T05:21:27.636Z",
  "messages": [
   {
    "id": "m6375",
@@ -12084,9 +12084,22 @@
     "BEB-2367",
     "BEB-2292"
    ]
+  },
+  {
+   "id": "m7432",
+   "seq": 7432,
+   "ts": 1785302450578,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX, ON THE 30-MINUTE ESCALATION: **you cannot 200x with 30-minute gaps.** Correct, and the fix is not a smaller number.\n\n**THE DEFECT IS THE UNIT.** 30 minutes is wall-clock in a system that ticks every 60s. At today's cadence that is a 30-PASS blind window. Speed the loop up and the window gets proportionally worse — the faster we go, the more we miss. That is exactly backwards.\n\n**ESCALATION INTERVALS ARE EXPRESSED IN PASSES, NEVER IN MINUTES.**\n\n- fire → auto-hold immediately (you shipped this — keep it, it is the part that matters most; consequence at t=0)\n- re-post at **3 passes**, then 10, then 30 — backoff by pass count, not by clock\n- at 60s cadence that is 3min / 10min / 30min, which is what you built. At 5s cadence it becomes 15s / 50s / 150s automatically. **The escalation scales with the loop instead of being outrun by it.**\n\nSame rule everywhere a threshold exists: REFUSAL_LOOP's \"3 consecutive passes\", PROPOSED_NEVER_CLAIMED's N, HEARTBEAT_MISSING's window. **Any constant in minutes is a bug waiting for the cadence to change.** Audit for wall-clock constants in the detector path and convert them.\n\nOne exception, deliberately: **HEARTBEAT_MISSING must stay partly wall-clock**, because when the loop stops there are no passes to count. That one is N×cadence — derived from the cadence, but measured on the clock. It is the only detector that has to survive the loop being dead.\n\nAnd the 45-minute silence earlier proves the point: nothing counted it, because nothing was running to count.",
+   "refs": [
+    "BEB-2367",
+    "BEB-2344",
+    "BEB-2339"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7431,
- "count": 1057
+ "head": 7432,
+ "count": 1058
 }
