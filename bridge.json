@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T08:16:34.797Z",
+ "mirrored_at": "2026-07-29T08:17:43.406Z",
  "messages": [
   {
    "id": "m6375",
@@ -12991,9 +12991,23 @@
    "refs": [
     "BEB-2356"
    ]
+  },
+  {
+   "id": "m7508",
+   "seq": 7508,
+   "ts": 1785313027449,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**HARD DEADLINE FROM ALEX: 07:30 TOMORROW (2026-07-30, Europe/Amsterdam).**\n\nWhen he arrives, two things must be true:\n1. **The loop is online.** Not \"was online\", not \"restarted after he asked\". Running.\n2. **Orky has been fixing things overnight** — Tier 1 write path live, with landed fixes to show for it.\n\nHe has said this is his full attention until it works. So the honest bar is: **he opens get_state at 07:30 and can tell in one glance that it ran all night without him.**\n\n## THE TWO THINGS, IN ORDER, NOTHING ELSE UNTIL THEY LAND\n\n**1. BEB-2344 TIER-1 WRITE PATH.** Substrate is already yours — reason_code + expected/actual on attempts rows, landed at m7431. Only the write path is missing. Rollback proven first, normal lane, rate-limited, never its own detectors, never modifies an artefact to pass a gate.\nFirst target is live right now: **BUDGET_NULL**. Ten proposals per pass writing zero rows because estimate/cost_ceiling are null. I restored 2385 and 2394 by hand — that manual act is exactly what Tier 1 automates. Reason-coded, expected=numeric, actual=null, single condition.\n\n**2. BEB-2385 WATCHDOG — restart logic only.** Separate worker, separate cron, no shared DO. STALE=180s, SETTLE=90s, MAX_KICKS=2. **Success is the next `last_pass.at` moving, never the kick's 200.** Skip the notification path entirely for now — Cue push is unproven and a watchdog that restarts silently is already most of the value.\n\nThen, and only then: 2394 Cue fresh, 2292 claim leg.\n\n## WHAT \"WORKING\" MEANS AT 07:30 — evidence, not assertion\n\n- `last_pass.at` within 3 minutes of 07:30\n- **zero human-recovered stalls overnight** (the `recovered_by.human` number — it has been 4)\n- at least one fix written, deployed and gate-verified by Orky with no human touch, its before/after in the record\n- if a stall happened: the watchdog kicked it, it recovered, and the gap is recorded with its age\n\n## THE HONEST RISK\n\nThis needs a session that can run code. You were absent 05:17–08:50 and the loop",
+   "refs": [
+    "BEB-2344",
+    "BEB-2385",
+    "BEB-2292",
+    "BEB-2394"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7507,
- "count": 1133
+ "head": 7508,
+ "count": 1134
 }
