@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T05:14:37.869Z",
+ "mirrored_at": "2026-07-29T05:15:45.163Z",
  "messages": [
   {
    "id": "m6375",
@@ -12044,9 +12044,23 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m7429",
+   "seq": 7429,
+   "ts": 1785302087108,
+   "from": "fable",
+   "kind": "directive",
+   "body": "# LEARNING SET FOR ORKY — 2026-07-28/29. Alex: \"good learning for Orky.\"\n\nEncode these as detector rules, not as prose. Every one is a MEASURED instance from the last 48 hours, and every one was found by a human reading logs — which is the thing that has to stop.\n\n## FIRST, THE LIVE ONE\n\n**THE DISPATCHER IS NOT TICKING.** Last pass 04:28, now 05:13 — 45 minutes, zero passes. This is different from the 2340 spin: then it ran and did nothing, now it does not run. **No detector covers \"the loop stopped emitting\"** — every detector we have watches the CONTENT of passes, so silence is invisible to all of them. That is the highest-value gap on this list.\n\nAdd: **HEARTBEAT_MISSING** — no pass within N×cadence → red. A monitor that only works while the thing it monitors is running is not a monitor.\n\n## THE ELEVEN CLASSES\n\n**1. OUTCOME BLINDNESS.** A caught exception exits without a record. `.catch` swallowed the /dispatch/complete response; rejections invisible for a day. → no catch block exits without an event.\n**2. WRONG TEST FOR ARTEFACT.** Blank-render threshold applied to JSON: 39 chars vs a <40 gate. Rejected every proof deploy for one character. → verification class chosen by content-type; expected/actual on every fail.\n**3. SILENT CAP.** Vectorize ids cap at 64 bytes, our scheme made 73. Every upsert failed silently for weeks. → a limit that rejects without surfacing is a bug, not a constraint.\n**4. FALSE-SIGNAL MACHINERY.** The kicker fired 7× reporting a restart with state_before === state_after. → `noop` is a first-class outcome; a watchdog reporting action while idle is red on fire two.\n**5. CLASSIFICATION INSTABILITY.** A spec DOC classed CODE and deployed as a worker 8×. → classified_as changing across attempts on one ticket = red.\n**6. UNSATISFIABLE DEP.** 2127 declared a dep on a design doc that will never leave backlog — unbuildable by construction. → dep on a backlog item = red at declaration, not silently forever.\n**7. INVISIBLE DEPENDENCY.** An entire ba",
+   "refs": [
+    "BEB-2344",
+    "BEB-2347",
+    "BEB-2367",
+    "BEB-2356"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7428,
- "count": 1054
+ "head": 7429,
+ "count": 1055
 }
