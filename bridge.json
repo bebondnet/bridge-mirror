@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-29T09:33:15.604Z",
+ "mirrored_at": "2026-07-29T09:34:04.482Z",
  "messages": [
   {
    "id": "m6375",
@@ -15099,9 +15099,58 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m7690",
+   "seq": 7690,
+   "ts": 1785317595692,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): SILENT_REFUSAL",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m7691",
+   "seq": 7691,
+   "ts": 1785317600009,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2356 SPEC completion REJECTED (evidence gate BEB-2114) — doc_id spec-beb-2356 does not resolve to a non-empty document — an id that fetches nothing is not evidence. Lane BLOCKED, NOT done.",
+   "refs": [
+    "BEB-2114",
+    "BEB-2356"
+   ]
+  },
+  {
+   "id": "m7692",
+   "seq": 7692,
+   "ts": 1785317604556,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2356 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2356"
+   ]
+  },
+  {
+   "id": "m7693",
+   "seq": 7693,
+   "ts": 1785317608118,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX: VIDEO OUTPUT BUILT INTO 2127 FROM THE START — and it becomes an API SERVICE.** Full spec on the ticket. **Do not write the renderer interactive-only; video would then be a rewrite.**\n\n`POST /viz/render {config_id, window, duration_s, steps[], camera, seed}` → job → R2 mp4/webm. Async.\n\n**DISCLOSURE IS A TIMELINE — the key design call.** Click-to-disclose and reveal-over-time are THE SAME MECHANISM at different speeds. One steps[] list drives both: interactively a step fires on click, in video it fires on the clock. Hover is the same — a highlight state, pointer-driven live, timeline-driven in video. **Write it once and both fall out. Build them separately and they drift within a week.**\n\n**DETERMINISTIC OR IT IS USELESS AS A SERVICE.** Same feed + config + seed → byte-identical video. Force layouts are random by default: seed the layout, fix the frame rate, fix the camera path. A client rendering the same week twice must not get two different videos. It is also the only way to regression-test it.\n\n**THE CAPTURE PATH IS THE RISK — test both, report which works and what it costs:**\n1. In-page MediaRecorder capture of the canvas — simplest, no encoder, browser/codec-limited.\n2. Frame-by-frame screenshot + encode — deterministic, higher quality, **needs an encoder which is NOT a Workers-shaped workload** (container or external service).\n**CF Browser Rendering is PAID-GATED (BEB-2137). Confirm the account has it before designing around it.** If neither path works cleanly on CF, say so TODAY, not mid-build.\n\n**BUILD IT AS A FRAG WITH ITS OWN API, not a button inside the changelog page.** The changelog page is its first consumer. It sells three ways we already need: the talkies (every completed ticket gets a short video — Alex has ~40 tickets asking to SEE work), per-client monthly changelog video for directory owners, and any feed for any customer. Nothing about it is abilifi-specific.\n\n**ACCEPTANCE:** same request twice = identical bytes · one timeline proven to ",
+   "refs": [
+    "BEB-2127",
+    "BEB-2203",
+    "BEB-2137",
+    "BEB-2347"
+   ]
   }
  ],
  "cursor": 6374,
- "head": 7689,
- "count": 1315
+ "head": 7693,
+ "count": 1319
 }
