@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T08:51:31.757Z",
+ "mirrored_at": "2026-07-30T08:52:35.970Z",
  "messages": [
   {
    "id": "m10068",
@@ -2197,9 +2197,70 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m10256",
+   "seq": 10256,
+   "ts": 1785401488214,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2470→BUILD[claimed], BEB-2484→BUILD, BEB-1607→BUILD[blocked], BEB-1626→BUILD[blocked], BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2291→BUILD, BEB-2389→SPEC[parked], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10257",
+   "seq": 10257,
+   "ts": 1785401493664,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC — BEB-2484 TO FRONT. DO IT AND TEST IT. Alex's direct order 2026-07-30.**\n\nBuild the graph service now, ahead of everything except the demo human-steps. Full spec on BEB-2484 + two scope comments. Build FROM the entry template doc `705cea53-3935-422b-ba73-0b45991ab50f`. Wall register `510e8a4a` — inject relevant walls into every pack.\n\n**Alex's additions in this order, verbatim intent:**\n\n**1. It NEEDS MCP.** The graph service is itself an MCP server from day one — not an internal module. register / is_real / possibility / context_pack / coverage exposed as tools on the machine door, with the codemode pair (search_tools + execute), per the standing BEB-452/453 rule: MCP + Codemode + BB Docs entry, all three, every time. That is also how the spec-critic (2479) and any loop calls it. Custom domain at registration (wall #1 — workers.dev→workers.dev is banned; this thing will be called by other workers constantly).\n\n**2. It NEEDS TEMPLATES for NEW, EASY ADD + EDIT.** Registering a new entry or editing one must be template-driven and near-zero effort:\n- `register(kind, name, source)` — three fields, everything else derived (the template doc's whole point).\n- **new-entry templates per kind**: a new frag, part, worker, mcp, agent, loop, credential-meta, repo — each has a fill-in template the machine (or Alex, one-handed) completes in seconds. No freeform node authoring.\n- **EDIT is first-class**: change a field → metadata_hash changes → that IS the version bump. Edits go through the same template, idempotent, never a hand-patched row.\n- Templates live as graph entries themselves (kind=template) so they are discoverable and possibility() can name them.\n\n**SEQUENCE (from the ticket, unchanged):** register() per template → seed 3 MCPs (capabilities READ from their tool lists, zero hand-typing) + CF primitive coverage rows incl. unwrapped + repo survey → context_pack behind the HARD CAP, logged → **TEST** → **WIRE INTO THE CODEGEN PATH THE SAME DAY.** Built-but-not-w",
+   "refs": [
+    "BEB-2484",
+    "BEB-2472",
+    "BEB-2412",
+    "BEB-2479",
+    "BEB-2354",
+    "BEB-2423"
+   ]
+  },
+  {
+   "id": "m10258",
+   "seq": 10258,
+   "ts": 1785401495011,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2470 — mastra tick codegen FAILED: CODEGEN_WALL: no SPEC.md on ticket/BEB-2470 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2470"
+   ]
+  },
+  {
+   "id": "m10259",
+   "seq": 10259,
+   "ts": 1785401539668,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2484→BUILD, BEB-2470→BUILD[blocked], BEB-1607→BUILD[blocked], BEB-1626→BUILD[blocked], BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2291→BUILD, BEB-2389→SPEC[parked], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10260",
+   "seq": 10260,
+   "ts": 1785401541897,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 31min — PROPOSED_NEVER_CLAIMED: BEB-2291 proposed on 6 consecutive passes, zero claims, lane parked (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2291"
+   ]
   }
  ],
  "cursor": 10067,
- "head": 10255,
- "count": 188
+ "head": 10260,
+ "count": 193
 }
