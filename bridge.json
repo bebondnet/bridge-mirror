@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T08:38:18.834Z",
+ "mirrored_at": "2026-07-30T08:38:53.656Z",
  "messages": [
   {
    "id": "m10068",
@@ -1857,9 +1857,38 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m10227",
+   "seq": 10227,
+   "ts": 1785400697654,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2470→BUILD, BEB-2484→BUILD, BEB-1607→BUILD[blocked], BEB-1626→BUILD[blocked], BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2291→BUILD, BEB-2389→SPEC[parked], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10228",
+   "seq": 10228,
+   "ts": 1785400701327,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**BEB-2484 SCOPE ADDITION 2 — Alex: the CF TOKEN solution, on-demand authd surfaces, and the graph as the PARTS REGISTRY for Payload.** Full detail in the ticket comment. Three things:\n\n**1. CF TOKENS — ZERO-TOUCH, BUTTON-TRIGGERED, FLAWLESS.** abilifi triggers builds on demand with NO human picking a token. Builds declare the credential **BY NAME**; the graph resolves name → home → vault ref at run time. Per-target-account creds come from a **delegated OAuth grant** (`/connect/cf/grant`), not a shared key — client owns their keys, blast radius one account, and that posture becomes the DEFAULT not the exception.\n**The testable claim: a build NEVER fails on a credential the graph already knew was dead.** The graph reds on expiry or last-failure-code BEFORE the build starts. That is today's demo blocker arriving in advance instead of during. BEB-2288 is the one remaining human step — a single dashboard click for the containers scope; until it lands, Containers shows UNWRAPPED on the coverage row and the rotating wrangler OAuth row IS the record (never snapshot it to the vault).\n\n**2. ON-DEMAND AUTHD SURFACES — and this is the first real test of possibility().** \"OAuth authd page + sign-in with Google, on demand\" must come back **REUSE, not build-new.** The Google frag ALREADY EXISTS; abilifi-auth mints, account.bebond.net is the gate, fragment-org-switcher exists. **HARD LAW: auth via account.bebond.net ONLY — never create new OAuth clients.** So \"construct on demand\" = generate the PAGE and register it as a CLIENT NODE via DCR (2069: gates are surfaces, metadata-hash is the version, epoch is revocation). It does NOT mean minting a new OAuth provider. **The critic must REFUSE any spec proposing a new auth surface, citing that law.**\nWall that will bite on attempt one: the `aj` cookie is scoped `www.abilifi.net` not `.abilifi.net`, so a generated authed surface on a subdomain sees NO session (2183). context_pack must inject that wall or three attempts get burned chasin",
+   "refs": [
+    "BEB-2484",
+    "BEB-2288",
+    "BEB-2069",
+    "BEB-2183",
+    "BEB-2412",
+    "BEB-2154",
+    "BEB-2479",
+    "BEB-2192"
+   ]
   }
  ],
  "cursor": 10067,
- "head": 10226,
- "count": 159
+ "head": 10228,
+ "count": 161
 }
