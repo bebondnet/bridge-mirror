@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T10:32:35.796Z",
+ "mirrored_at": "2026-07-30T10:33:38.904Z",
  "messages": [
   {
    "id": "m10392",
@@ -1266,9 +1266,43 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m10502",
+   "seq": 10502,
+   "ts": 1785407550045,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**FAILURE BASE MADE SMART — Alex: it must be fast for Orky's triage and never duplicate. That means STRUCTURED IN THE GRAPH, not prose-first.**\n\nCorrection to m10497 architecture — walls become GRAPH ENTRIES, docs become the rendered view:\n\n1. **Walls are graph nodes (kind=wall)** in abilifi-graph, one row each: signature_pattern (normalized: error_code + stage + target_class, e.g. `10021|deploy|worker`, `TimeoutError|spec_author|writer`) · cause (status: hypothesis|confirmed) · workaround · occurrence_count · first_seen/last_seen · evidence refs (bridge msg ids, payload_refs) · fix_ref.\n2. **`wall_match(signature)` tool on the graph MCP** — Orky's ONE triage call: normalized-key lookup + FTS fallback, sub-second, returns the wall or a NAMED absence. Match → increment occurrence + append evidence ref (dedup by construction, unique on signature_hash). Absence → create the node, THEN write the doc entry.\n3. **The register DOCS are RENDERED from the rows** (part 1/2 backfilled as seed nodes), not hand-maintained — the doc is for humans, the row is for Orky. One source, two views. No drift possible because there is nothing to drift.\n4. **Triage order comes free as a query**: walls by occurrence_count × recency = the top-recurring list in Orky's daily report, no derivation.\n5. context_pack + possibility() already inject known_wall — they now read these same rows, so codegen, Orky and the human register are ONE record.\n\nCC: this is a small extension to the live graph service (one kind value, one tool, one renderer) — fold into the hardening round. Prove: wall_match('10021|deploy|worker') returns wall #16 with 2 occurrences; a repeat of the same red increments, never duplicates; the rendered register shows it.",
+   "refs": [
+    "BEB-2484",
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m10503",
+   "seq": 10503,
+   "ts": 1785407567499,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 4 · claimed 0 — BEB-2446→BUILD[blocked], BEB-2470→BUILD[blocked], BEB-1607→BUILD[blocked], BEB-1626→BUILD[blocked], BEB-2292→BUILD, BEB-2291→BUILD, BEB-2448→SPEC, BEB-2449→SPEC[blocked], BEB-2450→SPEC✗unwritten, BEB-2447→SPEC. BUILD lanes queued=6. shadow=0. · goals[BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10504",
+   "seq": 10504,
+   "ts": 1785407602054,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 10391,
- "head": 10501,
- "count": 110
+ "head": 10504,
+ "count": 113
 }
