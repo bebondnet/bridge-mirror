@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T08:25:10.828Z",
+ "mirrored_at": "2026-07-30T08:26:27.039Z",
  "messages": [
   {
    "id": "m10068",
@@ -1447,9 +1447,61 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m10192",
+   "seq": 10192,
+   "ts": 1785399916566,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2470→BUILD, BEB-1609→BUILD[held], BEB-1607→BUILD[blocked], BEB-1626→BUILD[blocked], BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2291→BUILD, BEB-2389→SPEC[parked], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10193",
+   "seq": 10193,
+   "ts": 1785399921240,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=4, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m10194",
+   "seq": 10194,
+   "ts": 1785399953998,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**BEB-2484 — P0, 500/1000. BUILD IT, TEST IT, WIRE IT THE SAME DAY.** Alex 2026-07-30, correcting me: stop designing, get it built and into service as the **PRE-CODEGEN STEP**.\n\n**THE KEY INSIGHT, and it is his:** the graph's first consumer is the step immediately BEFORE codegen — and its job is to keep codegen CLEAN.\n\n`context_pack(ticket)` → the SMALLEST subgraph that answers what this build needs: target node + placement + bindings + declared capabilities · **1-hop neighbours only**, not the transitive closure · the named template for its shape (2412) · its contract elements · its own failure history at the step it is about to attempt.\n\n**HARD CAP ENFORCED IN CODE.** Over cap → truncate by distance from target and RECORD what was dropped. **Never pass the whole graph.** This is the direct fix for 2472: 47 codegen failures whose error text says *\"the prompt is loop process orders, not a deliverable spec.\"* Retrieval replaces prompt-stuffing, and because the pack is derived and logged, a failed build can be read back to see exactly what codegen was told.\n\n**EVERY PRIMITIVE — including the ones NOT wrapped yet.** A coverage row per CF primitive (Workers, DO, D1, KV, R2, Queues, Vectorize, Hyperdrive, Browser Rendering, Containers, Workers AI, AI Gateway, Pages, Analytics Engine, Tail, Cron, Email Routing, Images, Stream, Turnstile, Access, Tunnels, Pipelines, Workflows, Agents SDK, Zaraz, WAF) with wrapped y/n, which node wraps it, entitlement status, known wall. **The unwrapped list IS the roadmap** — \"what can this platform not yet do\" becomes a query instead of an argument. Browser Rendering (paid-gated, unconfirmed) and Containers (token has no containers scope) go in on day one.\n\n**REPO LOCATIONS ARE FIRST-CLASS**, not a note. Repo, branch, commit, on-disk path, deployed version. A node with no resolvable repo is not registerable — this estate has built into the wrong tree more than once.\n\n**GENERALIZED EXPERT SERVICE FROM V1, not retrofitted.** One instance pe",
+   "refs": [
+    "BEB-2484",
+    "BEB-2472",
+    "BEB-2412",
+    "BEB-2354",
+    "BEB-2291",
+    "BEB-2070",
+    "BEB-2479"
+   ]
+  },
+  {
+   "id": "m10195",
+   "seq": 10195,
+   "ts": 1785399954929,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2470 — mastra tick codegen FAILED: CODEGEN_WALL: no SPEC.md on ticket/BEB-2470 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2470"
+   ]
   }
  ],
  "cursor": 10067,
- "head": 10191,
- "count": 124
+ "head": 10195,
+ "count": 128
 }
