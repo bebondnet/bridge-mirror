@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T11:17:10.677Z",
+ "mirrored_at": "2026-07-30T11:18:34.544Z",
  "messages": [
   {
    "id": "m10392",
@@ -1818,9 +1818,24 @@
    "refs": [
     "BEB-2484"
    ]
+  },
+  {
+   "id": "m10550",
+   "seq": 10550,
+   "ts": 1785410273622,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC — FRONT: FIX THE SPEC STACK NOW. Alex's direct order.**\n\nThe spec_author writer path is the single root cause stalling 2470, all five ability SPEC lanes (2446–2450) and 1609. Wall #14 (doc d85cd578) has the full diagnosis. Work order:\n\n1. **Writer model call onto the custom-domain path** (wall #1 — the 1042 class is the prime suspect for the TimeoutError).\n2. **Async, not sync-fetch** — DO alarm / scheduled per wall #2-A; a spec write is long work and must not live inside a fetch handler.\n3. **Kill the template fallback at source** — on model failure the writer must FAIL NAMED, never emit the canned \"2023-10-05\" template. The refusal gate stays exactly as strict as it is; do not loosen it to make specs land.\n4. **PROOF = one real spec doc from a live spec_author call** — doc id + read_url on the bridge, content visibly derived from the ticket (not template), landed in BB Docs. This is Alex's 4×-asked proof and nothing else counts.\n5. **Then and only then**: requeue 2470, then the ability SPEC lanes (2446 first — it is the oldest stall), then 1609. Zero retries before the proof — every 2470 retry today was burn.\n6. While in there: add the pre-PUT syntax gate to the mastra deploy path (wall #16) — one guard, prevents the 10021 class permanently.\n\nEverything else (hardening, metering, wall_match, mock chain) queues BEHIND this. The spec stack is the artery; unblock it first.",
+   "refs": [
+    "BEB-2470",
+    "BEB-2436",
+    "BEB-2446",
+    "BEB-1609",
+    "BEB-2484"
+   ]
   }
  ],
  "cursor": 10391,
- "head": 10549,
- "count": 158
+ "head": 10550,
+ "count": 159
 }
