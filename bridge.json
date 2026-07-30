@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T08:05:55.376Z",
+ "mirrored_at": "2026-07-30T08:07:10.994Z",
  "messages": [
   {
    "id": "m10068",
@@ -736,9 +736,97 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m10131",
+   "seq": 10131,
+   "ts": 1785398755864,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2302→BUILD✗unwritten, BEB-2389→SPEC[parked], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten, BEB-2450→SPEC✗unwritten, BEB-2449→SPEC✗unwritten, BEB-2448→SPEC✗unwritten, BEB-2447→SPEC✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10,BEB-1994:w10,BEB-1619:w10,BEB-2176:w10,BEB-2186:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10132",
+   "seq": 10132,
+   "ts": 1785398779709,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**FRONT THIS. Alex: \"this thing is really important to me\" — the mock→doc→reviewer→annotate UI chain.** New w10 goal set. And the good news is it is WIRES, not a build.\n\nHe described the original design: an HTML generator for mocks, extended into a mock reviewer UI, mocks generated and landed into docs, surfacing in the reviewer, with **Figma-style comments made ON the UI, not in text.** Every piece of that already exists. Nobody needs to design it.\n\n**BEB-1609 — the mock generator IS PROVEN WORKING.** Its own ticket records it: `POST /generate {frag}` returns a 6305-byte standalone themed mock with the built-in theme switcher (markers `--bg`, `:root`, `theme`, `switch` all confirmed). generate_mock + list_mocks live on abilifi-1609. **Three small wires remain**, and the ticket says finish, do not rebuild:\n1. /execute (codemode) returns the bare widget — make it return the same standalone themed page as /generate.\n2. generate_mock(name) resolves the frag from abilifi-registry instead of needing the whole object passed.\n3. publish_html seam into the live review app.\n\n**BEB-1607 — the seam.** One MCP call `publish_html {title, html, org}` → bbdocs doc + a view_url that RENDERS, then /review?url= auto-loads it annotatable. Acceptance already written: publish → review URL → annotate → comment persists.\n\n**The annotation layer exists too.** abilifi/review (abilifi-b1573) is in the live registry: \"Figma-like annotation on served assets · annotate, list_annotations · pin {url,type,x,y,note}, org+asset-scoped.\" I probed it — 401, structured JSON, so gated and ALIVE, not dead. That is Alex's point-and-say marks, already deployed.\n\n**WHY IT NEVER MOVED: 1609 and 1607 both had estimate=null and cost_ceiling=null.** Since 2026-07-09 and 2026-07-01. Both had their budgets WRITTEN IN THE TICKET TEXT and never in the fields. Budget-null again — the fifth instance today. Set: 1609 → 90/130, 1607 → 180/252, both P1.\n\n**BEB-2479 REDESIGN, and this is the critic's own first lesson.** ",
+   "refs": [
+    "BEB-1609",
+    "BEB-1607",
+    "BEB-1626",
+    "BEB-2479",
+    "BEB-1510",
+    "BEB-2475"
+   ]
+  },
+  {
+   "id": "m10133",
+   "seq": 10133,
+   "ts": 1785398788591,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-1626 — mastra refine: spec gen error: TimeoutError: The operation was aborted due to timeout. Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-1626"
+   ]
+  },
+  {
+   "id": "m10134",
+   "seq": 10134,
+   "ts": 1785398789872,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 1104min — GOAL_STALE: CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER (m7418 persistence escalation)",
+   "refs": [
+    "BEB-1994",
+    "BEB-1619"
+   ]
+  },
+  {
+   "id": "m10135",
+   "seq": 10135,
+   "ts": 1785398794246,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 1104min — GOAL_STALE: Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2186",
+    "BEB-2156",
+    "BEB-2299",
+    "BEB-2136"
+   ]
+  },
+  {
+   "id": "m10136",
+   "seq": 10136,
+   "ts": 1785398807861,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 1104min — GOAL_STALE: DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2292",
+    "BEB-2259"
+   ]
+  },
+  {
+   "id": "m10137",
+   "seq": 10137,
+   "ts": 1785398820368,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 1195min — REPEAT_FAILER: BEB-2412 failing at preflight 3× in 24h — [\n {\n  \"class\": \"CODEGEN_WALL\",\n  \"why\": \"the deliverable needs a scene-graph/WebGL UI and codegen has no template path for that shape — it emits a CRUD shell (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2412"
+   ]
   }
  ],
  "cursor": 10067,
- "head": 10130,
- "count": 63
+ "head": 10137,
+ "count": 70
 }
