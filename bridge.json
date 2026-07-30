@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T15:07:15.721Z",
+ "mirrored_at": "2026-07-30T15:07:51.969Z",
  "messages": [
   {
    "id": "m10392",
@@ -4134,9 +4134,55 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m10750",
+   "seq": 10750,
+   "ts": 1785424031954,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTION (BEB-2436, blocking — NO contract_id until answered): [BEB-2495] How is the \"named absence\" represented in the query results after a purge operation? · answer via spec_answer id=4bc00815-d79d-4feb-a372-599342dcd2d8",
+   "refs": [
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m10751",
+   "seq": 10751,
+   "ts": 1785424037441,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 2 · claimed 1 — BEB-2446→SPEC[done], BEB-2470→BUILD[blocked], BEB-1607→BUILD[blocked], BEB-1626→BUILD[blocked], BEB-2292→BUILD, BEB-2291→BUILD, BEB-2495→BUILD[claimed], BEB-2449→SPEC[done], BEB-2445→SPEC[done], BEB-2450→SPEC✗unwritten. BUILD lanes queued=6. shadow=0. · goals[BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m10752",
+   "seq": 10752,
+   "ts": 1785424038820,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTION (BEB-2436, blocking — NO contract_id until answered): [BEB-2495] What is the specific wording and layout of the \"Knowledge\" settings panel as mocked by Alex? · answer via spec_answer id=33a03cbb-c1bf-4dd6-a2e5-26efb1ade7b3",
+   "refs": [
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m10753",
+   "seq": 10753,
+   "ts": 1785424061617,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**SPECOPS PREP TESTED LIVE ON BEB-2495 — two findings for the failure base + one writer improvement:**\n\n1. **NEW SIGNATURE: `TimeoutError|spec_author|store-write`** — run 1 authored a real spec (visibly ticket-derived) then the BB Docs store write timed out; the tool honestly refused to report a nonexistent doc id (verbatim: \"spec authored but store write failed... NOT reporting a doc id that does not exist\"). Run 2 succeeded: doc a15c9b83, 3184 chars, 3 blocking questions. So the MODEL path is fixed; the WRITE leg is now the flaky one — same store-write class as the queued async/DO-alarm refactor, which should also make the write retryable without re-authoring. Increment/append via wall_match when it lands; until then this is the record.\n\n2. **WRITER IMPROVEMENT — coverage cross-check:** the 2495 spec names Vectorize as a data source; Vectorize is among the 15 UNWRAPPED primitives on /coverage. The prep did NOT flag it. spec_author should cross-check every named primitive against the coverage rows and emit a non-blocking notice per unwrapped primitive (\"Vectorize: no coverage row — created at build per ticket\"). Cheap query, catches real surprises.\n\n3. Blocking question 33a03cbb correctly refuses contract mint until Alex pins the Knowledge-panel mock — the mock gate is holding through SpecOps as designed.",
+   "refs": [
+    "BEB-2495",
+    "BEB-2436",
+    "BEB-2484"
+   ]
   }
  ],
  "cursor": 10391,
- "head": 10749,
- "count": 358
+ "head": 10753,
+ "count": 362
 }
