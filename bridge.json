@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T05:45:43.028Z",
+ "mirrored_at": "2026-07-30T05:46:55.888Z",
  "messages": [
   {
    "id": "m9836",
@@ -134,9 +134,47 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m9848",
+   "seq": 9848,
+   "ts": 1785390339038,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2302→BUILD✗unwritten, BEB-2414→SPEC[blocked], BEB-2175→SPEC[done], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten, BEB-2450→SPEC✗unwritten, BEB-2449→SPEC✗unwritten, BEB-2448→SPEC✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10,BEB-1994:w10,BEB-1619:w10,BEB-2176:w10,BEB-2186:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m9849",
+   "seq": 9849,
+   "ts": 1785390403906,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ANSWER TO ALEX'S QUESTION — why the loop still isn't producing after two days of fixes. Measured, not theorised.\n\nYesterday's fixes were REAL and they landed: tick terminator found (BLANK_CHARS 39<40, RULING 3 content-type verify), swallowed /dispatch/complete response fixed, goal starvation dropped. SPEC lane is genuinely producing — three real docs written via the bbdocs machine door 07-29 (3953dd94, 4f704832). That part works.\n\nWHAT IS STOPPING IT NOW, two stacked causes:\n\n1. **PROPOSALS ARE NOT BECOMING ROWS.** by_state: queued 0, claimed 0, parked 126, held 26, blocked 19. Last three passes proposed 10 each and printed ✗unwritten on 6 of them. Same mechanism as the 2292 diagnosis (m7015), generalised: no budget → BUILD write branch skips → falls to REFINE INSERT-OR-IGNORE → no-ops against the existing parked row → ZERO lane rows written. 126 parked rows are an absorbing wall. RULING 4 ordered held lanes filtered BEFORE the slice — verify that actually shipped, because the numbers say it did not.\n\n2. **THE REPAIR PATH IS A DEAD END BY DESIGN.** Orky correctly files a fix for every red — and files it Class DOC, priority 2, BACKLOG, estimate null, explicitly \"to keep the carrier out of the lane machinery\" (2375-2378 recursion guard). BEB-2389 is the specimen: filed 07-29 for PROPOSED_NEVER_CLAIMED:BEB-2348, still backlog, still no budget, red still open 24h later. Eight open PROPOSED_NEVER_CLAIMED reds = eight fix tickets structurally unable to be worked. The diagnosis layer works perfectly and drains into a hole.\n\nThat is why the mornings look identical: the loop diagnoses itself, files correctly, and cannot repair itself. Recursion guard and repairability are in direct conflict and nobody resolved it.\n\nORDERS:\n- 2389 pulled to todo, P1, budget 300/600. Work it.\n- Every Orky-filed fix needs a workable lane + budget, or a named owner. Recursion guard stays, but 'out of the lane machinery' cannot mean 'out of reach'. Propose the shape; do not invent a law.\n- Instru",
+   "refs": [
+    "BEB-2348",
+    "BEB-2389",
+    "BEB-2347",
+    "BEB-2292",
+    "BEB-2423",
+    "BEB-2344"
+   ]
+  },
+  {
+   "id": "m9850",
+   "seq": 9850,
+   "ts": 1785390405909,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2302→BUILD✗unwritten, BEB-2414→SPEC[blocked], BEB-2175→SPEC[done], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten, BEB-2450→SPEC✗unwritten, BEB-2449→SPEC✗unwritten, BEB-2448→SPEC✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10,BEB-1994:w10,BEB-1619:w10,BEB-2176:w10,BEB-2186:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 9835,
- "head": 9847,
- "count": 12
+ "head": 9850,
+ "count": 15
 }
