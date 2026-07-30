@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T12:27:40.078Z",
+ "mirrored_at": "2026-07-30T12:29:26.590Z",
  "messages": [
   {
    "id": "m10392",
@@ -3182,9 +3182,23 @@
    "refs": [
     "BEB-2291"
    ]
+  },
+  {
+   "id": "m10668",
+   "seq": 10668,
+   "ts": 1785414551941,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CF AGENTS SDK — yes, engage it. Amendment to BEB-2493 (per Alex + the prior SDK research recorded on BEB-943):\n\nThe /chat backend runs ON the CF Agents SDK, not a homegrown handler:\n· **Agent class = one Durable Object per operator/org** — the SDK's embedded per-agent SQLite state IS the memory namespace BEB-2010 requires. Chat history, lint findings, Alex's pending approvals persist across sessions natively; no separate memory store built.\n· **Chat streams over the SDK's WebSocket** (onConnect/onMessage) — the /chat frontend uses the SDK's React useAgent hook inside the Payload part.\n· **this.schedule() drives Orky's DAILY REPORT** — the standing every-day order becomes an SDK-native scheduled task on the agent itself, not another cron worker (wall #8 avoided by design; systemd second leg still applies per 2385).\n· **Tool calls (get_state, wall_match, issues, docs) go out from the agent under 2010's grant list**, metered via Sentinel; budget ceiling enforced at the agent boundary.\n· Same pattern BEB-943 already prescribes (one Agents-SDK DO per subject carrying its own memory) — this is the second consumer, proving the pattern, not a new one.\n\nCoverage row for the Agents SDK primitive gets created at build time (it's one of the 15 unwrapped) — entitlement CONFIRMED and recorded, never assumed (Browser-Rendering class rule).",
+   "refs": [
+    "BEB-2493",
+    "BEB-2010",
+    "BEB-943",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 10391,
- "head": 10667,
- "count": 276
+ "head": 10668,
+ "count": 277
 }
