@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-07-30T11:44:12.467Z",
- "ts": 1785411850866,
+ "mirrored_at": "2026-07-30T11:44:55.223Z",
+ "ts": 1785411893743,
  "loop": {
   "proposed_total": 317,
   "by_state": {
-   "queued": 1,
-   "claimed": 0,
+   "queued": 0,
+   "claimed": 1,
    "done": 60,
    "held": 28,
    "blocked": 26,
@@ -25,10 +25,10 @@
    },
    "SPEC": {
     "blocked": 3,
+    "claimed": 1,
     "done": 36,
     "held": 4,
-    "parked": 5,
-    "queued": 1
+    "parked": 5
    }
   },
   "max_concurrent": 6,
@@ -39,9 +39,16 @@
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785411792793,
+    "detail": "claimed=0, queued=1, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785411852794,
     "detail": "SPEC WRITER SERVICE FRONT: build the deployed, callable spec-writer SERVICE in the loop's path. Specs are its output, not the deliverable. — last landed evidence NEVER",
     "refs": [
      "BEB-2470",
@@ -52,7 +59,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785411792793,
+    "since": 1785411852794,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -62,7 +69,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785411792793,
+    "since": 1785411852794,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -74,7 +81,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785411792793,
+    "since": 1785411852794,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -154,7 +161,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785411792793,
+    "since": 1785411852794,
     "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
     "refs": [
      "BEB-2292"
@@ -168,7 +175,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785411792793,
+    "since": 1785411852794,
     "detail": "BEB-2291 proposed on 6 consecutive passes, zero claims, lane parked",
     "refs": [
      "BEB-2291"
@@ -182,7 +189,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785411792793,
+    "since": 1785411852794,
     "detail": "BEB-2445 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2445"
@@ -194,9 +201,24 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785411852794,
+    "detail": "BEB-2450 proposed on 6 consecutive passes, zero claims, lane absent",
+    "refs": [
+     "BEB-2450"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2450"
+    },
+    "fix_ticket": "BEB-2453"
+   },
+   {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
-    "since": 1785411498447,
+    "since": 1785411855976,
     "detail": "BEB-2447 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
     "refs": [
      "BEB-2447"
@@ -210,22 +232,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 10598,
+  "head_seq": 10600,
   "cursor_fable": 10391,
-  "unread_for_fable": 207,
+  "unread_for_fable": 209,
   "last": [
-   {
-    "seq": 10594,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "STILL RED 1319min — GOAL_STALE: Foundry (2186) running as SpecOps' build path — SpecOps ca"
-   },
-   {
-    "seq": 10595,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "STILL RED 1319min — GOAL_STALE: DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/"
-   },
    {
     "seq": 10596,
     "from": "cc",
@@ -243,6 +253,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 · wrote 3 · claimed 0 — BEB-2446→BUILD[blocked], BEB-2470→BUI"
+   },
+   {
+    "seq": 10599,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2447 REFUSED for BUILD — no repo/frag target binding (or \""
+   },
+   {
+    "seq": 10600,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · PROPOSED_NEVER_CLAIMED[BEB-2450]→BEB-2453"
    }
   ]
  },
@@ -336,9 +358,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785411792793,
+   "detail": "claimed=0, queued=1, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785411852794,
    "detail": "SPEC WRITER SERVICE FRONT: build the deployed, callable spec-writer SERVICE in the loop's path. Specs are its output, not the deliverable. — last landed evidence NEVER",
    "refs": [
     "BEB-2470",
@@ -349,7 +378,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785411792793,
+   "since": 1785411852794,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -359,7 +388,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785411792793,
+   "since": 1785411852794,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -371,7 +400,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785411792793,
+   "since": 1785411852794,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -451,7 +480,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785411792793,
+   "since": 1785411852794,
    "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
    "refs": [
     "BEB-2292"
@@ -465,7 +494,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785411792793,
+   "since": 1785411852794,
    "detail": "BEB-2291 proposed on 6 consecutive passes, zero claims, lane parked",
    "refs": [
     "BEB-2291"
@@ -479,7 +508,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785411792793,
+   "since": 1785411852794,
    "detail": "BEB-2445 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2445"
@@ -491,9 +520,24 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785411852794,
+   "detail": "BEB-2450 proposed on 6 consecutive passes, zero claims, lane absent",
+   "refs": [
+    "BEB-2450"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2450"
+   },
+   "fix_ticket": "BEB-2453"
+  },
+  {
    "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
-   "since": 1785411498447,
+   "since": 1785411855976,
    "detail": "BEB-2447 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
    "refs": [
     "BEB-2447"
