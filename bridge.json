@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-30T06:19:39.416Z",
+ "mirrored_at": "2026-07-30T06:22:41.359Z",
  "messages": [
   {
    "id": "m9836",
@@ -808,9 +808,83 @@
    "refs": [
     "BEB-2449"
    ]
+  },
+  {
+   "id": "m9908",
+   "seq": 9908,
+   "ts": 1785392376192,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2302→BUILD✗unwritten, BEB-2414→SPEC[blocked], BEB-2175→SPEC[done], BEB-2389→SPEC[claimed], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten, BEB-2450→SPEC✗unwritten, BEB-2449→SPEC✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10,BEB-1994:w10,BEB-1619:w10,BEB-2176:w10,BEB-2186:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m9909",
+   "seq": 9909,
+   "ts": 1785392423990,
+   "from": "fable",
+   "kind": "directive",
+   "body": "PRE-MORTEM WRITTEN — Alex asked for the forward failure-mode plan so the loop can run for days and actually generate code. Two docs, no tickets:\n\nPart 1: a0f41024-2061-45ae-9b97-08b0fcadd329 (sections A-C)\nPart 2: see the doc created immediately after (sections C9-F). Part 1 was TRUNCATED by the write door at ~10k chars mid-section-C8 — note that as a real limit on the machine door, it silently accepted a short write and reported success.\n\nEvery class in it has already fired and carries its evidence line. The headline:\n\n**The loop has no path back.** Every failure class ends in parked, nothing returns a parked ticket to the queue with a changed input, and the fixes Orky files are themselves unworkable. done 58 / parked 126 / held 26 / blocked 19 / queued 0 / claimed 0. That is not a stalled loop, it is one that has monotonically drained. Three more days unchanged: parked 200, queued 0, passes green, zero code.\n\nORDER (section F): A1 BUDGET_NULL auto-repair → A3 three-number pass line (proposed/rows_written/claims_taken) → **A2 unpark-on-changed-input, the biggest single item** → B1 Alex's ruling on recursion-guard vs repairability → C2+C1 claim-time precondition check + retry breaker + shape router (removes 50+ wasted ticks/day: 2472 alone failed 47× in 24h on the same missing SPEC.md) → B2 the record (2347) → C7 class checked at claim → D1 credential sweep.\n\nNEW RISKS NAMED that have not fired yet and will on day 2-3: credential expiry as a permanent class (the dead RESEND key is instance one, and RESEND still has no 2192 registry row); no daily spend cap; orphan worker accumulation; BB Docs has NO BACKUP anywhere in the estate (2362) — the only unrecoverable item on the list.\n\nDo not re-diagnose from this. It is the plan; work section F top-down and report the three numbers each pass.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2347",
+    "BEB-2344",
+    "BEB-2385",
+    "BEB-2362",
+    "BEB-2192",
+    "BEB-2472"
+   ]
+  },
+  {
+   "id": "m9910",
+   "seq": 9910,
+   "ts": 1785392461410,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2302→BUILD✗unwritten, BEB-2414→SPEC[blocked], BEB-2175→SPEC[done], BEB-2389→SPEC[claimed], BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten, BEB-2450→SPEC✗unwritten, BEB-2449→SPEC✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10,BEB-1994:w10,BEB-1619:w10,BEB-2176:w10,BEB-2186:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m9911",
+   "seq": 9911,
+   "ts": 1785392475033,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER alarm: lease expired on BEB-2389 (attempt 1) — requeued.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2389"
+   ]
+  },
+  {
+   "id": "m9912",
+   "seq": 9912,
+   "ts": 1785392486056,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 — BEB-2446→SPEC✗unwritten, BEB-2292→BUILD, BEB-2302→BUILD✗unwritten, BEB-2414→SPEC[blocked], BEB-2175→SPEC[done], BEB-2389→SPEC, BEB-2466→SPEC[parked], BEB-2468→REFINE✗unwritten, BEB-2450→SPEC✗unwritten, BEB-2449→SPEC✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10,BEB-2342:w10,BEB-2292:w10,BEB-2367:w10,BEB-2348:w10,BEB-1994:w10,BEB-1619:w10,BEB-2176:w10,BEB-2186:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m9913",
+   "seq": 9913,
+   "ts": 1785392529496,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2389 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2389"
+   ]
   }
  ],
  "cursor": 9835,
- "head": 9907,
- "count": 72
+ "head": 9913,
+ "count": 78
 }
