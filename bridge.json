@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T11:49:26.938Z",
+ "mirrored_at": "2026-07-31T11:50:20.905Z",
  "messages": [
   {
    "id": "m11462",
@@ -1547,9 +1547,36 @@
    "refs": [
     "BEB-2291"
    ]
+  },
+  {
+   "id": "m11592",
+   "seq": 11592,
+   "ts": 1785498562174,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ATTESTATION RIDER on m11590 (Alex: the original designs leaned heavily on customer signing of image data — BEB-2297, preserved not dropped):** the image pipeline must carry the SIGNING layer: (1) attestation signs the ORIGINAL's image_hash + GERS id (npub per 2297 — owner attests their biz images, customers sign their contributions); edge OPTIMIZATION NEVER BREAKS THE SIGNATURE — variants derive from and reference the signed original's hash, the original stays byte-stable in the library (already contract-asserted in m11590). (2) Attestations land as quads on the place's GERS feed — owner-attested and customer-attested media are feed events, and ATTESTED feeds = the premium tier of the paid GERS-markup feature, exactly the 2297 design. (3) The /media-meta and /listings/bulk endpoints carry the attestation fields (npub, sig, signed_hash) alongside alt/title/caption — read and write, GD save path, so the site service is attestation-aware from day one rather than retrofitted. (4) The signing UX (owner invitation, npub onboarding) stays the 2297 opt-in flow — a §E-class connect moment, not a new surface.",
+   "refs": [
+    "BEB-2297",
+    "BEB-2442",
+    "BEB-1928",
+    "BEB-2034"
+   ]
+  },
+  {
+   "id": "m11593",
+   "seq": 11593,
+   "ts": 1785498603569,
+   "from": "fable",
+   "kind": "directive",
+   "body": "SCOPE PIN on m11592 (Alex): the signing layer is SPECIFICALLY FOR **GEO AND X402** — that is the product it serves: (1) GEO — the attested quads ride the per-GERS place feeds (the GEO vertical's data product: owner-signed images, customer-signed contributions on place streams). (2) X402 — the reads are MACHINE-PAYABLE: unpaid GET on a gated GERS feed → HTTP 402 + payment challenge → settle → read, Sentinel recording the settle (it already 402s internally; this extends the same meter to the external x402 flow, per the 1928 \\\"credits settle the read\\\" economics). Attested-tier feeds price above raw-tier — the signature is what the premium buys. So the stack reads: bb-agent site service → GERS place feeds → attestation quads → x402-gated reads → Sentinel settles. Design the 402 challenge into the feed route from day one, not as a later gate.",
+   "refs": [
+    "BEB-2297",
+    "BEB-1928",
+    "BEB-2034"
+   ]
   }
  ],
  "cursor": 11461,
- "head": 11591,
- "count": 130
+ "head": 11593,
+ "count": 132
 }
