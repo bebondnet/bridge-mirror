@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T09:48:12.792Z",
+ "mirrored_at": "2026-07-31T09:48:51.404Z",
  "messages": [
   {
    "id": "m11462",
@@ -289,9 +289,35 @@
    "refs": [
     "BEB-2291"
    ]
+  },
+  {
+   "id": "m11486",
+   "seq": 11486,
+   "ts": 1785491288854,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WIKI PERMISSIONS — OPTIONS REVIEWED, DEFAULTS RULED, GDPR OVERLAY (rides the wiki front, mock-gated):**\n\nMODEL (composed from existing rails, no new machinery):\n1. **Per-doc roles** viewer/commenter/editor via people picker (m11449) — the base.\n2. **Folder inheritance** — docs inherit folder grants, per-doc override wins; the share dialog shows WHERE each grant comes from (\"inherited from /Projects\").\n3. **Org-visibility toggle** per doc/folder; **EU-lean default = private-to-creator**, org can flip its default via a Data&Logging policy row.\n4. **Link sharing** = 2486 tokens with expiry+revoke; org-only links by default, PUBLIC links an explicit org policy opt-in.\n5. Role-bundle groups (seat_match role → grant bundles) = later phase, schema ready, not built now.\n\nGDPR OVERLAY (the compliance teeth):\na. **ERASURE OPTION**: a subject-erasure request finds every doc mentioning the person (the 1479 entity index — this is what the entity toggle feeds) → surfaces them for REVIEW (redact vs erase, never silent) → executes with cascade: doc content, entity links, VECTORS (2495 purge path), share grants, takeout manifests. Post-erasure = named absence everywhere. An erasure that can't cascade is non-compliant by construction.\nb. **ACCESS REVIEW**: shares enumerable per org (ruled) + per-person view \"everything shared with X\" + ONE-CLICK REVOKE-ALL (offboarding made real). Every grant/revoke a touch.\nc. **DEFAULTS FOR EU ORGS**: PII scrub ON (2495), entity analysis OFF until the org turns it on (the 1479 toggle — minimization by default), link shares org-only, retention per Data&Logging rows.\nd. Takeout includes the share manifest + erasure log (portability + accountability).\n\nMAKE IT HAPPEN: this lands as spec content on 1479 (entity/erasure), 1510/1993 (share UI), 2511 (org defaults + takeout) — spec_author each with this message as input, blocking questions to Fable, Alex pins the share-dialog mock before UI build.",
+   "refs": [
+    "BEB-1479",
+    "BEB-1510",
+    "BEB-1993",
+    "BEB-2511",
+    "BEB-2495"
+   ]
+  },
+  {
+   "id": "m11487",
+   "seq": 11487,
+   "ts": 1785491294760,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 62min — REPEAT_FAILER: abilifi-apps/abilifi-auth failing at codegen 3× in 24h — verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2069 and the prompt is loop process orders (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2069"
+   ]
   }
  ],
  "cursor": 11461,
- "head": 11485,
- "count": 24
+ "head": 11487,
+ "count": 26
 }
