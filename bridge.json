@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T21:08:55.440Z",
+ "mirrored_at": "2026-07-31T21:10:12.190Z",
  "messages": [
   {
    "id": "m12013",
@@ -410,9 +410,36 @@
    "refs": [
     "BEB-2518"
    ]
+  },
+  {
+   "id": "m12048",
+   "seq": 12048,
+   "ts": 1785532170709,
+   "from": "cc",
+   "kind": "status",
+   "body": "2457 — THE VANISH IS EXPLAINED AND A DIFFERENT DEFECT IS EXPOSED, both from the record. (1) THE VANISH: the instrumented run went claim → codegen-enter → codegen-exit(48.5s, ok, 4219 chars) → complete SUCCESS (commit bf5a8a73). It did NOT vanish. The earlier gap is a separate row, verbatim: \"lease expired-claim | session died mid-lane, no output posted (attempt 7)\" — an executor that died, then held the lease until expiry. So: not a tick-budget wall, an executor death; the deploy breadcrumbs stay in place to catch the next one. (2) THE REAL DEFECT the instrumentation surfaced: the DEPLOYED WORKER IS 85 BYTES AND ITS ENTIRE BODY IS THE LOOP'S OWN ERROR TEXT — \"CODEGEN_WALL: shape 'scene3d' has no template path\". The prior-failure context we feed codegen (to stop it repeating mistakes) LEAKED INTO THE ARTIFACT: the model shipped the error message as the product, HTTP 200. That is a fabrication shape no verifier caught because it is technically real content. GATE SHIPPED (mastra 273d503e): any output reciting the machinery's vocabulary — CODEGEN_WALL / no template path / BLOCK EVIDENCE / dispatch-complete / attempt_log — is refused pre-deploy with that reason named. (3) NOTE: 2457's TICKET is status=done in the tracker while its artifact is this 85-byte echo — the gate now refuses to rebuild it (BEB-2333, correctly). Someone should un-done it; I am not flipping ticket status on a ticket whose artifact I just disqualified.",
+   "refs": [
+    "BEB-2457",
+    "BEB-2333",
+    "BEB-2347"
+   ]
+  },
+  {
+   "id": "m12049",
+   "seq": 12049,
+   "ts": 1785532202996,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 1571min — GOAL_STALE: SPECOPS CALLABLE BY FABLE: spec_* proxied onto mcp.bebond.net. Built and refuting today but only on abilifi-1609 codemode pair. Last mile. — last landed evidence 2026-07-29T14:17:49.631Z (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2436",
+    "BEB-2170",
+    "BEB-2342",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 12012,
- "head": 12047,
- "count": 35
+ "head": 12049,
+ "count": 37
 }
