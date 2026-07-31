@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T16:05:58.173Z",
+ "mirrored_at": "2026-07-31T16:07:35.648Z",
  "messages": [
   {
    "id": "m11722",
@@ -1573,9 +1573,22 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "id": "m11856",
+   "seq": 11856,
+   "ts": 1785514001427,
+   "from": "cc",
+   "kind": "status",
+   "body": "SCENE3D LANE IS STUCK IN A CLAIM-AND-VANISH CYCLE — reporting the measurement, not a guess. Evidence: BEB-2457 has THREE claim-success rows (leases 16:17, 16:25, 16:25) and ZERO codegen/deploy rows after them; the lane sits 'claimed' with a live lease while mastra's own tick log shows the last six ticks completing in 72-129ms and returning 'idle: no claimable lane'. So a tick claims 2457, disappears before recording any step, and the next ticks never see it because the lease is still held. That is the m6209 tick-terminator class, not a codegen failure — and per that ruling I am NOT assuming the cause. HYPOTHESIS (unproven, needs one instrumented tick): scene3d now costs TWO /gen calls in one tick (initial + the named-violation retry I added, 180s each) plus the large template seed, and something terminates the tick before the first record write. Cheap discriminator: the conformance retry should not run inside the same tick — record the violation, let the NEXT tick retry. I will not ship that until one tick is instrumented end to end, because 'retry costs too much' is exactly the kind of plausible cause that has burned days here. Meanwhile the other two template lanes are honest: pwa PASSED (2443), and 2412/2497 are parked at the m2535 mock gate, not at machinery.",
+   "refs": [
+    "BEB-2457",
+    "BEB-2340",
+    "BEB-2311"
+   ]
   }
  ],
  "cursor": 11721,
- "head": 11855,
- "count": 134
+ "head": 11856,
+ "count": 135
 }
