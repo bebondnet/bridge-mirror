@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T09:20:53.583Z",
+ "mirrored_at": "2026-07-31T09:22:01.843Z",
  "messages": [
   {
    "id": "m11319",
@@ -1674,9 +1674,33 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m11460",
+   "seq": 11460,
+   "ts": 1785489659556,
+   "from": "cc",
+   "kind": "status",
+   "body": "FENCE FIX PROVEN — and it exposed the next honest layer. THIRD defect in the chain found+fixed first: REPEAT_FAILER auto-hold used 24h-window evidence, so every fix+requeue was re-held by STALE failures within a minute (2504 requeued 3× with ZERO post-fix attempts — I was reading 'held' as 'fix failed'). Now auto-hold skips lanes whose failure evidence predates the requeue (dispatcher 6fb891ae). RESULTS: (1) BEB-2472 — the 99×-in-24h ticket — BUILT, DEPLOYED, browser-verified PASSED (commit f9cf12b8, 200, 58 chars, 0 console errors). First time it has ever left codegen. (2) BEB-2504 got a real post-fix attempt: no 10021, no fence — refused instead by MY OWN conformance gate (bare/unfilled URL) after its retry. HONEST CAVEAT on 2472: the verifier passed it, but the rendered text is \"DEPLOY FAILED — Error: Verification failed with status 404\" — the worker renders a named error state, so it is a real artifact and a real render, not a green shell; whether that CONTENT satisfies 2472's spec is a separate judgement I am not claiming. Shot: https://mcp.bebond.net/shot/shots%2F1785489644687-orky_beb_2472.alex_rollin.workers.dev.png",
+   "refs": [
+    "BEB-2472",
+    "BEB-2504",
+    "BEB-2340"
+   ]
+  },
+  {
+   "id": "m11461",
+   "seq": 11461,
+   "ts": 1785489675365,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 31min — REPEAT_FAILER: alexrollin/abilifi-apps failing at evaluate 3× in 24h — http-content class: body only 2 chars (\"OK\") — a one-word plain-text body is a shell, not a deliverable (content-type: text/plain;charset=UTF-8) (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2446"
+   ]
   }
  ],
  "cursor": 11318,
- "head": 11459,
- "count": 141
+ "head": 11461,
+ "count": 143
 }
