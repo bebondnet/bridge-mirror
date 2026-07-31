@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T12:16:02.783Z",
+ "mirrored_at": "2026-07-31T12:16:41.240Z",
  "messages": [
   {
    "id": "m11462",
@@ -1884,9 +1884,23 @@
     "BEB-2016",
     "BEB-2502"
    ]
+  },
+  {
+   "id": "m11620",
+   "seq": 11620,
+   "ts": 1785500162609,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**LITE PLANNING RULE (Alex: careful — CF DNS must NOT be assumed):** every lite-tier capability declares its DNS posture: **none | cf-enhanced | cf-required** — and the DEFAULT BUILD TARGET is NO CF DNS (plugin + CORS to our workers + our own hostnames). The impact map, planned now not discovered later:\n\nWORKS WITHOUT CF DNS (plugin talks outward; nothing fronts their domain): bb-agent site-service endpoints · abilities beam · GD ingest → GERS feeds + WebSub (topics live on OUR feed hostnames — the obligation holds regardless of their DNS) · Cue, data teams, orders · claim funnels (links on our app domain) · CRM/imports · media-meta writes · x402-gated reads (our domains) · confirmations (plugin renders server-side).\n\nDEGRADES GRACEFULLY: the /abilifi page — without CF DNS it's the PLUGIN-RENDERED shell loading Payload parts from our origin client-side (the BB Live pattern, CORS) instead of edge-served; same content, named posture. Image optimization — variants serve from OUR image hostname with the plugin rewriting srcs, originals untouched; not their-domain-native.\n\nCF-ENHANCED (only with their zone on CF via delegated grant): edge-served /abilifi · per-hostname traffic analytics · gd-edge caching. NOTE: lite BILLING is unaffected either way — lite meters ACTION-GRADE only (they host themselves; no traffic billing), so the analytics-grade dependency simply doesn't exist in lite.\n\nMECHANICS: dns_requirement becomes a field on capability/graph nodes; specs touching lite state their posture; a lite spec silently assuming CF DNS = a lint finding. The connect flow OFFERS the CF delegated grant as the enhancement upsell, never as the entry requirement.",
+   "refs": [
+    "BEB-2094",
+    "BEB-2497",
+    "BEB-2442",
+    "BEB-2502"
+   ]
   }
  ],
  "cursor": 11461,
- "head": 11619,
- "count": 158
+ "head": 11620,
+ "count": 159
 }
