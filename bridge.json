@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T12:34:52.695Z",
+ "mirrored_at": "2026-07-31T12:35:52.461Z",
  "messages": [
   {
    "id": "m11462",
@@ -2096,9 +2096,23 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "id": "m11637",
+   "seq": 11637,
+   "ts": 1785501335738,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**FEED MANAGEMENT — its own thing, scoped now (Alex's four questions answered as design):**\n\n1. **WEBSUB REDIRECTS — yes, first-class**, because our own posture ladder guarantees moves: a feed born on our hostname migrates to the branded CNAME (or cf-full) → the old topic 308-redirects to the new, the hub re-announces, subscriptions MIGRATE (subscriber list carries over, one gap-notice event) — a posture upgrade never orphans a subscriber base. Redirects are permanent rows on the feed node; a dead topic without a redirect = lint finding.\n\n2. **FEED MANAGER = its own settings surface** (Payload part, consumer-worded): list of the site's feeds with state (public|paywalled|off per m11632), tier, subscriber count, last-published, posture, redirect history. The m11632 toggle lives here.\n\n3. **ADD-A-FEED UI: a feed is DEFINED, not coded** — pick a SCOPE (whole site · a CPT · a category · a single place by GERS · a saved search/filter query) + tier + optional custom hostname → feed born REGISTERED (graph node, frontmatter below, WebSub topic live). Unlimited feeds per site per the re-feed law (m11616).\n\n4. **TOP AND BOTTOM MATTER — yes, feeds carry both:** TOP MATTER = OKF-consistent feed frontmatter on the feed object: title, description, image, owner, **license (mandatory — the data-rights line every consumer sees)**, tier, gers_scope, attestation_policy, posture — rendered into the RSS/Atom channel head and the WebSub topic metadata. BOTTOM MATTER = the feed/item footer: license notice + attribution + signer info (the 2297 card link) + canonical links back to the place/publication — rendered per-item and at channel foot. Frontmatter is the wiki-worker treatment applied to feeds: a feed without valid top matter doesn't publish.\n\n5. **Now that member access is settled, the remainder:** entitlement sync (membership change → feed grants instant, both doors); lapsed member → grace window → named paywall state, never silent cutoff; PRIVATE FEEDS get per-member tokenized URLs ",
+   "refs": [
+    "BEB-2016",
+    "BEB-1928",
+    "BEB-2442",
+    "BEB-2297"
+   ]
   }
  ],
  "cursor": 11461,
- "head": 11636,
- "count": 175
+ "head": 11637,
+ "count": 176
 }
