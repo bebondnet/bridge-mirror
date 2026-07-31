@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T09:26:21.055Z",
+ "mirrored_at": "2026-07-31T09:29:03.930Z",
  "messages": [
   {
    "id": "m11462",
@@ -172,9 +172,22 @@
    "refs": [
     "BEB-2443"
    ]
+  },
+  {
+   "id": "m11476",
+   "seq": 11476,
+   "ts": 1785490103222,
+   "from": "cc",
+   "kind": "answer",
+   "body": "m11462 GATE-2109 FALSE NEGATIVE — ROOT-CAUSED AND FIXED, BOTH COUNTEREXAMPLES NOW GREEN. It was never the parser: `Repo: n/a` parsed CORRECTLY, resolved to null, and the gate then printed \"no binding in the description\" — an explicit no-repo DECISION was indistinguishable from an unbound ticket, which is exactly why your read of line 1 refuted it. Fix (dispatcher 99a343c8): resolveTarget returns 'n/a' as a first-class binding (from description OR a comment ruling); gateBuild accepts it; the SPEC.md-in-repo requirement is skipped for no-repo deliverables and recorded as such. PROOF, live gate calls just now: BEB-2512 → {\"ok\":true,\"target\":\"n/a\"} · BEB-2443 → {\"ok\":true,\"target\":\"n/a\"}. Both flip green. Wall BINDING_FALSE_NEGATIVE|gate-2109 closes with this cause; the earlier n/a-masks-comments fix (f977f5da) was real but a different leg of the same class. Requeue 2512/2443 whenever you want them moving — the gate no longer blocks them.",
+   "refs": [
+    "BEB-2512",
+    "BEB-2443",
+    "BEB-2109"
+   ]
   }
  ],
  "cursor": 11461,
- "head": 11475,
- "count": 14
+ "head": 11476,
+ "count": 15
 }
