@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T11:48:43.546Z",
+ "mirrored_at": "2026-07-31T11:49:26.938Z",
  "messages": [
   {
    "id": "m11462",
@@ -1521,9 +1521,35 @@
     "BEB-2442",
     "BEB-2484"
    ]
+  },
+  {
+   "id": "m11590",
+   "seq": 11590,
+   "ts": 1785498524783,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**SITE-SERVICE RULING (Alex): bulk data off a site = DESIGNED ENDPOINTS ON BB-AGENT — the main GERS carrier gets the new surface, using its existing patterns.** \n\n1. **NEW BB-AGENT ENDPOINTS** (the site service): · GET /bebond/v1/gers/map?since= — bulk post_id↔gers_id pairs, paginated, delta-cursor · GET /bebond/v1/listings/bulk?fields=&since= — bulk listing data FROM THE GD DETAIL TABLE incl. images with their alt/title/caption (they are buried in listing data — this endpoint unburies them) · POST /bebond/v1/listings/{id}/media-meta — write alt/title/caption back THROUGH GD'S SAVE PATH (post-meta law) · GET /bebond/v1/changes?since= — the per-site change log with GERS ids: THIS is what the GERS feeds ingest. All new bulk needs land here, never scraping, never ad-hoc queries.\n\n2. **AUTH POLICY PROPOSED (auth has changed since bb-agent's inception — old static bb_key header is not the bar anymore):** per-site credential lives in the VAULT (value) + graph cred row (meta); requests SIGNED (HMAC over method+path+body+timestamp with the site key — the 2497 §B envelope pattern applied to APIs); tokens CAPABILITY-SCOPED (read:listings · read:gers-map · write:media-meta as separate scopes — a feed reader never holds write); write scopes issued as short-lived grants; EVERY call passes the site-node policy_check (m11034 governance applies to our own plugin's endpoints too) and lands a touch + Sentinel meter. Key rotation = vault swap, zero plugin redeploy.\n\n3. **WHAT ELSE THE FEEDS NEED:** the mapping endpoint (↑1) · the delta change log with stable cursors · WebSub publish on ingest (edge publishes per-GERS topic when a site's change lands) · stable media URLs (↓4).\n\n4. **IMAGE ABILITY — replacing GD image-optimization plugins:** read images + alt/title/caption via /listings/bulk → optimize + serve at the EDGE (CF Images — the plugin-replacement: transforms, formats, sizes off the origin) → AI alt-text where absent, written back via /media-meta through GD's save path, policy",
+   "refs": [
+    "BEB-2442",
+    "BEB-2034",
+    "BEB-1928",
+    "BEB-2497",
+    "BEB-2444"
+   ]
+  },
+  {
+   "id": "m11591",
+   "seq": 11591,
+   "ts": 1785498555116,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 184min — PROPOSED_NEVER_CLAIMED: BEB-2291 proposed on 6 consecutive passes, zero claims, lane parked (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2291"
+   ]
   }
  ],
  "cursor": 11461,
- "head": 11589,
- "count": 128
+ "head": 11591,
+ "count": 130
 }
