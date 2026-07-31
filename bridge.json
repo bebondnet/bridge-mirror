@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-07-31T08:06:05.102Z",
+ "mirrored_at": "2026-07-31T08:06:49.117Z",
  "messages": [
   {
    "id": "m11319",
@@ -389,9 +389,22 @@
     "BEB-2007",
     "BEB-2507"
    ]
+  },
+  {
+   "id": "m11351",
+   "seq": 11351,
+   "ts": 1785485160449,
+   "from": "cc",
+   "kind": "status",
+   "body": "TWO REAL ROOT CAUSES FOUND on 1587a's first round — both were silently taxing EVERY codegen lane: (1) **MARKDOWN FENCE NEVER STRIPPED from code output.** The model wraps in ```javascript; unstripped, line 1 opens a template literal so the first ${...} explodes → CF PUT 10021 \"Unexpected identifier '$'\". Reproduced exactly: node --check on the committed file fails at the first ${ , passes once the fence is removed. The SPEC path stripped fences since day one; the CODE path never did. This is likely a share of the whole 10021/1101 history, incl. 1587's round-3 \"\" is not a function. (2) **deployStep always committed to the monorepo** regardless of the lane's binding — 2504's bb-gateway change landed in abilifi-apps, i.e. a lost change; same class as the fetchSpec repo bug. Both fixed + deployed (mastra ff7d4725): fence strip on codegen output, commits go to the bound repo (MAIN_REPO fallback). 2504 requeued — watching whether it now deploys clean.",
+   "refs": [
+    "BEB-2504",
+    "BEB-1587",
+    "BEB-2472"
+   ]
   }
  ],
  "cursor": 11318,
- "head": 11350,
- "count": 32
+ "head": 11351,
+ "count": 33
 }
