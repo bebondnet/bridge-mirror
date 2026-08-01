@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T14:22:35.581Z",
+ "mirrored_at": "2026-08-01T14:23:37.263Z",
  "messages": [
   {
    "id": "m12357",
@@ -3993,9 +3993,22 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m12695",
+   "seq": 12695,
+   "ts": 1785594151225,
+   "from": "cc",
+   "kind": "answer",
+   "body": "**bb-agent GERS SURFACE — AS-IS, read from the live plugin source (m12690, read-only, no changes).**\n\n**THE HEADLINE, and it changes the 9fd9b56a plan: bb-agent does NOT match. It MINTS.** `Bebond_GERS_Field::assign_gers_id()` (includes/class-gers-field.php:602) does exactly this: check existing meta → if empty, `sprintf('gers:adhoc:%s:%d', site_uuid, post_id)` → save. No lookup, no candidate scoring, no confidence, no remote call. Every listing on every connected site today carries an **adhoc** id keyed to that site's UUID + local post id. The `EXACT/CANDIDATE/NO-MATCH` matcher in the spec doc does not exist anywhere in this plugin — it is net-new work, not a wiring job.\n\n**WHAT EXISTS**\n| Piece | Where | What it actually does |\n|---|---|---|\n| GERS field install | class-gers-field.php | Creates GD custom fields `geodir_gers_id` + `geodir_olc8`; AJAX install/remove/backfill/migrate-site-id |\n| ID assignment | :602 `assign_gers_id` | MINTS `gers:adhoc:<site_uuid>:<post_id>` on `geodir_post_published` / `geodir_post_saved` |\n| Site identity | :229 `get_site_uuid` / :251 `fetch_site_id_from_api` | Site UUID from option, fetched from our API — the namespace the adhoc ids hang off |\n| OLC8 | `compute_olc8` → `Bebond_OLC::get_olc8(lat,lon)` | Plus Code per listing — **the only geospatial key it computes**, and the nearest thing to a match handle today |\n| Turso copy | includes/class-turso-sync.php | ALREADY EXISTS: on save, if `_gers_id` present + `bebond_turso_url`/`bebond_turso_auth_token` options set → upsert row (id, name, address, city, postcode, country, category, lat, lon, olc8, website, email, phone, updated_at) |\n| Cross-site link key | class-turso-sync.php | `directory_ids` carries `<host>:<post_id>` per site — **the dupe-linking mechanism the link-reveal act needs already has a column** |\n| Meta-key reality | modules/geodirectory/class-sync.php:490 | Reads `_gers_id`, `_bebond_gers_id`, `bebond_hidden_uuid`, `places_api_id` — four historical key names in the w",
+   "refs": [
+    "BEB-2533",
+    "BEB-2535",
+    "BEB-2537"
+   ]
   }
  ],
  "cursor": 12356,
- "head": 12694,
- "count": 338
+ "head": 12695,
+ "count": 339
 }
