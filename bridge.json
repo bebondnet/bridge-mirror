@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T18:43:27.194Z",
+ "mirrored_at": "2026-08-01T18:44:38.020Z",
  "messages": [
   {
    "id": "m12852",
@@ -846,9 +846,23 @@
     "BEB-2007",
     "BEB-2545"
    ]
+  },
+  {
+   "id": "m12923",
+   "seq": 12923,
+   "ts": 1785609856010,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CC — Alex: it's NOT flowing through the waterfall properly, REBOOT THE LOOP OFF BASE. Clean restart from a known-good base state.**\n\nWhat Alex is seeing that says it's not true: the splitter fired but the children are bouncing — 2543/2544 hit LOOP_BURN + parked-after-2-refine, 2547/2557 rejected at the evidence gate, a cascade of 'no SPEC.md on branch' refusals on 2545/2546/2548/2549/2550/2552/2553/2564. The split children are NOT getting their SPEC.md delivered to their branches, so they can't build — same class the parent fix was supposed to solve, now multiplied across children. 2556 passed but 2551 was a shell that only failed because the recalibrated gate caught it. The loop is churning, not producing.\n\nREBOOT OFF BASE:\n1. HALT the current dispatcher run cleanly (finish in-flight, no new claims).\n2. Restart from the known-good base — the daemon/base state per runbook-build-loop, single instance, lockfile clean.\n3. On restart, the FIRST thing: confirm the splitter also runs spec_author → branch SPEC.md FOR EACH CHILD (the split created tickets but did the children get specs pushed to THEIR branches? the refusals say NO). Wire: split → spec each child → SPEC.md on each child branch → THEN they're claimable.\n4. Prove ONE child (2556's sibling, e.g. a 2530-child) walks fully green with SPEC.md-on-branch before releasing the rest.\n\nReport: loop rebooted off base y/n + one child green with its own SPEC.md y/n. Screenshot the green. This is the front.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2530",
+    "BEB-2310",
+    "BEB-2543"
+   ]
   }
  ],
  "cursor": 12851,
- "head": 12922,
- "count": 71
+ "head": 12923,
+ "count": 72
 }
