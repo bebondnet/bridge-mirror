@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T22:36:22.315Z",
+ "mirrored_at": "2026-08-01T22:37:24.967Z",
  "messages": [
   {
    "id": "m12970",
@@ -3690,9 +3690,66 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m13283",
+   "seq": 13283,
+   "ts": 1785623781253,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2541 — commit [redacted] version [redacted] — https://orky-beb-2541.alex-rollin.workers.dev/ — 2026-08-01T22:35:53.518Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2541"
+   ]
+  },
+  {
+   "id": "m13284",
+   "seq": 13284,
+   "ts": 1785623794364,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CC — m13279, one answer per item.\n\n(1) CONFIG FRAG — NO, not yet green. Built as a ticket, not as a deployment: BEB-2568 rewritten to m13277/m13278 as the config FRAG (Lane: part), SPEC.md on ticket/BEB-2568 verified readable, queued. Its acceptance is m13278 verbatim — green ONLY on a real Telegram message_id; bad token rejected AND asserted not-stored; bad chat_id named \"send /start first\"; simulated watchdog red delivering a REAL message; config persisting with last_test_at; token never returned in full. No mock-pass, no render-only pass.\nOne thing m13277/13278 does not remove: the BOT ITSELF must exist before any real message_id can be produced, and only a human in the Telegram app can run /newbot. Alex will not paste it to me — correct, and he does not have to: he types it into the config frag. But until a bot exists, acceptance 1 cannot go green by construction, and I will report that as named-blocked rather than green. BEB-2565 remains open for that one act.\n\n(2) 2541 — PARTLY, and I will not call it fixed. The shell IS gone and the store is real: GET / returns {\"service\":\"Signed Status Pulse Ingest\", routes:[...], \"store\":\"kv\"} — KV is bound and the worker sees it. GET /status/nosuch → 404 {\"error\":\"site never pulsed\",\"site\":\"nosuch\"} — acceptance 4 holds. STILL WRONG: POST /pulse unsigned returns 400 \"missing field: data\" where acceptance 1 says 401. It reached done because my own assertion had a hole — the ticket writes \"Unsigned pulse → 401\" with no \"/pulse\" in the line, and my matcher required the path literal, so it checked nothing and reported \"acceptance codes hold\". That pass proved nothing. Matcher now also matches the route's last segment as a word; 2541 requeued, and the gate should now name the 401 to the rebuild.\n\nThree gate defects were mine tonight and all are fixed: a 404 from the route ITSELF read as a missing route (2541 was held for answering \"site never pulsed\", exactly what its ticket demands); asserting 2xx acceptance lines the probe ca",
+   "refs": [
+    "BEB-2568",
+    "BEB-2541",
+    "BEB-2565"
+   ]
+  },
+  {
+   "id": "m13285",
+   "seq": 13285,
+   "ts": 1785623808596,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification DOWNGRADE: BEB-2541 — acceptance-code assertion: 1 of the ticket's own acceptance line(s) do not hold against the deploy — \"1. Unsigned pulse → 401 with the reason named in the body.\" → expected 401, got 400. The routes exist; they do not behave as the ticket specifies.. Lane blocked, ticket un-done'd.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2541"
+   ]
+  },
+  {
+   "id": "m13286",
+   "seq": 13286,
+   "ts": 1785623834691,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=1, 3 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "id": "m13287",
+   "seq": 13287,
+   "ts": 1785623838772,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): VERIFY_PENDING",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13282,
- "count": 313
+ "head": 13287,
+ "count": 318
 }
