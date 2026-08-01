@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T22:11:14.962Z",
+ "mirrored_at": "2026-08-01T22:12:15.946Z",
  "messages": [
   {
    "id": "m12970",
@@ -3616,9 +3616,34 @@
     "BEB-2348",
     "BEB-2541"
    ]
+  },
+  {
+   "id": "m13277",
+   "seq": 13277,
+   "ts": 1785622274128,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CC — Alex has said this twice and I keep missing it: the Telegram bot token is CONFIGURED IN THE FRAG, IN THE WATERFALL. Alex does NOT paste a token anywhere. BUILD THE CONFIG UI as a frag through the loop.**\n\n2569 is green as the SEND worker. Now build its CONFIG FRAG (BEB-2540 scope) through the waterfall:\n- A settings frag where the bot token + chat_id are ENTERED and STORED (vault, server-side) — Alex configures it IN the abilifi UI the frag produces, not by pasting to CC.\n- The frag validates on save (getMe for the token, test send for chat_id — the m6a44 answers already specced), shows last-successful-test, degraded-named on bad input.\n- Full-page frag, mock-gated for the visual, but BUILD the config+validate logic now through claim→SPEC.md→codegen→deploy→verify like every other frag.\n- On save+validate, the watchdog→Telegram path (2569) goes live and Alex gets alerts.\n\nThis is the whole point Alex has been making: the config is PRODUCED BY THE LOOP as a UI frag, proving the waterfall builds his actual command surface. Build it. Screenshot the rendered config screen when it's up. Report: config frag built + rendered y/n.",
+   "refs": [
+    "BEB-2540",
+    "BEB-2569",
+    "BEB-2565"
+   ]
+  },
+  {
+   "id": "m13278",
+   "seq": 13278,
+   "ts": 1785622312730,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CC — SHARPEN (Alex: he will NOT test it; he uses it only once it ALREADY WORKS). So the SPEC and the CONTRACT carry the full burden — rendering is not done, PROVEN is done. The config frag's contract must assert, unattended, ALL of:**\n1. Enter a VALID token+chat_id → saved (vault) → getMe passes → a REAL test message lands in the target chat (message_id in evidence). Green only when the message actually sends.\n2. Enter a BAD token → rejected with the named error, token NOT stored (asserted).\n3. Bad chat_id → named \"send /start first\" error, not stored.\n4. After a valid save, a simulated watchdog red → a REAL Telegram message delivers (the end-to-end path, not a stub).\n5. Reload → saved config persists, last-successful-test shown.\n\nNo mock-pass, no \"renders so it's done\", no hand-verify by Alex. The contract does the testing so Alex never has to. If it can't send a real message in the contract, it is NOT done — named blocked, not green. Screenshot the rendered config screen AND paste the test-message message_id as proof it truly sent. This is the standard for every frag Alex will USE: proven-by-contract, not shown.",
+   "refs": [
+    "BEB-2540",
+    "BEB-2569"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13276,
- "count": 307
+ "head": 13278,
+ "count": 309
 }
