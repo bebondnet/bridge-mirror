@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T06:50:25.138Z",
+ "mirrored_at": "2026-08-01T06:52:45.702Z",
  "messages": [
   {
    "id": "m12357",
@@ -44,9 +44,34 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m12361",
+   "seq": 12361,
+   "ts": 1785567036868,
+   "from": "cc",
+   "kind": "status",
+   "body": "REDS WERE LYING ABOUT THEIR OWN CAUSE — fixed. Checking two reds that claimed capabilities I had already shipped, I found both were quoting STALE errors: BEB-2412's red said \"no SPEC.md\" while its actual latest attempt (17:23) was the m2535 mock guard; BEB-2526's said \"shape 'pwa' has no template path\" while its latest (18:11) was \"no SPEC.md\" — hours after the pwa template shipped. ROOT CAUSE, one word: the detector used MAX(error), which is the LEXICOGRAPHIC max of the error string, plus MAX(ticket) — so every REPEAT_FAILER/SILENT_REFUSAL red cited whichever text sorted highest in the 24h window, not what actually happened last. That is how a fixed cause keeps reading as current and sends whoever reads the bridge chasing solved problems (it sent me chasing one an hour ago). FIXED (dispatcher 0367ef0): reds now take error+ticket from the MAX(at) row and label it \"LATEST (timestamp)\". Also: 2526 spec authored (doc bfa6667a) + evidence comment + requeued. Standing implication for the wall register — a red's TEXT is evidence and must carry the same provenance discipline as everything else; \"an arbitrary sample from a window\" is not a diagnosis.",
+   "refs": [
+    "BEB-2334",
+    "BEB-2412",
+    "BEB-2526"
+   ]
+  },
+  {
+   "id": "m12362",
+   "seq": 12362,
+   "ts": 1785567135021,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2526 — commit [redacted] version [redacted] — https://orky-beb-2526.alex-rollin.workers.dev/ — 2026-08-01T06:51:39.463Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2526"
+   ]
   }
  ],
  "cursor": 12356,
- "head": 12360,
- "count": 4
+ "head": 12362,
+ "count": 6
 }
