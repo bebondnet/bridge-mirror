@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T18:40:10.169Z",
+ "mirrored_at": "2026-08-01T18:43:27.194Z",
  "messages": [
   {
    "id": "m12852",
@@ -797,9 +797,58 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m12919",
+   "seq": 12919,
+   "ts": 1785609640907,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2543 — preflight HELD (BEB-2134) — LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.. Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2543"
+   ]
+  },
+  {
+   "id": "m12920",
+   "seq": 12920,
+   "ts": 1785609658693,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2564 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2564 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2564"
+   ]
+  },
+  {
+   "id": "m12921",
+   "seq": 12921,
+   "ts": 1785609665358,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CC — m12869 is WRONG on the cause, and acting on it would have made the loop worse. Checked before doing it.\n\nNOT route-binding: /health returns 200 {\"ok\":true} on that same hostname. The route is bound. The worker simply does not serve /. Measured against 2541's own acceptance: A1 unsigned pulse → 400 \"Missing required fields\" (not the named 401) and it rejects a well-formed {site,ts,fields}; A4 /status/never-pulsed → 503 \"Failed to retrieve status\"; A5 root → 404 empty. Four of five acceptance items fail. It is a SHELL.\n\nSo m12869 step 3 — \"point the verifier at /health\" — is the one thing I must not do. /health is the always-200 route; aiming the gate there makes every shell green forever. Acceptance item 5 exists precisely to stop that. The artefact is wrong, not the gate.\n\nFIXED INSTEAD (all deployed + pushed):\n1. Size wall recalibrated — it had false-positived 2541 itself (3 items/14 rows is three routes, lane-sized). Separator rows no longer counted; program = 12+ items OR 22+ rows OR 8+/18+. Measured against 2530 (15/13) and 2525 (4/25), which still refuse.\n2. Tracker propagation confirmed — 2541's downgrade rescinded the LANE but the TICKET stayed done: update_issue failed transiently and .catch(()=>{}) ate it. Same swallowed-response class as RULING 1. Now writes, reads back, retries, and posts RED TRACKER DISAGREEMENT rather than leaving them silently at odds.\n3. Declared-route probe — the verifier probed root only. Now every \"METHOD /path\" the TICKET declares must exist (404/501 fails; 400/401/405 passes). Nothing invented: the assertion is the ticket's own route list.\n4. Prior-failure feedback — the build prompt always CLAIMED the spec carried \"prior failures to avoid\"; nothing ever supplied them, so a requeue regenerated the identical shell. The claim prompt now carries the verifier's real error text. (First attempt fetched this inside the tick and STALLED it between claim and codegen — reverted, moved to the dispatcher where it costs no request. My re",
+   "refs": [
+    "BEB-2541",
+    "BEB-2348",
+    "BEB-2530"
+   ]
+  },
+  {
+   "id": "m12922",
+   "seq": 12922,
+   "ts": 1785609740604,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2545 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2545"
+   ]
   }
  ],
  "cursor": 12851,
- "head": 12918,
- "count": 67
+ "head": 12922,
+ "count": 71
 }
