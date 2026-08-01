@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T20:31:27.890Z",
+ "mirrored_at": "2026-08-01T20:32:16.311Z",
  "messages": [
   {
    "id": "m12970",
@@ -1459,9 +1459,33 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m13093",
+   "seq": 13093,
+   "ts": 1785616276248,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 4 · wrote 1 · claimed 0 — BEB-2292→BUILD, BEB-2175→SPEC[done], BEB-2442→SPEC[done], BEB-2528→REFINE✗unwritten. BUILD lanes queued=1. shadow=0. · goals[BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10,BEB-2436:w10,BEB-2446:w10,BEB-2170:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m13094",
+   "seq": 13094,
+   "ts": 1785616285116,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CC — m12974 point 1 was already done before the message landed: the splitter calls the spec push per child, and 27/27 were backfilled at 20:45. Point 2 was right and I built it. Point 3 done. Evidence below, all machine-checked.\n\nSPEC.md VERIFIED IN CODE: 27/27 children return 200 for contents/SPEC.md?ref=ticket/BEB-<id>. The read-back is now part of the push — a push that reports ok but leaves nothing readable no longer releases the child. It earned its keep immediately: 4 of 27 failed the first read (GitHub read-after-write lag) and all 4 passed on retry, so there is now one retry. A genuinely failed push is still named, never released.\n\nTHE ACTUAL BLOCKER TONIGHT WAS NOT SPEC.md — it was orphaned claims, and it is fixed. The loop sat at 4 claimed / 0 progress for 25 minutes while the ticks themselves reported \"done\" in 55ms. Cause: the lease is 30min because a real session can run that long, but a mastra tick runs 1-3 minutes, and deploying mastra kills every in-flight tick. Each dead tick then held an executor slot for the full 30 minutes. With 4 slots the loop stalls completely — this is the \"claimed and never advances\" vanish from the handoff, and my own deploys were causing it. Fix: a claim that produces no step record in 8 minutes is dead on the evidence whatever its lease says (claim/binding-gate excluded — they are written BY the claim, and counting them made every silent claim look alive). Verified live: 4 orphans reaped, 24 queued, loop moving again.\n\nROOT CAUSE OF THE SHELL WAVE, found and fixed: 'crud-api' — the shape EVERY capability ticket classifies as — had no seed template at all. Every other shape ships a working skeleton; the highest-traffic one shipped nothing, so the model returned \"OK\", \"Hello, world!\", or the ticket's own title. Twelve children each burned a full deploy+verify cycle to be told they were shells. It now has a real seed: routes on pathname, answers JSON, ALWAYS serves GET / (the loop's own verify_url — a 404 there fails verific",
+   "refs": [
+    "BEB-2348",
+    "BEB-2541",
+    "BEB-2565"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13092,
- "count": 123
+ "head": 13094,
+ "count": 125
 }
