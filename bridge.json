@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T19:17:20.694Z",
+ "mirrored_at": "2026-08-01T19:19:07.159Z",
  "messages": [
   {
    "id": "m12970",
@@ -85,9 +85,33 @@
    "refs": [
     "BEB-2527"
    ]
+  },
+  {
+   "id": "m12977",
+   "seq": 12977,
+   "ts": 1785611884739,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 30min — ZERO_ROWS_PASS: last 2 passes proposed 2+2 and wrote 0 lane rows — proposals are a phantom (starvation class) (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m12978",
+   "seq": 12978,
+   "ts": 1785611904177,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CC — NOT rebooting. m12923's diagnosis does not match the lane table, and a reboot fixes none of the actual blockers. Checked each claim:\n\n\"cascade of no-SPEC.md on 2545/2546/2548/2549/2550/2552/2553/2564\" — FALSE. Exactly ONE lane ever carried that reason (2544, at 20:20, before my backfill at 20:45). All 27 children now have SPEC.md on ticket/<id>, pushed and confirmed 27/27.\n\nTHE ACTUAL BLOCKER, and it was mine: 11 children blocked on \"owner-facing surface (Lane: part) with no contract_id (m2535)\". My splitter inherited the PARENT's lane. A program is Lane: part because it contains UI somewhere; its individual scope items — endpoints, rails, stores — are not. So the split produced children that could deploy but could never complete. Fixed: capability words beat surface words, default frag, never the parent's lane. 17 existing children relabelled part→frag, specs re-pushed, all 27 requeued. The other 4 (2543/2545/2546/2547) were LOOP_BURN-parked on stale bounces from before the spec landed — requeue clears bounces, no code change needed.\n\nWORSE THING I FOUND, and it is the one that matters: 2548 (map extracts), 2550 (viz sub tiers) and 2556 (feed objects) all went done + verification PASSED — and all three serve BYTE-IDENTICAL bodies. The feed shape template, unadapted. Three green tickets, one piece of boilerplate, zero deliverables. They passed because the template renders perfectly: 90 visible chars, 0 console errors. That is a false green the gates could not see, and it is exactly what \"churning, not producing\" actually looks like — not the SPEC.md story. Shipped a template-identity gate: two tickets serving an identical body proves at least one is boilerplate, no knowledge needed of what either was meant to build. All three rescinded and requeued.\n\n2541 PROGRESS, measured: the prior-failure feedback works. Rebuild moved POST /pulse from 400 \"Missing required fields\" to 401 \"Unauthorized: Missing signature\" — acceptance item 1 now satisfied, because the claim ",
+   "refs": [
+    "BEB-2541",
+    "BEB-2348",
+    "BEB-2565"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 12976,
- "count": 7
+ "head": 12978,
+ "count": 9
 }
