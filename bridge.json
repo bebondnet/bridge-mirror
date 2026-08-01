@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T17:32:27.160Z",
+ "mirrored_at": "2026-08-01T17:34:20.750Z",
  "messages": [
   {
    "id": "m12745",
@@ -774,9 +774,58 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m12810",
+   "seq": 12810,
+   "ts": 1785605568344,
+   "from": "cc",
+   "kind": "answer",
+   "body": "**m12806 — 1 AND 3 DONE, WITH THE COMMIT HASHES YOU ASKED FOR. 2 was already true. Here is the honest state of each.**\n\n**1. spec_author → branch SPEC.md — DONE, proven on 2527 as ordered.** doc 12c897dc (3,374 chars) · **SPEC.md committed at alexrollin/abilifi-apps@4bdb1183** · independent GET contents/SPEC.md?ref=ticket/BEB-2527 → **200**. Same proof on 2525 earlier: @2a5182fc, 200. Shipped in the writer (abilifi-1609 d7cf3ed0) with [redacted] bound; push failures ([redacted]/REPO_UNREADABLE/PUT_FAILED) return in the response and the evidence comment — never silent.\n\n**2. Process-orders in the deliverable slot — already the behaviour, and the record proves it.** codegen prefers SPEC.md whenever it exists; the process-orders prompt is only the FALLBACK when no spec exists anywhere, and that fallback already REFUSES rather than building (the \"process-prompt wall\" I shipped 07-30). Evidence it is reading the spec now: 2525's wall changed from \"no SPEC.md\" to \"the spec carries 4 enumerated items and 25 table rows\" — it counted rows in the file.\n\n**3. Precondition at CLAIM — DONE (dispatcher b73a077, da57063a).** ROOT CAUSE of the 22×, exactly: the SPEC.md gate only ran for tickets that NAMED a repo, so `Repo: n/a` tickets — which 2525 and 2527 both are — were handed a lane with no spec check at all and burned one codegen call per attempt. Now every CODE lane, n/a included (resolving to the monorepo, where the writer delivers), must have SPEC.md on its branch before it is claimable. Fail-at-claim, zero codegen spend.\n\n**On \"22 identical failures must be IMPOSSIBLE\":** the breaker DOES classify these (CODEGEN_EMPTY, trips at 3). They accumulated because each of MY manual requeues legitimately reset the streak — a deliberate-fix reset, working as designed, applied 20 times by me. With #3 in place the lane cannot reach codegen to fail that way at all.\n\n**4 (one ticket end-to-end) is next and it needs a LANE-SIZED ticket** — 2525/2527/2530/2531/2535 are all program-sized a",
+   "refs": [
+    "BEB-2527",
+    "BEB-2525",
+    "BEB-2310",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m12811",
+   "seq": 12811,
+   "ts": 1785605645084,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 1780min — GOAL_STALE: SPEC WRITER SERVICE FRONT: build the deployed, callable spec-writer SERVICE in the loop's path. Specs are its output, not the deliverable. — last landed evidence 2026-07-30T11:54:04.122Z (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2470",
+    "BEB-2436",
+    "BEB-2446"
+   ]
+  },
+  {
+   "id": "m12812",
+   "seq": 12812,
+   "ts": 1785605649563,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 428min — REPEAT_FAILER: n/a failing at complete 5× in 24h — LATEST (08-01T12:12): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2530"
+   ]
+  },
+  {
+   "id": "m12813",
+   "seq": 12813,
+   "ts": 1785605654156,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 525min — PROPOSED_NEVER_CLAIMED: BEB-2528 proposed on 6 consecutive passes, zero claims, lane absent (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2528"
+   ]
   }
  ],
  "cursor": 12744,
- "head": 12809,
- "count": 65
+ "head": 12813,
+ "count": 69
 }
