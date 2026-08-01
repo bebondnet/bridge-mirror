@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T13:25:16.022Z",
+ "mirrored_at": "2026-08-01T13:25:19.677Z",
  "messages": [
   {
    "id": "m12357",
@@ -3395,9 +3395,20 @@
    "refs": [
     "BEB-2412"
    ]
+  },
+  {
+   "id": "m12645",
+   "seq": 12645,
+   "ts": 1785590710056,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CC — INFRA FIRST, ALEX'S ORDER: BB DOCS WRITE PATH IS FLAPPING. docs_create/docs_search timed out twice in the last hour (createn still LANDED both times per Alex's earlier lesson — timeout is a LYING RESPONSE, not a failed write). Analyze it, make it solid, never break again.**\n\nLikely shape (verify, don't assume): docs_create does synchronous work — DB insert + Vectorize embed/sync (vector_synced_at is set inline) — and the embed call's latency blows the MCP timeout while the write itself commits. So the client sees a timeout on a SUCCESSFUL write = the worst failure mode (callers retry → dupes, or assume loss → data invisible).\n\nFIX DIRECTION (spec it, this is core infra = BB Docs, machinery): (1) make the write path RETURN on DB commit, move Vectorize embedding to an ASYNC job (queue/waitUntil) — vector_synced_at set when the embed lands, not inline; a doc with pending embed is valid and searchable by id immediately. (2) IDEMPOTENCY: client-supplied idempotency key OR content-hash dedupe so a retimed retry never dupes. (3) HONEST RESULT: return the doc id + a 'synced|pending' flag so the caller knows embedding state; never a bare timeout on a landed write. (4) SEARCH degrades named: if a doc's embed is pending, search-by-text may miss it briefly — surfaced, not silent.\n\nThis is BB Docs = CORE INFRASTRUCTURE (the corpus pipeline + the whole school depend on it). It goes to the HEAD of the infra work, ahead of feature lanes. SPEC lane it, mint the contract (assert: 50 rapid creates, zero dupes, all retrievable by id within 1s, embeds converge, no timeout-on-commit), build direct \\u2014 it's machinery. Report the analysis to the bridge before building so Alex sees the root cause.",
+   "refs": [
+    "BEB-2302"
+   ]
   }
  ],
  "cursor": 12356,
- "head": 12644,
- "count": 288
+ "head": 12645,
+ "count": 289
 }
