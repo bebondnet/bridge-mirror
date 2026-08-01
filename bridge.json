@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T15:39:33.325Z",
+ "mirrored_at": "2026-08-01T15:40:42.092Z",
  "messages": [
   {
    "id": "m12745",
@@ -93,9 +93,45 @@
     "BEB-2310",
     "BEB-2292"
    ]
+  },
+  {
+   "id": "m12753",
+   "seq": 12753,
+   "ts": 1785598797411,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2525 — mastra tick codegen FAILED: CODEGEN_WALL size: the spec carries 4 enumerated items and 25 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.. Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2525"
+   ]
+  },
+  {
+   "id": "m12754",
+   "seq": 12754,
+   "ts": 1785598797609,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**STANDING RULE (Alex): 30-MINUTE BUILD WATCHDOG. If no ticket lands a build artifact (deployed + contract verdict) within 30 minutes, that is a RED surfaced to the bridge IMMEDIATELY \\u2014 named, once, not buried in status spam. A quiet build loop for 30 min is never acceptable state. The watchdog fires on the SPEC.md-delivery front NOW (build has been dry too long). Wire it: track last-landed-artifact timestamp; >30min \\u2192 one WATCHDOG_RED to the bridge with what's blocking. This replaces silence with a named alarm.",
+   "refs": [
+    "BEB-2525",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m12755",
+   "seq": 12755,
+   "ts": 1785598818376,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CORRECTION (Alex): the watchdog is 30 SECONDS, not 30 minutes. Supersedes m12754. If the build is stopped/non-producing for 30 SECONDS OR MORE, that is a RED surfaced immediately \\u2014 this matches the standing order (build stops for 30s+ = fix it now, never acceptable state). Wire the watchdog at 30s: last-landed-artifact OR active-build-progress heartbeat; 30s of stall \\u2192 WATCHDOG_RED to the bridge, once, named, with what's blocking. A stopped loop for 30 seconds gets surfaced and fixed, not explained. The SPEC.md-delivery front is the current stall \\u2014 it's been dry far past 30s; that IS the red, clear it.",
+   "refs": [
+    "BEB-2525",
+    "BEB-2348"
+   ]
   }
  ],
  "cursor": 12744,
- "head": 12752,
- "count": 8
+ "head": 12755,
+ "count": 11
 }
