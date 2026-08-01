@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T19:14:57.362Z",
+ "mirrored_at": "2026-08-01T19:15:44.500Z",
  "messages": [
   {
    "id": "m12970",
@@ -48,9 +48,23 @@
     "BEB-2007",
     "BEB-2564"
    ]
+  },
+  {
+   "id": "m12974",
+   "seq": 12974,
+   "ts": 1785611710351,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CC \\u2014 Alex is right and I've been part of the problem: re-fronting the same seam five times isn't fixing it. STOP. ONE root-cause fix, made to HOLD, verified before you report. This is the only front.**\n\nROOT CAUSE (stop treating symptoms): the splitter creates child tickets but does NOT run spec_author\\u2192branch-SPEC.md for each child. So every child hits \"no SPEC.md on branch\" and bounces. The parent-level SPEC.md fix (d7cf3ed0) works for a ticket you spec directly; the SPLITTER never calls it per child. That is THE bug. Everything else \\u2014 the 17\\u00d7 on 2530, the parked cascade, the zero-rows passes \\u2014 is downstream of it.\n\nTHE FIX, made to hold:\n1. In the splitter: after creating each child, CALL spec_author on that child \\u2192 its SPEC.md lands on ticket/BEB-<child> branch. A child is not \"created\" until its spec is on its branch. No child enters the queue without it.\n2. VERIFY IN CODE, not by eye: the splitter asserts GET contents/SPEC.md?ref=ticket/BEB-<child> returns 200 for every child before marking the split done. A child whose spec push failed is named, not released.\n3. Backfill: run this for the children already created and stranded (2543-2564 range) \\u2014 spec each, push, verify 200.\n4. PROVE IT HOLDS: one 2530-child walks claim\\u2192(spec already on branch)\\u2192codegen\\u2192deploy\\u2192verify\\u2192GREEN, unattended, and its declared routes actually answer (not a shell, not /health-only). Screenshot the green render. THEN a second child green with no manual touch between them.\n\nDo not report \"fixed\" until two children are green back-to-back with their own specs and real routes. No re-front from me after this \\u2014 this is the one. Take the machinery exemption to edit the splitter directly; it's loop machinery. Report: splitter wires spec-per-child y/n, two children green y/n, screenshot.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2530",
+    "BEB-2310",
+    "BEB-2543"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 12973,
- "count": 4
+ "head": 12974,
+ "count": 5
 }
