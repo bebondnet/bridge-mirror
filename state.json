@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-01T19:46:51.471Z",
- "ts": 1785613610347,
+ "mirrored_at": "2026-08-01T19:48:28.195Z",
+ "ts": 1785613706558,
  "loop": {
   "proposed_total": 378,
   "by_state": {
-   "queued": 5,
-   "claimed": 0,
+   "queued": 4,
+   "claimed": 1,
    "done": 72,
    "held": 42,
    "blocked": 37,
@@ -14,10 +14,11 @@
   "by_lane": {
    "BUILD": {
     "blocked": 19,
+    "claimed": 1,
     "done": 30,
     "held": 36,
     "parked": 85,
-    "queued": 5
+    "queued": 4
    },
    "REFINE": {
     "blocked": 15,
@@ -34,19 +35,16 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785613512402,
+   "at": 1785613666127,
    "tally": "BEB-2292→BUILD, BEB-2175→SPEC[done], BEB-2442→SPEC[done], BEB-2528→REFINE✗unwritten"
   },
   "reds": [
    {
-    "code": "VERIFY_PENDING",
+    "code": "ZERO_CLAIM",
     "severity": "red",
-    "since": 1785613504432,
-    "detail": "2 done lane(s) with verification PENDING — not complete until passed",
-    "refs": [
-     "BEB-2567",
-     "BEB-2566"
-    ]
+    "since": 1785613556306,
+    "detail": "claimed=0, queued=5, 3 passes, max_concurrent=6",
+    "refs": []
    },
    {
     "code": "GOAL_STALE",
@@ -84,7 +82,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785613556306,
+    "since": 1785613676301,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -105,7 +103,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785613556306,
+    "since": 1785613676301,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -117,7 +115,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785613556306,
+    "since": 1785613676301,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -156,7 +154,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785607722649,
-    "detail": "n/a failing at evaluate 21× in 24h — LATEST (08-01T19:45): verify_url not 2xx after 12 probes — last HTTP 404",
+    "detail": "n/a failing at evaluate 22× in 24h — LATEST (08-01T19:46): verify_url not 2xx after 12 probes — last HTTP 404",
     "refs": [
      "BEB-2541"
     ],
@@ -169,7 +167,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785613556306,
+    "since": 1785613676301,
     "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
     "refs": [
      "BEB-2292"
@@ -178,13 +176,12 @@
      "cls": "proposed-never-claimed",
      "error": "lane state parked; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2292"
-    },
-    "fix_ticket": "BEB-2371"
+    }
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785613556306,
+    "since": 1785613676301,
     "detail": "BEB-2528 proposed on 6 consecutive passes, zero claims, lane absent",
     "refs": [
      "BEB-2528"
@@ -198,39 +195,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 13045,
+  "head_seq": 13049,
   "cursor_fable": 12969,
-  "unread_for_fable": 76,
+  "unread_for_fable": 80,
   "last": [
-   {
-    "seq": 13041,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2566 — commit e"
-   },
-   {
-    "seq": 13042,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER verification DOWNGRADE: BEB-2562 — http-content class: body only 13 chars (\"Hel"
-   },
-   {
-    "seq": 13043,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2567 — commit b"
-   },
-   {
-    "seq": 13044,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2292 proposed on 6 consecutive passes, zero claims, lane p"
-   },
    {
     "seq": 13045,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER verification PASSED: BEB-2567 — https://orky-beb-2567.alex-rollin.workers.dev/ "
+   },
+   {
+    "seq": 13046,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER verification DOWNGRADE: BEB-2566 — http-content class: body only 2 chars (\"OK\")"
+   },
+   {
+    "seq": 13047,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "STILL RED 2053min — REPEAT_FAILER: n/a failing at codegen 23× in 24h — LATEST (08-01T17:48"
+   },
+   {
+    "seq": 13048,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=5, 2 passes, max_concurrent=6"
+   },
+   {
+    "seq": 13049,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
    }
   ]
  },
@@ -324,14 +321,11 @@
  ],
  "reds": [
   {
-   "code": "VERIFY_PENDING",
+   "code": "ZERO_CLAIM",
    "severity": "red",
-   "since": 1785613504432,
-   "detail": "2 done lane(s) with verification PENDING — not complete until passed",
-   "refs": [
-    "BEB-2567",
-    "BEB-2566"
-   ]
+   "since": 1785613556306,
+   "detail": "claimed=0, queued=5, 3 passes, max_concurrent=6",
+   "refs": []
   },
   {
    "code": "GOAL_STALE",
@@ -369,7 +363,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785613556306,
+   "since": 1785613676301,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -390,7 +384,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785613556306,
+   "since": 1785613676301,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -402,7 +396,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785613556306,
+   "since": 1785613676301,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -441,7 +435,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785607722649,
-   "detail": "n/a failing at evaluate 21× in 24h — LATEST (08-01T19:45): verify_url not 2xx after 12 probes — last HTTP 404",
+   "detail": "n/a failing at evaluate 22× in 24h — LATEST (08-01T19:46): verify_url not 2xx after 12 probes — last HTTP 404",
    "refs": [
     "BEB-2541"
    ],
@@ -454,7 +448,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785613556306,
+   "since": 1785613676301,
    "detail": "BEB-2292 proposed on 6 consecutive passes, zero claims, lane parked",
    "refs": [
     "BEB-2292"
@@ -463,13 +457,12 @@
     "cls": "proposed-never-claimed",
     "error": "lane state parked; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2292"
-   },
-   "fix_ticket": "BEB-2371"
+   }
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785613556306,
+   "since": 1785613676301,
    "detail": "BEB-2528 proposed on 6 consecutive passes, zero claims, lane absent",
    "refs": [
     "BEB-2528"
