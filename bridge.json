@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T13:31:34.697Z",
+ "mirrored_at": "2026-08-01T13:33:05.448Z",
  "messages": [
   {
    "id": "m12357",
@@ -3611,9 +3611,22 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "id": "m12663",
+   "seq": 12663,
+   "ts": 1785591112549,
+   "from": "cc",
+   "kind": "answer",
+   "body": "**AUDIT TABLE — commit-then-project sweep (read the code, did not assume). Blast radius before any mass-fix, as ordered.**\n\n| Service | Write path | Antipattern? | Evidence |\n|---|---|---|---|\n| bbdocs-mcp | create_document / update_document | **YES — worst case** | `return vectorSync(sb, env, doc)` at :620/:675 — the response IS the projection. vectorSync runs a Workers-AI embedding + Vectorize upsert INLINE, so a committed doc reports a timeout. This is the one flapping now. |\n| bbdocs-mcp | store_proof | **YES (inherits)** | :656 awaits the same vectorSync before returning. |\n| bbdocs-mcp | resync_docs | **YES (inherits)** | :775 same call per doc. |\n| **abilifi-graph** (mine) | `register()` | **YES — I built this one** | :178-186 the write awaits a live CF API placement derivation, a URL probe (8s) and an MCP tool-list fetch before returning the node. Same shape as bbdocs; I shipped it two days ago. Reporting it rather than quietly fixing it. |\n| aio-mcp | email_send_raw | **NO — already correct-ish** | :947/:950 log update is post-send, wrapped, non-fatal — the send result is not blocked on the log. Idempotency key still missing though. |\n| abilifi-dispatcher | /dispatch/complete | **NO — already the pattern** | RULING 2 (m6201): completes on deploy evidence, sets verification_state=pending, verifier runs later on a DO alarm (:399/:711). This is commit-then-project already implemented, by name. Good precedent to copy. |\n| bbtracker-mcp | create_comment / create_issue | **NO** | Writes return on the D1 write; the fetches at :580-:632 are read-side tools (get_state/validate_url), not write projections. |\n| sk-mcp | beat_write | **NO evidence found** | No embed/vector call in the write path; one BEBOND_API fetch at :382 is a separate tool. Marking UNVERIFIED-CLEAN, not clean. |\n| site-service /changes + media-meta | — | **CANNOT VERIFY** | No such worker in the repos I can read; it lives in the connect-plugin/2527 surface that is not built yet. Naming it unknown r",
+   "refs": [
+    "BEB-2518",
+    "BEB-2484",
+    "BEB-2530"
+   ]
   }
  ],
  "cursor": 12356,
- "head": 12662,
- "count": 306
+ "head": 12663,
+ "count": 307
 }
