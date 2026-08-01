@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-01T13:28:38.207Z",
+ "mirrored_at": "2026-08-01T13:29:52.255Z",
  "messages": [
   {
    "id": "m12357",
@@ -3498,9 +3498,45 @@
     "BEB-2007",
     "BEB-2530"
    ]
+  },
+  {
+   "id": "m12654",
+   "seq": 12654,
+   "ts": 1785590919644,
+   "from": "cc",
+   "kind": "status",
+   "body": "SIZE WALL VERIFIED ON A LIVE LANE — verbatim from BEB-2530's record: \"CODEGEN_WALL size: the spec carries 15 enumerated items and 13 table rows — program-sized, not lane-sized.\" Refused BEFORE the /gen spend, where the same ticket previously burned a tick and deployed a 2-byte \"OK\" shell. That is the gate doing exactly what it was written for, proven rather than asserted. Also: BEB-2535 (BB Maps) spec authored — doc 61763331, 3,762 chars, evidence comment 91936288 landed first try. Expect 2535 to hit the SAME size wall when it reaches BUILD; that is correct, not a failure — it is a program (PMTiles extracts + pay-to-edit quads + viz tiers + feed writer) and wants child lanes along its own sections, same as 2527/2530/2531. STANDING ASK unchanged: those four programs need their children filed (1587→2504-2507 pattern). I will file them on your word, or Orky can off the specs — the specs and the seams already exist; only the decision is missing.",
+   "refs": [
+    "BEB-2530",
+    "BEB-2535",
+    "BEB-2527",
+    "BEB-2531"
+   ]
+  },
+  {
+   "id": "m12655",
+   "seq": 12655,
+   "ts": 1785590926230,
+   "from": "cc",
+   "kind": "status",
+   "body": "STILL RED 183min — REPEAT_FAILER: n/a failing at complete 5× in 24h — LATEST (08-01T12:12): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane (m7418 persistence escalation)",
+   "refs": [
+    "BEB-2530"
+   ]
+  },
+  {
+   "id": "m12656",
+   "seq": 12656,
+   "ts": 1785590985215,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CC \\u2014 BROADEN THE FIX (Alex): this is a REUSABLE PATTERN, not a one-service bug. \\\"Slow work inside the write's response path\\\" is bad juju anywhere it appears. Do a SWEEP, not a patch.**\n\n1. NAME THE PATTERN as shared machinery: **commit-then-project**. A write returns on the DURABLE COMMIT only; every derived/secondary effect (embeddings, search indexing, cache warm, webhooks, downstream notifies, meter rollups) runs ASYNC after commit and reports its own convergence state. Response carries {id, committed: true, projections: [{name, state: pending|synced|failed}]}. NEVER block a write's response on a projection. This becomes a documented platform pattern (BB Docs entry) + a shared helper so services adopt it identically, not each reinventing.\n\n2. AUDIT every service that writes + then does slow secondary work, same failure shape as BB Docs (timeout-on-committed-write). Prime suspects to CHECK (verify, don't assume): the wiki-worker/corpus pusher (embed inline?), the site-service /changes + media-meta (GD API calls inline in the write?), the status/event endpoints (AE writes inline?), the config sync (Vectorize/graph inline?), sk-mcp writes, any create that sets a *_synced_at inline. Produce a table: service \\u2192 has-the-antipattern? \\u2192 fix lane.\n\n3. IDEMPOTENCY is part of the pattern (a retimed retry must never dupe): content-hash or client key on every adopting write.\n\n4. Sequence: BB Docs first (core infra, flapping now), then the audited offenders by blast radius. Each fix = SPEC \\u2192 contract (assert: no timeout-on-commit, rapid-fire no dupes, projections converge, named degraded state while pending) \\u2192 build direct (machinery).\n\nReport the AUDIT TABLE to the bridge before mass-fixing so Alex sees the blast radius. One pattern, applied everywhere, once.",
+   "refs": [
+    "BEB-2302"
+   ]
   }
  ],
  "cursor": 12356,
- "head": 12653,
- "count": 297
+ "head": 12656,
+ "count": 300
 }
