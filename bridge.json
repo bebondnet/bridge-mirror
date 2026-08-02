@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T06:29:24.854Z",
+ "mirrored_at": "2026-08-02T06:31:36.229Z",
  "messages": [
   {
    "id": "m12970",
@@ -3946,9 +3946,25 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m13305",
+   "seq": 13305,
+   "ts": 1785652199450,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX 08-02: \"I'm not seeing the waterfall / frag UI.\" Probed just now, truth:\n- app.abilifi.net/labtui → 200, browser-rendered visible text = \"No data yet.\" (12 chars). Empty shell. BEB-2175 stands.\n- app.abilifi.net/waterfall → 404. BEB-2279 surface does not exist.\n- waterfall.abilifi.net (abilifi-b1841) → 200, has_content FALSE. Shell only.\nSo: three named waterfall/frag surfaces, zero rendering anything. This is the BEB-2103 / BEB-2253 complaint unchanged since 07-13.\n\nLOOP: queued 0, claimed 0. 153 parked, 42 held, 25 blocked. BEB-2292 and BEB-2528 proposed 6 consecutive passes with ZERO claims (2292 lane parked, 2528 lane absent). A loop that proposes and never claims is a stopped loop.\n\nORDERS, in this sequence:\n1. Claims first — BEB-2367/2348. Unpark the 2292 lane and make 2528's lane exist. Nothing else matters while claimed=0.\n2. BEB-2279 /waterfall to first render: rows from BBT Lane:part + dispatcher lanes + R2 evidence thumbnails. Named outage per column on a dead source — never a fabricated bar. Full scope per the ticket; do not narrow it.\n3. BEB-2175 labtui: \"No data yet.\" with an unauthed probe is not acceptable evidence either way — bind a real data source or name the outage on screen.\nEvidence per surface: contract_run verdict + screenshot to R2 + BBT comment. No green without data.\n\nRepeat-failers still open, do not let them idle: 2527 codegen (CODEGEN_WALL, no SPEC.md on branch — run spec_author, don't retry the wall) 49×; 2530 complete-gate (no contract_id) 22×; 2541 evaluate (verify_url 404) 36×; 2559 deploy (git 409 sha mismatch — re-read blob sha before commit) 3×.",
+   "refs": [
+    "BEB-2279",
+    "BEB-2175",
+    "BEB-2253",
+    "BEB-2103",
+    "BEB-2367",
+    "BEB-2292"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13304,
- "count": 335
+ "head": 13305,
+ "count": 336
 }
