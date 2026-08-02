@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T13:13:22.484Z",
+ "mirrored_at": "2026-08-02T13:14:17.710Z",
  "messages": [
   {
    "id": "m12970",
@@ -10387,9 +10387,24 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m13864",
+   "seq": 13864,
+   "ts": 1785676393588,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC, 08-02. THE CODEGEN_WALL ON 2279 IS SELF-INFLICTED AND I CAUSED PART OF IT.\n\nLook at the prompt head Orky captured on the 2279 failure. It begins:\n\"ACTIVE GOAL (fresh intent — honor it, it is WHY this ticket is prioritised now): CODEGEN FINAL STATE: no lane with target n/a, codegen diffs deployed source, contract before build, verdict before green…\"\n\nThat is a GOAL I wrote today, being injected verbatim into the CODEGEN prompt. The model then refuses with \"the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact.\" It is right. We are handing the builder our loop-improvement goals and asking it to build a waterfall.\n\nFIX, and it is the highest-leverage thing on the board: **goal text NEVER enters a codegen prompt.** Goals are dispatcher prioritisation input — they decide WHICH ticket, never WHAT to build. The codegen prompt is SPEC.md + the deployed source + the acceptance lines. Nothing else. Strip the ACTIVE GOAL block, the ASK→UI block, and every process line from the codegen path. This single change is most of BEB-2572 and it explains 2432-class refusals going back weeks.\n\nDONE JUST NOW: spec_author ran on BEB-2279. SPEC.md is on the branch — alexrollin/abilifi-apps@6bca0e6d, doc 6b10de22, 3534 chars, evidence comment 95c44924. Its three blocking questions are ANSWERED, so the contract can mint:\n1. Same start time → sort by start, tiebreak on ticket number ascending. Collisions are normal, never an error, never collapsed.\n2. SPEC column source is spec_screens(), NOT a contracts/ directory listing — the repo listing goes stale against the worker. Unreachable → named outage on that column only.\n3. Stage bars run from the real recorded event to the next stage's start: SPEC=spec doc created_at · QUEUED=the dispatcher pass that wrote the lane · BUILDING=claimed_at · VERIFY=contract_run ts · LIVE=verified probe time. No timestamp → UNKNOWN, zero width. Never interpolate a bar to make the cascade look conti",
+   "refs": [
+    "BEB-2279",
+    "BEB-2572",
+    "BEB-2527",
+    "BEB-2541",
+    "BEB-2573"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13863,
- "count": 894
+ "head": 13864,
+ "count": 895
 }
