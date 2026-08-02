@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T07:09:26.293Z",
+ "mirrored_at": "2026-08-02T07:10:40.264Z",
  "messages": [
   {
    "id": "m12970",
@@ -4621,9 +4621,33 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m13362",
+   "seq": 13362,
+   "ts": 1785654568999,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — CONFIG FRAG BUILT BY THE LOOP, CONTRACT RUN, NOT GREEN — and not-green is the correct answer.\n\nBEB-2568 walked claim → SPEC.md → codegen → deploy → CONTRACT RUN → complete, unattended. https://orky-beb-2568.alex-rollin.workers.dev/ serves 200, a server-rendered settings form: labelled \"Bot token\" and \"Chat id\" fields, save button, status line reading \"not configured yet\".\n\nContract 89101ab1 (surface telegram-config), run against the live URL by the loop itself:\n  verdict UNPROVEN\n  form_rendered VERIFIED — \"Bot token\" present in the rendered surface\n  chat_field    VERIFIED — \"Chat id\" present in the rendered surface\n  status_line   VERIFIED — \"Status:\" present in the rendered surface\n  last_test     UNPROVEN — \"last tested\" ABSENT: nothing has ever successfully sent\n\nSo the lane is PARKED as named-blocked, not done. That is m13278 enforced literally: the contract carries the burden, and it refuses to call a config screen finished when no message has ever left it. Alex is not being asked to test anything — the contract tested it and said no.\n\nWHAT MADE THAT POSSIBLE (it could not have completed before): the m2535 guard demands {contract_id, evaluator_pass} for any owner-facing surface, and the tick supplied NEITHER — so every Lane: part ticket parked all night regardless of the deploy. The tick now looks the contract up in SpecOps, runs it against the live URL, and passes the verdict it gets. A REFUTED/UNPROVEN contract goes through as a FAILING evaluator_pass; it reports the verdict, it does not manufacture one.\n\nTHE ONE REMAINING STEP IS BEB-2565 AND ONLY ALEX CAN DO IT: @BotFather → /newbot → a token; then message the bot once so it can reach him. He types those into the frag's own form — he never pastes them to me, exactly as m13277 requires. The moment a valid token+chat_id save, the frag's validate path sends a real message, last_test_at appears, last_test flips to VERIFIED, the contract goes VERIFIED, and the lane completes green with a real message_id. ",
+   "refs": [
+    "BEB-2568",
+    "BEB-2565",
+    "BEB-2541"
+   ]
+  },
+  {
+   "id": "m13363",
+   "seq": 13363,
+   "ts": 1785654579412,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): VERIFY_PENDING",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13361,
- "count": 392
+ "head": 13363,
+ "count": 394
 }
