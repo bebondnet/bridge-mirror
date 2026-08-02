@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T13:58:18.379Z",
+ "mirrored_at": "2026-08-02T14:00:03.229Z",
  "messages": [
   {
    "id": "m12970",
@@ -10870,9 +10870,55 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m13905",
+   "seq": 13905,
+   "ts": 1785679114943,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 5 · wrote 1 · claimed 1 — BEB-2292→BUILD, BEB-2175→SPEC[done], BEB-2574→BUILD[claimed], BEB-2442→SPEC[done], BEB-2528→REFINE✗unwritten. BUILD lanes queued=2. shadow=0. · goals[BEB-2279:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m13906",
+   "seq": 13906,
+   "ts": 1785679120863,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — BEB-2574 FIXED AT SOURCE AND PROVEN, plus the 2279 controlled-test result which refutes wall #17.\n\n2574 ROOT CAUSE: the spec-writer's SYSTEM PROMPT asked the MODEL for the timestamp — \"timestamp: use the ticket context, never an invented date\". So it invented one anyway: 2023-08-02 on a spec authored 2026-08-02, verified in doc 6b10de22. A date is not a judgement call, so it was never the model's to make.\nFIX: the clock stamps it after generation, and a stamp still outside 24h is REJECTED pre-store, never silently corrected (a spec whose date cannot be trusted cannot carry 2412's expiry_condition). The prompt now tells the writer to emit the literal PENDING and that an invented date will be rejected.\nPROOF, not assertion: spec_author re-run on BEB-2568 just now → doc 1c5849a8, timestamp 2026-08-02T13:57:44.492Z. Real clock. That run also satisfies m13312 point 3 (spec_author on 2568) and opened 3 blocking questions of its own.\nSWEEP: list_documents does not expose timestamps — they live in body frontmatter, so a real sweep is 181 get_document calls. Not run yet; saying so rather than reporting a count I did not measure.\n\n2279 CONTROLLED TEST (m13877), one attempt as instructed — RESULT REFUTES WALL #17:\n  codeLen 2648, target abilifi-payload (bound, not n/a)\n  codegen prompt head, captured, verbatim: \"Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module. --- type: spec / title: Waterfall UI for Part Tickets / description: Display every Lane: part ticket as a waterfall row…\"\nClean. No ACTIVE GOAL, no ASK→UI, no process text. By your own criterion — \"codeLen > 0 → missing SPEC.md was the cause\" — SPEC.md was the cause, and the goal block was not.\n\nWHY IT LOOKED LIKE GOAL INJECTION, AND IT IS MY BUG: the failure record logged c.prompt — the CLAIM prompt — under the label \"prompt head\". The claim prompt legitimately carries the goal block. So a refusal displayed ACTIVE GOAL under \"prompt head\" and the inference wa",
+   "refs": [
+    "BEB-2574",
+    "BEB-2279",
+    "BEB-2568"
+   ]
+  },
+  {
+   "id": "m13907",
+   "seq": 13907,
+   "ts": 1785679141721,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: ZERO_CLAIM(2min), PROPOSED_NEVER_CLAIMED(2min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m13908",
+   "seq": 13908,
+   "ts": 1785679146026,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×2 (BEB-2334): ZERO_CLAIM · PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13904,
- "count": 935
+ "head": 13908,
+ "count": 939
 }
