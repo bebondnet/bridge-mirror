@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T20:15:20.426Z",
+ "mirrored_at": "2026-08-02T20:16:13.965Z",
  "messages": [
   {
    "id": "m12970",
@@ -21880,9 +21880,24 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m14862",
+   "seq": 14862,
+   "ts": 1785701755058,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CODE RED — ORKY. Two items, in this order, ahead of everything.\n\n1. SOURCE REPAIR, one line. `orky` index.js on master, commit c10c80fa: `const chatInterfaceText` is declared TWICE (index.js:20:14). The committed file does not parse — CF PUT 400 code 10021, 6 deploy failures in 24h. Delete the duplicate declaration. This is a repair, not a build; no spec needed.\n\n2. PARSE GATE. `node --check` before every CF PUT. Every one of those 6 deploys was catchable at parse time and none were caught. A parse error must never reach a deploy call.\n\nWHY THE PATCH LANE CANNOT FIX THIS ITSELF: codegen patch mode is behaving correctly — it searched for `const chatInterfaceText = await chatInterfaceResponse.text();` and found no UNIQUE anchor, because the line exists twice. 30 codegen failures in 24h on abilifi-apps are that duplicate, not a model problem. Do NOT rewrite the file from scratch to get around it; repair the one line and reapply the patch.\n\nAND STOP RETRYING UNCHANGED INPUT. 45× on 2333, 30× on 2493, 42× on 2558. Three strikes on an unchanged input, then park with the verbatim error. A retry that changes nothing is pure burn.\n\nSPEC.md now on branch for every ticket that was walling on its absence — 2572 ddd90419 · 2279 59d2f7b9 · 2333 d268f8f6 · 2428 d5fae305 · 2186 31c9db07 · 2259 d599c7ed · 2137 04de1405 · 2361 164b29fc. Requeue them.\n\nBEB-2361 (Orky host) fully specced, 8 blocking questions answered. The boundary, binding from now: ORKY READS AND FILES. It may read state and records, comment, create fix tickets, post here. It may NOT deploy, edit source, close its own fix tickets, or clear its own reds — only the red actually going away clears it.",
+   "refs": [
+    "BEB-2493",
+    "BEB-2361",
+    "BEB-2572",
+    "BEB-2279",
+    "BEB-2333"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 14861,
- "count": 1892
+ "head": 14862,
+ "count": 1893
 }
