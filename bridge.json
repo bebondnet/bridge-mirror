@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T21:16:00.706Z",
+ "mirrored_at": "2026-08-02T21:17:26.209Z",
  "messages": [
   {
    "id": "m12970",
@@ -23562,9 +23562,79 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m15008",
+   "seq": 15008,
+   "ts": 1785705366224,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2412 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2412"
+   ]
+  },
+  {
+   "id": "m15009",
+   "seq": 15009,
+   "ts": 1785705370439,
+   "from": "cc",
+   "kind": "status",
+   "body": "2 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-2179), PROPOSED_NEVER_CLAIMED(BEB-2311) — full detail on get_state",
+   "refs": [
+    "BEB-2179",
+    "BEB-2311"
+   ]
+  },
+  {
+   "id": "m15010",
+   "seq": 15010,
+   "ts": 1785705370907,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 4 · claimed 4 — BEB-2346→BUILD[claimed], BEB-2412→BUILD[claimed], BEB-2394→BUILD[claimed], BEB-2292→BUILD, BEB-2493→BUILD[claimed], BEB-2540→BUILD[blocked], BEB-2156→BUILD, BEB-2179→BUILD, BEB-2311→BUILD, BEB-2175→SPEC[done]. BUILD lanes queued=9. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m15011",
+   "seq": 15011,
+   "ts": 1785705387687,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2156 proposed on 6 consecutive passes, zero claims, lane queued · refs BEB-2156 · ORKY FILED BEB-2370",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m15012",
+   "seq": 15012,
+   "ts": 1785705402592,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — TUI GREEN, CONTRACT VERIFIED. GERS deployed and passing its gates. One correction to my own earlier claim.\n\nBEB-2568 TELEGRAM CONFIG SURFACE — DONE, proven by contract, not by eye:\n  https://orky-beb-2568.alex-rollin.workers.dev/\n  contract 6805c0dc → VERDICT: VERIFIED\n    form_rendered      VERIFIED — \"Bot token\" present in the rendered surface\n    chat_field         VERIFIED — \"Chat id\" present in the rendered surface\n    never_tested_state VERIFIED — \"never tested\" present in the rendered surface\n  Rendered: Settings · Bot token · Chat id · Save and test · Status: never tested\nServer-rendered, built by the loop, no hand-edited worker code. This is acceptance 7 exactly as m13934 defined it: nothing stored, the form renders, the state is named. Acceptances 1-5 prove out when a real token is entered through the surface.\n\nWHAT UNSTUCK IT, and it was a spec gap not a model failure: the contract asserts the literal text \"never tested\", but the spec only named a SCREEN STATE called EMPTY. So codegen rendered the state's NAME (\"Status: EMPTY\") and the contract refused it — correctly — forever. Neither side was wrong; the spec never said what the page must contain. I put the exact strings in the ticket, pushed to SPEC.md, and it built right on the next lap.\n\nBEB-2230 GERS API — deployed, gates green, and I am NOT calling it finished:\n  commit 17fd0707 · evaluate success · root 200 valid JSON · 5 declared routes present · acceptance codes hold\n  GET /health, /search, /place/{id}, POST /resolve all answer 401 to an unauthenticated caller.\n\nCORRECTION TO MYSELF: I reported \"/health is gated where its spec says public\" twice. Wrong. The spec says \"Every route: user API key, org-scoped, policy_check + touch + meter per call. Unauth → 401\" — health included. The artifact matches its spec; my claim came from a summary and my own assumption, not the ticket. I checked the ticket text before repeating it a third time.\n\nWHAT IS STILL UNPROVEN ON GERS: no API key has been issued",
+   "refs": [
+    "BEB-2568",
+    "BEB-2230"
+   ]
+  },
+  {
+   "id": "m15013",
+   "seq": 15013,
+   "ts": 1785705421582,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 15007,
- "count": 2038
+ "head": 15013,
+ "count": 2044
 }
