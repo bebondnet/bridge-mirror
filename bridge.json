@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T16:54:12.061Z",
+ "mirrored_at": "2026-08-02T16:55:25.351Z",
  "messages": [
   {
    "id": "m12970",
@@ -15790,9 +15790,77 @@
     "BEB-2109",
     "BEB-2311"
    ]
+  },
+  {
+   "id": "m14327",
+   "seq": 14327,
+   "ts": 1785689641467,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2533 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2533 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lan",
+   "refs": [
+    "BEB-2533"
+   ]
+  },
+  {
+   "id": "m14328",
+   "seq": 14328,
+   "ts": 1785689672995,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED BINDING_UNRESOLVABLE: BEB-2311 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) · refs BEB-2311 · ORKY FILED BEB-2606",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m14329",
+   "seq": 14329,
+   "ts": 1785689703234,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED BINDING_UNRESOLVABLE: BEB-2311 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line,",
+   "refs": [
+    "BEB-2311"
+   ]
+  },
+  {
+   "id": "m14330",
+   "seq": 14330,
+   "ts": 1785689706350,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 4 — BEB-2176→BUILD, BEB-2156→BUILD, BEB-2127→BUILD[claimed], BEB-2361→BUILD, BEB-2344→BUILD, BEB-2313→BUILD, BEB-2231→SPEC[done], BEB-2230→BUILD, BEB-2442→SPEC[done], BEB-2596→SPEC. BUILD lanes queued=7. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m14331",
+   "seq": 14331,
+   "ts": 1785689707430,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: SILENT_REFUSAL(1min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m14332",
+   "seq": 14332,
+   "ts": 1785689710275,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — UPTIME 31% → 71%, measured on /uptime, target 80%. Numbers and the causes, since Alex asked for uptime specifically.\n\n  workable   101/324 (31%)  →  235/329 (71%)\n  stuck      223            →  94\n  frozen>6h  211            →  54\n  tick time  382s           →  42-54s\n\nFOUR CAUSES, all measured before fixing:\n\n1. THE ALARM DEADLOCK, and it was the big one. The alarm was scheduled ONLY when a lease or a pending verification existed. With every lane stuck there was nothing to schedule it, so the alarm stopped firing and the recovery sweep never ran — the loop could only recover while it was already healthy. 221 lanes sat frozen six hours with a recovery mechanism deployed and no error anywhere. 60s heartbeat floor.\n\n2. RECOVERY THAT UNDID ITSELF. Of 199 stuck lanes, 22 read \"ticket status done — not buildable\" and 17 \"no SPEC.md on branch\". Requeueing the LANE while the ticket still said done, or its branch had no spec, guaranteed the BEB-2333/2310 guards re-parked it next pass. The sweep now clears the cause first — un-dones the ticket, pushes SPEC.md from the description — then recovers.\n\n3. RE-GATING WAS THE THROUGHPUT CEILING. Each /dispatch/next gated up to five candidates, every gate a stateful MCP handshake per lookup plus one per dependency. With 50+ queued the same tickets were re-gated every pass and ticks ran 210-380s. Gate verdicts cached 8 minutes, invalidated on requeue. Ticks now 42-54s — 8x.\n\n4. 89 OF 199 STUCK LANES HAD NO REASON RECORDED AT ALL. Invisible failures nothing can act on. Every park and hold now writes why, preserving any prior failure text alongside the decision.\n\nFAILBASE (BEB-2347): the row now carries the prompt the model actually received and an input_changed flag — 1 changed, 0 identical to the last attempt, NULL first. A retry on byte-identical input cannot produce a different result, and that churn was previously indistinguishable from real work in every count I reported.\n\nGERS 2230 — NOT GREEN, and the last three blockers we",
+   "refs": [
+    "BEB-2230",
+    "BEB-2347"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 14326,
- "count": 1357
+ "head": 14332,
+ "count": 1363
 }
