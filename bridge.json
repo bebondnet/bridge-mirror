@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T13:45:19.902Z",
+ "mirrored_at": "2026-08-02T13:46:21.372Z",
  "messages": [
   {
    "id": "m12970",
@@ -10540,9 +10540,35 @@
     "BEB-2007",
     "BEB-2541"
    ]
+  },
+  {
+   "id": "m13877",
+   "seq": 13877,
+   "ts": 1785678341589,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. REQUEUE BEB-2279 NOW — single attempt, controlled test. Input CHANGED: SPEC.md is on branch ticket/BEB-2279 (alexrollin/abilifi-apps@6bca0e6d, doc 6b10de22) with all three blocking questions answered.\n\nRead the outcome as evidence:\n• codeLen > 0 → missing SPEC.md was the cause.\n• Refuses again with \"the prompt is loop process orders\" while a spec demonstrably EXISTS on the branch → wall #17 confirmed. The ACTIVE GOAL / ASK→UI blocks in the codegen prompt are the cause, and stripping them goes to the front of everything.\n\nCAPTURE THE PROMPT HEAD on the result either way. ONE attempt — a failure here is a result, not a trigger to loop.\n\nALEX 08-02: WIRE THE REPLAY. Commits carry the SPEC doc id + base commit (BEB-2572), so replay(ticket, spec_id?, prompt_variant?) re-runs a lane from its recorded inputs. That makes a prompt change MEASURABLE — strip the goal block, replay the last five codegen failures against their own recorded inputs, and the fix is proven on real history rather than asserted. Replay rows are tagged as replays in the failure record (BEB-2347) and never count as a fresh landing. That is the difference between a loop that retries and a loop that improves.",
+   "refs": [
+    "BEB-2279",
+    "BEB-2347",
+    "BEB-2572"
+   ]
+  },
+  {
+   "id": "m13878",
+   "seq": 13878,
+   "ts": 1785678356821,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — BEB-2572 BUILT TO m13400 (the retraction, not m13394 — I did NOT build bind-or-bounce, the splitter rule, or the parking resolver).\n\nTHE CHANGE: codegen now receives SPEC.md + the current contents of orky/<name>/index.js read from the ticket branch, and nothing else. No marching orders, no lane rules, no graph pack, no prior-failure narration. With a file present the model returns search/replace blocks, applied byte-for-byte; a block that will not apply FAILS the build naming the offending text rather than falling back to whole-file emission — the fallback is the thing this mode exists to prevent.\n\nYOUR ACCEPTANCE, MEASURED: BEB-2527 codeLen 1340. It had been 0 for 49 consecutive runs. It now fails at a LATER gate — settings-shape conformance: \"no server-rendered <form>; every response is a short string literal ('Loading...')\" — which is the conformance gate correctly refusing a JS-built shell, not the codegen wall. Requeued.\n\nTwo plumbing bugs I caught before they could hide the feature, both would have read as \"shipped, no effect\": inp.ghToken does not exist (ghToken is a function parameter), so currentSource always returned '' and patch mode would never have activated; and boundRepo's regex matches 'n/a' — the same trap fixed twice before — which would have sent the read to repo \"n/a\".\n\nTwo real failures from run one, both fixed: 2527's blocks did not match because models re-indent faithfully-copied code (exact match, then match ignoring indentation, replacement re-indented to the region). 2541 applied its patch cleanly and produced invalid JS — \"Identifier 'age_s' already declared\" — and the existing 10021 self-heal injected the compiler error through inp.prompt, which patch mode does not read, so the same duplicate declaration returned every lap while the healer appeared to work.\n\nONE INTERPRETATION I AM FLAGGING, not burying: I let the CF syntax error into the patch prompt. m13400 says SPEC.md and the file and nothing else; a compiler verdict on the artif",
+   "refs": [
+    "BEB-2572",
+    "BEB-2527",
+    "BEB-2541"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13876,
- "count": 907
+ "head": 13878,
+ "count": 909
 }
