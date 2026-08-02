@@ -1,23 +1,22 @@
 {
- "mirrored_at": "2026-08-02T14:49:22.816Z",
- "ts": 1785682160415,
+ "mirrored_at": "2026-08-02T14:51:10.216Z",
+ "ts": 1785682267856,
  "loop": {
   "proposed_total": 398,
   "by_state": {
    "queued": 13,
-   "claimed": 4,
-   "done": 87,
-   "held": 44,
+   "claimed": 0,
+   "done": 88,
+   "held": 46,
    "blocked": 25,
-   "parked": 149
+   "parked": 150
   },
   "by_lane": {
    "BUILD": {
     "blocked": 7,
-    "claimed": 4,
-    "done": 45,
-    "held": 38,
-    "parked": 86,
+    "done": 46,
+    "held": 40,
+    "parked": 87,
     "queued": 5
    },
    "REFINE": {
@@ -36,14 +35,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785681975782,
-   "tally": "BEB-2568→BUILD[claimed], BEB-2493→BUILD, BEB-2590→BUILD, BEB-2589→BUILD, BEB-2588→BUILD, BEB-2586→BUILD, BEB-2265→REFINE[parked], BEB-2297→SPEC, BEB-2511→REFINE, BEB-2582→BUILD"
+   "at": 1785682145450,
+   "tally": "BEB-2493→BUILD[held], BEB-2568→BUILD[held], BEB-2265→REFINE[parked], BEB-2297→SPEC, BEB-2511→REFINE, BEB-2502→SPEC✗unwritten, BEB-2231→SPEC[done], BEB-2230→SPEC[done], BEB-2503→REFINE, BEB-2508→REFINE"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -52,7 +51,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -61,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -71,7 +70,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "TELEGRAM CONFIG SURFACE (2568) — deployed, page renders its fields, cred-red when unconfigured. First UI Alex sees. — last landed evidence NEVER",
     "refs": [
      "BEB-2568",
@@ -125,7 +124,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -146,7 +145,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
     "refs": [
      "BEB-2186",
@@ -158,7 +157,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -196,8 +195,23 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
+    "since": 1785681147128,
+    "detail": "alexrollin/abilifi-apps failing at codegen 3× in 24h — LATEST (08-02T14:49): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-2493"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring indentation: \"const chatInterfaceText = await chatInterfaceResponse.text();\\nconst lintResultsT\"). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n---\ntype: spec\ntitle: ",
+     "subject": "BEB-2493"
+    },
+    "fix_ticket": "BEB-2460"
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
     "since": 1785680370341,
-    "detail": "alexrollin/abilifi-apps failing at complete 4× in 24h — LATEST (08-02T14:34): owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at complete 5× in 24h — LATEST (08-02T14:49): owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2568"
     ],
@@ -210,8 +224,23 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785595788179,
-    "detail": "n/a failing at codegen 44× in 24h — LATEST (08-02T13:47): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2538 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
+    "since": 1785598398916,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 3× in 24h — LATEST (08-02T14:49): verify_url not 2xx after 12 probes — last HTTP 400: <html><body><h1>CODEGEN_WALL: shape 'scene3d' has no template path</h1></body></html>",
+    "refs": [
+     "BEB-2457"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verify_url not 2xx after 12 probes — last HTTP 400: <html><body><h1>CODEGEN_WALL: shape 'scene3d' has no template path</h1></body></html>",
+     "subject": "BEB-2457"
+    },
+    "fix_ticket": "BEB-2491"
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1785595921584,
+    "detail": "n/a failing at codegen 43× in 24h — LATEST (08-02T13:47): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2538 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
     "refs": [
      "BEB-2538"
     ],
@@ -266,7 +295,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "BEB-2297 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2297"
@@ -280,7 +309,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785682133064,
+    "since": 1785682193063,
     "detail": "BEB-2511 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2511"
@@ -290,52 +319,43 @@
      "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2511"
     }
-   },
-   {
-    "code": "HEARTBEAT_MISSING",
-    "severity": "red",
-    "since": 1785681975782,
-    "detail": "no dispatcher pass for 3min (expected ≤3min) — computed at read time, BEB-2385",
-    "refs": [
-     "BEB-2385"
-    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 13990,
+  "head_seq": 13999,
   "cursor_fable": 12969,
-  "unread_for_fable": 1021,
+  "unread_for_fable": 1030,
   "last": [
    {
-    "seq": 13986,
+    "seq": 13995,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(2min)."
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2568 — contract refused the deploy: contract 94e7e9c6 UNPROVE"
    },
    {
-    "seq": 13987,
+    "seq": 13996,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 4 · claimed 0 — BEB-2493→BUILD[held], BEB-2568→BUILD["
    },
    {
-    "seq": 13988,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "FABLE → CC. Use the SPEC, not my version.  The GERS node list is doc **98f95138 §1** (BB M"
-   },
-   {
-    "seq": 13989,
+    "seq": 13997,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(4min)."
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2579 — commit d"
    },
    {
-    "seq": 13990,
+    "seq": 13998,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "RED ×2 (BEB-2334): REPEAT_FAILER[BEB-2493]→BEB-2460 · REPEAT_FAILER[BEB-2457]→BEB-2491"
+   },
+   {
+    "seq": 13999,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER verification PASSED: BEB-2579 — https://orky-beb-2579.alex-rollin.workers.dev/ "
    }
   ]
  },
@@ -431,7 +451,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -440,7 +460,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -449,7 +469,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -459,7 +479,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "TELEGRAM CONFIG SURFACE (2568) — deployed, page renders its fields, cred-red when unconfigured. First UI Alex sees. — last landed evidence NEVER",
    "refs": [
     "BEB-2568",
@@ -513,7 +533,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -534,7 +554,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence NEVER",
    "refs": [
     "BEB-2186",
@@ -546,7 +566,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -584,8 +604,23 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
+   "since": 1785681147128,
+   "detail": "alexrollin/abilifi-apps failing at codegen 3× in 24h — LATEST (08-02T14:49): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-2493"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring indentation: \"const chatInterfaceText = await chatInterfaceResponse.text();\\nconst lintResultsT\"). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n---\ntype: spec\ntitle: ",
+    "subject": "BEB-2493"
+   },
+   "fix_ticket": "BEB-2460"
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
    "since": 1785680370341,
-   "detail": "alexrollin/abilifi-apps failing at complete 4× in 24h — LATEST (08-02T14:34): owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at complete 5× in 24h — LATEST (08-02T14:49): owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2568"
    ],
@@ -598,8 +633,23 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785595788179,
-   "detail": "n/a failing at codegen 44× in 24h — LATEST (08-02T13:47): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2538 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
+   "since": 1785598398916,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 3× in 24h — LATEST (08-02T14:49): verify_url not 2xx after 12 probes — last HTTP 400: <html><body><h1>CODEGEN_WALL: shape 'scene3d' has no template path</h1></body></html>",
+   "refs": [
+    "BEB-2457"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verify_url not 2xx after 12 probes — last HTTP 400: <html><body><h1>CODEGEN_WALL: shape 'scene3d' has no template path</h1></body></html>",
+    "subject": "BEB-2457"
+   },
+   "fix_ticket": "BEB-2491"
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1785595921584,
+   "detail": "n/a failing at codegen 43× in 24h — LATEST (08-02T13:47): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2538 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
    "refs": [
     "BEB-2538"
    ],
@@ -654,7 +704,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "BEB-2297 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2297"
@@ -668,7 +718,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785682133064,
+   "since": 1785682193063,
    "detail": "BEB-2511 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2511"
@@ -678,15 +728,6 @@
     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2511"
    }
-  },
-  {
-   "code": "HEARTBEAT_MISSING",
-   "severity": "red",
-   "since": 1785681975782,
-   "detail": "no dispatcher pass for 3min (expected ≤3min) — computed at read time, BEB-2385",
-   "refs": [
-    "BEB-2385"
-   ]
   }
  ]
 }
