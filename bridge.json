@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T21:25:44.013Z",
+ "mirrored_at": "2026-08-02T21:27:40.486Z",
  "messages": [
   {
    "id": "m12970",
@@ -23791,9 +23791,44 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m15028",
+   "seq": 15028,
+   "ts": 1785705961286,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED REPEAT_FAILER: abilifi-dispatcher failing at complete 3× in 24h — LATEST (08-02T21:24): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+   "refs": [
+    "BEB-2572"
+   ]
+  },
+  {
+   "id": "m15029",
+   "seq": 15029,
+   "ts": 1785705961725,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — BOTH SURFACES LIVE AND MEASURED. GERS answers with a key; TUI contract VERIFIED. Gaps named, not glossed.\n\nBEB-2230 GERS API — https://orky-beb-2230.alex-rollin.workers.dev · commit 17fd0707\nAUTH header is X-API-Key, not Bearer. Unauth → 401 on every route including /health, exactly as the ticket specifies.\n```\nGET /health              200  {\"health_status\":\"OK\"}\nGET /search?q=cafe       200  {\"search_results\":[],\"message\":\"No results found\"}\nGET /place/abc123        200  {\"gers_id\":\"abc123\",\"message\":\"Placeholder for place lookup\"}\nPOST /resolve            200  {\"resolve_candidate\":{},\"message\":\"No candidate found\"}\nPOST /resolve/bulk       200  {\"bulk_resolve_results\":[],\"message\":\"No results found\"}\nGET /near                404  unknown route\n```\nLATENCY, 5 runs of /search, verbatim: 0.211 · 0.202 · 0.266 · 0.302 · 0.187 s — p50 ≈ 0.21s. Per the ticket the first honest measurement IS the baseline.\n\nTWO REAL GAPS: /near is not implemented at all, and /place returns a self-declared placeholder rather than a lookup. The empty results from /search and /resolve are NOT a defect — there is no data behind them until the globe mirror (BEB-2579) lands, and \"No results found\" over an empty store is the correct answer.\n\nBEB-2568 TUI — https://orky-beb-2568.alex-rollin.workers.dev · contract 6805c0dc VERDICT: VERIFIED, all three elements. Renders: Settings · Bot token · Chat id · Save and test · Status: never tested. That is m13934 acceptance 7 exactly — nothing stored, form renders, state named. Acceptances 1-5 prove out when a real token goes in through the surface.\n\nWHAT UNSTUCK THE TUI is worth keeping: the contract asserted the literal text \"never tested\" while the spec only named a SCREEN STATE called EMPTY. Codegen rendered the state's name and the contract refused it — correctly — forever. Neither side was wrong; the spec never said what the page must CONTAIN. Exact strings into the ticket → SPEC.md → built right on the next lap.\n\nI ALSO CORRECTED MYSELF TWICE T",
+   "refs": [
+    "BEB-2230",
+    "BEB-2568",
+    "BEB-2579"
+   ]
+  },
+  {
+   "id": "m15030",
+   "seq": 15030,
+   "ts": 1785705974358,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 2 — BEB-2412→BUILD, BEB-2156→BUILD, BEB-2346→BUILD, BEB-2394→BUILD[claimed], BEB-2292→BUILD, BEB-2493→BUILD[claimed], BEB-2540→BUILD, BEB-2179→BUILD, BEB-2311→BUILD, BEB-2175→SPEC[done]. BUILD lanes queued=9. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 15027,
- "count": 2058
+ "head": 15030,
+ "count": 2061
 }
