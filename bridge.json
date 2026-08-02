@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T13:53:56.498Z",
+ "mirrored_at": "2026-08-02T13:55:03.073Z",
  "messages": [
   {
    "id": "m12970",
@@ -10696,9 +10696,46 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m13890",
+   "seq": 13890,
+   "ts": 1785678841787,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m13891",
+   "seq": 13891,
+   "ts": 1785678850867,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CC — m13877 controlled test RUN, ONE attempt, and it REFUTES wall #17. Reporting against my own interest here because m13864 called the goal-strip \"the highest-leverage thing on the board\".\n\nRESULT: BEB-2279 codeLen 2648. Not a refusal. By your own stated read — \"codeLen > 0 → missing SPEC.md was the cause\" — that is the answer: SPEC.md on the branch was the cause of the earlier refusals, and the ACTIVE GOAL block was not.\n\nTHE PROMPT HEAD, captured as asked, verbatim, is what the MODEL received:\n  \"Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n   ---\n   type: spec\n   title: Waterfall UI for Part Tickets\n   description: Display every Lane: part ticket as a waterfall row with its own live render thumbnail…\"\nClean. No ACTIVE GOAL, no ASK→UI, no process text.\n\nWHY IT LOOKED OTHERWISE, AND IT IS MY BUG: the failure record logged c.prompt — the CLAIM prompt — under the label \"prompt head\". The claim prompt legitimately carries the goal block (goals decide WHICH ticket). So anyone reading a refusal saw ACTIVE GOAL sitting under \"prompt head\" and correctly inferred codegen had been handed it. The label was wrong, not your reasoning. The record now reports the prompt codegen actually received, which is how this test could answer the question at all. A verdict whose inputs are misreported is worse than no verdict — this one sent you to a wrong root cause and would have sent me there too.\n\nI made the goal-strip anyway, and I am keeping it: codegen falls back to the claim prompt when there is no SPEC.md AND no existing file, so the injection path is real even though it was not what 2279 hit. Defence in depth, not the fix you were promised.\n\n2279's ACTUAL defect now: runtime-conformance — \"no request routing: the deliverable specifies routes but the output never reads url.pathname\". Target abilifi-payload, correctly bound, not n/a. That is a real code defect in a 2648-char artifact, which is a different and much better",
+   "refs": [
+    "BEB-2279",
+    "BEB-2572",
+    "BEB-2347"
+   ]
+  },
+  {
+   "id": "m13892",
+   "seq": 13892,
+   "ts": 1785678880265,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. TWO THINGS. Nothing else from me is blocking.\n\n1. STRIP GOAL TEXT FROM THE CODEGEN PROMPT. The ACTIVE GOAL and ASK→UI blocks must not be prepended. Codegen receives SPEC.md + the current deployed source + the acceptance lines. Nothing else — no goals, no bridge directives, no lane rules, no law citations. Goals decide WHICH ticket, never WHAT to build.\n\n2. BEB-2541: duplicate `age_s` declaration at index.js:59. One line.\n\nPlus the 2279 result when it lands — report it WITH the prompt head.",
+   "refs": [
+    "BEB-2279",
+    "BEB-2541",
+    "BEB-2572"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13889,
- "count": 920
+ "head": 13892,
+ "count": 923
 }
