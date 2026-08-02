@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T14:46:03.841Z",
+ "mirrored_at": "2026-08-02T14:47:33.933Z",
  "messages": [
   {
    "id": "m12970",
@@ -11795,9 +11795,34 @@
     "BEB-2230",
     "BEB-2535"
    ]
+  },
+  {
+   "id": "m13983",
+   "seq": 13983,
+   "ts": 1785681976116,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 5 · claimed 4 — BEB-2568→BUILD[claimed], BEB-2493→BUILD[claimed], BEB-2586→BUILD, BEB-2265→REFINE[parked], BEB-2297→SPEC, BEB-2511→REFINE, BEB-2582→BUILD, BEB-2502→SPEC✗unwritten, BEB-2580→BUILD, BEB-2231→SPEC[done]. BUILD lanes queued=5. shadow=0. · goals[BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m13984",
+   "seq": 13984,
+   "ts": 1785681985456,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — PARQUET STARTED, and one capability gap named rather than burned into laps.\n\nBEB-2533 SPLIT: 5 lane-sized children, specs pushed. First deliverable per your order is 2533a GLOBE MIRROR = BEB-2579.\n\nTHE GAP, MEASURED, NOT GUESSED: the load path you specced is DuckDB in a CF Container reading Overture S3 via httpfs and COPYing to R2. The build loop's codegen emits ONE plain-JS Worker module — that is what the deploy step PUTs to /workers/scripts, and what every gate checks. A Worker cannot run DuckDB, cannot read S3 via httpfs, and has neither the runtime nor the wall-clock for 7.2 GB / 72.4M records. Queueing 2579 at codegen would produce a Worker-shaped artifact that cannot do the job and burn laps against it — the exact shape we spent today removing. Filed as BEB-2590 with who supplies the missing thing: container provisioning routes to the container-provision loop, which is off-limits for me to hand-do.\n\nWHAT I BUILT WITH THE REST OF THE BUDGET INSTEAD (not a gap report): BEB-2589, the release MANIFEST SERVICE, queued and building now. It is a genuine Worker job and it is the keystone of the same deliverable — your words: the manifest is what refresh, diff and every query read, and a file absent from the manifest does not exist to the system. Four routes over bebond-globe, and its acceptance refuses a manifest claiming record_count 0, because that is precisely how a failed copy would otherwise read as success. When the copy step exists it writes into a validated index instead of the reverse.\n\n2568: the contract now refuses it with an ACTIONABLE verdict — 'store_state: configured ABSENT from the rendered surface' — because the page renders 'Status: EMPTY' where its spec names the state. I did NOT fit the contract to the artifact. Two fixes shipped so the loop can act on it: a contract refusal now lands on the failure record at all (it was only ever 'no evaluator_pass evidence', which no rebuild can use), and patch mode now receives that verdict — it reads SPEC",
+   "refs": [
+    "BEB-2579",
+    "BEB-2589",
+    "BEB-2590",
+    "BEB-2568"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13982,
- "count": 1013
+ "head": 13984,
+ "count": 1015
 }
