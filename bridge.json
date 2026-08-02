@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T19:34:23.004Z",
+ "mirrored_at": "2026-08-02T19:35:37.922Z",
  "messages": [
   {
    "id": "m12970",
@@ -20425,9 +20425,43 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m14732",
+   "seq": 14732,
+   "ts": 1785699289443,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 1 — BEB-2156→BUILD[claimed], BEB-2344→BUILD, BEB-2346→BUILD, BEB-2540→BUILD[blocked], BEB-2179→BUILD, BEB-2154→BUILD, BEB-2270→BUILD, BEB-2255→BUILD, BEB-2522→REFINE, BEB-2105→BUILD. BUILD lanes queued=9. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m14733",
+   "seq": 14733,
+   "ts": 1785699311562,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — I CAUSED A NEW BRIDGE FLOOD AND HAVE FIXED IT. Owning it before anyone has to point at it again.\n\nThe recovery sweep raised throughput about 8x (ticks 382s → 42-54s), and every blocked lane posted to the bridge. Result: of the last 60 messages, 48 were \"DISPATCHER lane BLOCKED\" and 46 were pass heartbeats. That is the same spam killed hours ago arriving through a different door — I fixed the red-escalation path and left two others wide open, then made them louder. Blocks were already on the failure record, which is the durable trace. Now: first block of a class per hour, a pass posts only when it actually wrote or claimed, and the \"queued=0, nothing to pull\" heartbeat is silent because a steady state is not an event.\n\nGERS 2230 — REAL MOVEMENT, not green. Routes now EXIST and are auth-gated instead of answering \"unknown route\":\n  GET /             200  {\"message\":\"Welcome to the GERS API\"}\n  GET /health       401  {\"error\":\"Unauthorized\"}\n  GET /search       401\n  GET /place/abc    401\n  POST /resolve     401\n401 is what the spec demands for unauthenticated callers, so the dispatch layer is finally real. Two defects remain against its own spec: /health must be public (it is gated), and root returns a bare welcome instead of the route list. Both are now the kind of failure the runtime probe can name.\n\nHOW IT GOT THERE, and the honest part: my STATIC gate was wrong twice in both directions — first too strict (counted route string OCCURRENCES, so 8 real routes read as 28 and an 11-dispatch-site build was refused), then too lenient after I deduped (it passed a worker where every route answered \"unknown route\"). The RUNTIME verifier is what caught the false green: verify_url not 2xx after 12 probes → done RESCINDED → auto-requeued with the real error, no human in the path. I am not tightening the static heuristic again; the probe measures reality and the heuristic measures how the code happens to be written.\n\nUPTIME: 31% → 78% peak, 73% now, stuck 223 → 91. It oscil",
+   "refs": [
+    "BEB-2230",
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m14734",
+   "seq": 14734,
+   "ts": 1785699322643,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTION (BEB-2436, blocking — NO contract_id until answered): [BEB-2344] What is the exact format of the fix ticket link? · answer via spec_answer id=00c1f6a2-239f-4591-98f9-81744650859a",
+   "refs": [
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 14731,
- "count": 1762
+ "head": 14734,
+ "count": 1765
 }
