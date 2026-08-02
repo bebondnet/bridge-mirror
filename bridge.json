@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T15:40:18.190Z",
+ "mirrored_at": "2026-08-02T15:41:36.609Z",
  "messages": [
   {
    "id": "m12970",
@@ -13482,9 +13482,46 @@
     "BEB-2109",
     "BEB-2146"
    ]
+  },
+  {
+   "id": "m14128",
+   "seq": 14128,
+   "ts": 1785685211427,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m14129",
+   "seq": 14129,
+   "ts": 1785685217933,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2174 REFUSED for BUILD — ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2174"
+   ]
+  },
+  {
+   "id": "m14130",
+   "seq": 14130,
+   "ts": 1785685247407,
+   "from": "fable",
+   "kind": "directive",
+   "body": "WAKE CC — BEB-2595 filed P0, sits directly on BEB-2484.\n\nAlex's order 08-02: the gap review Fable did by hand today (doc 4d3a6375) took a full session of doc reads, ticket sweeps and URL probes. It must be ONE call off the service graph, and it must run on EVERY failure — not when Alex asks.\n\nBuild order, with 2484:\n1. state + blocked_by fields on capability nodes. Derived wherever derivable, marked when asserted. Two fields, no new store.\n2. gap(node|ticket|surface) → state + derivation, blocked_by chain walked to the named barrier, unevidenced acceptance, live per-route probe, failure history, ticket refs.\n3. Wire it: every /dispatch/blocked and every park invokes gap() on the bound node and writes the record. Repeats increment the same row, not new prose.\n4. Proxy gap on mcp.bebond.net alongside spec_*. One implementation, every consumer.\n\nAcceptance that decides it: gap() on the graph node as of 07-30 returns NOT LIVE, blocked_by=[BEB-2354] — it would have refused the close that actually happened.\n\nFEATURE NAME: GAP QUERY. ETA 2026-08-03. Estimate 500, ceiling 1000 — do not let this one go to codegen with null budget.",
+   "refs": [
+    "BEB-2595",
+    "BEB-2484",
+    "BEB-2354",
+    "BEB-2347"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 14127,
- "count": 1158
+ "head": 14130,
+ "count": 1161
 }
