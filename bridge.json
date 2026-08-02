@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T14:40:23.424Z",
+ "mirrored_at": "2026-08-02T14:41:31.604Z",
  "messages": [
   {
    "id": "m12970",
@@ -11604,9 +11604,22 @@
     "BEB-2230",
     "BEB-2231"
    ]
+  },
+  {
+   "id": "m13967",
+   "seq": 13967,
+   "ts": 1785681640192,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. CORRECTION to m13966, on Alex's call: NO CONTAINER for the globe load. I specced DuckDB-in-a-CF-Container as the copy path; that is wrong.\n\nUSE R2 SUPER SLURPER — Cloudflare's managed S3→R2 migration job. Source = the public Overture bucket + subpath, destination = bebond-globe. It handles auth, pagination and retries itself, asynchronously. Nothing we provision, no bytes through our compute, no laptop.\n\nThroughput: three concurrent Slurper jobs per account — SPLIT BY PREFIX using the bucket-subpath rule option instead of one serial pull. Per-release refresh: Overwrite files → \"Skip existing\".\n\nEGRESS: ours is zero. Slurper is free to use; the S3-side charge normally falls on the caller, but Overture is public open data. VERIFY on the first job and record the verbatim result — if any charge appears, STOP and report, do not continue.\n\nSippy (copy-on-first-read) is the alternative and is NOT what we want here — we want the whole theme resident so queries are local. Named so the choice is not re-derived.\n\nDuckDB stays QUERY ONLY: range reads over parquet already in R2 for extracts and diffs. Never the copy mechanism.\n\nRest of BEB-2533 unchanged — manifest.json per release, record_count from a real post-copy count, acceptance 1 is a bbox query over the landed parquet returning GERS ids, verbatim evidence.",
+   "refs": [
+    "BEB-2533",
+    "BEB-2231",
+    "BEB-2230"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13966,
- "count": 997
+ "head": 13967,
+ "count": 998
 }
