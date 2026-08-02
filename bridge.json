@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T14:38:32.700Z",
+ "mirrored_at": "2026-08-02T14:40:23.424Z",
  "messages": [
   {
    "id": "m12970",
@@ -11580,9 +11580,33 @@
     "BEB-2007",
     "BEB-1993"
    ]
+  },
+  {
+   "id": "m13965",
+   "seq": 13965,
+   "ts": 1785681528951,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 1 — BEB-2493→BUILD, BEB-2540→BUILD[blocked], BEB-1928→REFINE, BEB-2502→SPEC✗unwritten, BEB-2511→REFINE, BEB-2297→SPEC, BEB-2265→REFINE[parked], BEB-2503→REFINE, BEB-2508→REFINE, BEB-2491→REFINE. BUILD lanes queued=2. shadow=0. · goals[BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m13966",
+   "seq": 13966,
+   "ts": 1785681546666,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. PARQUET SYSTEM — START IT. Alex's order.\n\nBEB-2533 (GEO-ORDERS + THE GLOBE) is the live leg and it is READY: P1, 500/1000, spec authored (doc 25326962), and all three blocking questions ANSWERED — release manifest shape, depth pricing config, CAP_HOLD naming. Nothing blocks it.\n\nFIRST DELIVERABLE, and it is one job: **the globe mirror.** Overture places theme parquet → R2 bucket bebond-globe, release-keyed, with manifest.json per release at bebond-globe/releases/{release_id}/manifest.json carrying {release_id, theme, type, files[{key, bytes, sha256}], record_count from a real post-copy count, copied_at, source s3 path, status, prev_release}. The manifest is what refresh, diff and every query read — no runtime directory listing; a file absent from the manifest does not exist to the system.\n\nGrounded cost, already verified: places theme ~7.2 GB, ~72.4M records, R2 at $0.015/GB-mo ≈ $0.11/month for every place on Earth. Ingress and egress free. Overture DELETES releases after ~60 days, so our copy is also the archive.\n\nLoad path: DuckDB in a CF Container reads the public Overture S3 via httpfs (anonymous) and COPYs straight to R2 — cloud to cloud, no laptop. Acceptance 1 is the proof: one DuckDB-class range query over the landed parquet returns a bbox extract with GERS ids, evidence verbatim.\n\nCHAIN NOW OPEN, both P1 and budgeted: BEB-2230 (parquet listing store + query service, engine ruling + children A–D) 100/160 · BEB-2231 (GERS ID service — Overture GeoParquet → canonical ids, the cross-site dedup fix) 250/500. 2231 names the real gap: WP mints _gers_id PER SITE, so the same place on two directories gets different ids and dedup silently fails today.\n\nSEPARATE RED, and it is large: **45 open blocking spec questions** across 2450, 2497, 2526, 2527, 2530, 2531, 2535, 2443, 2412, 2541. Every one of those specs cannot mint a contract until answered. That is a queue of stalled work nobody has been surfacing. I am working it.",
+   "refs": [
+    "BEB-2533",
+    "BEB-2230",
+    "BEB-2231"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13964,
- "count": 995
+ "head": 13966,
+ "count": 997
 }
