@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T13:52:04.185Z",
+ "mirrored_at": "2026-08-02T13:53:00.970Z",
  "messages": [
   {
    "id": "m12970",
@@ -10646,9 +10646,47 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m13886",
+   "seq": 13886,
+   "ts": 1785678718047,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2279 — mastra tick codegen FAILED: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class). Retryable if transient (BEB-2201).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2279"
+   ]
+  },
+  {
+   "id": "m13887",
+   "seq": 13887,
+   "ts": 1785678755649,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC, 08-02. Session close, everything ruled today in one place.\n\nNEW TICKET — BEB-2574 (30/60): the spec-writer stamps a TEMPLATE DATE. The 2279 spec (doc 6b10de22) authored today carries `timestamp: 2023-08-02` — wrong by three years. Wall #14's refusal gate catches a wholly canned doc; it does NOT catch a real doc carrying a canned date, which is worse because the doc looks real and gets used. Fix: stamp from the clock at author time, store REJECTS any spec whose timestamp is not within 24h of now (cap-and-reject, never silently correct), and sweep existing specs for the count + ids. The mandatory expiry_condition from 2412 depends on the timestamp being true.\n\nFAILBASE STORE — ruled after checking Analytics Engine. WAE is DISQUALIFIED for the record itself: it is explicitly not for individual event lookups, and equitable sampling DROPS raw events at volume with a statistical multiplier to keep aggregates right. The failbase's whole value is the verbatim error text and the prompt head on a specific attempt — a store that may drop that row cannot hold it. The split: D1 for the rows (exact lookup, joins to ticket and node) · Vectorize for \"what else failed like this\" · Analytics Engine for the COUNTING layer only (class frequency per stage per target), where sampling is harmless and unlimited cardinality is the point. Currently unbilled. Fold into BEB-2347.\n\nBEB-2347 stands as filed: the loop writes its own failure row (stage, VERBATIM error, target, prompt head, artefact ref, attempt number, input-changed flag) and no record means no retry. Plus replay(ticket, spec_id?, prompt_variant?) so a prompt change is measurable against real history, with replay rows tagged and never counting as a landing.\n\nDOCS: search log 48fd7a9b (every search, forever, with what it changes for us — standing order) · wall register PART 3 76182dda (walls 17–21) · substrate assessment 2ef70f62 · standing dig 878fd954 · spec log 232cac5d updated with the three 2279 rulings.\n\nSTILL RED",
+   "refs": [
+    "BEB-2574",
+    "BEB-2347",
+    "BEB-2279",
+    "BEB-2541",
+    "BEB-2572"
+   ]
+  },
+  {
+   "id": "m13888",
+   "seq": 13888,
+   "ts": 1785678761548,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 5 · wrote 2 · claimed 0 — BEB-2292→BUILD, BEB-2175→SPEC[done], BEB-2574→REFINE, BEB-2442→SPEC[done], BEB-2528→REFINE✗unwritten. BUILD lanes queued=1. shadow=0. · goals[BEB-2279:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10,BEB-2472:w10,BEB-2412:w10,BEB-2354:w10,BEB-1609:w10,BEB-1607:w10,BEB-1626:w10,BEB-2479:w10,BEB-2470:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 13885,
- "count": 916
+ "head": 13888,
+ "count": 919
 }
