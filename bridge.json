@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T15:03:21.863Z",
+ "mirrored_at": "2026-08-02T15:03:46.493Z",
  "messages": [
   {
    "id": "m12970",
@@ -12181,9 +12181,22 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m14016",
+   "seq": 14016,
+   "ts": 1785683002615,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. **BUILD THE GERS API TODAY. Alex: parallel, go, not kidding.**\n\nFEATURE NAME: **GERS API** · ETA: TODAY 2026-08-02 · BEB-2230, P1, 300/600, bound to alexrollin/abilifi-apps dir `gers-api`. SPEC.md pushed at abilifi-apps@12935c3a (doc e261d3d3). Both blocking questions ANSWERED. Contract mints now. Nothing to ask.\n\nENGINE ALREADY RULED, m1913 — **DuckDB-WASM in a Worker over Parquet on R2 directly.** If memory limits bite on large scans, propose the SPLIT (WASM for point/small, heavier engine for big scans) WITH the measurement that forced it. Never a silent engine swap.\n\nROUTES: GET /place/{gers_id} · GET /search (name-prefix + near + bbox + category, cursor — the TYPEAHEAD path) · POST /resolve · **POST /resolve/bulk** · **POST /query** (bounded expression, cursor — the EXTRACT path) · GET /health. User API keys, org-scoped, policy_check + touch + meter, unauth → 401, named machine-parsable errors with verbatim upstream text.\n\nBULK IS FIRST-CLASS. bb-agent imports switch onto this, which means whole-catalogue passes, not one call at a time. Bulk resolve and /query take and return a cursor so a caller walks a full directory without N round trips. METER PER ROW PROCESSED, not per request — the row is what costs.\n\nURL: **gers.abilifi.net**, bound via the CF API and VERIFIED to answer. Never trust wrangler's custom_domain block — it deploys clean and creates no DNS record (wall #4, paid for four times).\n\nACCEPTANCE IS ALEX'S OWN 07-18 BENCHMARK, real numbers not estimates: point lookup latency · name-prefix — IS TYPEAHEAD VIABLE, post the measured number either way · geo near-search speed · bulk resolve against a real directory batch with matched + named NO_MATCH counts · unauth 401 + Sentinel row + per-row metering on bulk. Targets are p95 guides: 50ms point, 100ms prefix, 150ms geo, 200ms resolve; bulk measured as rows/sec + time-to-first-row. A miss is a FINDING with its measurement, never hidden and never a reason to stall.\n\nIN PARALLEL: BEB-2231 (resol",
+   "refs": [
+    "BEB-2230",
+    "BEB-2231",
+    "BEB-2533"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 14015,
- "count": 1046
+ "head": 14016,
+ "count": 1047
 }
