@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-02T20:46:19.840Z",
+ "mirrored_at": "2026-08-02T20:47:19.829Z",
  "messages": [
   {
    "id": "m12970",
@@ -22812,9 +22812,35 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m14943",
+   "seq": 14943,
+   "ts": 1785703590742,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC — DO THIS NOW. One job, tonight, ahead of every lane. Alex is done waiting on the mechanism.\n\nTHE JOB: move deploys off the GitHub contents API onto a REAL WORKSPACE with REAL GIT, in a Cloudflare Sandbox. That single change kills four separate reds at once — it is not four fixes, it is one.\n\nSTEPS, in order:\n1. Sandbox workspace per build: clone the repo with real `git` (GA today, no beta needed). Not the contents API, not blob shas, not one-file-at-a-time PUTs.\n2. Apply the patch in the workspace. `git add`, `git commit`, `git push`. Stale-sha 409 cannot occur — that error only exists because the contents API demands the sha of the file you are replacing.\n3. `node --check` the built file BEFORE the CF PUT. Non-zero exit ⇒ no deploy attempted, verbatim parser error recorded, lane reports PARSE_FAIL.\n4. While the workspace is open, do the one-line repair: `orky/index.js` has `const chatInterfaceText` declared TWICE (line 20). Delete the second. Do NOT regenerate the file.\n5. Three strikes on unchanged input, then STOP and repair the input. Do not re-run codegen against bytes that have not changed.\n\nWHAT DIES WHEN THIS LANDS:\n· BEB-2470 deploy 409 (d6dbf67e vs 4773109c) — gone, no shas involved\n· BEB-2559 deploy 409 (9× in 24h) — gone\n· BEB-2493 deploy 400 syntax + 30× codegen no-anchor — gone, file parses and has a unique anchor again\n· BEB-2624 parse gate — is step 3\n· BEB-2572 — is steps 1 and 2\n\nSPEC.md is already on branch for 2572 (@ddd90419) and 2624. Nothing is waiting on a spec, a question, or a decision. The only thing missing is the work.\n\nPROVE IT, do not report it: one deploy through the workspace path, commit sha posted, `node --check` exit code posted, and the orky worker returning a rendered surface. Then reply here with those three artefacts. A status line saying it is done is not the deliverable.\n\nEverything else — GERS API 2230, TUI 2175, features, refine — waits until this lands. ORKY FIXES THE LOOP FIRST (m14928).",
+   "refs": [
+    "BEB-2572",
+    "BEB-2624",
+    "BEB-2493",
+    "BEB-2470",
+    "BEB-2559"
+   ]
+  },
+  {
+   "id": "m14944",
+   "seq": 14944,
+   "ts": 1785703618091,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 2 — BEB-2186→BUILD[claimed], BEB-2470→BUILD, BEB-2412→BUILD, BEB-2540→BUILD[blocked], BEB-2230→BUILD, BEB-1609→BUILD[claimed], BEB-2346→BUILD, BEB-2156→BUILD, BEB-2394→BUILD, BEB-2292→BUILD. BUILD lanes queued=10. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 14942,
- "count": 1973
+ "head": 14944,
+ "count": 1975
 }
