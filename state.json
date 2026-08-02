@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-02T21:14:17.532Z",
- "ts": 1785705255902,
+ "mirrored_at": "2026-08-02T21:16:00.706Z",
+ "ts": 1785705360013,
  "loop": {
   "proposed_total": 415,
   "by_state": {
-   "queued": 223,
-   "claimed": 2,
+   "queued": 221,
+   "claimed": 4,
    "done": 96,
    "held": 6,
    "blocked": 1,
@@ -14,11 +14,11 @@
   "by_lane": {
    "BUILD": {
     "blocked": 1,
-    "claimed": 2,
+    "claimed": 4,
     "done": 55,
     "held": 6,
     "parked": 4,
-    "queued": 103
+    "queued": 101
    },
    "REFINE": {
     "queued": 106
@@ -31,14 +31,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785705125567,
-   "tally": "BEB-2394→BUILD, BEB-2346→BUILD, BEB-2470→BUILD, BEB-2292→BUILD, BEB-2412→BUILD, BEB-2493→BUILD[claimed], BEB-2540→BUILD[blocked], BEB-2156→BUILD, BEB-2179→BUILD, BEB-2311→BUILD"
+   "at": 1785705246309,
+   "tally": "BEB-2346→BUILD[claimed], BEB-2412→BUILD[claimed], BEB-2394→BUILD[claimed], BEB-2292→BUILD, BEB-2493→BUILD[claimed], BEB-2540→BUILD[blocked], BEB-2156→BUILD, BEB-2179→BUILD, BEB-2311→BUILD, BEB-2175→SPEC[done]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785705233471,
+    "since": 1785705293472,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -47,7 +47,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785705233471,
+    "since": 1785705293472,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -56,7 +56,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785705233471,
+    "since": 1785705293472,
     "detail": "TELEGRAM CONFIG SURFACE (2568) — deployed, page renders its fields, cred-red when unconfigured. First UI Alex sees. — last landed evidence NEVER",
     "refs": [
      "BEB-2568",
@@ -99,7 +99,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785705233471,
+    "since": 1785705293472,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -120,7 +120,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785705233471,
+    "since": 1785705293472,
     "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
     "refs": [
      "BEB-2292",
@@ -201,7 +201,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785702924211,
-    "detail": "abilifi-mastra failing at evaluate 5× in 24h — LATEST (08-02T21:12): verify_url not 2xx after 12 probes — last HTTP 400: EMPTY: No ticket ID was provided. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "abilifi-mastra failing at evaluate 5× in 24h — LATEST (08-02T21:12): verify_url not 2xx after 12 probes — last HTTP 400: EMPTY: No ticket ID was provided.",
     "refs": [
      "BEB-2470"
     ],
@@ -392,43 +392,73 @@
      "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2361 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class)\ntarget: the\ncodegen prompt head (what the MODEL received): (not captured)",
      "subject": "BEB-2361"
     }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785705293472,
+    "detail": "BEB-2179 proposed on 6 consecutive passes, zero claims, lane queued",
+    "refs": [
+     "BEB-2179"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2179"
+    },
+    "fix_ticket": "BEB-2619"
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785705293472,
+    "detail": "BEB-2311 proposed on 6 consecutive passes, zero claims, lane queued",
+    "refs": [
+     "BEB-2311"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2311"
+    },
+    "fix_ticket": "BEB-2609"
    }
   ]
  },
  "bridge": {
-  "head_seq": 15003,
+  "head_seq": 15007,
   "cursor_fable": 12969,
-  "unread_for_fable": 2034,
+  "unread_for_fable": 2038,
   "last": [
-   {
-    "seq": 14999,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 6 · claimed 3 — BEB-2292→BUILD, BEB-2394→BUILD, BEB-2"
-   },
-   {
-    "seq": 15000,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 5 · claimed 4 — BEB-2470→BUILD[claimed], BEB-2292→BUI"
-   },
-   {
-    "seq": 15001,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 4 · claimed 5 — BEB-2346→BUILD[claimed], BEB-2470→BUI"
-   },
-   {
-    "seq": 15002,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2470 — commit e"
-   },
    {
     "seq": 15003,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 1 — BEB-2394→BUILD, BEB-2346→BUILD, BEB-2"
+   },
+   {
+    "seq": 15004,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-2394 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step"
+   },
+   {
+    "seq": 15005,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 6 · claimed 2 — BEB-2470→BUILD[held], BEB-2346→BUILD,"
+   },
+   {
+    "seq": 15006,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-2346 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step"
+   },
+   {
+    "seq": 15007,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2179]→BEB-2619 · PROPOSED_NEVER_CLAIMED[BEB-"
    }
   ]
  },
@@ -524,7 +554,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785705233471,
+   "since": 1785705293472,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -533,7 +563,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785705233471,
+   "since": 1785705293472,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -542,7 +572,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785705233471,
+   "since": 1785705293472,
    "detail": "TELEGRAM CONFIG SURFACE (2568) — deployed, page renders its fields, cred-red when unconfigured. First UI Alex sees. — last landed evidence NEVER",
    "refs": [
     "BEB-2568",
@@ -585,7 +615,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785705233471,
+   "since": 1785705293472,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -606,7 +636,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785705233471,
+   "since": 1785705293472,
    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence NEVER",
    "refs": [
     "BEB-2292",
@@ -687,7 +717,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785702924211,
-   "detail": "abilifi-mastra failing at evaluate 5× in 24h — LATEST (08-02T21:12): verify_url not 2xx after 12 probes — last HTTP 400: EMPTY: No ticket ID was provided. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "abilifi-mastra failing at evaluate 5× in 24h — LATEST (08-02T21:12): verify_url not 2xx after 12 probes — last HTTP 400: EMPTY: No ticket ID was provided.",
    "refs": [
     "BEB-2470"
    ],
@@ -878,6 +908,36 @@
     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2361 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class)\ntarget: the\ncodegen prompt head (what the MODEL received): (not captured)",
     "subject": "BEB-2361"
    }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785705293472,
+   "detail": "BEB-2179 proposed on 6 consecutive passes, zero claims, lane queued",
+   "refs": [
+    "BEB-2179"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2179"
+   },
+   "fix_ticket": "BEB-2619"
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785705293472,
+   "detail": "BEB-2311 proposed on 6 consecutive passes, zero claims, lane queued",
+   "refs": [
+    "BEB-2311"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2311"
+   },
+   "fix_ticket": "BEB-2609"
   }
  ]
 }
