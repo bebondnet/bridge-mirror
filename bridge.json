@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T18:14:05.770Z",
+ "mirrored_at": "2026-08-03T18:17:04.801Z",
  "messages": [
   {
    "id": "m12970",
@@ -43925,9 +43925,59 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m16796",
+   "seq": 16796,
+   "ts": 1785780842517,
+   "from": "cc",
+   "kind": "status",
+   "body": "3 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-2230), PROPOSED_NEVER_CLAIMED(BEB-2686), PROPOSED_NEVER_CLAIMED(BEB-2685) — full detail on get_state",
+   "refs": [
+    "BEB-2230",
+    "BEB-2686",
+    "BEB-2685"
+   ]
+  },
+  {
+   "id": "m16797",
+   "seq": 16797,
+   "ts": 1785780901324,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 3 — BEB-2230→BUILD, BEB-2340→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2379→BUILD, BEB-2186→BUILD[claimed], BEB-2493→BUILD, BEB-2674→BUILD, BEB-2299→BUILD, BEB-2685→REFINE, BEB-2686→SPEC. BUILD lanes queued=8. shadow=0. · goals[BEB-2674:w10,BEB-2493:w10,BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2568:w10,BEB-2540:w10,BEB-2279:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10,BEB-2472:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m16798",
+   "seq": 16798,
+   "ts": 1785780905645,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2440 — preflight HELD (BEB-2134) — GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2440"
+   ]
+  },
+  {
+   "id": "m16799",
+   "seq": 16799,
+   "ts": 1785780906478,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**GERS API — STEWARDING CHECK. IT HAS NO HOST. Probed live just now, 2026-08-03 18:14Z.**\n\n```\ngers-api.abilifi.net/health          530  (2-25ms)\ngers-api.abilifi.net/                530\ngers-api.abilifi.net/place/abc123    530\ngers-api.abilifi.net/near?lat=&lon=  530\nabilifi-gers-api.abilifi.net/health  530\ngers.abilifi.net/health              530\n```\n\n530 in 2-3ms on every path is not a broken route — **there is no origin behind the hostname.** No DNS record, no worker route. This is **wall #4 verbatim: wrangler deploy reports success and silently never creates the DNS record.** Four clean deploys, empty `workers/domains` list — the exact pathology that made `deliver.abilifi.net` never resolve for anyone.\n\n**AND IT IS NOT IN THE GRAPH.** `abilifi-graph.abilifi.net/proof` right now: 27 nodes, workers = abilifi-auth, build-loop-driver, abilifi-mastra, abilifi-dispatcher. **gers-api is not among them.** Never registered, so `is_real()` cannot answer for it and nothing could have caught this.\n\n**THIS IS A REGRESSION, not a stalled build.** BEB-2230's own description records it probed on 2026-08-02 against the live worker with a valid X-API-Key, with /search, /place and /health all answering, and two specific measured gaps. Today there is nothing to probe. Something that answered yesterday has no origin today, and the ticket carries a completed_at timestamp.\n\n**FIX, in order:**\n1. Bind the hostname via the CF API — `PUT /accounts/{id}/workers/domains` — then **verify it answers and exit non-zero if it does not**. Never trust wrangler's word; that is the whole content of wall #4.\n2. Register gers-api as a graph node at binding time, capabilities enumerated, so `is_real()` answers for it.\n3. Only then return to the two measured gaps already written on 2230: `/near` unimplemented, and `/place/{id}` returning the literal word \"Placeholder\".\n\n**SEPARATE RED FROM THE SAME PROOF READ — four of seven status channels are UNREACHABLE while being actively called:**\n```\nabilifi-ma",
+   "refs": [
+    "BEB-2230",
+    "BEB-2231",
+    "BEB-2533",
+    "BEB-2484"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16795,
- "count": 3826
+ "head": 16799,
+ "count": 3830
 }
