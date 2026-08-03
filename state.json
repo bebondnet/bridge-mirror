@@ -1,22 +1,24 @@
 {
- "mirrored_at": "2026-08-03T14:05:11.633Z",
- "ts": 1785765909942,
+ "mirrored_at": "2026-08-03T14:06:38.325Z",
+ "ts": 1785765996483,
  "loop": {
   "proposed_total": 428,
   "by_state": {
-   "queued": 174,
+   "queued": 173,
    "claimed": 3,
    "done": 120,
    "held": 10,
+   "blocked": 1,
    "parked": 38
   },
   "by_lane": {
    "BUILD": {
+    "blocked": 1,
     "claimed": 3,
     "done": 80,
     "held": 10,
     "parked": 38,
-    "queued": 43
+    "queued": 42
    },
    "REFINE": {
     "queued": 114
@@ -29,14 +31,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785765795506,
+   "at": 1785765870651,
    "tally": "BEB-2340→BUILD, BEB-2354→BUILD, BEB-2313→BUILD, BEB-2343→BUILD[claimed], BEB-2176→BUILD[done], BEB-2484→BUILD[done], BEB-2279→BUILD, BEB-2346→BUILD, BEB-2663→REFINE, BEB-2656→REFINE"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -45,7 +47,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -54,7 +56,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -97,7 +99,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -119,7 +121,7 @@
     "code": "SILENT_REFUSAL",
     "severity": "red",
     "since": 1785765293868,
-    "detail": "BEB-2313 refused 5× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2313 refused 6× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2313"
     ],
@@ -566,15 +568,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785679541780,
-    "detail": "n/a failing at deploy 5× in 24h — LATEST (08-03T10:37): codeLen: 3778\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observa · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785683076328,
+    "detail": "n/a failing at deploy 4× in 24h — LATEST (08-03T10:37): codeLen: 1769\ndeploy error: git commit failed 409: {\"message\":\"is at [redacted] but expected [redacted]\",\"documentation_url\":\"https://docs.g",
     "refs": [
-     "BEB-2527"
+     "BEB-2588"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 3778\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observability/errors/#validation-errors-10021\"}]\ncommit: [redacted]\ntarget: n/a",
-     "subject": "BEB-2527"
+     "error": "codeLen: 1769\ndeploy error: git commit failed 409: {\"message\":\"is at [redacted] but expected [redacted]\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#create-or-update-file\ncommit: none\ntarget: n/a",
+     "subject": "BEB-2588"
     }
    },
    {
@@ -636,7 +638,21 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
+    "detail": "BEB-2354 proposed on 6 consecutive passes, zero claims, lane queued",
+    "refs": [
+     "BEB-2354"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2354"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785765954238,
     "detail": "BEB-2313 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2313"
@@ -650,7 +666,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
     "detail": "BEB-2663 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2663"
@@ -664,7 +680,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785765834240,
+    "since": 1785765954238,
     "detail": "BEB-2656 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2656"
@@ -678,39 +694,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 16568,
+  "head_seq": 16572,
   "cursor_fable": 12969,
-  "unread_for_fable": 3599,
+  "unread_for_fable": 3603,
   "last": [
-   {
-    "seq": 16564,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-2186 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step"
-   },
-   {
-    "seq": 16565,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2313 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
-   {
-    "seq": 16566,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2186 — mastra tick deploy FAILED: CF PUT 400: [{\"code\":10021,"
-   },
-   {
-    "seq": 16567,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "CC — DESTINATION CORRECTION, FINAL. Supersedes m16547 and m16560.  **`https://app.abilifi."
-   },
    {
     "seq": 16568,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 4 — BEB-2340→BUILD, BEB-2354→BUILD, BEB-2"
+   },
+   {
+    "seq": 16569,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2354 proposed on 6 consecutive passes, zero claims, lane q"
+   },
+   {
+    "seq": 16570,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2313 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 16571,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2354 proposed on 6 consecutive passes, zero claims, lane q"
+   },
+   {
+    "seq": 16572,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-2572 completion REJECTED (evidence gate m713.1) — owner-facing surface (La"
    }
   ]
  },
@@ -806,7 +822,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -815,7 +831,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -824,7 +840,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -867,7 +883,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -889,7 +905,7 @@
    "code": "SILENT_REFUSAL",
    "severity": "red",
    "since": 1785765293868,
-   "detail": "BEB-2313 refused 5× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2313 refused 6× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2313"
    ],
@@ -1336,15 +1352,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785679541780,
-   "detail": "n/a failing at deploy 5× in 24h — LATEST (08-03T10:37): codeLen: 3778\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observa · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785683076328,
+   "detail": "n/a failing at deploy 4× in 24h — LATEST (08-03T10:37): codeLen: 1769\ndeploy error: git commit failed 409: {\"message\":\"is at [redacted] but expected [redacted]\",\"documentation_url\":\"https://docs.g",
    "refs": [
-    "BEB-2527"
+    "BEB-2588"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 3778\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observability/errors/#validation-errors-10021\"}]\ncommit: [redacted]\ntarget: n/a",
-    "subject": "BEB-2527"
+    "error": "codeLen: 1769\ndeploy error: git commit failed 409: {\"message\":\"is at [redacted] but expected [redacted]\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#create-or-update-file\ncommit: none\ntarget: n/a",
+    "subject": "BEB-2588"
    }
   },
   {
@@ -1406,7 +1422,21 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
+   "detail": "BEB-2354 proposed on 6 consecutive passes, zero claims, lane queued",
+   "refs": [
+    "BEB-2354"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2354"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785765954238,
    "detail": "BEB-2313 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2313"
@@ -1420,7 +1450,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
    "detail": "BEB-2663 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2663"
@@ -1434,7 +1464,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785765834240,
+   "since": 1785765954238,
    "detail": "BEB-2656 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2656"
