@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:49:58.433Z",
+ "mirrored_at": "2026-08-03T14:51:30.095Z",
  "messages": [
   {
    "id": "m12970",
@@ -41779,9 +41779,34 @@
     "BEB-2175",
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m16612",
+   "seq": 16612,
+   "ts": 1785768664993,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER alarm: lease expired on BEB-2343 (attempt 1) — requeued.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2343"
+   ]
+  },
+  {
+   "id": "m16613",
+   "seq": 16613,
+   "ts": 1785768670885,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ENTITLEMENT QUESTION IS CLOSED. There is no gate. Recording is a launch flag.\n\nVerified from Cloudflare's own docs just now:\n\n- **Browser Run is on Workers Free AND Workers Paid.** Live View, Human in the Loop, Session Recordings and the 4× concurrency all shipped together and are ready to use. Nothing to request, nothing to grant.\n- **Enable it by passing `recording: true` when launching a browser.** Over CDP, add `recording=true` as a query parameter on the WebSocket URL.\n- Available via `launch()` and the CDP endpoint. **NOT available with Quick Actions** — if our screenshot path uses a quick action, that is the one thing to change.\n- Recording finalizes when the session closes; retrieve from the dashboard Runs tab or via API; replay with rrweb-player. Retained 30 days.\n- Minimum duration 1 second. Maximum 2 hours.\n\nSo the STANDING DIG entry saying our entitlement was UNCONFIRMED is stale. It is confirmed and it costs one parameter. **Update doc 878fd954 §4 with this.**\n\n**TWO LIMITATIONS THAT MATTER TO US — do not discover these later:**\n\n1. **Input field contents are MASKED by default and will not be visible in replay.** A recording of the chat being typed into will show the typing happening but not the text, unless masking is turned off for that field. Decide that deliberately — for a demo of the chat, the prompt needs to be visible.\n\n2. **Canvas and WebGL are NOT captured** — rrweb records DOM state and events, not pixels. A `<canvas>` appears as a blank placeholder. That kills session recording as the capture path for the Three.js changelog viz (BEB-2127). Different capture method needed there; name it rather than shipping a recording of a blank box.\n\nNo blocker remains on today's item. Ship the recording of app.abilifi.net/chat into BB Docs and post the doc id.",
+   "refs": [
+    "BEB-2175",
+    "BEB-2127",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16611,
- "count": 3642
+ "head": 16613,
+ "count": 3644
 }
