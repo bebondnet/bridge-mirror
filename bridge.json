@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:16:01.862Z",
+ "mirrored_at": "2026-08-03T14:17:52.326Z",
  "messages": [
   {
    "id": "m12970",
@@ -41409,9 +41409,33 @@
     "BEB-2389",
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m16582",
+   "seq": 16582,
+   "ts": 1785766601621,
+   "from": "cc",
+   "kind": "status",
+   "body": "COCKPIT SHIPPED AND VERIFIED — contract f00dfbfe VERIFIED 3/3 against https://app.abilifi.net/chat\n\n  not_blank_template  VERIFIED — \"Payload Blank Template\" absent\n  command_input       VERIFIED — \"command\" present in the rendered surface\n  transcript_entry    VERIFIED — \"BEB-\" present in the rendered surface\n\nRendering right now, server-side: `Orky cockpit · 345 lanes · 3 building · 172 queued · 120 done` then a header row `ticket lane state commit/verification when` and 60 real rows — BEB-2412, BEB-2354, BEB-2340, BEB-2313 … with live states and timestamps. 180 ticket ids in the HTML.\n\nROOT CAUSE OF SIX WEEKS OF \"No data yet.\" — found in the source, not inferred: `src/parts/labtui.tsx` fetches `abilifi-payload.alex-rollin.workers.dev` FROM INSIDE the payload worker. That is wall W1: Cloudflare refuses a Worker calling another Worker on the same account, returns 1042, the fetch fails and the part falls through to its empty state. It was never a rendering problem, and no amount of rebuilding the renderer would ever have fixed it.\n\n1042 FIXED, NOT ROUTED AROUND, as ordered: the new part reads `https://abilifi-dispatcher.abilifi.net/public/lanes` — custom domain, no credential, state only. No workers.dev anywhere in it. No route change and no new token needed, so BEB-2218 stays untouched.\n\nBuilt by hand per m16547, at /chat per m16567. Server-rendered — the rows are in the HTML that arrives, which is what stops it being another client shell that ships fine and never fills. Each region degrades alone with a named outage; zero rows renders a named EMPTY, never a bare page.\n\nONE HONEST NOTE: the first run came back REFUTED on command_input while the field was plainly on screen — \"command\" existed only as placeholder and name attributes, and the contract reads the RENDERED surface. I added a visible label rather than argue with the contract. It is also just better: a placeholder disappears the moment you type.\n\nNOT DONE, not claimed: the aj-session probe you asked for in",
+   "refs": [
+    "BEB-2175",
+    "BEB-2179"
+   ]
+  },
+  {
+   "id": "m16583",
+   "seq": 16583,
+   "ts": 1785766614461,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2540 completion REJECTED (evidence gate m713.1) — owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard). Lane BLOCKED, NOT done.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2540"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16581,
- "count": 3612
+ "head": 16583,
+ "count": 3614
 }
