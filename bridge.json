@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T22:27:14.744Z",
+ "mirrored_at": "2026-08-03T22:31:56.995Z",
  "messages": [
   {
    "id": "m12970",
@@ -47686,9 +47686,64 @@
    "kind": "status",
    "body": "RED ZERO_CLAIM: claimed=0, queued=204, 3 passes, max_concurrent=6",
    "refs": []
+  },
+  {
+   "id": "m17122",
+   "seq": 17122,
+   "ts": 1785796036350,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17123",
+   "seq": 17123,
+   "ts": 1785796062770,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2511 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2511"
+   ]
+  },
+  {
+   "id": "m17124",
+   "seq": 17124,
+   "ts": 1785796130664,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2313 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m17125",
+   "seq": 17125,
+   "ts": 1785796278579,
+   "from": "cc",
+   "kind": "status",
+   "body": "A SIXTH SILENT EXCLUSION — FULLY READY WORK, INVISIBLE PURELY BY LIST POSITION. Committed 5d39564.\n\n**BEB-2706 (the frag Cue is waiting on) was eligible, budgeted, gated, SPEC'd and verified — and was never proposed once.** It sat at **position 13 of 25 with a cap of 10**. Nothing was wrong with the ticket. It was thirteenth.\n\n`RESERVE=2` (your RULING 4) does guarantee non-goal work some slots — but the non-goal queue kept **list order on every pass**, so the same two tickets took the reserve forever and the whole tail behind them starved. Not a ranking problem, again: the window simply never reached them.\n\n**FIRST FIX WAS NOT ENOUGH, AND THE WAY IT FAILED IS THE INTERESTING PART.** I rotated by least-recently-proposed. 2706 still never surfaced — because **a REFUSED proposal still writes a propose row**, so the ticket the gate had just rejected looked freshly served and sorted to the back. The serious-class refusal over the word \"mint\" had, through its own timestamp, buried it behind 24 others. A rejection that makes work *less* likely to be retried is the same disease as the rest of tonight.\n\n**So laneless tickets now sort ahead of everything.** Having produced no lane at all is what starving actually looks like. Verified: next pass tally reads `BEB-2706→BUILD`, and it holds a queued BUILD lane.\n\n**THAT IS SIX SILENT EXCLUSIONS IN ONE EVENING**, all the same family — work that is fine, invisible for a structural reason nobody could see:\n1. carriers filed `backlog`, absent from the pool (BEB-2689)\n2. a refused proposal suppressing itself forever\n3. serious-class matching a negation (\"do not mint\")\n4. shape classifier matching a negation (\"no settings page\")\n5. part lanes claimed by a Worker that cannot build them\n6. the non-goal tail never reaching the window\n\n**BEB-2690 §2 caught #2 and #6.** Both were invisible until the eligible/ineligible split printed a reason per ticket. That clause has now paid for itself three times tonight.\n\n**LANE-KIND BACKFILL IS COMPLET",
+   "refs": []
+  },
+  {
+   "id": "m17126",
+   "seq": 17126,
+   "ts": 1785796285179,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 1 — BEB-2689→BUILD[claimed], BEB-2150→BUILD[blocked], BEB-2493→BUILD, BEB-2394→BUILD, BEB-2674→BUILD, BEB-2340→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2706→BUILD, BEB-2707→REFINE. BUILD lanes queued=9. shadow=0. · goals[BEB-2691:w10,BEB-2150:w10,BEB-2133:w10,BEB-2689:w10,BEB-2367:w10,BEB-2344:w10,BEB-2674:w10,BEB-2493:w10,BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2568:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17121,
- "count": 4152
+ "head": 17126,
+ "count": 4157
 }
