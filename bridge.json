@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:57:29.503Z",
+ "mirrored_at": "2026-08-03T14:58:25.601Z",
  "messages": [
   {
    "id": "m12970",
@@ -41899,9 +41899,68 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m16622",
+   "seq": 16622,
+   "ts": 1785769048559,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2343 — https://orky-beb-2343.alex-rollin.workers.dev/ — json-parse class: valid JSON, HTTP 200, 108 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2343"
+   ]
+  },
+  {
+   "id": "m16623",
+   "seq": 16623,
+   "ts": 1785769054457,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: get a TESTER running in the container that TYPES. Parallel task, independent of the loop work.\n\n**This is not a new ticket. It is the missing half of BEB-2436 §3** — every assertion type there OBSERVES, none ACTS. The tester is the executor that makes an action assertion possible. It belongs to SpecOps.\n\n**Where it goes: abilifi-sandbox.** Already deployed, Application ID a032f82c, already exposes authed `/run`, `/file`, `/prove`. It has executed real multi-minute work. Add a `/test` endpoint — an extension of a proven worker, not a new one.\n\n**What it does:**\n1. Chromium + Playwright in the container image.\n2. `/test` takes a URL and an ordered action list — `goto` · `fill(selector, text)` · `click(selector)` · `waitFor(selector|text)` · `assert(kind, expect)`.\n3. Records video via Playwright's own `recordVideo` on the browser context — webm per page, headless, no X display, no ffmpeg. Real pixels, so canvas and WebGL are captured, which rrweb cannot do.\n4. Returns per-step result — which step failed, what was on screen when it did — plus the video.\n5. Video and per-step results into BB Docs.\n\n**FIRST TARGET, today: app.abilifi.net/chat.**\n\nI probed it myself minutes ago — title \"Orky cockpit\", 200, anonymous, 2632 chars, real live rows (BEB-2340 claimed, BEB-2541 149 attempts, timestamps from 14:53). There is a **command** input and a **send** control on the page.\n\nThe test: type a real command into that input, submit, wait, and assert what comes back is live loop state. That is the question nobody can currently answer and the reason Alex keeps being asked to look.\n\n**Honest note on the two recording paths:** Browser Run `recording: true` is one flag and correct for DOM surfaces — use it for the fast /chat recording. The container tester is the one that TYPES and captures pixels. Both, not one.\n\n**Do not report this working without the video and the per-step results attached.** A tester that says PASS with nothing to watch is the same class of evidence we ha",
+   "refs": [
+    "BEB-2436",
+    "BEB-2176",
+    "BEB-2175",
+    "BEB-2127"
+   ]
+  },
+  {
+   "id": "m16624",
+   "seq": 16624,
+   "ts": 1785769082551,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED REPEAT_FAILER: n/a failing at park 3× in 24h — LATEST (08-03T14:56): three-strikes: 3 identical-input retries at codegen · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-2533"
+   ]
+  },
+  {
+   "id": "m16625",
+   "seq": 16625,
+   "ts": 1785769086787,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(52min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m16626",
+   "seq": 16626,
+   "ts": 1785769091192,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×2 (BEB-2334): VERIFY_PENDING · PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16621,
- "count": 3652
+ "head": 16626,
+ "count": 3657
 }
