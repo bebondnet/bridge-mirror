@@ -1,21 +1,23 @@
 {
- "mirrored_at": "2026-08-03T12:45:30.399Z",
- "ts": 1785761128876,
+ "mirrored_at": "2026-08-03T12:46:38.619Z",
+ "ts": 1785761196564,
  "loop": {
   "proposed_total": 419,
   "by_state": {
    "queued": 173,
-   "claimed": 4,
+   "claimed": 2,
    "done": 120,
-   "held": 9,
-   "parked": 30
+   "held": 8,
+   "blocked": 1,
+   "parked": 32
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 4,
+    "blocked": 1,
+    "claimed": 2,
     "done": 80,
-    "held": 9,
-    "parked": 30,
+    "held": 8,
+    "parked": 32,
     "queued": 43
    },
    "REFINE": {
@@ -29,14 +31,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785760996952,
-   "tally": "BEB-2346→BUILD[claimed], BEB-2540→BUILD, BEB-2186→BUILD, BEB-2572→BUILD, BEB-2279→BUILD, BEB-2299→BUILD, BEB-2394→BUILD[claimed], BEB-2311→BUILD, BEB-2654→REFINE, BEB-2154→BUILD"
+   "at": 1785761115968,
+   "tally": "BEB-2346→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2186→BUILD, BEB-2572→BUILD, BEB-2279→BUILD, BEB-2299→BUILD, BEB-2394→BUILD[claimed], BEB-2270→BUILD[claimed], BEB-2654→REFINE, BEB-2311→BUILD"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785761100862,
+    "since": 1785761160857,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -45,7 +47,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785761100862,
+    "since": 1785761160857,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -54,7 +56,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785761100862,
+    "since": 1785761160857,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -97,7 +99,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785761100862,
+    "since": 1785761160857,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -343,7 +345,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785705132503,
-    "detail": "abilifi-payload failing at park 60× in 24h — LATEST (08-03T12:15): three-strikes: 3 identical-input retries at codegen",
+    "detail": "abilifi-payload failing at park 60× in 24h — LATEST (08-03T12:15): three-strikes: 3 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2394"
     ],
@@ -385,7 +387,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785681147128,
-    "detail": "alexrollin/abilifi-apps failing at codegen 207× in 24h — LATEST (08-03T12:41): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde",
+    "detail": "alexrollin/abilifi-apps failing at codegen 207× in 24h — LATEST (08-03T12:41): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2493"
     ],
@@ -413,7 +415,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785680965857,
-    "detail": "alexrollin/abilifi-apps failing at deploy 48× in 24h — LATEST (08-03T12:35): codeLen: 2040\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Identifier 'chatInterfaceText' has already been declared\\n  at index.js:20:14\\n\",\"documentation_url\":\"https://de",
+    "detail": "alexrollin/abilifi-apps failing at deploy 48× in 24h — LATEST (08-03T12:35): codeLen: 2040\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Identifier 'chatInterfaceText' has already been declared\\n  at index.js:20:14\\n\",\"documentation_url\":\"https://de · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2493"
     ],
@@ -622,7 +624,22 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785761100862,
+    "since": 1785761160857,
+    "detail": "BEB-2394 proposed on 6 consecutive passes, zero claims, lane queued",
+    "refs": [
+     "BEB-2394"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2394"
+    },
+    "fix_ticket": "BEB-2395"
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785761160857,
     "detail": "BEB-2654 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2654"
@@ -636,22 +653,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 16468,
+  "head_seq": 16470,
   "cursor_fable": 12969,
-  "unread_for_fable": 3499,
+  "unread_for_fable": 3501,
   "last": [
-   {
-    "seq": 16464,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2440 — commit e"
-   },
-   {
-    "seq": 16465,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed"
-   },
    {
     "seq": 16466,
     "from": "cc",
@@ -669,10 +674,27 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×3 (BEB-2334): VERIFY_PENDING · PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 16469,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-2394 PARKED after 2 failed attempts — lease_expired, park evidence posted "
+   },
+   {
+    "seq": 16470,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2394 proposed on 6 consecutive passes, zero claims, lane q"
    }
   ]
  },
  "p0s_open": [
+  {
+   "id": "BEB-2394",
+   "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
+   "status": "todo"
+  },
   {
    "id": "BEB-2156",
    "title": "P0 AUDIT: eliminate laptop dependency from build pipeli",
@@ -681,11 +703,6 @@
   {
    "id": "BEB-2154",
    "title": "build-loop needs a PART lane — UI tickets must route to",
-   "status": "todo"
-  },
-  {
-   "id": "BEB-2394",
-   "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
    "status": "todo"
   },
   {
@@ -764,7 +781,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785761100862,
+   "since": 1785761160857,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -773,7 +790,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785761100862,
+   "since": 1785761160857,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -782,7 +799,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785761100862,
+   "since": 1785761160857,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -825,7 +842,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785761100862,
+   "since": 1785761160857,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -1071,7 +1088,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785705132503,
-   "detail": "abilifi-payload failing at park 60× in 24h — LATEST (08-03T12:15): three-strikes: 3 identical-input retries at codegen",
+   "detail": "abilifi-payload failing at park 60× in 24h — LATEST (08-03T12:15): three-strikes: 3 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2394"
    ],
@@ -1113,7 +1130,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785681147128,
-   "detail": "alexrollin/abilifi-apps failing at codegen 207× in 24h — LATEST (08-03T12:41): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde",
+   "detail": "alexrollin/abilifi-apps failing at codegen 207× in 24h — LATEST (08-03T12:41): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2493"
    ],
@@ -1141,7 +1158,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785680965857,
-   "detail": "alexrollin/abilifi-apps failing at deploy 48× in 24h — LATEST (08-03T12:35): codeLen: 2040\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Identifier 'chatInterfaceText' has already been declared\\n  at index.js:20:14\\n\",\"documentation_url\":\"https://de",
+   "detail": "alexrollin/abilifi-apps failing at deploy 48× in 24h — LATEST (08-03T12:35): codeLen: 2040\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Identifier 'chatInterfaceText' has already been declared\\n  at index.js:20:14\\n\",\"documentation_url\":\"https://de · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2493"
    ],
@@ -1350,7 +1367,22 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785761100862,
+   "since": 1785761160857,
+   "detail": "BEB-2394 proposed on 6 consecutive passes, zero claims, lane queued",
+   "refs": [
+    "BEB-2394"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2394"
+   },
+   "fix_ticket": "BEB-2395"
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785761160857,
    "detail": "BEB-2654 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2654"
