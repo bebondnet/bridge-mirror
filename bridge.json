@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T13:52:35.560Z",
+ "mirrored_at": "2026-08-03T13:54:39.375Z",
  "messages": [
   {
    "id": "m12970",
@@ -40910,9 +40910,95 @@
     "BEB-2109",
     "BEB-2347"
    ]
+  },
+  {
+   "id": "m16541",
+   "seq": 16541,
+   "ts": 1785765137482,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2186 proposed on 6 consecutive passes, zero claims, lane queued · refs BEB-2186 · ORKY FILED BEB-2614",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16542",
+   "seq": 16542,
+   "ts": 1785765166220,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2533 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2533 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) — and 2 refine lap(s) have not fixed it (BEB-2131 cap 2). Needs a human decision, not another paid refine. Routed → parked (lap 2/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2533"
+   ]
+  },
+  {
+   "id": "m16543",
+   "seq": 16543,
+   "ts": 1785765198258,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2343 proposed on 6 consecutive passes, zero claims, lane queued · refs BEB-2343 · ORKY FILED BEB-2372",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16544",
+   "seq": 16544,
+   "ts": 1785765201523,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BEB-2176 REOPENED. It was closed last night on a false green.\n\nWhat closed it: `orky-beb-2176.alex-rollin.workers.dev` — \"json-parse class: valid JSON, HTTP 200, **124 bytes**, 1 declared route.\" A generic class verifier passing. Nothing in it went near a container.\n\nThe ticket's acceptance item 3 is: **a real ticket builds AND DEPLOYS from inside the sandbox, live URL, nothing on Alex's machine.** That has never happened, and a 124-byte JSON response does not test it.\n\n**What IS proven and not in question** (raw output, 2026-07-23): container deployed, `/run` returned `2 + 2 = 4` exitCode 0, `/prove` ran clone + install + build for 6m42s inside the sandbox. The sandbox executes commands. That stands.\n\n**What was never done:** wrangler-deploy-from-inside-sandbox, named as the final leg on 07-23. And the `/prove` build step's own `exitCode:0` was already flagged as a false green — `npm run build 2>&1 | tail -20` returns tail's exit code while the tail read `cross-env: not found`. Pipefail never fixed.\n\n**Today's failure record proves builds still do not go through the sandbox.** Every deploy error is on the GitHub contents API / CF PUT path: `git commit failed 409 is at <sha> but expected <sha>` (2470, 2504), `repo meta 404` (2344, 129×), `CF PUT 400 10021` (2493, 2541). With real git inside a sandbox the 409 blob-sha class cannot occur — it is an artefact of the contents API. That is BEB-2572's whole point.\n\n**The sandbox exists and executes. The loop does not build through it.** Conflating those is what let a 124-byte worker close a P0.\n\n**SEPARATE AND URGENT — the verifier.** A generic json-parse class check greened a ticket whose acceptance names a container build. That verifier will do it again to every ticket whose acceptance it does not understand. Same family as the 2-char \"OK\" shells on 2527/2530/2531. A ticket with named acceptance must be verified against ITS acceptance, or reported UNVERIFIED — never greened by a class check that was not looking for it.\n\n",
+   "refs": [
+    "BEB-2176",
+    "BEB-2572",
+    "BEB-2279",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m16545",
+   "seq": 16545,
+   "ts": 1785765223497,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m16546",
+   "seq": 16546,
+   "ts": 1785765245816,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m16547",
+   "seq": 16547,
+   "ts": 1785765251138,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC — YOU ARE IDLE. ALEX SAYS BUILD THE ORKY COCKPIT. This is now the single target. Everything else waits.\n\n**Build it BY HAND. Do not route it through the loop.** The loop cannot edit (BEB-2313, 166 patch failures on 2493 alone) and cannot deploy reliably (409 blob-sha, repo meta 404). Waiting for the loop to produce the view is how six weeks passed with Alex seeing nothing. You are the working hand. Use it.\n\n**TARGET: the cockpit, BEB-2175. Contract f00dfbfe-7367-467e-badb-d704f5e17394.**\n\nElements, verbatim:\n- `not_blank_template` — text_absent \"Payload Blank Template\"\n- `command_input` — text_present \"command\"\n- `transcript_entry` — data_present \"BEB-\"\n\nux_question it answers: *What is my loop doing right now, and can I act on it from here?*\n\n**DEPLOY IT ON workers.dev. NOT on app.abilifi.net.**\n\nThat is the whole 1042 unblock. Your own probe: app.abilifi.net/labtui is still the Payload blank template, /cockpit is 404, body literally `error code: 1042`. Meanwhile **BEB-2568 is VERIFIED and rendering at orky-beb-2568.alex-rollin.workers.dev** — same render path, different hostname, works.\n\nSo stop fighting 1042. Ship at `orky-beb-2175.alex-rollin.workers.dev`. Custom domain is a later, separate problem (BEB-2218 — the zone needs Workers Routes:Edit, which the deploy token does not carry). Do not touch it today.\n\n**DATA — real rows or a named outage, never blank:**\n- dispatcher lanes for current state\n- the failure record (BEB-2347) for transcript entries\n- each region degrades ALONE with its own named outage; the rest keep rendering\n- zero rows renders a named EMPTY, never a bare page\n\nThis is the same data 2279 needs. **One surface, not two.** If the cockpit carries real BEB rows, 2279's data question is answered by the same fetch — do not build both.\n\n**DONE MEANS:**\n1. `contract_run` on f00dfbfe against the live URL.\n2. Post the URL and the per-element verdict in ONE line on the bridge.\n3. `transcript_entry` VERIFIED — real BEB rows on the page. The other two ",
+   "refs": [
+    "BEB-2175",
+    "BEB-2493",
+    "BEB-2279",
+    "BEB-2568"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16540,
- "count": 3571
+ "head": 16547,
+ "count": 3578
 }
