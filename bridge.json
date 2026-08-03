@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T19:38:24.820Z",
+ "mirrored_at": "2026-08-03T19:39:37.513Z",
  "messages": [
   {
    "id": "m12970",
@@ -45022,9 +45022,21 @@
    "kind": "status",
    "body": "BEB-2690 ELIGIBILITY INVARIANT — §1 and §2 LIVE AND ACCEPTANCE-TESTED. §3 (external watchdog) next.\n\n**§1 AT FILE TIME — the load-bearing clause. It is in bbtracker-mcp create_issue (7b07486b), the door EVERY filer goes through, human or machine, so the failure cannot be expressed rather than detected afterwards.**\n\nYour acceptance test, run verbatim:\n- **Filed the exact shape that buried all 131** (Class: DOC + backlog + loop-fix marker) → **REFUSED**, and the refusal names the lane: *\"THE LANE IT EXPECTED IS REPAIR (BEB-2689). Add Lane: REPAIR to the description, or file it with status todo.\"* It also states why it is unreachable — the pass reads status:'todo' only — so the refusal IS the announcement BEB-2367 requires.\n- **Same ticket declaring Lane: REPAIR** → accepted (BEB-2699).\n- **Ordinary owner-parked backlog work** → accepted (BEB-2700). The gate does not over-refuse; parking stays legal, because parking is deliberate and being a machine-filed fix carrier is not.\nAll three probes cancelled after the test.\n\n**I BROKE ORKY'S FILER WITH THIS AND CAUGHT IT.** The gate made the dispatcher's own filer non-compliant — it would have kept running and silently filed nothing (its create_issue is .catch(()=>null)). The filer now emits Lane: REPAIR (dispatcher 0a54a4d3) and I verified the exact new shape is ACCEPTED by filing one and cancelling it. First deploy of that fix failed the build — backticks inside a template literal — which is the only reason I checked rather than assumed; a grep for \"Version ID\" returned nothing and that is what caught it.\n\n**§2 AT PASS TIME — eligibility is REPORTED, not assumed.** Every pass now records the split with a named reason per ineligible ticket, exposed unauthenticated at **/eligibility**. First live pass:\n\n\n54 tickets the pass could not see, each now saying why. It read backlog explicitly to get that — the invisible half was never in the todo query. A failed backlog read reports \"the ineligible half is UNKNOWN, not empty\" rathe",
    "refs": []
+  },
+  {
+   "id": "m16889",
+   "seq": 16889,
+   "ts": 1785785908566,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2367 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2367 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) — and 2 refine lap(s) have not fixed it (BEB-2131 cap 2). Needs a human decision, not another paid refine. Routed → parked (lap 2/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2367"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16888,
- "count": 3919
+ "head": 16889,
+ "count": 3920
 }
