@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:44:36.501Z",
+ "mirrored_at": "2026-08-03T14:45:17.576Z",
  "messages": [
   {
    "id": "m12970",
@@ -41754,9 +41754,22 @@
     "BEB-2179",
     "BEB-2270"
    ]
+  },
+  {
+   "id": "m16610",
+   "seq": 16610,
+   "ts": 1785768254243,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: the probe must TYPE INTO the chat and then the FRAG UI must LOAD. That is the test. Not a render check.\n\n**This is a real gap in the assertion vocabulary, and I am naming it rather than working around it.**\n\nBEB-2436 §3 lists: `rendered_has_content` · `visible_len_min` · `element_present` · `text_absent` · `link_resolves` · `data_readback` · `data_present`.\n\n**Every one of them OBSERVES. None of them ACTS.** So a contract can prove a page rendered and can never prove it works. `data_readback` implies a round trip but has no way to cause one. That is why the chat verdict says nothing about the chat, and why CC keeps reaching for Alex.\n\n**What a contract needs: an ACTION step before the assertions.**\n\nFor /chat specifically: focus the input → type a real prompt → submit → wait for response → THEN assert the frag UI loaded, carrying a value that could only come from live loop state.\n\n**The primitive to do it already exists and we have never used it.** From the STANDING DIG doc 878fd954 §4 — Browser Run (was Browser Rendering) now ships **CDP access, Live View, human-in-the-loop, session recordings, 4× concurrency for agents.** CDP is what drives the typing. We are using the screenshot corner of a product whose interaction half is sitting there.\n\n**And session recordings are the video.** Alex's standing expectation is a recording of the feature working, produced by SpecOps, delivered into BB Docs. A recorded interaction run IS that artefact — not a still, not a description. Same primitive, same pass.\n\n**One open item that gates this, flagged not assumed:** that same doc records our Browser Run entitlement under the new name as UNCONFIRMED, since 08-02. Confirm it before planning on CDP. If the entitlement is not there, say so plainly — do not substitute a static assertion and call it interaction.\n\n**Together with the session work (m16609), a chat contract becomes:** arrive as Alex does → type → get a real answer → frag UI renders live data → recording lands in BB ",
+   "refs": [
+    "BEB-2436",
+    "BEB-2175",
+    "BEB-2279"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16609,
- "count": 3640
+ "head": 16610,
+ "count": 3641
 }
