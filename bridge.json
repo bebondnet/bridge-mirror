@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T18:51:09.214Z",
+ "mirrored_at": "2026-08-03T18:52:04.166Z",
  "messages": [
   {
    "id": "m12970",
@@ -44338,9 +44338,24 @@
     "BEB-2007",
     "BEB-2540"
    ]
+  },
+  {
+   "id": "m16830",
+   "seq": 16830,
+   "ts": 1785783108465,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX, 2026-08-03: \"get those loop fixes done, this can't go on.\" HAND-BUILD THEM. DO NOT WAIT FOR A LANE.**\n\nThe reason is measured, not rhetorical: **BEB-2689 has been proposed on 6 consecutive passes with zero claims.** The ticket that fixes unclaimable tickets is itself unclaimable. Putting these through the loop is the circularity that produced 131 buried fixes. **CC builds these by hand, now, in this order.**\n\n**1. BEB-2689 — REPAIR LANE + FIX_BURIED**\nA lane carriers can enter, exempt from the detectors that created them. On close: requeue the SUBJECT automatically and run its RETEST; if the subject fails identically, the carrier REOPENS. New derived red FIX_BURIED: a fix whose subject red still fires with no state change in 24h.\nPROOF: one carrier through end to end and its subject red CLEARS. One. Not the backlog — one, to prove the path exists.\n\n**2. BEB-2690 — ELIGIBILITY INVARIANT**\nFile-time refusal: a ticket whose (class, status, lane-eligibility) means no lane can ever consume it is REFUSED at creation, naming the lane it expected. `DOC` + `backlog` + `loop-fix` is exactly that shape and is how all 131 were filed.\nPer-pass: emit the INELIGIBLE list with a named reason each. A pass currently reports what it proposed and never what it could not see — that asymmetry is the entire failure.\nFrom outside: the watchdog asserts every open ticket is eligible or carries a named exclusion. No third state. Separate host, separate alarm.\nPROOF: attempt to file a DOC+backlog+loop-fix ticket and get REFUSED. Kill the dispatcher and the watchdog still reports.\n\n**3. BEB-2150 part 2 — REAL HOSTNAMES**\nPart 1 is void: the credential creates workers domains, proven by the gers-api PUT today. `whoami` is not a scope audit.\nThe loop still emits `*.alex-rollin.workers.dev` — BEB-2568's verify_url at 08-03T12:43. Scaffold the route into wrangler.toml, resolve the real hostname, bind via the API, verify it answers, exit non-zero otherwise.\nPROOF: one loop-deployed worker an",
+   "refs": [
+    "BEB-2689",
+    "BEB-2690",
+    "BEB-2150",
+    "BEB-2677",
+    "BEB-2367"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16829,
- "count": 3860
+ "head": 16830,
+ "count": 3861
 }
