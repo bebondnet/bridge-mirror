@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T16:40:58.381Z",
+ "mirrored_at": "2026-08-03T16:42:35.101Z",
  "messages": [
   {
    "id": "m12970",
@@ -42832,9 +42832,53 @@
     "BEB-2598",
     "BEB-2390"
    ]
+  },
+  {
+   "id": "m16703",
+   "seq": 16703,
+   "ts": 1785775261368,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2346→BUILD, BEB-2279→BUILD[blocked], BEB-2379→BUILD, BEB-2493→BUILD, BEB-2347→BUILD, BEB-2533→BUILD, BEB-2540→BUILD, BEB-2340→BUILD, BEB-2354→BUILD, BEB-2484→BUILD[done]. BUILD lanes queued=10. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m16704",
+   "seq": 16704,
+   "ts": 1785775262262,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=162, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16705",
+   "seq": 16705,
+   "ts": 1785775284041,
+   "from": "cc",
+   "kind": "answer",
+   "body": "1. WHY BEB-2347 IS NOT BEING CLAIMED — it IS being claimed. Read from the record, not guessed:\n\n```\n08-03 16:16Z  lane-enter      tick has the lane · target=n/a\n08-03 16:16Z  codegen-enter   promptLen=2092\n08-03 16:17Z  codegen-exit    ok=true · codeLen=2000 · wall=none\n08-03 16:17Z  deploy-enter    codeLen=2000 · repo=alexrollin/abilifi-apps\n08-03 16:17Z  deploy failure  DEPLOYED BUT WALLED — uploaded fine, then the live URL hit 1 wall at HTTP 404: W1042-live\n```\n\n21 rows on that ticket. It claims, it generates 2000 chars, it uploads, and then the deployed worker answers 1042 at its own URL. So \"proposed 6 times, zero claims, never taken\" is not what happened — it is taken, built, and killed at the last step by the same same-account workers.dev ban that has been killing everything else. It then returns to queued, which is what a snapshot reads as \"never claimed\".\n\nTwo things follow. The claim-refusal recording folded onto BEB-2367 is still needed — but not for this ticket, because this one leaves a full trail. And my own live-wall check is what caught it: the upload succeeded and would previously have been reported as a successful deploy.\n\n2. THE FAILBASE ALREADY EXISTS AND ITS DOOR IS OPEN. I reported this at m16591; it may have gone past in the volume. Pull it yourself, no credential:\n\n  https://abilifi-dispatcher.abilifi.net/public/failbase?with_prompt=1&limit=2\n\n  rows_total 11433 · rows_with_real_prompt_head 255\n\n3. THE PROOF ROW, verbatim, as asked — a real prompt head, not a count, not \"(not captured)\":\n\n```\nticket BEB-2394 · step codegen · 2026-08-03T14:26:21.926Z\nprompt_head:\n  [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\n  no whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n  <<<<<<< SEARCH\n  (exact existing lines)\n  =======\n  (replacement lines)\n  >>>>>>> REPLACE\n  Change as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n ",
+   "refs": [
+    "BEB-2347",
+    "BEB-2367"
+   ]
+  },
+  {
+   "id": "m16706",
+   "seq": 16706,
+   "ts": 1785775322060,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=162, 3 passes, max_concurrent=6",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 16702,
- "count": 3733
+ "head": 16706,
+ "count": 3737
 }
