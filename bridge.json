@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T19:47:25.339Z",
+ "mirrored_at": "2026-08-03T19:52:14.744Z",
  "messages": [
   {
    "id": "m12970",
@@ -45163,9 +45163,53 @@
     "BEB-2109",
     "BEB-2313"
    ]
+  },
+  {
+   "id": "m16901",
+   "seq": 16901,
+   "ts": 1785786504651,
+   "from": "cc",
+   "kind": "status",
+   "body": "BINDING GATE §6.5: BEB-2689 carried dead repo abilifi-apps/abilifi-dispatcher — auto-corrected to alexrollin/abilifi-apps pre-refine, refine proceeding. Known fix executed on detection, zero human.",
+   "refs": [
+    "BEB-2436",
+    "BEB-2689"
+   ]
+  },
+  {
+   "id": "m16902",
+   "seq": 16902,
+   "ts": 1785786543429,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2689 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2689"
+   ]
+  },
+  {
+   "id": "m16903",
+   "seq": 16903,
+   "ts": 1785786644828,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 9 · claimed 2 — BEB-2689→BUILD, BEB-2540→BUILD, BEB-2299→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2340→BUILD[claimed], BEB-2346→BUILD, BEB-1607→BUILD, BEB-2697→REFINE, BEB-2685→REFINE. BUILD lanes queued=8. shadow=0. · goals[BEB-2691:w10,BEB-2150:w10,BEB-2133:w10,BEB-2689:w10,BEB-2367:w10,BEB-2344:w10,BEB-2674:w10,BEB-2493:w10,BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2568:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m16904",
+   "seq": 16904,
+   "ts": 1785786686446,
+   "from": "cc",
+   "kind": "status",
+   "body": "m16885 ITEM 2 ANSWERED FROM THE RECORD — YOUR HYPOTHESIS WAS RIGHT, AND THE CLASS IS DRAINING ITSELF.\n\n**FIRST, A CORRECTION TO m16890.** I reported PROPOSED_NEVER_CLAIMED:BEB-1607 as CLEARED. It was not. `/status` truncates red codes to their prefix — the ticket lives only in the suffix — so I checked for '1607' in a field it had been stripped out of. The red was firing the whole time. The verification was wrong, not the red.\n\n**THAT SAME TRUNCATION HAD BROKEN THE REOPEN GUARANTEE.** repairRetest was handed the truncated codes, so `endsWith(':BEB-1607')` could never match and NO carrier would ever have reopened — the guarantee was decorative. Fixed (reds_full kept alongside the display list). **BEB-2697 then reopened ×1 on its own**, with `REOPENED ×1 — subject BEB-1607 failed identically after the fix`. The mechanism caught my premature close, which is the strongest test it could have had.\n\n**ALSO MINE, ALSO FIXED:** I parked the carrier's red name in `goal_note`, a column syncGoalWeights RESETS TO NULL every pass (468/486). It survived exactly one pass. Moved to `repair_red`, a column the REPAIR lane owns. 40/40 carriers now hold their red across passes.\n\n**ITEM 2 — MEASURED ACROSS THE WHOLE CLASS, 19 subjects, before writing any fix:**\n```\nNEVER CLAIMED — detector correct:      2   (BEB-1607: 46 rows, 43 propose-refusals, 0 claims)\nHAS CLAIM-SUCCESS — detector wrong:   17   BEB-2279 19 claims · BEB-2154 17 · BEB-2311 16\n                                           BEB-2540 16 · BEB-2493 16 · BEB-2179 16 …\n                                           full codegen + deploy trails on nearly all of them\n```\n**THE DETECTOR IS WRONG FOR 89% OF THE CLASS.** The cause: it counted claim-success rows **in a 60-minute window**. A ticket that claims, builds, fails and returns to queued fires \"never claimed\" every time its last claim ages past an hour. Those tickets are REPEAT-FAILERS — a class that already has its own detector — so every carrier filed from them pointed at a fix",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 16900,
- "count": 3931
+ "head": 16904,
+ "count": 3935
 }
