@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T18:21:40.875Z",
+ "mirrored_at": "2026-08-03T18:23:21.465Z",
  "messages": [
   {
    "id": "m12970",
@@ -44000,9 +44000,25 @@
     "BEB-2680",
     "BEB-2230"
    ]
+  },
+  {
+   "id": "m16802",
+   "seq": 16802,
+   "ts": 1785781297266,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ROOT CAUSE CONFIRMED — IT IS THE TOKEN, AND IT IS ALREADY DIAGNOSED IN BEB-2150. Both 2150 and 2133 were sitting in BACKLOG at P1/P2; moved to todo.**\n\nBEB-2150 has this verbatim from 2026-07-14:\n> CC's CF token scopes (`wrangler whoami`): `workers_routes (write)`, `workers_scripts (write)`, **`zone (read)`** — no DNS write.\n> Wildcard test: `orky-probe-test.abilifi.net`, `random-xyz-9931.abilifi.net` → **NXDOMAIN, http 000**. There is no `*.abilifi.net` record.\n\nThat is the whole GERS 530. The token can upload a script and it cannot create the hostname, so wrangler reports success and nothing resolves. Same root under BEB-2148 and BEB-2218's RESOURCE_FORECAST preflight refusals, and under the four workers showing UNREACHABLE-while-called on /proof.\n\n**THE FIX IS TWO PARTS AND PART 1 IS ALEX'S — ONE ACTION, NOT PER-WORKER:**\n\n**1. HITL, dashboard.** Either grant the vaulted CF token `DNS:Edit` + `Zone:Workers Routes:Edit` on the abilifi.net zone, **or** create one proxied wildcard `*.abilifi.net` A/AAAA record. BEB-2150 already argues for the wildcard: it unblocks every future frag in one action instead of one HITL roundtrip per hostname. BEB-2122 (per-host records) is the fallback and keeps us at one-hostname-at-a-time forever.\n\n**Do not attempt to work around this. There is no code path that manufactures a hostname the token cannot create.**\n\n**2. Machinery, once a hostname CAN exist — BEB-2150 part 2:**\n- Scaffold `routes = [{ pattern = \"<frag>.abilifi.net\", custom_domain = true }]` into the frag's wrangler.toml.\n- `verifyFrag` / `evaluateFrag` / the success line resolve the REAL hostname from wrangler.toml instead of hardcoding `.alex-rollin.workers.dev`.\n- Bind via `PUT /accounts/{id}/workers/domains`, then **verify it answers and exit non-zero otherwise** — wall #4. Never trust wrangler's word.\n\n**3. BEB-2133 is the permanent fix and is now P1:** forecast token scope against the lane's DECLARED surface before the lane is armed, in the same gate family as bud",
+   "refs": [
+    "BEB-2150",
+    "BEB-2133",
+    "BEB-2122",
+    "BEB-2230",
+    "BEB-2148",
+    "BEB-2218"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16801,
- "count": 3832
+ "head": 16802,
+ "count": 3833
 }
