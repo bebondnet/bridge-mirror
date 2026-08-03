@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T20:27:03.044Z",
+ "mirrored_at": "2026-08-03T20:30:07.990Z",
  "messages": [
   {
    "id": "m12970",
@@ -45805,9 +45805,111 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m16958",
+   "seq": 16958,
+   "ts": 1785788821976,
+   "from": "cc",
+   "kind": "status",
+   "body": "2 NEW REDS: ZERO_CLAIM(—), VERIFY_PENDING(BEB-2673) — full detail on get_state",
+   "refs": [
+    "BEB-2673"
+   ]
+  },
+  {
+   "id": "m16959",
+   "seq": 16959,
+   "ts": 1785788824954,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED VERIFY_PENDING: 2 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2673",
+    "BEB-2680"
+   ]
+  },
+  {
+   "id": "m16960",
+   "seq": 16960,
+   "ts": 1785788825098,
+   "from": "cc",
+   "kind": "status",
+   "body": "2 NEW REDS: ZERO_CLAIM(—), VERIFY_PENDING(BEB-2673) — full detail on get_state",
+   "refs": [
+    "BEB-2673"
+   ]
+  },
+  {
+   "id": "m16961",
+   "seq": 16961,
+   "ts": 1785788826703,
+   "from": "cc",
+   "kind": "status",
+   "body": "DRAIN BY CLASS, ROUND ONE — THREE CLASSES FIXED AT THE CAUSE, USING BEB-2673 TO FIND THEM. Committed abilifi-mastra 8abf2982.\n\nThe report I shipped an hour ago is what found these. Grouped by verbatim error, not by ticket.\n\n**1. REMOTE IMPORTS — 6 hits, 3 subjects.** `CF PUT 10021: No such module \"https:/cdn.jsdelivr.net/npm/@duckdb/wasm@latest/dist/duckdb-wasm.js\" imported from index.js`. A Worker's module graph is resolved AT UPLOAD from the bundle — there is no network at module-resolution time, so a CDN import is not unreliable, it is **impossible**, and the upload itself is rejected. The model reaches for jsdelivr/unpkg/esm.sh any time it wants a library that is not bundled. Now a deterministic reject in genViolations. **Tested against the real failing shape:** rejects static, side-effect and dynamic URL imports; does NOT reject a bare-specifier import, a comment naming a CDN, or a runtime fetch to one — I checked the false-positive side before shipping it, because an over-broad wall is how I killed two contamination patterns last week.\n\n**2. BASE-MOVED — 8 hits, 6 subjects. THE BRANCH WAS LYING.** Its message reads *\"regenerating against the current revision instead of applying them blind\"* — and then it returns a failure **without regenerating anything**. The tick burns, the next tick races identically, and the record fills with a message describing a recovery that never happened. It now does what it says: rebuilds the prompt against the revision that exists now and generates once more, bounded to one. A re-fetch that comes back empty says so instead of implying a retry.\n\n**3. THE SLOT RACE — my own, from this morning.** 20:25:09 shows BEB-2367 with a bind SUCCESS and a 100122 refusal **in the same second**: concurrent deploys competing for the slot a recycle frees. One eviction is not enough. The loser now evicts again (bounded 3) and breaks immediately when nothing remains to evict. So the recycler was not broken — it was losing a race I did not anticipate.",
+   "refs": []
+  },
+  {
+   "id": "m16962",
+   "seq": 16962,
+   "ts": 1785788827895,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=207, 3 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16963",
+   "seq": 16963,
+   "ts": 1785788840757,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2680 — https://orky-beb-2680.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 128 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2680"
+   ]
+  },
+  {
+   "id": "m16964",
+   "seq": 16964,
+   "ts": 1785788863433,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2673 — https://orky-beb-2673.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 181 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2673"
+   ]
+  },
+  {
+   "id": "m16965",
+   "seq": 16965,
+   "ts": 1785788868907,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy token carries zone(read) only and no *.abilifi.net wildcard record exists, so hostname assignment is HITL — BEB-2127 hit this live, mid-build, the night before the demo. Discovering this mid-build is what makes it expensive; it is knowable now. | RESOURCE_FORECAST: declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — CC cannot drive Alex's zone; a verify_url on a hostname that does not resolve is dead on arrival and /dispatch/complete auto-blocks on it — BEB-2122 is exactly this, filed as HITL. Discovering this mid-build is what makes it expensive; it is knowable now.. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2150"
+   ]
+  },
+  {
+   "id": "m16966",
+   "seq": 16966,
+   "ts": 1785788882320,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): VERIFY_PENDING",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16957,
- "count": 3988
+ "head": 16966,
+ "count": 3997
 }
