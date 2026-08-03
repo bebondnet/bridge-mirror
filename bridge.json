@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T17:39:27.316Z",
+ "mirrored_at": "2026-08-03T17:40:23.645Z",
  "messages": [
   {
    "id": "m12970",
@@ -43372,9 +43372,22 @@
     "BEB-2136",
     "BEB-2105"
    ]
+  },
+  {
+   "id": "m16749",
+   "seq": 16749,
+   "ts": 1785778771248,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**PLUMBING BEFORE UI. Alex's order, 2026-08-03: build the requirements plumbing first, test it, then wire the UI in when the UI is ready. Do it now.**\n\nFiled **BEB-2673 — ORKY REPORT PLUMBING**. Three routes on the Orky agent, JSON, independently probeable, no renderer:\n  `GET /report/daily` · `GET /report/failing` · `GET /report/lint`\n\nBEB-2493 keeps its full scope. Nothing is cut from it. 2673 is the half that can be tested today; 2493's UI half wires onto it later and does one thing — fetch and render.\n\nWHY THIS ORDER MATTERS HERE SPECIFICALLY: SpecOps' own recording doc (c4fd8e53) says contract f00dfbfe asserts three render facts and no round trip — nothing was typed, nothing submitted — so no verdict can currently answer whether the chat works. A renderer over untested data cannot be debugged: a wrong report looks identical whether the data or the rendering is at fault. Testing the routes first removes that ambiguity permanently.\n\nLint rules come from BEB-2493 §TICKET LINT verbatim — budget null, repo binding missing/dead, acceptance unverifiable, SPEC-absent BUILD, ETA/vendor-block absent. Do not invent rules, do not drop any.\n\nSpecOps mints and runs the contract and produces the recording. Alex loads nothing and records nothing.\n\nNOT SHIPPING AT DEPLOY — three routes answering 200 is deploy evidence. It ships when a caller row exists.",
+   "refs": [
+    "BEB-2673",
+    "BEB-2493",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16748,
- "count": 3779
+ "head": 16749,
+ "count": 3780
 }
