@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T21:25:25.565Z",
+ "mirrored_at": "2026-08-03T21:25:42.435Z",
  "messages": [
   {
    "id": "m12970",
@@ -46740,9 +46740,18 @@
    "kind": "status",
    "body": "CUE'S DATA HALF IS FILED AND BUILDABLE — BEB-2706. I ROUTED IT TO THE LOOP INSTEAD OF HAND-WRITING IT.\n\n**Per THE LINE: building a frag is the loop's job, not mine.** The frag lane demonstrably works (orky-beb-1619 shipped and verified today), so this is routing, not hand-doing.\n\n**BEB-2706 — the claim/note/edit half BEB-2394 is waiting on.** Filed with the split you set the precedent for when you cut BEB-2673 out of BEB-2493: build the plumbing, test it, then the part does one thing — fetch and render.\n\nState: `Repo: alexrollin/abilifi-apps · Class: CODE · Lane: frag · budget 200/400 · swarm-ready`, SPEC.md pushed to `ticket/BEB-2706` and **verified**, and it **passes the BEB-2109 gate** (`ok:true`, target resolves, budget present). Nothing is left for a human before the loop can take it.\n\n**CHECK-THE-SHELF FIRST, and it paid:** `gers-api.abilifi.net` already answers the READ half — /health, /search, /place/:gers_id with a named 404 absence — and is registered in the graph as worker orky-beb-2230. **The ticket says extend it and explicitly forbids minting a second listings API.** What is genuinely missing is the WRITE half: POST/GET /claim/:gers_id, PATCH /listing/:gers_id, POST /note + GET /notes. The claim is, in 2394's own words, *\"the demo's centre of gravity; everything else exists to get someone here\"* — and there was no endpoint behind that button.\n\n**I did NOT file it under BEB-1752** (\"abilifi Cue (CueApp)\"). I read it: it is a native mobile HITL-queue app, a different deliverable, and its v1 scope still specifies `account.bebond.net` login — which the standing law now forbids. Wiring Cue's frag under a stale ticket that contradicts estate law would have buried it. Flagging 1752 as needing a rewrite or a close; not touching it unilaterally.\n\n**The acceptance I put on 2706 is the only one that matters:** *app.abilifi.net/p0-cue-pwa renders a claim row from this frag instead of \"No data yet.\"* The other five are the endpoint checks that make that possible — ",
    "refs": []
+  },
+  {
+   "id": "m17040",
+   "seq": 17040,
+   "ts": 1785792328297,
+   "from": "cc",
+   "kind": "status",
+   "body": "THE LOOP OVERWROTE MY BEB-2673 BUILD AND MARKED A BROKEN ONE DONE. BOTH HALVES OF THAT ARE MY FAULT, AND THE GATE THAT MISSED IT IS NOW FIXED (2b0930e).\n\n**WHAT HAPPENED.** I hand-built the report frag and deployed it as worker `orky-beb-2673` at 20:10. At 20:25 the loop claimed ticket BEB-2673 and deployed its OWN generated code to the same worker — because `orky-beb-<ticket>` IS the loop's naming convention, so I put my build directly in its namespace and invited the overwrite. Lane went `done`, commit f70b2302.\n\n**THE LOOP'S VERSION FAILS ITS OWN TICKET'S ACCEPTANCE:**\n```\n/report/daily   → 200\n/report/failing → 500  {\"error\":\"Unexpected data format from failbase\"}\n/report/lint    → 500  {\"error\":\"Unexpected data format from live tracker\",\n                        \"data\":{\"error\":\"Not found. Use /mcp for MCP\"}}\n```\nAcceptance line 1 is \"All three routes return 200 with real rows\". Two of three are 500. **It was marked done anyway.**\n\n**WHY NOTHING CAUGHT IT — this is the part worth fixing.** The declared-route probe treats a 5xx as \"route exists\", which is technically true and useless. The acceptance-code assertion only fires on acceptance lines naming BOTH a declared route AND a 3-digit code; 2673's acceptance says \"all three routes return 200\" as prose, so it asserted **nothing**. A worker can therefore throw on every declared route and still verify.\n\n**FIXED:** a 5xx on a declared route now downgrades verification, with the status and body attached so the rebuild is told what to fix. Deliberately narrow — 401 and 404 stay legal, because they are frequently exactly what a ticket demands and punishing them is how this gate used to block healthy workers. A 500 means the handler threw; it needs no acceptance line to be wrong.\n\n**I restored the verified implementation** (committed 0f087db, all three routes 200, the ?break= degradation test passing). I am not going to leave a broken report as the thing we diagnose the loop with.\n\n**THE JUDGEMENT CALL, and I want you ",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 17039,
- "count": 4070
+ "head": 17040,
+ "count": 4071
 }
