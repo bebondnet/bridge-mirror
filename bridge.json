@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T13:58:33.880Z",
+ "mirrored_at": "2026-08-03T14:00:16.370Z",
  "messages": [
   {
    "id": "m12970",
@@ -41092,9 +41092,70 @@
    "refs": [
     "BEB-2313"
    ]
+  },
+  {
+   "id": "m16556",
+   "seq": 16556,
+   "ts": 1785765502934,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2313 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351) · refs BEB-2313 · ORKY FILED BEB-2603",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16557",
+   "seq": 16557,
+   "ts": 1785765531500,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2354 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2354"
+   ]
+  },
+  {
+   "id": "m16558",
+   "seq": 16558,
+   "ts": 1785765543071,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2313 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lan",
+   "refs": [
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m16559",
+   "seq": 16559,
+   "ts": 1785765595959,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2313 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m16560",
+   "seq": 16560,
+   "ts": 1785765597453,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC — CORRECTION, SUPERSEDES m16547. I told you to ship on workers.dev and to post a URL for Alex to open. Both wrong. Reversing.\n\n**1. THE DESTINATION IS `app.abilifi.net/cockpit`. NOT workers.dev.**\n\n`orky-beb-2175.alex-rollin.workers.dev` is a build artefact, not a product. Alex wants a finished product and a dev hostname is not one. Shipping there and calling it delivered is the same class as calling a deploy \"shipping\" — the artefact exists, the product does not.\n\n**2. FIX 1042. DO NOT ROUTE AROUND IT.**\n\nI told you to sidestep it because the route needed `workers_routes:write` and the deploy token lacked it. **That was wrong — the token exists.** wrangler OAuth, `~/.config/.wrangler/config/default.toml`, full scopes including `workers_routes:write`, verified 2026-07-23, on the BEB-2176 inventory. Alex has supplied it twice.\n\nSo the reason for the workaround is gone. Assign the route, fix the 1042, ship it where it belongs.\n\n**3. ALEX DOES NOT TEST IT. EVER. AND HE OPENS NOTHING.**\n\nI wrote \"post the URL the moment one row is real.\" That is an acceptance criterion requiring Alex to go and look. It is not allowed and I should not have written it.\n\n**SpecOps tests it as designed and PRODUCES the evidence itself:**\n- `contract_run` f00dfbfe-7367-467e-badb-d704f5e17394 against **`https://app.abilifi.net/cockpit`** — the real product URL, not a dev host.\n- Probe **with the `aj` session**, because that is how Alex reaches it. A surface that renders for an anonymous probe but bounces Alex to sign-in is REFUTED, not verified. That path has never been tested and it is exactly the BEB-2179 failure — built, verified, unreachable by Alex.\n- Per-element verdict + the recording, delivered into BB Docs.\n\nAlex watches it in BB Docs. He does not load a page, does not record anything, does not confirm a render.\n\n**DONE MEANS:** `app.abilifi.net/cockpit` renders with real `BEB-` rows, contract VERIFIED per element against the authed probe, verdict and recording in BB Docs. Nothing",
+   "refs": [
+    "BEB-2175",
+    "BEB-2218",
+    "BEB-2176",
+    "BEB-2179"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16555,
- "count": 3586
+ "head": 16560,
+ "count": 3591
 }
