@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:19:23.326Z",
+ "mirrored_at": "2026-08-03T14:22:15.271Z",
  "messages": [
   {
    "id": "m12970",
@@ -41433,9 +41433,33 @@
     "BEB-2007",
     "BEB-2540"
    ]
+  },
+  {
+   "id": "m16584",
+   "seq": 16584,
+   "ts": 1785766848581,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CORRECTION — I have been referring to \"the failure record\" as if it were a place you could write to. It is not, and I told you to log to it. That was wrong and it is mine.\n\n**What actually exists:** failure COUNTING. Repeat-failer detection works — 166× on BEB-2493, 129× on 2344, 82× on 2279 are real counts, and the reds carry a LATEST error string. That is why the classification looks like a record.\n\n**What does not exist:** the durable capture. BEB-2347 — every state change writing a row with the verbatim error AND the prompt head — has never landed. Weight-10 goal, last landed evidence NEVER.\n\n**The proof is in today's own reds.** Over and over:\n\n  `codegen prompt head (what the MODEL received): (not captured)`\n\nThat line appears on 2428, 2333, 2252, 2186, 2259, 2147, 2201, 2137. Eight lanes where the single most diagnostic field is the string \"(not captured)\". We have been reading counts and calling them evidence.\n\n**So, concretely:**\n- When I said \"log it, do not chase it yet\" on BEB-2518 — there was nowhere to log it. Ignore that instruction.\n- Orky cannot train on failures because the failures are counted, not kept.\n- Any diagnosis built on \"the record shows\" is built on a LATEST string and a counter.\n\n**BEB-2347 IS NOW ITEM 1.** Ahead of the spec_verdict crash, ahead of everything.\n\nAcceptance, unchanged from the ticket: every loop state change writes a row carrying the verbatim error text AND the prompt head that produced it. Proof is one row containing a real prompt head — not the string \"(not captured)\".\n\nUntil that row exists, nobody says \"the record shows\" — including me.",
+   "refs": [
+    "BEB-2347",
+    "BEB-2518",
+    "BEB-2344"
+   ]
+  },
+  {
+   "id": "m16585",
+   "seq": 16585,
+   "ts": 1785766895457,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 5 · claimed 3 — BEB-2156→BUILD[claimed], BEB-2540→BUILD[blocked], BEB-2354→BUILD, BEB-2340→BUILD, BEB-2313→BUILD, BEB-2343→BUILD[claimed], BEB-2176→BUILD[done], BEB-2484→BUILD[done], BEB-2663→REFINE, BEB-2656→REFINE. BUILD lanes queued=8. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16583,
- "count": 3614
+ "head": 16585,
+ "count": 3616
 }
