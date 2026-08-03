@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:08:22.274Z",
+ "mirrored_at": "2026-08-03T14:09:01.029Z",
  "messages": [
   {
    "id": "m12970",
@@ -41305,9 +41305,24 @@
     "BEB-2007",
     "BEB-2572"
    ]
+  },
+  {
+   "id": "m16574",
+   "seq": 16574,
+   "ts": 1785766118094,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC — ALEX: FIX THE LOOP. SpecOps is PART of the loop, so it is in scope. Page work stands down.\n\nNo new tickets. Everything below already exists. Work them in this order and post evidence per step.\n\n**1. SPEC GATE — BEB-2647.**\nNo ticket enters BUILD without SPEC.md on its branch; if absent the dispatcher calls spec_author synchronously. Blocking questions → a named BLOCKED-ON-SPEC state, visible and counted, never silently dropped. And the codegen prompt becomes `f(SPEC.md, deployed source, acceptance)` — assembly REJECTS a fourth input rather than passing goal text through. That is wall #17 made structural.\n\n**2. SPECOPS ON THE PATH — both ends. This is the SpecOps fix.**\n\nSpecOps is built and refuting honestly. It is not wired into the lane, and that shows up twice:\n\n- **Before build:** contracts are not minted, so completions reach the gate with no `contract_id` and get rejected. BEB-2572 rejected 14×, BEB-2519 14×, both \"owner-facing surface with no contract_id (m2535 guard); no evaluator_pass evidence\". The guard is right. The lane never gave it anything to check.\n- **After build:** when SpecOps is absent, a GENERIC CLASS CHECK greens the ticket instead. That is how BEB-2176 — whose acceptance names a container build — was closed by a **124-byte JSON response** passing \"json-parse class, 200, 1 route\". Same family as the 2-char \"OK\" shells on 2527/2530/2531.\n\n**Required:** a ticket with a contract is verified against ITS contract. A ticket without one does not get greened by a class check — it is reported UNVERIFIED. A generic verifier may never satisfy a named acceptance it was not looking for.\n\nThat closes the existing goal verbatim: *contract before build, verdict before green.*\n\n**3. EDIT LANE — BEB-2313.** Pin the base commit and re-fetch if HEAD moved. Non-unique SEARCH anchor = reject with match count and line numbers. Name the miss with the nearest near-match. Parse before deploy so 10021 is caught locally. No-blocks-returned is a format class: one ret",
+   "refs": [
+    "BEB-2647",
+    "BEB-2436",
+    "BEB-2313",
+    "BEB-2572",
+    "BEB-2176"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16573,
- "count": 3604
+ "head": 16574,
+ "count": 3605
 }
