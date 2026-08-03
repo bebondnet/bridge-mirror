@@ -1,22 +1,22 @@
 {
- "mirrored_at": "2026-08-03T06:11:05.504Z",
- "ts": 1785737464288,
+ "mirrored_at": "2026-08-03T06:13:51.301Z",
+ "ts": 1785737629919,
  "loop": {
   "proposed_total": 417,
   "by_state": {
-   "queued": 192,
-   "claimed": 1,
+   "queued": 190,
+   "claimed": 3,
    "done": 117,
    "held": 5,
    "parked": 19
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 1,
+    "claimed": 3,
     "done": 76,
     "held": 5,
     "parked": 19,
-    "queued": 64
+    "queued": 62
    },
    "REFINE": {
     "queued": 114
@@ -29,21 +29,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785737345212,
-   "tally": "BEB-2156→BUILD, BEB-2346→BUILD, BEB-2540→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2270→BUILD, BEB-2311→BUILD, BEB-2179→BUILD, BEB-2154→BUILD, BEB-1510→BUILD"
+   "at": 1785737422711,
+   "tally": "BEB-2156→BUILD[claimed], BEB-2346→BUILD, BEB-2540→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2270→BUILD, BEB-2311→BUILD, BEB-2179→BUILD, BEB-2154→BUILD, BEB-1510→BUILD"
   },
   "reds": [
    {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1785737333474,
-    "detail": "claimed=0, queued=193, 2 passes, max_concurrent=6",
-    "refs": []
-   },
-   {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785737393465,
+    "since": 1785737573473,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -52,7 +45,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785737393465,
+    "since": 1785737573473,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -83,7 +76,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785737393465,
+    "since": 1785737573473,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -510,7 +503,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785737393465,
+    "since": 1785737573473,
     "detail": "BEB-2394 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2394"
@@ -519,13 +512,12 @@
      "cls": "proposed-never-claimed",
      "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2394"
-    },
-    "fix_ticket": "BEB-2395"
+    }
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785737393465,
+    "since": 1785737573473,
     "detail": "BEB-2179 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2179"
@@ -539,7 +531,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785737393465,
+    "since": 1785737573473,
     "detail": "BEB-2154 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2154"
@@ -549,32 +541,23 @@
      "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2154"
     }
+   },
+   {
+    "code": "HEARTBEAT_MISSING",
+    "severity": "red",
+    "since": 1785737422711,
+    "detail": "no dispatcher pass for 3min (expected ≤3min) — computed at read time, BEB-2385",
+    "refs": [
+     "BEB-2385"
+    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 15994,
+  "head_seq": 15997,
   "cursor_fable": 12969,
-  "unread_for_fable": 3025,
+  "unread_for_fable": 3028,
   "last": [
-   {
-    "seq": 15990,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 10 · claimed 0 — BEB-2156→BUILD, BEB-2346→BUILD, BEB-"
-   },
-   {
-    "seq": 15991,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2246 REFUSED for BUILD — declared deps still open: BEB-224"
-   },
-   {
-    "seq": 15992,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2250 REFUSED for BUILD — declared deps still open: BEB-222"
-   },
    {
     "seq": 15993,
     "from": "cc",
@@ -586,6 +569,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · PROPOSED_NEVER_CLAIMED[BEB-2394]→BEB-2395"
+   },
+   {
+    "seq": 15995,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2394 proposed on 6 consecutive passes, zero claims, lane q"
+   },
+   {
+    "seq": 15996,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
+   },
+   {
+    "seq": 15997,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 9 · claimed 2 — BEB-2156→BUILD[claimed], BEB-2346→BUI"
    }
   ]
  },
@@ -679,16 +680,9 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1785737333474,
-   "detail": "claimed=0, queued=193, 2 passes, max_concurrent=6",
-   "refs": []
-  },
-  {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785737393465,
+   "since": 1785737573473,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -697,7 +691,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785737393465,
+   "since": 1785737573473,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -728,7 +722,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785737393465,
+   "since": 1785737573473,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -1155,7 +1149,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785737393465,
+   "since": 1785737573473,
    "detail": "BEB-2394 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2394"
@@ -1164,13 +1158,12 @@
     "cls": "proposed-never-claimed",
     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2394"
-   },
-   "fix_ticket": "BEB-2395"
+   }
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785737393465,
+   "since": 1785737573473,
    "detail": "BEB-2179 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2179"
@@ -1184,7 +1177,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785737393465,
+   "since": 1785737573473,
    "detail": "BEB-2154 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2154"
@@ -1194,6 +1187,15 @@
     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2154"
    }
+  },
+  {
+   "code": "HEARTBEAT_MISSING",
+   "severity": "red",
+   "since": 1785737422711,
+   "detail": "no dispatcher pass for 3min (expected ≤3min) — computed at read time, BEB-2385",
+   "refs": [
+    "BEB-2385"
+   ]
   }
  ]
 }
