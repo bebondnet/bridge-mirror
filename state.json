@@ -1,23 +1,21 @@
 {
- "mirrored_at": "2026-08-03T16:18:04.909Z",
- "ts": 1785773881887,
+ "mirrored_at": "2026-08-03T16:18:55.484Z",
+ "ts": 1785773933493,
  "loop": {
   "proposed_total": 429,
   "by_state": {
-   "queued": 164,
+   "queued": 168,
    "claimed": 0,
    "done": 121,
-   "held": 12,
-   "blocked": 1,
-   "parked": 48
+   "held": 10,
+   "parked": 47
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 1,
     "done": 81,
-    "held": 12,
-    "parked": 48,
-    "queued": 31
+    "held": 10,
+    "parked": 47,
+    "queued": 35
    },
    "REFINE": {
     "queued": 115
@@ -30,14 +28,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785773777633,
-   "tally": "BEB-2186→BUILD[blocked], BEB-2347→BUILD[blocked], BEB-2572→BUILD[blocked], BEB-2540→BUILD, BEB-2340→BUILD, BEB-2354→BUILD, BEB-2379→BUILD, BEB-2484→BUILD[done], BEB-2156→BUILD, BEB-2493→BUILD"
+   "at": 1785773849081,
+   "tally": "BEB-2186→BUILD[held], BEB-2572→BUILD[held], BEB-2533→BUILD, BEB-2347→BUILD, BEB-2540→BUILD, BEB-2340→BUILD, BEB-2354→BUILD, BEB-2379→BUILD, BEB-2484→BUILD[done], BEB-2156→BUILD"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773814231,
+    "since": 1785773874239,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -46,7 +44,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773814231,
+    "since": 1785773874239,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -55,7 +53,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773814231,
+    "since": 1785773874239,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -98,7 +96,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773814231,
+    "since": 1785773874239,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -232,7 +230,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785703269899,
-    "detail": "abilifi-dispatcher failing at complete 22× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "abilifi-dispatcher failing at complete 22× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2572"
     ],
@@ -246,7 +244,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785691704386,
-    "detail": "abilifi-mastra failing at codegen 23× in 24h — LATEST (08-03T15:15): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "abilifi-mastra failing at codegen 24× in 24h — LATEST (08-03T16:16): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2186"
     ],
@@ -525,6 +523,21 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
+    "since": 1785724379947,
+    "detail": "n/a failing at deploy 3× in 24h — LATEST (08-03T16:17): codeLen: 3787\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observa · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2527"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "codeLen: 3787\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observability/errors/#validation-errors-10021\"}]\ncommit: [redacted]\ntarget: n/a",
+     "subject": "BEB-2527"
+    },
+    "fix_ticket": "BEB-2671"
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
     "since": 1785706301634,
     "detail": "n/a failing at evaluate 3× in 24h — LATEST (08-03T14:35): declared-route probe: 1/3 route(s) the ticket DECLARES do not exist on the deploy — POST /pulse → unreachable (empty body). A worker missing its own declared routes is a shell, whatever the root retur · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
@@ -595,16 +608,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 16689,
+  "head_seq": 16690,
   "cursor_fable": 12969,
-  "unread_for_fable": 3720,
+  "unread_for_fable": 3721,
   "last": [
-   {
-    "seq": 16685,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: REPEAT_FAILER(1427min)."
-   },
    {
     "seq": 16686,
     "from": "cc",
@@ -628,6 +635,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×4 (BEB-2334): PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CL"
+   },
+   {
+    "seq": 16690,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: n/a failing at deploy 3× in 24h — LATEST (08-03T16:17): codeLen: 3787 d"
    }
   ]
  },
@@ -723,7 +736,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773814231,
+   "since": 1785773874239,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -732,7 +745,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773814231,
+   "since": 1785773874239,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -741,7 +754,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773814231,
+   "since": 1785773874239,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -784,7 +797,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773814231,
+   "since": 1785773874239,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -918,7 +931,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785703269899,
-   "detail": "abilifi-dispatcher failing at complete 22× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "abilifi-dispatcher failing at complete 22× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2572"
    ],
@@ -932,7 +945,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785691704386,
-   "detail": "abilifi-mastra failing at codegen 23× in 24h — LATEST (08-03T15:15): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "abilifi-mastra failing at codegen 24× in 24h — LATEST (08-03T16:16): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2186"
    ],
@@ -1207,6 +1220,21 @@
     "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
     "subject": "BEB-2519"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1785724379947,
+   "detail": "n/a failing at deploy 3× in 24h — LATEST (08-03T16:17): codeLen: 3787\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observa · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2527"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "codeLen: 3787\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '<<'\\n  at index.js:1\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/observability/errors/#validation-errors-10021\"}]\ncommit: [redacted]\ntarget: n/a",
+    "subject": "BEB-2527"
+   },
+   "fix_ticket": "BEB-2671"
   },
   {
    "code": "REPEAT_FAILER",
