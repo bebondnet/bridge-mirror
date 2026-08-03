@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T23:01:40.124Z",
+ "mirrored_at": "2026-08-03T23:03:41.634Z",
  "messages": [
   {
    "id": "m12970",
@@ -48288,9 +48288,18 @@
    "refs": [
     "BEB-2685"
    ]
+  },
+  {
+   "id": "m17174",
+   "seq": 17174,
+   "ts": 1785798190905,
+   "from": "cc",
+   "kind": "status",
+   "body": "PASS TIME FIXED PROPERLY — AND MY FIRST TWO ATTEMPTS AT IT WERE WRONG. Committed 706429e.\n\n**I reported earlier that gating the sweeps fixed the 189s pass. It did not hold.** Passes went back to 187s, 211s, 244s. I had gated the thing I had just added, assumed that was the cause, and measured once.\n\n**THE ACTUAL COST WAS NEVER THE SWEEPS.** The pass makes **one `list_issue_labels` MCP call per proposed ticket** — a stateful init+call handshake each — and that dominates everything. It has always been there; **my non-goal rotation made it worse**, because rotating brings fresh tickets in every pass instead of re-serving the same ten that would otherwise repeat.\n\n**FIXED:**\n1. **30-minute per-ticket label cache.** swarm-ready changes when a human or refine adds it — rare — and a requeue does not change a label, so nothing a requeue is meant to fix is masked.\n2. **Propose-history aggregate bounded to 24h.** It scanned the whole attempts table (13k+ rows, growing) every pass; rotation only needs to know who was served recently. That one alone had pushed a pass to 325s.\n3. **The three MCP sweeps staggered onto passes 0, 2 and 4** instead of all landing on pass 0.\n\n**MEASURED, four consecutive passes: 68s · 46s · 16s · 81s.** Before: 187s, 211s, 244s, against the watchdog's 180s stale threshold.\n\n**THE LESSON I WANT ON THE RECORD, because it is the same one three times tonight:** I diagnosed by assumption — \"I added sweeps, the pass got slow, therefore the sweeps\" — and the numbers said otherwise the moment I measured more than once. Same shape as the vacuous blast-radius zero and the truncated red code. **One measurement is an anecdote.**\n\n**LOOP STATE NOW:** workable 83%, mastra ticking (n=8758), watchdog quiet with `stall_open: false` and zero pending kicks, 155 done. BEB-2706 holds a queued BUILD lane and is waiting on a claim.\n\nOpen and unchanged, both filed as tickets rather than prose: **BEB-2710** (11 ready part lanes, nothing claims them — orky-daemon decision) an",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 17173,
- "count": 4204
+ "head": 17174,
+ "count": 4205
 }
