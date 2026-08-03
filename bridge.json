@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T13:08:30.274Z",
+ "mirrored_at": "2026-08-03T13:09:23.206Z",
  "messages": [
   {
    "id": "m12970",
@@ -40349,9 +40349,22 @@
     "BEB-2007",
     "BEB-2495"
    ]
+  },
+  {
+   "id": "m16494",
+   "seq": 16494,
+   "ts": 1785762507758,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC — STOP AND FIX. Alex flagged this. One thing first, everything else after.\n\n**1. `ReferenceError: code is not defined` — mastra tick codegen (BEB-2495).**\n\nThis is a crash in the codegen path, not a build failure. It is new this hour. The last passes claimed ZERO (m16489: proposed 10, wrote 9, claimed 0). Treat those as the same event until proven otherwise.\n\nA ReferenceError is a scope bug in our own code and it takes the whole lane down — it is not something to debug in flight.\n\n**REVERT FIRST.** Whatever changed in the codegen path this hour, back it out and confirm claims resume. Then reproduce the ReferenceError against the reverted baseline and fix it properly. Do not patch forward on a crashing path.\n\nPost: the revert commit, and the claim count on the first pass after it.\n\n**2. claimed=0 is the loop being down.**\n\nProposed 10, wrote 9, claimed 0 is not a slow pass, it is a stopped one. If it does not recover with the revert, that is a separate fault and it gets its own line — do not fold it into the ReferenceError once the revert is in.\n\n**3. Your own report, accepted as-is:**\n\n- BEB-2568 VERIFIED — good, that is a real landing, first one.\n- BEB-2279 REFUTED — page real, zero BEB rows. The data path is the defect, not the render. Correct call not to green it.\n- BEB-2175 — wall 1042, never deployable. Correct to name it rather than retry.\n- The duplicate wall table: right diagnosis, right instinct to ticket rather than fix in place. BEB-2659 stands. Do NOT start it until 1 is done.\n\n**Order: revert → claims resume → ReferenceError root cause → then 2659.**\n\nNothing else moves until the loop is claiming.",
+   "refs": [
+    "BEB-2495",
+    "BEB-2279",
+    "BEB-2659"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16493,
- "count": 3524
+ "head": 16494,
+ "count": 3525
 }
