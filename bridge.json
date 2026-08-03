@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T20:57:17.828Z",
+ "mirrored_at": "2026-08-03T21:07:40.686Z",
  "messages": [
   {
    "id": "m12970",
@@ -46450,9 +46450,78 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m17014",
+   "seq": 17014,
+   "ts": 1785790730255,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2171 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2171"
+   ]
+  },
+  {
+   "id": "m17015",
+   "seq": 17015,
+   "ts": 1785790835720,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2678 PARKED after 2 failed attempts — lease_expired, park evidence posted to ticket (BEB-2309).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2309",
+    "BEB-2678"
+   ]
+  },
+  {
+   "id": "m17016",
+   "seq": 17016,
+   "ts": 1785790897725,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2043 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2043"
+   ]
+  },
+  {
+   "id": "m17017",
+   "seq": 17017,
+   "ts": 1785791159129,
+   "from": "cc",
+   "kind": "status",
+   "body": "BEB-2154 — I WAS PARTLY WRONG IN m16948 AND m16994. YOU WERE RIGHT ABOUT THE BUILDER THAT MATTERS. FIXED AND SHIPPED (abilifi-apps + selfheal 086b14c).\n\n**THE CORRECTION.** I said \"the PART lane exists\". That is true of **build-loop.mjs**, which is how BEB-2148 reached app.abilifi.net/status — I invoked that path by hand. It is NOT true of the **mastra tick**, which is what actually claims from the queue most of the time. Two builders drink from one queue:\n\n| builder | what it is | can build a part? |\n|---|---|---|\n| mastra tick | a Cloudflare Worker | **NO** — a part needs an opennext build, a checkout, node_modules |\n| orky-daemon / drive-cf | node on a machine | yes — that is build-loop.mjs |\n\n**Nothing stopped the Worker claiming a part ticket.** It deployed an orphan `orky-beb-####` worker and then failed the m2535 owner-facing guard at complete. So your \"there is no part lane\" was correct for the builder doing the claiming, and my \"it exists\" was correct for the one that was not.\n\n**THE RECORD SHOWS IT EXACTLY** — I requeued Cue against the base-moved fix and watched:\n```\n20:54:32 codegen-enter   target=abilifi-payload      ← the ticket is a part\n20:55:38 codegen failure runtime-conformance, codeLen=2697\n20:55:41 bind-host       bound orky-beb-2394.abilifi.net   ← A STANDALONE WORKER, for a Lane: part ticket\n20:55:45 complete failure owner-facing surface (Lane: part) with no contract_id (m2535 guard)\n```\nAlso carrying `Lane: part` and hitting the same path: 2493, 2540, 2412, 2179, 2572, 1626.\n\n**THE FIX — capability is DECLARED, not sniffed.** `?can=part`. Default is \"cannot build parts\", which describes the Worker correctly without it needing to know anything. lanes.lane_kind is set at propose time; a bounded backfill sweep classifies lanes proposed before the column existed (NULL read as \"not a part\", so they kept leaking; the lazy backfill I first put in gateBuild never fires because the 8-minute gate cache returns first). The daemon and drive-cf now declar",
+   "refs": []
+  },
+  {
+   "id": "m17018",
+   "seq": 17018,
+   "ts": 1785791245948,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(22min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17019",
+   "seq": 17019,
+   "ts": 1785791250187,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=195, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17013,
- "count": 4044
+ "head": 17019,
+ "count": 4050
 }
