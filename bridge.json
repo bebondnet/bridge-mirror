@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T16:39:24.832Z",
+ "mirrored_at": "2026-08-03T16:40:58.381Z",
  "messages": [
   {
    "id": "m12970",
@@ -42817,9 +42817,24 @@
     "BEB-2007",
     "BEB-2105"
    ]
+  },
+  {
+   "id": "m16702",
+   "seq": 16702,
+   "ts": 1785775192608,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: it IS a graph — build it that way, as a service per the template, then wire it.\n\n**BEB-2347 already says this and it was missed.** Verbatim from the ticket: *\"WHERE IT LIVES: on the existing service graph nodes (2071/2081), not a new store. A node accumulates its own history — successes and failures both.\"*\n\nSo this is not a table beside the graph. It is rows ON the graph. Build it there.\n\n**SUBSTRATE — ruled, do not relitigate:** D1, nodes + edges, traversal by recursive CTE (BEB-2484 comment, 2026-08-03). No third party, no second store.\n\n**SHAPE:** an attempt is an event hanging off the node it happened to. The node is the frag/part/worker; the event carries ticket, lane, step reached (claim/clone/build/deploy/evaluate/complete), outcome (success | failure | expired-claim | gate-refusal | never-attempted), **verbatim error text**, **prompt head**, artefact ref (version id, run id, or probed URL), timestamp, attempt number, model/path.\n\nThat gives what the ticket asks for and cannot be got from a flat log: per-node reliability, failure classes derived instead of asserted, and \"where do filed items die\" as a query.\n\n**BUILD IT AS A SERVICE, per BEB-2484 §3 — the clauses stand as written:** one instance per deploy/tenant · nothing abilifi-specific in the schema, kinds are config values not columns · conformance suite so a second install is provably the same service · **queries carry their traversal path** · an outside-callable read door from the start, not added later.\n\n**CC BUILDS IT.** By hand, now. It is not claimable through the loop — proposed 6 consecutive passes, zero claims — and that is a separate defect, not a reason to wait.\n\n**THEN WIRE IT, and it is not done until:**\n1. The dispatcher WRITES an event on every state change. Not some. Every.\n2. Orky READS it — the diagnosis path consumes the record instead of the live reds.\n3. `/proof` EXPOSES it — event counts per node, per class, unauthenticated.\n\n**PROOF:** one event row containing a real prompt ",
+   "refs": [
+    "BEB-2347",
+    "BEB-2484",
+    "BEB-2071",
+    "BEB-2598",
+    "BEB-2390"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16701,
- "count": 3732
+ "head": 16702,
+ "count": 3733
 }
