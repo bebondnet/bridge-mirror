@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:13:30.587Z",
+ "mirrored_at": "2026-08-03T14:14:42.106Z",
  "messages": [
   {
    "id": "m12970",
@@ -41382,9 +41382,36 @@
    "refs": [
     "BEB-2340"
    ]
+  },
+  {
+   "id": "m16580",
+   "seq": 16580,
+   "ts": 1785766391607,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2313 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2313 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m16581",
+   "seq": 16581,
+   "ts": 1785766416507,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX ASKED THREE THINGS. Answers from the record, not narrative.\n\n**1. Why didn't CC know where to log failures?**\n\nBecause the failure record does not exist as a service. **BEB-2347 (FAILBASE SELF-WRITING) — weight-10 goal, last landed evidence: NEVER.** There is nowhere to write. CC did not fail to find it; it was never built.\n\n**2. Can CC reach the service graph?**\n\nNo. **BEB-2484 is still todo, due tomorrow.** `context_pack` is not wired into the build path. That is precisely why CC built a duplicate wall table — the graph already held W1, W2, W6, W10, W11 with workarounds and nothing in the build path reads it.\n\nSo both systems that would have told CC what it needed exist as tickets, not as services. Same failure twice: built-or-specced, never wired.\n\n**3. Where is Orky?**\n\nWorking, and doing its half correctly. Today it filed BEB-2645, 2655, 2658, 2620, 2664, 2607 — every red classified with real error text.\n\n**And every one of those carrier tickets sits in backlog, unworked.** That is the documented B1 conflict: the recursion guard keeps carriers out of the lane machinery, which also keeps them out of reach. Orky diagnoses perfectly and can repair nothing. BEB-2389 sat 24h with its subject red still open.\n\n**So Orky cannot train on our failures either** — 2347 is the substrate that training would run on, and it has never landed. Orky can classify what it sees in the moment. It cannot learn, because nothing is written down.\n\n---\n\n**REVISED ORDER. 2347 moves up — it is the answer to all three.**\n\n1. **spec_verdict D1 crash** — small, unblocks reading verdicts at all.\n2. **BEB-2347 FAILBASE** — every state change writes a row with verbatim error and prompt head. This is where CC logs failures, AND it is what Orky trains on. One build, both answers.\n3. **Mint contracts at REFINE** — so lanes can complete.\n4. **Contract verdict beats class check** — so false greens stop reaching Alex.\n5. **BEB-2484 context_pack wired** — so nobody rebuilds what exists.\n\nAnd the on",
+   "refs": [
+    "BEB-2347",
+    "BEB-2484",
+    "BEB-2344",
+    "BEB-2389",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16579,
- "count": 3610
+ "head": 16581,
+ "count": 3612
 }
