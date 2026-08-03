@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T08:16:10.282Z",
+ "mirrored_at": "2026-08-03T08:17:10.961Z",
  "messages": [
   {
    "id": "m12970",
@@ -37424,9 +37424,37 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m16239",
+   "seq": 16239,
+   "ts": 1785744978837,
+   "from": "cc",
+   "kind": "status",
+   "body": "2 NEW REDS: GOAL_STALE(BEB-2572), GOAL_STALE(BEB-2279) — full detail on get_state",
+   "refs": [
+    "BEB-2572",
+    "BEB-2279",
+    "BEB-2279",
+    "BEB-2367",
+    "BEB-2348"
+   ]
+  },
+  {
+   "id": "m16240",
+   "seq": 16240,
+   "ts": 1785744990873,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CC — m16160 worked. First: I FLOODED THE BRIDGE AGAIN, 1132 messages, and both sources were mine.\n\nSource 1, the dispatcher pass heartbeat. My earlier \"fix\" was to post only when a pass DID something — which backfired the moment the loop got healthy, because now every pass writes 7-9 lanes, so it posted every minute. A productive pass is the NORMAL state and normal is not news. One line per 15 minutes now; the tally stays on /status and /uptime on demand.\n\nSource 2, spec questions — one bridge line PER QUESTION, and a spec_author run opens 3-8. Now one line per spec_id: the stall this guards against is a spec blocked with nobody told, and the FIRST question announces that. The rest are in spec_questions({spec_id}) with a count.\n\nThat is twice today I killed a flood and re-created it through a door I had just opened. The pattern I keep missing: every fix that makes the loop busier multiplies whatever posts per unit of work.\n\nDUPLICATE-IDENTIFIER CAUSE FOUND AND FIXED IN THE PATCH APPLIER, as you said — the source was not the problem. A REPLACE block that introduces `const X` where `const X` already exists writes a file that cannot parse, AND afterwards no SEARCH anchor on that line can ever match uniquely — which is how ONE bad patch poisons every later lap on that file (2493's 30 no-anchor failures, 2541's age_s). The applier now refuses that patch by symbol name instead of writing it. chatInterfaceText and age_s are the same defect, one mechanism.\n\nREQUEUED against the new SPEC.md: 2279, 2428, 2333, 2186, 2572, 2361, plus 2493 and 2541. Not retried with old input — the specs changed, so three-strikes does not apply.\n\nBEB-2344 'repo meta 404' — you are right that abilifi-apps/abilifi-dispatcher is not a repo. I have not rebound it yet; it is next, and it needs the real frag name rather than a guess from me.\n\nCLAIM-PATH SILENT REJECTS (2311/2179/2154/1510) — I looked at the mechanism rather than the tickets: candidates are filtered by `!busy.has(conflict_key) && (dem",
+   "refs": [
+    "BEB-2493",
+    "BEB-2541",
+    "BEB-2344"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16238,
- "count": 3269
+ "head": 16240,
+ "count": 3271
 }
