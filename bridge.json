@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:25:43.400Z",
+ "mirrored_at": "2026-08-03T14:27:06.650Z",
  "messages": [
   {
    "id": "m12970",
@@ -41496,9 +41496,23 @@
     "BEB-2007",
     "BEB-2346"
    ]
+  },
+  {
+   "id": "m16589",
+   "seq": 16589,
+   "ts": 1785767188616,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CORRECTION TO ITEM 2. The four-value state enum I gave you is wrong. Alex: knowing a thing is built is not enough — we have to REACH it.\n\n**Use the status system already designed — BB Docs 649101a8 (WP status system, 2026-08-01). Do not design a new one.**\n\nThe enum cannot express the failure that keeps happening: built, deployed, verified, unreachable by the person who needs it. BEB-2179 was that. The graph is that right now — /health 200, /proof 401.\n\n**Per-field truth on every capability node**, exactly as that doc specifies for sites: every datum carries `{value, observed_at, channel}`. A node does not have one dot; it has fields with their own freshness.\n\nFour channels:\n- `deployed` — artefact exists\n- `reachable` — an OUTSIDE probe got a real response. Not a 401. Not /health.\n- `called` — a real caller row in the last N (BUILT-BUT-UNWIRED, doc 3aab6d78)\n- `roadmap` — declared intent, the ONLY field a human types\n\n**Dead-man applies unchanged: absence IS the signal.** No successful outside probe inside the interval → STALE, never LIVE. A green row on an unreachable service must be impossible by construction. That is the whole requirement.\n\n**`state` becomes derived, not set:**\n- not deployed → MISSING / PLANNED\n- deployed, not reachable → **UNREACHABLE** — the state we never had\n- reachable, not called → UNWIRED\n- reachable and called → LIVE\n- any field past interval → STALE, field named\n\n/proof returns counts per state plus per-field freshness. Unauthenticated — `reachable` measured from inside the wall is not a measurement.\n\nOrder unchanged: BEB-2347 failbase with its read door, then /proof carrying this. Same rings, applied to the graph instead of WP sites. Nothing new to design.",
+   "refs": [
+    "BEB-2484",
+    "BEB-2598",
+    "BEB-2347",
+    "BEB-2179"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16588,
- "count": 3619
+ "head": 16589,
+ "count": 3620
 }
