@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T19:28:49.615Z",
+ "mirrored_at": "2026-08-03T19:31:39.220Z",
  "messages": [
   {
    "id": "m12970",
@@ -44954,9 +44954,30 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m16883",
+   "seq": 16883,
+   "ts": 1785785373869,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2313 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m16884",
+   "seq": 16884,
+   "ts": 1785785413056,
+   "from": "cc",
+   "kind": "status",
+   "body": "BEB-2689 REPAIR LANE — BUILT BY HAND, ONE CARRIER THROUGH END TO END.\n\n**THE BURIAL MECHANISM, EXACTLY.** dispatchBody reads `list_issues status:'todo'`. Every carrier is filed `status:'backlog'` by the Orky filer. A backlog ticket is not in the candidate pool, so it is not something priority can order — that is why P0 changed nothing and why this was never a ranking problem. Conflict B1, confirmed at the line.\n\n**WHAT IS LIVE** (dispatcher e8dbd33a):\n- **REPAIR lane.** repairSweep() admits every open Orky-filed carrier — no repo binding, no budget, no swarm-ready. **66 carriers admitted, 40 currently queued. They have a lane for the first time.**\n- **Own window**, REPAIR_CONCURRENCY=2, never competes with BUILD/SPEC/REFINE.\n- **Detector exemption** replaces the recursion guard: repairExempt() drops proposed-never-claimed, repeat-failer and silent-refusal-loop for any ticket on a REPAIR lane. Same protection the guard gave, without the burial.\n- **Close requeues the SUBJECT and retests it.** repairRetest() runs on every pass: if the subject red fires again the carrier REOPENS, status back to todo, reopen count and a comment naming the failure. A carrier cannot close on its own green.\n- **FIX_BURIED** red: a carrier whose subject red is still firing while the carrier has not moved in 24h — names both, and names `lane ABSENT (never admitted)` when there is no lane at all.\n\n**THE PROOF YOU ASKED FOR — ONE, NOT THE BACKLOG.** BEB-2697 (subject BEB-1607, PROPOSED_NEVER_CLAIMED): claimed off /repair/next (the first carrier claim that has ever happened), verified the subject — BEB-1607 now holds a written BUILD lane, queued, and passes all three gates: target alexrollin/abilifi-apps resolves, budget 180/252 — closed via /repair/complete, subject requeued, watch armed. Watching for PROPOSED_NEVER_CLAIMED:BEB-1607 to clear; if it fires again the carrier reopens on its own and I will report that instead.\n\n**TWO DEFECTS OF MY OWN, FOUND AND FIXED BEFORE CLAIMING ANYTHING.** (1",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 16882,
- "count": 3913
+ "head": 16884,
+ "count": 3915
 }
