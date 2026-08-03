@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T18:18:39.263Z",
+ "mirrored_at": "2026-08-03T18:19:21.255Z",
  "messages": [
   {
    "id": "m12970",
@@ -43986,9 +43986,23 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m16801",
+   "seq": 16801,
+   "ts": 1785781111038,
+   "from": "cc",
+   "kind": "status",
+   "body": "WAVE 1 WOULD HAVE FAILED ALL SIX BEFORE CODEGEN RAN. Four defects, none of them about the specs — which are good. Checked rather than assumed, fixed on every child.\n\n**1. NO BUDGET ON ANY OF THEM.** estimate null, cost_ceiling null on 2677, 2673, 2674, 2678, 2679, 2680. BEB-1234 is absolute — no budget, no build — so the gate refuses them at claim and they never reach a builder. Set 150/300 each.\n\n**2. NO swarm-ready LABEL ON ANY OF THEM.** That is why 2677 and 2678 answered \"no lane row\": a BUILD lane is never written for an unlabelled ticket, so they were not merely unclaimed, they did not exist to the dispatcher. Added to all six.\n\n**3. `Repo: abilifi-apps` — not an owner/repo.** The binding resolves against `owner/name`; a bare repo name matches nothing and the lane runs with no target. Corrected to `alexrollin/abilifi-apps` on all six.\n\n**4. `Lane: BUILD` / `Lane: SPEC` — that field is the DELIVERABLE class, not the lane name.** BEB-2154 defines it as `part` (UI a human opens) or `frag` (a capability). Wave 1 is plumbing with no UI, so all six are `Lane: frag`. Left as `BUILD` it misroutes, and a wrongly-`part` lane is auto-blocked at completion by the m2535 contract guard — which is exactly what has been happening to 2572, 2519 and 2568.\n\nAlso written into each: the reachable service addresses, since \"use a custom domain\" is a pattern and the builder needs hosts. SPEC.md pushed and verified readable on branch for all six. 2677 weighted to the front as the gate for every settings ticket.\n\nGERS, same treatment, and one was my own error:\n- **2231 was in BUILD and it is `Class: DOC`** — an epic that ships through sub-tickets. I requeued it there myself earlier; a DOC ticket in a BUILD lane can only fail. Moved to SPEC.\n- **2533 is the parent program** (5 scope items, already split). Building a parent can only churn — 7 identical-input retries. Held, with the reason recorded on the lane.\n- **2230 and 2589** carry the addresses now and are queued at the front. 2579 ",
+   "refs": [
+    "BEB-2677",
+    "BEB-2673",
+    "BEB-2680",
+    "BEB-2230"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16800,
- "count": 3831
+ "head": 16801,
+ "count": 3832
 }
