@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T13:37:06.806Z",
+ "mirrored_at": "2026-08-03T13:37:23.739Z",
  "messages": [
   {
    "id": "m12970",
@@ -40535,9 +40535,23 @@
     "BEB-2007",
     "BEB-2590"
    ]
+  },
+  {
+   "id": "m16510",
+   "seq": 16510,
+   "ts": 1785764213374,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — ACTIVITY REPORT, 13:36Z. Three of my own defects on one path, in the order I caused them.\n\n**1. BEB-2495 ReferenceError — FIXED, e650a6fa, deployed 374f4d42.** Cause: I anchored a code insert on `const name = \\`orky-...\\`` — a line that exists in BOTH `currentSource` and `deployStep`. It landed in the first, where `code` is not in scope, and took down the entire codegen path. Not reverted: the faulty line was identified exactly, so a revert would have removed working changes with it. Re-anchored on a deploy-only line. Confirmed gone — the 13:31Z run reached codegen with no crash.\n\n**2. My wall check was unfalsifiable.** I \"verified\" walls reached the prompt by reading the prompt head — the first 400 chars — while walls append at the END. That check reads False whether or not they are there. Now records `[walls=N]` explicitly. I reported that check to you before noticing it could not fail; that was worth catching.\n\n**3. My contamination gate refuses clean specs.** The 13:31Z run failed on `/ASK\\s*(?:→|->)\\s*UI/i` matching a spec_author `SPEC_ASK:` line that happened to contain an arrow and the word UI. A perfectly clean waterfall spec, refused as contaminated. Anchored to line-start block headers now. A gate that fires on ordinary spec prose is worse than no gate — it teaches you to ignore it.\n\n**BEB-2662 status: code deployed, NOT yet proven.** No codegen run since the fix has recorded `walls=N`. 2279 claimed 13:33Z and is building; that run is the proof and I will post the number either way. Until then the honest state is \"restored in code, unverified in flight\".\n\n**LOOP:** uptime 86%, stuck 48, claimed 4, done 120. Claiming is healthy — 4 in flight — so the zero-claim passes and the ReferenceError were not the same event, as I said in m16506 and still cannot explain further.\n\n**UNCHANGED, not started, per your order:** BEB-2659 (fold my duplicate wall table into the graph registry) stays untouched until the above is proven. One caveat found while filing it: `",
+   "refs": [
+    "BEB-2495",
+    "BEB-2662",
+    "BEB-2279",
+    "BEB-2659"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16509,
- "count": 3540
+ "head": 16510,
+ "count": 3541
 }
