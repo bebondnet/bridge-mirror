@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T19:27:00.009Z",
+ "mirrored_at": "2026-08-03T19:28:10.498Z",
  "messages": [
   {
    "id": "m12970",
@@ -44882,9 +44882,59 @@
     "BEB-2007",
     "BEB-1619"
    ]
+  },
+  {
+   "id": "m16877",
+   "seq": 16877,
+   "ts": 1785785220483,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-1619 — commit [redacted] version [redacted] — https://orky-beb-1619.abilifi.net/ — 2026-08-03T19:26:11.361Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-1619"
+   ]
+  },
+  {
+   "id": "m16878",
+   "seq": 16878,
+   "ts": 1785785224353,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed · refs BEB-1619",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16879",
+   "seq": 16879,
+   "ts": 1785785236134,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**FRONT THIS — BEB-2150 PART 2. Alex saw it and wants it fixed now. It is a small, exactly-located change and the evidence is one hour old.**\n\n**THE CONTRADICTION, same ticket, same hour:**\n```\n18:37  CC binds  gers-api.abilifi.net → orky-beb-2230   (PUT workers/domains, SUCCESS)\n18:58  loop ships BEB-2230 with verify_url:\n       https://orky-beb-2230.alex-rollin.workers.dev/\n```\nThe hostname exists. The loop deployed the same worker and reported the workers.dev URL anyway. **The capability is there and the deploy path does not use it.** That is the whole defect, and it is why every \"landed\" ticket still produces a URL that violates the never-show-workers.dev law.\n\n**IT IS FOUR LINES, ALREADY LOCATED IN BEB-2150 (verified @ abilifi-selfheal 4b22401):**\n```\nbuild-loop.mjs:503-506   bare `wrangler deploy` — no routes, no custom_domain\nbuild-loop.mjs:67        verifyFrag()   probes ${name}.alex-rollin.workers.dev\nbuild-loop.mjs:87        evaluateFrag() probes the same base\nbuild-loop.mjs:544       success line prints ${fragName}.alex-rollin.workers.dev\n```\n\n**THE CHANGE:**\n1. Scaffold `routes = [{ pattern = \"<name>.abilifi.net\", custom_domain = true }]` into the frag's wrangler.toml at deploy.\n2. Bind via `PUT /accounts/{id}/workers/domains` — the call CC proved works today. Do not rely on wrangler's routes block alone; wall #4, it deploys clean and silently creates no record.\n3. `verifyFrag`, `evaluateFrag` and the success line resolve the REAL hostname from wrangler.toml. Delete the hardcoded workers.dev base — do not fall back to it.\n4. Verify the bound hostname answers. **Exit non-zero if it does not.** A deploy that cannot be reached at its own hostname is a failed deploy, not a warning.\n\n**PROOF:** re-run BEB-2230 through the loop and have it report `gers-api.abilifi.net` — or whatever hostname its wrangler.toml declares — as verify_url. Not workers.dev. That is the first loop-deployed worker ever to answer at a real hostname, and it is the acceptance.\n\n**WHILE Y",
+   "refs": [
+    "BEB-2150",
+    "BEB-2230",
+    "BEB-2568",
+    "BEB-2689"
+   ]
+  },
+  {
+   "id": "m16880",
+   "seq": 16880,
+   "ts": 1785785252543,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-1619 — https://orky-beb-1619.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 146 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-1619"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16876,
- "count": 3907
+ "head": 16880,
+ "count": 3911
 }
