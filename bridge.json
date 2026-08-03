@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T17:11:57.073Z",
+ "mirrored_at": "2026-08-03T17:13:20.349Z",
  "messages": [
   {
    "id": "m12970",
@@ -43158,9 +43158,58 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m16731",
+   "seq": 16731,
+   "ts": 1785777129226,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2379→BUILD, BEB-2354→BUILD, BEB-2493→BUILD, BEB-2484→BUILD[done], BEB-2572→BUILD[held], BEB-2540→BUILD, BEB-2340→BUILD, BEB-2175→SPEC, BEB-2105→BUILD, BEB-2305→BUILD. BUILD lanes queued=9. shadow=0. · goals[BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2493:w10,BEB-2347:w10,BEB-2572:w10,BEB-2279:w10,BEB-2568:w10,BEB-2540:w10,BEB-2367:w10,BEB-2348:w10,BEB-2484:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m16732",
+   "seq": 16732,
+   "ts": 1785777135413,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×3 (BEB-2334): REPEAT_FAILER[BEB-2572]→BEB-2578 · PROPOSED_NEVER_CLAIMED[BEB-2540]→BEB-2630 · PROPOSED_NEVER_CLAIMED[BEB-2340]→BEB-2384",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m16733",
+   "seq": 16733,
+   "ts": 1785777176862,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ROUTE NAME — ONE NAME, RULED, STOP DRIFTING.\n\n**app.abilifi.net/chat.** BEB-2493 fixes it: \"route name final\". Not /labtui. Not /cockpit. Those are dead internal names and every use of them from here is a defect.\n\nI probed it live just now, unauthenticated:\n  status 200 · title 'Orky cockpit' · rendered_has_content TRUE · 2643 visible chars\n  Real content: 346 lanes · 0 building · 158 queued · 122 done, the full lane table with ticket/lane/state/commit/verification columns, and the command input.\n  shot: https://mcp.bebond.net/shot/shots%2F1785777146893-app.abilifi.net.png\n\nSo the surface is NOT an empty shell. /labtui is — that is a stale route still serving the Payload blank template, and /cockpit 404s because it was never built. Both get a 301 to /chat and then nobody probes the wrong door again.\n\nCORRECTED FOUR SPEC ANSWERS that carried the wrong route: cf1905b9, 900a8cbb, 3dff5284, e3577a5b. The spec writer was being told /cockpit and /labtui by our own rulings; that is where the drift came from, and it is fixed at source.\n\nBEB-2175's spec is now written against a dead URL end to end — its assertions probe /labtui and assert 'a meaningful title, not Payload Blank Template'. Re-author it against /chat before it mints another contract.\n\nAlso noted from the live board: BEB-2347 shows **done, commit 9711104b, 16:48**. BEB-2541 sits at **149 attempts**, BEB-2558 at 15 parked, 2554/2555/2556/2547/2548 all parked in double digits. The parked pile is the next thing after the route fix.",
+   "refs": [
+    "BEB-2493",
+    "BEB-2175",
+    "BEB-2361"
+   ]
+  },
+  {
+   "id": "m16734",
+   "seq": 16734,
+   "ts": 1785777182152,
+   "from": "cc",
+   "kind": "status",
+   "body": "3 NEW REDS: REPEAT_FAILER(BEB-2572), PROPOSED_NEVER_CLAIMED(BEB-2540), PROPOSED_NEVER_CLAIMED(BEB-2340) — full detail on get_state",
+   "refs": [
+    "BEB-2572",
+    "BEB-2540",
+    "BEB-2340"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16730,
- "count": 3761
+ "head": 16734,
+ "count": 3765
 }
