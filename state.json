@@ -1,6 +1,6 @@
 {
- "mirrored_at": "2026-08-03T23:33:21.823Z",
- "ts": 1785800001038,
+ "mirrored_at": "2026-08-03T23:34:18.420Z",
+ "ts": 1785800058024,
  "loop": {
   "proposed_total": 455,
   "by_state": {
@@ -34,14 +34,14 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785799987821,
-   "tally": "BEB-2186→BUILD[claimed], BEB-2691→BUILD, BEB-2156→BUILD[claimed], BEB-2279→BUILD[claimed], BEB-2710→BUILD, BEB-2150→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
+   "at": 1785800047333,
+   "tally": "BEB-2150→BUILD, BEB-2691→BUILD, BEB-2186→BUILD[claimed], BEB-2156→BUILD[claimed], BEB-2279→BUILD[claimed], BEB-2710→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -91,6 +91,21 @@
     ]
    },
    {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1785798396088,
+    "detail": "BEB-2691 refused 3× in 30min — LATEST: RESOURCE_FORECAST: declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy token carries zone(read) only  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2691"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "RESOURCE_FORECAST: declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy token carries zone(read) only and no *.abilifi.net wildcard record exists, so hostname assignment is HITL — BEB-2127 hit this live, mid-build, the night before the demo. Discovering this mid-build is what makes it expensive; it is knowable now. | RESOURCE_FORECAST: declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — CC cannot drive Alex's zone; a verify_url on a hostname that does not resolve is dead on arrival and /dispatch/complete auto-blocks on it — BEB-2122 is exactly this, filed as HITL. Discovering this mid-build is what makes it expensive; it is knowable now.",
+     "subject": "BEB-2691"
+    },
+    "fix_ticket": "BEB-2718"
+   },
+   {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785788839244,
@@ -122,7 +137,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785789724924,
-    "detail": "BEB-2691 failing at preflight 7× in 24h — LATEST (08-03T23:32): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2691 failing at preflight 7× in 24h — LATEST (08-03T23:32): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2691"
     ],
@@ -247,8 +262,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785713566176,
-    "detail": "abilifi-dispatcher failing at complete 18× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785716892746,
+    "detail": "abilifi-dispatcher failing at complete 17× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2572"
     ],
@@ -387,15 +402,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785713579907,
-    "detail": "alexrollin/abilifi-apps failing at codegen 297× in 24h — LATEST (08-03T23:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785713703040,
+    "detail": "alexrollin/abilifi-apps failing at codegen 296× in 24h — LATEST (08-03T23:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2311 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2156"
+     "BEB-2311"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n---\ntype: spec\ntitle: ",
-     "subject": "BEB-2156"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2311 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2311"
     }
    },
    {
@@ -443,15 +458,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785713579907,
-    "detail": "alexrollin/abilifi-apps failing at park 257× in 24h — LATEST (08-03T23:29): three-strikes: 18 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785713703040,
+    "detail": "alexrollin/abilifi-apps failing at park 256× in 24h — LATEST (08-03T23:29): three-strikes: 4 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2156"
+     "BEB-2311"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 18 identical-input retries at codegen",
-     "subject": "BEB-2156"
+     "error": "three-strikes: 4 identical-input retries at codegen",
+     "subject": "BEB-2311"
     }
    },
    {
@@ -611,7 +626,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "BEB-2691 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2691"
@@ -625,7 +640,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2710"
@@ -639,7 +654,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "BEB-2150 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2150"
@@ -653,7 +668,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2707"
@@ -667,7 +682,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2685"
@@ -681,7 +696,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2409",
@@ -691,7 +706,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -701,7 +716,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2473",
@@ -721,7 +736,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2515",
@@ -741,7 +756,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2524",
@@ -751,7 +766,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2570",
@@ -761,7 +776,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2573",
@@ -771,7 +786,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785799928530,
+    "since": 1785799988522,
     "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2578",
@@ -781,16 +796,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 17205,
+  "head_seq": 17206,
   "cursor_fable": 12969,
-  "unread_for_fable": 4236,
+  "unread_for_fable": 4237,
   "last": [
-   {
-    "seq": 17201,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER alarm: lease expired on BEB-2689 (attempt 1) — requeued."
-   },
    {
     "seq": 17202,
     "from": "cc",
@@ -814,6 +823,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
+   },
+   {
+    "seq": 17206,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SILENT_REFUSAL: BEB-2691 refused 3× in 30min — LATEST: RESOURCE_FORECAST: declares a s"
    }
   ]
  },
@@ -909,7 +924,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -959,6 +974,21 @@
    ]
   },
   {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1785798396088,
+   "detail": "BEB-2691 refused 3× in 30min — LATEST: RESOURCE_FORECAST: declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy token carries zone(read) only  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2691"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "RESOURCE_FORECAST: declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy token carries zone(read) only and no *.abilifi.net wildcard record exists, so hostname assignment is HITL — BEB-2127 hit this live, mid-build, the night before the demo. Discovering this mid-build is what makes it expensive; it is knowable now. | RESOURCE_FORECAST: declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — CC cannot drive Alex's zone; a verify_url on a hostname that does not resolve is dead on arrival and /dispatch/complete auto-blocks on it — BEB-2122 is exactly this, filed as HITL. Discovering this mid-build is what makes it expensive; it is knowable now.",
+    "subject": "BEB-2691"
+   },
+   "fix_ticket": "BEB-2718"
+  },
+  {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785788839244,
@@ -990,7 +1020,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785789724924,
-   "detail": "BEB-2691 failing at preflight 7× in 24h — LATEST (08-03T23:32): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2691 failing at preflight 7× in 24h — LATEST (08-03T23:32): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2691"
    ],
@@ -1115,8 +1145,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785713566176,
-   "detail": "abilifi-dispatcher failing at complete 18× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785716892746,
+   "detail": "abilifi-dispatcher failing at complete 17× in 24h — LATEST (08-03T15:08): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2572"
    ],
@@ -1255,15 +1285,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785713579907,
-   "detail": "alexrollin/abilifi-apps failing at codegen 297× in 24h — LATEST (08-03T23:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785713703040,
+   "detail": "alexrollin/abilifi-apps failing at codegen 296× in 24h — LATEST (08-03T23:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2311 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2156"
+    "BEB-2311"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n---\ntype: spec\ntitle: ",
-    "subject": "BEB-2156"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2311 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2311"
    }
   },
   {
@@ -1311,15 +1341,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785713579907,
-   "detail": "alexrollin/abilifi-apps failing at park 257× in 24h — LATEST (08-03T23:29): three-strikes: 18 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785713703040,
+   "detail": "alexrollin/abilifi-apps failing at park 256× in 24h — LATEST (08-03T23:29): three-strikes: 4 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2156"
+    "BEB-2311"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 18 identical-input retries at codegen",
-    "subject": "BEB-2156"
+    "error": "three-strikes: 4 identical-input retries at codegen",
+    "subject": "BEB-2311"
    }
   },
   {
@@ -1479,7 +1509,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "BEB-2691 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2691"
@@ -1493,7 +1523,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2710"
@@ -1507,7 +1537,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "BEB-2150 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2150"
@@ -1521,7 +1551,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2707"
@@ -1535,7 +1565,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2685"
@@ -1549,7 +1579,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2409",
@@ -1559,7 +1589,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1569,7 +1599,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2473",
@@ -1589,7 +1619,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2515",
@@ -1609,7 +1639,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2524",
@@ -1619,7 +1649,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2570",
@@ -1629,7 +1659,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2573",
@@ -1639,7 +1669,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785799928530,
+   "since": 1785799988522,
    "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2578",
