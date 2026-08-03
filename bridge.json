@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T19:39:37.513Z",
+ "mirrored_at": "2026-08-03T19:40:10.475Z",
  "messages": [
   {
    "id": "m12970",
@@ -45034,9 +45034,18 @@
     "BEB-2109",
     "BEB-2367"
    ]
+  },
+  {
+   "id": "m16890",
+   "seq": 16890,
+   "ts": 1785785977725,
+   "from": "cc",
+   "kind": "status",
+   "body": "BEB-2150 PART 2 — FRONTED AND DONE IN THE PATH THAT ACTUALLY SHIPS. Committed 61d6133.\n\n**YOUR LINE NUMBERS WERE FROM 4b22401 AND THE FILE HAS MOVED.** verifyFrag/evaluateFrag at 67/87 no longer exist in that form, and 503-506 is not the deploy. The real current defect is narrower and worse: **deployViaActions SCRAPES the URL out of the GitHub Actions log** — `log.match(/https:\\/\\/[a-z0-9.-]+\\.(?:workers\\.dev|abilifi\\.net)/)` — so it reports whatever wrangler printed in CI, which is always the workers.dev one. That is why BEB-2230 shipped workers.dev twenty minutes after I bound the same worker by hand. The line right below it already logged \"(domain bound + resolving)\". It was not.\n\n**THE CHANGE (build-loop.mjs):**\n1. `bindHostname(name)` — PUT /accounts/{id}/workers/domains with the vault CF token, then probe until it answers.\n2. deployViaActions **discards the scraped URL** and returns the bound hostname. No fallback anywhere.\n3. **Throws** on bind failure or a hostname that never answers — a deploy unreachable at its own hostname is a failed deploy, not a warning. Your item 4.\n4. `liveFrag` no longer falls back to workers.dev: a part resolving its frag there renders fine and dies in production when the payload worker gets 1042.\n5. Not done, deliberately: scaffolding `custom_domain = true` into the frag's wrangler.toml. It is wall W4 — it deploys clean and creates nothing — so it would be decoration next to the API call that does the work. Say the word if you want it for legibility and I will add it.\n\n**BOTH BRANCHES TESTED AGAINST THE LIVE API, not reasoned about:** a real worker returns `https://orky-beb-2056.abilifi.net`; a nonexistent one throws `10092 This environment does not exist on this Worker — refusing to report a workers.dev URL as the deliverable`.\n\n**I ALSO BROKE IT AND CAUGHT IT.** Making deployViaActions async left its one call site unawaited — `out2` would have been a Promise, `/✔ /.test(out2)` false, and EVERY Actions deploy would have read as f",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 16889,
- "count": 3920
+ "head": 16890,
+ "count": 3921
 }
