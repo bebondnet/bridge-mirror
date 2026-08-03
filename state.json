@@ -1,20 +1,21 @@
 {
- "mirrored_at": "2026-08-03T16:25:29.050Z",
- "ts": 1785774325936,
+ "mirrored_at": "2026-08-03T16:26:42.494Z",
+ "ts": 1785774400093,
  "loop": {
   "proposed_total": 429,
   "by_state": {
    "queued": 166,
-   "claimed": 0,
+   "claimed": 1,
    "done": 121,
    "held": 10,
-   "parked": 49
+   "parked": 48
   },
   "by_lane": {
    "BUILD": {
+    "claimed": 1,
     "done": 81,
     "held": 10,
-    "parked": 49,
+    "parked": 48,
     "queued": 33
    },
    "REFINE": {
@@ -28,14 +29,21 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785774194725,
-   "tally": "BEB-2299→BUILD, BEB-2346→BUILD[claimed], BEB-2347→BUILD, BEB-2533→BUILD, BEB-2540→BUILD, BEB-2340→BUILD, BEB-2354→BUILD, BEB-2379→BUILD, BEB-2484→BUILD[done], BEB-2156→BUILD"
+   "at": 1785774307671,
+   "tally": "BEB-2346→BUILD, BEB-2493→BUILD, BEB-2347→BUILD, BEB-2533→BUILD, BEB-2540→BUILD, BEB-2340→BUILD, BEB-2354→BUILD, BEB-2379→BUILD, BEB-2484→BUILD[done], BEB-2156→BUILD"
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785774294239,
+    "detail": "claimed=0, queued=167, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785774354240,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -44,7 +52,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785774294239,
+    "since": 1785774354240,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -53,7 +61,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785774294239,
+    "since": 1785774354240,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -96,7 +104,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785774294239,
+    "since": 1785774354240,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -286,7 +294,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785752894328,
-    "detail": "abilifi-mastra failing at park 15× in 24h — LATEST (08-03T16:23): three-strikes: 3 identical-input retries at codegen · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "abilifi-mastra failing at park 15× in 24h — LATEST (08-03T16:23): three-strikes: 3 identical-input retries at codegen",
     "refs": [
      "BEB-2299"
     ],
@@ -328,7 +336,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785751760996,
-    "detail": "abilifi-payload failing at evaluate 3× in 24h — LATEST (08-03T10:29): verify_url not 2xx after 12 probes — last HTTP 404",
+    "detail": "abilifi-payload failing at evaluate 3× in 24h — LATEST (08-03T10:29): verify_url not 2xx after 12 probes — last HTTP 404 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2279"
     ],
@@ -607,22 +615,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 16695,
+  "head_seq": 16697,
   "cursor_fable": 12969,
-  "unread_for_fable": 3726,
+  "unread_for_fable": 3728,
   "last": [
-   {
-    "seq": 16691,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED REPEAT_FAILER: n/a failing at deploy 3× in 24h — LATEST (08-03T16:17): codeLen: 3787 d"
-   },
-   {
-    "seq": 16692,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=168, 2 passes, max_concurrent=6"
-   },
    {
     "seq": 16693,
     "from": "cc",
@@ -640,6 +636,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane BLOCKED: BEB-2346 — mastra tick deploy FAILED: repo meta 404. First of thi"
+   },
+   {
+    "seq": 16696,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2493→BUILD, BEB-2299→BUILD[held],"
+   },
+   {
+    "seq": 16697,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=167, 2 passes, max_concurrent=6"
    }
   ]
  },
@@ -733,9 +741,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785774294239,
+   "detail": "claimed=0, queued=167, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785774354240,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -744,7 +759,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785774294239,
+   "since": 1785774354240,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -753,7 +768,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785774294239,
+   "since": 1785774354240,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -796,7 +811,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785774294239,
+   "since": 1785774354240,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -986,7 +1001,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785752894328,
-   "detail": "abilifi-mastra failing at park 15× in 24h — LATEST (08-03T16:23): three-strikes: 3 identical-input retries at codegen · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "abilifi-mastra failing at park 15× in 24h — LATEST (08-03T16:23): three-strikes: 3 identical-input retries at codegen",
    "refs": [
     "BEB-2299"
    ],
@@ -1028,7 +1043,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785751760996,
-   "detail": "abilifi-payload failing at evaluate 3× in 24h — LATEST (08-03T10:29): verify_url not 2xx after 12 probes — last HTTP 404",
+   "detail": "abilifi-payload failing at evaluate 3× in 24h — LATEST (08-03T10:29): verify_url not 2xx after 12 probes — last HTTP 404 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2279"
    ],
