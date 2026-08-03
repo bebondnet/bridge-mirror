@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T16:46:37.204Z",
+ "mirrored_at": "2026-08-03T16:47:36.270Z",
  "messages": [
   {
    "id": "m12970",
@@ -42923,9 +42923,21 @@
     "BEB-2309",
     "BEB-2305"
    ]
+  },
+  {
+   "id": "m16711",
+   "seq": 16711,
+   "ts": 1785775584516,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BUILD THE QUERY SHAPES. NOW. Not documented, not commented on a ticket — in the worker, callable.\n\nTarget: `abilifi-graph`. D1, recursive CTEs. No vendor.\n\n**FIVE CALLS:**\n```\nrelated(start)\nexpand(start, max_depth, direction, filters)\nneighborhood(start, radius)\npath(start, target, max_depth)\nconnection([a, b, ...], max_depth)\n```\n\nOne recursive CTE pattern serves all five — seed row, recursive join on edges, depth counter, cycle guard on visited ids. `path` and `connection` are the same walk with a target predicate and an early exit. This is one query written once and parameterised, not five implementations.\n\n**EVERY RESULT:** `{node, score, relationships[], path[]}`. The `path` array is the actual hop sequence the CTE took, carried out of the query, not reconstructed after. A bare list fails this.\n\n**NO ROUTE = THE NAMED STOP.** `path` and `connection` with no route return the last node reached and the edge kind that was missing. Never an empty array, never \"not found\". The traversal already knows where it died — return it.\n\n**PROSE ENTRY:** `resolve(text)` — FTS over node names and aliases, top hit becomes the start node, then expand. The response names the resolved start node so the caller can see what it walked from. No caller is ever required to know a node id.\n\n**EXPOSED THROUGH `/proof`** — unauthenticated — and proxied on mcp.bebond.net so I can call them from chat.\n\n**PROOF, all four, posted verbatim:**\n1. `related(<a real node id>)` — the response, with `path[]` populated.\n2. `connection([<node>, <node>])` where a route EXISTS — the hops.\n3. `connection([<node>, <node>])` where it does NOT — the named stopping point.\n4. `resolve(\"<some prose>\")` — the resolved start node named.\n\nZero nodes is an acceptable state and the calls must still answer correctly against an empty graph. They must not 500 and must not return health as state.\n\nThis is `possibility(intent)` and it replaces a hand-maintained table. Build it.",
+   "refs": [
+    "BEB-2484",
+    "BEB-2598"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16710,
- "count": 3741
+ "head": 16711,
+ "count": 3742
 }
