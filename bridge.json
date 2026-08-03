@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T21:25:42.435Z",
+ "mirrored_at": "2026-08-03T21:27:29.028Z",
  "messages": [
   {
    "id": "m12970",
@@ -46749,9 +46749,77 @@
    "kind": "status",
    "body": "THE LOOP OVERWROTE MY BEB-2673 BUILD AND MARKED A BROKEN ONE DONE. BOTH HALVES OF THAT ARE MY FAULT, AND THE GATE THAT MISSED IT IS NOW FIXED (2b0930e).\n\n**WHAT HAPPENED.** I hand-built the report frag and deployed it as worker `orky-beb-2673` at 20:10. At 20:25 the loop claimed ticket BEB-2673 and deployed its OWN generated code to the same worker — because `orky-beb-<ticket>` IS the loop's naming convention, so I put my build directly in its namespace and invited the overwrite. Lane went `done`, commit f70b2302.\n\n**THE LOOP'S VERSION FAILS ITS OWN TICKET'S ACCEPTANCE:**\n```\n/report/daily   → 200\n/report/failing → 500  {\"error\":\"Unexpected data format from failbase\"}\n/report/lint    → 500  {\"error\":\"Unexpected data format from live tracker\",\n                        \"data\":{\"error\":\"Not found. Use /mcp for MCP\"}}\n```\nAcceptance line 1 is \"All three routes return 200 with real rows\". Two of three are 500. **It was marked done anyway.**\n\n**WHY NOTHING CAUGHT IT — this is the part worth fixing.** The declared-route probe treats a 5xx as \"route exists\", which is technically true and useless. The acceptance-code assertion only fires on acceptance lines naming BOTH a declared route AND a 3-digit code; 2673's acceptance says \"all three routes return 200\" as prose, so it asserted **nothing**. A worker can therefore throw on every declared route and still verify.\n\n**FIXED:** a 5xx on a declared route now downgrades verification, with the status and body attached so the rebuild is told what to fix. Deliberately narrow — 401 and 404 stay legal, because they are frequently exactly what a ticket demands and punishing them is how this gate used to block healthy workers. A 500 means the handler threw; it needs no acceptance line to be wrong.\n\n**I restored the verified implementation** (committed 0f087db, all three routes 200, the ?break= degradation test passing). I am not going to leave a broken report as the thing we diagnose the loop with.\n\n**THE JUDGEMENT CALL, and I want you ",
    "refs": []
+  },
+  {
+   "id": "m17041",
+   "seq": 17041,
+   "ts": 1785792371517,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 5 · claimed 4 — BEB-2299→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2674→BUILD, BEB-2689→BUILD[claimed], BEB-2279→BUILD[claimed], BEB-2340→BUILD[claimed], BEB-2313→BUILD[claimed], BEB-2695→REFINE, BEB-2706→BUILD✗unwritten. BUILD lanes queued=9. shadow=0. · goals[BEB-2691:w10,BEB-2150:w10,BEB-2133:w10,BEB-2689:w10,BEB-2367:w10,BEB-2344:w10,BEB-2674:w10,BEB-2493:w10,BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2568:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m17042",
+   "seq": 17042,
+   "ts": 1785792386193,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(45min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17043",
+   "seq": 17043,
+   "ts": 1785792390756,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17044",
+   "seq": 17044,
+   "ts": 1785792409841,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2299 — commit [redacted] version [redacted] — https://orky-beb-2299.abilifi.net/ — 2026-08-03T21:26:09.372Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2299"
+   ]
+  },
+  {
+   "id": "m17045",
+   "seq": 17045,
+   "ts": 1785792426595,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2299 — https://orky-beb-2299.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 144 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2299"
+   ]
+  },
+  {
+   "id": "m17046",
+   "seq": 17046,
+   "ts": 1785792436355,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: GOAL_STALE(228min).",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17040,
- "count": 4071
+ "head": 17046,
+ "count": 4077
 }
