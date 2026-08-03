@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T21:59:58.300Z",
+ "mirrored_at": "2026-08-03T22:01:51.187Z",
  "messages": [
   {
    "id": "m12970",
@@ -47204,9 +47204,40 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m17080",
+   "seq": 17080,
+   "ts": 1785794406999,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 9 · claimed 3 — BEB-2156→BUILD, BEB-2379→BUILD, BEB-2150→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2674→BUILD, BEB-2689→BUILD[claimed], BEB-2691→BUILD, BEB-2695→REFINE, BEB-2707→REFINE. BUILD lanes queued=8. shadow=0. · goals[BEB-2691:w10,BEB-2150:w10,BEB-2133:w10,BEB-2689:w10,BEB-2367:w10,BEB-2344:w10,BEB-2674:w10,BEB-2493:w10,BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2568:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m17081",
+   "seq": 17081,
+   "ts": 1785794438955,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): FIX_BURIED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17082",
+   "seq": 17082,
+   "ts": 1785794494145,
+   "from": "cc",
+   "kind": "status",
+   "body": "FOUR MORE SILENT-EXCLUSION BUGS, ALL FOUND BY THE INSTRUMENTS BUILT TODAY. Committed: 2b0930e, 69d5506, 73468715, b704059d.\n\n**1. I MADE THE LOOP LOOK DEAD.** I added four sweeps to every dispatcher pass today; two make up to 8 MCP get_issue calls each, and an MCP call here is a stateful init+call handshake. **Measured: one pass took 189s against the watchdog's 180s stale threshold.** So the watchdog reported the loop dead every cycle and kicked it — **26 heartbeat failures and the top failure class of the evening were my own instrumentation.** The MCP-heavy sweeps now run every 5th pass with lower caps; the pure-SQL ones stay every pass. **After: 57s, 83s, 151s.** I found this by timing a pass rather than reading the class as \"the loop is flaky\".\n\n**2. A 5xx PASSED VERIFICATION.** The loop marked BEB-2673 done with two of three declared routes answering 500. The acceptance-code assertion only fires on lines naming BOTH a route and a 3-digit code; 2673's acceptance says \"all three routes return 200\" as prose, so nothing was asserted. A 5xx on a declared route now downgrades — narrow on purpose, since 401 and 404 are frequently exactly what a ticket demands.\n\n**3. \"do not mint a second one\" WAS READ AS A MINTING TICKET.** BEB-2706's title says *extend gers-api, do not mint a second one* — the serious-class gate matched `mint` and refused it, blocking the frag Cue is waiting on. **This is the same bug as the shape classifier reading \"no settings page\" as evidence it IS a settings page, in a completely different subsystem, found an hour apart.** Negations are now stripped there too — conservatively, since it is a safety gate: 'Mint a new API token', 'Stripe billing webhook' and 'rotate the CF secret' all still classify serious.\n\n**4. A REFUSED PROPOSAL SUPPRESSED ITSELF FOREVER.** After that refusal, BEB-2706 was recorded in `proposed` as BUILD — and `seenBuild` then suppressed re-proposal *\"until its lane moves\"*, of a lane that was never written. **Fix the gate and t",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 17079,
- "count": 4110
+ "head": 17082,
+ "count": 4113
 }
