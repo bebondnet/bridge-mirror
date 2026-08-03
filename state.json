@@ -1,21 +1,22 @@
 {
- "mirrored_at": "2026-08-03T16:09:26.502Z",
- "ts": 1785773364405,
+ "mirrored_at": "2026-08-03T16:10:43.862Z",
+ "ts": 1785773441529,
  "loop": {
   "proposed_total": 429,
   "by_state": {
-   "queued": 165,
-   "claimed": 0,
+   "queued": 163,
+   "claimed": 2,
    "done": 121,
    "held": 13,
    "parked": 47
   },
   "by_lane": {
    "BUILD": {
+    "claimed": 2,
     "done": 81,
     "held": 13,
     "parked": 47,
-    "queued": 32
+    "queued": 30
    },
    "REFINE": {
     "queued": 115
@@ -28,14 +29,21 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785773312233,
-   "tally": "BEB-2379→BUILD, BEB-2354→BUILD, BEB-2340→BUILD, BEB-2540→BUILD, BEB-2572→BUILD, BEB-2347→BUILD, BEB-2484→BUILD[done], BEB-2186→BUILD, BEB-2533→BUILD, BEB-2346→BUILD"
+   "at": 1785773351589,
+   "tally": "BEB-2379→BUILD[claimed], BEB-2354→BUILD, BEB-2340→BUILD, BEB-2540→BUILD, BEB-2572→BUILD, BEB-2347→BUILD, BEB-2484→BUILD[done], BEB-2186→BUILD, BEB-2533→BUILD, BEB-2346→BUILD"
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785773334240,
+    "detail": "claimed=0, queued=165, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785773394234,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -44,7 +52,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -53,7 +61,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -96,7 +104,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -607,7 +615,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "BEB-2572 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2572"
@@ -621,7 +629,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "BEB-2347 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2347"
@@ -635,7 +643,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "BEB-2186 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2186"
@@ -649,7 +657,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "BEB-2533 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2533"
@@ -663,7 +671,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785773334240,
+    "since": 1785773394234,
     "detail": "BEB-2346 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2346"
@@ -677,16 +685,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 16682,
+  "head_seq": 16683,
   "cursor_fable": 12969,
-  "unread_for_fable": 3713,
+  "unread_for_fable": 3714,
   "last": [
-   {
-    "seq": 16678,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: REPEAT_FAILER(2585min)."
-   },
    {
     "seq": 16679,
     "from": "cc",
@@ -710,6 +712,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 · wrote 9 · claimed 0 — BEB-2379→BUILD, BEB-2354→BUILD, BEB-2"
+   },
+   {
+    "seq": 16683,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=165, 2 passes, max_concurrent=6"
    }
   ]
  },
@@ -803,9 +811,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785773334240,
+   "detail": "claimed=0, queued=165, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785773394234,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -814,7 +829,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -823,7 +838,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -866,7 +881,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -1377,7 +1392,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "BEB-2572 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2572"
@@ -1391,7 +1406,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "BEB-2347 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2347"
@@ -1405,7 +1420,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "BEB-2186 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2186"
@@ -1419,7 +1434,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "BEB-2533 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2533"
@@ -1433,7 +1448,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785773334240,
+   "since": 1785773394234,
    "detail": "BEB-2346 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2346"
