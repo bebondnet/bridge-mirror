@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T14:42:13.488Z",
+ "mirrored_at": "2026-08-03T14:43:10.912Z",
  "messages": [
   {
    "id": "m12970",
@@ -41718,9 +41718,45 @@
     "BEB-2109",
     "BEB-2313"
    ]
+  },
+  {
+   "id": "m16607",
+   "seq": 16607,
+   "ts": 1785768122639,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(44min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m16608",
+   "seq": 16608,
+   "ts": 1785768126721,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m16609",
+   "seq": 16609,
+   "ts": 1785768159027,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX: the probe should test with a LOGGED-IN link. Correct, and half of it already exists.\n\n**`screenshot_url` already takes `aj`** — \"pass aj to render an authenticated abilifi surface (e.g. the labtui cockpit behind sign-in).\" That capability is built.\n\n**`contract_run` does NOT.** Its signature is `(contract_id, url)`. No session.\n\nSo every contract verdict we have is an ANONYMOUS probe. That is the hole:\n\n- A surface can verify anonymously and still bounce Alex to sign-in. **That is BEB-2179 exactly** — built, verified, unreachable by him, because of a cross-subdomain cookie nobody probed for.\n- f00dfbfe VERIFIED on app.abilifi.net/chat today was an anonymous render. It proves the page renders to the public. It does NOT prove Alex reaches it, and it cannot, as built.\n- Anything behind auth is currently untestable by contract, which is most of the estate.\n\n**Carry the session into `contract_run`** — same parameter, same handling as `screenshot_url` already does. Then a contract probes the surface the way the person actually arrives at it.\n\n**Use a scoped test session, not Alex's own.** The session-handoff pattern is already designed on BEB-2270 — a signed link that opens already logged in, no password screen. Same mechanic, machine-held, revocable, its own identity so a leaked probe token is not Alex's account.\n\n**And it changes what a verdict means.** A contract should record WHICH identity the probe carried. Two runs of the same contract — one anonymous, one authed — answer two different questions, and today we conflate them. An authed-only surface returning VERIFIED anonymously is suspicious, not good news.\n\nThis is small and it removes the last reason anyone asks Alex to open a page.\n\nOrder: it goes with the chat contract's `data_readback` work — same contract, same pass. Both are needed before \"does the chat work\" has an answer.",
+   "refs": [
+    "BEB-2436",
+    "BEB-2175",
+    "BEB-2179",
+    "BEB-2270"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16606,
- "count": 3637
+ "head": 16609,
+ "count": 3640
 }
