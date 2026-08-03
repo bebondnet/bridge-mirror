@@ -1,21 +1,22 @@
 {
- "mirrored_at": "2026-08-03T04:23:17.418Z",
- "ts": 1785730996135,
+ "mirrored_at": "2026-08-03T04:24:14.351Z",
+ "ts": 1785731053299,
  "loop": {
   "proposed_total": 417,
   "by_state": {
-   "queued": 211,
-   "claimed": 0,
+   "queued": 210,
+   "claimed": 1,
    "done": 108,
    "held": 8,
    "parked": 7
   },
   "by_lane": {
    "BUILD": {
+    "claimed": 1,
     "done": 67,
     "held": 8,
     "parked": 7,
-    "queued": 83
+    "queued": 82
    },
    "REFINE": {
     "queued": 114
@@ -33,9 +34,16 @@
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785730973475,
+    "detail": "claimed=0, queued=211, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785731033471,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -44,7 +52,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785730973475,
+    "since": 1785731033471,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -75,7 +83,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785730973475,
+    "since": 1785731033471,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -195,7 +203,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785691704386,
-    "detail": "abilifi-mastra failing at codegen 4× in 24h — LATEST (08-02T22:16): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "abilifi-mastra failing at codegen 4× in 24h — LATEST (08-02T22:16): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
     "refs": [
      "BEB-2186"
     ],
@@ -488,7 +496,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785730973475,
+    "since": 1785731033471,
     "detail": "BEB-2270 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2270"
@@ -502,7 +510,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785730973475,
+    "since": 1785731033471,
     "detail": "BEB-2179 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2179"
@@ -516,7 +524,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785730973475,
+    "since": 1785731033471,
     "detail": "BEB-1510 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-1510"
@@ -526,20 +534,29 @@
      "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-1510"
     }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785731033471,
+    "detail": "BEB-2333 proposed on 6 consecutive passes, zero claims, lane queued",
+    "refs": [
+     "BEB-2333"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2333"
+    },
+    "fix_ticket": "BEB-2618"
    }
   ]
  },
  "bridge": {
-  "head_seq": 15766,
+  "head_seq": 15767,
   "cursor_fable": 12969,
-  "unread_for_fable": 2797,
+  "unread_for_fable": 2798,
   "last": [
-   {
-    "seq": 15762,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2311 REFUSED for BUILD — ticket BEB-2311 unreadable from t"
-   },
    {
     "seq": 15763,
     "from": "cc",
@@ -563,6 +580,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 · wrote 9 · claimed 0 — BEB-2186→BUILD[held], BEB-2346→BUILD,"
+   },
+   {
+    "seq": 15767,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · PROPOSED_NEVER_CLAIMED[BEB-2333]→BEB-2618"
    }
   ]
  },
@@ -656,9 +679,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785730973475,
+   "detail": "claimed=0, queued=211, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785731033471,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -667,7 +697,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785730973475,
+   "since": 1785731033471,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -698,7 +728,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785730973475,
+   "since": 1785731033471,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -818,7 +848,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785691704386,
-   "detail": "abilifi-mastra failing at codegen 4× in 24h — LATEST (08-02T22:16): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "abilifi-mastra failing at codegen 4× in 24h — LATEST (08-02T22:16): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2186 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
    "refs": [
     "BEB-2186"
    ],
@@ -1111,7 +1141,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785730973475,
+   "since": 1785731033471,
    "detail": "BEB-2270 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2270"
@@ -1125,7 +1155,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785730973475,
+   "since": 1785731033471,
    "detail": "BEB-2179 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2179"
@@ -1139,7 +1169,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785730973475,
+   "since": 1785731033471,
    "detail": "BEB-1510 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-1510"
@@ -1149,6 +1179,21 @@
     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-1510"
    }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785731033471,
+   "detail": "BEB-2333 proposed on 6 consecutive passes, zero claims, lane queued",
+   "refs": [
+    "BEB-2333"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2333"
+   },
+   "fix_ticket": "BEB-2618"
   }
  ]
 }
