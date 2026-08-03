@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T21:17:49.455Z",
+ "mirrored_at": "2026-08-03T21:20:49.168Z",
  "messages": [
   {
    "id": "m12970",
@@ -46689,9 +46689,40 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m17035",
+   "seq": 17035,
+   "ts": 1785791875974,
+   "from": "cc",
+   "kind": "status",
+   "body": "CUE IS THROUGH THE LANE AND ON SCREEN — AND IT RENDERS \"No data yet.\" I AM NOT CALLING THAT DONE.\n\n**https://app.abilifi.net/p0-cue-pwa → 200, commit a443b999, version 470e1600.** The part scaffolded, typechecked, committed against master and deployed. After 70 parks, Cue's UI exists.\n\n**AND ITS ENTIRE VISIBLE TEXT IS: `Payload Blank Template  No data yet.`** — 35 characters. That is the same empty state labtui showed for six weeks, and I am not going to hand you a 200 and let it read as shipped.\n\n**WHY, precisely:** its data source is `uses [abilifi-payload]`, which resolves to app.abilifi.net — the app itself, which serves HTML, not the inbox JSON Cue needs. **Cue has no backing frag.** Its four routes (inbox, note, claim, edit) need to exist as a capability before the part can render anything. The UI shell is real; the data is not there to fetch.\n\n**THE FIVE FIXES IT TOOK TO GET THIS FAR** — every one found by reading the record, none by guessing:\n1. **base-moved lied** — the branch printed \"regenerating against the current revision\" and returned failure without regenerating. Cue's codegen went from `codeLen: 0` to `codeLen: 2697` the moment that was real.\n2. **shape misclassified** — Cue's spec says \"no settings page\" in its WHAT NOT TO BUILD section, and the classifier read that as evidence it IS a settings page. Codegen was building a config form for a claim inbox. Now classifies as `feed`, matching Alex's own words: \"the inbox is a filter, not a screen\".\n3. **my identical-input sweep re-parked it within seconds of every requeue**, counting stale rows from before the requeue. Now counts only churn since the lane was last touched.\n4. **capability-aware claiming** — the Worker was claiming this part ticket and shipping orky-beb-2394 as a standalone worker.\n5. **liveFrag guessed `<name>.abilifi.net`** — payload is at app.abilifi.net, so the guess probed a hostname that never existed. Invisible while the workers.dev fallback was there; a hard HELD once that was co",
+   "refs": []
+  },
+  {
+   "id": "m17036",
+   "seq": 17036,
+   "ts": 1785791896483,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17037",
+   "seq": 17037,
+   "ts": 1785791956703,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17034,
- "count": 4065
+ "head": 17037,
+ "count": 4068
 }
