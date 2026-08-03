@@ -1,21 +1,22 @@
 {
- "mirrored_at": "2026-08-03T15:20:07.072Z",
- "ts": 1785770403677,
+ "mirrored_at": "2026-08-03T15:21:24.666Z",
+ "ts": 1785770481280,
  "loop": {
   "proposed_total": 428,
   "by_state": {
-   "queued": 171,
-   "claimed": 0,
+   "queued": 169,
+   "claimed": 2,
    "done": 121,
    "held": 12,
    "parked": 41
   },
   "by_lane": {
    "BUILD": {
+    "claimed": 2,
     "done": 81,
     "held": 12,
     "parked": 41,
-    "queued": 40
+    "queued": 38
    },
    "REFINE": {
     "queued": 114
@@ -33,16 +34,9 @@
   },
   "reds": [
    {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1785770214240,
-    "detail": "claimed=0, queued=171, 4 passes, max_concurrent=6",
-    "refs": []
-   },
-   {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785770394247,
+    "since": 1785770454241,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -51,7 +45,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785770394247,
+    "since": 1785770454241,
     "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
     "refs": [
      "BEB-2347"
@@ -60,7 +54,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785770394247,
+    "since": 1785770454241,
     "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
     "refs": [
      "BEB-2572",
@@ -103,7 +97,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785770394247,
+    "since": 1785770454241,
     "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
     "refs": [
      "BEB-1994",
@@ -642,7 +636,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785770394247,
+    "since": 1785770454241,
     "detail": "BEB-2663 proposed on 6 consecutive passes, zero claims, lane queued",
     "refs": [
      "BEB-2663"
@@ -652,32 +646,29 @@
      "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
      "subject": "BEB-2663"
     }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785770454241,
+    "detail": "BEB-2156 proposed on 6 consecutive passes, zero claims, lane queued",
+    "refs": [
+     "BEB-2156"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+     "subject": "BEB-2156"
+    },
+    "fix_ticket": "BEB-2370"
    }
   ]
  },
  "bridge": {
-  "head_seq": 16639,
+  "head_seq": 16642,
   "cursor_fable": 12969,
-  "unread_for_fable": 3670,
+  "unread_for_fable": 3673,
   "last": [
-   {
-    "seq": 16635,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
-   },
-   {
-    "seq": 16636,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=170, 2 passes, max_concurrent=6"
-   },
-   {
-    "seq": 16637,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "BINDING GATE §6.5: BEB-2379 carried dead repo abilifi/crm-service — auto-corrected to alex"
-   },
    {
     "seq": 16638,
     "from": "cc",
@@ -689,10 +680,33 @@
     "from": "cc",
     "kind": "status",
     "one_line": "RED ZERO_CLAIM: claimed=0, queued=170, 3 passes, max_concurrent=6"
+   },
+   {
+    "seq": 16640,
+    "from": "fable",
+    "kind": "directive",
+    "one_line": "ALEX: MAKE THEM REAL. Three blockers between the loop and building UI. All three are alrea"
+   },
+   {
+    "seq": 16641,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED CLEARED: ZERO_CLAIM(2min)."
+   },
+   {
+    "seq": 16642,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2156 proposed on 6 consecutive passes, zero claims, lane q"
    }
   ]
  },
  "p0s_open": [
+  {
+   "id": "BEB-2394",
+   "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
+   "status": "todo"
+  },
   {
    "id": "BEB-2379",
    "title": "P0: GERS-SCOPED CONTACT SERVICE — CF-native CRM from sc",
@@ -701,11 +715,6 @@
   {
    "id": "BEB-2156",
    "title": "P0 AUDIT: eliminate laptop dependency from build pipeli",
-   "status": "todo"
-  },
-  {
-   "id": "BEB-2394",
-   "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
    "status": "todo"
   },
   {
@@ -782,16 +791,9 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1785770214240,
-   "detail": "claimed=0, queued=171, 4 passes, max_concurrent=6",
-   "refs": []
-  },
-  {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785770394247,
+   "since": 1785770454241,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -800,7 +802,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785770394247,
+   "since": 1785770454241,
    "detail": "FAILBASE SELF-WRITING (2347) — loop writes its own failure rows with verbatim error + prompt head; no record, no retry; burn counted. — last landed evidence NEVER",
    "refs": [
     "BEB-2347"
@@ -809,7 +811,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785770394247,
+   "since": 1785770454241,
    "detail": "CLEAN PROMPT (wall #17) — goal text and process orders out of the codegen prompt; SPEC.md + deployed source + acceptance only. — last landed evidence NEVER",
    "refs": [
     "BEB-2572",
@@ -852,7 +854,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785770394247,
+   "since": 1785770454241,
    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence NEVER",
    "refs": [
     "BEB-1994",
@@ -1391,7 +1393,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785770394247,
+   "since": 1785770454241,
    "detail": "BEB-2663 proposed on 6 consecutive passes, zero claims, lane queued",
    "refs": [
     "BEB-2663"
@@ -1401,6 +1403,21 @@
     "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
     "subject": "BEB-2663"
    }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785770454241,
+   "detail": "BEB-2156 proposed on 6 consecutive passes, zero claims, lane queued",
+   "refs": [
+    "BEB-2156"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; no claim-success rows in 60min despite 6 consecutive proposals",
+    "subject": "BEB-2156"
+   },
+   "fix_ticket": "BEB-2370"
   }
  ]
 }
