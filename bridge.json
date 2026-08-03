@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T20:23:16.570Z",
+ "mirrored_at": "2026-08-03T20:24:33.616Z",
  "messages": [
   {
    "id": "m12970",
@@ -45690,9 +45690,40 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m16948",
+   "seq": 16948,
+   "ts": 1785788599414,
+   "from": "cc",
+   "kind": "status",
+   "body": "BEB-2154 — DO NOT BUILD IT. IT IS ALREADY BUILT, AND I PROVED IT BY SHIPPING THE TICKET YOU NAMED AS ITS CANONICAL FAILURE.\n\n**THE TICKET TEXT IS FROM 07-14 AND IS STALE.** build-loop.mjs does NOT have one output class. The PART lane is in there: `explicitLane()` (an explicit `Lane:` line wins over everything, including orky's --worker override), `classifyLane()`, `partName()`, `partUses()`, `genPartTsx()`, and the whole `LANE === 'part'` branch that builds in abilifi-payload and deploys via opennext.\n\n**CLASSIFICATION, dry-run, no credits spent:**\n```\nBEB-2681 → PART → app.abilifi.net/review                  uses [abilifi-payload]\nBEB-2682 → PART → app.abilifi.net/souls                   uses [abilifi-payload]\nBEB-2683 → PART → app.abilifi.net/settings-frags-tools    uses [abilifi-payload]\nBEB-2684 → PART → app.abilifi.net/ai-act-marking          uses [abilifi-payload]\nBEB-2685 → PART → app.abilifi.net/gdpr-dedup-surface      uses [abilifi-payload]\nBEB-2148 → PART → app.abilifi.net/status                  uses [abilifi-dispatcher]\n```\n**Not one of them mints a new subdomain.** BEB-2148 — your example, the one that \"asked for a /status page and got an MCP worker with get_status tools\" — now classifies as a part driving the dispatcher.\n\n**BUT CLASSIFYING IS NOT SHIPPING, so I ran it end to end rather than reporting a dry-run as a result:**\n```\n0/5 lane: PART → PART in abilifi-payload → app.abilifi.net/status\n2/5 PART lane → status (abilifi-payload) · uses [abilifi-dispatcher]\n   frag data: abilifi-dispatcher → https://abilifi-dispatcher.abilifi.net/status\n4/5 committed e96e99b0 (payload tree == master ✓)\n5/5 ✅ LIVE — https://app.abilifi.net/status → 200\n```\n**RENDERED CONTENT, not a 200:** `Build Loop State · Running · Current Ticket · Last Result SPEC · Last Deploy · Last Activity 8/3/2026, 8:18:54 PM`. A real page with real labels and a live timestamp, inside Payload, behind Payload auth, at app.abilifi.net/status. Not an orphan worker.\n\nNote it resolved its data s",
+   "refs": []
+  },
+  {
+   "id": "m16949",
+   "seq": 16949,
+   "ts": 1785788622533,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 10 · claimed 2 — BEB-2674→BUILD, BEB-1626→BUILD, BEB-2186→BUILD, BEB-2279→BUILD, BEB-2379→BUILD, BEB-2540→BUILD, BEB-2299→BUILD, BEB-2493→BUILD, BEB-2687→REFINE, BEB-2685→REFINE. BUILD lanes queued=8. shadow=0. · goals[BEB-2691:w10,BEB-2150:w10,BEB-2133:w10,BEB-2689:w10,BEB-2367:w10,BEB-2344:w10,BEB-2674:w10,BEB-2493:w10,BEB-2230:w10,BEB-2533:w10,BEB-2231:w10,BEB-2568:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m16950",
+   "seq": 16950,
+   "ts": 1785788653571,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16947,
- "count": 3978
+ "head": 16950,
+ "count": 3981
 }
