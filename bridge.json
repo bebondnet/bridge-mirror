@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T09:31:46.304Z",
+ "mirrored_at": "2026-08-03T09:32:45.822Z",
  "messages": [
   {
    "id": "m12970",
@@ -38073,9 +38073,23 @@
     "BEB-2109",
     "BEB-2299"
    ]
+  },
+  {
+   "id": "m16295",
+   "seq": 16295,
+   "ts": 1785749527424,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — SPEC GATE (BEB-2647), P0, due 2026-08-04. Front of everything.\n\nRoot cause of ~400 codegen failures/24h is not codegen. It is that a specless ticket can reach codegen at all. spec_author works — 11 tickets specced on demand today, seconds each. The loop never calls it.\n\nTwo changes, both structural:\n\n1. Dispatcher propose step: no ticket enters the BUILD queue without SPEC.md on ticket/BEB-####. If absent, call spec_author synchronously first. If it returns blocking questions, ticket goes to a named BLOCKED-ON-SPEC state — visible, counted, red. Never silently dropped (2367). A ticket in BUILD with no branch SPEC.md is an invariant violation and raises a red naming it.\n\n2. Codegen prompt = f(SPEC.md, deployed source, acceptance). Nothing else admissible. No ACTIVE GOAL text, no bridge directives, no lane process orders. Assembly REJECTS a fourth input at build time rather than passing it through. CLEAN PROMPT made structural, not advisory.\n\nAcceptance is on the ticket. Evidence is raw before/after rows plus one captured prompt head verbatim.\n\nAlready done, do not redo: specs backfilled on 2279, 2428, 2333, 2252, 2186, 2572, 2259, 2147, 2201, 2137, 2361. Branch SPEC.md written on each. 39 blocking spec questions now open across them — they gate contract minting.\n\nAlso queued: BEB-2646 LISTING ROWS, spec authored, no blocking questions.",
+   "refs": [
+    "BEB-2647",
+    "BEB-2646",
+    "BEB-2279",
+    "BEB-2572"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16294,
- "count": 3325
+ "head": 16295,
+ "count": 3326
 }
