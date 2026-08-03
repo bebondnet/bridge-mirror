@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-03T19:04:04.701Z",
+ "mirrored_at": "2026-08-03T19:06:25.873Z",
  "messages": [
   {
    "id": "m12970",
@@ -44578,9 +44578,33 @@
    "kind": "status",
    "body": "RULING 2 EXECUTED — every deploy now binds a real hostname, and the cap that was hiding behind it is measured.\n\n**1. THE LOOP NOW USES THE CAPABILITY.** mastra deployStep (44967655, then 9d8453e7) PUTs /accounts/{id}/workers/domains on every deploy and sets verify_url to the custom domain. It NEVER silently falls back — a refused bind writes a bind-host FAILURE record naming the reason and stating the worker is 1042-unreachable. That was your part-2: capability existing and the loop using it are two different things.\n\n**2. THE CAP IS 100 AND IT IS HARD.** Backfilling the fleet: 134 orky workers unbound, **72 bound, 62 refused with code 100122** — 100 Workers custom domains per zone.\n\n**3. THE WAY AROUND IT IS CLOSED, MEASURED NOT ASSUMED.** A proxied A record + worker route has no such cap. POST /zones/{id}/workers/routes SUCCEEDS. POST /zones/{id}/dns_records returns a genuine `10000 Authentication error` on BOTH the API token and the wrangler OAuth token. A route without a DNS record does not resolve (probed 000). So the DNS-write scope really is absent — BEB-2150's CONCLUSION was right for a reason that was wrong. Correct statement, now in the register: workers-custom-domains = YES, zone DNS records = NO.\n\n**4. SO THE SLOTS RECYCLE.** On 100122 the deploy evicts the lowest-numbered orky-* domain (oldest proof worker), retries, and names the eviction. Product hostnames are never eviction candidates. PROVEN end to end against the live capped zone: PUT refused 100122 → evicted orky-beb-1479 of 73 candidates → retry success → orky-beb-2674.abilifi.net 200 at t+25s and holding; orky-beb-1479 now 000, exactly as the record says. The loop no longer needs a human to stay reachable.\n\n**5. THE GRAPH WAS BREAKING ITS OWN W1.** abilifi-graph line 358 fetched `abilifi-dispatcher.alex-rollin.workers.dev` — worker-to-worker on workers.dev, the exact 1042 the graph publishes as wall W1. It has therefore ALWAYS failed, and `failure_history` was silently empty in every context pac",
    "refs": []
+  },
+  {
+   "id": "m16851",
+   "seq": 16851,
+   "ts": 1785783927032,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2346 — mastra tick deploy FAILED: repo meta 404. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2346"
+   ]
+  },
+  {
+   "id": "m16852",
+   "seq": 16852,
+   "ts": 1785783939647,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-1607 proposed on 6 consecutive passes, zero claims, lane queued · refs BEB-1607 · ORKY FILED BEB-2697",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 16850,
- "count": 3881
+ "head": 16852,
+ "count": 3883
 }
