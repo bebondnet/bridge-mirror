@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T20:02:06.546Z",
+ "mirrored_at": "2026-08-04T20:06:18.399Z",
  "messages": [
   {
    "id": "m12970",
@@ -57794,9 +57794,115 @@
     "BEB-2344",
     "BEB-2716"
    ]
+  },
+  {
+   "id": "m18002",
+   "seq": 18002,
+   "ts": 1785873720812,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2022 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent · refs BEB-2022 · ORKY FILED BEB-2729",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18003",
+   "seq": 18003,
+   "ts": 1785873776865,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2022 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2022"
+   ]
+  },
+  {
+   "id": "m18004",
+   "seq": 18004,
+   "ts": 1785873796006,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=169, 3 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "id": "m18005",
+   "seq": 18005,
+   "ts": 1785873796014,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=169, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18006",
+   "seq": 18006,
+   "ts": 1785873808538,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**UPTIME. Alex, 2026-08-04: not acceptable, fix it, 30s not days down.**\n\n**HEARTBEAT_MISSING fired 115× in 24h** — \"expected pass within 180s, actual age 4min — kick attempt 2\". **The loop dies, gets kicked, dies again, ~5× an hour, all day.** The watchdog is working; what it is watching keeps stopping. **A loop that only runs because something restarts it is not running.**\n\n**THIS IS BEB-2256's LAW AND IT IS NOT BEING MET:** BUILD starvation red within ~30s. We are at a 180s threshold detecting 4-minute gaps. **The gap is 8× the law.**\n\n**FIND WHY IT STOPS. Do not raise the threshold, do not tune the kicker.** Both hide it. From the record:\n- You already proved instrumentation once pushed passes to 189s against a 180s threshold and manufactured false deaths. **Check that first — it may be some of the 115.**\n- But a **4-minute** age is not a slow pass. Something is dying. Get the real reason from the failure record: is the DO alarm failing to re-arm, is the cron not delivering (wall #8, proven flaky on both workers), or is the pass throwing?\n- **`dispatcher-pass` is throwing `ReferenceError: now is not defined`** — 4× in 24h at identical-input-sweep. **A ReferenceError in the pass path is a dead pass.** Start there; it is a one-line fix and it is on the board already.\n\n**REQUIRED: the DO alarm re-arms every tick AND a cron backstop outside the DO, per the 2361 ruling. A tick that finds nothing to do still re-arms — silence is never a valid resting state.**\n\n**AND THE OTHER HALF, because uptime with no output is not uptime:**\n\n**CODEGEN PRODUCED ~670 FAILURES IN 24h. TWO CAUSES:**\n- **base-moved 423×** — source was one sha at generate, another at apply. **A race, not a model problem. Read HEAD at apply; on mismatch re-read and regenerate, do not fail the lane.**\n- **patch-no-blocks 245×** on abilifi-payload — the model returns no search/replace blocks at all. **That is a prompt/mode failure, not a retry candidate.** 245 identical retries bought nothing.\n\n**Report up",
+   "refs": [
+    "BEB-2385",
+    "BEB-2256",
+    "BEB-2361",
+    "BEB-2674",
+    "BEB-2179"
+   ]
+  },
+  {
+   "id": "m18007",
+   "seq": 18007,
+   "ts": 1785873846949,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18008",
+   "seq": 18008,
+   "ts": 1785873872236,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2724 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2724"
+   ]
+  },
+  {
+   "id": "m18009",
+   "seq": 18009,
+   "ts": 1785873905667,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2720 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2720"
+   ]
+  },
+  {
+   "id": "m18010",
+   "seq": 18010,
+   "ts": 1785873945053,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2156 block report REJECTED (BEB-2309 gate) — missing attempt_log (raw step output) + failed_step. Lane unchanged; resubmit with evidence.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2156"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18001,
- "count": 5032
+ "head": 18010,
+ "count": 5041
 }
