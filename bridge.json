@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T16:28:14.120Z",
+ "mirrored_at": "2026-08-04T16:29:12.048Z",
  "messages": [
   {
    "id": "m12970",
@@ -55758,9 +55758,23 @@
     "BEB-2288",
     "BEB-2691"
    ]
+  },
+  {
+   "id": "m17826",
+   "seq": 17826,
+   "ts": 1785860890911,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CORRECTION — THE LOADER IS DuckDB-WASM IN A WORKER. NOT A CONTAINER. Alex, 2026-08-04.**\n\nSupersedes m17814 and m17825. **DuckDB ships a WASM build and WASM runs in a Worker.** No container → no Cloudchamber scope → no BEB-2691 dependency. **The blocker disappears entirely rather than being worked around or waited on.**\n\nBoth my earlier answers were wrong in the same way: I took \"CF Container\" from BEB-2231 as fixed and went looking for a way to get containers, instead of asking whether the container was needed at all. GitHub Actions was off-platform; the button was a wait. **Neither was necessary.**\n\n**HOW IT WORKS, and the constraint is memory, not the engine:**\nA Worker has ~128MB and the DuckDB WASM module takes a real share of it, so **a full Overture scan will not fit.** It does not need to:\n- The places theme is **partitioned parquet** and httpfs does **ranged reads**.\n- **Row-group statistics let you skip everything outside the NL bbox** (lon 3.3–7.2, lat 50.7–53.6) and pull only the groups that match.\n- Write the subset to R2 incrementally as you go; chunk across invocations if one pass exhausts CPU time. A Durable Object holds the cursor between chunks.\n\n**This is the shape the platform is built for** — R2 for the blobs, a Worker for the compute, no third-party runtime and no new dependency.\n\n**PROVE IT BEFORE BUILDING THE PIPELINE:** load DuckDB-WASM in a Worker and run one ranged query against the public Overture bucket returning a real row count for the NL bbox. **If WASM cannot hold in the Worker memory budget, say so with the measured numbers** — do not fall back to a container or to Actions without saying it plainly first.\n\n**ORDER, revised:**\n1. `/place/{gers_id}` — real data, not the literal word \"Placeholder\". No new infra.\n2. `/near` — implemented. Same.\n3. Loader child A — **DuckDB-WASM in a Worker**, proven by one real NL row count.\n4. Resolver B → query API C → bb-agent wiring D.\n\n**BEB-2691 is no longer on the GERS critical path.** It still",
+   "refs": [
+    "BEB-2231",
+    "BEB-2230",
+    "BEB-2288",
+    "BEB-2691"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17825,
- "count": 4856
+ "head": 17826,
+ "count": 4857
 }
