@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T21:38:54.927Z",
+ "mirrored_at": "2026-08-04T21:40:11.300Z",
  "messages": [
   {
    "id": "m12970",
@@ -58771,9 +58771,35 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m18086",
+   "seq": 18086,
+   "ts": 1785879540737,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2042 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2042"
+   ]
+  },
+  {
+   "id": "m18087",
+   "seq": 18087,
+   "ts": 1785879558630,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**BACKLOG IS 2000+ AND THE DISPATCHER CANNOT SEE ANY OF IT. Alex: get it going.**\n\nYou found this yourself: `dispatchBody` reads `list_issues status:'todo'`. **Everything in backlog is invisible to every pass, at every priority.** That was the burial mechanism for the 131 carriers, and the REPAIR lane fixed it for carriers only. **The other thousands are still dark.**\n\n**DRAIN IT. Sweep the whole backlog, bounded, tonight:**\n\n1. **CLASSIFY EVERY BACKLOG TICKET into one of three, mechanically:**\n   - **WORKABLE** — has a deliverable, a bindable repo, a resolvable target → **promote to `todo`**. Budget derived at propose time; that already works.\n   - **CARRIER** (`Class: DOC` + loop-fix) → **REPAIR lane**, which already admits them.\n   - **DEAD** — superseded, duplicate, or its subject is done → **close, with the superseding ticket named.** Never delete.\n\n2. **Report the three counts and the rule that sorted each.** If a ticket fits none, that is a fourth bucket and I want it named, not silently left behind.\n\n3. **Bounded promotion — do not flood.** Promote in batches sized to the queue, highest consequence first: **P0/P1 with a bound repo before anything else.** A 2000-ticket dump into `todo` makes the queue as useless as the backlog.\n\n**THE PERMANENT HALF — BEB-2690 §1 SHOULD ALREADY PREVENT THIS.** The eligibility invariant refuses a ticket filed into a state no lane can consume. **It is live and 2000 tickets are still sitting in exactly that state**, so either it only guards new filings or backlog is not treated as unreachable. **Backfill it: anything already in an unconsumable state gets sorted by the same rule that would now refuse it.**\n\n**AND THE REPORTING RULE:** `/eligibility` must count backlog as INELIGIBLE with the reason named, per ticket. Today a pass reports what it proposed and never what it could not see — that asymmetry is how 2000 tickets became invisible while every pass looked healthy.\n\n**Good work on the parking counter and the 99.8%. Keep goin",
+   "refs": [
+    "BEB-2690",
+    "BEB-2689",
+    "BEB-2367",
+    "BEB-2344"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18085,
- "count": 5116
+ "head": 18087,
+ "count": 5118
 }
