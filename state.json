@@ -1,21 +1,21 @@
 {
- "mirrored_at": "2026-08-04T07:54:21.857Z",
- "ts": 1785830059884,
+ "mirrored_at": "2026-08-04T07:55:19.991Z",
+ "ts": 1785830118433,
  "loop": {
   "proposed_total": 457,
   "by_state": {
-   "queued": 189,
+   "queued": 191,
    "claimed": 0,
    "done": 166,
    "held": 18,
-   "parked": 67
+   "parked": 65
   },
   "by_lane": {
    "BUILD": {
     "done": 99,
     "held": 18,
-    "parked": 66,
-    "queued": 11
+    "parked": 64,
+    "queued": 13
    },
    "REFINE": {
     "queued": 114
@@ -33,14 +33,21 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785830008258,
-   "tally": "BEB-2379→BUILD[claimed], BEB-2279→BUILD[claimed], BEB-2156→BUILD[claimed], BEB-2710→SPEC, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
+   "at": 1785830063163,
+   "tally": "BEB-2279→BUILD, BEB-2156→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2540→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785830048531,
+    "detail": "claimed=0, queued=191, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785830108537,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -107,7 +114,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785789362886,
-    "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26 · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26",
     "refs": [
      "BEB-2379"
     ],
@@ -331,7 +338,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785751760996,
-    "detail": "abilifi-payload failing at evaluate 6× in 24h — LATEST (08-04T02:16): verify_url not 2xx after 12 probes — last HTTP 404",
+    "detail": "abilifi-payload failing at evaluate 6× in 24h — LATEST (08-04T02:16): verify_url not 2xx after 12 probes — last HTTP 404 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2279"
     ],
@@ -415,7 +422,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785748282029,
-    "detail": "alexrollin/abilifi-apps failing at deploy 36× in 24h — LATEST (08-04T07:53): codeLen: 2968\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:39\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
+    "detail": "alexrollin/abilifi-apps failing at deploy 36× in 24h — LATEST (08-04T07:53): codeLen: 2968\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:39\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2156"
     ],
@@ -456,15 +463,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785743678294,
-    "detail": "bebondnet/bebond-mcp failing at codegen 4× in 24h — LATEST (08-03T13:28): verdict: codegen produced no usable code\ncodeLen: 4264\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'specResponse' — the file does not parse, CF PUT will",
+    "since": 1785756961638,
+    "detail": "bebondnet/bebond-mcp failing at codegen 3× in 24h — LATEST (08-03T13:28): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
     "refs": [
-     "BEB-2518"
+     "BEB-1587"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 4264\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'specResponse' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: bebondnet/bebond-mcp\ncodegen prompt head (what the MODEL received): Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRepo: bebondnet/bebond",
-     "subject": "BEB-2518"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: bebondnet/bebond-mcp\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-1587"
     }
    },
    {
@@ -568,7 +575,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2710"
@@ -582,7 +589,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2707"
@@ -596,7 +603,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2685"
@@ -610,7 +617,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2409",
@@ -620,7 +627,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -630,7 +637,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2473",
@@ -650,7 +657,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2515",
@@ -670,7 +677,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2524",
@@ -690,7 +697,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2570",
@@ -700,7 +707,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2573",
@@ -710,7 +717,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785830048531,
+    "since": 1785830108537,
     "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2578",
@@ -720,16 +727,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 17442,
+  "head_seq": 17443,
   "cursor_fable": 12969,
-  "unread_for_fable": 4473,
+  "unread_for_fable": 4474,
   "last": [
-   {
-    "seq": 17438,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2186 — mastra tick deploy FAILED: CF PUT 400: [{\"code\":10021,"
-   },
    {
     "seq": 17439,
     "from": "cc",
@@ -753,6 +754,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declare"
+   },
+   {
+    "seq": 17443,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=191, 2 passes, max_concurrent=6"
    }
   ]
  },
@@ -846,9 +853,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785830048531,
+   "detail": "claimed=0, queued=191, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785830108537,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -915,7 +929,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785789362886,
-   "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26 · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26",
    "refs": [
     "BEB-2379"
    ],
@@ -1139,7 +1153,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785751760996,
-   "detail": "abilifi-payload failing at evaluate 6× in 24h — LATEST (08-04T02:16): verify_url not 2xx after 12 probes — last HTTP 404",
+   "detail": "abilifi-payload failing at evaluate 6× in 24h — LATEST (08-04T02:16): verify_url not 2xx after 12 probes — last HTTP 404 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2279"
    ],
@@ -1223,7 +1237,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785748282029,
-   "detail": "alexrollin/abilifi-apps failing at deploy 36× in 24h — LATEST (08-04T07:53): codeLen: 2968\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:39\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
+   "detail": "alexrollin/abilifi-apps failing at deploy 36× in 24h — LATEST (08-04T07:53): codeLen: 2968\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:39\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2156"
    ],
@@ -1264,15 +1278,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785743678294,
-   "detail": "bebondnet/bebond-mcp failing at codegen 4× in 24h — LATEST (08-03T13:28): verdict: codegen produced no usable code\ncodeLen: 4264\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'specResponse' — the file does not parse, CF PUT will",
+   "since": 1785756961638,
+   "detail": "bebondnet/bebond-mcp failing at codegen 3× in 24h — LATEST (08-03T13:28): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
    "refs": [
-    "BEB-2518"
+    "BEB-1587"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 4264\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'specResponse' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: bebondnet/bebond-mcp\ncodegen prompt head (what the MODEL received): Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRepo: bebondnet/bebond",
-    "subject": "BEB-2518"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: bebondnet/bebond-mcp\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-1587"
    }
   },
   {
@@ -1376,7 +1390,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2710"
@@ -1390,7 +1404,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2707"
@@ -1404,7 +1418,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2685"
@@ -1418,7 +1432,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2409",
@@ -1428,7 +1442,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1438,7 +1452,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2473",
@@ -1458,7 +1472,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2515",
@@ -1478,7 +1492,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2524",
@@ -1498,7 +1512,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2570",
@@ -1508,7 +1522,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2573",
@@ -1518,7 +1532,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785830048531,
+   "since": 1785830108537,
    "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2578",
