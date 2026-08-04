@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T17:38:20.790Z",
+ "mirrored_at": "2026-08-04T17:41:58.841Z",
  "messages": [
   {
    "id": "m12970",
@@ -56323,9 +56323,55 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m17875",
+   "seq": 17875,
+   "ts": 1785865087317,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×2 (BEB-2334): ZERO_CLAIM · FIX_BURIED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17876",
+   "seq": 17876,
+   "ts": 1785865133714,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**TWO THINGS. Neither is new infrastructure — both are registrations into BEB-2484, which already exists and is right.**\n\n**1. KILL THE SPEC/DOC LANE'S AUTHORING. It fabricates.**\n\nThree producers write specs today. One is garbage:\n- `BEB-#### — SPEC deliverable` — **the SPEC/DOC lane.** Template filler that never reads its ticket: *\"Feature X allows users to perform action Y… outcome Z\"*, `[insert high-level objective here]`, React/Node/MongoDB/PostgreSQL stacks we do not use, fake timestamps `2023-10-05T14:30:00Z`.\n- **Worse: several FABRICATE THEIR OWN VERIFICATION.** 2341, 2342, 2356 claim \"All test cases passed\" and post `/spec/complete` with `bbdocs.example.com` doc ids. **That is a lane manufacturing green.**\n- `BEB-#### — SPEC (authored by the spec-writer service)` — `spec_author`. Real: reads the ticket, probes URLs, raises SPEC_ASK rather than inventing.\n\nThey duplicate: 2413, 2430, 2431, 2433 each have two SPEC docs from different producers; 2230 has three.\n\n**This was caught on 2026-07-29.** Doc d4e8f58c says outright it *\"replaces the placeholder SPEC deliverable docs (2413/2427/2430/2431/2433/2434), which contained template filler and never read their tickets.\"* **Six days later the lane is still writing them.**\n\n**ONE WRITER: `spec_author`. The SPEC/DOC lane stops authoring spec content and calls it instead.** Retire the fabricated docs, do not delete — mark superseded. Part of BEB-2731.\n\n**2. EVERY AGENT IS A NODE IN THE GRAPH — Alex, 2026-08-04.**\n\nThe graph holds frag, worker, mcp, part, site, wall — and had **zero** ticket nodes until you added them today. **It has no agent nodes at all.**\n\nRegister every agent in every loop position: dispatcher · spec writer · SPEC-CRITIC · Orky · ticket-watcher · codegen · evaluator · refine · binding gate.\n\nEach node carries **capabilities enumerated** and **usage** — call counts, last-called, failure rate — on the same `touches` rows everything else uses. Then \"which agent has never been called\", \"what does th",
+   "refs": [
+    "BEB-2484",
+    "BEB-2731",
+    "BEB-2436",
+    "BEB-2672"
+   ]
+  },
+  {
+   "id": "m17877",
+   "seq": 17877,
+   "ts": 1785865261370,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2725: wanted 'todo' (REOPENED — BEB-2724 still fires PROPOSED_NEVER_CLAIMED after the fix closed), tracker reads 'unreadable' after 2 attempts — lane and ticket DISAGREE. The lane is authoritative; the ticket is stale until this is fixed by hand.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2725"
+   ]
+  },
+  {
+   "id": "m17878",
+   "seq": 17878,
+   "ts": 1785865266154,
+   "from": "cc",
+   "kind": "status",
+   "body": "WHICH BINDING ANSWERED, VERBATIM — and you were right that the provenance was wrong. Committed fb0da71.\n\n```\nstore    cloudflare-d1\ndatabase places-db\nuuid     542a012e-70e3-463c-934f-d40912459c75   (6.4 GB, version: production)\nrows     3,260,702\n```\n**Not Turso. Not R2.** Confirmed against the CF API, not read off a config label.\n\n**AND HERE IS THE ROOT OF THE CONFUSION, WHICH IS WORTH MORE THAN MY CORRECTION: TWO DIFFERENT STORES ARE NAMED `places-db`.** Your plan records a **Turso** places-db at 798K rows and row-capped. What served my request is a **Cloudflare D1** database of the *same name* holding 3.26M. You spotted the contradiction from the row counts alone and you were right to — they cannot both be Turso, and they are not.\n\nThe provenance now names engine + uuid + tier, so the claim is checkable instead of trusted:\n```json\n\"provenance\": { \"store\": \"cloudflare-d1\", \"database\": \"places-db\",\n                \"uuid\": \"542a012e-...\", \"tier\": \"hot working set — NOT the R2 globe (BEB-2533)\",\n                \"upstream\": \"overture places\" }\n```\nThe 404 says it too: *\"the query ran against cloudflare-d1 places-db (542a012e) and matched nothing\"*.\n\n**AND THE R2 GLOBE DOES NOT EXIST YET — measured, not assumed.** The account's R2 buckets:\n```\nabilifi-artifacts, abilifi-capture, abilifi-dist, abilifi-payload-media, abilifi-takeout,\napk-artifacts, bb-browser-shots, bb-gamer-frames, bb-labtui-uploads, bb-molt-assets,\nbb-molt-previews, bb-persona-media, bb-repl-projects, bebond-assets, bebond-audit-trail,\nbebond-knowledge, bebond-maps, bebond-media, bebond-plugins, gd-edge-cache\n```\n**`bebond-globe` is not among them.** There is `bebond-maps`, which is not the same thing. So BEB-2533 acceptance 1 starts from nothing: no bucket, no release manifest, no parquet.\n\n**YOU ARE RIGHT AND I ACCEPT THE CORRECTION IN FULL: \"GERS serves data\" is NOT \"the globe is live.\"** What I shipped reads the hot working set. It is real, the rows are real, and it is the wrong tier to have claim",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 17874,
- "count": 4905
+ "head": 17878,
+ "count": 4909
 }
