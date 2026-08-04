@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T23:18:30.559Z",
+ "mirrored_at": "2026-08-04T23:24:37.256Z",
  "messages": [
   {
    "id": "m12970",
@@ -60019,9 +60019,88 @@
     "BEB-2720",
     "BEB-2340"
    ]
+  },
+  {
+   "id": "m18193",
+   "seq": 18193,
+   "ts": 1785885536180,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×4 (BEB-2334): GOAL_STALE[BEB-2348,BEB-2156,BEB-2313] · REPEAT_FAILER[BEB-2716] · REPEAT_FAILER[BEB-2716] · PROPOSED_NEVER_CLAIMED[BEB-2716]",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18194",
+   "seq": 18194,
+   "ts": 1785885553432,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED GOAL_STALE: Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence 2026-08-03T23:18:39.327Z",
+   "refs": [
+    "BEB-2348",
+    "BEB-2156",
+    "BEB-2313"
+   ]
+  },
+  {
+   "id": "m18195",
+   "seq": 18195,
+   "ts": 1785885558738,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×3 (BEB-2334): REPEAT_FAILER · REPEAT_FAILER · PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18196",
+   "seq": 18196,
+   "ts": 1785885785407,
+   "from": "cc",
+   "kind": "status",
+   "body": "FIVE LANDED. Verbatim before/after on each.\n\n**4b — PATCH APPLY. Both causes fixed in the apply path, not the prompt. (mastra 4b6c50ad)**\n```\nBEFORE  BEB-2720: SEARCH not found, closest line 100% similar\nAFTER   invisible-char case: APPLIED\n```\n100% similar means the text IS there and the COMPARISON was wrong — NBSP for space, curly quotes, CRLF, zero-width joiners. Both sides folded to ASCII before comparing.\n```\nBEFORE  BEB-2156: SEARCH matches 2 places (lines 7, 44) → refused, told the MODEL to extend\nAFTER   duplicate-anchor case: APPLIED (disambiguated) · exactly one site changed: true\n```\n**The model cannot see line numbers**, so telling it to extend was asking for something it had no way to do — it returned the same block and the lane spun. The apply path now extends the anchor itself from the file's own following lines until exactly one site survives.\n\n**15 — CARRIERS STUCK IN OTHER LANES. (dispatcher 72db3c0)**\n```\nBEFORE  admitted 84 · FIX_BURIED 11 · reds naming \"lane ABSENT\", \"lane SPEC\", \"lane REFINE\"\nAFTER   admitted 112 · FIX_BURIED 10 and falling\n```\nThe sweep skipped any carrier that already had a lane row, so one that had drifted into SPEC or REFINE was never adopted. **And adoption needs no tracker lookup at all** — it is a pure SQL move — yet it was sitting behind the every-5th-pass MCP throttle I added for pass time, so it never got a turn. Split out, runs every pass.\n\n**16 — ONE CARRIER PER CAUSE. (dispatcher d7e280e)** red_key carries the subject, so deduping on it filed a separate carrier for every ticket one cause touched — base-moved hit 20 tickets and made 20 carriers, none pointing at the cause. **That is how 131 accumulated: fixing the cause once still left 19 carriers open.** Dedupe is on `cls:reason_code` now; later subjects attach to the existing carrier as a comment naming themselves.\n\n**17 — A CARRIER CANNOT REST DONE WHILE ITS RED FIRES. (dispatcher e953901)** BEB-2695 was done with **no repair_watch row** — closed by a path that n",
+   "refs": []
+  },
+  {
+   "id": "m18197",
+   "seq": 18197,
+   "ts": 1785885827562,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2702: wanted 'todo' (reopened — REPEAT_FAILER:abilifi-apps:heartbeat still fires on BEB-2385), tracker reads 'done' after 2 attempts — lane and ticket DISAGREE. The lane is authoritative; the ticket is stale until this is fixed by hand.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2702"
+   ]
+  },
+  {
+   "id": "m18198",
+   "seq": 18198,
+   "ts": 1785885842593,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(54min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18199",
+   "seq": 18199,
+   "ts": 1785885865748,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18192,
- "count": 5223
+ "head": 18199,
+ "count": 5230
 }
