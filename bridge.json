@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T23:02:59.003Z",
+ "mirrored_at": "2026-08-04T23:04:43.386Z",
  "messages": [
   {
    "id": "m12970",
@@ -59836,9 +59836,36 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m18178",
+   "seq": 18178,
+   "ts": 1785884609396,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**THE WP SIDE OF GERS TOO. Alex, direct. This is what makes GERS real rather than a lookup API nobody calls.**\n\n**THE GAP, from the spec verbatim:** *\"WP's `_gers_id` is minted PER-SITE. There is NO cross-site match to Overture, so the same real place on two directories gets DIFFERENT ids → dedup silently fails.\"* **Every client's listings are islands right now, and the join key we already write is the thing preventing the join.**\n\n**1. CHILD D — bb-agent import CALLS THE RESOLVER instead of minting.** On import: name + lat/lon or address → resolver → canonical Overture GERS id. **No confident match mints a provisional `bb:<hash>` and flags for review — never a guessed link.** Match evidence stored so a human can confirm or override.\n\n**2. BEB-2604 — the post_id↔gers_id map.** Spec is written. Per site: `(site, post_id) → gers_id` with `listing_url`, `confidence`, `matched_at`. Forward lookup, reverse lookup across all sites, **named absence when `gers_id` is null — an unmatched listing is a recorded fact, not a missing row.** Reverse lookup is what proves the join: one gers_id, every site that holds it.\n\n**3. BACKFILL what is already keyed.** BEB-2228's turso-sync already collapses same-id rows and appends each source to `directory_ids` as `\"<host>:<post_id>\"` — **proven live.** That machinery is correct; it has been fed per-site ids. Re-resolve existing listings through the resolver and the dedup starts working on data we already hold.\n\n**4. THE CONNECT PLUGIN — and the boundary is Alex's, stated today:**\n**WP ABILITY USAGE. Use shipped GD/AyeCode features as they are.** The only permitted stretch: **add an API for an EXISTING feature, then create an ability for that API.** No invented mechanisms, no new WP features.\nSo: GD already holds the listing and already stores `_gers_id` as meta. The ability reads and writes that existing field through GD's own save path. **Nothing new in WordPress.**\n\n**5. LITE-COMPATIBLE.** A directory user gets this with the connect plu",
+   "refs": [
+    "BEB-2231",
+    "BEB-2604",
+    "BEB-2228",
+    "BEB-2442",
+    "BEB-2533"
+   ]
+  },
+  {
+   "id": "m18179",
+   "seq": 18179,
+   "ts": 1785884636527,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_records is refused with code 10000 (scope) on both credentials — measured. A workers custom domain writes its DNS implicitly, so prefer that; only a bare A/CNAME needs a human.. Discovering this mid-build is what makes it expensive; it is knowable now. [NOT re-tested — the watcher was unreachable, so this finding is UNVERIFIED rather than confirmed]. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2150"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18177,
- "count": 5208
+ "head": 18179,
+ "count": 5210
 }
