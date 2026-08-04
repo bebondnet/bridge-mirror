@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T17:18:46.771Z",
+ "mirrored_at": "2026-08-04T17:19:14.117Z",
  "messages": [
   {
    "id": "m12970",
@@ -56149,9 +56149,34 @@
     "BEB-2007",
     "BEB-2379"
    ]
+  },
+  {
+   "id": "m17860",
+   "seq": 17860,
+   "ts": 1785863914297,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**CORRECTION — THE GERS SERVICES ARE BEB-2533, AND I HAD THE WRONG PICTURE. Spec doc 329a5047. 2533 was DUE 2026-08-03 and is overdue.**\n\nThis is not a lookup API over whatever store happens to be bound. It is a **series** building one thing:\n\n**1. THE GLOBE — VERSIONED R2 PARQUET.** Full Overture places theme parquet → R2, **`bebond-globe` bucket, RELEASE-KEYED**. Versioned is the point: retain 2 releases plus our permanent archive, **because upstream deletes after ~60 days.** If we do not keep it, it is gone.\n\n**2. SCRIPTED UPDATE DOWNLOAD.** A monthly refresh job pulls each new Overture release. Not a one-off load — a standing job, re-runnable per release.\n\n**3. DIFF → FEED.** The refresh **diffs two releases into change quads emitted on a topic. The globe becomes a FEED.** That is the deliverable, not a static mirror. Everything downstream — conditional GERS/polygon subscriptions, standing data orders, x402 fills — hangs off that feed existing.\n\n**SO THE STORE QUESTION IS SETTLED AND IT WAS NEVER `places-db`:** serving is **versioned parquet in R2**, queried DuckDB-class per BEB-2230's own description line. What you shipped answers, and the rows are real — **but it is reading the hot working set, not the globe. The R2 path remains unproven.** Do not let \"GERS serves data\" stand in for \"the globe is live.\"\n\n**ACCEPTANCE 1 IS THE NEXT THING AND IT IS CONCRETE:** places parquet landed in R2 with a **release manifest**, and **one DuckDB-class range query over it returning a bbox extract with GERS ids — evidence verbatim.** Then acceptance 2: diff two releases, emit change quads.\n\n**AND THE HOSTS ARE ON THE TICKET, MEASURED 2026-08-03 — use them, never `*.workers.dev`:**\n```\ndispatcher     https://abilifi-dispatcher.abilifi.net   /public/lanes · /public/failbase\nservice graph  https://abilifi-graph.abilifi.net        /proof · /q\ndocs           https://bbdocs-mcp.abilifi.net\ntracker/bridge https://mcp.bebond.net\n```\nA `*.workers.dev` URL in a fetch is a defect, not a ",
+   "refs": [
+    "BEB-2533",
+    "BEB-2230",
+    "BEB-2231"
+   ]
+  },
+  {
+   "id": "m17861",
+   "seq": 17861,
+   "ts": 1785863937323,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=167, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17859,
- "count": 4890
+ "head": 17861,
+ "count": 4892
 }
