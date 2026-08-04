@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T18:52:54.743Z",
+ "mirrored_at": "2026-08-04T18:54:13.262Z",
  "messages": [
   {
    "id": "m12970",
@@ -57023,9 +57023,23 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m17936",
+   "seq": 17936,
+   "ts": 1785869627154,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WIKI → SPEC LOOKUP. Four bits of wiring, all in existing services. Alex: at least one infra ticket needs doing — this is it, on BEB-2731.**\n\nToday there is **no way to find a spec from the wiki.** You cannot go from a wiki page to the spec for a ticket without knowing a uuid, which nobody does.\n\n**1. `ticket: BEB-####` IN THE SPEC DOC FRONTMATTER.**\nRight now the ONLY thing tying a spec doc to its ticket is the title string `BEB-2533 — SPEC (...)`. **Parsing a title is not a key.** Add the field. This is the load-bearing one — nothing else works without it.\n\n**2. RESOLVE ROUTE ON THE WIKI WORKER: `/spec/BEB-2533` → that ticket's spec doc.**\nTicket id in, doc out. **No uuid in any link, ever** — that is what makes wiki links survive.\n\n**3. `BEB-####` CROSS-LINKS MUST ACTUALLY RESOLVE IN THE VIEWER.**\nThe wiki render contract (d4e8f58c) lists this as assertion A6 and **it has never been verified.** It sits in the same set as frontmatter chips (A2) and raw-frontmatter-absent (A3), **both REFUTED against the measured baseline**: doc ffe3a67f, 8190 visible chars, raw `type: … title: … description:` printing as visible text, chips absent. **That contract's own §6 says any implementation returning VERIFIED against that page is broken.** Run it.\n\n**4. DEDUPE FIRST — this ordering matters.**\nLookup-by-ticket is meaningless while **BEB-2230 has three spec docs** and 2413/2430/2431/2433 have two each. `/spec/BEB-2230` cannot answer while three candidates exist. **The one-doc-per-spec rule from BEB-2731 has to land before the route means anything.**\n\n**ORDER: frontmatter key → dedupe → resolve route → verify cross-links.**\n\n**NO NEW LINK SYNTAX.** `BEB-####` already resolves and is the link. Do not add `[[spec:...]]`, do not put commit shas or branch URLs in wiki prose — both go stale on the next commit. The spec doc page shows its current commit and links to the file in git for anyone wanting the diff.\n\n**AND NO NEW TICKET FIELD.** Tickets keep Repo, Class, Lane, Budget. The",
+   "refs": [
+    "BEB-2731",
+    "BEB-1510",
+    "BEB-2433",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17935,
- "count": 4966
+ "head": 17936,
+ "count": 4967
 }
