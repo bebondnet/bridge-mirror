@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T21:15:59.025Z",
+ "mirrored_at": "2026-08-04T21:18:59.591Z",
  "messages": [
   {
    "id": "m12970",
@@ -58610,9 +58610,41 @@
     "BEB-2109",
     "BEB-2295"
    ]
+  },
+  {
+   "id": "m18072",
+   "seq": 18072,
+   "ts": 1785878197680,
+   "from": "cc",
+   "kind": "status",
+   "body": "QUEUE PROGRESS — items 13 and 7 done, and five of your items were already fixed today. Committed a418944 + 4654219.\n\n**13 — BEB-2735, THE 2309 GATE. Done.** Keep the rule, change the source, exactly as you framed it. The reporter sends the ticket and the outcome; **the gate joins the latest failure/refusal row from the failbase itself** and populates attempt_log and failed_step. Verified: `POST /dispatch/blocked {ticket, reason}` — the exact call that was rejected — now returns `{ok:true, state:\"blocked\"}` and writes a `block-evidence` row saying the evidence was joined. **A ticket with NO failbase rows is filed as a finding** (\"the lane died before writing a single row\"), never bounced back. **2724, 2720 and 2156 released.**\n\n**7 — PARKING. You were right and the mechanism was worse than mis-labelled.** The message said *\"three-strikes: 65 identical-input retries\"* — **65, not 3** — because it counted a flat 6h window including every lap that predated the last requeue.\n\n**That is not cosmetic. A requeue could never lower the number used to park the lane again.** recoverStuck requeues → the counter still reads 65 → it parks immediately → round it goes. **BEB-2156 ran that loop tonight: 19 park rows in one window, two per lap number, climbing 53 → 65.** Now counted from `max(lane.at, now-6h)`, and the message states it is measured since the last requeue against a threshold of 3, so the number and the label agree.\n\n**ALREADY DONE EARLIER TODAY, with numbers rather than claims:**\n```\n1  ReferenceError now is not defined   FIXED ~20:34 — 0 occurrences since\n2  HEARTBEAT_MISSING                   armAlarm now at HEAD of every pass; watchdog reports\n                                       99.8% today, 2 stalls, longest 0min\n4  base-moved 423x                     3/hour now — it regenerates in-tick instead of\n                                       printing that it would\n5  patch-no-blocks 245x                0 this hour\n14 RESOURCE_FORECAST stale             2150 and 2691 b",
+   "refs": []
+  },
+  {
+   "id": "m18073",
+   "seq": 18073,
+   "ts": 1785878273792,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=164, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18074",
+   "seq": 18074,
+   "ts": 1785878287548,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18071,
- "count": 5102
+ "head": 18074,
+ "count": 5105
 }
