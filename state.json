@@ -1,21 +1,21 @@
 {
- "mirrored_at": "2026-08-04T01:10:06.579Z",
- "ts": 1785805806024,
+ "mirrored_at": "2026-08-04T01:11:10.645Z",
+ "ts": 1785805869497,
  "loop": {
   "proposed_total": 457,
   "by_state": {
-   "queued": 194,
+   "queued": 195,
    "claimed": 0,
    "done": 161,
    "held": 19,
-   "parked": 66
+   "parked": 65
   },
   "by_lane": {
    "BUILD": {
     "done": 99,
     "held": 19,
-    "parked": 65,
-    "queued": 11
+    "parked": 64,
+    "queued": 12
    },
    "REFINE": {
     "queued": 115
@@ -33,14 +33,21 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785805768089,
+   "at": 1785805834124,
    "tally": "BEB-2379→BUILD, BEB-2710→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2540→BUILD, BEB-2412→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785805748535,
+    "detail": "claimed=0, queued=194, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785805808534,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -107,7 +114,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785789362886,
-    "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26",
     "refs": [
      "BEB-2379"
     ],
@@ -401,7 +408,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785719605581,
-    "detail": "alexrollin/abilifi-apps failing at codegen 322× in 24h — LATEST (08-04T01:08): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 323× in 24h — LATEST (08-04T01:10): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2540"
     ],
@@ -457,7 +464,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785719605581,
-    "detail": "alexrollin/abilifi-apps failing at park 276× in 24h — LATEST (08-04T01:08): three-strikes: 17 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at park 277× in 24h — LATEST (08-04T01:10): three-strikes: 17 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2540"
     ],
@@ -610,7 +617,22 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
+    "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
+    "refs": [
+     "BEB-2710"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2710"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785805808534,
     "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2707"
@@ -624,7 +646,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2685"
@@ -638,7 +660,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2409",
@@ -648,7 +670,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -658,7 +680,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2473",
@@ -678,7 +700,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2515",
@@ -698,7 +720,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2524",
@@ -718,7 +740,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2570",
@@ -728,7 +750,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2573",
@@ -738,7 +760,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785805748535,
+    "since": 1785805808534,
     "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2578",
@@ -748,16 +770,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 17270,
+  "head_seq": 17271,
   "cursor_fable": 12969,
-  "unread_for_fable": 4301,
+  "unread_for_fable": 4302,
   "last": [
-   {
-    "seq": 17266,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2150 proposed on 6 consecutive passes and has NEVER been c"
-   },
    {
     "seq": 17267,
     "from": "cc",
@@ -781,6 +797,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 17271,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · PROPOSED_NEVER_CLAIMED[BEB-2710]→BEB-2716"
    }
   ]
  },
@@ -874,9 +896,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785805748535,
+   "detail": "claimed=0, queued=194, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785805808534,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -943,7 +972,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785789362886,
-   "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2379 failing at park 3× in 24h — LATEST (08-03T22:19): identical-input sweep: 26 byte-identical retries at codegen — parked before the next lap instead of after 26",
    "refs": [
     "BEB-2379"
    ],
@@ -1237,7 +1266,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785719605581,
-   "detail": "alexrollin/abilifi-apps failing at codegen 322× in 24h — LATEST (08-04T01:08): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 323× in 24h — LATEST (08-04T01:10): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found in the file, even ignoring inde · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2540"
    ],
@@ -1293,7 +1322,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785719605581,
-   "detail": "alexrollin/abilifi-apps failing at park 276× in 24h — LATEST (08-04T01:08): three-strikes: 17 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at park 277× in 24h — LATEST (08-04T01:10): three-strikes: 17 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2540"
    ],
@@ -1446,7 +1475,22 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
+   "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
+   "refs": [
+    "BEB-2710"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2710"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785805808534,
    "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2707"
@@ -1460,7 +1504,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2685"
@@ -1474,7 +1518,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2409",
@@ -1484,7 +1528,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1494,7 +1538,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2473",
@@ -1514,7 +1558,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2515",
@@ -1534,7 +1578,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2524",
@@ -1554,7 +1598,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2570",
@@ -1564,7 +1608,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2573",
@@ -1574,7 +1618,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785805748535,
+   "since": 1785805808534,
    "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2578",
