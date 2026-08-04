@@ -1,29 +1,30 @@
 {
- "mirrored_at": "2026-08-04T12:04:46.528Z",
- "ts": 1785845084536,
+ "mirrored_at": "2026-08-04T12:06:19.171Z",
+ "ts": 1785845177543,
  "loop": {
   "proposed_total": 461,
   "by_state": {
-   "queued": 184,
-   "claimed": 0,
-   "done": 183,
+   "queued": 183,
+   "claimed": 2,
+   "done": 182,
    "held": 16,
    "parked": 64
   },
   "by_lane": {
    "BUILD": {
+    "claimed": 2,
     "done": 100,
     "held": 16,
     "parked": 63,
-    "queued": 17
+    "queued": 15
    },
    "REFINE": {
     "queued": 115
    },
    "REPAIR": {
-    "done": 44,
+    "done": 43,
     "parked": 1,
-    "queued": 30
+    "queued": 31
    },
    "SPEC": {
     "done": 39,
@@ -33,14 +34,21 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785845013377,
-   "tally": "BEB-2279→BUILD, BEB-2379→BUILD[done], BEB-2156→BUILD, BEB-2394→BUILD, BEB-2724→BUILD, BEB-2720→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
+   "at": 1785845076574,
+   "tally": "BEB-2379→BUILD, BEB-2279→BUILD, BEB-2156→BUILD, BEB-2394→BUILD, BEB-2724→BUILD, BEB-2346→BUILD, BEB-2720→BUILD, BEB-2722→BUILD, BEB-2707→REFINE, BEB-2685→REFINE"
   },
   "reds": [
    {
-    "code": "GOAL_STALE",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785845048545,
+    "detail": "claimed=0, queued=184, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785845108538,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -177,7 +185,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785762418048,
-    "detail": "abilifi-apps/abilifi-dispatcher failing at codegen 4× in 24h — LATEST (08-03T13:25): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: ReferenceError: code is not defined\ntarget: abilifi-apps/abilifi-dispatcher\ncodegen prompt head (what the MODEL received): (not captured)",
+    "detail": "abilifi-apps/abilifi-dispatcher failing at codegen 4× in 24h — LATEST (08-03T13:25): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: ReferenceError: code is not defined\ntarget: abilifi-apps/abilifi-dispatcher\ncodegen prompt head (what the MODEL received): (not captured) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2346"
     ],
@@ -191,7 +199,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785758783319,
-    "detail": "abilifi-apps/abilifi-dispatcher failing at deploy 57× in 24h — LATEST (08-04T11:18): codeLen: 1607\ndeploy error: repo meta 404\ncommit: none\ntarget: abilifi-apps/abilifi-dispatcher",
+    "detail": "abilifi-apps/abilifi-dispatcher failing at deploy 57× in 24h — LATEST (08-04T11:18): codeLen: 1607\ndeploy error: repo meta 404\ncommit: none\ntarget: abilifi-apps/abilifi-dispatcher · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2346"
     ],
@@ -498,7 +506,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "BEB-2724 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2724"
@@ -512,7 +520,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "BEB-2720 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2720"
@@ -526,7 +534,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2707"
@@ -538,9 +546,24 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785845108538,
+    "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
+    "refs": [
+     "BEB-2685"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2685"
+    },
+    "fix_ticket": "BEB-2688"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2409",
@@ -550,7 +573,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -560,7 +583,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2473",
@@ -580,7 +603,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2515",
@@ -610,7 +633,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2570",
@@ -620,7 +643,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2573",
@@ -630,7 +653,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785845048545,
+    "since": 1785845108538,
     "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2578",
@@ -640,16 +663,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 17601,
+  "head_seq": 17602,
   "cursor_fable": 12969,
-  "unread_for_fable": 4632,
+  "unread_for_fable": 4633,
   "last": [
-   {
-    "seq": 17597,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed ·"
-   },
    {
     "seq": 17598,
     "from": "cc",
@@ -673,6 +690,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2379 — commit 8"
+   },
+   {
+    "seq": 17602,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · PROPOSED_NEVER_CLAIMED[BEB-2685]→BEB-2688"
    }
   ]
  },
@@ -766,9 +789,16 @@
  ],
  "reds": [
   {
-   "code": "GOAL_STALE",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785845048545,
+   "detail": "claimed=0, queued=184, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785845108538,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -905,7 +935,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785762418048,
-   "detail": "abilifi-apps/abilifi-dispatcher failing at codegen 4× in 24h — LATEST (08-03T13:25): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: ReferenceError: code is not defined\ntarget: abilifi-apps/abilifi-dispatcher\ncodegen prompt head (what the MODEL received): (not captured)",
+   "detail": "abilifi-apps/abilifi-dispatcher failing at codegen 4× in 24h — LATEST (08-03T13:25): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: ReferenceError: code is not defined\ntarget: abilifi-apps/abilifi-dispatcher\ncodegen prompt head (what the MODEL received): (not captured) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2346"
    ],
@@ -919,7 +949,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785758783319,
-   "detail": "abilifi-apps/abilifi-dispatcher failing at deploy 57× in 24h — LATEST (08-04T11:18): codeLen: 1607\ndeploy error: repo meta 404\ncommit: none\ntarget: abilifi-apps/abilifi-dispatcher",
+   "detail": "abilifi-apps/abilifi-dispatcher failing at deploy 57× in 24h — LATEST (08-04T11:18): codeLen: 1607\ndeploy error: repo meta 404\ncommit: none\ntarget: abilifi-apps/abilifi-dispatcher · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2346"
    ],
@@ -1226,7 +1256,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "BEB-2724 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2724"
@@ -1240,7 +1270,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "BEB-2720 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2720"
@@ -1254,7 +1284,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "BEB-2707 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2707"
@@ -1266,9 +1296,24 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785845108538,
+   "detail": "BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
+   "refs": [
+    "BEB-2685"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2685"
+   },
+   "fix_ticket": "BEB-2688"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2409 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2409",
@@ -1278,7 +1323,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1288,7 +1333,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2473 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2473",
@@ -1308,7 +1353,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2515",
@@ -1338,7 +1383,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2570",
@@ -1348,7 +1393,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2573",
@@ -1358,7 +1403,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785845048545,
+   "since": 1785845108538,
    "detail": "fix BEB-2578 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2578",
