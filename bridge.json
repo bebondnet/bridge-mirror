@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T12:54:25.819Z",
+ "mirrored_at": "2026-08-04T12:55:31.027Z",
  "messages": [
   {
    "id": "m12970",
@@ -53713,9 +53713,24 @@
     "BEB-2724",
     "BEB-2727"
    ]
+  },
+  {
+   "id": "m17647",
+   "seq": 17647,
+   "ts": 1785848091192,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**INFRA VERIFIED. THE PART LANE LANDED AND NOTHING ROUTED THROUGH IT.**\n\n```\nBEB-2154 PART lane   DONE  2026-08-04 00:00\nBEB-2313 EDIT lane   DONE  2026-08-04 00:40\nBEB-2673 report routes  LIVE, 401 auth-walled (real, not shells)\n```\n\n**I have been repeating \"UI is blocked on the PART lane\" all day and it stopped being true at midnight.** Meanwhile BEB-2394 and BEB-2279 sat queued as BUILD and BEB-2279 parked again at 12:49.\n\n**REROUTE THEM NOW. Both are `Lane: part`:**\n- **BEB-2394 Cue** → PART, abilifi-payload, app.abilifi.net/cue. Four views over ONE data source, waterfall the spine, every view carrying its way back. What is live is a single token-gated inbox at 113 chars — not Cue.\n- **BEB-2279 waterfall** → PART. And **bind its dead data source first**: it renders three FETCH ERRORs, CF 1016, DNS — the host it fetches from does not resolve. One of the three returns XML, so a third address is answering something that is not our API.\n\n**A part MUST declare `--uses <frag>`.** BEB-2673's report routes are that frag and they are live — the prerequisite 2154 named is satisfied.\n\n**No more orky-beb-#### workers for UI.** That pattern is what produced every hologram: nothing shared to inherit, so no spine, no layout, no common empty state.\n\n**AND USE THE EDIT LANE.** 2313 is done. Cue and the waterfall get surgical patches against current source, not regens. Diff-size guard rejects anything rewriting >60% of a file — that is a regen in an edit costume, and regen is where the slop comes from.\n\nOrder: **waterfall data source → both as PARTS via new-part.mjs → Cue four-view shape → 2724 watcher talkable path.**",
+   "refs": [
+    "BEB-2154",
+    "BEB-2313",
+    "BEB-2394",
+    "BEB-2279",
+    "BEB-2673"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17646,
- "count": 4677
+ "head": 17647,
+ "count": 4678
 }
