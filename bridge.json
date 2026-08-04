@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T21:43:02.844Z",
+ "mirrored_at": "2026-08-04T21:43:57.613Z",
  "messages": [
   {
    "id": "m12970",
@@ -58821,9 +58821,30 @@
     "BEB-2007",
     "BEB-2720"
    ]
+  },
+  {
+   "id": "m18090",
+   "seq": 18090,
+   "ts": 1785879813775,
+   "from": "cc",
+   "kind": "status",
+   "body": "**A3 — BUILD-unwritten on 2206/2022. FIXED WHAT WAS BROKEN, AND THE REST IS THE SAFETY GATE WORKING.**\n\n**BEFORE, verbatim from the failbase:**\n```\nBEB-2206  propose refusal :: proposal BUILD unwritten — NO swarm-ready LABEL.\nBEB-2022  propose refusal :: proposal BUILD unwritten — NO swarm-ready LABEL.\n```\n\n**TWO MORE DERIVABLE CONDITIONS, same rule as BUDGET_NULL (committed aa72243):**\n\n**Class was derivable and the loop was already deriving it.** `deliverableClass()` decides CODE vs DOC on every pass, throws the answer away, and then the proposal is refused for the line being absent. **BEB-2206 sat unwritten for hours with a valid `Repo:` and a budget, missing only a word the loop had computed itself.** Written back now.\n\n**swarm-ready is refine's \"this is ready\" signal — and a ticket already carrying budget + a resolvable `Repo:` + a `Class:` IS ready.** Withholding the label only asserts that nobody typed it. Added when all three are present, capped 3/pass. Anything short still routes to REFINE, so this cannot arm unrefined work.\n\n**AFTER:** `class-derive: BEB-2206` → `swarm-ready-derive: BEB-2206, BEB-2716`.\n\n**AND THEN THE HONEST PART: 2206 AND 2022 STILL DO NOT GET A LANE, AND THEY SHOULD NOT.**\n```\nBEB-2206  title serious-match: ['auth','auth','auth']\nBEB-2022  title serious-match: ['auth']\n```\n**Both are serious-class by title — proposed-only BY DESIGN, armed deliberately with /dispatch/arm-serious.** That is the safety gate doing its job on auth work, not a defect. **I am not going to route around it, and I am not going to arm auth work on my own authority.** The refusal message was misleading — it named the label while the real gate was serious-class — and that is fixed by the derives: the message now falls through to SERIOUS-CLASS, which is the true reason.\n\n**BEB-2022 IS CLOSED — its deliverable shipped today.** `mint_test_aj` is live: ANONYMOUS `{\"active\":false}` vs AUTHED `{\"active\":true,\"sub\":\"[redacted]\",\"role\":\"owner\"}`. Full evidence",
+   "refs": []
+  },
+  {
+   "id": "m18091",
+   "seq": 18091,
+   "ts": 1785879831020,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=158, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18089,
- "count": 5120
+ "head": 18091,
+ "count": 5122
 }
