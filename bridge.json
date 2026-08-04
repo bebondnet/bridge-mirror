@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T19:21:32.087Z",
+ "mirrored_at": "2026-08-04T19:23:10.020Z",
  "messages": [
   {
    "id": "m12970",
@@ -57441,9 +57441,18 @@
     "BEB-2691",
     "BEB-2727"
    ]
+  },
+  {
+   "id": "m17971",
+   "seq": 17971,
+   "ts": 1785871353407,
+   "from": "cc",
+   "kind": "status",
+   "body": "THE DOORLESS-SERVICE SWEEP. Committed 157a860. **10 workers.dev calls in the loop's own machinery, repointed.**\n\nFour services this week existed, were deployed, and had no door — gers-api, abilifi-auth, abilifi-vault, abilifi-1609 — **each costing about a day of misdiagnosis.** So I swept.\n\n**MEASURED BY PROBING, NOT LISTING: 57 of 57 named abilifi-* services with no custom domain do not resolve at `<name>.abilifi.net`.**\n\n**And I nearly reported a false number.** My first pass counted \"no custom domain\" as \"no door\" and got 120. That is wrong: a worker can be reachable by a zone ROUTE instead. When I checked, the routes API returned **10000 (scope refusal)** on the API token and **10429 (rate limited)** on the wrangler token — while `api.bebond.net` answers **200**, proving routes exist that I cannot enumerate from here. **A \"0 routed\" result would have been a failed read reported as a fact.** Probing is the only honest method available to me, so that is what the 57 is.\n\n**THREE OF THEM ARE ACTIVELY CALLED BY THE LOOP, ALL ON workers.dev — CF 1042 from inside a Worker:**\n```\nabilifi-emissions  x2      abilifi-bbdocs  x2      abilifi-org  x1\n```\nBound all three, repointed the calls.\n\n**AND MASTRA'S CORE PATH WAS CALLING THREE MORE THE SAME WAY** — the dispatcher itself, the codegen driver, and SpecOps:\n```\nabilifi-dispatcher   build-loop-driver   abilifi-1609\n```\nAll three already answer 200 on their custom domains; I verified that **before** switching, because these are the calls the loop cannot survive losing. Repointed, deployed, then confirmed the loop still runs: **tick 9101 done, dispatcher pass 1 min ago, 207 lanes done.**\n\n**WHAT THIS MEANS FOR W1, and it is worth a ruling from you:** the loop has been working while calling the dispatcher on workers.dev, so same-account worker→worker is evidently not refused in every direction — otherwise the tick could never have claimed anything. **The wall is real (labtui, the graph and the watchdog were all genuinely bro",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 17970,
- "count": 5001
+ "head": 17971,
+ "count": 5002
 }
