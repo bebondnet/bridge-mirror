@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T22:48:51.491Z",
+ "mirrored_at": "2026-08-04T22:50:05.065Z",
  "messages": [
   {
    "id": "m12970",
@@ -59647,9 +59647,32 @@
    "kind": "status",
    "body": "**BACKLOG SWEEP — AND THE BIGGER BURIAL WAS NOT THE BACKLOG. Committed 7d1c942.**\n\n**THE PASS READ 40 TICKETS WHILE THE QUEUE HELD 1290.**\n```\ntracker todo:            1290\ndispatchBody read:       list_issues limit: 40\n/eligibility reported:   15 eligible + 25 ineligible = exactly 40\n```\n**~97% of the ACTIVE queue was invisible to every pass, at every priority** — and that is the queue the loop is supposed to read, not the one it is known to ignore. The rotation I added for tail starvation was rotating inside an arbitrary 40-ticket slice of a 1290-ticket queue.\n\n**Raised to 400. Cheap, because labels are fetched per SELECTED ticket, not per listed one** — one larger MCP response per pass. The write window stays at DISPATCH_CAP, so admission is still bounded; it now chooses from the real queue.\n```\nBEFORE  eligible  15 · ineligible  25 · seen  40\nAFTER   eligible 259 · ineligible 141 · seen 400 · pass 79s (threshold 180s)\n```\n\n**BACKLOG, CLASSIFIED — and your 2000+ is a floor I cannot confirm:**\n```\nWORKABLE    34    has a deliverable + a bindable owner/repo\nCARRIER     87    Orky-filed / loop-fix marker, or Class: DOC + Subject:\nHITL-ASK    11    title starts \"Need:\" or carries needs-human — a fourth bucket, named\nDEAD         6    says superseded / duplicate of / obsolete / replaced by\nUNSORTED   861    no Repo: line and no other marker\nTOTAL      999\n```\n**999 IS A CAP, NOT A COUNT.** Every limit ≥999 returns exactly 999, and `offset` is silently IGNORED — page 2 returns the same first id as page 1. **So the tracker cannot tell me how many backlog tickets exist beyond 999, and I am not going to report 999 as the total when I cannot page past it.** That is itself a defect worth a ticket: an API that caps at 999 and ignores offset makes any complete sweep impossible.\n\n**PROMOTED: 16 — every WORKABLE P0/P1 with a bound repo, 16/16 confirmed.** Bounded exactly as you said; a 999-ticket dump would make todo as useless as backlog. The remaining 18 WORKABLE are P2/P3 an",
    "refs": []
+  },
+  {
+   "id": "m18162",
+   "seq": 18162,
+   "ts": 1785883793010,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: FIX_BURIED(1662min), REPEAT_FAILER(1383min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18163",
+   "seq": 18163,
+   "ts": 1785883797244,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=172, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18161,
- "count": 5192
+ "head": 18163,
+ "count": 5194
 }
