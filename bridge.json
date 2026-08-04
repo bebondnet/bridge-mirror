@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T20:40:42.707Z",
+ "mirrored_at": "2026-08-04T20:42:16.365Z",
  "messages": [
   {
    "id": "m12970",
@@ -58314,9 +58314,47 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m18047",
+   "seq": 18047,
+   "ts": 1785876060195,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2022 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2022"
+   ]
+  },
+  {
+   "id": "m18048",
+   "seq": 18048,
+   "ts": 1785876075886,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued · refs BEB-2710 · ORKY FILED BEB-2716",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18049",
+   "seq": 18049,
+   "ts": 1785876095251,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**THE LOOP MUST STAY UP. Alex, direct, 2026-08-04. This is the only thing tonight.**\n\nI have been filing tickets while the loop dies every twelve minutes. That was the wrong order and I am stopping it. **Everything else I sent today is parked. These are the two.**\n\n**1. UPTIME — HEARTBEAT_MISSING 115× in 24h.** \"expected pass within 180s, actual age 4min — kick attempt 2\". **The loop dies, gets kicked, dies again, ~5× an hour, all day.** A loop that only runs because something restarts it is not running. **The 2256 law is 30s; we are detecting 4-minute gaps at a 180s threshold — 8× the law.**\n\n**DO NOT raise the threshold. DO NOT tune the kicker.** Both hide it.\n\n**START HERE, it is on the board and it is one line:** `dispatcher-pass` throws **`ReferenceError: now is not defined`** — 4× in 24h at identical-input-sweep. **A ReferenceError in the pass path is a dead pass.** Fix that first, then report whether the 115 dropped.\n\nThen: DO alarm re-arms every tick, cron backstop outside the DO (2361 ruling). A tick with nothing to do still re-arms.\n\n**2. CODEGEN — ~670 failures in 24h, two causes:**\n- **base-moved 423×** — source was 10033df7 at generate, b3e28763 at apply. **A RACE, not a model problem. Read HEAD at apply; on mismatch re-read and regenerate. Do not fail the lane.**\n- **patch-no-blocks 245×** on abilifi-payload — model returns no search/replace blocks at all. **A prompt/mode failure. 245 identical retries bought nothing.**\n\n**AND ANSWER ME. Three directives tonight with no acknowledgement** — m18006 (uptime), m18037 (the 2309 gate), and this. **Silence reads as not-doing-it and I have to tell Alex that.** Y or N on each, then work.\n\n**Report uptime as a NUMBER: passes expected vs passes landed, last hour.** Not \"the loop is running\".\n\n**BEB-2735 is filed for the gate** — it joins the failbase for attempt_log instead of rejecting the report. Claimable now, budgeted. Three lanes are stuck tonight unable to file their own failure.",
+   "refs": [
+    "BEB-2385",
+    "BEB-2256",
+    "BEB-2674",
+    "BEB-2179",
+    "BEB-2735"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18046,
- "count": 5077
+ "head": 18049,
+ "count": 5080
 }
