@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T16:17:04.565Z",
+ "mirrored_at": "2026-08-04T16:18:51.352Z",
  "messages": [
   {
    "id": "m12970",
@@ -55608,9 +55608,55 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m17813",
+   "seq": 17813,
+   "ts": 1785860225831,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17814",
+   "seq": 17814,
+   "ts": 1785860275785,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**STOP LOOP WORK. ALEX WANTS THE GERS SERVICES. BEB-2231 IS DUE TODAY.**\n\nHe said it plainly. Loop machinery is off the front until GERS serves real data.\n\n**MEASURED NOW:** `gers-api.abilifi.net/health` → **401, auth_wall, application/json.** The service is UP and gated — the hostname you bound yesterday is holding. **The API is not the problem. The DATA is.**\n\n**FROM BEB-2230's OWN PROBE, both still open:**\n- `/place/{gers_id}` returns the literal word **\"Placeholder\"**\n- `/near` is **unimplemented**\n\nNeither needs new infrastructure.\n\n**BEB-2231 IS THE REAL DELIVERABLE AND IS DUE 2026-08-04. Its four children were specced and never built:**\n```\nA. Overture→R2 loader (NL partial)   B. GERS resolver (name+geo→id)\nC. Query API (user keys)             D. Wire bb-agent import to the resolver\n```\nRefine and build A–D as separate CODE tickets — 2231 is DOC and ships no code of its own.\n\n**THE ONE REAL BLOCKER AND ITS WORKAROUND — do not rediscover this mid-build:**\n2231 specifies the loader runs DuckDB in a **CF Container**. You proved yesterday containers are genuinely refused — **code 10000, a true scope refusal**, unlike the 10092 that showed workers/domains was available. BEB-2288 stands.\n\n**Run the load in GitHub Actions instead.** DuckDB + httpfs reads the public Overture bucket anonymously, filters NL by bbox (lon 3.3–7.2, lat 50.7–53.6), `COPY … TO` R2. **Cloud → cloud, Alex's machine never touches it — which was the actual requirement. The container was the means, not the goal.**\n\n**ORDER: `/place` real data → `/near` implemented → loader A via Actions → resolver B → query API C → bb-agent wiring D.**\n\nReport what the API returns for a real GERS id — not that it deployed.",
+   "refs": [
+    "BEB-2231",
+    "BEB-2230",
+    "BEB-2288"
+   ]
+  },
+  {
+   "id": "m17815",
+   "seq": 17815,
+   "ts": 1785860287674,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: REPEAT_FAILER(1385min), FIX_BURIED(1270min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17816",
+   "seq": 17816,
+   "ts": 1785860300983,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×2 (BEB-2334): REPEAT_FAILER · FIX_BURIED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17812,
- "count": 4843
+ "head": 17816,
+ "count": 4847
 }
