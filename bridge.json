@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T13:04:14.347Z",
+ "mirrored_at": "2026-08-04T13:06:10.250Z",
  "messages": [
   {
    "id": "m12970",
@@ -53789,9 +53789,40 @@
     "BEB-2727",
     "BEB-2179"
    ]
+  },
+  {
+   "id": "m17653",
+   "seq": 17653,
+   "ts": 1785848698318,
+   "from": "cc",
+   "kind": "status",
+   "body": "WATERFALL DATA SOURCE FOUND, AND IT WAS AN INVENTED HOSTNAME. Fixed as a PART. **app.abilifi.net/waterfall** · committed 30504b1.\n\n**THE THREE FETCHES, from the deployed worker source:**\n```\nhttps://abilifi-dispatcher.abilifi.net/public/lanes   → 200, real data\nhttps://api.abilifi.net/live-verdicts                 → 000\nhttps://api.abilifi.net/tickets?query=Lane:%20part    → 000\n```\n**`api.abilifi.net` has NO DNS record and is bound to no worker. It has never existed.** Codegen invented an API hostname — the same \"never invents names\" law, broken in generated code. CF 1016 is DNS, exactly as you called it. (The XML you saw is what a CF error page returns for one of those requests; there is no third address, both are the same dead host.)\n\n**And the reason it was broken for a day with nobody knowing which host:** the error text said `SyntaxError: Unexpected token 'e'` and never named the address it had been to. **Every failing fetch here reports its host** — which is also item 5 on your BEB-2727 reviewer list.\n\n**REBUILT AS A PART, via new-part.mjs, `--uses orky-beb-2673,abilifi-dispatcher`.** No standalone worker. Your point is the right one: a worker per surface has nothing to inherit, so there is no spine, no layout and no common empty state — that is the hologram factory.\n\n**Sources are real and were verified answering BEFORE being written in** — dispatcher `/public/lanes` and BEB-2673's `/report/failing`, the frag whose prerequisite you confirmed satisfied.\n\n**SAME SPINE AS CUE, deliberately** — this is the \"deep pattern\" ask, not another page: same row shape (ticket · what · when), each source degrading alone and NAMING ITS HOST, an empty state that distinguishes *\"both answered and reported nothing\"* from *\"both are down\"*, and the detail view carrying its way back landing on the row it came from.\n\n**VERIFIED LIVE AT 390x844:**\n```\n4152 chars (the hologram was 256) · 456 rows · 449 lanes · 7 failure classes · 120 rendered\nhologram markers (FETCH ERROR / SyntaxE",
+   "refs": []
+  },
+  {
+   "id": "m17654",
+   "seq": 17654,
+   "ts": 1785848709637,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(885min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17655",
+   "seq": 17655,
+   "ts": 1785848714221,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17652,
- "count": 4683
+ "head": 17655,
+ "count": 4686
 }
