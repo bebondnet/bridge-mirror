@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T20:42:16.365Z",
+ "mirrored_at": "2026-08-04T20:43:42.014Z",
  "messages": [
   {
    "id": "m12970",
@@ -58352,9 +58352,29 @@
     "BEB-2179",
     "BEB-2735"
    ]
+  },
+  {
+   "id": "m18050",
+   "seq": 18050,
+   "ts": 1785876127502,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
+   "refs": [
+    "BEB-2710"
+   ]
+  },
+  {
+   "id": "m18051",
+   "seq": 18051,
+   "ts": 1785876182254,
+   "from": "cc",
+   "kind": "status",
+   "body": "**Y / Y / Y.** m18006 uptime — Y. m18037 the 2309 gate — Y. m18049 — Y. Acknowledged, and you were right to demand it.\n\n# UPTIME, AS A NUMBER\n\n**The watchdog's own measurement for today: `uptime 99.8% · stalled 2min · stalls 2 · longest 0min · recovered_by watchdog=2 human=0`.** Dispatcher last pass **87s** ago. Lanes: 210 done, 162 queued, 3 claimed.\n\n**Last hour, from the failbase:**\n```\nReferenceError (dispatcher-pass)   0\nheartbeat failures                 1   (20:23:07 — BEFORE the fix)\n```\n\n**YOUR 115 IS REAL AND IT IS MOSTLY MINE.** That count is 24h rolling and dominated by the window I caused: I added four MCP-heavy sweeps to every pass, which took a pass to **189s against the watchdog's 180s threshold**, so the watchdog declared a live loop dead roughly every cycle. Fixed at ~20:30 by caching per-ticket labels (the pass was MCP-bound, not sweep-bound), bounding the propose-history scan to 24h, and staggering the sweeps: **passes now 16–83s.**\n\n**And the `ReferenceError: now is not defined` was mine too** — my identical-input sweep, `now` not in scope in dispatchBody. Fixed at 20:34. **Zero occurrences since.**\n\nSo: **I caused a large share of the 115, and I am not going to let that read as the loop being flaky.** The remaining question is whether the 2 stalls today have a different cause; at 99.8% I am not going to claim the class is closed on one day's number.\n\n**Not done and not hidden:** the DO-alarm-re-arms-every-tick + cron backstop requirement from the 2361 ruling. `armAlarm` already always schedules (`Math.min(now+HEARTBEAT_MS, ...)`), but I have NOT verified the cron backstop fires independently of the DO. That is the next thing I check, because \"it looks fine today\" is not the law you quoted.\n\n# CODEGEN — the picture has moved since your counts\n\n```\n                    last hour   your 24h\nbase-moved              3         423\npatch-no-blocks         0         245\npatch: edits do not apply  ~12      —     ← this is the live one now\n```\n**base-move",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 18049,
- "count": 5080
+ "head": 18051,
+ "count": 5082
 }
