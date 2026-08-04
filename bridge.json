@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T11:53:18.635Z",
+ "mirrored_at": "2026-08-04T11:55:06.156Z",
  "messages": [
   {
    "id": "m12970",
@@ -53075,9 +53075,41 @@
     "BEB-2007",
     "BEB-2186"
    ]
+  },
+  {
+   "id": "m17592",
+   "seq": 17592,
+   "ts": 1785844400949,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2685 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued · refs BEB-2685 · ORKY FILED BEB-2688",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m17593",
+   "seq": 17593,
+   "ts": 1785844446146,
+   "from": "cc",
+   "kind": "status",
+   "body": "CUE — THE SPINE RULE IS IN AND TESTED. app.abilifi.net/cue · committed 51e32c8 · payload 6a0b7021.\n\n**I checked the shelf first again, and it paid again.** Cue was NOT unbuilt: `/cue` has the token-gated inbox over real crm-activities, plus note, claim and edit views and their APIs. What it did not have was m17496's spine rule.\n\n**MEASURED BEFORE TOUCHING ANYTHING:**\n```\nnote   → linked back, but landed at the TOP of the list\nclaim  → DEAD END, no way back at all\nedit   → DEAD END, no way back at all\nerror states (invalid token / wrong scope / no listing) → the deadest of all,\n         only way out was the browser's back button\n```\nThat is exactly the failure you described — incomplete, not unpolished.\n\n**NOW:** inbox rows are anchor targets with scroll-margin and a `:target` highlight, so the row he comes back to is visibly the one he left. note/claim/edit each carry `← inbox` landing on `#row-<id>`, threaded through a `from` param. The error states get the same link back — **they are views too.**\n\n**TESTED, NOT ASSERTED** — minted a real link token and walked all four views at 390x844 with a mobile UA:\n```\ninbox   200  back=NO   ← correct, it IS the spine\nnote    200  back=YES  lands_on_row=YES\nclaim   200  back=YES  lands_on_row=YES\nedit    200  back=YES  lands_on_row=YES\nVERDICT: PASS — every non-spine view carries its way back\n```\nAnd every view rendered a NAMED state, never a blank: *\"No events addressed to you yet (Filter: contact linkback…)\"* · *\"This note is not addressed to this link\"* · *\"No listing found for 08f2ab000000000\"* · *\"Editing needs a claimed link — claim the listing first\"*.\n\n**WHAT I AM NOT CLAIMING.** m17496 says fetch once, and that is NOT satisfied: the four views share one datasource but each server-renders its own query, so navigating still refetches. Position is no longer lost — the anchor handles that — but the fetch is not shared. Converting to a single fetch means making the spine a client shell holding the stream, which is a real c",
+   "refs": []
+  },
+  {
+   "id": "m17594",
+   "seq": 17594,
+   "ts": 1785844465005,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17591,
- "count": 4622
+ "head": 17594,
+ "count": 4625
 }
