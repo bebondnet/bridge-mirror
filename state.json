@@ -1,18 +1,19 @@
 {
- "mirrored_at": "2026-08-04T22:04:18.276Z",
- "ts": 1785881057608,
+ "mirrored_at": "2026-08-04T22:05:50.673Z",
+ "ts": 1785881149867,
  "loop": {
   "proposed_total": 469,
   "by_state": {
    "queued": 156,
-   "claimed": 1,
+   "claimed": 0,
    "done": 211,
    "held": 23,
+   "blocked": 1,
    "parked": 65
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 1,
+    "blocked": 1,
     "done": 104,
     "held": 23,
     "parked": 64,
@@ -24,27 +25,20 @@
    "REPAIR": {
     "done": 68,
     "parked": 1,
-    "queued": 9
+    "queued": 8
    },
    "SPEC": {
     "done": 39,
-    "queued": 24
+    "queued": 25
    }
   },
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785880982947,
-   "tally": "BEB-2720→BUILD, BEB-2716→SPEC, BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2206→BUILD✗unwritten, BEB-2730→SPEC"
+   "at": 1785881118973,
+   "tally": "BEB-2716→SPEC, BEB-2720→BUILD[blocked], BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2206→BUILD✗unwritten, BEB-2730→SPEC"
   },
   "reds": [
-   {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1785880963160,
-    "detail": "claimed=0, queued=157, 2 passes, max_concurrent=6",
-    "refs": []
-   },
    {
     "code": "GOAL_STALE",
     "severity": "red",
@@ -69,7 +63,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -220,6 +214,20 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
+    "since": 1785880330651,
+    "detail": "BEB-2716 failing at repair-reopen 3× in 24h — LATEST (08-04T22:04): subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED after close · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2716"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED after close",
+     "subject": "BEB-2716"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
     "since": 1785798007388,
     "detail": "abilifi-apps failing at codegen 42× in 24h — LATEST (08-04T22:02): verdict: codegen produced no usable code\ncodeLen: 3527\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.",
     "refs": [
@@ -290,14 +298,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785794651666,
-    "detail": "abilifi-payload failing at codegen 239× in 24h — LATEST (08-04T21:31): verdict: codegen produced no usable code\ncodeLen: 4386\ngenError: CODEGEN_WALL base-moved: the source moved bbcd9894 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks s",
+    "since": 1785795572838,
+    "detail": "abilifi-payload failing at codegen 238× in 24h — LATEST (08-04T21:31): verdict: codegen produced no usable code\ncodeLen: 4362\ngenError: CODEGEN_WALL base-moved: the source moved 8a0e8ea3 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks s",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 4386\ngenError: CODEGEN_WALL base-moved: the source moved bbcd9894 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks still did not apply: block 7/7 SEARCH text not found, even ignoring indentation. WANTED: \"<body>{margin:0;background:#0d1117;color:#e6edf3;font:14px/1.4 system-ui;padding:12px}.row\" · CLOSEST in file is line 85 (3% similar): \"return new Response('<!doctype html><meta name=\"viewport\" content=\"width=device-width,init\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 4362\ngenError: CODEGEN_WALL base-moved: the source moved 8a0e8ea3 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks still did not apply: block 6/9 SEARCH text not found, even ignoring indentation. WANTED: \"<div class=\"row\">\" · CLOSEST in file is line 54 (10% similar): \"<span class=\"ts\">LIVE: ${liveTime}</span>\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2279"
     }
    },
@@ -332,14 +340,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785794651666,
-    "detail": "abilifi-payload failing at park 236× in 24h — LATEST (08-04T18:17): three-strikes: 5 identical-input retries at codegen",
+    "since": 1785795572838,
+    "detail": "abilifi-payload failing at park 235× in 24h — LATEST (08-04T18:17): three-strikes: 6 identical-input retries at codegen",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 5 identical-input retries at codegen",
+     "error": "three-strikes: 6 identical-input retries at codegen",
      "subject": "BEB-2279"
     }
    },
@@ -430,7 +438,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "BEB-2716 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2716"
@@ -444,7 +452,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2710"
@@ -458,7 +466,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2206"
@@ -472,7 +480,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "BEB-2730 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2730"
@@ -486,7 +494,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -516,7 +524,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2570",
@@ -526,7 +534,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785881023159,
+    "since": 1785881083174,
     "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2573",
@@ -616,22 +624,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 18117,
+  "head_seq": 18119,
   "cursor_fable": 12969,
-  "unread_for_fable": 5148,
+  "unread_for_fable": 5150,
   "last": [
-   {
-    "seq": 18113,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=159, 2 passes, max_concurrent=6"
-   },
-   {
-    "seq": 18114,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
-   },
    {
     "seq": 18115,
     "from": "cc",
@@ -649,6 +645,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "RED ZERO_CLAIM: claimed=0, queued=157, 2 passes, max_concurrent=6"
+   },
+   {
+    "seq": 18118,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-2716 failing at repair-reopen 3× in 24h — LATEST (08-04T22:04): sub"
+   },
+   {
+    "seq": 18119,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
    }
   ]
  },
@@ -742,13 +750,6 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1785880963160,
-   "detail": "claimed=0, queued=157, 2 passes, max_concurrent=6",
-   "refs": []
-  },
-  {
    "code": "GOAL_STALE",
    "severity": "red",
    "since": 1785782844833,
@@ -772,7 +773,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -923,6 +924,20 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
+   "since": 1785880330651,
+   "detail": "BEB-2716 failing at repair-reopen 3× in 24h — LATEST (08-04T22:04): subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED after close · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2716"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED after close",
+    "subject": "BEB-2716"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
    "since": 1785798007388,
    "detail": "abilifi-apps failing at codegen 42× in 24h — LATEST (08-04T22:02): verdict: codegen produced no usable code\ncodeLen: 3527\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.",
    "refs": [
@@ -993,14 +1008,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785794651666,
-   "detail": "abilifi-payload failing at codegen 239× in 24h — LATEST (08-04T21:31): verdict: codegen produced no usable code\ncodeLen: 4386\ngenError: CODEGEN_WALL base-moved: the source moved bbcd9894 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks s",
+   "since": 1785795572838,
+   "detail": "abilifi-payload failing at codegen 238× in 24h — LATEST (08-04T21:31): verdict: codegen produced no usable code\ncodeLen: 4362\ngenError: CODEGEN_WALL base-moved: the source moved 8a0e8ea3 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks s",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 4386\ngenError: CODEGEN_WALL base-moved: the source moved bbcd9894 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks still did not apply: block 7/7 SEARCH text not found, even ignoring indentation. WANTED: \"<body>{margin:0;background:#0d1117;color:#e6edf3;font:14px/1.4 system-ui;padding:12px}.row\" · CLOSEST in file is line 85 (3% similar): \"return new Response('<!doctype html><meta name=\"viewport\" content=\"width=device-width,init\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 4362\ngenError: CODEGEN_WALL base-moved: the source moved 8a0e8ea3 → 093019ad while the model worked. Regenerated against 093019ad and the new blocks still did not apply: block 6/9 SEARCH text not found, even ignoring indentation. WANTED: \"<div class=\"row\">\" · CLOSEST in file is line 54 (10% similar): \"<span class=\"ts\">LIVE: ${liveTime}</span>\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2279"
    }
   },
@@ -1035,14 +1050,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785794651666,
-   "detail": "abilifi-payload failing at park 236× in 24h — LATEST (08-04T18:17): three-strikes: 5 identical-input retries at codegen",
+   "since": 1785795572838,
+   "detail": "abilifi-payload failing at park 235× in 24h — LATEST (08-04T18:17): three-strikes: 6 identical-input retries at codegen",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 5 identical-input retries at codegen",
+    "error": "three-strikes: 6 identical-input retries at codegen",
     "subject": "BEB-2279"
    }
   },
@@ -1133,7 +1148,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "BEB-2716 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2716"
@@ -1147,7 +1162,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2710"
@@ -1161,7 +1176,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2206"
@@ -1175,7 +1190,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "BEB-2730 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2730"
@@ -1189,7 +1204,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1219,7 +1234,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "fix BEB-2570 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2570",
@@ -1229,7 +1244,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785881023159,
+   "since": 1785881083174,
    "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2573",
