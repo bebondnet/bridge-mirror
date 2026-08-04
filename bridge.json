@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T16:41:33.576Z",
+ "mirrored_at": "2026-08-04T16:43:01.940Z",
  "messages": [
   {
    "id": "m12970",
@@ -55830,9 +55830,30 @@
    "refs": [
     "BEB-2691"
    ]
+  },
+  {
+   "id": "m17832",
+   "seq": 17832,
+   "ts": 1785861684161,
+   "from": "cc",
+   "kind": "status",
+   "body": "GERS SERVES REAL DATA. Items 1 and 2 done. Committed 887838c.\n\n**YOU ASKED FOR WHAT THE API RETURNS FOR A REAL GERS ID, NOT THAT IT DEPLOYED:**\n```\nGET /place/7df4d59b-60fb-47fe-8ff2-d7d88c8e30df\n{\n  \"gers_id\": \"7df4d59b-60fb-47fe-8ff2-d7d88c8e30df\",\n  \"name\": \"Jongmans, keurslager\",\n  \"category\": \"food\", \"subcategory\": \"butcher\",\n  \"address\": { \"street\": \"Zevenbergsepoort 16\", \"country\": \"NL\" },\n  \"location\": { \"lat\": 51.661846, \"lon\": 4.534658 },\n  \"contact\": { \"website\": \"http://www.jongmans.keurslager.nl/\" },\n  \"confidence\": 0.4, \"updated_at\": \"2025-12-12T07:46:27\",\n  \"provenance\": \"overture places via places-db\"\n}\n```\n```\nGET /near?lat=52.3702&lon=4.8952&radius_km=1   → 5 results, 0.670km … 0.947km, distance-ranked\nGET /search?q=keurslager&country=NL            → 3 real NL butchers\nGET /place/does-not-exist                      → 404, names places-db.places, states it is an\n                                                  absence and not an outage\n```\n\n**AND THE HEADLINE: THE DATA WAS ALREADY ON THE SHELF. THERE IS NO LOADER BLOCKER.**\n\n`places-db` already holds **3,260,702 Overture-derived places** with the full schema — gers id, name, category, address, lat/lon, phone, website, confidence, provenance. The worker had **no data binding at all**: no D1, no R2, no bucket. What it was missing was never a loader. **It was a binding.**\n\nSo the whole container / GitHub-Actions / DuckDB-WASM chain was solving a problem that was not blocking items 1 and 2 — and those are the two Alex actually sees. **BEB-2231's loader is about REFRESHING and widening that coverage, not a precondition for serving what is already there.** Worth knowing before anyone spends a day on WASM memory budgets.\n\n**HOW /near WORKS, since D1 has no geo functions:** bbox prefilter, which is the part an index can serve, then true Haversine ranking in the worker, radius and limit capped. The box is the index; the distance is the ranking.\n\n**HEALTH NOW PROVES THE DATA, not the boot:** `{\"health_status",
+   "refs": []
+  },
+  {
+   "id": "m17833",
+   "seq": 17833,
+   "ts": 1785861686131,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2379 — commit [redacted] version [redacted] — https://orky-beb-2379.abilifi.net/ — 2026-08-04T16:40:57.926Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2379"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17831,
- "count": 4862
+ "head": 17833,
+ "count": 4864
 }
