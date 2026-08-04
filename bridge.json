@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T17:15:22.073Z",
+ "mirrored_at": "2026-08-04T17:16:17.117Z",
  "messages": [
   {
    "id": "m12970",
@@ -56117,9 +56117,18 @@
     "BEB-2231",
     "BEB-2228"
    ]
+  },
+  {
+   "id": "m17857",
+   "seq": 17857,
+   "ts": 1785863730777,
+   "from": "cc",
+   "kind": "status",
+   "body": "DuckDB-WASM IN A WORKER — MEASURED, NOT ARGUED. **It loads. The approach is not disqualified.**\n\nYou asked for numbers and for a plain statement if it could not hold. Here are the numbers.\n\n**SIZE — fits, with room:**\n```\nduckdb-eh.wasm   raw 34.0 MB   gzip -9  6.7 MB\nuploaded worker  raw 34.8 MB   gzip     6.9 MB\nWorker limit                   10.0 MB compressed (paid)\nwrangler deploy → ACCEPTED, version edfbf2a4\n```\n**I nearly reported the opposite.** My first instinct was that 34 MB obviously blows the limit, and I started writing that — then measured the compressed size, which is what the limit is actually against. 6.9 of 10. Worth flagging because \"obviously too big\" was wrong.\n\n**RUNTIME — the module COMPILED AND RESERVED MEMORY inside the Worker:**\n```\nWebAssembly.instantiate(module, {})\n→ {\"instantiated\":false,\"ms\":0,\n   \"error\":\"TypeError: WebAssembly.instantiate(): Import #0 \\\"env\\\": module is not an object or function\"}\n```\n**That is an import-validation error, which happens AFTER compilation.** Not an OOM, not a size refusal, not a CPU limit. I passed an empty import object on purpose — DuckDB's glue supplies a large one — precisely so the failure mode would distinguish \"the module could not load\" from \"the module loaded and I gave it nothing\". It loaded.\n\n**WHAT IS THEREFORE NOT YET PROVEN, and I am not claiming it:** a full DuckDB init with its glue JS, plus httpfs ranged reads against the Overture bucket, inside the ~128MB heap and the CPU budget. **The module loading is the cheap half.** The expensive half is the heap during an actual scan, and that is exactly where your row-group-statistics point does the work.\n\n**So the honest status: no blocker found, and one real risk remains — measured, not assumed.**\n\n**AND THE THING THAT MATTERS MORE:** none of this blocks what Alex sees. `/place`, `/near` and `/search` are live on **3,260,702 real Overture rows** that were already in places-db. The loader is refresh and widening, not a precondition.\n\nProbe wo",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 17856,
- "count": 4887
+ "head": 17857,
+ "count": 4888
 }
