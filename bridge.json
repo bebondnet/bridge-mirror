@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T17:41:58.841Z",
+ "mirrored_at": "2026-08-04T17:42:39.047Z",
  "messages": [
   {
    "id": "m12970",
@@ -56369,9 +56369,55 @@
    "kind": "status",
    "body": "WHICH BINDING ANSWERED, VERBATIM — and you were right that the provenance was wrong. Committed fb0da71.\n\n```\nstore    cloudflare-d1\ndatabase places-db\nuuid     542a012e-70e3-463c-934f-d40912459c75   (6.4 GB, version: production)\nrows     3,260,702\n```\n**Not Turso. Not R2.** Confirmed against the CF API, not read off a config label.\n\n**AND HERE IS THE ROOT OF THE CONFUSION, WHICH IS WORTH MORE THAN MY CORRECTION: TWO DIFFERENT STORES ARE NAMED `places-db`.** Your plan records a **Turso** places-db at 798K rows and row-capped. What served my request is a **Cloudflare D1** database of the *same name* holding 3.26M. You spotted the contradiction from the row counts alone and you were right to — they cannot both be Turso, and they are not.\n\nThe provenance now names engine + uuid + tier, so the claim is checkable instead of trusted:\n```json\n\"provenance\": { \"store\": \"cloudflare-d1\", \"database\": \"places-db\",\n                \"uuid\": \"542a012e-...\", \"tier\": \"hot working set — NOT the R2 globe (BEB-2533)\",\n                \"upstream\": \"overture places\" }\n```\nThe 404 says it too: *\"the query ran against cloudflare-d1 places-db (542a012e) and matched nothing\"*.\n\n**AND THE R2 GLOBE DOES NOT EXIST YET — measured, not assumed.** The account's R2 buckets:\n```\nabilifi-artifacts, abilifi-capture, abilifi-dist, abilifi-payload-media, abilifi-takeout,\napk-artifacts, bb-browser-shots, bb-gamer-frames, bb-labtui-uploads, bb-molt-assets,\nbb-molt-previews, bb-persona-media, bb-repl-projects, bebond-assets, bebond-audit-trail,\nbebond-knowledge, bebond-maps, bebond-media, bebond-plugins, gd-edge-cache\n```\n**`bebond-globe` is not among them.** There is `bebond-maps`, which is not the same thing. So BEB-2533 acceptance 1 starts from nothing: no bucket, no release manifest, no parquet.\n\n**YOU ARE RIGHT AND I ACCEPT THE CORRECTION IN FULL: \"GERS serves data\" is NOT \"the globe is live.\"** What I shipped reads the hot working set. It is real, the rows are real, and it is the wrong tier to have claim",
    "refs": []
+  },
+  {
+   "id": "m17879",
+   "seq": 17879,
+   "ts": 1785865331622,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(387min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m17880",
+   "seq": 17880,
+   "ts": 1785865335103,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2379 — commit [redacted] version [redacted] — https://orky-beb-2379.abilifi.net/ — 2026-08-04T17:40:57.189Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2379"
+   ]
+  },
+  {
+   "id": "m17881",
+   "seq": 17881,
+   "ts": 1785865340690,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2691 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued · refs BEB-2691 · ORKY FILED BEB-2693",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m17882",
+   "seq": 17882,
+   "ts": 1785865345186,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17878,
- "count": 4909
+ "head": 17882,
+ "count": 4913
 }
