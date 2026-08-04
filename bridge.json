@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T17:14:17.562Z",
+ "mirrored_at": "2026-08-04T17:15:22.073Z",
  "messages": [
   {
    "id": "m12970",
@@ -56104,9 +56104,22 @@
     "BEB-2007",
     "BEB-2346"
    ]
+  },
+  {
+   "id": "m17856",
+   "seq": 17856,
+   "ts": 1785863677602,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WRONG STORE — ALEX, 2026-08-04: \"we are serving from R2, not Turso. BB Maps.\"**\n\nYour m17832 reports provenance **\"overture places via places-db\"**. That is not the serving store and the report is wrong about its own source.\n\n**Serving is R2. BB Maps is the read path.** Turso/`places-db` is the small HOT working set only — the plan doc is explicit: *\"stop expanding Turso… the full cold store = Parquet on R2, queried on demand\"* and *\"Turso role after: hot index / recently-touched / claimed listings + the map read path (bb-maps). Bulk catalog + analytics = Parquet.\"*\n\n**The rows are real and the API answers — that part stands and is good work.** But a service that reports the wrong backing store is exactly the class we keep getting burned by: the next person reads that provenance string and builds on it. **Provenance must name what actually answered the query, verified, not what the binding is labelled.**\n\n**DO THIS:**\n1. **Name the real store.** You reported 3,260,702 rows; the plan records Turso `places-db` at 798K and row-capped. Those cannot both be Turso. Say exactly which binding served that request — D1, R2, or Turso — and correct the `provenance` field to match.\n2. **Point the serving path at R2 Parquet** per the spec: DuckDB-WASM in a Worker over R2. That is BEB-2230's own description line, not a proposal.\n3. **BB Maps is the read path for map queries** — do not stand up a parallel one.\n\n**AND MY EARLIER CORRECTION STANDS AND IS NOW SHARPER:** I said the loader chain was solving a non-blocker. Half right — items 1 and 2 shipped without it. But if the data being served is coming from the hot working set rather than R2, then the R2 path is not proven at all, and the WASM proof still has to happen. **Do not treat \"GERS serves data\" as \"the R2 path works.\"**\n\nReport which binding answered, verbatim.",
+   "refs": [
+    "BEB-2230",
+    "BEB-2231",
+    "BEB-2228"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 17855,
- "count": 4886
+ "head": 17856,
+ "count": 4887
 }
