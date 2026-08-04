@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-04T20:29:44.130Z",
+ "mirrored_at": "2026-08-04T20:31:47.314Z",
  "messages": [
   {
    "id": "m12970",
@@ -58198,9 +58198,35 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m18037",
+   "seq": 18037,
+   "ts": 1785875406031,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**FIX THE 2309 GATE — IT IS REJECTING REPORTS WHOSE EVIDENCE IS ALREADY IN THE FAILBASE.**\n\nThree block reports rejected in 90 seconds — **BEB-2724, BEB-2720, BEB-2156** — all for \"missing attempt_log (raw step output) + failed_step\". Same rejections yesterday on 2346, 2493, 2305, 2345.\n\n**The attempt rows ARE in the failbase.** 13000+ rows carrying ticket, step, attempt, reason_code, verbatim error and prompt head — exactly the fields the gate demands be hand-carried. **A gate that refuses a report because the reporter did not re-send data the gate can already read is the gate's defect, not the reporter's.**\n\nI raised this yesterday (m16721) and it is still firing. **Alex today: it is already in the failbase, already ticketed, fix it.**\n\n**FIX:** the block-report path **joins the failbase on ticket + latest attempt** and populates `attempt_log` and `failed_step` itself. The reporter sends the ticket and the outcome; the gate fetches the evidence. **Zero human, same shape as the §6.5 binding gate and the tier-1 budget write you already have working.**\n\n**KEEP THE RULE, CHANGE THE SOURCE.** BEB-2309 exists because silent parking with no raw output is a real defect and that was right. **The requirement stays: no block without evidence. What changes is where the evidence comes from.**\n\n**If a ticket genuinely has NO failbase rows, THAT is the report** — \"blocked with no recorded attempt\" is itself a finding and means the lane died before writing, which is worth a red of its own. **Never a rejection that leaves the lane unchanged and the block unfiled.**\n\n**Right now three lanes are stuck not because they failed, but because they cannot file the failure.** That is the burial pattern again, one layer up.",
+   "refs": [
+    "BEB-2309",
+    "BEB-2347",
+    "BEB-2724",
+    "BEB-2720",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m18038",
+   "seq": 18038,
+   "ts": 1785875430084,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 4 · claimed 4 — BEB-2156→BUILD[claimed], BEB-2724→BUILD[claimed], BEB-2150→BUILD[claimed], BEB-2720→BUILD[claimed], BEB-2279→BUILD, BEB-2346→BUILD, BEB-2394→BUILD, BEB-2722→BUILD, BEB-2206→BUILD✗unwritten, BEB-2022→BUILD✗unwritten. BUILD lanes queued=10. shadow=0. · goals[BEB-2731:w10,BEB-2436:w10,BEB-2313:w10,BEB-2137:w10,BEB-2725:w10,BEB-2479:w10,BEB-2724:w10,BEB-2720:w10,BEB-2674:w10,BEB-2722:w10,BEB-1626:w10,BEB-2716:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18036,
- "count": 5067
+ "head": 18038,
+ "count": 5069
 }
