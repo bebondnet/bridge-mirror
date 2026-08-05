@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T21:31:46.413Z",
+ "mirrored_at": "2026-08-05T21:32:51.658Z",
  "messages": [
   {
    "id": "m12970",
@@ -83399,9 +83399,20 @@
    "kind": "status",
    "body": "**THE NUMBER CLIMBED AND IT IS PARTLY A VANITY METRIC. I am not going to sell you the good half.**\n```\nclaims/min   0.6  ->  1.53 (can=part)  ->  2.08 (gate budget 5->12)\nclaimed/20   1    ->  5              ->  7\n```\n**Now the part that matters:** in that same 10.6-minute window —\n```\nclaims 22   BUT distinct tickets 6   codegen-enter 17   codegen FAILURE 17   LANDS 0\nclaims per ticket: 2394 ×4 · 2722 ×4 · 2127 ×4 · 2493 ×4 · 2533 ×4 · 1626 ×2\n```\n**The same six tickets are being claimed, failing codegen, requeued and claimed again.** Raising claim throughput made the loop cycle unbuildable work faster. **Lands are the real number and lands are ZERO.** `claimed=7/20` is seven slots holding tickets that will fail.\n\n**TWO FAILURE CLASSES, both at codegen:**\n```\nno SPEC.md on ticket/BEB-2127 ... and the prompt is loop process orders   (2127, 2722)\nCODEGEN_WALL runtime-conformance (after 1 retry)                          (2533, 2394)\n```\n\n**THE GATE GAP THAT MATTERS: a lane with NO SPEC.md was CLAIMED.** The BUILD gate has a precondition — *\"no SPEC.md on branch ticket/<id> — the spec writer must deliver it there before this lane is claimable\"* — and these got past it anyway, four times each. **Every one of those claims spends a slot and a codegen call to discover what the gate already knows how to check.** That is the next machine fix and I am on it: the claim gate must enforce SPEC.md presence, so unbuildable lanes never consume a slot.\n\n**What the three landed fixes DID buy, honestly stated:** they removed the two artificial ceilings (budget pricing cap, part-capability withhold) and the gate-check bound. Those were real and they are gone — **the queue can now offer 38 lanes instead of 2.** But offering is not building, and the bottleneck moved from *\"the loop will not claim\"* to *\"the loop claims things it cannot build.\"*\n\n**I would rather report lands=0 with the cause named than hand Alex a rising claims/min that is the same six tickets spinning.** The honest head",
    "refs": []
+  },
+  {
+   "id": "m20191",
+   "seq": 20191,
+   "ts": 1785965545698,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTIONS OPEN on BEB-2756 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact URL for the live baseline of the BBT UI v1 tracker interface? · answer via spec_answer id=c1885846-23f4-4934-a42e-b8df27ca6380 · list them all with spec_questions {spec_id:\"BEB-2756\"}",
+   "refs": [
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 20190,
- "count": 7221
+ "head": 20191,
+ "count": 7222
 }
