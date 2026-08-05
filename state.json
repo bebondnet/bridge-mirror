@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-05T23:56:39.437Z",
- "ts": 1785974198808,
+ "mirrored_at": "2026-08-05T23:58:01.877Z",
+ "ts": 1785974281174,
  "loop": {
   "proposed_total": 696,
   "by_state": {
-   "queued": 235,
-   "claimed": 10,
+   "queued": 240,
+   "claimed": 4,
    "done": 286,
-   "held": 23,
-   "blocked": 4,
-   "parked": 107
+   "held": 24,
+   "blocked": 3,
+   "parked": 108
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 4,
-    "claimed": 10,
+    "blocked": 3,
+    "claimed": 4,
     "done": 159,
-    "held": 23,
-    "parked": 105,
-    "queued": 12
+    "held": 24,
+    "parked": 106,
+    "queued": 17
    },
    "REFINE": {
     "queued": 148
@@ -36,14 +36,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785974179488,
-   "tally": "BEB-2156→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2493→BUILD[claimed], BEB-1626→BUILD[claimed], BEB-2533→BUILD[claimed], BEB-2394→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2744→BUILD[claimed], BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
+   "at": 1785974261532,
+   "tally": "BEB-2533→BUILD[blocked], BEB-2156→BUILD, BEB-2540→BUILD, BEB-2493→BUILD, BEB-1626→BUILD, BEB-2394→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2744→BUILD[claimed], BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785974172104,
+    "since": 1785974232106,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -74,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785974172104,
+    "since": 1785974232106,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -573,7 +573,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785888818111,
-    "detail": "alexrollin/abilifi-apps failing at codegen 89× in 24h — LATEST (08-05T23:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 92× in 24h — LATEST (08-05T23:57): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2720"
     ],
@@ -587,7 +587,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785949781956,
-    "detail": "alexrollin/abilifi-apps failing at complete 13× in 24h — LATEST (08-05T23:38): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target)",
+    "detail": "alexrollin/abilifi-apps failing at complete 14× in 24h — LATEST (08-05T23:57): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target)",
     "refs": [
      "BEB-2756"
     ],
@@ -671,7 +671,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785967681930,
-    "detail": "n/a failing at complete 4× in 24h — LATEST (08-05T23:27): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at complete 4× in 24h — LATEST (08-05T23:27): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2531"
     ],
@@ -684,7 +684,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785974172104,
+    "since": 1785974232106,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -762,43 +762,56 @@
      "subject": "dispatcher-claim",
      "error": "NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)"
     }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1785974189871,
+    "detail": "8 ticket(s) refused at the claim step for UNCODED in the last hour (8 rows) — one defect, not 8 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "refs": [],
+    "orky": {
+     "cls": "claim-refusal-uncoded",
+     "subject": "dispatcher-claim",
+     "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+    },
+    "fix_ticket": "BEB-2778"
    }
   ]
  },
  "bridge": {
-  "head_seq": 20335,
+  "head_seq": 20341,
   "cursor_fable": 12969,
-  "unread_for_fable": 7366,
+  "unread_for_fable": 7372,
   "last": [
    {
-    "seq": 20331,
+    "seq": 20337,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2531 — mastra tick deploy FAILED: LAND REFUSED (base-moved): "
    },
    {
-    "seq": 20332,
+    "seq": 20338,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declare"
+    "one_line": "DISPATCHER: BEB-2615 completion REJECTED (evidence gate m713.1) — owner-facing surface (La"
    },
    {
-    "seq": 20333,
+    "seq": 20339,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER alarm: lease expired on BEB-2540 (attempt 1) — requeued."
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2681 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
    },
    {
-    "seq": 20334,
+    "seq": 20340,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER: BEB-2572 completion REJECTED (evidence gate m713.1) — owner-facing surface (La"
+    "one_line": "RED REPEAT_FAILER: 8 ticket(s) refused at the claim step for UNCODED in the last hour (8 r"
    },
    {
-    "seq": 20335,
+    "seq": 20341,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2412 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+    "one_line": "DISPATCHER: BEB-2765 PARKED after 2 failed attempts — lease_expired, park evidence posted "
    }
   ]
  },
@@ -894,7 +907,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785974172104,
+   "since": 1785974232106,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -925,7 +938,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785974172104,
+   "since": 1785974232106,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1424,7 +1437,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785888818111,
-   "detail": "alexrollin/abilifi-apps failing at codegen 89× in 24h — LATEST (08-05T23:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 92× in 24h — LATEST (08-05T23:57): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2720"
    ],
@@ -1438,7 +1451,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785949781956,
-   "detail": "alexrollin/abilifi-apps failing at complete 13× in 24h — LATEST (08-05T23:38): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target)",
+   "detail": "alexrollin/abilifi-apps failing at complete 14× in 24h — LATEST (08-05T23:57): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target)",
    "refs": [
     "BEB-2756"
    ],
@@ -1522,7 +1535,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785967681930,
-   "detail": "n/a failing at complete 4× in 24h — LATEST (08-05T23:27): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at complete 4× in 24h — LATEST (08-05T23:27): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2531"
    ],
@@ -1535,7 +1548,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785974172104,
+   "since": 1785974232106,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1613,6 +1626,19 @@
     "subject": "dispatcher-claim",
     "error": "NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1785974189871,
+   "detail": "8 ticket(s) refused at the claim step for UNCODED in the last hour (8 rows) — one defect, not 8 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "refs": [],
+   "orky": {
+    "cls": "claim-refusal-uncoded",
+    "subject": "dispatcher-claim",
+    "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+   },
+   "fix_ticket": "BEB-2778"
   }
  ]
 }
