@@ -1,21 +1,23 @@
 {
- "mirrored_at": "2026-08-05T15:05:59.780Z",
- "ts": 1785942356616,
+ "mirrored_at": "2026-08-05T15:07:33.728Z",
+ "ts": 1785942450904,
  "loop": {
   "proposed_total": 674,
   "by_state": {
-   "queued": 268,
+   "queued": 267,
    "claimed": 0,
    "done": 264,
-   "held": 20,
+   "held": 19,
+   "blocked": 2,
    "parked": 94
   },
   "by_lane": {
    "BUILD": {
+    "blocked": 2,
     "done": 139,
-    "held": 20,
+    "held": 19,
     "parked": 93,
-    "queued": 31
+    "queued": 30
    },
    "REFINE": {
     "queued": 173
@@ -33,10 +35,19 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785942312152,
-   "tally": "BEB-2156→BUILD, BEB-2756→BUILD, BEB-2279→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2206→BUILD[serious:proposed-only], BEB-2624→BUILD[serious:proposed-only]"
+   "at": 1785942433671,
+   "tally": "idle (no proposable work)"
   },
   "reds": [
+   {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1785942428464,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2054"
+    ]
+   },
    {
     "code": "GOAL_STALE",
     "severity": "red",
@@ -61,7 +72,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785942303465,
+    "since": 1785942423455,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -167,7 +178,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785940523885,
+    "since": 1785940655082,
     "detail": "BEB-2279 refused 16× in 30min — LATEST: declared deps still open: BEB-1934=backlog, BEB-1935=backlog — acceptance is unverifiable by construction · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2279"
@@ -683,9 +694,37 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785942423455,
+    "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2206"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2206"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785942423455,
+    "detail": "BEB-2624 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2624"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2624"
+    }
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785942303465,
+    "since": 1785942423455,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -775,8 +814,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785938749931,
-    "detail": "21 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (120 rows) — one defect, not 21 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "since": 1785938885387,
+    "detail": "21 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (108 rows) — one defect, not 21 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
@@ -787,39 +826,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 19427,
+  "head_seq": 19435,
   "cursor_fable": 12969,
-  "unread_for_fable": 6458,
+  "unread_for_fable": 6466,
   "last": [
    {
-    "seq": 19423,
+    "seq": 19431,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — declared deps still open: BEB-193"
+    "one_line": "2 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-2206), PROPOSED_NEVER_CLAIMED(BEB-2624) — full deta"
    },
    {
-    "seq": 19424,
+    "seq": 19432,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — declared deps still open: BEB-193"
+    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed ·"
    },
    {
-    "seq": 19425,
+    "seq": 19433,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2054 — commit 3"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2756 — mastra tick codegen FAILED: CODEGEN_WALL runtime-confo"
    },
    {
-    "seq": 19426,
+    "seq": 19434,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — declared deps still open: BEB-193"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2756 — mastra tick codegen FAILED: CODEGEN_WALL runtime-confo"
    },
    {
-    "seq": 19427,
+    "seq": 19435,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2054 — commit 6"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2156 — mastra tick deploy FAILED: DEPLOY REFUSED by 2 known w"
    }
   ]
  },
@@ -913,6 +952,15 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1785942428464,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2054"
+   ]
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
    "since": 1785782844833,
@@ -936,7 +984,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785942303465,
+   "since": 1785942423455,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1042,7 +1090,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785940523885,
+   "since": 1785940655082,
    "detail": "BEB-2279 refused 16× in 30min — LATEST: declared deps still open: BEB-1934=backlog, BEB-1935=backlog — acceptance is unverifiable by construction · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2279"
@@ -1558,9 +1606,37 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785942423455,
+   "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2206"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2206"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785942423455,
+   "detail": "BEB-2624 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2624"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2624"
+   }
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785942303465,
+   "since": 1785942423455,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1650,8 +1726,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785938749931,
-   "detail": "21 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (120 rows) — one defect, not 21 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "since": 1785938885387,
+   "detail": "21 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (108 rows) — one defect, not 21 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
