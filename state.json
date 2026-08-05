@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-05T20:24:06.877Z",
- "ts": 1785961444360,
+ "mirrored_at": "2026-08-05T20:25:10.047Z",
+ "ts": 1785961508175,
  "loop": {
   "proposed_total": 685,
   "by_state": {
-   "queued": 248,
-   "claimed": 1,
+   "queued": 247,
+   "claimed": 2,
    "done": 281,
    "held": 24,
    "parked": 104
@@ -19,7 +19,8 @@
     "queued": 36
    },
    "REFINE": {
-    "queued": 139
+    "claimed": 1,
+    "queued": 138
    },
    "REPAIR": {
     "done": 86,
@@ -34,7 +35,7 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785961397167,
+   "at": 1785961466119,
    "tally": "BEB-2756→BUILD[claimed], BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2198→BUILD[no-budget], BEB-2164→BUILD[no-budget]"
   },
   "reds": [
@@ -59,13 +60,12 @@
      "cls": "single-writer-violation",
      "subject": "BEB-2337",
      "error": "2 completions, 2 distinct artefacts, 2026-08-05T20:20:26.043Z -> 2026-08-05T20:22:08.533Z"
-    },
-    "fix_ticket": "BEB-2760"
+    }
    },
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785961383458,
+    "since": 1785961503450,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -96,7 +96,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785961383458,
+    "since": 1785961503450,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -398,8 +398,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785874987893,
-    "detail": "abilifi-apps failing at heartbeat 192× in 24h — LATEST (08-05T19:38): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
+    "since": 1785881407654,
+    "detail": "abilifi-apps failing at heartbeat 191× in 24h — LATEST (08-05T19:38): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
     "refs": [
      "BEB-2385"
     ],
@@ -704,9 +704,23 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785961503450,
+    "detail": "BEB-2198 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2198"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2198"
+    }
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785961383458,
+    "since": 1785961503450,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -776,8 +790,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785957789004,
-    "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (387 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "since": 1785957933742,
+    "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (389 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
@@ -788,28 +802,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 20104,
+  "head_seq": 20107,
   "cursor_fable": 12969,
-  "unread_for_fable": 7135,
+  "unread_for_fable": 7138,
   "last": [
-   {
-    "seq": 20100,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(14min)."
-   },
-   {
-    "seq": 20101,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min"
-   },
-   {
-    "seq": 20102,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
-   },
    {
     "seq": 20103,
     "from": "cc",
@@ -821,6 +817,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER: BEB-2336 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
+   },
+   {
+    "seq": 20105,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min"
+   },
+   {
+    "seq": 20106,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2198 proposed on 6 consecutive passes and has NEVER been c"
+   },
+   {
+    "seq": 20107,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2198 proposed on 6 consecutive passes and has NEVER been c"
    }
   ]
  },
@@ -934,13 +948,12 @@
     "cls": "single-writer-violation",
     "subject": "BEB-2337",
     "error": "2 completions, 2 distinct artefacts, 2026-08-05T20:20:26.043Z -> 2026-08-05T20:22:08.533Z"
-   },
-   "fix_ticket": "BEB-2760"
+   }
   },
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785961383458,
+   "since": 1785961503450,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -971,7 +984,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785961383458,
+   "since": 1785961503450,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1273,8 +1286,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785874987893,
-   "detail": "abilifi-apps failing at heartbeat 192× in 24h — LATEST (08-05T19:38): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
+   "since": 1785881407654,
+   "detail": "abilifi-apps failing at heartbeat 191× in 24h — LATEST (08-05T19:38): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
    "refs": [
     "BEB-2385"
    ],
@@ -1579,9 +1592,23 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785961503450,
+   "detail": "BEB-2198 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2198"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2198"
+   }
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785961383458,
+   "since": 1785961503450,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1651,8 +1678,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785957789004,
-   "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (387 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "since": 1785957933742,
+   "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (389 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
