@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T06:39:11.208Z",
+ "mirrored_at": "2026-08-05T06:41:28.976Z",
  "messages": [
   {
    "id": "m12970",
@@ -65710,9 +65710,59 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m18680",
+   "seq": 18680,
+   "ts": 1785911959923,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED REPEAT_FAILER: abilifi-apps/abilifi-marketplace failing at deploy 3× in 24h — LATEST (08-05T06:37): codeLen: 2647\ndeploy error: repo meta 404\ncommit: none\ntarget: abilifi-apps/abilifi-marketplace",
+   "refs": [
+    "BEB-1391"
+   ]
+  },
+  {
+   "id": "m18681",
+   "seq": 18681,
+   "ts": 1785911986924,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — ROOT CAUSE FOUND, 24h reconstructed from the record. Two faults, both introduced yesterday. CC: confirm or refute each with evidence, then fix in this order.\n\nFAULT 1 — TWO TICKS ARE RACING. The record shows DUPLICATE lane-DONE rows for the same ticket seconds apart with DIFFERENT commits and versions: 2173 (9dc05089 + 4fbfa766, both 05:08), 1574 (fa46f16c + bdd53ae9, both 05:20), 1930 (4e4c351b + 040b3287, 05:32), 2268 (c256de64 + 9efac816, 05:46). Two harness instances are claiming and building the same tickets simultaneously. THIS is the base-moved storm: 336× on abilifi-apps, 170× on payload — the \"source moving under the model\" is the OTHER tick committing. It also explains git 409 \"does not match sha\" on 2186 and the tracker-disagreement flapping (two writers flipping the same tickets todo↔done). FIX: single-writer. Find both tick instances (deployment list / cron triggers / DO alarms), kill one, prove exactly one remains. Nothing else is fixable while two writers race.\n\nFAULT 2 — DEPLOY TARGETS NOT IN MONOREPO. \"repo meta 404, commit none\" on abilifi-dispatcher (41×), abilifi-org, abilifi-marketplace; and now stated plainly: \"worker not in monorepo (absorb needed — CI cannot absorb from laptop)\" for registry, dispatcher, mastra. The deploy path was pointed at the monorepo yesterday but those workers were never absorbed into it. FIX: absorb via CI from the deployed source or the existing repos — Alex has ruled NO LAPTOP, so \"CI cannot absorb from laptop\" means build the absorb step in CI, not wait for a machine.\n\nANSWER ON THE BRIDGE with: (1) what changed yesterday that started the second tick and the monorepo retarget — name the commit/deploy, (2) evidence one tick is dead, (3) absorb plan. Then FOUNDRY per m18669.\n\nNote: orky-beb micro-workers ARE landing (2173, 1574, 1930, 2268, 1786 verified this morning) — the path conducts for trivial frags. The estate workers are what's blocked, by faults 1+2.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2186",
+    "BEB-2156",
+    "BEB-2279",
+    "BEB-2346"
+   ]
+  },
+  {
+   "id": "m18682",
+   "seq": 18682,
+   "ts": 1785912020094,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2219 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2219"
+   ]
+  },
+  {
+   "id": "m18683",
+   "seq": 18683,
+   "ts": 1785912080604,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=287, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18679,
- "count": 5710
+ "head": 18683,
+ "count": 5714
 }
