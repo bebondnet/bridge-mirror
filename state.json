@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-05T20:55:04.753Z",
- "ts": 1785963302531,
+ "mirrored_at": "2026-08-05T20:57:26.226Z",
+ "ts": 1785963443492,
  "loop": {
   "proposed_total": 689,
   "by_state": {
-   "queued": 249,
+   "queued": 247,
    "claimed": 4,
    "done": 282,
-   "held": 19,
-   "blocked": 4,
+   "held": 23,
+   "blocked": 2,
    "parked": 102
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 4,
+    "blocked": 2,
     "claimed": 4,
     "done": 156,
-    "held": 19,
+    "held": 23,
     "parked": 101,
-    "queued": 38
+    "queued": 36
    },
    "REFINE": {
     "queued": 135
@@ -36,17 +36,159 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785963261130,
-   "tally": "BEB-2743→BUILD, BEB-2744→BUILD[claimed], BEB-2279→BUILD[claimed], BEB-2756→BUILD[claimed], BEB-2150→BUILD[blocked], BEB-2156→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
+   "at": 1785963432728,
+   "tally": "BEB-2743→BUILD[claimed], BEB-2756→BUILD[claimed], BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
   },
   "reds": [
    {
-    "code": "VERIFY_PENDING",
+    "code": "SINGLE_WRITER_VIOLATION",
     "severity": "red",
-    "since": 1785963250603,
-    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "since": 1785963140966,
+    "detail": "BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
     "refs": [
-     "BEB-2769"
+     "BEB-2337"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2337",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-05T20:52:20.966Z -> 2026-08-05T20:55:09.216Z"
+    }
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785963423454,
+    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
+    "refs": [
+     "BEB-2743",
+     "BEB-2744"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785782844833,
+    "detail": "DATA SERVICE — any parquet dataset on R2 becomes a keyed, metered API app by config row alone; proven when a SECOND dataset ships with zero  — last landed evidence 2026-08-03T18:47:24.833Z",
+    "refs": [
+     "BEB-2230",
+     "BEB-2533"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785782844833,
+    "detail": "GERS API — public metered place lookup + BULK resolve/query over Parquet on R2, DuckDB-WASM in a Worker; bb-agent imports switch onto it — last landed evidence 2026-08-03T18:47:24.833Z",
+    "refs": [
+     "BEB-2230",
+     "BEB-2231",
+     "BEB-2533"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785963423454,
+    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
+    "refs": [
+     "BEB-2493"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785708125655,
+    "detail": "TELEGRAM CONFIG SURFACE (2568) — deployed, page renders its fields, cred-red when unconfigured. First UI Alex sees. — last landed evidence 2026-08-02T22:02:05.655Z",
+    "refs": [
+     "BEB-2568",
+     "BEB-2540"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785789924508,
+    "detail": "CODEGEN FINAL STATE: no lane with target n/a, codegen diffs deployed source, contract before build, verdict before green - proven by two una — last landed evidence 2026-08-03T20:45:24.508Z",
+    "refs": [
+     "BEB-2279",
+     "BEB-2367",
+     "BEB-2348"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785708433155,
+    "detail": "SPEC WRITER SERVICE FRONT: build the deployed, callable spec-writer SERVICE in the loop's path. Specs are its output, not the deliverable. — last landed evidence 2026-08-02T22:07:13.155Z",
+    "refs": [
+     "BEB-2470",
+     "BEB-2436",
+     "BEB-2446"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785334669631,
+    "detail": "SPECOPS CALLABLE BY FABLE: spec_* proxied onto mcp.bebond.net. Built and refuting today but only on abilifi-1609 codemode pair. Last mile. — last landed evidence 2026-07-29T14:17:49.631Z",
+    "refs": [
+     "BEB-2436",
+     "BEB-2170",
+     "BEB-2342",
+     "BEB-2292"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785789924508,
+    "detail": "CODE RED: unstick the loop — tickets reach queued and get claimed; gates stop making work permanently invisible (2367 + 2348) — last landed evidence 2026-08-03T20:45:24.508Z",
+    "refs": [
+     "BEB-2367",
+     "BEB-2348"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785783535587,
+    "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence 2026-08-03T18:58:55.587Z",
+    "refs": [
+     "BEB-1994",
+     "BEB-1619"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785799119327,
+    "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence 2026-08-03T23:18:39.327Z",
+    "refs": [
+     "BEB-2348",
+     "BEB-2156",
+     "BEB-2313"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785792328416,
+    "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence 2026-08-03T21:25:28.416Z",
+    "refs": [
+     "BEB-2186",
+     "BEB-2156",
+     "BEB-2299",
+     "BEB-2136"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785707121682,
+    "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence 2026-08-02T21:45:21.682Z",
+    "refs": [
+     "BEB-2292",
+     "BEB-2259"
     ]
    },
    {
@@ -109,7 +251,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785878375036,
-    "detail": "BEB-2150 failing at preflight 30× in 24h — LATEST (08-05T19:37): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2150 failing at preflight 31× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}",
     "refs": [
      "BEB-2150"
     ],
@@ -179,7 +321,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785927930717,
-    "detail": "BEB-2743 failing at preflight 3× in 24h — LATEST (08-05T11:28): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2743 failing at preflight 5× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2743"
     ],
@@ -193,7 +335,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785927380812,
-    "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-05T11:28): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-05T11:28): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
     "refs": [
      "BEB-2744"
     ],
@@ -389,7 +531,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785878821350,
-    "detail": "abilifi-payload failing at codegen 31× in 24h — LATEST (08-05T20:03): verdict: codegen produced no usable code\ncodeLen: 2950\ngenError: CODEGEN_WALL base-moved: the source moved fd9969ee → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "abilifi-payload failing at codegen 32× in 24h — LATEST (08-05T20:55): verdict: codegen produced no usable code\ncodeLen: 2950\ngenError: CODEGEN_WALL base-moved: the source moved fd9969ee → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
     "refs": [
      "BEB-2279"
     ],
@@ -445,7 +587,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785877082871,
-    "detail": "alexrollin/abilifi-apps failing at codegen 114× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 114× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN",
     "refs": [
      "BEB-2156"
     ],
@@ -459,7 +601,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785949781956,
-    "detail": "alexrollin/abilifi-apps failing at complete 4× in 24h — LATEST (08-05T20:52): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at complete 5× in 24h — LATEST (08-05T20:55): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2756"
     ],
@@ -473,7 +615,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785890243705,
-    "detail": "alexrollin/abilifi-apps failing at deploy 24× in 24h — LATEST (08-05T19:36): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at deploy 25× in 24h — LATEST (08-05T20:55): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
     "refs": [
      "BEB-2156"
     ],
@@ -487,7 +629,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785918971376,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 72× in 24h — LATEST (08-05T20:52): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 73× in 24h — LATEST (08-05T20:55): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2113"
     ],
@@ -501,7 +643,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785877082871,
-    "detail": "alexrollin/abilifi-apps failing at park 9× in 24h — LATEST (08-05T00:23): three-strikes: 60 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at park 9× in 24h — LATEST (08-05T00:23): three-strikes: 60 identical-input retries at codegen",
     "refs": [
      "BEB-2156"
     ],
@@ -556,7 +698,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785963243454,
+    "since": 1785963423454,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -627,7 +769,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785960108768,
-    "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (355 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (394 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
@@ -638,39 +780,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 20139,
+  "head_seq": 20146,
   "cursor_fable": 12969,
-  "unread_for_fable": 7170,
+  "unread_for_fable": 7177,
   "last": [
    {
-    "seq": 20135,
+    "seq": 20142,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×13 (BEB-2334): GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · G"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2337 — commit 4"
    },
    {
-    "seq": 20136,
+    "seq": 20143,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER verification PASSED: BEB-2769 — https://orky-beb-2769.abilifi.net/ — json-parse"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2156 — mastra tick deploy FAILED: DEPLOY REFUSED by 2 known w"
    },
    {
-    "seq": 20137,
+    "seq": 20144,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declare"
+    "one_line": "13 NEW REDS: GOAL_STALE(BEB-2743), GOAL_STALE(BEB-2230), GOAL_STALE(BEB-2230), GOAL_STALE("
    },
    {
-    "seq": 20138,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "FABLE \\u2014 Alex: he needs 20 lanes AND SPEED, now. Progress is real (claimed 3 this pass"
-   },
-   {
-    "seq": 20139,
+    "seq": 20145,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER: BEB-2744 completion REJECTED (evidence gate m713.1) — WRONG_ADDRESS: the spec "
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min"
+   },
+   {
+    "seq": 20146,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min"
    }
   ]
  },
@@ -764,12 +906,154 @@
  ],
  "reds": [
   {
-   "code": "VERIFY_PENDING",
+   "code": "SINGLE_WRITER_VIOLATION",
    "severity": "red",
-   "since": 1785963250603,
-   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "since": 1785963140966,
+   "detail": "BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
    "refs": [
-    "BEB-2769"
+    "BEB-2337"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2337",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-05T20:52:20.966Z -> 2026-08-05T20:55:09.216Z"
+   }
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785963423454,
+   "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
+   "refs": [
+    "BEB-2743",
+    "BEB-2744"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785782844833,
+   "detail": "DATA SERVICE — any parquet dataset on R2 becomes a keyed, metered API app by config row alone; proven when a SECOND dataset ships with zero  — last landed evidence 2026-08-03T18:47:24.833Z",
+   "refs": [
+    "BEB-2230",
+    "BEB-2533"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785782844833,
+   "detail": "GERS API — public metered place lookup + BULK resolve/query over Parquet on R2, DuckDB-WASM in a Worker; bb-agent imports switch onto it — last landed evidence 2026-08-03T18:47:24.833Z",
+   "refs": [
+    "BEB-2230",
+    "BEB-2231",
+    "BEB-2533"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785963423454,
+   "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
+   "refs": [
+    "BEB-2493"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785708125655,
+   "detail": "TELEGRAM CONFIG SURFACE (2568) — deployed, page renders its fields, cred-red when unconfigured. First UI Alex sees. — last landed evidence 2026-08-02T22:02:05.655Z",
+   "refs": [
+    "BEB-2568",
+    "BEB-2540"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785789924508,
+   "detail": "CODEGEN FINAL STATE: no lane with target n/a, codegen diffs deployed source, contract before build, verdict before green - proven by two una — last landed evidence 2026-08-03T20:45:24.508Z",
+   "refs": [
+    "BEB-2279",
+    "BEB-2367",
+    "BEB-2348"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785708433155,
+   "detail": "SPEC WRITER SERVICE FRONT: build the deployed, callable spec-writer SERVICE in the loop's path. Specs are its output, not the deliverable. — last landed evidence 2026-08-02T22:07:13.155Z",
+   "refs": [
+    "BEB-2470",
+    "BEB-2436",
+    "BEB-2446"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785334669631,
+   "detail": "SPECOPS CALLABLE BY FABLE: spec_* proxied onto mcp.bebond.net. Built and refuting today but only on abilifi-1609 codemode pair. Last mile. — last landed evidence 2026-07-29T14:17:49.631Z",
+   "refs": [
+    "BEB-2436",
+    "BEB-2170",
+    "BEB-2342",
+    "BEB-2292"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785789924508,
+   "detail": "CODE RED: unstick the loop — tickets reach queued and get claimed; gates stop making work permanently invisible (2367 + 2348) — last landed evidence 2026-08-03T20:45:24.508Z",
+   "refs": [
+    "BEB-2367",
+    "BEB-2348"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785783535587,
+   "detail": "CODE RED chain: BEB-1994 CC gets an org-scoped (alexwiki) token — gates BEB-1619 writes landing in the right org — last landed evidence 2026-08-03T18:58:55.587Z",
+   "refs": [
+    "BEB-1994",
+    "BEB-1619"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785799119327,
+   "detail": "Loop PRODUCES — one ticket lands end to end unattended with deployed artefact and contract verdict, then a second to prove the path — last landed evidence 2026-08-03T23:18:39.327Z",
+   "refs": [
+    "BEB-2348",
+    "BEB-2156",
+    "BEB-2313"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785792328416,
+   "detail": "Foundry (2186) running as SpecOps' build path — SpecOps can claim, build, deploy without CC or laptop — last landed evidence 2026-08-03T21:25:28.416Z",
+   "refs": [
+    "BEB-2186",
+    "BEB-2156",
+    "BEB-2299",
+    "BEB-2136"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785707121682,
+   "detail": "DEMO FRIDAY 07-31 (2292): all five legs — generation, CRM/content manager, page creation, send, funnel. Full scope, nothing cut. — last landed evidence 2026-08-02T21:45:21.682Z",
+   "refs": [
+    "BEB-2292",
+    "BEB-2259"
    ]
   },
   {
@@ -832,7 +1116,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785878375036,
-   "detail": "BEB-2150 failing at preflight 30× in 24h — LATEST (08-05T19:37): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2150 failing at preflight 31× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}",
    "refs": [
     "BEB-2150"
    ],
@@ -902,7 +1186,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785927930717,
-   "detail": "BEB-2743 failing at preflight 3× in 24h — LATEST (08-05T11:28): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2743 failing at preflight 5× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2743"
    ],
@@ -916,7 +1200,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785927380812,
-   "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-05T11:28): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-05T11:28): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
    "refs": [
     "BEB-2744"
    ],
@@ -1112,7 +1396,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785878821350,
-   "detail": "abilifi-payload failing at codegen 31× in 24h — LATEST (08-05T20:03): verdict: codegen produced no usable code\ncodeLen: 2950\ngenError: CODEGEN_WALL base-moved: the source moved fd9969ee → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "abilifi-payload failing at codegen 32× in 24h — LATEST (08-05T20:55): verdict: codegen produced no usable code\ncodeLen: 2950\ngenError: CODEGEN_WALL base-moved: the source moved fd9969ee → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
    "refs": [
     "BEB-2279"
    ],
@@ -1168,7 +1452,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785877082871,
-   "detail": "alexrollin/abilifi-apps failing at codegen 114× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 114× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN",
    "refs": [
     "BEB-2156"
    ],
@@ -1182,7 +1466,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785949781956,
-   "detail": "alexrollin/abilifi-apps failing at complete 4× in 24h — LATEST (08-05T20:52): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at complete 5× in 24h — LATEST (08-05T20:55): missing/invalid commit SHA; missing deploy version; missing verify_url (the async verifier needs a probe target) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2756"
    ],
@@ -1196,7 +1480,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785890243705,
-   "detail": "alexrollin/abilifi-apps failing at deploy 24× in 24h — LATEST (08-05T19:36): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at deploy 25× in 24h — LATEST (08-05T20:55): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
    "refs": [
     "BEB-2156"
    ],
@@ -1210,7 +1494,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785918971376,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 72× in 24h — LATEST (08-05T20:52): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 73× in 24h — LATEST (08-05T20:55): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2113"
    ],
@@ -1224,7 +1508,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785877082871,
-   "detail": "alexrollin/abilifi-apps failing at park 9× in 24h — LATEST (08-05T00:23): three-strikes: 60 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at park 9× in 24h — LATEST (08-05T00:23): three-strikes: 60 identical-input retries at codegen",
    "refs": [
     "BEB-2156"
    ],
@@ -1279,7 +1563,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785963243454,
+   "since": 1785963423454,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1350,7 +1634,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785960108768,
-   "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (355 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (394 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
