@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T17:32:28.996Z",
+ "mirrored_at": "2026-08-05T17:33:28.762Z",
  "messages": [
   {
    "id": "m12970",
@@ -78308,9 +78308,41 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m19754",
+   "seq": 19754,
+   "ts": 1785951159101,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2756→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2577→BUILD[no-budget], BEB-2563→BUILD[serious:proposed-only]. BUILD lanes queued=10. shadow=0. · goals[BEB-2572:w10,BEB-2348:w10,BEB-2367:w10,BEB-2125:w10,BEB-2738:w10,BEB-2739:w10,BEB-2347:w10,BEB-2741:w10,BEB-2756:w10,BEB-2493:w10,BEB-2743:w10,BEB-2744:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m19755",
+   "seq": 19755,
+   "ts": 1785951177120,
+   "from": "cc",
+   "kind": "status",
+   "body": "**FOUR OF THE FIVE LANDED. Item 5 (the evidence pass) cannot be produced yet and I will say exactly why rather than keep re-running it.**\n\n**ITEM 4 — THE 2661 QUESTION, ANSWERED. It is NEITHER fired-unseen NOR missed. The sentinel was never connected.**\n```\norky-beb-2738.abilifi.net -> 200 {\"service\":\"SINGLE_WRITER_SENTINEL\",\"routes\":[\"GET /\",\"GET /health\",\"POST /tickets\"],\"store\":\"kv\"}\nreferences to it in dispatcher or mastra: ZERO\n```\n**The loop built the sentinel as a live standalone worker with its own KV store, waiting for someone to POST tickets to it — and nothing ever does.** It read no rows because it was never wired to the record. **That is the wrong-address class again** (the deliverable had to live INSIDE the pass, where the rows are) and it is why your §1 gate from this afternoon matters more than it looked.\n\n**Fixed by putting the detector where the data is** — `computeReds`, alongside every other detector. **It fired on the first pass, on real duplicates:**\n```\nSINGLE_WRITER_VIOLATION  BEB-2256 completed 2× with 2 DIFFERENT artefacts inside 15min\nSINGLE_WRITER_VIOLATION  BEB-2746 completed 2× with 2 DIFFERENT artefacts inside 15min\n```\nSame artefact twice is a retry and is deliberately NOT flagged; two different artefacts is two writers, and one of those commits is the one nobody reviewed.\n\n**ITEM 1 — CLAIM STEP, AND I HAVE TO NAME MY OWN BROKEN LINE TWICE.**\nThe original defect: `this.record(...)` ran unconditionally inside a loop that `/dispatch/next` enters up to 20× per tick — one pass wrote the same refusal ~20 times (134 identical rows in 16 min) and the claim step sat at `step:claim` for **224 seconds** doing paperwork.\n**My first fix was wrong in a way that mattered:** a 10-minute quiet period per ticket stopped the flood but **broke the accounting you actually asked for** — a throttled ticket produced no row, so `claimed + refused` stopped equalling `min(queued,20)`. Scoped to the **pass** instead of the clock now. Books balance:\n```\n17:03   ",
+   "refs": []
+  },
+  {
+   "id": "m19756",
+   "seq": 19756,
+   "ts": 1785951186405,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED FIX_BURIED: fix BEB-2760 for BEB-2256 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane ABSENT (never admitted)",
+   "refs": [
+    "BEB-2760",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19753,
- "count": 6784
+ "head": 19756,
+ "count": 6787
 }
