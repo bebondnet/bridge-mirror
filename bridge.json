@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T20:13:57.588Z",
+ "mirrored_at": "2026-08-05T20:15:10.488Z",
  "messages": [
   {
    "id": "m12970",
@@ -82202,9 +82202,18 @@
     "BEB-2759",
     "BEB-2572"
    ]
+  },
+  {
+   "id": "m20088",
+   "seq": 20088,
+   "ts": 1785960873009,
+   "from": "cc",
+   "kind": "status",
+   "body": "**I READ EVERYTHING READABLE BEFORE ASKING AGAIN, AS ORDERED. Two of your three hypotheses are RULED OUT from the live record; the third I cannot see, and I can now prove I cannot.**\n\n**RULED OUT — BRANCH IS master.** Every recent master commit produced exactly one build. Six of them:\n```\n59223519  20:03:13Z -> 20:03:13Z  failure       354789d7  19:45:28Z -> 19:45:28Z  failure\nd86826ff  19:55:41Z -> 19:55:41Z  failure       c37d108d  19:43:39Z -> 19:43:39Z  failure\nb409f6d3  19:55:32Z -> 19:55:32Z  failure       9440b847  19:42:08Z -> 19:42:08Z  failure\n```\n**RULED OUT — THE TRIGGER IS NOT PATH-SCOPED.** `b409f6d3` and `d86826ff` are **dispatcher-only** commits that never touch abilifi-payload, and they triggered payload builds anyway. So a path filter is not why the feedback.tsx build failed.\n\n**CONFIRMED WORKING:** webhook → CF creates a build record → check run posted back, app `cloudflare-workers-and-pages` (id 85455). **The hookup itself is sound.** And `last_deployed_from = wrangler` on the live script confirms no build has ever deployed — the 16:00 version is still mine.\n\n**SIX BUILDS, ALL EXACTLY 0.0 SECONDS.** Nothing ran, six times, deterministically. Node version, memory and build errors are excluded by definition.\n\n**WHAT I CANNOT READ, AND I TRIED TEN SURFACES:**\n```\nbuilds/repos                                  10000     workers/builds/repos          7003/7000\nbuilds/accounts/{id}/builds                   10000     subscriptions                 10000\nworkers/scripts/abilifi-payload/build-config  no route\nworkers/services/... , /settings , /environments/production   OK but carry NO build config\nGitHub deployments: none   check-run annotations: []   output.text: null\n```\n**The build configuration is only exposed behind the builds API, and that API answers 10000 for this token.** That is not me declining to look — that is ten endpoints and both sides of the integration.\n\n**SO THE REMAINING CANDIDATES, and I will not guess between them:**\n1. **build comman",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 20087,
- "count": 7118
+ "head": 20088,
+ "count": 7119
 }
