@@ -1,22 +1,24 @@
 {
- "mirrored_at": "2026-08-05T12:01:02.450Z",
- "ts": 1785931258109,
+ "mirrored_at": "2026-08-05T12:02:08.078Z",
+ "ts": 1785931324946,
  "loop": {
   "proposed_total": 668,
   "by_state": {
-   "queued": 259,
-   "claimed": 6,
-   "done": 252,
-   "held": 21,
-   "parked": 101
+   "queued": 273,
+   "claimed": 1,
+   "done": 255,
+   "held": 19,
+   "blocked": 1,
+   "parked": 90
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 6,
-    "done": 126,
-    "held": 21,
-    "parked": 100,
-    "queued": 24
+    "blocked": 1,
+    "claimed": 1,
+    "done": 129,
+    "held": 19,
+    "parked": 89,
+    "queued": 38
    },
    "REFINE": {
     "queued": 174
@@ -34,14 +36,23 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785931207403,
+   "at": 1785931272025,
    "tally": "idle (no proposable work)"
   },
   "reds": [
    {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1785931272775,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2744"
+    ]
+   },
+   {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785931203479,
+    "since": 1785931263513,
     "detail": "UI INFRA — the three surfaces Alex works in: FEEDBACK TOOL (2741) live, BBT UI with goal view (2756) live, ORKY CHAT (2493) live after Found — last landed evidence NEVER",
     "refs": [
      "BEB-2741",
@@ -52,7 +63,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785931203479,
+    "since": 1785931263513,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -62,7 +73,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785931203479,
+    "since": 1785931263513,
     "detail": "MARKBOARD v1 lands TODAY on the conducting frag path — wiki page, tap-to-mark, MCP-door thread, SpecOps verdict + recording into BB Docs — last landed evidence NEVER",
     "refs": [
      "BEB-2741"
@@ -92,7 +103,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785931203479,
+    "since": 1785931263513,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -194,20 +205,6 @@
      "BEB-2292",
      "BEB-2259"
     ]
-   },
-   {
-    "code": "SILENT_REFUSAL",
-    "severity": "red",
-    "since": 1785929436796,
-    "detail": "BEB-2756 refused 3× in 30min — LATEST: GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-    "refs": [
-     "BEB-2756"
-    ],
-    "orky": {
-     "cls": "silent-refusal-loop",
-     "error": "GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.",
-     "subject": "BEB-2756"
-    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -395,7 +392,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785855242920,
-    "detail": "abilifi-apps failing at heartbeat 160× in 24h — LATEST (08-05T11:35): HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
+    "detail": "abilifi-apps failing at heartbeat 162× in 24h — LATEST (08-05T12:01): HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
     "refs": [
      "BEB-2385"
     ],
@@ -674,7 +671,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785931203479,
+    "since": 1785931263513,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -764,39 +761,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 19145,
+  "head_seq": 19152,
   "cursor_fable": 12969,
-  "unread_for_fable": 6176,
+  "unread_for_fable": 6183,
   "last": [
    {
-    "seq": 19141,
+    "seq": 19148,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 7 · claimed 3 — BEB-2741→BUILD[claimed], BEB-2756→BUI"
+    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed ·"
    },
    {
-    "seq": 19142,
+    "seq": 19149,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER: BEB-2476 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
+    "one_line": "CLEARED ×1 (BEB-2334): SILENT_REFUSAL"
    },
    {
-    "seq": 19143,
+    "seq": 19150,
     "from": "cc",
     "kind": "status",
-    "one_line": "**BEB-2741 IS CLAIMED AND BUILDING. The gate between Alex and his UI is open.** ``` 11:57:"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2476 — commit 2"
    },
    {
-    "seq": 19144,
+    "seq": 19151,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(9min)."
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2743 — commit c"
    },
    {
-    "seq": 19145,
+    "seq": 19152,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2741 — commit f"
    }
   ]
  },
@@ -890,9 +887,18 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1785931272775,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2744"
+   ]
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785931203479,
+   "since": 1785931263513,
    "detail": "UI INFRA — the three surfaces Alex works in: FEEDBACK TOOL (2741) live, BBT UI with goal view (2756) live, ORKY CHAT (2493) live after Found — last landed evidence NEVER",
    "refs": [
     "BEB-2741",
@@ -903,7 +909,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785931203479,
+   "since": 1785931263513,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -913,7 +919,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785931203479,
+   "since": 1785931263513,
    "detail": "MARKBOARD v1 lands TODAY on the conducting frag path — wiki page, tap-to-mark, MCP-door thread, SpecOps verdict + recording into BB Docs — last landed evidence NEVER",
    "refs": [
     "BEB-2741"
@@ -943,7 +949,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785931203479,
+   "since": 1785931263513,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1045,20 +1051,6 @@
     "BEB-2292",
     "BEB-2259"
    ]
-  },
-  {
-   "code": "SILENT_REFUSAL",
-   "severity": "red",
-   "since": 1785929436796,
-   "detail": "BEB-2756 refused 3× in 30min — LATEST: GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-   "refs": [
-    "BEB-2756"
-   ],
-   "orky": {
-    "cls": "silent-refusal-loop",
-    "error": "GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.",
-    "subject": "BEB-2756"
-   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -1246,7 +1238,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785855242920,
-   "detail": "abilifi-apps failing at heartbeat 160× in 24h — LATEST (08-05T11:35): HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
+   "detail": "abilifi-apps failing at heartbeat 162× in 24h — LATEST (08-05T12:01): HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
    "refs": [
     "BEB-2385"
    ],
@@ -1525,7 +1517,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785931203479,
+   "since": 1785931263513,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
