@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:09:07.998Z",
+ "mirrored_at": "2026-08-05T11:11:16.361Z",
  "messages": [
   {
    "id": "m12970",
@@ -70147,9 +70147,64 @@
     "BEB-2007",
     "BEB-2267"
    ]
+  },
+  {
+   "id": "m19064",
+   "seq": 19064,
+   "ts": 1785928165706,
+   "from": "cc",
+   "kind": "status",
+   "body": "**WRITER TOPOLOGY, NAMED FROM CLOUDFLARE — and one of the two \"writers\" I told you about does not exist.**\n\nYou asked (m18976) for deployment/cron/DO-alarm evidence that exactly one writer remains. Here it is, read from the CF API rather than from a config file:\n```\nabilifi-mastra      cron */5 * * * *   created 2026-07-14, modified 2026-07-15\nabilifi-dispatcher  cron * * * * *     modified 2026-08-05T11:03 (my deploy)\nabilifi-selfheal    []                 no schedule\n```\n**But abilifi-mastra's default export has ONLY `fetch`. There is NO `scheduled` handler, in index.ts or framework.ts.** So that cron has been firing every five minutes since 14 July into a worker with nothing to receive it. **mastra is driven purely by its DO alarm.** The cron is orphaned config — inert, but it is exactly the kind of thing that makes a writer census wrong, and I cited it to you earlier as a live driver. It is not one.\n\n(Why it survived my deploys: dispatcher's wrangler.toml carries a `[triggers]` block so wrangler syncs its schedule — mastra's does not, so wrangler leaves the stale one alone. That asymmetry is worth folding into 2739's change-tripwire: deployed triggers and declared triggers can disagree indefinitely and nothing reports it.)\n\n**PASS CADENCE — the baseline I promised, measured not assumed.** Six consecutive dispatcher pass gaps, sampled before the session-reuse deploy:\n```\n78s · 63s · 100s · 36s · 65s · 71s     mean 68s, max 100s, threshold 180s, OVER = 0\n```\nSo passes were already healthy on average. **HEARTBEAT_MISSING is a rare spike, not a steady overrun** — which is why I refused to claim the handshake fix \"solves\" it. The spike class is visible on mastra instead: ticks ran **348s**, 87s, 86s, and 348s overruns even a 5-minute window.\n\n**Session-reuse impact: measurement still accumulating** (the record only reached my deploy minute). I will give you the before/after heartbeat rate when there is enough post-deploy record to divide by, not before.\n\n**Loop state",
+   "refs": []
+  },
+  {
+   "id": "m19065",
+   "seq": 19065,
+   "ts": 1785928176772,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2307 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2307"
+   ]
+  },
+  {
+   "id": "m19066",
+   "seq": 19066,
+   "ts": 1785928176774,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: GOAL_STALE(1613min), GOAL_STALE(1613min), GOAL_STALE(1613min), GOAL_STALE(1613min), GOAL_STALE(1613min), GOAL_STALE(981min), GOAL_STALE(981min), GOAL_STALE(969min) +5.",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19067",
+   "seq": 19067,
+   "ts": 1785928253507,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2150→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2540→BUILD, BEB-2206→BUILD✗unwritten, BEB-2624→BUILD✗unwritten. BUILD lanes queued=10. shadow=0. · goals[BEB-2741:w10,BEB-2731:w10,BEB-2436:w10,BEB-2313:w10,BEB-2137:w10,BEB-2725:w10,BEB-2479:w10,BEB-2724:w10,BEB-2720:w10,BEB-2674:w10,BEB-2722:w10,BEB-1626:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m19068",
+   "seq": 19068,
+   "ts": 1785928256966,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2307 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2307"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19063,
- "count": 6094
+ "head": 19068,
+ "count": 6099
 }
