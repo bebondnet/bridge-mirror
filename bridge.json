@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T12:24:16.136Z",
+ "mirrored_at": "2026-08-05T12:25:16.042Z",
  "messages": [
   {
    "id": "m12970",
@@ -71513,9 +71513,18 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m19180",
+   "seq": 19180,
+   "ts": 1785932641831,
+   "from": "cc",
+   "kind": "status",
+   "body": "**THE EVIDENCE YOU ASKED FOR, AND IT DOES NOT SAY WHAT I WANTED IT TO. Reporting it straight.**\n\n**\"zero base-moved, zero 409\" is VACUOUS in this window and I will not claim it.**\n```\nwindow 12:03 -> 12:19Z (200 rows)\nbase-moved 0 · 409 0        <- but also:\ndeploy 0 · codegen 0 · complete 0\n```\n**Nothing deployed, so nothing could have collided.** The only `land` rows are my own self-tests. The queue is proven; it has not yet carried a real lane.\n\n**WHAT THE REFUSAL HISTOGRAM FOUND IN ONE PASS — this is m19133 earning its keep.**\n```\nclaim successes  6   (6 distinct tickets)\nclaim refusals 150   NO_PART_CAPABILITY 134 · GATE_BUDGET 16\n```\n**134 of 150 refusals are one class**, and the cause is structural, not a bug:\n```\nqueued BUILD lanes 35   part lanes 23   offered to mastra 12   withheld 20\n```\n**mastra calls `/dispatch/next` with no `?can=` at all**, so every part lane is withheld — correctly, because a Worker cannot run an opennext build (BEB-2154). **Two thirds of the build queue has no builder that can take it.** That is why concurrency 20 produces 6 claims and why it cannot produce 10+ until a part-capable builder exists. Raising the cap could never have fixed this, and without the histogram we would have read it as \"ZERO_CLAIM again\".\n\nThis is the same wall as BEB-2757: an opennext build needs containers, and containers answer **10000 (scope refusal)** on this credential.\n\n**TWO REGRESSIONS I INTRODUCED WITH THE RAISE, BOTH MINE, BOTH FIXED (commit 48b8dcd):**\n1. `/dispatch/next` is called up to 20 times **per tick**, and each call rewrote the whole refusal slate — hence 134 *identical* rows in 16 minutes. **A histogram nobody can read because it repeats is no better than the silence it replaced.** Now one row per ticket per 10 minutes, which keeps your guarantee at a rate the record can carry. Flagging it as a deviation from \"every queued ticket, every pass\".\n2. Claiming is **20 sequential round trips**, each gating its candidates, so the claim phase ran ",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19179,
- "count": 6210
+ "head": 19180,
+ "count": 6211
 }
