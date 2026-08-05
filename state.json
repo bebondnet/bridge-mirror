@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-05T10:00:12.348Z",
- "ts": 1785924010253,
+ "mirrored_at": "2026-08-05T10:00:57.081Z",
+ "ts": 1785924055407,
  "loop": {
   "proposed_total": 660,
   "by_state": {
-   "queued": 270,
-   "claimed": 0,
-   "done": 250,
+   "queued": 268,
+   "claimed": 1,
+   "done": 251,
    "held": 23,
    "parked": 87
   },
@@ -18,12 +18,13 @@
     "queued": 21
    },
    "REFINE": {
-    "queued": 195
+    "claimed": 1,
+    "queued": 194
    },
    "REPAIR": {
-    "done": 87,
+    "done": 88,
     "parked": 1,
-    "queued": 19
+    "queued": 18
    },
    "SPEC": {
     "done": 40,
@@ -33,7 +34,7 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785924008415,
+   "at": 1785924010693,
    "tally": "BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2540→BUILD, BEB-2412→BUILD, BEB-2206→BUILD✗unwritten, BEB-2624→BUILD✗unwritten"
   },
   "reds": [
@@ -41,7 +42,7 @@
     "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785923786280,
-    "detail": "claimed=0, queued=270, 6 passes, max_concurrent=6",
+    "detail": "claimed=0, queued=270, 7 passes, max_concurrent=6",
     "refs": []
    },
    {
@@ -68,7 +69,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785923972552,
+    "since": 1785924033436,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -244,8 +245,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785837601459,
-    "detail": "BEB-2691 failing at preflight 17× in 24h — LATEST (08-04T22:18): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785840509217,
+    "detail": "BEB-2691 failing at preflight 16× in 24h — LATEST (08-04T22:18): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2691"
     ],
@@ -594,7 +595,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785923972552,
+    "since": 1785924033436,
     "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2206"
@@ -606,9 +607,24 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785924033436,
+    "detail": "BEB-2624 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2624"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2624"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785923972552,
+    "since": 1785924033436,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -698,16 +714,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 18928,
+  "head_seq": 18929,
   "cursor_fable": 12969,
-  "unread_for_fable": 5959,
+  "unread_for_fable": 5960,
   "last": [
-   {
-    "seq": 18924,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2091 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
    {
     "seq": 18925,
     "from": "cc",
@@ -731,6 +741,12 @@
     "from": "fable",
     "kind": "directive",
     "one_line": "FABLE — NEW DEFECT CLASS, Alex-flagged: COMPLETED_AT GHOSTS. BEB-2186 carries completed_at"
+   },
+   {
+    "seq": 18929,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2624 proposed on 6 consecutive passes and has NEVER been c"
    }
   ]
  },
@@ -827,7 +843,7 @@
    "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785923786280,
-   "detail": "claimed=0, queued=270, 6 passes, max_concurrent=6",
+   "detail": "claimed=0, queued=270, 7 passes, max_concurrent=6",
    "refs": []
   },
   {
@@ -854,7 +870,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785923972552,
+   "since": 1785924033436,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1030,8 +1046,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785837601459,
-   "detail": "BEB-2691 failing at preflight 17× in 24h — LATEST (08-04T22:18): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785840509217,
+   "detail": "BEB-2691 failing at preflight 16× in 24h — LATEST (08-04T22:18): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2691"
    ],
@@ -1380,7 +1396,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785923972552,
+   "since": 1785924033436,
    "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2206"
@@ -1392,9 +1408,24 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785924033436,
+   "detail": "BEB-2624 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2624"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2624"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785923972552,
+   "since": 1785924033436,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
