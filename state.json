@@ -1,27 +1,27 @@
 {
- "mirrored_at": "2026-08-05T23:36:49.569Z",
- "ts": 1785973008875,
+ "mirrored_at": "2026-08-05T23:37:53.841Z",
+ "ts": 1785973073504,
  "loop": {
   "proposed_total": 696,
   "by_state": {
-   "queued": 232,
-   "claimed": 6,
+   "queued": 227,
+   "claimed": 10,
    "done": 285,
-   "held": 23,
+   "held": 24,
    "blocked": 5,
    "parked": 114
   },
   "by_lane": {
    "BUILD": {
     "blocked": 5,
-    "claimed": 6,
+    "claimed": 10,
     "done": 158,
-    "held": 23,
+    "held": 24,
     "parked": 112,
-    "queued": 10
+    "queued": 4
    },
    "REFINE": {
-    "queued": 147
+    "queued": 148
    },
    "REPAIR": {
     "done": 87,
@@ -36,14 +36,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785972988747,
+   "at": 1785973053062,
    "tally": "BEB-2533→BUILD, BEB-2493→BUILD, BEB-1626→BUILD, BEB-2394→BUILD[claimed], BEB-2572→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2744→BUILD[claimed], BEB-2577→BUILD[no-budget], BEB-2563→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785972972084,
+    "since": 1785973032068,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -74,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785972972084,
+    "since": 1785973032068,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -250,14 +250,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785886578259,
-    "detail": "BEB-2710 failing at repair-reopen 11× in 24h — LATEST (08-05T00:25): closed as done while its red PROPOSED_NEVER_CLAIMED:BEB-2710 was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked.",
+    "since": 1785887232077,
+    "detail": "BEB-2710 failing at repair-reopen 8× in 24h — LATEST (08-05T00:25): subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED:BEB-2710 after close",
     "refs": [
      "BEB-2716"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "closed as done while its red PROPOSED_NEVER_CLAIMED:BEB-2710 was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked.",
+     "error": "subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED:BEB-2710 after close",
      "subject": "BEB-2716"
     }
    },
@@ -558,6 +558,21 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
+    "since": 1785969067376,
+    "detail": "alexrollin/abilifi-apps failing at claim 3× in 24h — LATEST (08-05T23:36): GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-2764"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass",
+     "subject": "BEB-2764"
+    },
+    "fix_ticket": "BEB-2737"
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
     "since": 1785887013621,
     "detail": "alexrollin/abilifi-apps failing at codegen 85× in 24h — LATEST (08-05T23:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
@@ -670,7 +685,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785972972084,
+    "since": 1785973032068,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -741,40 +756,21 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785972964404,
-    "detail": "9 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (9 rows) — one defect, not 9 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "detail": "10 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (20 rows) — one defect, not 10 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
      "subject": "dispatcher-claim",
      "error": "NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)"
-    },
-    "fix_ticket": "BEB-2125"
+    }
    }
   ]
  },
  "bridge": {
-  "head_seq": 20318,
+  "head_seq": 20321,
   "cursor_fable": 12969,
-  "unread_for_fable": 7349,
+  "unread_for_fable": 7352,
   "last": [
-   {
-    "seq": 20314,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2773 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
-   {
-    "seq": 20315,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2777 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
-   {
-    "seq": 20316,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED REPEAT_FAILER: 9 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the las"
-   },
    {
     "seq": 20317,
     "from": "cc",
@@ -786,6 +782,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2775 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 20319,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2685 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 20320,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: 10 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the la"
+   },
+   {
+    "seq": 20321,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: alexrollin/abilifi-apps failing at claim 3× in 24h — LATEST (08-05T23:3"
    }
   ]
  },
@@ -881,7 +895,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785972972084,
+   "since": 1785973032068,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -912,7 +926,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785972972084,
+   "since": 1785973032068,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1088,14 +1102,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785886578259,
-   "detail": "BEB-2710 failing at repair-reopen 11× in 24h — LATEST (08-05T00:25): closed as done while its red PROPOSED_NEVER_CLAIMED:BEB-2710 was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked.",
+   "since": 1785887232077,
+   "detail": "BEB-2710 failing at repair-reopen 8× in 24h — LATEST (08-05T00:25): subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED:BEB-2710 after close",
    "refs": [
     "BEB-2716"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "closed as done while its red PROPOSED_NEVER_CLAIMED:BEB-2710 was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked.",
+    "error": "subject BEB-2710 still fires PROPOSED_NEVER_CLAIMED:BEB-2710 after close",
     "subject": "BEB-2716"
    }
   },
@@ -1396,6 +1410,21 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
+   "since": 1785969067376,
+   "detail": "alexrollin/abilifi-apps failing at claim 3× in 24h — LATEST (08-05T23:36): GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-2764"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass",
+    "subject": "BEB-2764"
+   },
+   "fix_ticket": "BEB-2737"
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
    "since": 1785887013621,
    "detail": "alexrollin/abilifi-apps failing at codegen 85× in 24h — LATEST (08-05T23:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
@@ -1508,7 +1537,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785972972084,
+   "since": 1785973032068,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1579,14 +1608,13 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785972964404,
-   "detail": "9 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (9 rows) — one defect, not 9 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "detail": "10 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (20 rows) — one defect, not 10 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
     "subject": "dispatcher-claim",
     "error": "NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)"
-   },
-   "fix_ticket": "BEB-2125"
+   }
   }
  ]
 }
