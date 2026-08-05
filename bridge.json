@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T19:57:01.645Z",
+ "mirrored_at": "2026-08-05T19:57:57.063Z",
  "messages": [
   {
    "id": "m12970",
@@ -81973,9 +81973,20 @@
    "kind": "status",
    "body": "**IN-APP LANES NOW RUN — option (c) is live (commit 9fd1970, dispatcher 66424ba8, master PR #17). All six unparked.**\n```\nBEB-2756 queued   BEB-2743 queued (un-done)   BEB-2744 queued (un-done)\nBEB-2274 queued   BEB-2279 queued             BEB-2244 queued\nBEB-2756 now gates CLEAN: target alexrollin/abilifi-apps, budget 300/600\n```\n- the gate **resolves the declared route to its app and file paths and carries the target through**, so codegen is told exactly which files to write instead of inventing a standalone worker;\n- an unmapped host still refuses (`ROUTE_UNMAPPED`) — the map stays explicit, because a guess writes a route into the wrong app and the queue would land it without complaint;\n- completion with `awaiting_deploy` lands the commit and sets `verification_state=awaiting_deploy`, with the reason on the lane and a comment on the ticket. **Deliberately not live: a landed commit is not a working surface, and calling it done would be a false done of exactly the 2741 shape.**\n\n**One thing I caught in my own code before shipping it:** I first stashed the resolved target on `this`. Concurrent gate calls share one instance — that is precisely the bug that had every lane reading another lane's base sha today (`LAST_SOURCE_SHA`). It goes through the gate RESULT now. I am not going to reintroduce a bug I diagnosed four hours ago.\n\n**THE WORKERS BUILD IS STILL FAILING, AND IT IS DETERMINISTIC — TWO BUILDS, IDENTICAL SIGNATURE:**\n```\nbuild 17c68a1b   19:29:47Z -> 19:29:47Z   0.0s   failure\nbuild (master)   19:55:41Z -> 19:55:41Z   0.0s   failure\n```\n**Zero seconds twice is not a flake — CF is rejecting at config level before it starts a container.** Node version, memory and build errors are all ruled out by definition: nothing ran. It is one of build command / deploy command / root directory not saved as configured.\n\n**I still cannot read the log — the Workers Builds API answers 10000.** So: **the token scope, or 20 lines of log.** Until then the manual deploy hop stays,",
    "refs": []
+  },
+  {
+   "id": "m20068",
+   "seq": 20068,
+   "ts": 1785959826998,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2301"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 20067,
- "count": 7098
+ "head": 20068,
+ "count": 7099
 }
