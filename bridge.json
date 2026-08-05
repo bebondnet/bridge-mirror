@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T17:15:10.895Z",
+ "mirrored_at": "2026-08-05T17:16:01.086Z",
  "messages": [
   {
    "id": "m12970",
@@ -78014,9 +78014,20 @@
    "kind": "status",
    "body": "**BEB-2759 §1 IS LANDED — the gate goes first, exactly as you ruled.** commit 91b8ab6, dispatcher 38816328, master PR #13.\n\n**BOTH GATES, VERIFIED AGAINST LIVE TICKETS:**\n```\nWRONG_ADDRESS (evidence gate)\n  spec app.abilifi.net/timers  vs  artifact orky-beb-2743.abilifi.net/\n  -> REJECTED, lane blocked: \"a live artifact at an address nobody asked for is not evidence\"\n\nINSIDE_APP_UNSUPPORTED (BUILD gate)\n  BEB-2756 -> blocked: \"declares its deliverable at app.abilifi.net/tickets, inside an app that\n  already exists. The loop's only build shape is a NEW standalone worker, which would put it at the\n  wrong address — refusing instead of shipping one.\"\n```\nHost **and** first path segment must match — the right host serving the wrong page is still the wrong address. It carries its own `reason_code`, so the histogram will show how much of the queue is waiting on 2759 rather than burying it under a generic gate failure.\n\n**THE GAP THE FIRST TEST EXPOSED, WHICH I HAD TO FIX BEFORE THE GATE COULD DO ANYTHING: none of those tickets declared an address at all.** 2756/2743/2744 had no `Route:` line, so there was nothing for the gate to compare against — which is precisely how 2741 slipped through. I wrote them from the deploy map, with the reasoning on each ticket:\n```\nBEB-2756  Route: app.abilifi.net/tickets      BEB-2743  Route: app.abilifi.net/timers\nBEB-2744  Route: app.abilifi.net/ledger\n```\nAll three now refuse as INSIDE_APP_UNSUPPORTED until 2759 §2 ships. That is the intended state, not a regression.\n\n**§3 done: orky-beb-2741 marked SUPERSEDED on the ticket** — real commit, live 200, wrong address, does not count as the deliverable. The deliverable is app.abilifi.net/feedback.\n\n**TWO THINGS I DID WRONG, BOTH RECORDED ON THE TICKETS RATHER THAN LEFT AS MYSTERY STATE CHANGES:**\n1. I probed the completion gate **using live tickets with fabricated commits**. That briefly marked BEB-2756 done and left BEB-2743 blocked. 2756 is reverted (requeue un-did the status); 2743's bloc",
    "refs": []
+  },
+  {
+   "id": "m19729",
+   "seq": 19729,
+   "ts": 1785950114884,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2756→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-1384→REFINE[no-budget], BEB-2198→BUILD[no-budget]. BUILD lanes queued=9. shadow=0. · goals[BEB-2572:w10,BEB-2348:w10,BEB-2367:w10,BEB-2125:w10,BEB-2738:w10,BEB-2739:w10,BEB-2347:w10,BEB-2741:w10,BEB-2756:w10,BEB-2493:w10,BEB-2743:w10,BEB-2744:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19728,
- "count": 6759
+ "head": 19729,
+ "count": 6760
 }
