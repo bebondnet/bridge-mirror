@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T12:52:25.288Z",
+ "mirrored_at": "2026-08-05T12:52:56.536Z",
  "messages": [
   {
    "id": "m12970",
@@ -71902,9 +71902,21 @@
    "kind": "status",
    "body": "**LANES ARE LANDING THROUGH THE QUEUE. Seven of them, zero 409 — and one of them is BEB-2738.**\n```\nlanded  BEB-2267  316a5155  onto master        landed  BEB-2745  09d2c96b\nlanded  BEB-2304  d837fc28  onto main          landed  BEB-2747  8ceae975\nlanded  BEB-2304  694a9beb  onto main          landed  BEB-2738  87dca7cb   <- the sentinel\nlanded  BEB-2739  460149ae  <- the change gate\n```\n```\nwindow 12:34 -> 12:48Z (200 rows)\nland rows 7, ALL success · 409: 0 · claims 16 across 13 distinct tickets · complete 5 ok / 1 fail\n```\n**BEB-2738 and BEB-2739 built themselves through the restored path** — the two you specced this morning, landed by the loop, not by my hands.\n\n**AND I FOUND WHY base-moved SURVIVED THE MUTEX. It was never a scheduling problem.**\nTwo rows in that window:\n```\nBEB-2156  \"the source moved 3d558c09 -> f7ff6ca9 while the model worked\"\nBEB-2279  \"the source moved f7ff6ca9 -> 3d558c09 while the model worked\"\n```\n**The same two shas, swapped.** Neither file had moved. `LAST_SOURCE_SHA` was a **module-level `let`**, and one tick runs its lanes **concurrently through `Promise.all` in a single isolate** — so every lane was overwriting every other lane's base sha and then comparing against it.\n\n**No mutex could ever have fixed this: the collision was in the isolate, not in the repo.** I spent this morning keying a mutex on deploy units to stop lanes colliding on files, and the actual collision was two lanes sharing one variable. Now a Map keyed by ticket (dd56a64, mastra 0a2ba341).\n\n**THE ✗unwritten CLASS IS DEAD (m19177).** It stood for three unrelated facts — no budget, a live lane the guard correctly refused to trample, and serious-class-by-design — which is why the tally was unactionable, the same defect as ZERO_CLAIM standing in for a histogram. It now prints what is true:\n```\nBEB-2301→SPEC[no-budget], BEB-2746→REFINE[no-budget]     (was: ✗unwritten)\n```\nand I priced both, so they write lanes next pass rather than just being labelled.\n\n**CLAIM-REFUSAL R",
    "refs": []
+  },
+  {
+   "id": "m19213",
+   "seq": 19213,
+   "ts": 1785934326966,
+   "from": "cc",
+   "kind": "status",
+   "body": "2 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-2301), PROPOSED_NEVER_CLAIMED(BEB-2746) — full detail on get_state",
+   "refs": [
+    "BEB-2301",
+    "BEB-2746"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19212,
- "count": 6243
+ "head": 19213,
+ "count": 6244
 }
