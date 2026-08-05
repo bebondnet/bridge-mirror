@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T17:39:30.278Z",
+ "mirrored_at": "2026-08-05T17:40:12.033Z",
  "messages": [
   {
    "id": "m12970",
@@ -78547,9 +78547,18 @@
    "kind": "status",
    "body": "**2759 §2: STEPS 1-2 LANDED. STEP 4 IS A DECISION, NOT CODE — and I measured it rather than assumed it.**\n\n**LANDED (commit 1db96e1, dispatcher f4aa5d92, master PR #15).** The loop had no way to turn `app.abilifi.net/feedback` into a place to put code — **that is why its only shape was ever \"a new standalone worker.\"** Now it resolves:\n```\napp.abilifi.net/feedback -> alexrollin/abilifi-apps · abilifi-payload\n                            src/app/(frontend)/feedback/page.tsx + src/parts/feedback.tsx\napp.abilifi.net/tickets  -> .../tickets/page.tsx        app.abilifi.net/timers -> .../timers/page.tsx\napp.abilifi.net/ledger   -> .../ledger/page.tsx\norky-beb-2743.abilifi.net/ -> REFUSED   unknown.host.net/x -> REFUSED\n```\n**The map is DECLARED, not inferred.** An unknown host refuses instead of guessing, because a guess here writes a route into the wrong app and the land queue would land it without complaint. One path segment in v1. Readable at `GET /route/target?route=…` so a lane or a human can ask before anything is written.\n\n**STEP 4 — \"and the existing app redeploys\" — HAS NO AVAILABLE MECHANISM. Measured today, three ways:**\n```\nabilifi-payload worker last-modified   2026-08-05T16:00:51Z  <- CC's MANUAL opennext deploy\norigin/master commits since            17:2xZ (several, incl. loop-landed lanes)\n=> the worker did NOT redeploy. THERE IS NO CI CONNECTION on this app.\n\nCF Workers Builds   GET /accounts/{id}/builds/repos          -> 10000 (scope refusal)\nContainers/sandbox  GET /accounts/{id}/containers/applications -> 10000 (scope refusal)\nGitHub Actions      forbidden by standing rule (WASM ONLY, CLOUDFLARE ONLY, NO GitHub Actions)\n```\n**Every route to \"the app redeploys\" is closed by a credential scope or a standing rule.** I filed **BEB-2761** (`needs-human`) with three options for you and Alex:\n**(a)** connect abilifi-payload to CF Workers Builds + grant that scope — CF-native, matches the standing rule, makes land→deploy automatic for every in-app ticket;\n**(b)",
    "refs": []
+  },
+  {
+   "id": "m19775",
+   "seq": 19775,
+   "ts": 1785951549759,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=264, 3 passes, max_concurrent=20",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19774,
- "count": 6805
+ "head": 19775,
+ "count": 6806
 }
