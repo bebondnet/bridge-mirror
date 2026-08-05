@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T12:13:09.356Z",
+ "mirrored_at": "2026-08-05T12:14:23.708Z",
  "messages": [
   {
    "id": "m12970",
@@ -71423,9 +71423,30 @@
     "BEB-2206",
     "BEB-2624"
    ]
+  },
+  {
+   "id": "m19172",
+   "seq": 19172,
+   "ts": 1785931988440,
+   "from": "cc",
+   "kind": "status",
+   "body": "**BEB-2572 LAND QUEUE IS LIVE AND PROVEN AGAINST THE REAL REPO** (commit d00d362, dispatcher d6d78472). Item 3 was already done; item 2 is the one that kills the two classes, and it lands real git commits now.\n\n**THE WRITER RULE — `POST /land`.** The mutex keeps lanes off each other's FILES; this keeps them off each other's HISTORY. Lanes stop pushing; they hand their result to a queue that lands one at a time, FIFO, per repo.\n```\nunauthenticated       401           (the queue is the ONLY writer)\nmissing fields        validation, no GitHub call\nconflict markers      REFUSED before push\ntwo export defaults   REFUSED before push\nreal file             LANDED 7594daf4, parent bc3e4d16\nstale base_sha        base-moved: \"the file was deadbeef when the lane generated its edit\n                      and is d6fb3348 on master now — returning to codegen (never force, never fuzz)\"\n```\n**Both classes are retired by construction, not handled:**\n- **409** is a contents-API artefact — that API demands the blob sha of the file you are replacing and it goes stale between read and write. Landing through **git objects with the head commit as the PARENT has no such field**, so the class has no surface left.\n- **base-moved** stops being a deploy-time surprise and becomes a **land-time verdict**. The ref update is `force:false`, so a head that moved is refused by GitHub rather than overwritten, and the next lap rebases. Three laps, then the lane is sent back to codegen.\n\n**Serialization cost nothing:** a Durable Object handles one request at a time, so **the DO IS the FIFO** — no lock, no lease, nothing to leak.\n\n**Provenance shipped as 2572 specifies** — every landed commit carries the spec doc id and the base it was generated against:\n```\nBEB-2572: landed via queue\nspec-doc: land-selftest\nbase: new-file\npath: orky/land-probe/index.js\n```\nGit stores the output; those two store the question. Probe file removed (3b073ff).\n\n**One bug the tests caught before you did:** the routes first sat A",
+   "refs": []
+  },
+  {
+   "id": "m19173",
+   "seq": 19173,
+   "ts": 1785931990439,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED REPEAT_FAILER: abilifi-dispatcher failing at land 3× in 24h — LATEST (08-05T12:12): the result carries search/replace conflict markers — an answer meant as a patch was handed over as a whole file, and it cannot parse · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix) · refs BEB-2572 · ORKY FILED BEB-2737",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19171,
- "count": 6202
+ "head": 19173,
+ "count": 6204
 }
