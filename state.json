@@ -1,6 +1,6 @@
 {
- "mirrored_at": "2026-08-05T17:30:55.529Z",
- "ts": 1785951053353,
+ "mirrored_at": "2026-08-05T17:32:28.996Z",
+ "ts": 1785951147102,
  "loop": {
   "proposed_total": 680,
   "by_state": {
@@ -33,7 +33,7 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785951012070,
+   "at": 1785951100430,
    "tally": "BEB-2756→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2157→BUILD[no-budget], BEB-2502→BUILD[serious:proposed-only]"
   },
   "reds": [
@@ -41,8 +41,36 @@
     "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785950583462,
-    "detail": "claimed=0, queued=263, 8 passes, max_concurrent=20",
+    "detail": "claimed=0, queued=263, 10 passes, max_concurrent=20",
     "refs": []
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1785950537213,
+    "detail": "BEB-2256 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2256"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2256",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-05T17:22:17.213Z -> 2026-08-05T17:22:18.570Z"
+    }
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1785950510371,
+    "detail": "BEB-2746 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2746"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2746",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-05T17:21:50.371Z -> 2026-08-05T17:21:53.902Z"
+    }
    },
    {
     "code": "GOAL_STALE",
@@ -68,7 +96,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785951003470,
+    "since": 1785951123743,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -706,7 +734,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785951003470,
+    "since": 1785951123743,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -794,6 +822,26 @@
     ]
    },
    {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785951123743,
+    "detail": "fix BEB-2760 for BEB-2256 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane ABSENT (never admitted)",
+    "refs": [
+     "BEB-2760",
+     "BEB-2256"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785951123743,
+    "detail": "fix BEB-2760 for BEB-2746 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane ABSENT (never admitted)",
+    "refs": [
+     "BEB-2760",
+     "BEB-2746"
+    ]
+   },
+   {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785948095778,
@@ -808,28 +856,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 19750,
+  "head_seq": 19753,
   "cursor_fable": 12969,
-  "unread_for_fable": 6781,
+  "unread_for_fable": 6784,
   "last": [
-   {
-    "seq": 19746,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "3 NEW REDS: REPEAT_FAILER(BEB-2275), PROPOSED_NEVER_CLAIMED(BEB-2198), FIX_BURIED(BEB-2422"
-   },
-   {
-    "seq": 19747,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=262, 2 passes, max_concurrent=20"
-   },
-   {
-    "seq": 19748,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=263, 3 passes, max_concurrent=20"
-   },
    {
     "seq": 19749,
     "from": "cc",
@@ -841,6 +871,24 @@
     "from": "fable",
     "kind": "directive",
     "one_line": "FABLE — ALEX ORDER: LOOP PARALLEL DEPTH goal (target 08-08) executes NOW, not by Friday. C"
+   },
+   {
+    "seq": 19751,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): SINGLE_WRITER_VIOLATION[BEB-2256]→BEB-2760 · SINGLE_WRITER_VIOLATION[BE"
+   },
+   {
+    "seq": 19752,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "2 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-2256), SINGLE_WRITER_VIOLATION(BEB-2746) — full de"
+   },
+   {
+    "seq": 19753,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): FIX_BURIED[BEB-2760,BEB-2256] · FIX_BURIED[BEB-2760,BEB-2746]"
    }
   ]
  },
@@ -937,8 +985,36 @@
    "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785950583462,
-   "detail": "claimed=0, queued=263, 8 passes, max_concurrent=20",
+   "detail": "claimed=0, queued=263, 10 passes, max_concurrent=20",
    "refs": []
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1785950537213,
+   "detail": "BEB-2256 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2256"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2256",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-05T17:22:17.213Z -> 2026-08-05T17:22:18.570Z"
+   }
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1785950510371,
+   "detail": "BEB-2746 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2746"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2746",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-05T17:21:50.371Z -> 2026-08-05T17:21:53.902Z"
+   }
   },
   {
    "code": "GOAL_STALE",
@@ -964,7 +1040,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785951003470,
+   "since": 1785951123743,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1602,7 +1678,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785951003470,
+   "since": 1785951123743,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1687,6 +1763,26 @@
    "refs": [
     "BEB-2637",
     "deploy"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785951123743,
+   "detail": "fix BEB-2760 for BEB-2256 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane ABSENT (never admitted)",
+   "refs": [
+    "BEB-2760",
+    "BEB-2256"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785951123743,
+   "detail": "fix BEB-2760 for BEB-2746 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane ABSENT (never admitted)",
+   "refs": [
+    "BEB-2760",
+    "BEB-2746"
    ]
   },
   {
