@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-05T20:57:55.296Z",
- "ts": 1785963473418,
+ "mirrored_at": "2026-08-05T20:58:54.852Z",
+ "ts": 1785963532988,
  "loop": {
   "proposed_total": 689,
   "by_state": {
-   "queued": 249,
+   "queued": 250,
    "claimed": 1,
-   "done": 283,
-   "held": 23,
-   "blocked": 2,
+   "done": 282,
+   "held": 24,
+   "blocked": 1,
    "parked": 102
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 2,
+    "blocked": 1,
     "claimed": 1,
-    "done": 157,
-    "held": 23,
+    "done": 156,
+    "held": 24,
     "parked": 101,
-    "queued": 38
+    "queued": 39
    },
    "REFINE": {
     "queued": 135
@@ -36,28 +36,28 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785963432728,
-   "tally": "BEB-2743→BUILD[claimed], BEB-2756→BUILD[claimed], BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
+   "at": 1785963491537,
+   "tally": "BEB-2756→BUILD[claimed], BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
   },
   "reds": [
    {
     "code": "SINGLE_WRITER_VIOLATION",
     "severity": "red",
     "since": 1785963140966,
-    "detail": "BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "detail": "BEB-2337 completed 3× with 3 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
     "refs": [
      "BEB-2337"
     ],
     "orky": {
      "cls": "single-writer-violation",
      "subject": "BEB-2337",
-     "error": "2 completions, 2 distinct artefacts, 2026-08-05T20:52:20.966Z -> 2026-08-05T20:55:09.216Z"
+     "error": "3 completions, 3 distinct artefacts, 2026-08-05T20:52:20.966Z -> 2026-08-05T20:57:44.136Z"
     }
    },
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785963423454,
+    "since": 1785963483453,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -88,7 +88,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785963423454,
+    "since": 1785963483453,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -321,7 +321,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785927930717,
-    "detail": "BEB-2743 failing at preflight 5× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2743 failing at preflight 5× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2743"
     ],
@@ -586,14 +586,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785877082871,
-    "detail": "alexrollin/abilifi-apps failing at codegen 114× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN",
+    "since": 1785877200145,
+    "detail": "alexrollin/abilifi-apps failing at codegen 113× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines",
     "refs": [
      "BEB-2156"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WANTED: \"const ticket = \"BEB-2156\";\" · CLOSEST in file is line 6 (100% similar): \"const ticket = \"BEB-2156\";\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines — the result would not parse, and a duplicated line can never be a unique SEARCH anchor again. Modify the existing declaration instead of adding a second one.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
      "subject": "BEB-2156"
     }
    },
@@ -615,7 +615,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785890243705,
-    "detail": "alexrollin/abilifi-apps failing at deploy 25× in 24h — LATEST (08-05T20:55): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
+    "detail": "alexrollin/abilifi-apps failing at deploy 26× in 24h — LATEST (08-05T20:57): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
     "refs": [
      "BEB-2156"
     ],
@@ -629,7 +629,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785918971376,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 73× in 24h — LATEST (08-05T20:55): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 75× in 24h — LATEST (08-05T20:57): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2113"
     ],
@@ -642,14 +642,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785877082871,
-    "detail": "alexrollin/abilifi-apps failing at park 9× in 24h — LATEST (08-05T00:23): three-strikes: 60 identical-input retries at codegen",
+    "since": 1785877200145,
+    "detail": "alexrollin/abilifi-apps failing at park 8× in 24h — LATEST (08-05T00:23): three-strikes: 61 identical-input retries at codegen",
     "refs": [
      "BEB-2156"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 60 identical-input retries at codegen",
+     "error": "three-strikes: 61 identical-input retries at codegen",
      "subject": "BEB-2156"
     }
    },
@@ -698,7 +698,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785963423454,
+    "since": 1785963483453,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -780,16 +780,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 20149,
+  "head_seq": 20150,
   "cursor_fable": 12969,
-  "unread_for_fable": 7180,
+  "unread_for_fable": 7181,
   "last": [
-   {
-    "seq": 20145,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min"
-   },
    {
     "seq": 20146,
     "from": "cc",
@@ -813,6 +807,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2467 — commit 2"
+   },
+   {
+    "seq": 20150,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2766 — commit b"
    }
   ]
  },
@@ -909,20 +909,20 @@
    "code": "SINGLE_WRITER_VIOLATION",
    "severity": "red",
    "since": 1785963140966,
-   "detail": "BEB-2337 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "detail": "BEB-2337 completed 3× with 3 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
    "refs": [
     "BEB-2337"
    ],
    "orky": {
     "cls": "single-writer-violation",
     "subject": "BEB-2337",
-    "error": "2 completions, 2 distinct artefacts, 2026-08-05T20:52:20.966Z -> 2026-08-05T20:55:09.216Z"
+    "error": "3 completions, 3 distinct artefacts, 2026-08-05T20:52:20.966Z -> 2026-08-05T20:57:44.136Z"
    }
   },
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785963423454,
+   "since": 1785963483453,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -953,7 +953,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785963423454,
+   "since": 1785963483453,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1186,7 +1186,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785927930717,
-   "detail": "BEB-2743 failing at preflight 5× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2743 failing at preflight 5× in 24h — LATEST (08-05T20:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2743"
    ],
@@ -1451,14 +1451,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785877082871,
-   "detail": "alexrollin/abilifi-apps failing at codegen 114× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN",
+   "since": 1785877200145,
+   "detail": "alexrollin/abilifi-apps failing at codegen 113× in 24h — LATEST (08-05T20:51): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines",
    "refs": [
     "BEB-2156"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WANTED: \"const ticket = \"BEB-2156\";\" · CLOSEST in file is line 6 (100% similar): \"const ticket = \"BEB-2156\";\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines — the result would not parse, and a duplicated line can never be a unique SEARCH anchor again. Modify the existing declaration instead of adding a second one.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
     "subject": "BEB-2156"
    }
   },
@@ -1480,7 +1480,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785890243705,
-   "detail": "alexrollin/abilifi-apps failing at deploy 25× in 24h — LATEST (08-05T20:55): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
+   "detail": "alexrollin/abilifi-apps failing at deploy 26× in 24h — LATEST (08-05T20:57): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser",
    "refs": [
     "BEB-2156"
    ],
@@ -1494,7 +1494,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785918971376,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 73× in 24h — LATEST (08-05T20:55): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 75× in 24h — LATEST (08-05T20:57): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2113"
    ],
@@ -1507,14 +1507,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785877082871,
-   "detail": "alexrollin/abilifi-apps failing at park 9× in 24h — LATEST (08-05T00:23): three-strikes: 60 identical-input retries at codegen",
+   "since": 1785877200145,
+   "detail": "alexrollin/abilifi-apps failing at park 8× in 24h — LATEST (08-05T00:23): three-strikes: 61 identical-input retries at codegen",
    "refs": [
     "BEB-2156"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 60 identical-input retries at codegen",
+    "error": "three-strikes: 61 identical-input retries at codegen",
     "subject": "BEB-2156"
    }
   },
@@ -1563,7 +1563,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785963423454,
+   "since": 1785963483453,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
