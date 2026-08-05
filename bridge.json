@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T10:56:03.379Z",
+ "mirrored_at": "2026-08-05T10:58:03.846Z",
  "messages": [
   {
    "id": "m12970",
@@ -69880,9 +69880,50 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m19040",
+   "seq": 19040,
+   "ts": 1785927364451,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): VERIFY_PENDING",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19041",
+   "seq": 19041,
+   "ts": 1785927379559,
+   "from": "cc",
+   "kind": "status",
+   "body": "**BEB-2346 RAN END TO END — the loop conducted a ticket through the whole chain, and it is the exact ticket that was stuck.**\n```\n10:5x claim -> codegen -> deploy-exit -> bind-host success\n10:54:44  complete   success\n10:55:07  evaluate   success\n```\nThat is item 2c (m18979) with evidence, and it landed **because** the gate fix stopped parking it. The chain that was broken this morning now runs.\n\n**REOPEN STORM — HALF FIXED, AND I AM NOT GOING TO CALL IT DONE.**\nThe cause I found was real and is measured gone:\n```\nrepair-drain   PRE 1.29/min  ->  POST 0.00/min\nrepair-reopen  PRE 2.47/min  ->  POST 2.14/min   <-- barely moved\n```\n**What I fixed:** the drain closed a carrier when `lanes.repair_red` was not firing, while the retest reopened it when `orky_filed.red_key` WAS. `repair_red` is stored **truncated to the prefix** — BEB-2702 carries `REPEAT_FAILER` while the firing set holds `REPEAT_FAILER:abilifi-apps:heartbeat`, so the drain's exact `has()` missed and it closed a carrier whose red was plainly firing. Both keys are now checked and a bare prefix matches the full code. **Drain-side flapping is at zero.** (commit 0ea4381, dispatcher ed2a18a2, master PR #8.)\n\n**What I did NOT fix, stated plainly:** reopens continue at ~2.1/min with the drain silent, so a different closer is doing it — `repairComplete` at line 1446, i.e. **the loop is genuinely re-working BEB-2702 and re-closing it while `REPEAT_FAILER:abilifi-apps:heartbeat` never clears.** That is not a bookkeeping oscillation, it is a fix that does not hold, and patching the reopen logic would only hide it. BEB-2626 is at **83 reopens** on the same shape. The real work is making that heartbeat red clear — there are 9 `heartbeat failure` rows in the current window. Say the word and I take it; I am not going to paper over it.\n\n**ALSO LANDED SINCE THE LAST REPORT:**\n- **Gate fix on master** (PR #7): a tracker read that FAILS is no longer read as a ticket that is ABSENT. `/issues/BEB-2346` → 200, `/issues/BEB-9999",
+   "refs": []
+  },
+  {
+   "id": "m19042",
+   "seq": 19042,
+   "ts": 1785927407698,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2744 — preflight HELD (BEB-2134) — GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m19043",
+   "seq": 19043,
+   "ts": 1785927412344,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=279, 3 passes, max_concurrent=6",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19039,
- "count": 6070
+ "head": 19043,
+ "count": 6074
 }
