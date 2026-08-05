@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T12:03:11.928Z",
+ "mirrored_at": "2026-08-05T12:05:04.373Z",
  "messages": [
   {
    "id": "m12970",
@@ -71207,9 +71207,170 @@
     "BEB-2744",
     "BEB-2743"
    ]
+  },
+  {
+   "id": "m19154",
+   "seq": 19154,
+   "ts": 1785931383243,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2156 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m19155",
+   "seq": 19155,
+   "ts": 1785931385941,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: GOAL_STALE(17min), GOAL_STALE(17min), GOAL_STALE(17min), GOAL_STALE(17min), GOAL_STALE(17min), GOAL_STALE(17min), GOAL_STALE(17min), GOAL_STALE(17min) +7.",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19156",
+   "seq": 19156,
+   "ts": 1785931387470,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2744 — https://orky-beb-2744.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 224 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m19157",
+   "seq": 19157,
+   "ts": 1785931388201,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED BINDING_UNRESOLVABLE: BEB-2156 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) · refs BEB-2156 · ORKY FILED BEB-2736",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m19158",
+   "seq": 19158,
+   "ts": 1785931389172,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×15 (BEB-2334): GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19159",
+   "seq": 19159,
+   "ts": 1785931391123,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2476 — https://orky-beb-2476.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 137 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2476"
+   ]
+  },
+  {
+   "id": "m19160",
+   "seq": 19160,
+   "ts": 1785931392809,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2036 REFUSED for BUILD — declared deps still open: BEB-2034=todo, BEB-2027=backlog — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2036"
+   ]
+  },
+  {
+   "id": "m19161",
+   "seq": 19161,
+   "ts": 1785931401345,
+   "from": "cc",
+   "kind": "status",
+   "body": "**ALL FOUR STEPS OF m19125, WITH THE LANDED CHANGES. And I found a hole in my own earlier fix — reporting it before you find it.**\n\n**1. LINE-GUARD RULING — LANDED.** `line-guard.sh`: a dispatched lane writing inside its own rails gets `allow`; `ask` stays for outside them. Contract: `ABILIFI_LANE_TICKET` (presence = dispatched), `ABILIFI_LANE_PATHS`, `ABILIFI_LANE_TARGET`. **Absent the marker, nothing changes — it cannot loosen CC's own edits.** Table run against the real script:\n```\ninteractive, product source      ASK    (unchanged)     lane INSIDE rails            ALLOW\nlane OUTSIDE rails (other frag)  ASK                    multi-rail, second matches   ALLOW\nlane inside rails, .dev.vars     ASK                    lane inside rails, token     ASK\nmachinery allowlist              ALLOW  (unchanged)     no rails declared            ASK  (fails closed)\n```\n**All four requeued and past the gate:**\n```\nBEB-2741 held -> queued    BEB-2743 held -> queued\nBEB-2756 held -> queued    BEB-2744 held -> queued\ntick 9318: build×6 = BEB-2756 + BEB-2476 + BEB-2741 + BEB-2743 + BEB-2744 ...\n```\n**BEB-2741 CLAIMED at 11:57:23** — Alex's UI is in a lane and building. BEB-2125 closed with the evidence on it.\nA second defect surfaced en route: `guardCured` read BEB-2125 through raw `mcp()`, which returns null on any transient miss, so a CLOSED ticket read as open and GUARD_POLICY fired anyway. **Same class as BEB-2346, one layer up.** Now reads through `readIssue` (50c8ce2, dispatcher 4798c719).\n\n**2. CONCURRENCY 20 + DEPLOY-UNIT MUTEX + REBASE-TOLERANT PUSH** — 5cbc91d. The old key was worse than coarse: `/payload|labtui|admin|part|block|page/i.test(TITLE) ? 'abilifi-payload' : id` — **a title merely containing the word \"page\" collapsed into one bucket**, serialising unrelated workers on a word match. Now `Part: x` shares a key with lanes on that same part; everything else keys on its own generated worker. Mastra's per-tick claim loop raised 6 → 20 to match, since a tick that claim",
+   "refs": []
+  },
+  {
+   "id": "m19162",
+   "seq": 19162,
+   "ts": 1785931404867,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2743 — https://orky-beb-2743.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 149 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2743"
+   ]
+  },
+  {
+   "id": "m19163",
+   "seq": 19163,
+   "ts": 1785931429531,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2125 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2125"
+   ]
+  },
+  {
+   "id": "m19164",
+   "seq": 19164,
+   "ts": 1785931438552,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2123 REFUSED for BUILD — declared deps still open: BEB-2052=backlog, BEB-2051=backlog, BEB-2117=backlog — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2123"
+   ]
+  },
+  {
+   "id": "m19165",
+   "seq": 19165,
+   "ts": 1785931445940,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED BINDING_UNRESOLVABLE: BEB-2156 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line,",
+   "refs": [
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m19166",
+   "seq": 19166,
+   "ts": 1785931447052,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×14 (BEB-2334): GOAL_STALE[BEB-2741,BEB-2756,BEB-2493] · GOAL_STALE[BEB-2741] · GOAL_STALE[BEB-2230,BEB-2533] · GOAL_STALE[BEB-2230,BEB-2231,BEB-2533] · GOAL_STALE[BEB-2493] · GOAL_STALE[BEB-2568,BEB-2540] · GOAL_STALE[BEB-2279,BEB-2367,BEB-2348] · GOAL_STALE[BEB-2470,BEB-2436,BEB-2446] · GOAL_STALE[BEB-2436,BEB-2170,BEB-2342,BEB-2292] · GOAL_STALE[BEB-2367,BEB-2348] · GOAL_STALE[BEB-1994,BEB-1619] · GOAL_STALE[BEB-2348,BEB-2156,BEB-2313] · GOAL_STALE[BEB-2186,BEB-2156,BEB-2299,BEB-2136] · GOAL_STALE[BEB-2292,BEB-2259]",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m19167",
+   "seq": 19167,
+   "ts": 1785931448161,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): VERIFY_PENDING",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19153,
- "count": 6184
+ "head": 19167,
+ "count": 6198
 }
