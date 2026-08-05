@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-05T17:05:03.278Z",
- "ts": 1785949501084,
+ "mirrored_at": "2026-08-05T17:06:12.851Z",
+ "ts": 1785949570081,
  "loop": {
   "proposed_total": 680,
   "by_state": {
-   "queued": 259,
+   "queued": 258,
    "claimed": 0,
-   "done": 273,
+   "done": 274,
    "held": 23,
    "blocked": 1,
    "parked": 97
@@ -14,10 +14,10 @@
   "by_lane": {
    "BUILD": {
     "blocked": 1,
-    "done": 148,
+    "done": 149,
     "held": 23,
     "parked": 96,
-    "queued": 33
+    "queued": 32
    },
    "REFINE": {
     "queued": 159
@@ -35,10 +35,26 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785949455062,
+   "at": 1785949512110,
    "tally": "BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2540→BUILD, BEB-2180→BUILD[no-budget], BEB-1384→REFINE[no-budget]"
   },
   "reds": [
+   {
+    "code": "ZERO_CLAIM",
+    "severity": "red",
+    "since": 1785949503514,
+    "detail": "claimed=0, queued=258, 2 passes, max_concurrent=20",
+    "refs": []
+   },
+   {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1785949571572,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2662"
+    ]
+   },
    {
     "code": "GOAL_STALE",
     "severity": "red",
@@ -63,7 +79,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785949443465,
+    "since": 1785949563464,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -225,8 +241,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785863135150,
-    "detail": "BEB-2150 failing at preflight 33× in 24h — LATEST (08-05T17:03): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "since": 1785865920316,
+    "detail": "BEB-2150 failing at preflight 32× in 24h — LATEST (08-05T17:03): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to",
     "refs": [
      "BEB-2150"
     ],
@@ -687,7 +703,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785949443465,
+    "since": 1785949563464,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -778,7 +794,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785946019434,
-    "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (124 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (125 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
@@ -803,22 +819,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 19710,
+  "head_seq": 19712,
   "cursor_fable": 12969,
-  "unread_for_fable": 6741,
+  "unread_for_fable": 6743,
   "last": [
-   {
-    "seq": 19706,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): VERIFY_PENDING · BINDING_UNRESOLVABLE"
-   },
-   {
-    "seq": 19707,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2661 — commit 0"
-   },
    {
     "seq": 19708,
     "from": "cc",
@@ -836,6 +840,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER: BEB-2662 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
+   },
+   {
+    "seq": 19711,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): ZERO_CLAIM[-] · VERIFY_PENDING[BEB-2662]"
+   },
+   {
+    "seq": 19712,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2662 — commit 5"
    }
   ]
  },
@@ -929,6 +945,22 @@
  ],
  "reds": [
   {
+   "code": "ZERO_CLAIM",
+   "severity": "red",
+   "since": 1785949503514,
+   "detail": "claimed=0, queued=258, 2 passes, max_concurrent=20",
+   "refs": []
+  },
+  {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1785949571572,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2662"
+   ]
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
    "since": 1785782844833,
@@ -952,7 +984,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785949443465,
+   "since": 1785949563464,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1114,8 +1146,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785863135150,
-   "detail": "BEB-2150 failing at preflight 33× in 24h — LATEST (08-05T17:03): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "since": 1785865920316,
+   "detail": "BEB-2150 failing at preflight 32× in 24h — LATEST (08-05T17:03): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to",
    "refs": [
     "BEB-2150"
    ],
@@ -1576,7 +1608,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785949443465,
+   "since": 1785949563464,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1667,7 +1699,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785946019434,
-   "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (124 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (125 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
