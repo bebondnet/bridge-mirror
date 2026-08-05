@@ -1,21 +1,21 @@
 {
- "mirrored_at": "2026-08-05T04:37:10.251Z",
- "ts": 1785904629598,
+ "mirrored_at": "2026-08-05T04:39:11.541Z",
+ "ts": 1785904750818,
  "loop": {
   "proposed_total": 653,
   "by_state": {
-   "queued": 295,
+   "queued": 297,
    "claimed": 0,
    "done": 246,
-   "held": 20,
+   "held": 18,
    "parked": 64
   },
   "by_lane": {
    "BUILD": {
     "done": 112,
-    "held": 20,
+    "held": 18,
     "parked": 63,
-    "queued": 29
+    "queued": 31
    },
    "REFINE": {
     "queued": 234
@@ -33,18 +33,16 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785904463459,
-   "tally": "BEB-2186→BUILD[claimed], BEB-2720→BUILD[claimed], BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2191→BUILD✗unwritten, BEB-2180→BUILD✗unwritten"
+   "at": 1785904584067,
+   "tally": "BEB-2720→BUILD, BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2164→BUILD✗unwritten, BEB-2163→BUILD✗unwritten"
   },
   "reds": [
    {
-    "code": "VERIFY_PENDING",
+    "code": "ZERO_CLAIM",
     "severity": "red",
-    "since": 1785904526532,
-    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
-    "refs": [
-     "BEB-1786"
-    ]
+    "since": 1785904560305,
+    "detail": "claimed=0, queued=296, 3 passes, max_concurrent=6",
+    "refs": []
    },
    {
     "code": "GOAL_STALE",
@@ -70,7 +68,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785904560305,
+    "since": 1785904678999,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -233,7 +231,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785820903428,
-    "detail": "BEB-2150 failing at preflight 39× in 24h — LATEST (08-05T03:47): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to",
+    "detail": "BEB-2150 failing at preflight 39× in 24h — LATEST (08-05T03:47): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2150"
     ],
@@ -345,7 +343,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785900743606,
-    "detail": "abilifi-apps/abilifi-org failing at codegen 3× in 24h — LATEST (08-05T04:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1846 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
+    "detail": "abilifi-apps/abilifi-org failing at codegen 3× in 24h — LATEST (08-05T04:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1846 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-1846"
     ],
@@ -372,28 +370,28 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785818184633,
-    "detail": "abilifi-payload failing at codegen 198× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2744\ngenError: CODEGEN_WALL base-moved: the source moved e66f6fe3 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+    "since": 1785818405988,
+    "detail": "abilifi-payload failing at codegen 197× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2602\ngenError: CODEGEN_WALL base-moved: the source moved 1488341c → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 2744\ngenError: CODEGEN_WALL base-moved: the source moved e66f6fe3 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/5 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 2602\ngenError: CODEGEN_WALL base-moved: the source moved 1488341c → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/4 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2279"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785818184633,
-    "detail": "abilifi-payload failing at park 181× in 24h — LATEST (08-04T18:17): three-strikes: 52 identical-input retries at codegen",
+    "since": 1785818405988,
+    "detail": "abilifi-payload failing at park 180× in 24h — LATEST (08-04T18:17): three-strikes: 53 identical-input retries at codegen",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 52 identical-input retries at codegen",
+     "error": "three-strikes: 53 identical-input retries at codegen",
      "subject": "BEB-2279"
     }
    },
@@ -415,7 +413,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785875430862,
-    "detail": "abilifi-selfheal failing at codegen 5× in 24h — LATEST (08-05T03:54): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2150 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
+    "detail": "abilifi-selfheal failing at codegen 5× in 24h — LATEST (08-05T03:54): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2150 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2150"
     ],
@@ -456,14 +454,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785818246757,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 54× in 24h — LATEST (08-04T19:46): html-render class: verify_url serves 200 but renders BLANK in a real browser context (0 visible chars) — built-but-blank, the exact shape that curl cannot see · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785820547477,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 53× in 24h — LATEST (08-04T19:46): verify_url not 2xx after 12 probes — last HTTP 403: Forbidden · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2379"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "html-render class: verify_url serves 200 but renders BLANK in a real browser context (0 visible chars) — built-but-blank, the exact shape that curl cannot see",
+     "error": "verify_url not 2xx after 12 probes — last HTTP 403: Forbidden",
      "subject": "BEB-2379"
     }
    },
@@ -498,7 +496,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785904560305,
+    "since": 1785904678999,
     "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2710"
@@ -512,7 +510,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785904560305,
+    "since": 1785904678999,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -602,28 +600,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 18543,
+  "head_seq": 18546,
   "cursor_fable": 12969,
-  "unread_for_fable": 5574,
+  "unread_for_fable": 5577,
   "last": [
-   {
-    "seq": 18539,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2186 — mastra tick deploy FAILED: CF PUT 400: [{\"code\":10021,"
-   },
-   {
-    "seq": 18540,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED REPEAT_FAILER: abilifi-apps/abilifi-org failing at codegen 3× in 24h — LATEST (08-05T0"
-   },
-   {
-    "seq": 18541,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED REPEAT_FAILER: abilifi-apps/abilifi-org failing at codegen 3× in 24h — LATEST (08-05T0"
-   },
    {
     "seq": 18542,
     "from": "cc",
@@ -635,6 +615,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-1786 — commit b"
+   },
+   {
+    "seq": 18544,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=296, 2 passes, max_concurrent=6"
+   },
+   {
+    "seq": 18545,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
+   },
+   {
+    "seq": 18546,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=296, 3 passes, max_concurrent=6"
    }
   ]
  },
@@ -728,13 +726,11 @@
  ],
  "reds": [
   {
-   "code": "VERIFY_PENDING",
+   "code": "ZERO_CLAIM",
    "severity": "red",
-   "since": 1785904526532,
-   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
-   "refs": [
-    "BEB-1786"
-   ]
+   "since": 1785904560305,
+   "detail": "claimed=0, queued=296, 3 passes, max_concurrent=6",
+   "refs": []
   },
   {
    "code": "GOAL_STALE",
@@ -760,7 +756,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785904560305,
+   "since": 1785904678999,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -923,7 +919,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785820903428,
-   "detail": "BEB-2150 failing at preflight 39× in 24h — LATEST (08-05T03:47): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to",
+   "detail": "BEB-2150 failing at preflight 39× in 24h — LATEST (08-05T03:47): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: route/custom-domain on abilifi.net. Needs Zone:Workers Routes:Edit on the abilifi.net zone — the deploy to · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2150"
    ],
@@ -1035,7 +1031,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785900743606,
-   "detail": "abilifi-apps/abilifi-org failing at codegen 3× in 24h — LATEST (08-05T04:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1846 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
+   "detail": "abilifi-apps/abilifi-org failing at codegen 3× in 24h — LATEST (08-05T04:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1846 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-1846"
    ],
@@ -1062,28 +1058,28 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785818184633,
-   "detail": "abilifi-payload failing at codegen 198× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2744\ngenError: CODEGEN_WALL base-moved: the source moved e66f6fe3 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+   "since": 1785818405988,
+   "detail": "abilifi-payload failing at codegen 197× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2602\ngenError: CODEGEN_WALL base-moved: the source moved 1488341c → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 2744\ngenError: CODEGEN_WALL base-moved: the source moved e66f6fe3 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/5 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 2602\ngenError: CODEGEN_WALL base-moved: the source moved 1488341c → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/4 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2279"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785818184633,
-   "detail": "abilifi-payload failing at park 181× in 24h — LATEST (08-04T18:17): three-strikes: 52 identical-input retries at codegen",
+   "since": 1785818405988,
+   "detail": "abilifi-payload failing at park 180× in 24h — LATEST (08-04T18:17): three-strikes: 53 identical-input retries at codegen",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 52 identical-input retries at codegen",
+    "error": "three-strikes: 53 identical-input retries at codegen",
     "subject": "BEB-2279"
    }
   },
@@ -1105,7 +1101,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785875430862,
-   "detail": "abilifi-selfheal failing at codegen 5× in 24h — LATEST (08-05T03:54): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2150 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc",
+   "detail": "abilifi-selfheal failing at codegen 5× in 24h — LATEST (08-05T03:54): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2150 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2150"
    ],
@@ -1146,14 +1142,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785818246757,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 54× in 24h — LATEST (08-04T19:46): html-render class: verify_url serves 200 but renders BLANK in a real browser context (0 visible chars) — built-but-blank, the exact shape that curl cannot see · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785820547477,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 53× in 24h — LATEST (08-04T19:46): verify_url not 2xx after 12 probes — last HTTP 403: Forbidden · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2379"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "html-render class: verify_url serves 200 but renders BLANK in a real browser context (0 visible chars) — built-but-blank, the exact shape that curl cannot see",
+    "error": "verify_url not 2xx after 12 probes — last HTTP 403: Forbidden",
     "subject": "BEB-2379"
    }
   },
@@ -1188,7 +1184,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785904560305,
+   "since": 1785904678999,
    "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2710"
@@ -1202,7 +1198,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785904560305,
+   "since": 1785904678999,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
