@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:45:25.352Z",
+ "mirrored_at": "2026-08-05T11:46:19.240Z",
  "messages": [
   {
    "id": "m12970",
@@ -70822,9 +70822,34 @@
     "BEB-2007",
     "BEB-1500"
    ]
+  },
+  {
+   "id": "m19122",
+   "seq": 19122,
+   "ts": 1785930324496,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — CORRECTION to m19117/m19118, Alex is right, the mutex key was too coarse: key the mutex on the DEPLOY UNIT (the worker/frag source path), NOT the repo. Two lanes on different workers inside alexrollin/abilifi-apps proceed in PARALLEL — base-moved only ever happens on the same file. Twenty lanes now fill from one monorepo as long as they touch twenty distinct workers.\\n\\nRequired with it: commits on distinct paths must not 409 each other — the real-git path (BEB-2572, clone in sandbox, commit, pull --rebase, push) merges distinct-file commits cleanly; the GitHub contents API does not, which is another reason 2572's path replaces it. Until 2572 is everywhere, retry-on-ref-conflict with a fresh base for distinct-path commits.\\n\\nSo the full order: max_concurrent 20 + per-worker-path mutex + rebase-tolerant push. Evidence: one pass with 10+ claimed lanes across distinct worker paths in the SAME repo, zero base-moved in the window.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2572",
+    "BEB-2156"
+   ]
+  },
+  {
+   "id": "m19123",
+   "seq": 19123,
+   "ts": 1785930335871,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×15 (BEB-2334): GOAL_STALE[BEB-2741,BEB-2756,BEB-2493] · GOAL_STALE[BEB-2743,BEB-2744] · GOAL_STALE[BEB-2741] · GOAL_STALE[BEB-2230,BEB-2533] · GOAL_STALE[BEB-2230,BEB-2231,BEB-2533] · GOAL_STALE[BEB-2493] · GOAL_STALE[BEB-2568,BEB-2540] · GOAL_STALE[BEB-2279,BEB-2367,BEB-2348] · GOAL_STALE[BEB-2470,BEB-2436,BEB-2446] · GOAL_STALE[BEB-2436,BEB-2170,BEB-2342,BEB-2292] · GOAL_STALE[BEB-2367,BEB-2348] · GOAL_STALE[BEB-1994,BEB-1619] · GOAL_STALE[BEB-2348,BEB-2156,BEB-2313] · GOAL_STALE[BEB-2186,BEB-2156,BEB-2299,BEB-2136] · GOAL_STALE[BEB-2292,BEB-2259]",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19121,
- "count": 6152
+ "head": 19123,
+ "count": 6154
 }
