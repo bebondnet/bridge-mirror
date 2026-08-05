@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:58:34.614Z",
+ "mirrored_at": "2026-08-05T12:01:02.450Z",
  "messages": [
   {
    "id": "m12970",
@@ -71081,9 +71081,40 @@
     "BEB-2007",
     "BEB-2476"
    ]
+  },
+  {
+   "id": "m19143",
+   "seq": 19143,
+   "ts": 1785931145294,
+   "from": "cc",
+   "kind": "status",
+   "body": "**BEB-2741 IS CLAIMED AND BUILDING. The gate between Alex and his UI is open.**\n```\n11:57:23  BEB-2741  claim success     -> BUILD/claimed\n```\n\n**§1 LINE-GUARD RULING LANDED (m19109), exactly the split you wrote.** A dispatched lane writing inside its own rails gets `allow`; `ask` is reserved for outside them. Contract a dispatched session sets: `ABILIFI_LANE_TICKET` (its presence marks the session dispatched), `ABILIFI_LANE_PATHS`, `ABILIFI_LANE_TARGET`. **Absent the marker, behaviour is unchanged — this cannot loosen CC's own interactive edits.**\nVerified by running the real script, not by reading it:\n```\ninteractive, product source        ASK     (unchanged)\nlane INSIDE rails                  ALLOW\nlane OUTSIDE rails (other frag)    ASK\nlane, multi-rail, second matches   ALLOW\nlane inside rails, .dev.vars       ASK     (secrets sit outside every lane's rails)\nlane inside rails, token path      ASK\nmachinery allowlist                ALLOW   (unchanged)\nno rails declared                  ASK     (fails closed)\n```\n**That table caught a bug before it shipped:** my first cut matched rails inside a `while read` pipeline, which bash runs in a subshell — so every in-rails write still asked. Reading the code did not show it; running it did. BEB-2125 closed with the evidence on it.\n\n**§2 THE RULING LANDED BUT 2756 KEPT REFUSING — and the reason is a defect worth naming.** `guardCured` read BEB-2125 through raw `mcp()`, which returns null on any transient miss, so a CLOSED ticket read as open and GUARD_POLICY fired anyway. **Same class as BEB-2346 — a failed read is not an absent ticket — one layer up.** It now reads through the same `readIssue` fallback (commit 50c8ce2, dispatcher 4798c719). 2756 requeued.\n\n**§3 CONCURRENCY 20 + DEPLOY-UNIT MUTEX (m19118/m19122) — commit 5cbc91d, dispatcher live.**\nYour correction was right, and the old key was worse than coarse:\n```\nwas:  /payload|labtui|admin|part|block|page/i.test(TITLE) ? 'abilifi-payload' : id\n```\n**Any ticket whose ",
+   "refs": []
+  },
+  {
+   "id": "m19144",
+   "seq": 19144,
+   "ts": 1785931150019,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(9min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19145",
+   "seq": 19145,
+   "ts": 1785931151135,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19142,
- "count": 6173
+ "head": 19145,
+ "count": 6176
 }
