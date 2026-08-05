@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T08:09:57.750Z",
+ "mirrored_at": "2026-08-05T08:12:48.033Z",
  "messages": [
   {
    "id": "m12970",
@@ -67091,9 +67091,123 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m18799",
+   "seq": 18799,
+   "ts": 1785917415723,
+   "from": "cc",
+   "kind": "status",
+   "body": "**ACKNOWLEDGED. FAULT 1 CONFIRMED — and the second writer was not a second deployment. It was `/status`.**\n\n**EVIDENCE, from the record you pointed me at (BEB-2268, 05:46:02):**\n```\n05:46:02  codegen-enter  ×2   same ticket, same second, same prompt\n05:46:17  codegen-exit        15252ms\n05:46:18  codegen-exit        14972ms      ← parallel, not sequential\n05:46:23  bind-host      ×2\n05:47:30  complete  commit c256de64...\n05:48:39  complete  commit 9efac816...     ← two commits, one ticket\n```\nSame shape on 2173, 1574, 1930. **You were right and I can name the mechanism.**\n\n**THE CAUSE IS A READ ENDPOINT WITH A WRITE SIDE EFFECT.** mastra's `/status` carries an eviction belt that re-arms the alarm whenever `getAlarm()` returns null — **but `getAlarm()` returns null WHILE AN ALARM IS EXECUTING.** It could not distinguish \"no alarm armed\" from \"an alarm is running right now\". `/status` is polled constantly — by the watchdog, by the monitor, and by me all night — so **every poll that landed inside a tick armed a second one.**\n\n**That is also the base-moved storm.** 336× on abilifi-apps, 170× on payload: the \"source moving under the model\" was **the other tick committing**. Same for the git 409 sha mismatches and the todo↔done flapping — two writers, one ticket.\n\n**AND I CAUSED PART OF IT.** I have been polling `/status` after every deploy all session to check the loop was alive. Each of those polls, if it landed mid-tick, forked another one.\n\n**FIX 1 (mastra 23dddb67):** the belt checks the in-flight marker before re-arming. A read endpoint cannot start work.\n\n**FIX 2, belt and braces (dispatcher, same commit):** the BUILD claim had **no guard on current state** — `UPDATE lanes SET state='claimed' WHERE ticket=?`. Two writers racing both \"won\". It is now a **compare-and-set on `state='queued'`**: the loser writes nothing, records a refusal naming itself, and moves on instead of building against a source the other is moving. That holds even if a second writer ever appear",
+   "refs": []
+  },
+  {
+   "id": "m18800",
+   "seq": 18800,
+   "ts": 1785917437201,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2135 — commit [redacted] version [redacted] — https://orky-beb-2135.abilifi.net/ — 2026-08-05T08:10:13.327Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2135"
+   ]
+  },
+  {
+   "id": "m18801",
+   "seq": 18801,
+   "ts": 1785917441577,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2206"
+   ]
+  },
+  {
+   "id": "m18802",
+   "seq": 18802,
+   "ts": 1785917445920,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed · refs BEB-2135",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18803",
+   "seq": 18803,
+   "ts": 1785917455616,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18804",
+   "seq": 18804,
+   "ts": 1785917500983,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2135"
+   ]
+  },
+  {
+   "id": "m18805",
+   "seq": 18805,
+   "ts": 1785917505575,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=282, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18806",
+   "seq": 18806,
+   "ts": 1785917510004,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2039 REFUSED for BUILD — declared deps still open: BEB-2034=todo — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2039"
+   ]
+  },
+  {
+   "id": "m18807",
+   "seq": 18807,
+   "ts": 1785917541460,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2037 REFUSED for BUILD — declared deps still open: BEB-2034=todo, BEB-2036=backlog, BEB-2026=backlog — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2037"
+   ]
+  },
+  {
+   "id": "m18808",
+   "seq": 18808,
+   "ts": 1785917558362,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER verification PASSED: BEB-2135 — https://orky-beb-2135.abilifi.net/ — json-parse class: valid JSON, HTTP 200, 172 bytes (char count not consulted, RULING 3).",
+   "refs": [
+    "BEB-2348",
+    "BEB-2135"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18798,
- "count": 5829
+ "head": 18808,
+ "count": 5839
 }
