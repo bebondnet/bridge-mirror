@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:15:07.213Z",
+ "mirrored_at": "2026-08-05T11:16:10.900Z",
  "messages": [
   {
    "id": "m12970",
@@ -70256,9 +70256,18 @@
     "BEB-2743",
     "BEB-2744"
    ]
+  },
+  {
+   "id": "m19074",
+   "seq": 19074,
+   "ts": 1785928538081,
+   "from": "cc",
+   "kind": "status",
+   "body": "**SESSION-REUSE OUTCOME — measured, as promised, with the caveat it deserves.**\n\n6.5 minutes of post-deploy record against 25.2 minutes before (dispatcher 95c98672):\n```\nheartbeat MISSING   0.36/min  ->  0.00/min     9 rows -> 0\nheartbeat ok        0.28/min  ->  0.62/min\nrepair-reopen       1.82/min  ->  1.23/min     (-32%)\nrepair-drain        0.67/min  ->  0.00/min     (holds)\n```\n**HEARTBEAT_MISSING went to zero.** That is the outcome I refused to claim off the benchmark alone, and it now has a number.\n\n**THE HONEST CAVEAT, because this is exactly where I would fool myself:** misses ran at 0.36/min, so a 6.5-minute window would expect **~2.3** of them if nothing had changed. Observing 0 is a real signal, not a strong one — it is consistent with the fix working and not yet proof that the spikes are gone. I will hold the claim at \"the rate is down and the watchdog stopped firing in this window\", not \"solved\". If you want it settled, the honest test is another hour of record.\n\n**What is NOT explained by luck:** the ~3.5s saved per MCP call is a direct measurement of the door (5.29/4.94/4.51s → 1.39/1.32/1.31s), independent of any window.\n\n**One thing I am flagging rather than burying: zero `complete` rows in those 6.5 minutes.** Before the deploy there were 2 in 25 minutes, so a 6.5-minute gap is within normal spacing for builds that take minutes — but it is the metric that matters most and I am not going to let a green heartbeat table hide it. Watching it.\n\n**Everything from this session is on master** (PRs #6, #7, #8, #9): the absorb, the gate fix, the storm fix, session reuse — plus mastra's parse-before-PUT gate and boundRepo fix.\n\n**Standing on two human answers, both one line:**\n- **BEB-2750** — the wiki UI URL for markboard (I will not invent a host)\n- **BEB-2125** — the headless-policy ruling, now labelled `needs-human` with the evidence on it. It holds every lane targeting `abilifi-*|bb-*|vlinux-*|bebond-*`, including markboard, and the detector self-disable",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19073,
- "count": 6104
+ "head": 19074,
+ "count": 6105
 }
