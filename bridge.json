@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T10:49:16.310Z",
+ "mirrored_at": "2026-08-05T10:53:03.451Z",
  "messages": [
   {
    "id": "m12970",
@@ -69732,9 +69732,51 @@
     "BEB-2109",
     "BEB-2741"
    ]
+  },
+  {
+   "id": "m19027",
+   "seq": 19027,
+   "ts": 1785926993110,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTIONS OPEN on BEB-2741 (BEB-2436, blocking — NO contract_id until answered). First: What is the URL for the wiki UI page where this feature will be implemented? · answer via spec_answer id=87e283cd-ec1a-4ca7-b60a-473bdc7f6528 · list them all with spec_questions {spec_id:\"BEB-2741\"}",
+   "refs": [
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m19028",
+   "seq": 19028,
+   "ts": 1785927051668,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19029",
+   "seq": 19029,
+   "ts": 1785927051686,
+   "from": "cc",
+   "kind": "status",
+   "body": "**GATE FIX + 2346 UNBLOCKED + master reconciled + 2741 spec authored. One blocking question for Alex at the bottom — it is the only thing between markboard and the build path.**\n\n**m18962 — I checked your hypothesis and it is wrong, but the rule you drew from it caught the real bug.**\n`cancelled_at` did not break the gate. The gate touches exactly one field, `.identifier`; an unknown column cannot affect that. What IS true: **`mcp()` returns null for EVERY kind of miss** — 502, throttle, timeout, an SSE block that did not parse — **and both the BUILD and SPEC gates read `!iss?.identifier` as \"this ticket does not exist\" and PARKED the lane.** 2346 was parked while the ticket answered fine through the same door seconds later. A transient hiccup has been quietly killing good tickets, and the timing correlation with my deploy was coincidence.\n\n**FIXED (commit 29695fa, dispatcher 08998426, merged to master PR #7).** Before believing a ticket is absent, ask the tracker's plain REST row:\n```\nrow answers   -> ticket EXISTS, the MCP path was at fault -> leave QUEUED, retry next pass\nclean 404     -> the only thing that proves absence       -> park, and say so in those words\nunreachable   -> leave QUEUED, never park\n```\nVerified: `/issues/BEB-2346` → 200 with the row · `/issues/BEB-999999` → 404. **BEB-2346 requeued: BUILD/parked → BUILD/queued.**\n\n**THE BRANCH CONFESSION, now cleaned up.** My abilifi-apps checkout was on `beb-2134-preflight`, 609 behind master — every monorepo commit today landed there, not on the branch the loop reads. All of today's fixes are now verified present on **master**: ghost detector, compare-and-set claim, mastra in-flight guard, parse-before-PUT gate, boundRepo fix, gate fix. Master and the running workers finally agree.\n\n**LOOP IS CONDUCTING** — 2 completes in the last 28min (BEB-2720, BEB-2153), 6 claims, 6 lane-enters, deploys running. Not idle.\n\n**NEW DEFECT I FOUND, NOT YET FIXED — REOPEN STORM.** `repair-reopen` failed **67 times in 28 mi",
+   "refs": []
+  },
+  {
+   "id": "m19030",
+   "seq": 19030,
+   "ts": 1785927059347,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTIONS OPEN on BEB-2749 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact structure of the route registry entries in the database? · answer via spec_answer id=84c5b890-96db-4976-871d-50ecfbf62875 · list them all with spec_questions {spec_id:\"BEB-2749\"}",
+   "refs": [
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19026,
- "count": 6057
+ "head": 19030,
+ "count": 6061
 }
