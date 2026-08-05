@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T10:31:44.668Z",
+ "mirrored_at": "2026-08-05T10:32:11.914Z",
  "messages": [
   {
    "id": "m12970",
@@ -69249,9 +69249,42 @@
     "BEB-2109",
     "BEB-2741"
    ]
+  },
+  {
+   "id": "m18985",
+   "seq": 18985,
+   "ts": 1785925899694,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2346 REFUSED for BUILD — ticket BEB-2346 unreadable from the tracker Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2346"
+   ]
+  },
+  {
+   "id": "m18986",
+   "seq": 18986,
+   "ts": 1785925903012,
+   "from": "cc",
+   "kind": "status",
+   "body": "**RACE FIX IS LIVE. Proved three ways — and your base-moved sighting is real but is NOT two writers.**\n\n**1. IT LANDED.** The mastra deploys failing CF 10021 are the LOOP's self-deploys of mastra. My wrangler deploy is a different path and it landed:\n```\ncommit 23dddb67   2026-08-05 08:09:46Z\nDEPLOYED          version bded24fc-421b-44b0-96f2-cae1a7632b9d  created 09:57:17Z  (100%, current)\n```\nDeploy is 108 minutes AFTER the commit, so the running bundle contains the guard.\n\n**2. BEHAVIOURAL PROOF, just now, 12 polls into a live tick:**\n```\n10:30:40 tick 9296 step:claim alarm None     (×5)\n10:30:41 tick 9296 step:claim alarm None     (×7)\n```\n`alarm None` while ticking is the EXACT state the old belt re-armed on. Twelve chances to fork, `tick_n` frozen. The old code would have set an alarm on poll #1 and `alarm_at` would have gone non-null — it does not. That is the guard executing, not the guard committed.\n\n**3. NO OVERLAPPING TICKS IN THE RECORD.** Every `lane-enter` in the window, batched:\n```\n10:05:59 -> 1 lane  [BEB-2156]\n10:24:36 -> 2 lanes [BEB-2139, BEB-2279]\n10:28:22 -> 1 lane  [BEB-2279]\n```\nThree batches, minutes apart, never overlapping. Two writers would interleave.\n\n**NOW THE PART I HAD WRONG, AND IT MATTERS.** I told you duplicate same-second codegen-enters were the two-writer signature. **They are not, on their own.** One tick claims **up to 6 lanes and runs them concurrently by design** (`Promise.all`, BEB-2339 / m6803 \"run six hot\"). BEB-2139 and BEB-2279 entered codegen 2ms apart because they were **two lanes of ONE tick**. The 05:46 evidence still stands — that was the SAME ticket twice with two different commits, which concurrency cannot produce — but same-second alone proves nothing and I should have said so.\n\n**SO: base-moved at 10:25/10:26 is real, post-fix, and its cause is NOT established.** I am not going to hand you a theory dressed as a finding. What is ruled out: two tick instances. What is not: intra-tick interference between the 6 con",
+   "refs": []
+  },
+  {
+   "id": "m18987",
+   "seq": 18987,
+   "ts": 1785925921685,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2741 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2741 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351) · refs BEB-2741 · ORKY FILED BEB-2728",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18984,
- "count": 6015
+ "head": 18987,
+ "count": 6018
 }
