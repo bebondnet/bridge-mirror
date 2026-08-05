@@ -1,24 +1,25 @@
 {
- "mirrored_at": "2026-08-05T19:38:54.459Z",
- "ts": 1785958730109,
+ "mirrored_at": "2026-08-05T19:40:15.141Z",
+ "ts": 1785958811414,
  "loop": {
   "proposed_total": 684,
   "by_state": {
-   "queued": 251,
-   "claimed": 0,
+   "queued": 248,
+   "claimed": 1,
    "done": 281,
    "held": 21,
-   "parked": 104
+   "parked": 106
   },
   "by_lane": {
    "BUILD": {
     "done": 155,
     "held": 21,
-    "parked": 103,
-    "queued": 38
+    "parked": 105,
+    "queued": 36
    },
    "REFINE": {
-    "queued": 142
+    "claimed": 1,
+    "queued": 141
    },
    "REPAIR": {
     "done": 86,
@@ -33,7 +34,7 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785958691928,
+   "at": 1785958768800,
    "tally": "BEB-2756→BUILD, BEB-2279→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2565→BUILD[no-budget], BEB-2152→REFINE[no-budget]"
   },
   "reds": [
@@ -49,6 +50,20 @@
      "cls": "single-writer-violation",
      "subject": "BEB-2338",
      "error": "2 completions, 2 distinct artefacts, 2026-08-05T19:31:24.081Z -> 2026-08-05T19:35:44.071Z"
+    }
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1785958418253,
+    "detail": "BEB-2672 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2672"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2672",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-05T19:33:38.253Z -> 2026-08-05T19:38:42.961Z"
     }
    },
    {
@@ -75,7 +90,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785958683460,
+    "since": 1785958803456,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -181,8 +196,8 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785956891812,
-    "detail": "BEB-2279 refused 20× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785957066218,
+    "detail": "BEB-2279 refused 18× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2279"
     ],
@@ -195,8 +210,8 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785956889593,
-    "detail": "BEB-2756 refused 20× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785957064859,
+    "detail": "BEB-2756 refused 18× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2756"
     ],
@@ -266,7 +281,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785874571514,
-    "detail": "BEB-2150 failing at preflight 32× in 24h — LATEST (08-05T19:37): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id} · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2150 failing at preflight 32× in 24h — LATEST (08-05T19:37): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}",
     "refs": [
      "BEB-2150"
     ],
@@ -713,7 +728,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785958683460,
+    "since": 1785958803456,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -793,8 +808,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785955171974,
-    "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (526 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "since": 1785955285787,
+    "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (527 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
@@ -805,39 +820,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 20029,
+  "head_seq": 20034,
   "cursor_fable": 12969,
-  "unread_for_fable": 7060,
+  "unread_for_fable": 7065,
   "last": [
    {
-    "seq": 20025,
+    "seq": 20030,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declare"
+    "one_line": "DISPATCHER verification PASSED: BEB-2672 — https://orky-beb-2672.abilifi.net/ — json-parse"
    },
    {
-    "seq": 20026,
+    "seq": 20031,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2150 — preflight HELD (BEB-2134) — RESOURCE_FORECAST: declare"
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2672 completed 2× with 2 DIFFERENT artefacts inside 15min"
    },
    {
-    "seq": 20027,
+    "seq": 20032,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2756 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this tick"
    },
    {
-    "seq": 20028,
+    "seq": 20033,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this tick"
    },
    {
-    "seq": 20029,
+    "seq": 20034,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2672 — commit 9"
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2672 completed 2× with 2 DIFFERENT artefacts inside 15min"
    }
   ]
  },
@@ -945,6 +960,20 @@
    }
   },
   {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1785958418253,
+   "detail": "BEB-2672 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2672"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2672",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-05T19:33:38.253Z -> 2026-08-05T19:38:42.961Z"
+   }
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
    "since": 1785782844833,
@@ -968,7 +997,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785958683460,
+   "since": 1785958803456,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1074,8 +1103,8 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785956891812,
-   "detail": "BEB-2279 refused 20× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785957066218,
+   "detail": "BEB-2279 refused 18× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2279"
    ],
@@ -1088,8 +1117,8 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785956889593,
-   "detail": "BEB-2756 refused 20× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785957064859,
+   "detail": "BEB-2756 refused 18× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2756"
    ],
@@ -1159,7 +1188,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785874571514,
-   "detail": "BEB-2150 failing at preflight 32× in 24h — LATEST (08-05T19:37): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id} · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2150 failing at preflight 32× in 24h — LATEST (08-05T19:37): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}",
    "refs": [
     "BEB-2150"
    ],
@@ -1606,7 +1635,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785958683460,
+   "since": 1785958803456,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1686,8 +1715,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785955171974,
-   "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (526 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "since": 1785955285787,
+   "detail": "28 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (527 rows) — one defect, not 28 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
