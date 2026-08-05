@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:12:20.976Z",
+ "mirrored_at": "2026-08-05T11:13:06.105Z",
  "messages": [
   {
    "id": "m12970",
@@ -70214,9 +70214,27 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m19070",
+   "seq": 19070,
+   "ts": 1785928355812,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=269, 3 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "id": "m19071",
+   "seq": 19071,
+   "ts": 1785928356803,
+   "from": "cc",
+   "kind": "status",
+   "body": "**MARKBOARD IS BLOCKED TWICE, AND THE SECOND BLOCKER LOOKS LIKE A FALSE FORECAST. I need a ruling before I touch it — this is the thing standing between Alex and today's landing.**\n\nBEB-2741 got past the spec gate and is now **BUILD/held**:\n```\nGUARD_POLICY — \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which\nline-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer\nit, so ask resolves to DENY. The lane cannot write one line.\"\nevidence: line-guard.sh:21   fix_ref: BEB-2125\n```\nThe detector is written to **self-disable the moment BEB-2125 closes** (`guardCured = DONE_STATUS.test(BEB-2125.status)`). **BEB-2125 currently reads `todo`** — so it fires and holds every lane whose target matches `abilifi-*|bb-*|vlinux-*|bebond-*`. Its own comment says \"As of 2026-07-16 it IS quiet — 2125 closed, machinery writable headless, proven by this very ticket's build.\" So 2125 was reopened at some point after that.\n\n**FIRST: NOT MY DOING.** I checked, because I cleared completed_at on 79 tickets today and this is exactly the shape of a regression I could have caused. **BEB-2125 was NOT in the ghost list** — completed_at was already NULL, status already `todo`, and my sweep never changes status. Untouched.\n\n**SECOND, AND THIS IS THE PART THAT NEEDS YOU: the forecast does not match the execution path.** `line-guard.sh` is a **local Claude Code PreToolUse hook** in `~/.claude/scripts/` — it gates Edit/Write in a CC session on Alex's machine. **The dispatched loop does not write that way.** mastra commits through the GitHub contents API from a Worker; no hook exists in that path.\n\n**Proof, from today, not from reasoning:**\n```\ncommit 9faa1a7a  orky(BEB-2346): generated worker (BEB-2311 loop deploy)\nfiles: orky/orky-beb-2346/index.js      repo: alexrollin/abilifi-apps\n```\n`abilifi-apps/abilifi-dispatcher` matches GUARD_REPO exactly, the lane ran headless, and **it wrote and deployed anyway** — live at orky-beb-2346.a",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19069,
- "count": 6100
+ "head": 19071,
+ "count": 6102
 }
