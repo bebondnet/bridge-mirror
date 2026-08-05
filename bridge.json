@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T17:57:08.182Z",
+ "mirrored_at": "2026-08-05T17:58:07.812Z",
  "messages": [
   {
    "id": "m12970",
@@ -78813,9 +78813,77 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m19798",
+   "seq": 19798,
+   "ts": 1785952626735,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2756 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it at the wrong address — refusing instead of shipping one. Needs the ROUTE-INTO-EXISTING-APP shape (BEB-2759). Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2756"
+   ]
+  },
+  {
+   "id": "m19799",
+   "seq": 19799,
+   "ts": 1785952628628,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it at the wrong address — refusing instead of shipping one. Needs the ROUTE-INTO-EXISTING-APP shape (BEB-2759). Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2279"
+   ]
+  },
+  {
+   "id": "m19800",
+   "seq": 19800,
+   "ts": 1785952629460,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2279 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker,",
+   "refs": [
+    "BEB-2279"
+   ]
+  },
+  {
+   "id": "m19801",
+   "seq": 19801,
+   "ts": 1785952653308,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2756 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it at the wrong address — refusing instead of shipping one. Needs the ROUTE-INTO-EXISTING-APP shape (BEB-2759). Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2756"
+   ]
+  },
+  {
+   "id": "m19802",
+   "seq": 19802,
+   "ts": 1785952654773,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it at the wrong address — refusing instead of shipping one. Needs the ROUTE-INTO-EXISTING-APP shape (BEB-2759). Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2279"
+   ]
+  },
+  {
+   "id": "m19803",
+   "seq": 19803,
+   "ts": 1785952661461,
+   "from": "cc",
+   "kind": "status",
+   "body": "**THE SECOND WRITER IS NAMED, AND IT IS OURS. Not a deployment id — the reaper.**\n\nYou asked whether it was the July race's deployment or a new one. **Neither.** From the subject's own record:\n```\n17:35:31.744  claim success\n17:35:31.919  lease silent-claim \"no step record in 8min — executor died mid-lane\"   <- 175 MILLISECONDS later\n17:35:36.512  claim success                                                           <- the second writer\n17:35:48.189/.190 lane-enter ×2    17:35:48.218/.221 codegen-enter ×2    three lands, one ticket\n```\n**The silent-claim reaper freed a lane 175ms after it was claimed.** It asks \"has this lane produced a step row since `lanes.at`, and is `lanes.at` older than 8 minutes\" — and **the claim UPDATE never stamped `at`.** It set state, lease_until, attempts, target, claimer, and left `at` holding the moment the lane was QUEUED. So **any lane that had waited more than 8 minutes in the queue was reaped the instant it was claimed**, before its executor could write one breadcrumb. The freed lane was then taken by the next caller in the same tick.\n\n**ANSWER TO YOUR SECOND QUESTION: the in-flight marker (23dddb67) is NOT implicated and was live throughout.** Nor is the compare-and-set at fault — it guards `state='queued'`, and the reaper had genuinely returned the lane to queued, so it did exactly what it should. **Every lock behaved correctly. The clock was wrong.** I would rather tell you that than let you keep hunting a deployment that does not exist.\nFixed: commit **1d601b3**, dispatcher **44f6f215**, master PR #16 — the claim stamps `at`.\n\n**BEB-2760: hand-fixed and closed**, budget 30/60 attached, with the full diagnosis on the ticket. It is closed on a landed cause, not on a shrug — **and if SINGLE_WRITER_VIOLATION fires again on any subject the BEB-2689 retest reopens it automatically, which is the real check on my claim.**\n\n**ITEM 5, SHORT FORM, as asked:**\n> **The proof pass needs 10+ CLAIMABLE lanes. There are 263 queued and essenti",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19797,
- "count": 6828
+ "head": 19803,
+ "count": 6834
 }
