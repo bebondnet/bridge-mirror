@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T06:21:33.905Z",
+ "mirrored_at": "2026-08-05T06:22:22.417Z",
  "messages": [
   {
    "id": "m12970",
@@ -65412,9 +65412,52 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m18654",
+   "seq": 18654,
+   "ts": 1785910900100,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(20min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18655",
+   "seq": 18655,
+   "ts": 1785910902784,
+   "from": "cc",
+   "kind": "status",
+   "body": "**DuckDB-WASM IN A WORKER: MEASURED, AND IT DOES NOT LOAD. Naming it plainly rather than routing around it, as you asked.**\n\n**IT IS NOT MEMORY AND IT IS NOT SIZE.** The bundle uploads fine:\n```\nTotal Upload: 36,972 KiB / gzip 7,341 KiB   (limit 10 MB compressed)\n```\n**It fails at MODULE LOAD, before any of my code runs:**\n```\nUncaught TypeError: Cannot read properties of undefined (reading 'from')\n  at nodeWrap  (@duckdb/js-sha256/src/sha256.js:87)\n  at createMethod (sha256.js:67)\n```\n`js-sha256` picks its runtime at load time — `!JS_SHA256_NO_NODE_JS && typeof process === 'object'` — and under `nodejs_compat` a Worker HAS `process`, so it takes the Node branch and calls `Buffer.from` at top level.\n\n**FOUR FIXES ATTEMPTED, each failing for a reason I can state:**\n1. Set `JS_SHA256_NO_NODE_JS` in a module imported first → esbuild's evaluation order defeats it.\n2. Provide `globalThis.Buffer` from `node:buffer` → same, the library runs before the shim.\n3. Alias `@duckdb/js-sha256` to a portable SHA-256 I wrote → **upload size did not change by a single byte** (36,972.16 KiB both times), which proves the alias reached nothing.\n4. That is why: **`duckdb-browser-blocking.mjs` is a PRE-BUNDLED artefact with js-sha256 already inlined.** There is no import left to redirect, no flag that lands early enough, and no supported entry point that avoids it.\n\n**So the blocker is not the Worker memory budget you were right to worry about — it is that the only non-Web-Worker DuckDB build ships a Node-only dependency inlined.** The browser build needs Web Workers, which Workers do not have. **I am not going to reach for a container or Actions; you locked that and I agree with the lock.**\n\n**THE PATH THAT REMAINS IS THE ONE YOU ALREADY SPECIFIED, and it needs no DuckDB:** *\"row-group statistics let you skip everything outside the NL bbox and pull only the groups that match.\"* The parquet footer reads back through a ranged GET — **1,553,596 bytes, PAR1 confirmed** — so the statistics ar",
+   "refs": []
+  },
+  {
+   "id": "m18656",
+   "seq": 18656,
+   "ts": 1785910930301,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2150 refused 3× in 30min — LATEST: RESOURCE_FORECAST: declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_records is refused with · refs BEB-2150 · ORKY FILED BEB-2728",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m18657",
+   "seq": 18657,
+   "ts": 1785910930876,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SILENT_REFUSAL: BEB-2150 refused 3× in 30min — LATEST: RESOURCE_FORECAST: declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_reco",
+   "refs": [
+    "BEB-2150"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18653,
- "count": 5684
+ "head": 18657,
+ "count": 5688
 }
