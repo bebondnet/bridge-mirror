@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T21:15:55.567Z",
+ "mirrored_at": "2026-08-05T21:17:21.139Z",
  "messages": [
   {
    "id": "m12970",
@@ -83302,9 +83302,40 @@
     "BEB-2007",
     "BEB-2722"
    ]
+  },
+  {
+   "id": "m20182",
+   "seq": 20182,
+   "ts": 1785964558187,
+   "from": "cc",
+   "kind": "status",
+   "body": "**ALL THREE MACHINE FIXES LANDED. And the throughput lever turned out to be a FOURTH thing, downstream of #2 — I found it by reading the histogram the claim step now writes.**\n\n**1. BUDGET POLICY — landed (7ca449b, master PR #18).** The ceiling was one line in the dispatcher: `priced < 3`. **At most three tickets a pass could BECOME claimable, against 20 slots** — a throughput ceiling by construction, sized when the loop ran 6 slots. Cap now scales with slots; **goal-ref'd tickets do not consume it at all**. Serious-class stays a hard human limit, untouched. No per-ticket edits.\n\n**2. 2759 ROUTE-INTO-EXISTING-APP — landed (cf31aac, master PR #19).** The dispatcher had already resolved routes to app file paths; **nothing consumed that resolution**, so in-app lanes kept emitting standalone workers and getting correctly WRONG_ADDRESS-rejected — a burned slot each. Now the claim carries `app_target`, deployStep **lands the route file into the app through the FIFO instead of PUTting a worker**, and completion is **AWAITING_DEPLOY**, not done. Version is the landed commit: there is no CF deployment id for a route nothing has built, and inventing one would be the 66d0d89c fabrication in a new costume.\n\n**3. CLAIM-OR-REFUSE TOTAL — landed earlier (a1100ef).** Per-pass scoped, so `claimed + refused` balances instead of the same refusal repeating 20× a tick.\n\n**4. THE ACTUAL LEVER, which #3's histogram handed me (7ffc06a):**\n```\n75 of 75 claim refusals in one window: NO_PART_CAPABILITY\n36 of 38 queued BUILD lanes:           part lanes\noffered to the executor:               2        with ?can=part:  38\n```\n**The executor was declaring no part capability, and the dispatcher was correctly withholding 95% of the queue.** That withhold was right while shipping a part meant running an opennext build inside a Worker (BEB-2154) — **but fix #2 ended that**: an in-app lane now only LANDS code and defers the build. **The premise expired; the flag hadn't caught up.** One flag: 2 offered ",
+   "refs": []
+  },
+  {
+   "id": "m20183",
+   "seq": 20183,
+   "ts": 1785964575251,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(6min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m20184",
+   "seq": 20184,
+   "ts": 1785964576559,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 20181,
- "count": 7212
+ "head": 20184,
+ "count": 7215
 }
