@@ -1,30 +1,29 @@
 {
- "mirrored_at": "2026-08-05T04:21:21.829Z",
- "ts": 1785903681068,
+ "mirrored_at": "2026-08-05T04:25:29.193Z",
+ "ts": 1785903928531,
  "loop": {
   "proposed_total": 652,
   "by_state": {
-   "queued": 292,
-   "claimed": 3,
+   "queued": 296,
+   "claimed": 0,
    "done": 246,
-   "held": 19,
+   "held": 18,
    "parked": 64
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 3,
-    "done": 111,
-    "held": 19,
+    "done": 113,
+    "held": 18,
     "parked": 63,
-    "queued": 28
+    "queued": 30
    },
    "REFINE": {
     "queued": 233
    },
    "REPAIR": {
-    "done": 95,
+    "done": 93,
     "parked": 1,
-    "queued": 11
+    "queued": 13
    },
    "SPEC": {
     "done": 40,
@@ -34,10 +33,26 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785903530102,
-   "tally": "BEB-2720→BUILD[claimed], BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2577→BUILD✗unwritten, BEB-2563→BUILD✗unwritten"
+   "at": 1785903817642,
+   "tally": "BEB-2720→BUILD[blocked], BEB-2186→BUILD, BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-2493→BUILD, BEB-2533→BUILD, BEB-2565→BUILD✗unwritten, BEB-2528→BUILD✗unwritten"
   },
   "reds": [
+   {
+    "code": "ZERO_CLAIM",
+    "severity": "red",
+    "since": 1785903839403,
+    "detail": "claimed=0, queued=296, 2 passes, max_concurrent=6",
+    "refs": []
+   },
+   {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1785903907615,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2268"
+    ]
+   },
    {
     "code": "GOAL_STALE",
     "severity": "red",
@@ -62,7 +77,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785903661613,
+    "since": 1785903900915,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -295,7 +310,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785840308010,
-    "detail": "abilifi-apps failing at heartbeat 118× in 24h — LATEST (08-05T03:55): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
+    "detail": "abilifi-apps failing at heartbeat 120× in 24h — LATEST (08-05T04:22): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
     "refs": [
      "BEB-2385"
     ],
@@ -337,7 +352,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785819833586,
-    "detail": "abilifi-mastra failing at deploy 28× in 24h — LATEST (08-05T03:41): codeLen: 1823\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: missing ) after argument list\\n  at index.js:6:24\\n\",\"documentation_url\":\"https://developers.cloudflare.com/work",
+    "detail": "abilifi-mastra failing at deploy 28× in 24h — LATEST (08-05T03:41): codeLen: 1823\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: missing ) after argument list\\n  at index.js:6:24\\n\",\"documentation_url\":\"https://developers.cloudflare.com/work · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2186"
     ],
@@ -350,28 +365,28 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785817299097,
-    "detail": "abilifi-payload failing at codegen 203× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2607\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+    "since": 1785817620566,
+    "detail": "abilifi-payload failing at codegen 201× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2595\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 2607\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/5 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 2595\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/4 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2279"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785817299097,
-    "detail": "abilifi-payload failing at park 186× in 24h — LATEST (08-04T18:17): three-strikes: 47 identical-input retries at codegen",
+    "since": 1785817620566,
+    "detail": "abilifi-payload failing at park 184× in 24h — LATEST (08-04T18:17): three-strikes: 49 identical-input retries at codegen",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 47 identical-input retries at codegen",
+     "error": "three-strikes: 49 identical-input retries at codegen",
      "subject": "BEB-2279"
     }
    },
@@ -379,7 +394,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785899065892,
-    "detail": "abilifi-registry failing at codegen 3× in 24h — LATEST (08-05T04:04): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1933 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "abilifi-registry failing at codegen 5× in 24h — LATEST (08-05T04:22): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1933 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-1933"
     ],
@@ -406,14 +421,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785817268794,
-    "detail": "alexrollin/abilifi-apps failing at codegen 356× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 1397\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks s · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785817597299,
+    "detail": "alexrollin/abilifi-apps failing at codegen 355× in 24h — LATEST (08-05T04:23): verdict: codegen produced no usable code\ncodeLen: 4015\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks s · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2379"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 1397\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks still did not apply: block 1/3 SEARCH text not found, even ignoring indentation. WANTED: \"const stmt = env.DB.prepare(\"INSERT INTO interactions (contact_id, provider_message_id, ts\" · CLOSEST in file is line 38 (6% similar): \"body = err ? '<div class=\"err\">FEED UNREACHABLE — ' + err.replace(/</g, '&lt;') + '</div>'\" · copy that line verbatim if it is the one you meant.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 4015\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks still did not apply: block 1/3 SEARCH text not found, even ignoring indentation. WANTED: \"const stmt = env.DB.prepare(\"INSERT INTO interactions (contact_id, provider_message_id, ts\" · CLOSEST in file is line 38 (6% similar): \"body = err ? '<div class=\"err\">FEED UNREACHABLE — ' + err.replace(/</g, '&lt;') + '</div>'\" · copy that line verbatim if it is the one you meant.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
      "subject": "BEB-2379"
     }
    },
@@ -448,14 +463,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785817268794,
-    "detail": "alexrollin/abilifi-apps failing at park 293× in 24h — LATEST (08-05T00:23): three-strikes: 72 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785817597299,
+    "detail": "alexrollin/abilifi-apps failing at park 291× in 24h — LATEST (08-05T00:23): three-strikes: 74 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2379"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 72 identical-input retries at codegen",
+     "error": "three-strikes: 74 identical-input retries at codegen",
      "subject": "BEB-2379"
     }
    },
@@ -476,7 +491,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785903661613,
+    "since": 1785903900915,
     "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2710"
@@ -490,7 +505,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785903661613,
+    "since": 1785903900915,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -580,39 +595,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 18525,
+  "head_seq": 18533,
   "cursor_fable": 12969,
-  "unread_for_fable": 5556,
+  "unread_for_fable": 5564,
   "last": [
    {
-    "seq": 18521,
+    "seq": 18529,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 1 — BEB-2720→BUILD, BEB-2394→BUILD, BEB-2"
+    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed"
    },
    {
-    "seq": 18522,
+    "seq": 18530,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(27min)."
+    "one_line": "DISPATCHER verification PASSED: BEB-2262 — https://orky-beb-2262.abilifi.net/ — json-parse"
    },
    {
-    "seq": 18523,
+    "seq": 18531,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2262 — commit 2"
    },
    {
-    "seq": 18524,
+    "seq": 18532,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(27min)."
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2262 — commit d"
    },
    {
-    "seq": 18525,
+    "seq": 18533,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=296, 2 passes, max_concurrent=6"
    }
   ]
  },
@@ -706,6 +721,22 @@
  ],
  "reds": [
   {
+   "code": "ZERO_CLAIM",
+   "severity": "red",
+   "since": 1785903839403,
+   "detail": "claimed=0, queued=296, 2 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1785903907615,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2268"
+   ]
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
    "since": 1785782844833,
@@ -729,7 +760,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785903661613,
+   "since": 1785903900915,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -962,7 +993,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785840308010,
-   "detail": "abilifi-apps failing at heartbeat 118× in 24h — LATEST (08-05T03:55): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
+   "detail": "abilifi-apps failing at heartbeat 120× in 24h — LATEST (08-05T04:22): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
    "refs": [
     "BEB-2385"
    ],
@@ -1004,7 +1035,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785819833586,
-   "detail": "abilifi-mastra failing at deploy 28× in 24h — LATEST (08-05T03:41): codeLen: 1823\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: missing ) after argument list\\n  at index.js:6:24\\n\",\"documentation_url\":\"https://developers.cloudflare.com/work",
+   "detail": "abilifi-mastra failing at deploy 28× in 24h — LATEST (08-05T03:41): codeLen: 1823\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: missing ) after argument list\\n  at index.js:6:24\\n\",\"documentation_url\":\"https://developers.cloudflare.com/work · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2186"
    ],
@@ -1017,28 +1048,28 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785817299097,
-   "detail": "abilifi-payload failing at codegen 203× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2607\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+   "since": 1785817620566,
+   "detail": "abilifi-payload failing at codegen 201× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 2595\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 2607\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/5 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 2595\ngenError: CODEGEN_WALL base-moved: the source moved c07d14ce → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/4 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2279"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785817299097,
-   "detail": "abilifi-payload failing at park 186× in 24h — LATEST (08-04T18:17): three-strikes: 47 identical-input retries at codegen",
+   "since": 1785817620566,
+   "detail": "abilifi-payload failing at park 184× in 24h — LATEST (08-04T18:17): three-strikes: 49 identical-input retries at codegen",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 47 identical-input retries at codegen",
+    "error": "three-strikes: 49 identical-input retries at codegen",
     "subject": "BEB-2279"
    }
   },
@@ -1046,7 +1077,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785899065892,
-   "detail": "abilifi-registry failing at codegen 3× in 24h — LATEST (08-05T04:04): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1933 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "abilifi-registry failing at codegen 5× in 24h — LATEST (08-05T04:22): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-1933 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-1933"
    ],
@@ -1073,14 +1104,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785817268794,
-   "detail": "alexrollin/abilifi-apps failing at codegen 356× in 24h — LATEST (08-05T04:12): verdict: codegen produced no usable code\ncodeLen: 1397\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks s · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785817597299,
+   "detail": "alexrollin/abilifi-apps failing at codegen 355× in 24h — LATEST (08-05T04:23): verdict: codegen produced no usable code\ncodeLen: 4015\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks s · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2379"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 1397\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks still did not apply: block 1/3 SEARCH text not found, even ignoring indentation. WANTED: \"const stmt = env.DB.prepare(\"INSERT INTO interactions (contact_id, provider_message_id, ts\" · CLOSEST in file is line 38 (6% similar): \"body = err ? '<div class=\"err\">FEED UNREACHABLE — ' + err.replace(/</g, '&lt;') + '</div>'\" · copy that line verbatim if it is the one you meant.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 4015\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → c07d14ce while the model worked. Regenerated against c07d14ce and the new blocks still did not apply: block 1/3 SEARCH text not found, even ignoring indentation. WANTED: \"const stmt = env.DB.prepare(\"INSERT INTO interactions (contact_id, provider_message_id, ts\" · CLOSEST in file is line 38 (6% similar): \"body = err ? '<div class=\"err\">FEED UNREACHABLE — ' + err.replace(/</g, '&lt;') + '</div>'\" · copy that line verbatim if it is the one you meant.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
     "subject": "BEB-2379"
    }
   },
@@ -1115,14 +1146,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785817268794,
-   "detail": "alexrollin/abilifi-apps failing at park 293× in 24h — LATEST (08-05T00:23): three-strikes: 72 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785817597299,
+   "detail": "alexrollin/abilifi-apps failing at park 291× in 24h — LATEST (08-05T00:23): three-strikes: 74 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2379"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 72 identical-input retries at codegen",
+    "error": "three-strikes: 74 identical-input retries at codegen",
     "subject": "BEB-2379"
    }
   },
@@ -1143,7 +1174,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785903661613,
+   "since": 1785903900915,
    "detail": "BEB-2710 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2710"
@@ -1157,7 +1188,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785903661613,
+   "since": 1785903900915,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
