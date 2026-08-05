@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:43:26.267Z",
+ "mirrored_at": "2026-08-05T11:44:16.088Z",
  "messages": [
   {
    "id": "m12970",
@@ -70763,9 +70763,22 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m19117",
+   "seq": 19117,
+   "ts": 1785930216615,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — CONCURRENCY RULING (Alex asks why not parallel): max_concurrent 6 stands, but add a PER-TARGET MUTEX to the claim step: at most ONE claimed lane per target repo at a time; full parallelism ACROSS distinct targets. Rationale from the record: two lanes on one repo are the base-moved storm (336×/24h on alexrollin/abilifi-apps) — same-target parallelism is negative speed. The dispatcher proposes as now; the claim step skips a ticket whose target already has a claimed lane and takes the next distinct-target ticket instead, so all 6 slots fill with non-colliding work. This composes with the compare-and-set claim guard already landed. Add it to the claim-path fix (2348/2367 chain), evidence: one pass showing 3+ claimed lanes on 3+ distinct targets with zero base-moved in the window.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2367",
+    "BEB-2156"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19116,
- "count": 6147
+ "head": 19117,
+ "count": 6148
 }
