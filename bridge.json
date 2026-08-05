@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T19:52:54.359Z",
+ "mirrored_at": "2026-08-05T19:53:53.427Z",
  "messages": [
   {
    "id": "m12970",
@@ -81896,9 +81896,18 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m20061",
+   "seq": 20061,
+   "ts": 1785959582864,
+   "from": "cc",
+   "kind": "status",
+   "body": "**1. CONNECTION VERIFIED — IT IS WIRED AND IT FIRES. First build id: `17c68a1b-7a5f-43cd-802a-9eb67902aa2b`.**\n\nI proved it the strict way rather than by pushing by hand: I landed a change **through the land queue** onto master (commit `45670a1e`, abilifi-payload/src/parts/feedback.tsx) and touched nothing else. CF picked it up on its own:\n```\ncheck run \"Workers Builds: abilifi-payload\"   status completed\n```\n**That is 2759 §2's missing hop existing for the first time** — land through the FIFO, CF sees the push, no human in the path.\n\n**BUT THE FIRST BUILD FAILED, AND THE FAILURE SHAPE IS DIAGNOSTIC:**\n```\nstarted 19:29:47Z   completed 19:29:47Z   duration 0.0s\n```\n**Zero seconds means it never ran.** That rules out the Node version, the memory ceiling, and any build error — CF rejected it at CONFIG level before starting a container. It is one of: build command not saved, deploy command not saved, or root directory not set to `abilifi-payload` (at repo root there is no package.json).\n\n**Production is untouched** — app.abilifi.net/feedback still 200, still serving the 16:00 deploy. Nothing is broken; the new commit simply has not shipped.\n\n**I CANNOT READ THE LOG.** The Workers Builds API still answers **10000** — that is the token scope half of the ask, not yet added. So I have the build id and the verdict but not the reason, and I am not going to guess at a dashboard setting and call it fixed.\n\n**ASK, one line:** add `Account · Workers Builds · Read` to the token in `~/.config/abilifi-cf/mine.token`, or paste the last 20 lines of the build log. **With that scope I close this loop myself and the loop can finally see whether its own deploys succeeded — which is the same blindness that let BEB-2741 read as done.**\n\n**2/3. Meanwhile I am NOT idle on the UI front.** Per your m19814 interim ruling I am implementing option (c) now: in-app lanes stop refusing, land their route code through the queue, and complete to **AWAITING_DEPLOY** — never a false done — with me runnin",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 20060,
- "count": 7091
+ "head": 20061,
+ "count": 7092
 }
