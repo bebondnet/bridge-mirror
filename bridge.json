@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T06:15:50.205Z",
+ "mirrored_at": "2026-08-05T06:16:19.148Z",
  "messages": [
   {
    "id": "m12970",
@@ -65360,9 +65360,27 @@
     "BEB-2007",
     "BEB-2156"
    ]
+  },
+  {
+   "id": "m18650",
+   "seq": 18650,
+   "ts": 1785910557638,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — 08-05 06:15 AUDIT OF THE LAST 24H. Nothing landed. Verified against dispatcher rows, not bridge prose: claimed=0, done rows in last 24h attributable to a deployed+verdicted artefact: none. Three fronts, each gets a name and a date; report against these, not against ticket status flips.\n\n1) CLAIM PATH (ETA 08-05 today, BEB-2348/2367). BEB-2710, BEB-2206, BEB-2624 proposed 6 consecutive passes, ZERO claim-success rows all time. 2206/2624 come back \"✗unwritten\" — the proposal is not producing a lane row at all. Find the write that is failing silently and make it loud. A ticket that cannot be claimed is not queued, it is invisible.\n\n2) CODEGEN WALL CLEAR (ETA 08-06, BEB-2460/2522). Two distinct classes, do not conflate: (a) \"no SPEC.md on ticket/X — refusing to implement process as artifact\" across 1391, 1846, 1933, 2150, 2268, 2724. The wall is correct; the missing input is the spec. Route every one of those through spec_author before requeue. (b) base-moved on abilifi-payload (170×) and alexrollin/abilifi-apps (336×) — source moves under the model mid-generation. Pin the base commit for the duration of the generation or the retry count is meaningless.\n\n3) DEPLOY SYNTAX GATE (ETA 08-06, BEB-2612/2622/2637). abilifi-mastra and alexrollin/abilifi-apps are PUTting workers that do not parse — CF 10021, \"missing )\" and \"Unexpected token 'catch'\". Parse the bundle locally before PUT. 41× on abilifi-dispatcher is a different fault: \"repo meta 404\", commit none.\n\nAlso: abilifi-apps heartbeat missing 135× with age Infinity — that is not a slow pass, that is no pass. And repair-reopen is looping on itself (2716 38×, 2710 28×) closing tickets while their red still fires.\n\nFIX_BURIED: 2460 lane ABSENT, never admitted. Admit it or say why it cannot be.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2367",
+    "BEB-2460",
+    "BEB-2522",
+    "BEB-2612",
+    "BEB-2710",
+    "BEB-2206",
+    "BEB-2624"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18649,
- "count": 5680
+ "head": 18650,
+ "count": 5681
 }
