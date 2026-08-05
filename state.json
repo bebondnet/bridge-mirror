@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-05T21:57:44.247Z",
- "ts": 1785967063779,
+ "mirrored_at": "2026-08-05T21:59:07.896Z",
+ "ts": 1785967147193,
  "loop": {
   "proposed_total": 689,
   "by_state": {
-   "queued": 242,
-   "claimed": 6,
+   "queued": 241,
+   "claimed": 7,
    "done": 287,
-   "held": 22,
-   "blocked": 3,
-   "parked": 100
+   "held": 23,
+   "blocked": 1,
+   "parked": 101
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 3,
-    "claimed": 6,
+    "blocked": 1,
+    "claimed": 7,
     "done": 158,
-    "held": 22,
-    "parked": 99,
-    "queued": 32
+    "held": 23,
+    "parked": 100,
+    "queued": 31
    },
    "REFINE": {
     "queued": 137
@@ -36,14 +36,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785967040897,
-   "tally": "BEB-2127→BUILD, BEB-2533→BUILD[claimed], BEB-2394→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2156→BUILD[claimed], BEB-2540→BUILD[blocked], BEB-2744→BUILD[claimed], BEB-2722→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
+   "at": 1785967127348,
+   "tally": "BEB-2533→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2743→BUILD[claimed], BEB-2540→BUILD[blocked], BEB-2744→BUILD[claimed], BEB-2722→BUILD, BEB-1626→BUILD[claimed], BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785967032103,
+    "since": 1785967092106,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -74,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785967032103,
+    "since": 1785967092106,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -517,7 +517,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785882690357,
-    "detail": "abilifi-payload failing at codegen 50× in 24h — LATEST (08-05T21:56): verdict: codegen produced no usable code\ncodeLen: 2776\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+    "detail": "abilifi-payload failing at codegen 51× in 24h — LATEST (08-05T21:57): verdict: codegen produced no usable code\ncodeLen: 2776\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
     "refs": [
      "BEB-2279"
     ],
@@ -601,7 +601,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785890243705,
-    "detail": "alexrollin/abilifi-apps failing at deploy 26× in 24h — LATEST (08-05T20:57): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at deploy 27× in 24h — LATEST (08-05T21:57): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2156"
     ],
@@ -657,7 +657,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785915566982,
-    "detail": "n/a failing at codegen 12× in 24h — LATEST (08-05T21:45): verdict: codegen produced no usable code\ncodeLen: 1631\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at codegen 13× in 24h — LATEST (08-05T21:57): verdict: codegen produced no usable code\ncodeLen: 1631\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2297"
     ],
@@ -668,9 +668,39 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785967092106,
+    "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2301"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2301"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785967092106,
+    "detail": "BEB-2191 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2191"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2191"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785967032103,
+    "since": 1785967092106,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -742,22 +772,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 20208,
+  "head_seq": 20210,
   "cursor_fable": 12969,
-  "unread_for_fable": 7239,
+  "unread_for_fable": 7241,
   "last": [
-   {
-    "seq": 20204,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2260 REFUSED for BUILD — ticket status 'backlog' — owner-p"
-   },
-   {
-    "seq": 20205,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2083 — mastra tick codegen FAILED: CODEGEN_WALL size: the spe"
-   },
    {
     "seq": 20206,
     "from": "cc",
@@ -775,18 +793,30 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane BLOCKED: BEB-2156 — mastra tick deploy FAILED: DEPLOY REFUSED by 2 known w"
+   },
+   {
+    "seq": 20209,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2301]→BEB-2716 · PROPOSED_NEVER_CLAIMED[BEB-"
+   },
+   {
+    "seq": 20210,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2572 REFUSED for BUILD — ticket status 'backlog' — owner-p"
    }
   ]
  },
  "p0s_open": [
   {
-   "id": "BEB-2156",
-   "title": "P0 AUDIT: eliminate laptop dependency from build pipeli",
+   "id": "BEB-2394",
+   "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
    "status": "todo"
   },
   {
-   "id": "BEB-2394",
-   "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
+   "id": "BEB-2156",
+   "title": "P0 AUDIT: eliminate laptop dependency from build pipeli",
    "status": "todo"
   },
   {
@@ -870,7 +900,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785967032103,
+   "since": 1785967092106,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -901,7 +931,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785967032103,
+   "since": 1785967092106,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1344,7 +1374,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785882690357,
-   "detail": "abilifi-payload failing at codegen 50× in 24h — LATEST (08-05T21:56): verdict: codegen produced no usable code\ncodeLen: 2776\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+   "detail": "abilifi-payload failing at codegen 51× in 24h — LATEST (08-05T21:57): verdict: codegen produced no usable code\ncodeLen: 2776\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
    "refs": [
     "BEB-2279"
    ],
@@ -1428,7 +1458,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785890243705,
-   "detail": "alexrollin/abilifi-apps failing at deploy 26× in 24h — LATEST (08-05T20:57): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at deploy 27× in 24h — LATEST (08-05T21:57): codeLen: 3004\ndeploy error: CF PUT 400: [{\"code\":10021,\"message\":\"Uncaught SyntaxError: Unexpected token '==='\\n  at index.js:40\\n\",\"documentation_url\":\"https://developers.cloudflare.com/workers/obser · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2156"
    ],
@@ -1484,7 +1514,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785915566982,
-   "detail": "n/a failing at codegen 12× in 24h — LATEST (08-05T21:45): verdict: codegen produced no usable code\ncodeLen: 1631\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at codegen 13× in 24h — LATEST (08-05T21:57): verdict: codegen produced no usable code\ncodeLen: 1631\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2297"
    ],
@@ -1495,9 +1525,39 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785967092106,
+   "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2301"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2301"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785967092106,
+   "detail": "BEB-2191 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2191"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2191"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785967032103,
+   "since": 1785967092106,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
