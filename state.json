@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-05T01:20:05.367Z",
- "ts": 1785892804631,
+ "mirrored_at": "2026-08-05T01:20:49.755Z",
+ "ts": 1785892849172,
  "loop": {
   "proposed_total": 573,
   "by_state": {
-   "queued": 232,
+   "queued": 228,
    "claimed": 2,
-   "done": 240,
+   "done": 244,
    "held": 16,
    "parked": 63
   },
@@ -22,9 +22,9 @@
     "queued": 167
    },
    "REPAIR": {
-    "done": 92,
+    "done": 96,
     "parked": 1,
-    "queued": 13
+    "queued": 9
    },
    "SPEC": {
     "done": 40,
@@ -34,8 +34,8 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785892696362,
-   "tally": "BEB-2186→BUILD[claimed], BEB-2720→BUILD, BEB-2279→BUILD, BEB-2346→BUILD, BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2710→SPEC, BEB-1968→REFINE, BEB-1964→BUILD"
+   "at": 1785892696380,
+   "tally": "BEB-2716→SPEC[done], BEB-2186→BUILD[claimed], BEB-2720→BUILD, BEB-2279→BUILD, BEB-2346→BUILD, BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-1968→REFINE, BEB-1964→BUILD"
   },
   "reds": [
    {
@@ -62,7 +62,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785892603170,
+    "since": 1785892772869,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -295,7 +295,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785840308010,
-    "detail": "abilifi-apps failing at heartbeat 72× in 24h — LATEST (08-05T01:14): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
+    "detail": "abilifi-apps failing at heartbeat 75× in 24h — LATEST (08-05T01:20): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
     "refs": [
      "BEB-2385"
     ],
@@ -378,15 +378,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785806292461,
-    "detail": "alexrollin/abilifi-apps failing at codegen 423× in 24h — LATEST (08-05T01:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785806408744,
+    "detail": "alexrollin/abilifi-apps failing at codegen 422× in 24h — LATEST (08-05T01:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 12 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
     "refs": [
-     "BEB-2379"
+     "BEB-2706"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
-     "subject": "BEB-2379"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 12 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2706"
     }
    },
    {
@@ -420,51 +420,21 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785806292461,
-    "detail": "alexrollin/abilifi-apps failing at park 370× in 24h — LATEST (08-05T00:23): three-strikes: 28 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785806408744,
+    "detail": "alexrollin/abilifi-apps failing at park 369× in 24h — LATEST (08-05T00:23): three-strikes: 4 identical-input retries at codegen",
     "refs": [
-     "BEB-2379"
+     "BEB-2706"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 28 identical-input retries at codegen",
-     "subject": "BEB-2379"
+     "error": "three-strikes: 4 identical-input retries at codegen",
+     "subject": "BEB-2706"
     }
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1785892603170,
-    "detail": "BEB-1973 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
-    "refs": [
-     "BEB-1973"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-1973"
-    },
-    "fix_ticket": "BEB-2716"
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1785892603170,
-    "detail": "BEB-1969 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
-    "refs": [
-     "BEB-1969"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-1969"
-    },
-    "fix_ticket": "BEB-2716"
    },
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785892603170,
+    "since": 1785892772869,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -568,22 +538,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 18346,
+  "head_seq": 18348,
   "cursor_fable": 12969,
-  "unread_for_fable": 5377,
+  "unread_for_fable": 5379,
   "last": [
-   {
-    "seq": 18342,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
-   },
-   {
-    "seq": 18343,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "6 NEW REDS: REPEAT_FAILER(BEB-2716), REPEAT_FAILER(BEB-2716), REPEAT_FAILER(BEB-2716), REP"
-   },
    {
     "seq": 18344,
     "from": "cc",
@@ -601,6 +559,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "8 NEW REDS: REPEAT_FAILER(BEB-2716), REPEAT_FAILER(BEB-2716), REPEAT_FAILER(BEB-2716), REP"
+   },
+   {
+    "seq": 18347,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 18348,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-1973]→BEB-2716 · PROPOSED_NEVER_CLAIMED[BEB-"
    }
   ]
  },
@@ -717,7 +687,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785892603170,
+   "since": 1785892772869,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -950,7 +920,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785840308010,
-   "detail": "abilifi-apps failing at heartbeat 72× in 24h — LATEST (08-05T01:14): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
+   "detail": "abilifi-apps failing at heartbeat 75× in 24h — LATEST (08-05T01:20): HEARTBEAT_MISSING: expected pass within 180s, actual age Infinitymin — kick attempt 1",
    "refs": [
     "BEB-2385"
    ],
@@ -1033,15 +1003,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785806292461,
-   "detail": "alexrollin/abilifi-apps failing at codegen 423× in 24h — LATEST (08-05T01:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785806408744,
+   "detail": "alexrollin/abilifi-apps failing at codegen 422× in 24h — LATEST (08-05T01:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 12 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
    "refs": [
-    "BEB-2379"
+    "BEB-2706"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=3] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
-    "subject": "BEB-2379"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 12 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2706"
    }
   },
   {
@@ -1075,51 +1045,21 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785806292461,
-   "detail": "alexrollin/abilifi-apps failing at park 370× in 24h — LATEST (08-05T00:23): three-strikes: 28 identical-input retries at codegen · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785806408744,
+   "detail": "alexrollin/abilifi-apps failing at park 369× in 24h — LATEST (08-05T00:23): three-strikes: 4 identical-input retries at codegen",
    "refs": [
-    "BEB-2379"
+    "BEB-2706"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 28 identical-input retries at codegen",
-    "subject": "BEB-2379"
+    "error": "three-strikes: 4 identical-input retries at codegen",
+    "subject": "BEB-2706"
    }
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1785892603170,
-   "detail": "BEB-1973 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
-   "refs": [
-    "BEB-1973"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-1973"
-   },
-   "fix_ticket": "BEB-2716"
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1785892603170,
-   "detail": "BEB-1969 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
-   "refs": [
-    "BEB-1969"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-1969"
-   },
-   "fix_ticket": "BEB-2716"
   },
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785892603170,
+   "since": 1785892772869,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
