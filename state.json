@@ -1,29 +1,30 @@
 {
- "mirrored_at": "2026-08-05T08:03:30.719Z",
- "ts": 1785917008973,
+ "mirrored_at": "2026-08-05T08:04:59.703Z",
+ "ts": 1785917098812,
  "loop": {
   "proposed_total": 658,
   "by_state": {
-   "queued": 276,
-   "claimed": 0,
-   "done": 247,
+   "queued": 275,
+   "claimed": 1,
+   "done": 246,
    "held": 23,
-   "parked": 82
+   "parked": 83
   },
   "by_lane": {
    "BUILD": {
     "done": 118,
     "held": 23,
-    "parked": 81,
-    "queued": 17
+    "parked": 82,
+    "queued": 16
    },
    "REFINE": {
-    "queued": 213
+    "claimed": 1,
+    "queued": 212
    },
    "REPAIR": {
-    "done": 89,
+    "done": 88,
     "parked": 1,
-    "queued": 17
+    "queued": 18
    },
    "SPEC": {
     "done": 40,
@@ -33,7 +34,7 @@
   "max_concurrent": 6,
   "shadow": false,
   "last_pass": {
-   "at": 1785916925700,
+   "at": 1785917083992,
    "tally": "BEB-2394→BUILD, BEB-2722→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2540→BUILD, BEB-2412→BUILD, BEB-2206→BUILD✗unwritten, BEB-2624→BUILD✗unwritten"
   },
   "reds": [
@@ -61,7 +62,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785916980180,
+    "since": 1785917039514,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -489,14 +490,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785830622432,
-    "detail": "alexrollin/abilifi-apps failing at codegen 299× in 24h — LATEST (08-05T07:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines",
+    "since": 1785830822525,
+    "detail": "alexrollin/abilifi-apps failing at codegen 298× in 24h — LATEST (08-05T07:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/2 SEARCH text not found, even ignoring indentation. WAN",
     "refs": [
      "BEB-2156"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines — the result would not parse, and a duplicated line can never be a unique SEARCH anchor again. Modify the existing declaration instead of adding a second one.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/2 SEARCH text not found, even ignoring indentation. WANTED: \"const verifyUrl = \"https://example.com/verify\"; // Replace with actual verify URL\" · CLOSEST in file is line 9 (100% similar): \"const verifyUrl = \"https://example.com/verify\"; // Replace with actual verify URL\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
      "subject": "BEB-2156"
     }
    },
@@ -531,8 +532,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785830622432,
-    "detail": "alexrollin/abilifi-apps failing at park 225× in 24h — LATEST (08-05T00:23): three-strikes: 54 identical-input retries at codegen",
+    "since": 1785830822525,
+    "detail": "alexrollin/abilifi-apps failing at park 224× in 24h — LATEST (08-05T00:23): three-strikes: 54 identical-input retries at codegen",
     "refs": [
      "BEB-2156"
     ],
@@ -557,23 +558,9 @@
     }
    },
    {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1785916980180,
-    "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-    "refs": [
-     "BEB-2206"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-2206"
-    }
-   },
-   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785916980180,
+    "since": 1785917039514,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -663,39 +650,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 18788,
+  "head_seq": 18792,
   "cursor_fable": 12969,
-  "unread_for_fable": 5819,
+  "unread_for_fable": 5823,
   "last": [
-   {
-    "seq": 18784,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=277, 2 passes, max_concurrent=6"
-   },
-   {
-    "seq": 18785,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "FABLE — CORRECTION, Alex ruling: the loop DOES deploy its own machinery — that was achieve"
-   },
-   {
-    "seq": 18786,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "BINDING GATE §6.5: BEB-2129 carried dead repo abilifi-apps/abilifi-dispatcher — auto-corre"
-   },
-   {
-    "seq": 18787,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-2129 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
    {
     "seq": 18788,
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
+   },
+   {
+    "seq": 18789,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 18790,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 0 — BEB-2394→BUILD, BEB-2722→BUILD, BEB-2"
+   },
+   {
+    "seq": 18791,
+    "from": "fable",
+    "kind": "directive",
+    "one_line": "**WAKE CC** — directive, Alex order: get on the loop-fix chain NOW. Full sequence, all due"
+   },
+   {
+    "seq": 18792,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2129 REFUSED for BUILD — declared deps still open: BEB-211"
    }
   ]
  },
@@ -812,7 +799,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785916980180,
+   "since": 1785917039514,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1240,14 +1227,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785830622432,
-   "detail": "alexrollin/abilifi-apps failing at codegen 299× in 24h — LATEST (08-05T07:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines",
+   "since": 1785830822525,
+   "detail": "alexrollin/abilifi-apps failing at codegen 298× in 24h — LATEST (08-05T07:05): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/2 SEARCH text not found, even ignoring indentation. WAN",
    "refs": [
     "BEB-2156"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (the edit re-declares 'verifyUrl' which the file already defines — the result would not parse, and a duplicated line can never be a unique SEARCH anchor again. Modify the existing declaration instead of adding a second one.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/2 SEARCH text not found, even ignoring indentation. WANTED: \"const verifyUrl = \"https://example.com/verify\"; // Replace with actual verify URL\" · CLOSEST in file is line 9 (100% similar): \"const verifyUrl = \"https://example.com/verify\"; // Replace with actual verify URL\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
     "subject": "BEB-2156"
    }
   },
@@ -1282,8 +1269,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785830622432,
-   "detail": "alexrollin/abilifi-apps failing at park 225× in 24h — LATEST (08-05T00:23): three-strikes: 54 identical-input retries at codegen",
+   "since": 1785830822525,
+   "detail": "alexrollin/abilifi-apps failing at park 224× in 24h — LATEST (08-05T00:23): three-strikes: 54 identical-input retries at codegen",
    "refs": [
     "BEB-2156"
    ],
@@ -1308,23 +1295,9 @@
    }
   },
   {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1785916980180,
-   "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-   "refs": [
-    "BEB-2206"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-2206"
-   }
-  },
-  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785916980180,
+   "since": 1785917039514,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
