@@ -1,26 +1,27 @@
 {
- "mirrored_at": "2026-08-05T11:00:27.930Z",
- "ts": 1785927625246,
+ "mirrored_at": "2026-08-05T11:01:09.138Z",
+ "ts": 1785927666619,
  "loop": {
   "proposed_total": 667,
   "by_state": {
-   "queued": 276,
-   "claimed": 0,
+   "queued": 274,
+   "claimed": 1,
    "done": 252,
    "held": 21,
    "blocked": 1,
-   "parked": 88
+   "parked": 89
   },
   "by_lane": {
    "BUILD": {
     "blocked": 1,
     "done": 126,
     "held": 21,
-    "parked": 87,
-    "queued": 30
+    "parked": 88,
+    "queued": 29
    },
    "REFINE": {
-    "queued": 187
+    "claimed": 1,
+    "queued": 186
    },
    "REPAIR": {
     "done": 86,
@@ -43,13 +44,13 @@
     "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1785927272567,
-    "detail": "claimed=0, queued=277, 6 passes, max_concurrent=6",
+    "detail": "claimed=0, queued=276, 7 passes, max_concurrent=6",
     "refs": []
    },
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785927572535,
+    "since": 1785927632845,
     "detail": "MARKBOARD v1 lands TODAY on the conducting frag path — wiki page, tap-to-mark, MCP-door thread, SpecOps verdict + recording into BB Docs — last landed evidence NEVER",
     "refs": [
      "BEB-2741"
@@ -79,7 +80,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785927572535,
+    "since": 1785927632845,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -479,15 +480,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785841194025,
-    "detail": "abilifi-payload failing at codegen 105× in 24h — LATEST (08-05T10:29): verdict: codegen produced no usable code\ncodeLen: 2806\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+    "since": 1785841619511,
+    "detail": "abilifi-payload failing at codegen 104× in 24h — LATEST (08-05T10:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2722 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2279"
+     "BEB-2722"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 2806\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/5 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
-     "subject": "BEB-2279"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2722 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class)\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2722"
     }
    },
    {
@@ -507,14 +508,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785841194025,
-    "detail": "abilifi-payload failing at park 80× in 24h — LATEST (08-04T18:17): three-strikes: 94 identical-input retries at codegen",
+    "since": 1785842061727,
+    "detail": "abilifi-payload failing at park 79× in 24h — LATEST (08-04T18:17): three-strikes: 91 identical-input retries at codegen",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "three-strikes: 94 identical-input retries at codegen",
+     "error": "three-strikes: 91 identical-input retries at codegen",
      "subject": "BEB-2279"
     }
    },
@@ -633,7 +634,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785927572535,
+    "since": 1785927632845,
     "detail": "BEB-2741 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2741"
@@ -645,9 +646,24 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785927632845,
+    "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2206"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2206"
+    },
+    "fix_ticket": "BEB-2730"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785927572535,
+    "since": 1785927632845,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -737,22 +753,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 19043,
+  "head_seq": 19045,
   "cursor_fable": 12969,
-  "unread_for_fable": 6074,
+  "unread_for_fable": 6076,
   "last": [
-   {
-    "seq": 19039,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_CLAIM: claimed=0, queued=278, 2 passes, max_concurrent=6"
-   },
-   {
-    "seq": 19040,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
-   },
    {
     "seq": 19041,
     "from": "cc",
@@ -770,6 +774,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "RED ZERO_CLAIM: claimed=0, queued=279, 3 passes, max_concurrent=6"
+   },
+   {
+    "seq": 19044,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2040 REFUSED for BUILD — declared deps still open: BEB-193"
+   },
+   {
+    "seq": 19045,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2206 proposed on 6 consecutive passes and has NEVER been c"
    }
   ]
  },
@@ -866,13 +882,13 @@
    "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1785927272567,
-   "detail": "claimed=0, queued=277, 6 passes, max_concurrent=6",
+   "detail": "claimed=0, queued=276, 7 passes, max_concurrent=6",
    "refs": []
   },
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785927572535,
+   "since": 1785927632845,
    "detail": "MARKBOARD v1 lands TODAY on the conducting frag path — wiki page, tap-to-mark, MCP-door thread, SpecOps verdict + recording into BB Docs — last landed evidence NEVER",
    "refs": [
     "BEB-2741"
@@ -902,7 +918,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785927572535,
+   "since": 1785927632845,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1302,15 +1318,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785841194025,
-   "detail": "abilifi-payload failing at codegen 105× in 24h — LATEST (08-05T10:29): verdict: codegen produced no usable code\ncodeLen: 2806\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+   "since": 1785841619511,
+   "detail": "abilifi-payload failing at codegen 104× in 24h — LATEST (08-05T10:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2722 and the prompt is loop process orders, not a deliverable spec — refusing to implement the proc · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2279"
+    "BEB-2722"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 2806\ngenError: CODEGEN_WALL base-moved: the source moved 34db2845 → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks still did not apply: block 1/5 SEARCH text not found, even ignoring indentation. WANTED: \"if (u.pathname === '/') u.pathname = '/waterfall';\" · CLOSEST in file is line 6 (100% similar): \"if (u.pathname === '/') u.pathname = '/waterfall';\" · copy that line verbatim if it is the one you meant.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=8] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
-    "subject": "BEB-2279"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL: no SPEC.md on ticket/BEB-2722 and the prompt is loop process orders, not a deliverable spec — refusing to implement the process as the artifact (2432 class)\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2722"
    }
   },
   {
@@ -1330,14 +1346,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785841194025,
-   "detail": "abilifi-payload failing at park 80× in 24h — LATEST (08-04T18:17): three-strikes: 94 identical-input retries at codegen",
+   "since": 1785842061727,
+   "detail": "abilifi-payload failing at park 79× in 24h — LATEST (08-04T18:17): three-strikes: 91 identical-input retries at codegen",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "three-strikes: 94 identical-input retries at codegen",
+    "error": "three-strikes: 91 identical-input retries at codegen",
     "subject": "BEB-2279"
    }
   },
@@ -1456,7 +1472,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785927572535,
+   "since": 1785927632845,
    "detail": "BEB-2741 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2741"
@@ -1468,9 +1484,24 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785927632845,
+   "detail": "BEB-2206 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2206"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2206"
+   },
+   "fix_ticket": "BEB-2730"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785927572535,
+   "since": 1785927632845,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
