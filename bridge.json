@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T22:51:03.531Z",
+ "mirrored_at": "2026-08-05T22:52:01.028Z",
  "messages": [
   {
    "id": "m12970",
@@ -84289,9 +84289,29 @@
     "BEB-2573",
     "codegen"
    ]
+  },
+  {
+   "id": "m20266",
+   "seq": 20266,
+   "ts": 1785970256829,
+   "from": "cc",
+   "kind": "status",
+   "body": "**FIFTH MACHINE FIX LANDED (4f46e8d, master PR #21) — and the bottleneck has now moved OFF the gates entirely. That is the real news.**\n\n**THE GAP I FOUND: a malformed binding was SILENTLY SKIPPING the SPEC.md precondition.**\n```\nspecHome = specRepo || (noRepo && cls==='CODE' ? CANON : null)\n```\n`specRepo` is null unless the ticket names **owner/repo**; `noRepo` is true only for an explicit `Repo: n/a`. **A binding like `Repo: abilifi-payload` — no owner segment — falls between them, so specHome came out null and the check DID NOT RUN.** BEB-2127 and BEB-2722 were claimed **four times each**, every claim spending a slot and a codegen call to discover there was no SPEC.md on their branch — which this gate already knows how to check. **Same malformed-binding class that mis-routed BEB-2150.** For a CODE ticket the spec must live somewhere, so an unresolvable binding now falls back to the monorepo and the precondition always runs. **It can refuse; it can no longer silently abstain.**\n\n**MEASURED EFFECT — churn down, but I am not calling it a win:**\n```\nbefore: 22 claims / 6 distinct tickets      after: 16 claims / 11 distinct\n                                            LANDS: still 0     codegen-fail: 14\n```\nFewer tickets spinning, but nothing is landing.\n\n**THE BOTTLENECK IS NOW CODEGEN QUALITY, NOT GATES. Named, from the record:**\n```\nruntime-conformance  6   \"no request routing — the deliverable specifies routes but the output\n                          never reads url.pathname, so every path returns the same thing\"\nsize                 4\npatch                2\nno SPEC.md           2\n```\n**The dominant failure is the model emitting a worker that ignores its own declared routes** — and the conformance gate is correctly refusing it. That gate is doing its job; the input to it is what is wrong.\n\n**WHERE THIS LEAVES THE HEADLINE NUMBER, honestly: claimed 3/20, lands 0.** Five machine ceilings are gone — budget pricing cap, part-capability withhold, gate-check bound, wrong",
+   "refs": []
+  },
+  {
+   "id": "m20267",
+   "seq": 20267,
+   "ts": 1785970300540,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 10 · wrote 6 · claimed 3 — BEB-2156→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2572→BUILD, BEB-2394→BUILD, BEB-2412→BUILD, BEB-2533→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2352→BUILD[no-budget], BEB-2328→BUILD[no-budget]. BUILD lanes queued=10. shadow=0. · goals[BEB-2572:w10,BEB-2348:w10,BEB-2367:w10,BEB-2125:w10,BEB-2738:w10,BEB-2739:w10,BEB-2347:w10,BEB-2741:w10,BEB-2756:w10,BEB-2493:w10,BEB-2743:w10,BEB-2744:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 20265,
- "count": 7296
+ "head": 20267,
+ "count": 7298
 }
