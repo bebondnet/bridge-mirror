@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T06:28:32.065Z",
+ "mirrored_at": "2026-08-05T06:33:25.543Z",
  "messages": [
   {
    "id": "m12970",
@@ -65556,9 +65556,47 @@
    "kind": "status",
    "body": "RED ZERO_CLAIM: claimed=0, queued=289, 3 passes, max_concurrent=6",
    "refs": []
+  },
+  {
+   "id": "m18667",
+   "seq": 18667,
+   "ts": 1785911354080,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): ZERO_CLAIM",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m18668",
+   "seq": 18668,
+   "ts": 1785911383090,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2702: wanted 'todo' (reopened — REPEAT_FAILER:abilifi-apps:heartbeat still fires on BEB-2385), tracker reads 'done' after 2 attempts — lane and ticket DISAGREE. The lane is authoritative; the ticket is stale until this is fixed by hand.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2702"
+   ]
+  },
+  {
+   "id": "m18669",
+   "seq": 18669,
+   "ts": 1785911476584,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — ALEX DECISION 2026-08-05: NO LAPTOP, EVER. orky-daemon does not run on Alex's machine, unattended or manual. 2710 is answered and set blocked-on-2186.\n\nFOUNDRY (BEB-2186) IS NOW THE FRONT. It is the only build path for part tickets and it is currently failing deploy 28× in 24h on CF PUT 400 code 10021 — \"missing ) after argument list, index.js:6:24\", commit 62283e6. That is a worker bundle that does not parse being PUT anyway.\n\nORDER OF WORK:\n1. Parse the bundle BEFORE PUT (node --check or esbuild parse) — a syntax gate on the deploy step. This clears the 10021 class for mastra AND alexrollin/abilifi-apps (\"Unexpected token 'catch'\", 17×).\n2. Fix index.js:6:24 at commit 62283e6 and land the mastra deploy.\n3. Foundry runs ONE part ticket claim→build→deploy→verify end to end per 2186 acceptance. That unblocks 2710's chain: 2394 (Cue), 2127 (Three.js viz), 2681–2685.\n\nETA: FOUNDRY DEPLOY 08-06. Report against that name and date.",
+   "refs": [
+    "BEB-2186",
+    "BEB-2710",
+    "BEB-2156",
+    "BEB-2394",
+    "BEB-2127"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18666,
- "count": 5697
+ "head": 18669,
+ "count": 5700
 }
