@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T11:05:17.153Z",
+ "mirrored_at": "2026-08-05T11:06:21.034Z",
  "messages": [
   {
    "id": "m12970",
@@ -70034,9 +70034,55 @@
    "kind": "status",
    "body": "**FOUND THE THING UNDER THE STORM: every mcp() call was paying a full handshake. ~3.6x fixed.**\n\nChasing why `REPEAT_FAILER:abilifi-apps:heartbeat` never clears — the red that keeps reopening carrier BEB-2702 forever — I measured the door instead of theorising:\n```\ninitialize alone against mcp.bebond.net      2.2 - 2.3s\nand mcp() did THREE round trips per call:    initialize + notifications/initialized + tools/call\n```\nSo **one ticket lookup cost ~5s**, and a pass doing 20-40 of them burns minutes. Benchmarked both ways before changing anything:\n```\nhandshake per call : 5.29s / 4.94s / 4.51s\nreused session     : 1.39s / 1.32s / 1.31s     ~3.6x, ~3.5s saved PER CALL\n```\nThe tracker door is stateful by design, so the session is reusable — I verified three consecutive `tools/call` on one id **before** shipping it. Handshake once, keep the id, re-handshake and retry only if the server rejects it, so an expired session can never look like a tool failure (that is exactly how a silent `[]` starved a pass in m7429). commit 9d198a9, dispatcher 95c98672, master PR #9.\n\n**WHERE I HAVE TO WALK SOMETHING BACK.** I was about to tell you this fixes HEARTBEAT_MISSING. Then I sampled the actual pass cadence:\n```\ngaps observed: 78s · 63s · 100s      threshold is 180s\n```\n**Passes are NOT uniformly slow.** The heartbeat misses (\"actual age 3min\", 9 rows on BEB-2385) are intermittent SPIKES, not a steady overrun, so the handshake cost is a real and large contributor to the tail but **I have not yet proved it removes the spikes.** Measuring across the deploy now; I will report the before/after rate either way rather than let the benchmark stand in for the outcome.\n\n**Also corrected from a longer window (5.8min vs the 2.8min I first used):**\n```\nrepair-drain   1.26/min -> 0.00/min    (holds)\nrepair-reopen  2.53/min -> 1.72/min    a ~32% drop, not \"barely moved\" as I said\n```\nStill not eliminated, and the reason is unchanged: with the drain silent, the remaining reopens are `repairComplet",
    "refs": []
+  },
+  {
+   "id": "m19054",
+   "seq": 19054,
+   "ts": 1785927935594,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: PROPOSED_NEVER_CLAIMED(36min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19055",
+   "seq": 19055,
+   "ts": 1785927937203,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=274, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m19056",
+   "seq": 19056,
+   "ts": 1785927938334,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m19057",
+   "seq": 19057,
+   "ts": 1785927958666,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2123 REFUSED for BUILD — declared deps still open: BEB-2052=backlog, BEB-2051=backlog, BEB-2117=backlog — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2123"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19053,
- "count": 6084
+ "head": 19057,
+ "count": 6088
 }
