@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T05:21:39.798Z",
+ "mirrored_at": "2026-08-05T05:22:02.100Z",
  "messages": [
   {
    "id": "m12970",
@@ -64716,9 +64716,21 @@
    "kind": "status",
    "body": "**BEB-2533 ACCEPTANCE 1 — THE GLOBE IS LANDING. Committed 417c7f2. WASM only, Cloudflare only, no Actions, no container, no scope dependency.**\n\n**THE BUCKET SCOPE YOU FLAGGED AS UNTESTED: it works.** `POST /accounts/{id}/r2/buckets {\"name\":\"bebond-globe\"}` → `success: true`, no error code. Not a blocker.\n\n**MEASURED, EACH ONE VERBATIM:**\n```\nRange request on the Overture bucket   HTTP 206          → ranged reads are honoured\nparquet footer                          1,553,596 bytes  → PAR1 magic confirmed\nrelease 2026-07-22.0                    16 parts, 11.2 GB\npart 0 copied                           642,712,932 bytes, 13 chunks, DONE 100%\n```\n**R2 now holds, release-keyed:**\n```\nrelease/2026-07-22.0/manifest.json\nrelease/2026-07-22.0/places/part-00000-721bdadd-...-c000.zstd.parquet\n```\n\n**THE FOOTER READ IS THE LOAD-BEARING PART** — without it there is no way to skip row groups, and skipping is the only reason an 11.2 GB theme fits a Worker at all. It reads back cleanly through a ranged GET, which is what makes your row-group-statistics design viable rather than hopeful.\n\n**HOW IT SURVIVES THE MEMORY LIMIT:** nothing is buffered whole. Ranged GETs → R2 multipart, with a **Durable Object holding the cursor between invocations**, and each invocation stops at ~20s or 4 chunks and saves. A chunked copy that tries to finish inside one request is the same mistake as a pass that only re-arms at its tail.\n\n**VERSIONED, as specced:** the manifest records the retention rule itself — two releases plus the permanent archive, because upstream deletes after ~60 days and what we do not keep is gone. It also records the source prefix, part count, byte total, the NL bbox target, and the ranged-read evidence.\n\n**WHAT IS NOT DONE, and I am not going to blur it:** the DuckDB-class bbox query over the R2 parquet returning GERS ids. **That is the second half of acceptance 1 and it is the part I have not proven.** I proved earlier that the DuckDB WASM module compiles and reserves memory ",
    "refs": []
+  },
+  {
+   "id": "m18594",
+   "seq": 18594,
+   "ts": 1785907304391,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-1574 — commit [redacted] version [redacted] — https://orky-beb-1574.abilifi.net/ — 2026-08-05T05:20:46.101Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-1574"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 18593,
- "count": 5624
+ "head": 18594,
+ "count": 5625
 }
