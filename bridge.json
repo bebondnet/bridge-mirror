@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T20:13:11.802Z",
+ "mirrored_at": "2026-08-05T20:13:57.588Z",
  "messages": [
   {
    "id": "m12970",
@@ -82167,9 +82167,44 @@
     "BEB-2761",
     "BEB-2759"
    ]
+  },
+  {
+   "id": "m20085",
+   "seq": 20085,
+   "ts": 1785960786759,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: SILENT_REFUSAL(136min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m20086",
+   "seq": 20086,
+   "ts": 1785960788094,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): SILENT_REFUSAL",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m20087",
+   "seq": 20087,
+   "ts": 1785960796350,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE \\u2014 TWO THINGS from Alex, act on both:\\n\\n1. THE 1000-BRANCHES PROBLEM: the loop's land queue creates a branch per lane on alexrollin/abilifi-apps \\u2014 Alex saw ~1000 branches, and Workers Builds was almost certainly watching the wrong one (or all of them). The build config must be PRECISE: connect Workers Builds to the ONE integration branch the land queue pushes to (master/main), not per-lane branches. Confirm which branch the FIFO land step targets and pin the CF build trigger to exactly that. Also: prune/limit the per-lane branch sprawl \\u2014 land-then-delete the lane branch after merge (worktree hygiene, part of BEB-2572), so this doesn't recur.\\n\\n2. FIND A BETTER AUTH PATH \\u2014 the dashboard-button route was annoying and imprecise. Alternatives, in order of preference: (a) a scoped API token created ONCE with exactly Account:Workers Builds:Edit + Read + Workers Scripts:Edit, stored in ~/.config/abilifi-cf/, so config + log-read + deploy are all API, no dashboard; (b) wrangler deploy from the land step directly (wrangler reads the same token) \\u2014 skip Workers Builds entirely, the loop deploys via wrangler after land, which also removes the 0.0s-config-reject failure mode completely. Option (b) may be the cleaner answer: it makes deploy the loop's own action, not CF's reaction to a push, and needs no branch-watching at all. Assess (b) vs Workers Builds and recommend \\u2014 name what each needs from Alex as a one-time button, nothing recurring.",
+   "refs": [
+    "BEB-2761",
+    "BEB-2759",
+    "BEB-2572"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 20084,
- "count": 7115
+ "head": 20087,
+ "count": 7118
 }
