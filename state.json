@@ -1,22 +1,23 @@
 {
- "mirrored_at": "2026-08-05T17:55:57.629Z",
- "ts": 1785952554490,
+ "mirrored_at": "2026-08-05T17:57:08.182Z",
+ "ts": 1785952626084,
  "loop": {
   "proposed_total": 680,
   "by_state": {
-   "queued": 260,
-   "claimed": 1,
+   "queued": 261,
+   "claimed": 0,
    "done": 275,
    "held": 20,
-   "parked": 99
+   "blocked": 1,
+   "parked": 98
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 1,
+    "blocked": 1,
     "done": 150,
     "held": 20,
-    "parked": 98,
-    "queued": 32
+    "parked": 97,
+    "queued": 33
    },
    "REFINE": {
     "queued": 159
@@ -34,8 +35,8 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785952514873,
-   "tally": "BEB-2156→BUILD, BEB-2756→BUILD, BEB-2279→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
+   "at": 1785952575864,
+   "tally": "BEB-2156→BUILD[claimed], BEB-2756→BUILD, BEB-2279→BUILD, BEB-2572→BUILD, BEB-2722→BUILD, BEB-2394→BUILD, BEB-2127→BUILD, BEB-2493→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2191→BUILD[no-budget]"
   },
   "reds": [
    {
@@ -62,7 +63,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785952503461,
+    "since": 1785952563465,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -168,8 +169,23 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
+    "since": 1785952236204,
+    "detail": "BEB-2279 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2279"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it at the wrong address — refusing instead of shipping one. Needs the ROUTE-INTO-EXISTING-APP shape (BEB-2759).",
+     "subject": "BEB-2279"
+    },
+    "fix_ticket": "BEB-2728"
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
     "since": 1785951326072,
-    "detail": "BEB-2756 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2756 refused 4× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2756"
     ],
@@ -714,7 +730,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785952503461,
+    "since": 1785952563465,
     "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2301"
@@ -723,13 +739,12 @@
      "cls": "proposed-never-claimed",
      "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-2301"
-    },
-    "fix_ticket": "BEB-2716"
+    }
    },
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785952503461,
+    "since": 1785952563465,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -820,7 +835,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785949413679,
-    "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (98 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+    "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (133 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-no_part_capability",
@@ -831,22 +846,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 19795,
+  "head_seq": 19797,
   "cursor_fable": 12969,
-  "unread_for_fable": 6826,
+  "unread_for_fable": 6828,
   "last": [
-   {
-    "seq": 19791,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED SILENT_REFUSAL: BEB-2756 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ti"
-   },
-   {
-    "seq": 19792,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2156 — mastra tick deploy FAILED: DEPLOY REFUSED by 2 known w"
-   },
    {
     "seq": 19793,
     "from": "cc",
@@ -864,6 +867,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2279 REFUSED for BUILD — INSIDE_APP_UNSUPPORTED: this tick"
+   },
+   {
+    "seq": 19796,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2301 proposed on 6 consecutive passes and has NEVER been c"
+   },
+   {
+    "seq": 19797,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SILENT_REFUSAL: BEB-2279 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ti"
    }
   ]
  },
@@ -980,7 +995,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785952503461,
+   "since": 1785952563465,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1086,8 +1101,23 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
+   "since": 1785952236204,
+   "detail": "BEB-2279 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2279"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/waterfall, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it at the wrong address — refusing instead of shipping one. Needs the ROUTE-INTO-EXISTING-APP shape (BEB-2759).",
+    "subject": "BEB-2279"
+   },
+   "fix_ticket": "BEB-2728"
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
    "since": 1785951326072,
-   "detail": "BEB-2756 refused 3× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2756 refused 4× in 30min — LATEST: INSIDE_APP_UNSUPPORTED: this ticket declares its deliverable at app.abilifi.net/tickets, inside an app that already exists. The loop's only build shape is a NEW standalone worker, which would put it a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2756"
    ],
@@ -1632,7 +1662,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785952503461,
+   "since": 1785952563465,
    "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2301"
@@ -1641,13 +1671,12 @@
     "cls": "proposed-never-claimed",
     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-2301"
-   },
-   "fix_ticket": "BEB-2716"
+   }
   },
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785952503461,
+   "since": 1785952563465,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1738,7 +1767,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785949413679,
-   "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (98 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
+   "detail": "20 ticket(s) refused at the claim step for NO_PART_CAPABILITY in the last hour (133 rows) — one defect, not 20 — LATEST: NO_PART_CAPABILITY: this claimer did not declare ?can=part, and a part needs an opennext build the Worker cannot do (BEB-2154)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-no_part_capability",
