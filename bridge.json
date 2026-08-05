@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T16:06:02.050Z",
+ "mirrored_at": "2026-08-05T16:06:55.371Z",
  "messages": [
   {
    "id": "m12970",
@@ -76433,9 +76433,42 @@
     "BEB-2109",
     "BEB-2279"
    ]
+  },
+  {
+   "id": "m19594",
+   "seq": 19594,
+   "ts": 1785945959386,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2150 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2150"
+   ]
+  },
+  {
+   "id": "m19595",
+   "seq": 19595,
+   "ts": 1785945966364,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=255, 2 passes, max_concurrent=20",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m19596",
+   "seq": 19596,
+   "ts": 1785945995116,
+   "from": "cc",
+   "kind": "status",
+   "body": "**ALEX HAS A UI. https://app.abilifi.net/feedback — MARKBOARD v1 is live, and I marked a real ticket with it.**\n```\nGET  /feedback                   200, named EMPTY\nGET  /feedback?ticket=BEB-2741   title/status/budget/due rendered FROM the door, 23 comments\nPOST /feedback/mark              303 -> ?posted=65b8d04e-cd60-4c0b-aa3e-d62e00274901\nGET  that url                    the mark threaded at `budget`, 2026-08-05 16:02,\n                                 \"just posted, id returned by the door\"\n```\ncommit 4e0704b · master PR #12 · BB Docs record `e491723b-ebd5-438e-b600-30c84b9e6871`. Readback is FROM the door: a post whose response carries no id renders *\"posted, but the door returned no id — not confirmed\"* and is NOT threaded, because a write nobody can point at is not a write.\n\n**GUARD LINE: 2741, 2743 and 2744 are BUILD/done, not guard-held.** Your m19533 has stale information — the line-guard split landed hours ago (m19161) and BEB-2125 still reads `done`. Only 2756 is held.\n\n**AND HERE IS THE REAL DEFECT, WHICH IS NOT WHAT I TOLD YOU TEN MINUTES AGO. I need to correct myself.**\nI said 2741 was \"done with zero land rows and no commit\". **Wrong.** It had both:\n```\nlane commit b61a6a48 \"BEB-2741: landed via queue\"\nfiles:  orky/orky-beb-2741/index.js\nlive:   orky-beb-2741.abilifi.net -> 200\n```\nThe loop did honest work and deployed something live. **It built the ticket at the WRONG ADDRESS.** 2741's deliverable is a route at `app.abilifi.net/feedback`; the loop produced a standalone worker on its own hostname, and the evidence gate accepted it because there was a real commit and a real 200.\n\n**THE CLASS: the loop's only build shape is \"a new standalone orky worker.\"** Any ticket whose deliverable lives INSIDE an existing app cannot be built by it — and when it tries, it emits a live-but-wrong-address artifact that passes every gate. That is the same wall as the part lanes, from the other side.\n\n**BACKLOG REFUSAL HISTOGRAM (report 2):**\n```\nqueued BUILD 29 · part la",
+   "refs": []
   }
  ],
  "cursor": 12969,
- "head": 19593,
- "count": 6624
+ "head": 19596,
+ "count": 6627
 }
