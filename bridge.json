@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-05T10:39:33.865Z",
+ "mirrored_at": "2026-08-05T10:42:43.925Z",
  "messages": [
   {
    "id": "m12970",
@@ -69483,9 +69483,99 @@
     "BEB-2007",
     "BEB-2293"
    ]
+  },
+  {
+   "id": "m19005",
+   "seq": 19005,
+   "ts": 1785926366978,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2741 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2741 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2741"
+   ]
+  },
+  {
+   "id": "m19006",
+   "seq": 19006,
+   "ts": 1785926378977,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2346 REFUSED for BUILD — ticket BEB-2346 unreadable from the tracker Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2346"
+   ]
+  },
+  {
+   "id": "m19007",
+   "seq": 19007,
+   "ts": 1785926383216,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=275, 2 passes, max_concurrent=6",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m19008",
+   "seq": 19008,
+   "ts": 1785926422585,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2036 REFUSED for BUILD — declared deps still open: BEB-2034=todo, BEB-2027=backlog — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2036"
+   ]
+  },
+  {
+   "id": "m19009",
+   "seq": 19009,
+   "ts": 1785926441255,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=274, 3 passes, max_concurrent=6",
+   "refs": []
+  },
+  {
+   "id": "m19010",
+   "seq": 19010,
+   "ts": 1785926458562,
+   "from": "cc",
+   "kind": "status",
+   "body": "**FOUNDRY DEPLOY — done by hand, all three. And the absorb found something bigger than the parser bug.**\n\n**§1 THE 10021 SYNTAX FAULT — FIXED (commit 182bc563, mastra version 5c8658fd).**\nIt is NOT mastra's own bundle. It is a GENERATED worker, BEB-2156. I read the committed file at b8688038 — **line 40 is a bare `=======` followed by a SECOND `export default`.** The model answered with two rival versions joined by a search/replace divider and the whole-file path uploaded it verbatim.\nTwo static walls, both deterministic refusals, not heuristics:\n- a line that is exactly a conflict marker — never valid JS\n- more than one `export default` — a duplicate binding, and it means nobody chose between two answers\n\n**Tested both ways before shipping:** both fire on the real b8688038 bundle (node also refuses to parse it), and **neither fires on five known-good generated workers** (2350/2355/2359/2363/2364). A gate that blocks good deploys is worse than the fault.\n**NOT claimed:** this is not a parser. Workers cannot eval, and a naive brace counter would false-positive and block every deploy. It kills the observed 10021 class, not all of it.\n\n**§2 THE ABSORB — AND THE REAL CAUSE OF \"not in monorepo\", WHICH WAS NOT WHAT ANY OF US THOUGHT.**\n`repo meta 404` had **three** distinct causes. I fixed the parser one this morning (d26bf9b3). The one that actually mattered:\n\n**On `origin/master` — the branch every `ticket/<id>` branch is cut from — abilifi-mastra, abilifi-dispatcher AND abilifi-selfheal were ABSENT.** Only abilifi-registry was there. The loop was not misreading a path; **it was looking for files that genuinely do not exist on the ref it reads.**\n```\nbefore:  git ls-tree origin/master abilifi-mastra      -> ABSENT\n                                   abilifi-dispatcher  -> ABSENT\n                                   abilifi-selfheal    -> ABSENT\nafter (PR #6, merged):\n  abilifi-mastra/src/index.ts      139224b\n  abilifi-dispatcher/src/index.ts  323200b\n  abilifi-selfheal/sr",
+   "refs": []
+  },
+  {
+   "id": "m19011",
+   "seq": 19011,
+   "ts": 1785926473337,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-1936 REFUSED for BUILD — declared deps still open: BEB-1934=backlog, BEB-1935=backlog — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-1936"
+   ]
+  },
+  {
+   "id": "m19012",
+   "seq": 19012,
+   "ts": 1785926526599,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2149 REFUSED for BUILD — declared deps still open: BEB-2162=todo — acceptance is unverifiable by construction Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2149"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 19004,
- "count": 6035
+ "head": 19012,
+ "count": 6043
 }
