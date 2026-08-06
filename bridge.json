@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T20:02:36.102Z",
+ "mirrored_at": "2026-08-06T20:03:39.918Z",
  "messages": [
   {
    "id": "m12970",
@@ -106369,9 +106369,35 @@
     "BEB-2716",
     "BEB-2231"
    ]
+  },
+  {
+   "id": "m22133",
+   "seq": 22133,
+   "ts": 1786046557899,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×2 (BEB-2334): COMPLETED_AT_GHOST[BEB-2805]→BEB-2742 · FIX_BURIED[BEB-2742,BEB-2742]",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m22134",
+   "seq": 22134,
+   "ts": 1786046586778,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CODE RED DELIVERED: /ledger HTTP 200 (6.7KB rendered), carried through the loop without lease-expiry. Root causes were THREE, all fixed+deployed: (1) NO DEPLOY HOP — nothing ran the opennext build after part /land; built CF-native on abilifi-sandbox (BEB-2176 container resurrected: lite→standard-3, registry image, wrangler-reconciled): POST /deploy-payload = detached clone→pnpm→opennext build+deploy, proven EXIT=0; mastra kicks it via SANDBOX service binding after every part land (commit 3454372). (2) LANE-BLIND CODEGEN — 10 of 11 landed page.tsx on master were raw Worker modules; every payload build died at prerender. Purged (452ca71: chat/cue/loop-status restored from real implementations, crm/goals/ledger/probe/tickets/timers/tui deleted); part lanes now get a React-server-component prompt (e08619d). (3) LANE-BLIND CONFORMANCE WALL — refused valid pages for not reading url.pathname; genViolations now part-aware (3454372, mastra 48f23a64). Also: master payload tree was a skeleton — full app source synced additively (65e7c89); app.abilifi.net redeployed, /, /labtui, /chat, /cue, /loop-status all 200, zero regression. Evidence trail + open tail ([redacted] rotation, contract_id gate on part completions) in BEB-2805. BEB-2804 closed; PR #22 was merged by ALEX at 15:44 — GH deploy-payload.yml is on master by owner decision, redundant with the CF hop. m22082's 'no GH Actions' stands for the loop's path; the merged workflow is Alex's fallback.",
+   "refs": [
+    "BEB-2744",
+    "BEB-2154",
+    "BEB-2805",
+    "BEB-2804"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 22132,
- "count": 9163
+ "head": 22134,
+ "count": 9165
 }
