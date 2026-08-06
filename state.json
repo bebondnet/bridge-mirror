@@ -1,26 +1,27 @@
 {
- "mirrored_at": "2026-08-06T14:23:29.734Z",
- "ts": 1786026207363,
+ "mirrored_at": "2026-08-06T14:24:35.229Z",
+ "ts": 1786026273212,
  "loop": {
   "proposed_total": 721,
   "by_state": {
-   "queued": 215,
-   "claimed": 8,
+   "queued": 214,
+   "claimed": 9,
    "done": 300,
    "held": 34,
-   "blocked": 3,
-   "parked": 130
+   "blocked": 2,
+   "parked": 131
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 3,
+    "blocked": 2,
     "claimed": 8,
     "done": 173,
     "held": 34,
-    "parked": 127
+    "parked": 128
    },
    "REFINE": {
-    "queued": 126
+    "claimed": 1,
+    "queued": 125
    },
    "REPAIR": {
     "done": 87,
@@ -35,14 +36,29 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786026164341,
+   "at": 1786026224979,
    "tally": "BEB-2744→BUILD[claimed], BEB-2722→BUILD[blocked], BEB-2756→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2412→BUILD[parked-needs-human], BEB-2127→BUILD[parked-needs-human], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2770→REFINE[no-budget], BEB-2771→REFINE[no-budget]"
   },
   "reds": [
    {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786026029393,
+    "detail": "BEB-2177 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2177"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2177",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-06T14:20:29.393Z -> 2026-08-06T14:22:53.251Z"
+    },
+    "fix_ticket": "BEB-2760"
+   },
+   {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -77,7 +93,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -117,7 +133,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -503,15 +519,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785939763448,
-    "detail": "alexrollin/abilifi-apps failing at codegen 210× in 24h — LATEST (08-06T13:42): verdict: codegen produced no usable code\ncodeLen: 1590\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.",
+    "since": 1785942426434,
+    "detail": "alexrollin/abilifi-apps failing at codegen 209× in 24h — LATEST (08-06T13:42): verdict: codegen produced no usable code\ncodeLen: 1496\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2749"
+     "BEB-2756"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 1590\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\n---\nticket: BEB-2749\ntype: spec\ntitle: DATA ROUTES for CLIENT DESK - Route Registry, Declarative Rules, and Mark Disposition\ndescription: Extend the FEEDBACK TOOL to include a route registry, declarative rules, and mark disposition for traceable feedback in CLIENT DESK.\nta",
-     "subject": "BEB-2749"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 1496\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\n---\nticket: BEB-2756\ntype: spec\ntitle: BBT UI v1 — Tracker Interface with Ticket View + Goal View\ndescription: The initial version of the BBT UI, which includes a ticket list/view, goal view with rollups, and serves as a mount surface for timers and the feedback tool.\ntags",
+     "subject": "BEB-2756"
     }
    },
    {
@@ -545,8 +561,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785939779418,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 67× in 24h — LATEST (08-06T14:20): declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /wiki → 404 ({\n  \"error\": \"unknown route\",\n  \"path\": \"/wiki\",\n  \"routes\":). A worker missing its own declared ro · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1785939902106,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 66× in 24h — LATEST (08-06T14:20): declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /wiki → 404 ({\n  \"error\": \"unknown route\",\n  \"path\": \"/wiki\",\n  \"routes\":). A worker missing its own declared ro · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2054"
     ],
@@ -658,7 +674,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785940583240,
-    "detail": "n/a failing at evaluate 23× in 24h — LATEST (08-06T13:34): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at evaluate 24× in 24h — LATEST (08-06T14:23): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2755"
     ],
@@ -685,7 +701,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2133"
@@ -699,7 +715,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2770"
@@ -713,7 +729,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2771"
@@ -727,7 +743,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -987,7 +1003,7 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1786026150256,
+    "since": 1786026210256,
     "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
@@ -999,16 +1015,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 21848,
+  "head_seq": 21849,
   "cursor_fable": 12969,
-  "unread_for_fable": 8879,
+  "unread_for_fable": 8880,
   "last": [
-   {
-    "seq": 21844,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a p"
-   },
    {
     "seq": 21845,
     "from": "cc",
@@ -1032,6 +1042,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER verification DOWNGRADE: BEB-2793 — html-render class: verify_url serves 200 but"
+   },
+   {
+    "seq": 21849,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2177 completed 2× with 2 DIFFERENT artefacts inside 15min"
    }
   ]
  },
@@ -1125,9 +1141,24 @@
  ],
  "reds": [
   {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786026029393,
+   "detail": "BEB-2177 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2177"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2177",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-06T14:20:29.393Z -> 2026-08-06T14:22:53.251Z"
+   },
+   "fix_ticket": "BEB-2760"
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1162,7 +1193,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -1202,7 +1233,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1588,15 +1619,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785939763448,
-   "detail": "alexrollin/abilifi-apps failing at codegen 210× in 24h — LATEST (08-06T13:42): verdict: codegen produced no usable code\ncodeLen: 1590\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.",
+   "since": 1785942426434,
+   "detail": "alexrollin/abilifi-apps failing at codegen 209× in 24h — LATEST (08-06T13:42): verdict: codegen produced no usable code\ncodeLen: 1496\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2749"
+    "BEB-2756"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 1590\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\n---\nticket: BEB-2749\ntype: spec\ntitle: DATA ROUTES for CLIENT DESK - Route Registry, Declarative Rules, and Mark Disposition\ndescription: Extend the FEEDBACK TOOL to include a route registry, declarative rules, and mark disposition for traceable feedback in CLIENT DESK.\nta",
-    "subject": "BEB-2749"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 1496\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\n---\nticket: BEB-2756\ntype: spec\ntitle: BBT UI v1 — Tracker Interface with Ticket View + Goal View\ndescription: The initial version of the BBT UI, which includes a ticket list/view, goal view with rollups, and serves as a mount surface for timers and the feedback tool.\ntags",
+    "subject": "BEB-2756"
    }
   },
   {
@@ -1630,8 +1661,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785939779418,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 67× in 24h — LATEST (08-06T14:20): declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /wiki → 404 ({\n  \"error\": \"unknown route\",\n  \"path\": \"/wiki\",\n  \"routes\":). A worker missing its own declared ro · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1785939902106,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 66× in 24h — LATEST (08-06T14:20): declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /wiki → 404 ({\n  \"error\": \"unknown route\",\n  \"path\": \"/wiki\",\n  \"routes\":). A worker missing its own declared ro · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2054"
    ],
@@ -1743,7 +1774,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785940583240,
-   "detail": "n/a failing at evaluate 23× in 24h — LATEST (08-06T13:34): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at evaluate 24× in 24h — LATEST (08-06T14:23): verify_url not 2xx after 1 probes — last HTTP 500: error code: 1104\n · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2755"
    ],
@@ -1770,7 +1801,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2133"
@@ -1784,7 +1815,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2770"
@@ -1798,7 +1829,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2771"
@@ -1812,7 +1843,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -2072,7 +2103,7 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1786026150256,
+   "since": 1786026210256,
    "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
