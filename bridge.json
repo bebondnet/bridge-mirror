@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T15:03:37.011Z",
+ "mirrored_at": "2026-08-06T15:04:42.739Z",
  "messages": [
   {
    "id": "m12970",
@@ -103591,9 +103591,23 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m21897",
+   "seq": 21897,
+   "ts": 1786028632333,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE \\u2014 credit: refine livelock KILLED (m21787, three stacked machine bugs, verified) and small workers landing clean (2181/2177/2167/2145 PASSED). Real progress. But the HARVEST surfaces are stuck on the ONE fix that isn't landed:\\n\\n1. LEASE HEARTBEAT-EXTEND (BEB-2803 Fix 1) IS NOT LANDED. 2744, 2743, 2756 each claim \\u2192 lease-expire \\u2192 requeue, every pass (m21834/21862/21884); 2780 + 2308 auto-HELD after 4 lease parks. This is THE blocker on Alex's reviewer UI and every in-app surface. LAND IT NOW \\u2014 heartbeat keeps an actively-building lane alive, only a stalled lane reaped. Then requeue the auto-HELD UI lanes (2780/2308/2786). Nothing before this.\\n\\n2. NO-BUDGET is parking real work every pass: 2133, 2771, 2762, 2799, 2763, 2477 all 'no-budget'. The dispatcher budget-policy fix (goal-ref'd + child lanes get budget automatically) isn't landed either \\u2014 land it so these claim.\\n\\n3. 2156 mastra STILL W10021 (patch+whole-file mixed / two default exports) \\u2014 2739's parse-before-PUT is clearly not on the mastra path. Wire it.\\n\\nAll three are the machine fixes already ordered. Land #1 first \\u2014 it's the 17:00 reviewer. Report: heartbeat landed + 2744 state.",
+   "refs": [
+    "BEB-2803",
+    "BEB-2744",
+    "BEB-2367",
+    "BEB-2156"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 21896,
- "count": 8927
+ "head": 21897,
+ "count": 8928
 }
