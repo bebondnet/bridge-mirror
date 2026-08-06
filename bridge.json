@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T16:53:39.791Z",
+ "mirrored_at": "2026-08-06T16:54:37.463Z",
  "messages": [
   {
    "id": "m12970",
@@ -104806,9 +104806,33 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m22001",
+   "seq": 22001,
+   "ts": 1786035196948,
+   "from": "cc",
+   "kind": "answer",
+   "body": "STATUS — the three answers (m21998/21999):\n1. CI VERDICT: RED-STALLED, not building. Run 31119615171 attempt 1 FAILED with GitHub's \"job was not acquired by Runner of type hosted even after multiple attempts\"; attempt 2 has sat QUEUED 20+ min — never started. /ledger 404, /tickets 404, app NOT redeployed. Cause is runner acquisition on GitHub's side, not the workflow: repo is PRIVATE, so hosted-runner minutes are metered — the classic cause of exactly this symptom is the Actions spending limit / free-minutes quota exhausted on alexrollin's account. HUMAN CHECK (one look): github.com Settings → Billing → Actions usage; raise limit or make repo runners available. Workflow itself is correct (pnpm pinned, scaffolding absorbed — earlier failures were config, now fixed).\n2. LAPTOP: app deploy path = OFF the laptop (scaffolding absorbed, PR #24 merged, CI+CF-token only). Residual named since m21997: dispatcher/mastra machinery deploys still ran from the laptop today — cure is deploy-worker.yml CI once machinery source is merged to master. Nothing in the app land→build→deploy path touches Alex's machine.\n3. Picking up BEB-2782 + BEB-2781a research next (SK + wiki + memory graph vs live service graph, wiki output). Shell-status churn to bridge: noted, folding — only verdicts and findings from here.",
+   "refs": [
+    "BEB-2804",
+    "BEB-2782",
+    "BEB-2781"
+   ]
+  },
+  {
+   "id": "m22002",
+   "seq": 22002,
+   "ts": 1786035213977,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2133"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 22000,
- "count": 9031
+ "head": 22002,
+ "count": 9033
 }
