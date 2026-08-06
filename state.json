@@ -1,29 +1,31 @@
 {
- "mirrored_at": "2026-08-06T09:45:03.845Z",
- "ts": 1786009501948,
+ "mirrored_at": "2026-08-06T09:47:40.329Z",
+ "ts": 1786009658156,
  "loop": {
   "proposed_total": 698,
   "by_state": {
-   "queued": 215,
-   "claimed": 7,
-   "done": 292,
+   "queued": 216,
+   "claimed": 5,
+   "done": 293,
    "held": 34,
-   "parked": 121
+   "blocked": 1,
+   "parked": 120
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 7,
-    "done": 161,
+    "blocked": 1,
+    "claimed": 5,
+    "done": 163,
     "held": 34,
-    "parked": 118
+    "parked": 117
    },
    "REFINE": {
     "queued": 140
    },
    "REPAIR": {
-    "done": 91,
+    "done": 90,
     "parked": 3,
-    "queued": 20
+    "queued": 21
    },
    "SPEC": {
     "done": 40,
@@ -33,14 +35,37 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786009476540,
-   "tally": "idle (no proposable work)"
+   "at": 1786009627870,
+   "tally": "BEB-2744→BUILD[claimed], BEB-2722→BUILD, BEB-2756→BUILD[claimed], BEB-2743→BUILD, BEB-2127→BUILD, BEB-2412→BUILD, BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2577→BUILD[no-budget], BEB-2563→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1786009652351,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2323"
+    ]
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786009330701,
+    "detail": "BEB-2197 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2197"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2197",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-06T09:42:10.701Z -> 2026-08-06T09:45:43.552Z"
+    }
+   },
+   {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786009470737,
+    "since": 1786009650733,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -49,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786009470737,
+    "since": 1786009650733,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -80,7 +105,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786009470737,
+    "since": 1786009650733,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -187,7 +212,7 @@
     "code": "SILENT_REFUSAL",
     "severity": "red",
     "since": 1786008133969,
-    "detail": "BEB-2127 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2127 refused 11× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2127"
     ],
@@ -200,7 +225,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1786007731811,
+    "since": 1786007929779,
     "detail": "BEB-2412 refused 13× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2412"
@@ -209,6 +234,20 @@
      "cls": "silent-refusal-loop",
      "error": "no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
      "subject": "BEB-2412"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786009030778,
+    "detail": "BEB-2743 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2743"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-2743"
     }
    },
    {
@@ -383,7 +422,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785923582736,
-    "detail": "abilifi-apps failing at heartbeat 99× in 24h — LATEST (08-06T09:24): HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
+    "detail": "abilifi-apps failing at heartbeat 103× in 24h — LATEST (08-06T09:46): HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
     "refs": [
      "BEB-2385"
     ],
@@ -439,7 +478,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785925582255,
-    "detail": "abilifi-payload failing at codegen 80× in 24h — LATEST (08-06T09:43): verdict: codegen produced no usable code\ncodeLen: 6361\ngenError: CODEGEN_WALL base-moved: the source moved 884b745b → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+    "detail": "abilifi-payload failing at codegen 81× in 24h — LATEST (08-06T09:45): verdict: codegen produced no usable code\ncodeLen: 6361\ngenError: CODEGEN_WALL base-moved: the source moved 884b745b → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
     "refs": [
      "BEB-2279"
     ],
@@ -537,7 +576,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785925505654,
-    "detail": "alexrollin/abilifi-apps failing at codegen 219× in 24h — LATEST (08-06T09:34): verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks s",
+    "detail": "alexrollin/abilifi-apps failing at codegen 220× in 24h — LATEST (08-06T09:47): verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks s",
     "refs": [
      "BEB-2139"
     ],
@@ -676,7 +715,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786009470737,
+    "since": 1786009650733,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -916,7 +955,7 @@
    {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
-    "since": 1786009275714,
+    "since": 1786009640698,
     "detail": "BEB-2743 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
     "refs": [
      "BEB-2743"
@@ -930,48 +969,43 @@
   ]
  },
  "bridge": {
-  "head_seq": 21247,
+  "head_seq": 21262,
   "cursor_fable": 12969,
-  "unread_for_fable": 8278,
+  "unread_for_fable": 8293,
   "last": [
    {
-    "seq": 21243,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2197 — commit f"
-   },
-   {
-    "seq": 21244,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2743 REFUSED for BUILD — no repo/frag target binding (or \""
-   },
-   {
-    "seq": 21245,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2743 REFUSED for BUILD — no repo/frag target binding (or \""
-   },
-   {
-    "seq": 21246,
+    "seq": 21258,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2127 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
    },
    {
-    "seq": 21247,
+    "seq": 21259,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2412 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 21260,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "2 NEW REDS: VERIFY_PENDING(BEB-2323), SINGLE_WRITER_VIOLATION(BEB-2197) — full detail on g"
+   },
+   {
+    "seq": 21261,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×14 (BEB-2334): GOAL_STALE[BEB-2493] · GOAL_STALE[BEB-2743,BEB-2744] · GOAL_STALE[BEB-"
+   },
+   {
+    "seq": 21262,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER verification PASSED: BEB-2323 — https://orky-beb-2323.abilifi.net/ — json-parse"
    }
   ]
  },
  "p0s_open": [
-  {
-   "id": "BEB-2197",
-   "title": "P0 URGENT: append-only DATA-TRAIL logging substrate — C",
-   "status": "todo"
-  },
   {
    "id": "BEB-2394",
    "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
@@ -1026,6 +1060,11 @@
    "id": "SK-22",
    "title": "TEST completed_at ghost writer — delete me",
    "status": "backlog"
+  },
+  {
+   "id": "BEB-2356",
+   "title": "P0: CC reports success the tracker contradicts — false ",
+   "status": "todo"
   }
  ],
  "surfaces": [
@@ -1056,9 +1095,32 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1786009652351,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2323"
+   ]
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786009330701,
+   "detail": "BEB-2197 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2197"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2197",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-06T09:42:10.701Z -> 2026-08-06T09:45:43.552Z"
+   }
+  },
+  {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786009470737,
+   "since": 1786009650733,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1067,7 +1129,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786009470737,
+   "since": 1786009650733,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -1098,7 +1160,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786009470737,
+   "since": 1786009650733,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1205,7 +1267,7 @@
    "code": "SILENT_REFUSAL",
    "severity": "red",
    "since": 1786008133969,
-   "detail": "BEB-2127 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2127 refused 11× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2127"
    ],
@@ -1218,7 +1280,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1786007731811,
+   "since": 1786007929779,
    "detail": "BEB-2412 refused 13× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2412"
@@ -1227,6 +1289,20 @@
     "cls": "silent-refusal-loop",
     "error": "no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
     "subject": "BEB-2412"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786009030778,
+   "detail": "BEB-2743 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2743"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-2743"
    }
   },
   {
@@ -1401,7 +1477,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785923582736,
-   "detail": "abilifi-apps failing at heartbeat 99× in 24h — LATEST (08-06T09:24): HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
+   "detail": "abilifi-apps failing at heartbeat 103× in 24h — LATEST (08-06T09:46): HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
    "refs": [
     "BEB-2385"
    ],
@@ -1457,7 +1533,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785925582255,
-   "detail": "abilifi-payload failing at codegen 80× in 24h — LATEST (08-06T09:43): verdict: codegen produced no usable code\ncodeLen: 6361\ngenError: CODEGEN_WALL base-moved: the source moved 884b745b → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
+   "detail": "abilifi-payload failing at codegen 81× in 24h — LATEST (08-06T09:45): verdict: codegen produced no usable code\ncodeLen: 6361\ngenError: CODEGEN_WALL base-moved: the source moved 884b745b → 3d558c09 while the model worked. Regenerated against 3d558c09 and the new blocks s",
    "refs": [
     "BEB-2279"
    ],
@@ -1555,7 +1631,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785925505654,
-   "detail": "alexrollin/abilifi-apps failing at codegen 219× in 24h — LATEST (08-06T09:34): verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks s",
+   "detail": "alexrollin/abilifi-apps failing at codegen 220× in 24h — LATEST (08-06T09:47): verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks s",
    "refs": [
     "BEB-2139"
    ],
@@ -1694,7 +1770,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786009470737,
+   "since": 1786009650733,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1934,7 +2010,7 @@
   {
    "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
-   "since": 1786009275714,
+   "since": 1786009640698,
    "detail": "BEB-2743 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
    "refs": [
     "BEB-2743"
