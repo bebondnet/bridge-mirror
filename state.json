@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-06T01:37:56.135Z",
- "ts": 1785980275321,
+ "mirrored_at": "2026-08-06T01:38:50.053Z",
+ "ts": 1785980329230,
  "loop": {
   "proposed_total": 696,
   "by_state": {
-   "queued": 224,
-   "claimed": 6,
+   "queued": 225,
+   "claimed": 4,
    "done": 287,
    "held": 28,
-   "blocked": 1,
+   "blocked": 2,
    "parked": 120
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 1,
-    "claimed": 6,
+    "blocked": 2,
+    "claimed": 4,
     "done": 160,
     "held": 28,
     "parked": 117,
-    "queued": 3
+    "queued": 4
    },
    "REFINE": {
     "queued": 146
@@ -36,14 +36,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785980243048,
-   "tally": "BEB-2394→BUILD, BEB-2540→BUILD, BEB-2533→BUILD, BEB-1626→BUILD, BEB-2743→BUILD[claimed], BEB-2493→BUILD[claimed], BEB-2412→BUILD, BEB-2127→BUILD, BEB-2157→BUILD[no-budget], BEB-2502→BUILD[serious:proposed-only]"
+   "at": 1785980302643,
+   "tally": "BEB-1626→BUILD, BEB-2533→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2394→BUILD, BEB-2743→BUILD[claimed], BEB-2493→BUILD[claimed], BEB-2412→BUILD, BEB-2127→BUILD, BEB-2577→BUILD[no-budget], BEB-2563→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785980232109,
+    "since": 1785980292108,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -74,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785980232109,
+    "since": 1785980292108,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -180,7 +180,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785978476749,
+    "since": 1785978681227,
     "detail": "BEB-2127 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2127"
@@ -194,7 +194,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785978472922,
+    "since": 1785978675346,
     "detail": "BEB-2412 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2412"
@@ -218,6 +218,21 @@
      "error": "[\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_records is refused with code 10000 (scope) on both credentials — measured. A workers custom domain writes its DNS implicitly, so prefer that; only a bare A/CNAME needs a human.. Discovering this mid-build is what makes it expensive; it is knowable now. [NOT re-tested — the watcher was unreachable, so this finding is UNVERIFIED rather than confirmed]\",\n  \"evidence\": \"declared in the ticket: \\\"- Wildcard test (2026-07-14): `orky-probe-test.abilifi.net`, `random-xyz-9931.abilifi.net` → **NXDOMAIN, http 000**.\\\"\",\n  \"fix_ref\": \"BEB-2122 / BEB-2133\"\n }\n]",
      "subject": "BEB-2150"
     }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1785967814736,
+    "detail": "BEB-2394 failing at preflight 3× in 24h — LATEST (08-06T01:37): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2394 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2394"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2394 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+     "subject": "BEB-2394"
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
@@ -517,7 +532,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785899081399,
-    "detail": "alexrollin/abilifi-apps failing at codegen 125× in 24h — LATEST (08-06T01:32): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 126× in 24h — LATEST (08-06T01:38): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2720"
     ],
@@ -628,7 +643,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785980232109,
+    "since": 1785980292108,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -710,28 +725,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 20467,
+  "head_seq": 20470,
   "cursor_fable": 12969,
-  "unread_for_fable": 7498,
+  "unread_for_fable": 7501,
   "last": [
-   {
-    "seq": 20463,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×4 (BEB-2334): PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CLAIMED · FIX_BURIED · FIX_"
-   },
-   {
-    "seq": 20464,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2412 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
-   {
-    "seq": 20465,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2127 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
    {
     "seq": 20466,
     "from": "cc",
@@ -743,6 +740,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane BLOCKED: BEB-2394 — preflight HELD (BEB-2134) — GUARD_POLICY: every write "
+   },
+   {
+    "seq": 20468,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2412 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 20469,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2127 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 20470,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-2394 failing at preflight 3× in 24h — LATEST (08-06T01:37): [  {   "
    }
   ]
  },
@@ -838,7 +853,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785980232109,
+   "since": 1785980292108,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -869,7 +884,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785980232109,
+   "since": 1785980292108,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -975,7 +990,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785978476749,
+   "since": 1785978681227,
    "detail": "BEB-2127 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2127"
@@ -989,7 +1004,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785978472922,
+   "since": 1785978675346,
    "detail": "BEB-2412 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2412"
@@ -1013,6 +1028,21 @@
     "error": "[\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_records is refused with code 10000 (scope) on both credentials — measured. A workers custom domain writes its DNS implicitly, so prefer that; only a bare A/CNAME needs a human.. Discovering this mid-build is what makes it expensive; it is knowable now. [NOT re-tested — the watcher was unreachable, so this finding is UNVERIFIED rather than confirmed]\",\n  \"evidence\": \"declared in the ticket: \\\"- Wildcard test (2026-07-14): `orky-probe-test.abilifi.net`, `random-xyz-9931.abilifi.net` → **NXDOMAIN, http 000**.\\\"\",\n  \"fix_ref\": \"BEB-2122 / BEB-2133\"\n }\n]",
     "subject": "BEB-2150"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1785967814736,
+   "detail": "BEB-2394 failing at preflight 3× in 24h — LATEST (08-06T01:37): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2394 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2394"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2394 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+    "subject": "BEB-2394"
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
@@ -1312,7 +1342,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785899081399,
-   "detail": "alexrollin/abilifi-apps failing at codegen 125× in 24h — LATEST (08-06T01:32): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 126× in 24h — LATEST (08-06T01:38): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2720"
    ],
@@ -1423,7 +1453,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785980232109,
+   "since": 1785980292108,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
