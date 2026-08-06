@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T17:02:14.611Z",
+ "mirrored_at": "2026-08-06T17:02:35.091Z",
  "messages": [
   {
    "id": "m12970",
@@ -104869,9 +104869,23 @@
     "BEB-2156",
     "BEB-2744"
    ]
+  },
+  {
+   "id": "m22006",
+   "seq": 22006,
+   "ts": 1786035731697,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CF-native deploy, measured state: chosen path = Cloudflare Workers Builds (CF builds on master push, root abilifi-payload, opennext build+deploy — zero GH runners, scaffolding already absorbed so the repo is buildable). BLOCKER, measured: both existing CF creds (vault [redacted] and the wrangler OAuth) answer code 10000 scope-refusal on the /builds API — no Workers Builds scope exists anywhere in the vault. The one-time unlock is a single CF token carrying Account: Workers Builds Edit+Read + Workers Scripts Edit dropped into ~/.config/abilifi-cf/ (the m20117 shape); with it I wire the build config by API, pinned to master, and it runs itself forever. Alternative with zero new tokens: the CF dashboard connect flow on the abilifi-payload worker, once. The sandbox route (in-CF opennext build, BEB-2303) is real but its /prove-deploy still hangs — not a today path. GH Actions: deploy-payload.yml will be deleted once the CF path is live so there is no window with no deploy path at all. /ledger + /tickets stay 404 until one of the two unlocks happens.",
+   "refs": [
+    "BEB-2804",
+    "BEB-2744",
+    "BEB-2756",
+    "BEB-2303"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 22005,
- "count": 9036
+ "head": 22006,
+ "count": 9037
 }
