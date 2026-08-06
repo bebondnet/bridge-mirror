@@ -1,22 +1,24 @@
 {
- "mirrored_at": "2026-08-06T03:22:48.766Z",
- "ts": 1785986568122,
+ "mirrored_at": "2026-08-06T03:23:46.819Z",
+ "ts": 1785986626151,
  "loop": {
   "proposed_total": 696,
   "by_state": {
-   "queued": 232,
-   "claimed": 3,
+   "queued": 229,
+   "claimed": 4,
    "done": 286,
    "held": 25,
+   "blocked": 2,
    "parked": 120
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 3,
+    "blocked": 2,
+    "claimed": 4,
     "done": 160,
     "held": 25,
     "parked": 117,
-    "queued": 8
+    "queued": 5
    },
    "REFINE": {
     "queued": 148
@@ -34,14 +36,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785986545883,
-   "tally": "BEB-2533→BUILD, BEB-2540→BUILD, BEB-2493→BUILD, BEB-1626→BUILD, BEB-2756→BUILD, BEB-2572→BUILD, BEB-2156→BUILD, BEB-2744→BUILD, BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget]"
+   "at": 1785986605746,
+   "tally": "BEB-2493→BUILD[blocked], BEB-2540→BUILD[claimed], BEB-2533→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-1626→BUILD, BEB-2756→BUILD, BEB-2572→BUILD, BEB-2156→BUILD, BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785986532140,
+    "since": 1785986592104,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -72,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785986532140,
+    "since": 1785986592104,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -174,6 +176,36 @@
      "BEB-2292",
      "BEB-2259"
     ]
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1785984853525,
+    "detail": "BEB-2127 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2127"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+     "subject": "BEB-2127"
+    },
+    "fix_ticket": "BEB-2368"
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1785984851332,
+    "detail": "BEB-2412 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2412"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+     "subject": "BEB-2412"
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "REPEAT_FAILER",
@@ -598,21 +630,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1785986532140,
-    "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-    "refs": [
-     "BEB-2770"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-2770"
-    }
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1785986532140,
+    "since": 1785986592104,
     "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2771"
@@ -626,7 +644,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785986532140,
+    "since": 1785986592104,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -697,16 +715,6 @@
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-2770 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-    "refs": [
-     "BEB-2716",
-     "BEB-2770"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1785892434215,
     "detail": "fix BEB-2716 for BEB-2771 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
      "BEB-2716",
@@ -730,28 +738,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 20584,
+  "head_seq": 20587,
   "cursor_fable": 12969,
-  "unread_for_fable": 7615,
+  "unread_for_fable": 7618,
   "last": [
-   {
-    "seq": 20580,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 2 — BEB-2533→BUILD, BEB-2540→BUILD, BEB-2"
-   },
-   {
-    "seq": 20581,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: SILENT_REFUSAL(29min), SILENT_REFUSAL(26min)."
-   },
-   {
-    "seq": 20582,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): SILENT_REFUSAL · SILENT_REFUSAL"
-   },
    {
     "seq": 20583,
     "from": "cc",
@@ -763,6 +753,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2127 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 20585,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(19min)."
+   },
+   {
+    "seq": 20586,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): SILENT_REFUSAL[BEB-2127]→BEB-2368 · SILENT_REFUSAL[BEB-2412]→BEB-2368"
+   },
+   {
+    "seq": 20587,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
    }
   ]
  },
@@ -858,7 +866,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785986532140,
+   "since": 1785986592104,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -889,7 +897,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785986532140,
+   "since": 1785986592104,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -991,6 +999,36 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1785984853525,
+   "detail": "BEB-2127 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2127"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+    "subject": "BEB-2127"
+   },
+   "fix_ticket": "BEB-2368"
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1785984851332,
+   "detail": "BEB-2412 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2412"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+    "subject": "BEB-2412"
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "REPEAT_FAILER",
@@ -1415,21 +1453,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1785986532140,
-   "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-   "refs": [
-    "BEB-2770"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-2770"
-   }
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1785986532140,
+   "since": 1785986592104,
    "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2771"
@@ -1443,7 +1467,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785986532140,
+   "since": 1785986592104,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1508,16 +1532,6 @@
    "refs": [
     "BEB-2637",
     "deploy"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-2770 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-   "refs": [
-    "BEB-2716",
-    "BEB-2770"
    ]
   },
   {
