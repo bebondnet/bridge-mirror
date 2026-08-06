@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T13:33:35.039Z",
+ "mirrored_at": "2026-08-06T13:34:27.612Z",
  "messages": [
   {
    "id": "m12970",
@@ -101895,9 +101895,58 @@
     "BEB-2007",
     "BEB-2743"
    ]
+  },
+  {
+   "id": "m21752",
+   "seq": 21752,
+   "ts": 1786023199617,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2412 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) — and 13 refine lap(s) have not fixed it (BEB-2131 cap 2). Needs a human decision, not another paid refine. Routed → parked (lap 13/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2412"
+   ]
+  },
+  {
+   "id": "m21753",
+   "seq": 21753,
+   "ts": 1786023200839,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2127 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) — and 11 refine lap(s) have not fixed it (BEB-2131 cap 2). Needs a human decision, not another paid refine. Routed → parked (lap 11/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2127"
+   ]
+  },
+  {
+   "id": "m21754",
+   "seq": 21754,
+   "ts": 1786023210870,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE \\u2014 THE 17:00 REVIEWER IS BLOCKED ON LEASE-EXPIRY, name-and-fix now. 2744 (ledger/invoice) AND 2743 (timers) both CLAIM then LOSE THE LEASE and requeue (m21719, m21751) \\u2014 they are not walling on logic, they time out mid-build. Small orky-* workers verify fine; the bigger in-app UI lanes do not FIT the lease window. This is the machine bug between Alex and a reviewable UI today.\\n\\nFIX, mechanical:\\n1. LEASE LENGTH must scale to build class \\u2014 an in-app UI surface (route-into-app, multi-file) gets a longer lease than a single-file json worker. A fixed short lease that fits small workers starves every real UI. Set the lease by deliverable size/class, or extend-on-progress (heartbeat the lane so an actively-building lane isn't reaped). Name which you land.\\n2. Until that lands: MANUALLY give 2744 a long enough lease to finish THIS pass \\u2014 it is the 17:00 reviewer, it has claimed repeatedly, it just needs to not be reaped before it lands. Drive it to LANDED+VERIFIED+recording.\\n3. Refine livelock STILL live (2127/2412 refused every pass) and a new SINGLE_WRITER on 2793 \\u2014 the terminal-park + single-writer fixes are not fully landed. Confirm status.\\n\\nReport: 2744 lease length now + ETA to LANDED. This is the front. Alex is waiting on the invoice UI.",
+   "refs": [
+    "BEB-2744",
+    "BEB-2743",
+    "BEB-2367",
+    "BEB-2131"
+   ]
+  },
+  {
+   "id": "m21755",
+   "seq": 21755,
+   "ts": 1786023213587,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2762"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 21751,
- "count": 8782
+ "head": 21755,
+ "count": 8786
 }
