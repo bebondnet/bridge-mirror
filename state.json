@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-06T10:25:10.738Z",
- "ts": 1786011909453,
+ "mirrored_at": "2026-08-06T10:26:08.883Z",
+ "ts": 1786011966719,
  "loop": {
   "proposed_total": 699,
   "by_state": {
-   "queued": 215,
-   "claimed": 5,
+   "queued": 216,
+   "claimed": 4,
    "done": 292,
    "held": 36,
    "blocked": 1,
@@ -21,7 +21,6 @@
     "queued": 1
    },
    "REFINE": {
-    "claimed": 1,
     "held": 2,
     "queued": 135
    },
@@ -32,20 +31,20 @@
    },
    "SPEC": {
     "done": 40,
-    "queued": 57
+    "queued": 58
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786011882449,
+   "at": 1786011940699,
    "tally": "BEB-2744→BUILD[claimed], BEB-2722→BUILD[blocked], BEB-2756→BUILD[claimed], BEB-2127→BUILD, BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2484→BUILD[done], BEB-2231→SPEC, BEB-2770→REFINE[no-budget], BEB-2771→REFINE[no-budget]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -54,7 +53,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -85,7 +84,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -192,7 +191,7 @@
     "code": "SILENT_REFUSAL",
     "severity": "red",
     "since": 1786010164711,
-    "detail": "BEB-2127 refused 19× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2127 refused 20× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2127"
     ],
@@ -555,15 +554,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785925505654,
-    "detail": "alexrollin/abilifi-apps failing at codegen 220× in 24h — LATEST (08-06T09:47): verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks s",
+    "since": 1785926025863,
+    "detail": "alexrollin/abilifi-apps failing at codegen 219× in 24h — LATEST (08-06T09:47): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
     "refs": [
-     "BEB-2139"
+     "BEB-2172"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks still did not apply: block 1/2 SEARCH text not found, even ignoring indentation. WANTED: \"const targetBinding = parseTarget(description, target);\" · CLOSEST in file is line 46 (100% similar): \"const targetBinding = parseTarget(description, target);\" · copy that line verbatim if it is the one you meant.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
-     "subject": "BEB-2139"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: abilifi/abilifi-dispatcher\nClass: CODE\nLane: frag\n\n## Changes\n1. Cap the re-route at line 248 to the way `reap` at line 408 caps requeues: attempts >= 2 → park, not REFINE.\n2. Ensure tickets with the swarm-ready label are never re-routed to REFINE; route them to parked and trigger a bri",
+     "subject": "BEB-2172"
     }
    },
    {
@@ -695,7 +694,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2133"
@@ -709,7 +708,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "BEB-2231 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-2231"
@@ -723,7 +722,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2770"
@@ -737,7 +736,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786011870735,
+    "since": 1786011930735,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -1031,16 +1030,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 21375,
+  "head_seq": 21376,
   "cursor_fable": 12969,
-  "unread_for_fable": 8406,
+  "unread_for_fable": 8407,
   "last": [
-   {
-    "seq": 21371,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-2127 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
    {
     "seq": 21372,
     "from": "cc",
@@ -1064,6 +1057,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2781 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 21376,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-2312 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
    }
   ]
  },
@@ -1159,7 +1158,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1168,7 +1167,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -1199,7 +1198,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1306,7 +1305,7 @@
    "code": "SILENT_REFUSAL",
    "severity": "red",
    "since": 1786010164711,
-   "detail": "BEB-2127 refused 19× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2127 refused 20× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2127"
    ],
@@ -1669,15 +1668,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785925505654,
-   "detail": "alexrollin/abilifi-apps failing at codegen 220× in 24h — LATEST (08-06T09:47): verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks s",
+   "since": 1785926025863,
+   "detail": "alexrollin/abilifi-apps failing at codegen 219× in 24h — LATEST (08-06T09:47): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
    "refs": [
-    "BEB-2139"
+    "BEB-2172"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 1440\ngenError: CODEGEN_WALL base-moved: the source moved 3d558c09 → 884b745b while the model worked. Regenerated against 884b745b and the new blocks still did not apply: block 1/2 SEARCH text not found, even ignoring indentation. WANTED: \"const targetBinding = parseTarget(description, target);\" · CLOSEST in file is line 46 (100% similar): \"const targetBinding = parseTarget(description, target);\" · copy that line verbatim if it is the one you meant.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\nRe",
-    "subject": "BEB-2139"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: abilifi/abilifi-dispatcher\nClass: CODE\nLane: frag\n\n## Changes\n1. Cap the re-route at line 248 to the way `reap` at line 408 caps requeues: attempts >= 2 → park, not REFINE.\n2. Ensure tickets with the swarm-ready label are never re-routed to REFINE; route them to parked and trigger a bri",
+    "subject": "BEB-2172"
    }
   },
   {
@@ -1809,7 +1808,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2133"
@@ -1823,7 +1822,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "BEB-2231 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-2231"
@@ -1837,7 +1836,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2770"
@@ -1851,7 +1850,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786011870735,
+   "since": 1786011930735,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
