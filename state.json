@@ -1,22 +1,24 @@
 {
- "mirrored_at": "2026-08-06T04:02:43.172Z",
- "ts": 1785988962439,
+ "mirrored_at": "2026-08-06T04:03:55.851Z",
+ "ts": 1785989035107,
  "loop": {
   "proposed_total": 696,
   "by_state": {
-   "queued": 228,
-   "claimed": 5,
+   "queued": 227,
+   "claimed": 4,
    "done": 286,
    "held": 27,
+   "blocked": 2,
    "parked": 120
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 5,
+    "blocked": 2,
+    "claimed": 4,
     "done": 160,
     "held": 27,
     "parked": 117,
-    "queued": 4
+    "queued": 3
    },
    "REFINE": {
     "queued": 148
@@ -34,14 +36,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785988943111,
-   "tally": "BEB-1626→BUILD[claimed], BEB-2540→BUILD[claimed], BEB-2533→BUILD[claimed], BEB-2493→BUILD, BEB-2744→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2394→BUILD, BEB-2756→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
+   "at": 1785989015932,
+   "tally": "BEB-1626→BUILD[blocked], BEB-2493→BUILD[blocked], BEB-2540→BUILD[claimed], BEB-2533→BUILD[claimed], BEB-2744→BUILD[claimed], BEB-2743→BUILD[claimed], BEB-2394→BUILD, BEB-2756→BUILD, BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785988932101,
+    "since": 1785988992104,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -72,7 +74,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785988932101,
+    "since": 1785988992104,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -582,9 +584,24 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1785988992104,
+    "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2301"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2301"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785988932101,
+    "since": 1785988992104,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -650,20 +667,24 @@
      "BEB-2637",
      "deploy"
     ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2301 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2301"
+    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 20612,
+  "head_seq": 20613,
   "cursor_fable": 12969,
-  "unread_for_fable": 7643,
+  "unread_for_fable": 7644,
   "last": [
-   {
-    "seq": 20608,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2412 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
-   },
    {
     "seq": 20609,
     "from": "cc",
@@ -687,6 +708,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER pass: proposed 10 · wrote 3 · claimed 5 — BEB-1626→BUILD[claimed], BEB-2540→BUI"
+   },
+   {
+    "seq": 20613,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2301]→BEB-2716 · FIX_BURIED[BEB-2716,BEB-230"
    }
   ]
  },
@@ -782,7 +809,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785988932101,
+   "since": 1785988992104,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -813,7 +840,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785988932101,
+   "since": 1785988992104,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1323,9 +1350,24 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1785988992104,
+   "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2301"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2301"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785988932101,
+   "since": 1785988992104,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1390,6 +1432,16 @@
    "refs": [
     "BEB-2637",
     "deploy"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2301 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2301"
    ]
   }
  ]
