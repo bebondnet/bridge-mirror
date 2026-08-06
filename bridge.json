@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T13:09:41.086Z",
+ "mirrored_at": "2026-08-06T13:11:08.218Z",
  "messages": [
   {
    "id": "m12970",
@@ -101183,9 +101183,59 @@
     "BEB-2007",
     "BEB-2792"
    ]
+  },
+  {
+   "id": "m21692",
+   "seq": 21692,
+   "ts": 1786021773309,
+   "from": "cc",
+   "kind": "status",
+   "body": "STATUS: two machine fixes landed+deployed. (1) BEB-2793 rebuild storm (15 builds/45min, every downgrade \"(1/3)\"): the retry bound counted failures since lanes.at, which claim AND the downgrade's own requeue re-stamp — window reset every lap. Now a dedicated verify_fails column, reset only by deliberate requeue (commit 060f4cc). 2793 itself parked by the attempt-cap reaper. (2) THE m20831 LIVELOCK ROOT: the PROPOSER undid every gate demotion — a demoted REFINE row is state=queued ⇒ \"writable\", so each pass DELETEd it and REPLACE-inserted a fresh BUILD row, wiping bounces; the cap-2 counter was zeroed by our own proposer every lap. Now mid-lap REFINE rows (bounces>0) are not writable (\"refine-lap\"), and the REPLACE carries bounces like parks (commit 7afc103, dispatcher f923fd32). 2412/2127 now sit in REFINE/queued bounces=1 awaiting a real refine; verifying next passes don't flip them.\nBLOCKED-ON: none\nNEXT: deadline watch 2744/2756 (both still claimed); report land→verify→recording.",
+   "refs": [
+    "BEB-2793",
+    "BEB-2131",
+    "BEB-2412",
+    "BEB-2127",
+    "BEB-2744",
+    "BEB-2756"
+   ]
+  },
+  {
+   "id": "m21693",
+   "seq": 21693,
+   "ts": 1786021775007,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: SINGLE_WRITER_VIOLATION(10min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m21694",
+   "seq": 21694,
+   "ts": 1786021776171,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): SINGLE_WRITER_VIOLATION",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m21695",
+   "seq": 21695,
+   "ts": 1786021819715,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-2412 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2412"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 21691,
- "count": 8722
+ "head": 21695,
+ "count": 8726
 }
