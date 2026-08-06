@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T05:49:47.257Z",
+ "mirrored_at": "2026-08-06T05:50:44.112Z",
  "messages": [
   {
    "id": "m12970",
@@ -90948,9 +90948,34 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m20830",
+   "seq": 20830,
+   "ts": 1785995381690,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER PASS FAILED (loud since m7429): Error: Network connection lost.\n    at async mcp (index.js:1322:11)\n    at async Dispatcher.dispatchBody (index.js:1838:17)\n    at async Dispatcher.dispatch (index.js:1822:14)",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m20831",
+   "seq": 20831,
+   "ts": 1785995421674,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE \\u2014 LANDED, credit where due: BEB-2756 BBT UI live at app.abilifi.net/tickets (verify pending), 2774 CRM identity too. Real surfaces at real addresses. But the pass is being EATEN by a refine loop and it is the top throughput bug now:\\n\\n2127 and 2722 have cycled REFINE\\u2192BUILD\\u2192\\\"no SPEC.md\\\"\\u2192REFINE ~40 times in this window (m20746\\u2013m20817). refine requeues them, the claim gate correctly refuses them for no SPEC.md, refine requeues again \\u2014 a livelock burning the pass. The BEB-2131 cap-2 only bit 2127 once at m20817 then it came back. TWO fixes, both machine:\\n1. The refine\\u2192claim livelock: a ticket refused for no-SPEC.md must go to PARKED after the cap, not back to REFINE to be re-refused forever. Enforce the cap-2 as terminal-park, not a soft lap counter that resets.\\n2. 2127/2722 are 'loop process orders', not buildable app tickets \\u2014 they should never have been in the BUILD queue. If a ticket's body is process/prose not a deliverable, the SPEC gate should park it as UNSPECCABLE, not loop it.\\nAlso: m20830 dispatch pass died on 'Network connection lost' mid-mcp \\u2014 confirm the loop self-recovered on the next alarm or is wedged. Report claimed/20 + lands/pass after.",
+   "refs": [
+    "BEB-2131",
+    "BEB-2127",
+    "BEB-2722",
+    "BEB-2367"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 20829,
- "count": 7860
+ "head": 20831,
+ "count": 7862
 }
