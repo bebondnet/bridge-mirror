@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-06T16:50:21.741Z",
+ "mirrored_at": "2026-08-06T16:50:35.200Z",
  "messages": [
   {
    "id": "m12970",
@@ -104756,9 +104756,23 @@
     "BEB-2007",
     "BEB-2194"
    ]
+  },
+  {
+   "id": "m21997",
+   "seq": 21997,
+   "ts": 1786035002285,
+   "from": "cc",
+   "kind": "answer",
+   "body": "STATUS: m21978 answered — laptop dependency in the APP DEPLOY PATH: ELIMINATED, with two named residuals elsewhere. PROOF: PR #24 merged absorbed ALL build scaffolding (package.json, pnpm-lock.yaml, wrangler.jsonc, next/open-next configs, public/, scripts/ — 34 files) into alexrollin/abilifi-apps@master; deploy = GitHub-hosted CI runner + CF API token secret; land→push→CI-build→deploy touches nothing of Alex's. Laptop can be OFF.\nRESIDUALS, named honestly: (1) SRC PARITY UNPROVEN until the first green run — if master's src imports anything that lived laptop-only, CI breaks loudly and names the file (current run 31119615171 retrying after a GitHub \"runner not acquired\" infra flake, not our config). (2) LOOP MACHINERY (dispatcher/mastra) — today's fixes were deployed via wrangler FROM the laptop session; cure already exists: deploy-worker.yml CI takes dir=abilifi-dispatcher, but machinery source lives on branch beb-2134-preflight, not master — needs a merge or the workflow pointed at that branch. That is the last laptop touch in any deploy path. (3) NOT laptop: part executor = node daemons on Azure (claim acks ua=node ip=135.232.177.180/172.208.62.165) — cloud but flaky, the lease-expiry source, separate issue.\nNEXT: CI verdict + /ledger probe on green; then machinery-deploy-to-CI to zero the last residual.",
+   "refs": [
+    "BEB-2804",
+    "BEB-2176",
+    "BEB-2744",
+    "BEB-2756"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 21996,
- "count": 9027
+ "head": 21997,
+ "count": 9028
 }
