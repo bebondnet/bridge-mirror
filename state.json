@@ -1,26 +1,25 @@
 {
- "mirrored_at": "2026-08-06T04:40:06.418Z",
- "ts": 1785991205867,
+ "mirrored_at": "2026-08-06T04:40:46.864Z",
+ "ts": 1785991246154,
  "loop": {
   "proposed_total": 696,
   "by_state": {
-   "queued": 224,
-   "claimed": 4,
+   "queued": 226,
+   "claimed": 3,
    "done": 286,
    "held": 31,
-   "blocked": 1,
    "parked": 120
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 1,
-    "claimed": 4,
+    "claimed": 3,
     "done": 160,
     "held": 31,
-    "parked": 117
+    "parked": 117,
+    "queued": 5
    },
    "REFINE": {
-    "queued": 148
+    "queued": 145
    },
    "REPAIR": {
     "done": 86,
@@ -35,14 +34,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1785991182032,
-   "tally": "BEB-1626→BUILD, BEB-2540→BUILD, BEB-2493→BUILD[claimed], BEB-2533→BUILD[claimed], BEB-2412→BUILD, BEB-2127→BUILD, BEB-2722→BUILD, BEB-2133→BUILD[no-budget], BEB-2157→BUILD[no-budget], BEB-2502→BUILD[serious:proposed-only]"
+   "at": 1785991224680,
+   "tally": "BEB-2540→BUILD, BEB-1626→BUILD, BEB-2493→BUILD[claimed], BEB-2533→BUILD[claimed], BEB-2412→BUILD, BEB-2127→BUILD, BEB-2722→BUILD, BEB-2133→BUILD[no-budget], BEB-2577→BUILD[no-budget], BEB-2563→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785991152106,
+    "since": 1785991212106,
     "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
     "refs": [
      "BEB-2743",
@@ -73,7 +72,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1785991152106,
+    "since": 1785991212106,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -179,7 +178,22 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785989385313,
+    "since": 1785990966366,
+    "detail": "BEB-2127 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2127"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+     "subject": "BEB-2127"
+    },
+    "fix_ticket": "BEB-2368"
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1785989523460,
     "detail": "BEB-2412 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2412"
@@ -193,8 +207,23 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1785989382628,
-    "detail": "BEB-2756 refused 8× in 30min — LATEST: no budget (estimate/cost_ceiling null) — BEB-1234: no budget, no build",
+    "since": 1785990969040,
+    "detail": "BEB-2722 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2722 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2722"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no SPEC.md on branch ticket/BEB-2722 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+     "subject": "BEB-2722"
+    },
+    "fix_ticket": "BEB-2368"
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1785989522398,
+    "detail": "BEB-2756 refused 7× in 30min — LATEST: no budget (estimate/cost_ceiling null) — BEB-1234: no budget, no build",
     "refs": [
      "BEB-2756"
     ],
@@ -203,6 +232,21 @@
      "error": "no budget (estimate/cost_ceiling null) — BEB-1234: no budget, no build",
      "subject": "BEB-2756"
     }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1785975747617,
+    "detail": "BEB-1626 failing at preflight 3× in 24h — LATEST (08-06T04:39): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-1626"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+     "subject": "BEB-1626"
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
@@ -236,7 +280,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1785981279763,
-    "detail": "BEB-2540 failing at preflight 3× in 24h — LATEST (08-06T04:38): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-registry/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no",
+    "detail": "BEB-2540 failing at preflight 3× in 24h — LATEST (08-06T04:38): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-registry/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2540"
     ],
@@ -244,8 +288,7 @@
      "cls": "repeat-failer",
      "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-registry/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
      "subject": "BEB-2540"
-    },
-    "fix_ticket": "BEB-2737"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -334,14 +377,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1785904802806,
-    "detail": "abilifi-apps failing at heartbeat 106× in 24h — LATEST (08-06T04:39): HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
+    "since": 1785904829163,
+    "detail": "abilifi-apps failing at heartbeat 106× in 24h — LATEST (08-06T04:39): HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
     "refs": [
      "BEB-2385"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
+     "error": "HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
      "subject": "BEB-2385"
     }
    },
@@ -628,7 +671,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785991152106,
+    "since": 1785991212106,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -710,22 +753,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 20673,
+  "head_seq": 20675,
   "cursor_fable": 12969,
-  "unread_for_fable": 7704,
+  "unread_for_fable": 7706,
   "last": [
-   {
-    "seq": 20669,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED REPEAT_FAILER: BEB-2540 failing at preflight 3× in 24h — LATEST (08-06T04:38): [  {   "
-   },
-   {
-    "seq": 20670,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-1626 — preflight HELD (BEB-2134) — TARGET_BINDING: ticket BEB"
-   },
    {
     "seq": 20671,
     "from": "cc",
@@ -743,6 +774,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2722 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2"
+   },
+   {
+    "seq": 20674,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-2540 failing at preflight 3× in 24h — LATEST (08-06T04:38): [  {   "
+   },
+   {
+    "seq": 20675,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×3 (BEB-2334): SILENT_REFUSAL[BEB-2127]→BEB-2368 · SILENT_REFUSAL[BEB-2722]→BEB-2368 ·"
    }
   ]
  },
@@ -838,7 +881,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785991152106,
+   "since": 1785991212106,
    "detail": "HARVEST PAIR before SOW send — timers (2743) + ledger/invoice UI (2744) working so Alex's tlpt time is tracked from day one; SOW f3f6cc04 do — last landed evidence NEVER",
    "refs": [
     "BEB-2743",
@@ -869,7 +912,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1785991152106,
+   "since": 1785991212106,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -975,7 +1018,22 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785989385313,
+   "since": 1785990966366,
+   "detail": "BEB-2127 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2127"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no SPEC.md on branch ticket/BEB-2127 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+    "subject": "BEB-2127"
+   },
+   "fix_ticket": "BEB-2368"
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1785989523460,
    "detail": "BEB-2412 refused 9× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2412 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2412"
@@ -989,8 +1047,23 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1785989382628,
-   "detail": "BEB-2756 refused 8× in 30min — LATEST: no budget (estimate/cost_ceiling null) — BEB-1234: no budget, no build",
+   "since": 1785990969040,
+   "detail": "BEB-2722 refused 3× in 30min — LATEST: no SPEC.md on branch ticket/BEB-2722 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2722"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no SPEC.md on branch ticket/BEB-2722 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim)",
+    "subject": "BEB-2722"
+   },
+   "fix_ticket": "BEB-2368"
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1785989522398,
+   "detail": "BEB-2756 refused 7× in 30min — LATEST: no budget (estimate/cost_ceiling null) — BEB-1234: no budget, no build",
    "refs": [
     "BEB-2756"
    ],
@@ -999,6 +1072,21 @@
     "error": "no budget (estimate/cost_ceiling null) — BEB-1234: no budget, no build",
     "subject": "BEB-2756"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1785975747617,
+   "detail": "BEB-1626 failing at preflight 3× in 24h — LATEST (08-06T04:39): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-1626"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+    "subject": "BEB-1626"
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
@@ -1032,7 +1120,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1785981279763,
-   "detail": "BEB-2540 failing at preflight 3× in 24h — LATEST (08-06T04:38): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-registry/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no",
+   "detail": "BEB-2540 failing at preflight 3× in 24h — LATEST (08-06T04:38): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-registry/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2540"
    ],
@@ -1040,8 +1128,7 @@
     "cls": "repeat-failer",
     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-registry/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
     "subject": "BEB-2540"
-   },
-   "fix_ticket": "BEB-2737"
+   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -1130,14 +1217,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1785904802806,
-   "detail": "abilifi-apps failing at heartbeat 106× in 24h — LATEST (08-06T04:39): HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
+   "since": 1785904829163,
+   "detail": "abilifi-apps failing at heartbeat 106× in 24h — LATEST (08-06T04:39): HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
    "refs": [
     "BEB-2385"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "HEARTBEAT_MISSING: expected pass within 180s, actual age 3min — kick attempt 1",
+    "error": "HEARTBEAT_MISSING: expected pass within 180s, actual age 4min — kick attempt 1",
     "subject": "BEB-2385"
    }
   },
@@ -1424,7 +1511,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785991152106,
+   "since": 1785991212106,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
