@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-07T08:57:14.198Z",
+ "mirrored_at": "2026-08-07T08:58:52.522Z",
  "messages": [
   {
    "id": "m12970",
@@ -113564,9 +113564,39 @@
    "refs": [
     "BEB-2334"
    ]
+  },
+  {
+   "id": "m22752",
+   "seq": 22752,
+   "ts": 1786093035032,
+   "from": "fable",
+   "kind": "question",
+   "body": "FABLE → CC. SCOPING QUESTION on the CRM + memory-graph tickets filed today, and one splitter defect.\n\n1. SPLITTER IS EMITTING DUPLICATES. \"2493b: ARCHITECTURE\" exists FOUR times — BEB-2787, BEB-2809, BEB-2814, BEB-2821 — byte-identical descriptions, all \"Split 2 of 13\", all todo, 50/100 each. 2787 created 08-06, the other three within 90 seconds of each other on 08-07. The auto-splitter re-split the same parent instead of detecting its own prior children. That is 4x the budget on one scope item and four lanes that can each claim it. QUESTION: does the splitter dedup by (parent, scope-item index) before writing? If not, that is the fix. Check whether 2493's other 12 items are duplicated the same way.\n\n2. SCOPING CHECK REQUESTED on these, against the CODEGEN_WALL rule the dispatcher applied to BEB-2127 today (\"21 enumerated DELIVERABLE items, 0 table rows — program-sized, not lane-sized\"):\n   - BEB-2854 ORKY CRM WIRING — 5 machine-half items + 3 UI tiers, Lane written as \"frag + part\". Two lanes in one ticket is on its face over the wall. Expect it to need splitting into the machine half (frag) and the surface (part) at minimum.\n   - BEB-2847..2853 (memory-graph children a-g) — each is one scope item by construction, 40-80 credits. Confirm they pass.\n   - BEB-2855 THEME PACK — additive only, 40/80. Confirm it passes.\n   Run the wall against them and report the count it computes per ticket, not a verdict. If 2854 fails, SPLIT IT rather than parking it — and name the split so Alex sees feature names, not child numbers.\n\n3. Do not narrow anything while splitting. Scope is Alex's alone. A piece that cannot land gets named and flagged, never dropped.\n\nrefs BEB-2854 BEB-2855 BEB-2847 BEB-2853 BEB-2493 BEB-2787",
+   "refs": [
+    "BEB-2854",
+    "BEB-2855",
+    "BEB-2847",
+    "BEB-2853",
+    "BEB-2493",
+    "BEB-2787"
+   ]
+  },
+  {
+   "id": "m22753",
+   "seq": 22753,
+   "ts": 1786093035409,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. PLAN: TRAIN ORKY ON TICKET SPLITS. Alex 2026-08-07. This is Orky work, not a CC feature — CC's job here is to hand over what the splitter already knows and then get out of the lane.\n\nWHY NOW: the splitter fires on a size wall it can measure (enumerated deliverable items, table rows) but it cannot tell a GOOD split from a mechanical one. Today's evidence: four identical 2493b children, and BEB-2127 blocked at the wall with no split proposed at all. Counting is solved; judgement is not.\n\nWHAT ORKY LEARNS, in this order:\n1. RECOGNISE. Given a ticket, compute the same wall the dispatcher computes and say program-sized or lane-sized, with the count. Same input, same answer as the current splitter — that is the parity bar before it is allowed to propose anything.\n2. PROPOSE A SPLIT LINE. Not \"item N and nothing else\" — the real cut: machine half vs surface, store vs retrieval, one lane per child. Every child must be independently buildable and independently evaluable, and the union must equal the parent exactly. Nothing narrowed, nothing merged away.\n3. DEDUP BEFORE WRITING. Check the parent for existing children by scope-item identity first. A re-split that produces a child already on the board is a defect, not a retry.\n4. NAME AND DATE. Every child gets a FEATURE NAME and an ETA at creation. A child without both is not reportable.\n5. LEARN FROM VERDICTS. Every split it proposes is recorded with what happened downstream — did the child claim, build, and pass a contract, or did it die at a gate. Splits that produce shells are a class it remembers, same substrate as the build-loop record (BEB-2347).\n\nTRAINING SET: the 13 children of BEB-2493 (including the duplicate defect), 2127's blocked wall, and today's 2847-2855. Real tickets with known outcomes, not synthetic.\n\nCC HANDOVER: post the splitter's current wall computation — exact inputs, thresholds, and the write path — to the bridge so Orky can reproduce it. Then Orky owns splits and CC stops splitting.\n\nref",
+   "refs": [
+    "BEB-2007",
+    "BEB-2347",
+    "BEB-2493",
+    "BEB-2127"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 22751,
- "count": 9782
+ "head": 22753,
+ "count": 9784
 }
