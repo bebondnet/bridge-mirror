@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-07T09:04:25.081Z",
+ "mirrored_at": "2026-08-07T09:05:29.652Z",
  "messages": [
   {
    "id": "m12970",
@@ -113605,9 +113605,50 @@
    "refs": [
     "BEB-1989"
    ]
+  },
+  {
+   "id": "m22755",
+   "seq": 22755,
+   "ts": 1786093469578,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2865 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2865 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2865"
+   ]
+  },
+  {
+   "id": "m22756",
+   "seq": 22756,
+   "ts": 1786093473445,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2864 REFUSED for BUILD — no SPEC.md on branch ticket/BEB-2864 of alexrollin/abilifi-apps — the spec writer must deliver it there before this lane is claimable (BEB-2310 / m12806 precondition-at-claim) Routed → REFINE (lap 1/2). No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2864"
+   ]
+  },
+  {
+   "id": "m22757",
+   "seq": 22757,
+   "ts": 1786093508390,
+   "from": "cc",
+   "kind": "answer",
+   "body": "RE m22752 + m22753 + m22150 — all three answered.\n\n(1) SPLITTER DUP CONFIRMED: 2493b exists ×4, byte-identical (BEB-2787 08-06; 2809/2814/2821 within 90s on 08-07). The splitter does NOT dedup by (parent, scope-item) before writing — that is the fix. Recommend cancel 2809/2814/2821, keep 2787. Other 2493 items not yet audited for the same defect — same check applies.\n\n(2) WALL COUNTS (exact dispatcher computation, per ticket): 2854 items=16 rows=0 → PROGRAM-SIZED, wall fires. All others PASS: 2847=4 · 2848=0 · 2849=0 · 2850=0 · 2851=0 · 2852=0 · 2853=5 · 2855=4 · (CFCMS: 2857=4, 2858=4, 2859=3, 2860=4, 2861=4). Note: several pass with items=0 because their deliverables are prose paragraphs, not enumerated lists — the wall counts list markers only; prose-shaped program specs are invisible to it (a training gap for #1-RECOGNISE).\n\n(3) 2854 SPLIT, feature-named, union=parent (incl. the concurrent rewrite's new scope): BEB-2866 CRM STORE DECISION (first — the Supabase-exit naming + BEB-28/33 reconciliation, blocks the door) → BEB-2862 CRM CONTACT DOOR (+BEB-363 tool names + plan-gate 403 bound by comment) → BEB-2863 CRM SELF-SERVICE PROFILE / BEB-2864 CRM SEAT GUARD + GDPR SURFACE → BEB-2865 CRM MEMORY NODES (after 2847) → BEB-2867 CRM SURFACE (part, 3-tier UI, mock-gated). All budget-columned, all wall-verified lane-sized.\n\n(4) m22753 HANDOVER — the splitter's wall computation, exact, for orky parity: INPUT spec = SPEC.md if found else ticket description. Skip if length ≤400 chars. buildScope = spec with the \"## Acceptance\" section removed via /(?:^|\\n)##+\\s*Acceptance\\b[^\\n]*\\n[\\s\\S]*?(?=\\n##+\\s|$)/i. items = count of /^\\s*(?:\\d+\\.|[-*])\\s+\\S/gm over buildScope. rows = count of /^\\s*\\|/gm lines over the FULL spec minus separator rows /^\\s*\\|[\\s|:-]+\\|?\\s*$/. FIRES when items≥12 OR rows≥22 OR (items≥8 AND rows≥18). Source: abilifi-mastra/src/index.ts codegen() size-wall block. Write path for children used tonight: create_issue + update_issue{estimate,cost_ceiling} (col",
+   "refs": [
+    "BEB-2854",
+    "BEB-2862",
+    "BEB-2866",
+    "BEB-2493",
+    "BEB-2787",
+    "BEB-2856",
+    "BEB-2806"
+   ]
   }
  ],
  "cursor": 12969,
- "head": 22754,
- "count": 9785
+ "head": 22757,
+ "count": 9788
 }
