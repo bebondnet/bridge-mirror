@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-08T13:21:28.737Z",
- "ts": 1786195285692,
+ "mirrored_at": "2026-08-08T13:23:05.289Z",
+ "ts": 1786195382811,
  "loop": {
   "proposed_total": 818,
   "by_state": {
-   "queued": 28,
-   "claimed": 4,
-   "done": 460,
-   "held": 74,
-   "blocked": 4,
+   "queued": 27,
+   "claimed": 2,
+   "done": 462,
+   "held": 76,
+   "blocked": 3,
    "parked": 217
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 2,
-    "claimed": 4,
-    "done": 244,
-    "held": 62,
+    "blocked": 1,
+    "claimed": 2,
+    "done": 246,
+    "held": 64,
     "parked": 211,
-    "queued": 3
+    "queued": 2
    },
    "REFINE": {
     "blocked": 1,
@@ -40,23 +40,65 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786195261885,
-   "tally": "idle (no proposable work)"
+   "at": 1786195356467,
+   "tally": "BEB-2903→BUILD[blocked], BEB-2493→BUILD, BEB-2847→BUILD[claimed], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2484→BUILD[done], BEB-2624→BUILD[serious:proposed-only], BEB-2206→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
     "code": "VERIFY_PENDING",
     "severity": "red",
-    "since": 1786195265235,
+    "since": 1786195378933,
     "detail": "1 done lane(s) with verification PENDING — not complete until passed",
     "refs": [
-     "BEB-2905"
+     "BEB-2847"
     ]
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786194857545,
+    "detail": "BEB-2847 completed 3× with 3 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2847"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2847",
+     "error": "3 completions, 3 distinct artefacts, 2026-08-08T13:14:17.545Z -> 2026-08-08T13:22:53.827Z"
+    }
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786194864888,
+    "detail": "BEB-2857 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2857"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2857",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-08T13:14:24.888Z -> 2026-08-08T13:21:40.307Z"
+    }
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786194693772,
+    "detail": "BEB-2905 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2905"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2905",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-08T13:11:33.772Z -> 2026-08-08T13:21:05.317Z"
+    }
    },
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786195256219,
+    "since": 1786195376196,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -70,7 +112,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786195256219,
+    "since": 1786195376196,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -124,7 +166,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786195256219,
+    "since": 1786195376196,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -329,7 +371,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786148448277,
-    "detail": "BEB-2193 failing at unrecorded 6× in 24h — LATEST (08-08T13:20): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2193 failing at unrecorded 6× in 24h — LATEST (08-08T13:20): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
     "refs": [
      "BEB-2193"
     ],
@@ -609,7 +651,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786109039593,
-    "detail": "abilifi-apps failing at heartbeat 67× in 24h — LATEST (08-08T11:59): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+    "detail": "abilifi-apps failing at heartbeat 70× in 24h — LATEST (08-08T13:22): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
     "refs": [
      "BEB-2385"
     ],
@@ -637,7 +679,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786110456169,
-    "detail": "abilifi-payload failing at codegen 89× in 24h — LATEST (08-08T13:12): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "abilifi-payload failing at codegen 90× in 24h — LATEST (08-08T13:21): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
     "refs": [
      "BEB-2394"
     ],
@@ -721,7 +763,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786109343965,
-    "detail": "alexrollin/abilifi-apps failing at codegen 168× in 24h — LATEST (08-08T13:19): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 13 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
+    "detail": "alexrollin/abilifi-apps failing at codegen 169× in 24h — LATEST (08-08T13:21): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 13 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
     "refs": [
      "BEB-1752"
     ],
@@ -749,7 +791,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786109429143,
-    "detail": "alexrollin/abilifi-apps failing at deploy 103× in 24h — LATEST (08-08T13:20): codeLen: 3152\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.c · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at deploy 104× in 24h — LATEST (08-08T13:22): codeLen: 3152\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.c · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2862"
     ],
@@ -763,7 +805,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786114970515,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 51× in 24h — LATEST (08-08T13:19): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (33 chars sampled) | debit_ref: \"BEB-\"  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 54× in 24h — LATEST (08-08T13:21): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (33 chars sampled) | debit_ref: \"BEB-\" ",
     "refs": [
      "BEB-2744"
     ],
@@ -902,7 +944,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786195256219,
+    "since": 1786195376196,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -1338,43 +1380,73 @@
      "BEB-2737",
      "binding-gate"
     ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785951244809,
+    "detail": "fix BEB-2760 for BEB-2847 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2760",
+     "BEB-2847"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785951244809,
+    "detail": "fix BEB-2760 for BEB-2857 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2760",
+     "BEB-2857"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785951244809,
+    "detail": "fix BEB-2760 for BEB-2905 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2760",
+     "BEB-2905"
+    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 25411,
+  "head_seq": 25418,
   "cursor_fable": 22787,
-  "unread_for_fable": 2624,
+  "unread_for_fable": 2631,
   "last": [
    {
-    "seq": 25407,
+    "seq": 25414,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2905 — commit 8"
+    "one_line": "RED ×5 (BEB-2334): SINGLE_WRITER_VIOLATION[BEB-2847]→BEB-2760 · SINGLE_WRITER_VIOLATION[BE"
    },
    {
-    "seq": 25408,
+    "seq": 25415,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2744 — contract refused the deploy: contract bfde550d UNPROVE"
+    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
    },
    {
-    "seq": 25409,
+    "seq": 25416,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER verification PASSED: BEB-2905 — https://widgets.abilifi.net/orky-beb-2905 — jso"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2847 — commit b"
    },
    {
-    "seq": 25410,
+    "seq": 25417,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2847: wanted 'done' (l"
+    "one_line": "4 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-2847), SINGLE_WRITER_VIOLATION(BEB-2857), SINGLE_W"
    },
    {
-    "seq": 25411,
+    "seq": 25418,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2847 — commit 6"
+    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed ·"
    }
   ]
  },
@@ -1470,16 +1542,58 @@
   {
    "code": "VERIFY_PENDING",
    "severity": "red",
-   "since": 1786195265235,
+   "since": 1786195378933,
    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
    "refs": [
-    "BEB-2905"
+    "BEB-2847"
    ]
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786194857545,
+   "detail": "BEB-2847 completed 3× with 3 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2847"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2847",
+    "error": "3 completions, 3 distinct artefacts, 2026-08-08T13:14:17.545Z -> 2026-08-08T13:22:53.827Z"
+   }
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786194864888,
+   "detail": "BEB-2857 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2857"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2857",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-08T13:14:24.888Z -> 2026-08-08T13:21:40.307Z"
+   }
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786194693772,
+   "detail": "BEB-2905 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2905"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2905",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-08T13:11:33.772Z -> 2026-08-08T13:21:05.317Z"
+   }
   },
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786195256219,
+   "since": 1786195376196,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1493,7 +1607,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786195256219,
+   "since": 1786195376196,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1547,7 +1661,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786195256219,
+   "since": 1786195376196,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1752,7 +1866,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786148448277,
-   "detail": "BEB-2193 failing at unrecorded 6× in 24h — LATEST (08-08T13:20): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2193 failing at unrecorded 6× in 24h — LATEST (08-08T13:20): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
    "refs": [
     "BEB-2193"
    ],
@@ -2032,7 +2146,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786109039593,
-   "detail": "abilifi-apps failing at heartbeat 67× in 24h — LATEST (08-08T11:59): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+   "detail": "abilifi-apps failing at heartbeat 70× in 24h — LATEST (08-08T13:22): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
    "refs": [
     "BEB-2385"
    ],
@@ -2060,7 +2174,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786110456169,
-   "detail": "abilifi-payload failing at codegen 89× in 24h — LATEST (08-08T13:12): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "abilifi-payload failing at codegen 90× in 24h — LATEST (08-08T13:21): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
    "refs": [
     "BEB-2394"
    ],
@@ -2144,7 +2258,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786109343965,
-   "detail": "alexrollin/abilifi-apps failing at codegen 168× in 24h — LATEST (08-08T13:19): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 13 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
+   "detail": "alexrollin/abilifi-apps failing at codegen 169× in 24h — LATEST (08-08T13:21): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 13 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
    "refs": [
     "BEB-1752"
    ],
@@ -2172,7 +2286,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786109429143,
-   "detail": "alexrollin/abilifi-apps failing at deploy 103× in 24h — LATEST (08-08T13:20): codeLen: 3152\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.c · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at deploy 104× in 24h — LATEST (08-08T13:22): codeLen: 3152\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.c · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2862"
    ],
@@ -2186,7 +2300,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786114970515,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 51× in 24h — LATEST (08-08T13:19): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (33 chars sampled) | debit_ref: \"BEB-\"  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 54× in 24h — LATEST (08-08T13:21): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (33 chars sampled) | debit_ref: \"BEB-\" ",
    "refs": [
     "BEB-2744"
    ],
@@ -2325,7 +2439,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786195256219,
+   "since": 1786195376196,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -2760,6 +2874,36 @@
    "refs": [
     "BEB-2737",
     "binding-gate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785951244809,
+   "detail": "fix BEB-2760 for BEB-2847 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2760",
+    "BEB-2847"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785951244809,
+   "detail": "fix BEB-2760 for BEB-2857 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2760",
+    "BEB-2857"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785951244809,
+   "detail": "fix BEB-2760 for BEB-2905 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2760",
+    "BEB-2905"
    ]
   }
  ]
