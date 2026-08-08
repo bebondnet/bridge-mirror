@@ -1,23 +1,23 @@
 {
- "mirrored_at": "2026-08-08T15:33:29.336Z",
- "ts": 1786203207749,
+ "mirrored_at": "2026-08-08T15:34:51.515Z",
+ "ts": 1786203288485,
  "loop": {
   "proposed_total": 819,
   "by_state": {
-   "queued": 21,
-   "claimed": 5,
+   "queued": 23,
+   "claimed": 4,
    "done": 464,
    "held": 77,
-   "blocked": 3,
+   "blocked": 2,
    "parked": 218
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 1,
-    "claimed": 5,
+    "claimed": 4,
     "done": 245,
     "held": 63,
-    "parked": 212
+    "parked": 212,
+    "queued": 2
    },
    "REFINE": {
     "blocked": 1,
@@ -38,8 +38,8 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786203177399,
-   "tally": "BEB-2847→BUILD[claimed], BEB-2903→BUILD, BEB-2493→BUILD, BEB-2394→BUILD, BEB-2851→BUILD[claimed], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2768→REFINE[no-budget], BEB-2301→BUILD[serious:proposed-only]"
+   "at": 1786203247334,
+   "tally": "BEB-2394→BUILD[claimed], BEB-2493→BUILD, BEB-2847→BUILD[claimed], BEB-2851→BUILD[claimed], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2563→BUILD[serious:proposed-only], BEB-2768→REFINE[no-budget]"
   },
   "reds": [
    {
@@ -60,20 +60,20 @@
     "code": "SINGLE_WRITER_VIOLATION",
     "severity": "red",
     "since": 1786202778236,
-    "detail": "BEB-2903 completed 4× with 4 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "detail": "BEB-2903 completed 5× with 5 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
     "refs": [
      "BEB-2903"
     ],
     "orky": {
      "cls": "single-writer-violation",
      "subject": "BEB-2903",
-     "error": "4 completions, 4 distinct artefacts, 2026-08-08T15:26:18.236Z -> 2026-08-08T15:32:04.442Z"
+     "error": "5 completions, 5 distinct artefacts, 2026-08-08T15:26:18.236Z -> 2026-08-08T15:33:57.578Z"
     }
    },
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786203165063,
+    "since": 1786203285064,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -87,7 +87,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786203165063,
+    "since": 1786203285064,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -141,7 +141,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786203165063,
+    "since": 1786203285064,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -452,6 +452,20 @@
      "cls": "repeat-failer",
      "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
      "subject": "BEB-2336"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786199819139,
+    "detail": "BEB-2493 failing at preflight 3× in 24h — LATEST (08-08T15:33): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2493"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
+     "subject": "BEB-2493"
     }
    },
    {
@@ -780,7 +794,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786120019122,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 90× in 24h — LATEST (08-08T15:32): html-render class: verify_url serves 200 but renders BLANK in a real browser context (26 visible chars) — built-but-blank, the exact shape that curl cannot see",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 91× in 24h — LATEST (08-08T15:34): html-render class: verify_url serves 200 but renders BLANK in a real browser context (26 visible chars) — built-but-blank, the exact shape that curl cannot see",
     "refs": [
      "BEB-2744"
     ],
@@ -905,7 +919,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786203165063,
+    "since": 1786203285064,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -1361,32 +1375,24 @@
      "BEB-2760",
      "BEB-2903"
     ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785909220026,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 25640,
+  "head_seq": 25643,
   "cursor_fable": 22787,
-  "unread_for_fable": 2853,
+  "unread_for_fable": 2856,
   "last": [
-   {
-    "seq": 25636,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "3 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-2847), SINGLE_WRITER_VIOLATION(BEB-2903), FIX_BURI"
-   },
-   {
-    "seq": 25637,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
-   },
-   {
-    "seq": 25638,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2903 — commit 6"
-   },
    {
     "seq": 25639,
     "from": "cc",
@@ -1398,6 +1404,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2903 — commit c"
+   },
+   {
+    "seq": 25641,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-2493 failing at preflight 3× in 24h — LATEST (08-08T15:33): [  {   "
+   },
+   {
+    "seq": 25642,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2903 — commit 0"
+   },
+   {
+    "seq": 25643,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-2493 failing at preflight 3× in 24h — LATEST (08-08T15:33): [  {   "
    }
   ]
  },
@@ -1508,20 +1532,20 @@
    "code": "SINGLE_WRITER_VIOLATION",
    "severity": "red",
    "since": 1786202778236,
-   "detail": "BEB-2903 completed 4× with 4 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "detail": "BEB-2903 completed 5× with 5 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
    "refs": [
     "BEB-2903"
    ],
    "orky": {
     "cls": "single-writer-violation",
     "subject": "BEB-2903",
-    "error": "4 completions, 4 distinct artefacts, 2026-08-08T15:26:18.236Z -> 2026-08-08T15:32:04.442Z"
+    "error": "5 completions, 5 distinct artefacts, 2026-08-08T15:26:18.236Z -> 2026-08-08T15:33:57.578Z"
    }
   },
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786203165063,
+   "since": 1786203285064,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1535,7 +1559,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786203165063,
+   "since": 1786203285064,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1589,7 +1613,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786203165063,
+   "since": 1786203285064,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1900,6 +1924,20 @@
     "cls": "repeat-failer",
     "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
     "subject": "BEB-2336"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786199819139,
+   "detail": "BEB-2493 failing at preflight 3× in 24h — LATEST (08-08T15:33): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2493"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
+    "subject": "BEB-2493"
    }
   },
   {
@@ -2228,7 +2266,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786120019122,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 90× in 24h — LATEST (08-08T15:32): html-render class: verify_url serves 200 but renders BLANK in a real browser context (26 visible chars) — built-but-blank, the exact shape that curl cannot see",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 91× in 24h — LATEST (08-08T15:34): html-render class: verify_url serves 200 but renders BLANK in a real browser context (26 visible chars) — built-but-blank, the exact shape that curl cannot see",
    "refs": [
     "BEB-2744"
    ],
@@ -2353,7 +2391,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786203165063,
+   "since": 1786203285064,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -2808,6 +2846,16 @@
    "refs": [
     "BEB-2760",
     "BEB-2903"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785909220026,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2737",
+    "preflight"
    ]
   }
  ]
