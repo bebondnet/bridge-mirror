@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-08T12:40:30.460Z",
- "ts": 1786192829350,
+ "mirrored_at": "2026-08-08T12:41:42.428Z",
+ "ts": 1786192901091,
  "loop": {
   "proposed_total": 814,
   "by_state": {
-   "queued": 29,
-   "claimed": 6,
+   "queued": 31,
+   "claimed": 4,
    "done": 454,
    "held": 74,
    "blocked": 2,
@@ -13,10 +13,11 @@
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 5,
+    "claimed": 4,
     "done": 241,
     "held": 64,
-    "parked": 212
+    "parked": 212,
+    "queued": 1
    },
    "REFINE": {
     "blocked": 1,
@@ -29,24 +30,23 @@
    },
    "SPEC": {
     "blocked": 1,
-    "claimed": 1,
     "done": 122,
     "held": 9,
     "parked": 3,
-    "queued": 7
+    "queued": 8
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786192805127,
-   "tally": "BEB-2851→BUILD[claimed], BEB-2847→BUILD[claimed], BEB-2394→BUILD[claimed], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2484→BUILD[done], BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
+   "at": 1786192872585,
+   "tally": "BEB-2394→BUILD[claimed], BEB-2851→BUILD[claimed], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2484→BUILD[done], BEB-2890→SPEC[serious:proposed-only], BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786192796212,
+    "since": 1786192856209,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -60,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786192796212,
+    "since": 1786192856209,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -114,7 +114,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786192796212,
+    "since": 1786192856209,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -403,7 +403,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786140798787,
-    "detail": "BEB-2321 failing at unrecorded 5× in 24h — LATEST (08-08T12:39): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2321 failing at unrecorded 5× in 24h — LATEST (08-08T12:39): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
     "refs": [
      "BEB-2321"
     ],
@@ -878,7 +878,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786192796212,
+    "since": 1786192856209,
     "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2133"
@@ -892,7 +892,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786192796212,
+    "since": 1786192856209,
     "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2301"
@@ -904,9 +904,24 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786192856209,
+    "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2770"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2770"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786192796212,
+    "since": 1786192856209,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -1326,6 +1341,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2770 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2770"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1785909220026,
     "detail": "fix BEB-2737 for unrecorded has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
     "refs": [
@@ -1346,39 +1371,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 25346,
+  "head_seq": 25350,
   "cursor_fable": 22787,
-  "unread_for_fable": 2559,
+  "unread_for_fable": 2563,
   "last": [
-   {
-    "seq": 25342,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2301 proposed on 6 consecutive passes and has NEVER been c"
-   },
-   {
-    "seq": 25343,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_ROWS_PASS"
-   },
-   {
-    "seq": 25344,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2859 — commit b"
-   },
-   {
-    "seq": 25345,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER verification PASSED: BEB-2859 — https://widgets.abilifi.net/orky-beb-2859 — jso"
-   },
    {
     "seq": 25346,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER alarm: lease expired on BEB-2851 (attempt 1) — requeued."
+   },
+   {
+    "seq": 25347,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2806 — mastra tick: spec completion rejected: \"SyntaxError: U"
+   },
+   {
+    "seq": 25348,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2770 proposed on 6 consecutive passes and has NEVER been c"
+   },
+   {
+    "seq": 25349,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2847 — commit 0"
+   },
+   {
+    "seq": 25350,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 0 · claimed 4 — BEB-2394→BUILD[claimed], BEB-2851→BUI"
    }
   ]
  },
@@ -1474,7 +1499,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786192796212,
+   "since": 1786192856209,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1488,7 +1513,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786192796212,
+   "since": 1786192856209,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1542,7 +1567,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786192796212,
+   "since": 1786192856209,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1831,7 +1856,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786140798787,
-   "detail": "BEB-2321 failing at unrecorded 5× in 24h — LATEST (08-08T12:39): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2321 failing at unrecorded 5× in 24h — LATEST (08-08T12:39): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
    "refs": [
     "BEB-2321"
    ],
@@ -2306,7 +2331,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786192796212,
+   "since": 1786192856209,
    "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2133"
@@ -2320,7 +2345,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786192796212,
+   "since": 1786192856209,
    "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2301"
@@ -2332,9 +2357,24 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786192856209,
+   "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2770"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2770"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786192796212,
+   "since": 1786192856209,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -2749,6 +2789,16 @@
    "refs": [
     "BEB-2737",
     "unrecorded"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2770 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2770"
    ]
   },
   {
