@@ -1,22 +1,23 @@
 {
- "mirrored_at": "2026-08-08T10:13:34.957Z",
- "ts": 1786184013425,
+ "mirrored_at": "2026-08-08T10:14:37.515Z",
+ "ts": 1786184075457,
  "loop": {
   "proposed_total": 806,
   "by_state": {
-   "queued": 50,
-   "claimed": 0,
+   "queued": 48,
+   "claimed": 1,
    "done": 444,
    "held": 65,
    "blocked": 2,
-   "parked": 214
+   "parked": 215
   },
   "by_lane": {
    "BUILD": {
+    "claimed": 1,
     "done": 238,
     "held": 60,
-    "parked": 209,
-    "queued": 7
+    "parked": 210,
+    "queued": 5
    },
    "REFINE": {
     "blocked": 1,
@@ -39,14 +40,21 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786183968579,
+   "at": 1786184032555,
    "tally": "BEB-2394→BUILD, BEB-2851→BUILD, BEB-2744→BUILD, BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2484→BUILD[done], BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget]"
   },
   "reds": [
    {
-    "code": "COMPLETED_AT_GHOST",
+    "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1786183956369,
+    "detail": "claimed=0, queued=50, 2 passes, max_concurrent=20",
+    "refs": []
+   },
+   {
+    "code": "COMPLETED_AT_GHOST",
+    "severity": "red",
+    "since": 1786184016369,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -60,7 +68,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786183956369,
+    "since": 1786184016369,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -114,7 +122,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786183956369,
+    "since": 1786184016369,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -743,15 +751,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786097556978,
-    "detail": "alexrollin/abilifi-apps failing at deploy 122× in 24h — LATEST (08-08T07:46): codeLen: 1536\ndeploy error: DEPLOY REFUSED by 1 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786097791809,
+    "detail": "alexrollin/abilifi-apps failing at deploy 121× in 24h — LATEST (08-08T07:46): codeLen: 1746\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.c · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2156"
+     "BEB-1983"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 1536\ndeploy error: DEPLOY REFUSED by 1 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a divider line landed in the bundle and it cannot parse — FIX: return either whole-file code OR search/replace blocks, never both, and never a divider inside whole-file output\ncommit: none\ntarget: alexrollin/abilifi-apps",
-     "subject": "BEB-2156"
+     "error": "codeLen: 1746\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.com/workers/platform/limits/#number-of-workers) for more details.\",\"documentation_url\":\"htt\ncommit: [redacted]\ntarget: alexrollin/abilifi-apps",
+     "subject": "BEB-1983"
     }
    },
    {
@@ -841,14 +849,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786097597914,
-    "detail": "n/a failing at codegen 37× in 24h — LATEST (08-08T09:23): verdict: codegen produced no usable code\ncodeLen: 3229\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'rows' — the file does not parse, CF PUT will reject ",
+    "since": 1786097782595,
+    "detail": "n/a failing at codegen 36× in 24h — LATEST (08-08T09:23): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
     "refs": [
      "BEB-2533"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 3229\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'rows' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: n/a\ncodegen prompt head (what the MODEL received): [walls=2] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: n/a\ncodegen prompt head (what the MODEL received): [walls=2] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2533"
     }
    },
@@ -883,7 +891,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786183956369,
+    "since": 1786184016369,
     "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2133"
@@ -897,7 +905,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786183956369,
+    "since": 1786184016369,
     "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2771"
@@ -911,7 +919,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786183956369,
+    "since": 1786184016369,
     "detail": "BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2762"
@@ -925,7 +933,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786183956369,
+    "since": 1786184016369,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -1395,28 +1403,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 25117,
+  "head_seq": 25120,
   "cursor_fable": 22787,
-  "unread_for_fable": 2330,
+  "unread_for_fable": 2333,
   "last": [
-   {
-    "seq": 25113,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: GOAL_STALE(166min), GOAL_STALE(166min), GOAL_STALE(166min), GOAL_STALE(166min"
-   },
-   {
-    "seq": 25114,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×13 (BEB-2334): GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · GOAL_STALE · G"
-   },
-   {
-    "seq": 25115,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(23min)."
-   },
    {
     "seq": 25116,
     "from": "cc",
@@ -1428,6 +1418,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 25118,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "13 NEW REDS: GOAL_STALE(BEB-2493), GOAL_STALE(BEB-2572), GOAL_STALE(BEB-2741), GOAL_STALE("
+   },
+   {
+    "seq": 25119,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=50, 2 passes, max_concurrent=20"
+   },
+   {
+    "seq": 25120,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2493 REFUSED for BUILD — ticket status 'backlog' — owner-p"
    }
   ]
  },
@@ -1521,9 +1529,16 @@
  ],
  "reds": [
   {
-   "code": "COMPLETED_AT_GHOST",
+   "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1786183956369,
+   "detail": "claimed=0, queued=50, 2 passes, max_concurrent=20",
+   "refs": []
+  },
+  {
+   "code": "COMPLETED_AT_GHOST",
+   "severity": "red",
+   "since": 1786184016369,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1537,7 +1552,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786183956369,
+   "since": 1786184016369,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1591,7 +1606,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786183956369,
+   "since": 1786184016369,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -2220,15 +2235,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786097556978,
-   "detail": "alexrollin/abilifi-apps failing at deploy 122× in 24h — LATEST (08-08T07:46): codeLen: 1536\ndeploy error: DEPLOY REFUSED by 1 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786097791809,
+   "detail": "alexrollin/abilifi-apps failing at deploy 121× in 24h — LATEST (08-08T07:46): codeLen: 1746\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.c · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2156"
+    "BEB-1983"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 1536\ndeploy error: DEPLOY REFUSED by 1 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a divider line landed in the bundle and it cannot parse — FIX: return either whole-file code OR search/replace blocks, never both, and never a divider inside whole-file output\ncommit: none\ntarget: alexrollin/abilifi-apps",
-    "subject": "BEB-2156"
+    "error": "codeLen: 1746\ndeploy error: CF PUT 403: [{\"code\":10037,\"message\":\"You have exceeded the limit of 500 Workers on your account. Please refer to the Workers documentation (https://developers.cloudflare.com/workers/platform/limits/#number-of-workers) for more details.\",\"documentation_url\":\"htt\ncommit: [redacted]\ntarget: alexrollin/abilifi-apps",
+    "subject": "BEB-1983"
    }
   },
   {
@@ -2318,14 +2333,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786097597914,
-   "detail": "n/a failing at codegen 37× in 24h — LATEST (08-08T09:23): verdict: codegen produced no usable code\ncodeLen: 3229\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'rows' — the file does not parse, CF PUT will reject ",
+   "since": 1786097782595,
+   "detail": "n/a failing at codegen 36× in 24h — LATEST (08-08T09:23): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
    "refs": [
     "BEB-2533"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 3229\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): duplicate top-level declaration 'rows' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: n/a\ncodegen prompt head (what the MODEL received): [walls=2] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: n/a\ncodegen prompt head (what the MODEL received): [walls=2] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2533"
    }
   },
@@ -2360,7 +2375,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786183956369,
+   "since": 1786184016369,
    "detail": "BEB-2133 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2133"
@@ -2374,7 +2389,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786183956369,
+   "since": 1786184016369,
    "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2771"
@@ -2388,7 +2403,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786183956369,
+   "since": 1786184016369,
    "detail": "BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2762"
@@ -2402,7 +2417,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786183956369,
+   "since": 1786184016369,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
