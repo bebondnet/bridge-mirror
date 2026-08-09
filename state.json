@@ -1,22 +1,21 @@
 {
- "mirrored_at": "2026-08-09T09:03:05.586Z",
- "ts": 1786266184923,
+ "mirrored_at": "2026-08-09T09:04:09.245Z",
+ "ts": 1786266248635,
  "loop": {
   "proposed_total": 828,
   "by_state": {
    "queued": 19,
    "claimed": 2,
    "done": 473,
-   "held": 79,
-   "blocked": 3,
+   "held": 80,
+   "blocked": 2,
    "parked": 218
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 1,
     "claimed": 2,
     "done": 252,
-    "held": 65,
+    "held": 66,
     "parked": 212
    },
    "REFINE": {
@@ -38,14 +37,29 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786266167269,
-   "tally": "BEB-2394→BUILD[claimed], BEB-2909→BUILD[claimed], BEB-2851→BUILD[claimed], BEB-2913→BUILD[serious:proposed-only], BEB-2912→BUILD[serious:proposed-only], BEB-2907→BUILD[serious:proposed-only], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
+   "at": 1786266230131,
+   "tally": "BEB-2909→BUILD, BEB-2851→BUILD[claimed], BEB-2913→BUILD[serious:proposed-only], BEB-2912→BUILD[serious:proposed-only], BEB-2907→BUILD[serious:proposed-only], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2301→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
   },
   "reds": [
    {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786266021157,
+    "detail": "BEB-2909 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2909"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2909",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-09T09:00:21.157Z -> 2026-08-09T09:03:18.168Z"
+    },
+    "fix_ticket": "BEB-2760"
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -59,7 +73,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -134,7 +148,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -409,7 +423,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786180353388,
-    "detail": "abilifi-payload failing at codegen 82× in 24h — LATEST (08-09T08:09): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "abilifi-payload failing at codegen 83× in 24h — LATEST (08-09T09:03): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2394"
     ],
@@ -479,7 +493,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786180318524,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 172× in 24h — LATEST (08-09T09:00): html-render class: verify_url serves 200 but renders BLANK in a real browser context (34 visible chars) — built-but-blank, the exact shape that curl cannot see",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 173× in 24h — LATEST (08-09T09:03): html-render class: verify_url serves 200 but renders BLANK in a real browser context (34 visible chars) — built-but-blank, the exact shape that curl cannot see",
     "refs": [
      "BEB-2744"
     ],
@@ -534,7 +548,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "BEB-2913 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2913"
@@ -548,7 +562,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "BEB-2912 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2912"
@@ -562,22 +576,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786266157005,
-    "detail": "BEB-2577 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-    "refs": [
-     "BEB-2577"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-2577"
-    },
-    "fix_ticket": "BEB-2716"
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2301"
@@ -591,7 +590,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -782,16 +781,6 @@
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-2577 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-    "refs": [
-     "BEB-2716",
-     "BEB-2577"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1785892434215,
     "detail": "fix BEB-2716 for BEB-2912 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
      "BEB-2716",
@@ -821,7 +810,7 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1786266157005,
+    "since": 1786266217084,
     "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
@@ -833,28 +822,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 26855,
+  "head_seq": 26858,
   "cursor_fable": 22787,
-  "unread_for_fable": 4068,
+  "unread_for_fable": 4071,
   "last": [
-   {
-    "seq": 26851,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(45min)."
-   },
-   {
-    "seq": 26852,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
-   },
-   {
-    "seq": 26853,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2911 — commit b"
-   },
    {
     "seq": 26854,
     "from": "cc",
@@ -866,6 +837,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2577 proposed on 6 consecutive passes and has NEVER been c"
+   },
+   {
+    "seq": 26856,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2909 — commit 7"
+   },
+   {
+    "seq": 26857,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2909 completed 2× with 2 DIFFERENT artefacts inside 15min"
+   },
+   {
+    "seq": 26858,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
    }
   ]
  },
@@ -959,9 +948,24 @@
  ],
  "reds": [
   {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786266021157,
+   "detail": "BEB-2909 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2909"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2909",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-09T09:00:21.157Z -> 2026-08-09T09:03:18.168Z"
+   },
+   "fix_ticket": "BEB-2760"
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -975,7 +979,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1050,7 +1054,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1325,7 +1329,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786180353388,
-   "detail": "abilifi-payload failing at codegen 82× in 24h — LATEST (08-09T08:09): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "abilifi-payload failing at codegen 83× in 24h — LATEST (08-09T09:03): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2394"
    ],
@@ -1395,7 +1399,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786180318524,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 172× in 24h — LATEST (08-09T09:00): html-render class: verify_url serves 200 but renders BLANK in a real browser context (34 visible chars) — built-but-blank, the exact shape that curl cannot see",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 173× in 24h — LATEST (08-09T09:03): html-render class: verify_url serves 200 but renders BLANK in a real browser context (34 visible chars) — built-but-blank, the exact shape that curl cannot see",
    "refs": [
     "BEB-2744"
    ],
@@ -1450,7 +1454,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "BEB-2913 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2913"
@@ -1464,7 +1468,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "BEB-2912 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2912"
@@ -1478,22 +1482,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786266157005,
-   "detail": "BEB-2577 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-   "refs": [
-    "BEB-2577"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-2577"
-   },
-   "fix_ticket": "BEB-2716"
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "BEB-2301 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2301"
@@ -1507,7 +1496,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1698,16 +1687,6 @@
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-2577 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-   "refs": [
-    "BEB-2716",
-    "BEB-2577"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1785892434215,
    "detail": "fix BEB-2716 for BEB-2912 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
    "refs": [
     "BEB-2716",
@@ -1737,7 +1716,7 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1786266157005,
+   "since": 1786266217084,
    "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
