@@ -1,6 +1,6 @@
 {
- "mirrored_at": "2026-08-09T18:14:07.513Z",
- "ts": 1786299246791,
+ "mirrored_at": "2026-08-09T18:15:17.525Z",
+ "ts": 1786299316863,
  "loop": {
   "proposed_total": 843,
   "by_state": {
@@ -38,18 +38,33 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786299225054,
-   "tally": "idle (no proposable work)"
+   "at": 1786299292444,
+   "tally": "BEB-2928→BUILD[claimed], BEB-2851→BUILD[claimed], BEB-2231→BUILD[done], BEB-2920→SPEC[done], BEB-2921→SPEC[done], BEB-2917→BUILD[done], BEB-2916→BUILD[done], BEB-2754→SPEC[done], BEB-2770→REFINE[no-budget], BEB-2301→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
     "code": "VERIFY_PENDING",
     "severity": "red",
-    "since": 1786299226425,
+    "since": 1786299286426,
     "detail": "1 done lane(s) with verification PENDING — not complete until passed",
     "refs": [
      "BEB-2926"
     ]
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786298944652,
+    "detail": "BEB-2926 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2926"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2926",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-09T18:09:04.652Z -> 2026-08-09T18:13:41.192Z"
+    },
+    "fix_ticket": "BEB-2760"
    },
    {
     "code": "SINGLE_WRITER_VIOLATION",
@@ -63,13 +78,12 @@
      "cls": "single-writer-violation",
      "subject": "BEB-2929",
      "error": "2 completions, 2 distinct artefacts, 2026-08-09T18:10:58.308Z -> 2026-08-09T18:12:59.046Z"
-    },
-    "fix_ticket": "BEB-2760"
+    }
    },
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786299216896,
+    "since": 1786299278104,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -83,7 +97,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786299216896,
+    "since": 1786299278104,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -158,7 +172,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786299216896,
+    "since": 1786299278104,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -264,20 +278,6 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786212852377,
-    "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-08T18:56): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
-    "refs": [
-     "BEB-2744"
-    ],
-    "orky": {
-     "cls": "repeat-failer",
-     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
-     "subject": "BEB-2744"
-    }
-   },
-   {
-    "code": "REPEAT_FAILER",
-    "severity": "red",
     "since": 1786257418015,
     "detail": "BEB-2858 failing at preflight 3× in 24h — LATEST (08-09T07:47): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"no repo/frag target binding in the description, in any comment, or inferable from the title — the machine cannot name where this deliverable ships from, so  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
@@ -321,7 +321,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786215272906,
-    "detail": "abilifi-apps failing at heartbeat 16× in 24h — LATEST (08-09T17:45): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+    "detail": "abilifi-apps failing at heartbeat 17× in 24h — LATEST (08-09T18:14): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
     "refs": [
      "BEB-2385"
     ],
@@ -334,14 +334,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786212818707,
-    "detail": "abilifi-payload failing at codegen 20× in 24h — LATEST (08-09T17:52): verdict: codegen produced no usable code\ncodeLen: 6605\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 5 routes (/, /claim/:gers",
+    "since": 1786213215460,
+    "detail": "abilifi-payload failing at codegen 19× in 24h — LATEST (08-09T17:52): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
     "refs": [
      "BEB-2394"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 6605\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 5 routes (/, /claim/:gers_id, /listing/:gers_id/edit, /nodes/:eid) but only 3 dispatch site(s) — routes are listed and never handled, so every one of them answers \"unknown route\" while the page looks complete | duplicate top-level declaration 'stmt' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2394"
     }
    },
@@ -460,7 +460,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786299216896,
+    "since": 1786299278104,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -551,16 +551,6 @@
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785909220026,
-    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
-    "refs": [
-     "BEB-2737",
-     "preflight"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1785909220026,
     "detail": "fix BEB-2737 for pass has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
     "refs": [
      "BEB-2737",
@@ -600,39 +590,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 27642,
+  "head_seq": 27648,
   "cursor_fable": 22787,
-  "unread_for_fable": 4855,
+  "unread_for_fable": 4861,
   "last": [
    {
-    "seq": 27638,
+    "seq": 27644,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2929 — commit d"
+    "one_line": "RED CLEARED: REPEAT_FAILER(1401min)."
    },
    {
-    "seq": 27639,
+    "seq": 27645,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2934: wanted 'done' (l"
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2926 completed 2× with 2 DIFFERENT artefacts inside 15min"
    },
    {
-    "seq": 27640,
+    "seq": 27646,
     "from": "cc",
     "kind": "status",
-    "one_line": "17 NEW REDS: GOAL_STALE(BEB-2493), GOAL_STALE(BEB-2572), GOAL_STALE(BEB-2741), GOAL_STALE("
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2929 — commit b"
    },
    {
-    "seq": 27641,
+    "seq": 27647,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2926 — commit b"
+    "one_line": "CLEARED ×1 (BEB-2334): REPEAT_FAILER"
    },
    {
-    "seq": 27642,
+    "seq": 27648,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED ×2 (BEB-2334): VERIFY_PENDING[BEB-2926] · SINGLE_WRITER_VIOLATION[BEB-2929]→BEB-2760"
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 0 · claimed 4 — BEB-2928→BUILD[claimed], BEB-2851→BUI"
    }
   ]
  },
@@ -728,11 +718,26 @@
   {
    "code": "VERIFY_PENDING",
    "severity": "red",
-   "since": 1786299226425,
+   "since": 1786299286426,
    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
    "refs": [
     "BEB-2926"
    ]
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786298944652,
+   "detail": "BEB-2926 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2926"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2926",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-09T18:09:04.652Z -> 2026-08-09T18:13:41.192Z"
+   },
+   "fix_ticket": "BEB-2760"
   },
   {
    "code": "SINGLE_WRITER_VIOLATION",
@@ -746,13 +751,12 @@
     "cls": "single-writer-violation",
     "subject": "BEB-2929",
     "error": "2 completions, 2 distinct artefacts, 2026-08-09T18:10:58.308Z -> 2026-08-09T18:12:59.046Z"
-   },
-   "fix_ticket": "BEB-2760"
+   }
   },
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786299216896,
+   "since": 1786299278104,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -766,7 +770,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786299216896,
+   "since": 1786299278104,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -841,7 +845,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786299216896,
+   "since": 1786299278104,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -947,20 +951,6 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786212852377,
-   "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-08T18:56): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
-   "refs": [
-    "BEB-2744"
-   ],
-   "orky": {
-    "cls": "repeat-failer",
-    "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
-    "subject": "BEB-2744"
-   }
-  },
-  {
-   "code": "REPEAT_FAILER",
-   "severity": "red",
    "since": 1786257418015,
    "detail": "BEB-2858 failing at preflight 3× in 24h — LATEST (08-09T07:47): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"no repo/frag target binding in the description, in any comment, or inferable from the title — the machine cannot name where this deliverable ships from, so  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
@@ -1004,7 +994,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786215272906,
-   "detail": "abilifi-apps failing at heartbeat 16× in 24h — LATEST (08-09T17:45): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+   "detail": "abilifi-apps failing at heartbeat 17× in 24h — LATEST (08-09T18:14): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
    "refs": [
     "BEB-2385"
    ],
@@ -1017,14 +1007,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786212818707,
-   "detail": "abilifi-payload failing at codegen 20× in 24h — LATEST (08-09T17:52): verdict: codegen produced no usable code\ncodeLen: 6605\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 5 routes (/, /claim/:gers",
+   "since": 1786213215460,
+   "detail": "abilifi-payload failing at codegen 19× in 24h — LATEST (08-09T17:52): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
    "refs": [
     "BEB-2394"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 6605\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 5 routes (/, /claim/:gers_id, /listing/:gers_id/edit, /nodes/:eid) but only 3 dispatch site(s) — routes are listed and never handled, so every one of them answers \"unknown route\" while the page looks complete | duplicate top-level declaration 'stmt' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2394"
    }
   },
@@ -1143,7 +1133,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786299216896,
+   "since": 1786299278104,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1198,16 +1188,6 @@
    "refs": [
     "BEB-2742",
     "BEB-2742"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1785909220026,
-   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
-   "refs": [
-    "BEB-2737",
-    "preflight"
    ]
   },
   {
