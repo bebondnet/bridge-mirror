@@ -1,32 +1,31 @@
 {
- "mirrored_at": "2026-08-09T20:25:25.943Z",
- "ts": 1786307124734,
+ "mirrored_at": "2026-08-09T20:26:30.786Z",
+ "ts": 1786307189362,
  "loop": {
   "proposed_total": 846,
   "by_state": {
-   "queued": 15,
+   "queued": 16,
    "claimed": 5,
    "done": 487,
-   "held": 80,
+   "held": 79,
    "blocked": 2,
    "parked": 221
   },
   "by_lane": {
    "BUILD": {
     "claimed": 5,
-    "done": 259,
-    "held": 66,
-    "parked": 215,
-    "queued": 1
+    "done": 261,
+    "held": 65,
+    "parked": 215
    },
    "REFINE": {
     "blocked": 1,
     "held": 1
    },
    "REPAIR": {
-    "done": 99,
+    "done": 97,
     "parked": 3,
-    "queued": 14
+    "queued": 16
    },
    "SPEC": {
     "blocked": 1,
@@ -38,23 +37,29 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786307082272,
-   "tally": "BEB-2928→BUILD[claimed], BEB-2851→BUILD[claimed], BEB-2394→BUILD, BEB-2231→BUILD[done], BEB-2920→SPEC[done], BEB-2921→SPEC[done], BEB-2917→BUILD[done], BEB-2916→BUILD[done], BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget]"
+   "at": 1786307147856,
+   "tally": "BEB-2926→BUILD[claimed], BEB-2928→BUILD[claimed], BEB-2851→BUILD[claimed], BEB-2394→BUILD, BEB-2231→BUILD[done], BEB-2920→SPEC[done], BEB-2921→SPEC[done], BEB-2917→BUILD[done], BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget]"
   },
   "reds": [
    {
-    "code": "VERIFY_PENDING",
+    "code": "SINGLE_WRITER_VIOLATION",
     "severity": "red",
-    "since": 1786307073348,
-    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "since": 1786306968329,
+    "detail": "BEB-2930 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
     "refs": [
-     "BEB-2926"
-    ]
+     "BEB-2930"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2930",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-09T20:22:48.329Z -> 2026-08-09T20:25:07.268Z"
+    },
+    "fix_ticket": "BEB-2760"
    },
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786307064214,
+    "since": 1786307124232,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -68,7 +73,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786307064214,
+    "since": 1786307124232,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -143,7 +148,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786307064214,
+    "since": 1786307124232,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -245,6 +250,21 @@
      "BEB-2292",
      "BEB-2259"
     ]
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786307000798,
+    "detail": "BEB-2394 refused 3× in 30min — LATEST: ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2394"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333)",
+     "subject": "BEB-2394"
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "REPEAT_FAILER",
@@ -362,7 +382,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786223553501,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 206× in 24h — LATEST (08-09T20:23): declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the h · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 208× in 24h — LATEST (08-09T20:25): declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the h · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2857"
     ],
@@ -445,7 +465,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786307064214,
+    "since": 1786307124232,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -585,39 +605,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 27888,
+  "head_seq": 27894,
   "cursor_fable": 27741,
-  "unread_for_fable": 147,
+  "unread_for_fable": 153,
   "last": [
    {
-    "seq": 27884,
+    "seq": 27890,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
+   },
+   {
+    "seq": 27891,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2936 — commit 3"
+   },
+   {
+    "seq": 27892,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2394 REFUSED for BUILD — ticket status 'done' — owner-park"
    },
    {
-    "seq": 27885,
+    "seq": 27893,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed"
+    "one_line": "2 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-2930), SILENT_REFUSAL(BEB-2394) — full detail on g"
    },
    {
-    "seq": 27886,
+    "seq": 27894,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_ROWS_PASS"
-   },
-   {
-    "seq": 27887,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2930 — commit b"
-   },
-   {
-    "seq": 27888,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2394 REFUSED for BUILD — ticket status 'done' — owner-park"
+    "one_line": "RED CLEARED: GOAL_STALE(41min), GOAL_STALE(41min), GOAL_STALE(41min), GOAL_STALE(41min), G"
    }
   ]
  },
@@ -711,18 +731,24 @@
  ],
  "reds": [
   {
-   "code": "VERIFY_PENDING",
+   "code": "SINGLE_WRITER_VIOLATION",
    "severity": "red",
-   "since": 1786307073348,
-   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "since": 1786306968329,
+   "detail": "BEB-2930 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
    "refs": [
-    "BEB-2926"
-   ]
+    "BEB-2930"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2930",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-09T20:22:48.329Z -> 2026-08-09T20:25:07.268Z"
+   },
+   "fix_ticket": "BEB-2760"
   },
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786307064214,
+   "since": 1786307124232,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -736,7 +762,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786307064214,
+   "since": 1786307124232,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -811,7 +837,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786307064214,
+   "since": 1786307124232,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -913,6 +939,21 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786307000798,
+   "detail": "BEB-2394 refused 3× in 30min — LATEST: ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2394"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333)",
+    "subject": "BEB-2394"
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "REPEAT_FAILER",
@@ -1030,7 +1071,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786223553501,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 206× in 24h — LATEST (08-09T20:23): declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the h · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 208× in 24h — LATEST (08-09T20:25): declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the h · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2857"
    ],
@@ -1113,7 +1154,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786307064214,
+   "since": 1786307124232,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
