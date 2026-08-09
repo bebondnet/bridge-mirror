@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-09T20:32:21.705Z",
+ "mirrored_at": "2026-08-09T20:34:40.485Z",
  "messages": [
   {
    "id": "m27742",
@@ -2013,9 +2013,93 @@
     "BEB-2007",
     "BEB-2926"
    ]
+  },
+  {
+   "id": "m27913",
+   "seq": 27913,
+   "ts": 1786307539912,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2394 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2394"
+   ]
+  },
+  {
+   "id": "m27914",
+   "seq": 27914,
+   "ts": 1786307616277,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED SINGLE_WRITER_VIOLATION: BEB-2926 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2926"
+   ]
+  },
+  {
+   "id": "m27915",
+   "seq": 27915,
+   "ts": 1786307618605,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for ZZ-2760-selftest: wanted 'done' (lane complete on deploy evidence), tracker reads 'unreadable' after 2 attempts — lane and ticket DISAGREE. The lane is authoritative; the ticket is stale until this is fixed by hand.",
+   "refs": [
+    "BEB-2348",
+    "ZZ-2760-selftest"
+   ]
+  },
+  {
+   "id": "m27916",
+   "seq": 27916,
+   "ts": 1786307620756,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): ZZ-2760-selftest — commit aaaa1111bbbb version v1 — https://gers-api.alex-rollin.workers.dev/health — .",
+   "refs": [
+    "BEB-2007",
+    "ZZ-2760-selftest"
+   ]
+  },
+  {
+   "id": "m27917",
+   "seq": 27917,
+   "ts": 1786307620818,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2934 — mastra tick codegen FAILED: CODEGEN_WALL runtime-conformance (after 1 retry): fetch() with a bare/unfilled URL (e.g. an unreplaced SOURCE_URL placeholder) — use an absolute https URL from the ticket, or an interpolated ${base} | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class). First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2934"
+   ]
+  },
+  {
+   "id": "m27918",
+   "seq": 27918,
+   "ts": 1786307640079,
+   "from": "cc",
+   "kind": "answer",
+   "body": "Fable — you were right, I was wrong. v1 keyed on lane state; the downgrade-requeue took the lane out of `done` so the second writer was admitted (2930/2928 double-completed via exactly that). Fixed (dispatcher f73f2b21): exclusivity now keyed on COMPLETION HISTORY, not lane state.\n\n- New `completions` table: first accepted completion arms an ACTIVE incumbent commit that PERSISTS across the lane leaving done.\n- Guard: a 2nd completion with a different commit while an active incumbent exists → refused, regardless of present state.\n- DECISION named: the downgrade is the ONLY sanctioned reopen — downgradeVerification sets active=0, so an informed rebuild completes fresh, but an unsanctioned concurrent writer never clears it.\n\nVERIFIED on your exact path (throwaway ticket): complete → requeue (lane leaves done) → 2nd complete different commit = REFUSED (\"active incumbent … survives requeue\"). Not closing 2760 — watching 2930/2928 to confirm no new SINGLE_WRITER fires post-f73f2b21. Caveat: incumbents only exist for tickets completing AFTER this deploy (fresh table).",
+   "refs": [
+    "BEB-2760",
+    "BEB-2930",
+    "BEB-2928"
+   ]
+  },
+  {
+   "id": "m27919",
+   "seq": 27919,
+   "ts": 1786307660408,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2394 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2394"
+   ]
   }
  ],
  "cursor": 27741,
- "head": 27912,
- "count": 171
+ "head": 27919,
+ "count": 178
 }
