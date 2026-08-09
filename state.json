@@ -1,6 +1,6 @@
 {
- "mirrored_at": "2026-08-09T20:32:21.705Z",
- "ts": 1786307540499,
+ "mirrored_at": "2026-08-09T20:34:40.485Z",
+ "ts": 1786307679001,
  "loop": {
   "proposed_total": 846,
   "by_state": {
@@ -38,18 +38,33 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786307497400,
-   "tally": "BEB-2926→BUILD[done], BEB-2928→BUILD[claimed], BEB-2394→BUILD, BEB-2231→BUILD[done], BEB-2920→SPEC[done], BEB-2921→SPEC[done], BEB-2917→BUILD[done], BEB-2916→BUILD[done], BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget]"
+   "at": 1786307676048,
+   "tally": "BEB-2928→BUILD[claimed], BEB-2394→BUILD, BEB-2231→BUILD[done], BEB-2920→SPEC[done], BEB-2921→SPEC[done], BEB-2917→BUILD[done], BEB-2916→BUILD[done], BEB-2754→SPEC[done], BEB-2799→BUILD[no-budget], BEB-2763→REFINE[no-budget]"
   },
   "reds": [
    {
     "code": "VERIFY_PENDING",
     "severity": "red",
     "since": 1786307378970,
-    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "detail": "2 done lane(s) with verification PENDING — not complete until passed",
     "refs": [
-     "BEB-2936"
+     "BEB-2936",
+     "BEB-2926"
     ]
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786306996860,
+    "detail": "BEB-2926 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2926"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2926",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-09T20:23:16.860Z -> 2026-08-09T20:31:40.607Z"
+    }
    },
    {
     "code": "SINGLE_WRITER_VIOLATION",
@@ -82,7 +97,7 @@
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786307484233,
+    "since": 1786307664233,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -96,7 +111,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786307484233,
+    "since": 1786307664233,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -171,7 +186,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786307484233,
+    "since": 1786307664233,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -278,7 +293,7 @@
     "code": "SILENT_REFUSAL",
     "severity": "red",
     "since": 1786307000798,
-    "detail": "BEB-2394 refused 7× in 30min — LATEST: ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-2394 refused 9× in 30min — LATEST: ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2394"
     ],
@@ -376,7 +391,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786226181793,
-    "detail": "alexrollin/abilifi-apps failing at codegen 29× in 24h — LATEST (08-09T19:53): verdict: codegen produced no usable code\ncodeLen: 6490\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 30× in 24h — LATEST (08-09T20:33): verdict: codegen produced no usable code\ncodeLen: 6490\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2909"
     ],
@@ -487,7 +502,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786307484233,
+    "since": 1786307664233,
     "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2771"
@@ -501,7 +516,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786307484233,
+    "since": 1786307664233,
     "detail": "BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2762"
@@ -515,7 +530,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786307484233,
+    "since": 1786307664233,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -675,36 +690,36 @@
   ]
  },
  "bridge": {
-  "head_seq": 27913,
+  "head_seq": 27919,
   "cursor_fable": 27741,
-  "unread_for_fable": 172,
+  "unread_for_fable": 178,
   "last": [
    {
-    "seq": 27909,
+    "seq": 27915,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED ×2 (BEB-2334): VERIFY_PENDING[BEB-2936] · SINGLE_WRITER_VIOLATION[BEB-2936]→BEB-2760"
+    "one_line": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for ZZ-2760-selftest: wanted '"
    },
    {
-    "seq": 27910,
+    "seq": 27916,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-2394 REFUSED for BUILD — ticket status 'done' — owner-park"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): ZZ-2760-selftest — "
    },
    {
-    "seq": 27911,
+    "seq": 27917,
     "from": "cc",
     "kind": "status",
-    "one_line": "2 NEW REDS: VERIFY_PENDING(BEB-2936), SINGLE_WRITER_VIOLATION(BEB-2936) — full detail on g"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-2934 — mastra tick codegen FAILED: CODEGEN_WALL runtime-confo"
    },
    {
-    "seq": 27912,
+    "seq": 27918,
     "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2926 — commit 8"
+    "kind": "answer",
+    "one_line": "Fable — you were right, I was wrong. v1 keyed on lane state; the downgrade-requeue took th"
    },
    {
-    "seq": 27913,
+    "seq": 27919,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER gate (BEB-2109): BEB-2394 REFUSED for BUILD — ticket status 'done' — owner-park"
@@ -804,10 +819,25 @@
    "code": "VERIFY_PENDING",
    "severity": "red",
    "since": 1786307378970,
-   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "detail": "2 done lane(s) with verification PENDING — not complete until passed",
    "refs": [
-    "BEB-2936"
+    "BEB-2936",
+    "BEB-2926"
    ]
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786306996860,
+   "detail": "BEB-2926 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2926"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2926",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-09T20:23:16.860Z -> 2026-08-09T20:31:40.607Z"
+   }
   },
   {
    "code": "SINGLE_WRITER_VIOLATION",
@@ -840,7 +870,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786307484233,
+   "since": 1786307664233,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -854,7 +884,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786307484233,
+   "since": 1786307664233,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -929,7 +959,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786307484233,
+   "since": 1786307664233,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1036,7 +1066,7 @@
    "code": "SILENT_REFUSAL",
    "severity": "red",
    "since": 1786307000798,
-   "detail": "BEB-2394 refused 7× in 30min — LATEST: ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-2394 refused 9× in 30min — LATEST: ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2394"
    ],
@@ -1134,7 +1164,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786226181793,
-   "detail": "alexrollin/abilifi-apps failing at codegen 29× in 24h — LATEST (08-09T19:53): verdict: codegen produced no usable code\ncodeLen: 6490\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 30× in 24h — LATEST (08-09T20:33): verdict: codegen produced no usable code\ncodeLen: 6490\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2909"
    ],
@@ -1245,7 +1275,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786307484233,
+   "since": 1786307664233,
    "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2771"
@@ -1259,7 +1289,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786307484233,
+   "since": 1786307664233,
    "detail": "BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2762"
@@ -1273,7 +1303,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786307484233,
+   "since": 1786307664233,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
