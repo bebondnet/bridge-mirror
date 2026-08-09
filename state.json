@@ -1,23 +1,23 @@
 {
- "mirrored_at": "2026-08-09T18:13:30.077Z",
- "ts": 1786299209318,
+ "mirrored_at": "2026-08-09T18:14:07.513Z",
+ "ts": 1786299246791,
  "loop": {
   "proposed_total": 843,
   "by_state": {
-   "queued": 17,
-   "claimed": 3,
-   "done": 486,
+   "queued": 16,
+   "claimed": 4,
+   "done": 487,
    "held": 80,
    "blocked": 2,
-   "parked": 220
+   "parked": 219
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 3,
-    "done": 259,
+    "claimed": 4,
+    "done": 260,
     "held": 66,
-    "parked": 214,
-    "queued": 2
+    "parked": 213,
+    "queued": 1
    },
    "REFINE": {
     "blocked": 1,
@@ -38,14 +38,38 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786299175536,
-   "tally": "BEB-2770→REFINE[no-budget], BEB-2301→BUILD[serious:proposed-only], BEB-2771→REFINE[no-budget], BEB-2762→REFINE[no-budget], BEB-2913→BUILD[serious:proposed-only], BEB-2912→BUILD[serious:proposed-only], BEB-2907→BUILD[serious:proposed-only], BEB-2890→SPEC[serious:proposed-only], BEB-2799→BUILD[no-budget], BEB-2763→REFINE[no-budget]"
+   "at": 1786299225054,
+   "tally": "idle (no proposable work)"
   },
   "reds": [
    {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1786299226425,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2926"
+    ]
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786299058308,
+    "detail": "BEB-2929 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2929"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2929",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-09T18:10:58.308Z -> 2026-08-09T18:12:59.046Z"
+    },
+    "fix_ticket": "BEB-2760"
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786299157298,
+    "since": 1786299216896,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -59,7 +83,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786299157298,
+    "since": 1786299216896,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -134,7 +158,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786299157298,
+    "since": 1786299216896,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -366,15 +390,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786212786242,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 174× in 24h — LATEST (08-09T18:11): declared-route probe: 4/6 route(s) the ticket DECLARES do not exist on the deploy — GET /edit/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) —  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786213705526,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 174× in 24h — LATEST (08-09T18:13): declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the h · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2858"
+     "BEB-2857"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "declared-route probe: 4/6 route(s) the ticket DECLARES do not exist on the deploy — GET /edit/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /edit/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /edit/e → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /edit/e → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.",
-     "subject": "BEB-2858"
+     "error": "declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /t → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"t\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /nope → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"nope\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.",
+     "subject": "BEB-2857"
     }
    },
    {
@@ -436,7 +460,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786299157298,
+    "since": 1786299216896,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -576,28 +600,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 27639,
+  "head_seq": 27642,
   "cursor_fable": 22787,
-  "unread_for_fable": 4852,
+  "unread_for_fable": 4855,
   "last": [
-   {
-    "seq": 27635,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(14min), FIX_BURIED(14min), PROPOSED_NEVER_CLAIMED(12mi"
-   },
-   {
-    "seq": 27636,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ×17 (BEB-2334): GOAL_STALE[BEB-2493] · GOAL_STALE[BEB-2572,BEB-2348,BEB-2367,BEB-2125,"
-   },
-   {
-    "seq": 27637,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×6 (BEB-2334): SINGLE_WRITER_VIOLATION · PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_C"
-   },
    {
     "seq": 27638,
     "from": "cc",
@@ -609,6 +615,24 @@
     "from": "cc",
     "kind": "status",
     "one_line": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2934: wanted 'done' (l"
+   },
+   {
+    "seq": 27640,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "17 NEW REDS: GOAL_STALE(BEB-2493), GOAL_STALE(BEB-2572), GOAL_STALE(BEB-2741), GOAL_STALE("
+   },
+   {
+    "seq": 27641,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2926 — commit b"
+   },
+   {
+    "seq": 27642,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): VERIFY_PENDING[BEB-2926] · SINGLE_WRITER_VIOLATION[BEB-2929]→BEB-2760"
    }
   ]
  },
@@ -702,9 +726,33 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1786299226425,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2926"
+   ]
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786299058308,
+   "detail": "BEB-2929 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2929"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2929",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-09T18:10:58.308Z -> 2026-08-09T18:12:59.046Z"
+   },
+   "fix_ticket": "BEB-2760"
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786299157298,
+   "since": 1786299216896,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -718,7 +766,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786299157298,
+   "since": 1786299216896,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -793,7 +841,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786299157298,
+   "since": 1786299216896,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1025,15 +1073,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786212786242,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 174× in 24h — LATEST (08-09T18:11): declared-route probe: 4/6 route(s) the ticket DECLARES do not exist on the deploy — GET /edit/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) —  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786213705526,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 174× in 24h — LATEST (08-09T18:13): declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the h · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2858"
+    "BEB-2857"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "declared-route probe: 4/6 route(s) the ticket DECLARES do not exist on the deploy — GET /edit/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /edit/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /edit/e → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /edit/e → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"edit\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.",
-    "subject": "BEB-2858"
+    "error": "declared-route probe: 3/5 route(s) the ticket DECLARES do not exist on the deploy — POST /page → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"page\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /t → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"t\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /nope → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"nope\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.",
+    "subject": "BEB-2857"
    }
   },
   {
@@ -1095,7 +1143,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786299157298,
+   "since": 1786299216896,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
