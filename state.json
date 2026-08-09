@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-09T07:30:02.789Z",
- "ts": 1786260602080,
+ "mirrored_at": "2026-08-09T07:31:17.220Z",
+ "ts": 1786260676743,
  "loop": {
   "proposed_total": 822,
   "by_state": {
-   "queued": 20,
+   "queued": 21,
    "claimed": 1,
-   "done": 467,
+   "done": 466,
    "held": 81,
    "blocked": 2,
    "parked": 219
@@ -23,9 +23,9 @@
     "held": 1
    },
    "REPAIR": {
-    "done": 93,
+    "done": 92,
     "parked": 3,
-    "queued": 20
+    "queued": 21
    },
    "SPEC": {
     "blocked": 1,
@@ -37,7 +37,7 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786260584358,
+   "at": 1786260656899,
    "tally": "BEB-2851→BUILD[claimed], BEB-2231→SPEC[done], BEB-2414→SPEC[done], BEB-2176→BUILD[done], BEB-2133→BUILD[no-budget], BEB-2484→BUILD[done], BEB-2890→SPEC[serious:proposed-only], BEB-2751→SPEC[done], BEB-2799→BUILD[no-budget], BEB-2763→REFINE[no-budget]"
   },
   "reds": [
@@ -58,7 +58,7 @@
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786260576591,
+    "since": 1786260639190,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -72,7 +72,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786260576591,
+    "since": 1786260639190,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -147,7 +147,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786260576591,
+    "since": 1786260639190,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -477,14 +477,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786174203094,
-    "detail": "abilifi-payload failing at codegen 87× in 24h — LATEST (08-09T07:24): verdict: codegen produced no usable code\ncodeLen: 9361\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): advertises 4 routes (/, /claim/:gers_id, /listing/:gers_id/edit, /api/waterfall) but ",
+    "since": 1786176878626,
+    "detail": "abilifi-payload failing at codegen 86× in 24h — LATEST (08-09T07:24): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
     "refs": [
      "BEB-2394"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 9361\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): advertises 4 routes (/, /claim/:gers_id, /listing/:gers_id/edit, /api/waterfall) but only 1 dispatch site(s) — routes are listed and never handled, so every one of them answers \"unknown route\" while the page looks complete | duplicate top-level declaration 'page' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2394"
     }
    },
@@ -617,7 +617,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786260576591,
+    "since": 1786260639190,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -865,6 +865,19 @@
     ]
    },
    {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1786260639190,
+    "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
+   },
+   {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
     "since": 1786257421576,
@@ -881,16 +894,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 26699,
+  "head_seq": 26700,
   "cursor_fable": 22787,
-  "unread_for_fable": 3912,
+  "unread_for_fable": 3913,
   "last": [
-   {
-    "seq": 26695,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "2 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-2857), FIX_BURIED(BEB-2760) — full detail on get_s"
-   },
    {
     "seq": 26696,
     "from": "cc",
@@ -914,6 +921,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×6 (BEB-2334): VERIFY_PENDING · REPEAT_FAILER · PROPOSED_NEVER_CLAIMED · FIX_BURIE"
+   },
+   {
+    "seq": 26700,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a p"
    }
   ]
  },
@@ -1023,7 +1036,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786260576591,
+   "since": 1786260639190,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1037,7 +1050,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786260576591,
+   "since": 1786260639190,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1112,7 +1125,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786260576591,
+   "since": 1786260639190,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1442,14 +1455,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786174203094,
-   "detail": "abilifi-payload failing at codegen 87× in 24h — LATEST (08-09T07:24): verdict: codegen produced no usable code\ncodeLen: 9361\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): advertises 4 routes (/, /claim/:gers_id, /listing/:gers_id/edit, /api/waterfall) but ",
+   "since": 1786176878626,
+   "detail": "abilifi-payload failing at codegen 86× in 24h — LATEST (08-09T07:24): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
    "refs": [
     "BEB-2394"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 9361\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): advertises 4 routes (/, /claim/:gers_id, /listing/:gers_id/edit, /api/waterfall) but only 1 dispatch site(s) — routes are listed and never handled, so every one of them answers \"unknown route\" while the page looks complete | duplicate top-level declaration 'page' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2394"
    }
   },
@@ -1582,7 +1595,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786260576591,
+   "since": 1786260639190,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1828,6 +1841,19 @@
     "BEB-2760",
     "BEB-2857"
    ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1786260639190,
+   "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
