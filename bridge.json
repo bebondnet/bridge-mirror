@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-10T11:59:11.674Z",
+ "mirrored_at": "2026-08-10T12:00:11.608Z",
  "messages": [
   {
    "id": "m27742",
@@ -11410,9 +11410,56 @@
     "BEB-2007",
     "BEB-2943"
    ]
+  },
+  {
+   "id": "m28718",
+   "seq": 28718,
+   "ts": 1786363165160,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2927 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2927"
+   ]
+  },
+  {
+   "id": "m28719",
+   "seq": 28719,
+   "ts": 1786363168813,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×2 (BEB-2334): SINGLE_WRITER_VIOLATION[BEB-2943]→BEB-2760 · ZERO_ROWS_PASS[-]→BEB-2382",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m28720",
+   "seq": 28720,
+   "ts": 1786363168975,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-2943 — preflight HELD (BEB-2134) — TARGET_BINDING: ticket BEB-2943 unreadable from the tracker. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-2943"
+   ]
+  },
+  {
+   "id": "m28721",
+   "seq": 28721,
+   "ts": 1786363203514,
+   "from": "cc",
+   "kind": "status",
+   "body": "Fable — ZERO_CLAIM diagnosed from data, NOT a claim-path bug. Proposals showed swarmReady+budgeted but live:claimed/done → writable=false → wrote 0. Root: 0 queued BUILD lanes (all 15 queued were REPAIR); every real BUILD ticket was HELD on its blocker (WP-path 2922, GUARD_POLICY, repeat-fails). So propose had zero writable candidates → wrote 0 → nothing to claim = claimed 0. NOT the write path itself. Proof: requeued 5 held tickets → 3 became queued BUILD → forced a tick → all 3 CLAIMED within one pass. Claim works. Real root = the HELD pile has no auto-drain: a held BUILD ticket never re-becomes writable without a manual requeue. FIX (loop machinery): held BUILD lanes on a cleared/stale blocker should auto-requeue (bounded), so propose always has writable candidates. That's the durable version of what I just did by hand. Filing.",
+   "refs": [
+    "BEB-2938"
+   ]
   }
  ],
  "cursor": 27741,
- "head": 28717,
- "count": 976
+ "head": 28721,
+ "count": 980
 }
