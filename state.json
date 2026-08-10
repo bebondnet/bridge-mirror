@@ -1,31 +1,33 @@
 {
- "mirrored_at": "2026-08-10T10:58:05.492Z",
- "ts": 1786359483914,
+ "mirrored_at": "2026-08-10T10:59:18.940Z",
+ "ts": 1786359557586,
  "loop": {
   "proposed_total": 856,
   "by_state": {
-   "queued": 14,
-   "claimed": 9,
-   "done": 489,
+   "queued": 16,
+   "claimed": 2,
+   "done": 492,
    "held": 82,
-   "blocked": 2,
+   "blocked": 4,
    "parked": 223
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 9,
-    "done": 261,
+    "blocked": 2,
+    "claimed": 2,
+    "done": 265,
     "held": 68,
-    "parked": 217
+    "parked": 217,
+    "queued": 1
    },
    "REFINE": {
     "blocked": 1,
     "held": 1
    },
    "REPAIR": {
-    "done": 98,
+    "done": 97,
     "parked": 3,
-    "queued": 14
+    "queued": 15
    },
    "SPEC": {
     "blocked": 1,
@@ -37,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786359454723,
+   "at": 1786359527701,
    "tally": "BEB-2851→BUILD[claimed], BEB-2920→SPEC[done], BEB-2910→BUILD[done], BEB-2909→BUILD[done], BEB-2857→BUILD[done], BEB-2760→SPEC[done], BEB-2231→BUILD[done], BEB-2921→SPEC[done], BEB-2624→BUILD[serious:proposed-only], BEB-2206→BUILD[serious:proposed-only]"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786359444194,
+    "since": 1786359504178,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -58,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786359444194,
+    "since": 1786359504178,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -133,7 +135,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786359444194,
+    "since": 1786359504178,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -268,7 +270,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786307849109,
-    "detail": "BEB-2938 failing at preflight 4× in 24h — LATEST (08-09T21:37): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2938 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-2938 failing at preflight 4× in 24h — LATEST (08-09T21:37): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2938 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
     "refs": [
      "BEB-2938"
     ],
@@ -296,7 +298,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786275253653,
-    "detail": "abilifi-payload failing at codegen 17× in 24h — LATEST (08-10T10:56): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/4 SEARCH text not found, even ignoring indentation. WAN · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "abilifi-payload failing at codegen 17× in 24h — LATEST (08-10T10:56): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/4 SEARCH text not found, even ignoring indentation. WAN",
     "refs": [
      "BEB-2394"
     ],
@@ -421,7 +423,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786359444194,
+    "since": 1786359504178,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -537,43 +539,56 @@
      "BEB-2737",
      "preflight"
     ]
+   },
+   {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1786359504178,
+    "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
    }
   ]
  },
  "bridge": {
-  "head_seq": 28637,
+  "head_seq": 28643,
   "cursor_fable": 27741,
-  "unread_for_fable": 896,
+  "unread_for_fable": 902,
   "last": [
    {
-    "seq": 28633,
+    "seq": 28639,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2944 — mastra tick deploy FAILED: SHELL_GATE (BEB-2897): decl"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2942 — commit 8"
    },
    {
-    "seq": 28634,
+    "seq": 28640,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2945 — commit 2"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2939 — commit 4"
    },
    {
-    "seq": 28635,
+    "seq": 28641,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-2394 — mastra tick codegen FAILED: CODEGEN_WALL runtime-confo"
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2940 — commit e"
    },
    {
-    "seq": 28636,
+    "seq": 28642,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(7min), PROPOSED_NEVER_CLAIMED(7min), FIX_BURIED(7min)."
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2944 — commit a"
    },
    {
-    "seq": 28637,
+    "seq": 28643,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×4 (BEB-2334): PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CLAIMED · FIX_BURIED · FIX_"
+    "one_line": "DISPATCHER verification PASSED: BEB-2939 — https://widgets.abilifi.net/orky-beb-2939 — jso"
    }
   ]
  },
@@ -669,7 +684,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786359444194,
+   "since": 1786359504178,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -683,7 +698,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786359444194,
+   "since": 1786359504178,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -758,7 +773,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786359444194,
+   "since": 1786359504178,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -893,7 +908,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786307849109,
-   "detail": "BEB-2938 failing at preflight 4× in 24h — LATEST (08-09T21:37): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2938 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-2938 failing at preflight 4× in 24h — LATEST (08-09T21:37): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2938 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
    "refs": [
     "BEB-2938"
    ],
@@ -921,7 +936,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786275253653,
-   "detail": "abilifi-payload failing at codegen 17× in 24h — LATEST (08-10T10:56): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/4 SEARCH text not found, even ignoring indentation. WAN · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "abilifi-payload failing at codegen 17× in 24h — LATEST (08-10T10:56): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/4 SEARCH text not found, even ignoring indentation. WAN",
    "refs": [
     "BEB-2394"
    ],
@@ -1046,7 +1061,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786359444194,
+   "since": 1786359504178,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1162,6 +1177,19 @@
     "BEB-2737",
     "preflight"
    ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1786359504178,
+   "detail": "last 2 passes proposed 10+10 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
   }
  ]
 }
