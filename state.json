@@ -1,19 +1,20 @@
 {
- "mirrored_at": "2026-08-10T19:54:24.197Z",
- "ts": 1786391662321,
+ "mirrored_at": "2026-08-10T19:55:20.062Z",
+ "ts": 1786391718275,
  "loop": {
   "proposed_total": 857,
   "by_state": {
-   "queued": 19,
-   "claimed": 18,
+   "queued": 18,
+   "claimed": 17,
    "done": 498,
-   "held": 28,
-   "blocked": 2,
+   "held": 29,
+   "blocked": 3,
    "parked": 257
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 18,
+    "blocked": 1,
+    "claimed": 17,
     "done": 275,
     "held": 8,
     "parked": 251,
@@ -25,9 +26,9 @@
    },
    "REPAIR": {
     "done": 93,
-    "held": 5,
+    "held": 6,
     "parked": 3,
-    "queued": 16
+    "queued": 15
    },
    "SPEC": {
     "blocked": 1,
@@ -39,8 +40,8 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786391621646,
-   "tally": "BEB-2744→BUILD[claimed], BEB-1626→BUILD, BEB-2760→SPEC[done], BEB-2540→BUILD, BEB-2851→BUILD[claimed], BEB-2150→BUILD, BEB-2493→BUILD[claimed], BEB-2920→SPEC[done], BEB-2799→BUILD[no-budget], BEB-2763→REFINE[no-budget]"
+   "at": 1786391677096,
+   "tally": "idle (no proposable work)"
   },
   "reds": [
    {
@@ -60,7 +61,7 @@
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786391604246,
+    "since": 1786391664231,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -74,7 +75,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786391604246,
+    "since": 1786391664231,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -149,7 +150,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786391604246,
+    "since": 1786391664231,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -479,15 +480,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786305220235,
-    "detail": "alexrollin/abilifi-apps failing at codegen 138× in 24h — LATEST (08-10T19:52): verdict: codegen produced no usable code\ncodeLen: 3371\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786307618244,
+    "detail": "alexrollin/abilifi-apps failing at codegen 137× in 24h — LATEST (08-10T19:52): verdict: codegen produced no usable code\ncodeLen: 3492\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): fetch() with a bare/unfilled URL (e.g. an unreplaced SOURCE_URL placeholder) — use an",
     "refs": [
-     "BEB-2928"
+     "BEB-2934"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 3371\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=4] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps (abilifi-connect-cf edge worker)\nClass: CODE\nLane: BUILD\n\nThe Vectorize search results (BEB-2927) must appear IN the connected WP page — served fast from the edge, not bolted on. Done via the CF front-door worker sitting in front of the connec",
-     "subject": "BEB-2928"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 3492\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): fetch() with a bare/unfilled URL (e.g. an unreplaced SOURCE_URL placeholder) — use an absolute https URL from the ticket, or an interpolated ${base} | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=2] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps (abilifi-connect-cf + abilifi-wp-plugin)\nClass: CODE\nLane: BUILD\n\nOn connect, PROFILE the site to capture what characterizes it — custom fields, listing count, category count/tree. The connect plugin runs INSIDE WP, so it reads these directly ",
+     "subject": "BEB-2934"
     }
    },
    {
@@ -645,9 +646,39 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786391664231,
+    "detail": "BEB-2799 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2799"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2799"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786391664231,
+    "detail": "BEB-2763 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2763"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2763"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786391604246,
+    "since": 1786391664231,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -847,6 +878,26 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2799 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2799"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2763 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2763"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1785909220026,
     "detail": "fix BEB-2737 for land has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
     "refs": [
@@ -869,16 +920,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 29419,
+  "head_seq": 29420,
   "cursor_fable": 27741,
-  "unread_for_fable": 1678,
+  "unread_for_fable": 1679,
   "last": [
-   {
-    "seq": 29415,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
-   },
    {
     "seq": 29416,
     "from": "cc",
@@ -902,6 +947,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
+   },
+   {
+    "seq": 29420,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×4 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2799]→BEB-2716 · PROPOSED_NEVER_CLAIMED[BEB-"
    }
   ]
  },
@@ -1011,7 +1062,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786391604246,
+   "since": 1786391664231,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1025,7 +1076,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786391604246,
+   "since": 1786391664231,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1100,7 +1151,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786391604246,
+   "since": 1786391664231,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1430,15 +1481,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786305220235,
-   "detail": "alexrollin/abilifi-apps failing at codegen 138× in 24h — LATEST (08-10T19:52): verdict: codegen produced no usable code\ncodeLen: 3371\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786307618244,
+   "detail": "alexrollin/abilifi-apps failing at codegen 137× in 24h — LATEST (08-10T19:52): verdict: codegen produced no usable code\ncodeLen: 3492\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): fetch() with a bare/unfilled URL (e.g. an unreplaced SOURCE_URL placeholder) — use an",
    "refs": [
-    "BEB-2928"
+    "BEB-2934"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 3371\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=4] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps (abilifi-connect-cf edge worker)\nClass: CODE\nLane: BUILD\n\nThe Vectorize search results (BEB-2927) must appear IN the connected WP page — served fast from the edge, not bolted on. Done via the CF front-door worker sitting in front of the connec",
-    "subject": "BEB-2928"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 3492\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): fetch() with a bare/unfilled URL (e.g. an unreplaced SOURCE_URL placeholder) — use an absolute https URL from the ticket, or an interpolated ${base} | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=2] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps (abilifi-connect-cf + abilifi-wp-plugin)\nClass: CODE\nLane: BUILD\n\nOn connect, PROFILE the site to capture what characterizes it — custom fields, listing count, category count/tree. The connect plugin runs INSIDE WP, so it reads these directly ",
+    "subject": "BEB-2934"
    }
   },
   {
@@ -1596,9 +1647,39 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786391664231,
+   "detail": "BEB-2799 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2799"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2799"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786391664231,
+   "detail": "BEB-2763 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2763"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2763"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786391604246,
+   "since": 1786391664231,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -1793,6 +1874,26 @@
    "refs": [
     "BEB-2737",
     "evaluate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2799 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2799"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2763 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2763"
    ]
   },
   {
