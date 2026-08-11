@@ -1,33 +1,34 @@
 {
- "mirrored_at": "2026-08-11T15:37:30.507Z",
- "ts": 1786462648765,
+ "mirrored_at": "2026-08-11T15:39:33.037Z",
+ "ts": 1786462771045,
  "loop": {
   "proposed_total": 866,
   "by_state": {
    "queued": 22,
-   "claimed": 10,
+   "claimed": 11,
    "done": 499,
-   "held": 40,
-   "blocked": 2,
-   "parked": 259
+   "held": 39,
+   "blocked": 3,
+   "parked": 258
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 10,
-    "done": 280,
+    "blocked": 1,
+    "claimed": 11,
+    "done": 281,
     "held": 13,
-    "parked": 253,
-    "queued": 6
+    "parked": 252,
+    "queued": 4
    },
    "REFINE": {
     "blocked": 1,
     "held": 1
    },
    "REPAIR": {
-    "done": 87,
-    "held": 12,
+    "done": 86,
+    "held": 11,
     "parked": 3,
-    "queued": 16
+    "queued": 18
    },
    "SPEC": {
     "blocked": 1,
@@ -39,8 +40,8 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786462624993,
-   "tally": "BEB-2279→BUILD, BEB-1626→BUILD, BEB-2394→BUILD, BEB-2493→BUILD, BEB-2913→BUILD[serious:proposed-only], BEB-2912→BUILD[serious:proposed-only], BEB-2907→BUILD[serious:proposed-only], BEB-2133→BUILD[no-budget], BEB-2931→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
+   "at": 1786462751544,
+   "tally": "BEB-1626→BUILD, BEB-2493→BUILD, BEB-2913→BUILD[serious:proposed-only], BEB-2912→BUILD[serious:proposed-only], BEB-2907→BUILD[serious:proposed-only], BEB-2133→BUILD[no-budget], BEB-2890→SPEC[serious:proposed-only], BEB-2892→BUILD, BEB-2931→BUILD[serious:proposed-only], BEB-2770→REFINE[no-budget]"
   },
   "reds": [
    {
@@ -58,9 +59,23 @@
     }
    },
    {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1786462555495,
+    "detail": "BEB-2957 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2957"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2957",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-11T15:35:55.495Z -> 2026-08-11T15:37:45.231Z"
+    }
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786462607916,
+    "since": 1786462728249,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -74,7 +89,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786462607916,
+    "since": 1786462728249,
     "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -149,7 +164,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786462607916,
+    "since": 1786462728249,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -251,6 +266,21 @@
      "BEB-2292",
      "BEB-2259"
     ]
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786462101313,
+    "detail": "BEB-2493 refused 4× in 30min — LATEST: ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2493"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333)",
+     "subject": "BEB-2493"
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "REPEAT_FAILER",
@@ -465,8 +495,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786376252509,
-    "detail": "abilifi-payload failing at codegen 121× in 24h — LATEST (08-11T15:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
+    "since": 1786376450876,
+    "detail": "abilifi-payload failing at codegen 119× in 24h — LATEST (08-11T15:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
     "refs": [
      "BEB-2127"
     ],
@@ -550,7 +580,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786376450877,
-    "detail": "alexrollin/abilifi-apps failing at codegen 548× in 24h — LATEST (08-11T15:35): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 550× in 24h — LATEST (08-11T15:38): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2493"
     ],
@@ -591,8 +621,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786376304431,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 202× in 24h — LATEST (08-11T15:36): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ",
+    "since": 1786376415832,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 202× in 24h — LATEST (08-11T15:37): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ",
     "refs": [
      "BEB-2744"
     ],
@@ -731,7 +761,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786462607916,
+    "since": 1786462728249,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -1009,6 +1039,16 @@
     ]
    },
    {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786311457043,
+    "detail": "fix BEB-2760 for BEB-2957 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2760",
+     "BEB-2957"
+    ]
+   },
+   {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
     "since": 1786462607869,
@@ -1020,45 +1060,44 @@
      "cls": "binding-unresolvable",
      "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"no repo/frag target binding in the description, in any comment, or inferable from the title — the machine cannot name where this deliverable ships from, so it cannot verify it shipped. Refine can write a missing `Repo:` line; if the work genuinely ships from no repo, that is a placement call for a human.\",\n  \"evidence\": \"resolveTarget() found no binding (description → comments → title guess all empty) — BEB-2109 gate 3 will refuse this lane\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
      "subject": "BEB-2311"
-    },
-    "fix_ticket": "BEB-2606"
+    }
    }
   ]
  },
  "bridge": {
-  "head_seq": 30906,
+  "head_seq": 30915,
   "cursor_fable": 30309,
-  "unread_for_fable": 597,
+  "unread_for_fable": 606,
   "last": [
    {
-    "seq": 30902,
+    "seq": 30911,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2311 — commit 9"
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2493 REFUSED for BUILD — ticket status 'backlog' — owner-p"
    },
    {
-    "seq": 30903,
+    "seq": 30912,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2311: wanted 'todo' (v"
+    "one_line": "RED SINGLE_WRITER_VIOLATION: BEB-2957 completed 2× with 2 DIFFERENT artefacts inside 15min"
    },
    {
-    "seq": 30904,
+    "seq": 30913,
     "from": "cc",
     "kind": "status",
-    "one_line": "2 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-2311), FIX_BURIED(BEB-2760) — full detail on get_s"
+    "one_line": "RED SILENT_REFUSAL: BEB-2493 refused 4× in 30min — LATEST: ticket status 'backlog' — owner"
    },
    {
-    "seq": 30905,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED BINDING_UNRESOLVABLE: BEB-2311 carries a dead binding — [  {   \"class\": \"TARGET_BINDIN"
-   },
-   {
-    "seq": 30906,
+    "seq": 30914,
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
+   },
+   {
+    "seq": 30915,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2311 — commit a"
    }
   ]
  },
@@ -1166,9 +1205,23 @@
    }
   },
   {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1786462555495,
+   "detail": "BEB-2957 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2957"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2957",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-11T15:35:55.495Z -> 2026-08-11T15:37:45.231Z"
+   }
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786462607916,
+   "since": 1786462728249,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1182,7 +1235,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786462607916,
+   "since": 1786462728249,
    "detail": "ORKY CHAT BEB-2493 where Alex reasons WITH Orky: chat at /chat, ticket lint, chat-approved edits, real Browser-Run recordings as viz, chat_d — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1257,7 +1310,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786462607916,
+   "since": 1786462728249,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1359,6 +1412,21 @@
     "BEB-2292",
     "BEB-2259"
    ]
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786462101313,
+   "detail": "BEB-2493 refused 4× in 30min — LATEST: ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2493"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333)",
+    "subject": "BEB-2493"
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "REPEAT_FAILER",
@@ -1573,8 +1641,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786376252509,
-   "detail": "abilifi-payload failing at codegen 121× in 24h — LATEST (08-11T15:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
+   "since": 1786376450876,
+   "detail": "abilifi-payload failing at codegen 119× in 24h — LATEST (08-11T15:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
    "refs": [
     "BEB-2127"
    ],
@@ -1658,7 +1726,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786376450877,
-   "detail": "alexrollin/abilifi-apps failing at codegen 548× in 24h — LATEST (08-11T15:35): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 550× in 24h — LATEST (08-11T15:38): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2493"
    ],
@@ -1699,8 +1767,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786376304431,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 202× in 24h — LATEST (08-11T15:36): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ",
+   "since": 1786376415832,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 202× in 24h — LATEST (08-11T15:37): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ",
    "refs": [
     "BEB-2744"
    ],
@@ -1839,7 +1907,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786462607916,
+   "since": 1786462728249,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -2117,6 +2185,16 @@
    ]
   },
   {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786311457043,
+   "detail": "fix BEB-2760 for BEB-2957 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2760",
+    "BEB-2957"
+   ]
+  },
+  {
    "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
    "since": 1786462607869,
@@ -2128,8 +2206,7 @@
     "cls": "binding-unresolvable",
     "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"no repo/frag target binding in the description, in any comment, or inferable from the title — the machine cannot name where this deliverable ships from, so it cannot verify it shipped. Refine can write a missing `Repo:` line; if the work genuinely ships from no repo, that is a placement call for a human.\",\n  \"evidence\": \"resolveTarget() found no binding (description → comments → title guess all empty) — BEB-2109 gate 3 will refuse this lane\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
     "subject": "BEB-2311"
-   },
-   "fix_ticket": "BEB-2606"
+   }
   }
  ]
 }
