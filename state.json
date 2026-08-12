@@ -1,22 +1,22 @@
 {
- "mirrored_at": "2026-08-12T18:41:42.134Z",
- "ts": 1786560099321,
+ "mirrored_at": "2026-08-12T18:42:43.006Z",
+ "ts": 1786560160310,
  "loop": {
   "proposed_total": 917,
   "by_state": {
    "queued": 70,
    "claimed": 3,
    "done": 512,
-   "held": 32,
-   "blocked": 5,
+   "held": 31,
+   "blocked": 6,
    "parked": 262
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 1,
+    "blocked": 2,
     "claimed": 3,
     "done": 285,
-    "held": 5,
+    "held": 4,
     "parked": 256,
     "queued": 46
    },
@@ -42,14 +42,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786560057976,
-   "tally": "BEB-2929→BUILD, BEB-2127→BUILD, BEB-2412→BUILD, BEB-2493→BUILD, BEB-1626→BUILD, BEB-2292→BUILD, BEB-2533→BUILD, BEB-2922→BUILD, BEB-2861→SPEC[serious:proposed-only], BEB-2785→BUILD[no-budget]"
+   "at": 1786560145049,
+   "tally": "BEB-2929→BUILD, BEB-2127→BUILD, BEB-2572→BUILD[blocked], BEB-2412→BUILD, BEB-2493→BUILD, BEB-1626→BUILD, BEB-2292→BUILD, BEB-2533→BUILD, BEB-2767→REFINE[no-budget], BEB-2157→BUILD[no-budget]"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786560046994,
+    "since": 1786554106985,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -63,7 +63,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786560046994,
+    "since": 1786554106985,
     "detail": "ORKY CHAT BEB-2493 at /chat: mobile-first, Alex-only allowlist, memplug auto-attached as a graph edge, move a chat span into the build strea — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -138,7 +138,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786560046994,
+    "since": 1786554106985,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -245,7 +245,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786479977895,
-    "detail": "BEB-1626 failing at preflight 4× in 24h — LATEST (08-12T16:51): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-1626 failing at preflight 4× in 24h — LATEST (08-12T16:51): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
     "refs": [
      "BEB-1626"
     ],
@@ -258,8 +258,22 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786475189436,
-    "detail": "BEB-2150 failing at preflight 40× in 24h — LATEST (08-12T17:32): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786470720185,
+    "detail": "BEB-2127 failing at preflight 3× in 24h — LATEST (08-12T00:49): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2127 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+    "refs": [
+     "BEB-2127"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2127 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+     "subject": "BEB-2127"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786468499992,
+    "detail": "BEB-2150 failing at preflight 44× in 24h — LATEST (08-12T16:35): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}",
     "refs": [
      "BEB-2150"
     ],
@@ -267,6 +281,34 @@
      "cls": "repeat-failer",
      "error": "[\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_records is refused with code 10000 (scope) on both credentials — measured. A workers custom domain writes its DNS implicitly, so prefer that; only a bare A/CNAME needs a human.. Discovering this mid-build is what makes it expensive; it is knowable now. [NOT re-tested — the watcher was unreachable, so this finding is UNVERIFIED rather than confirmed]\",\n  \"evidence\": \"declared in the ticket: \\\"- Wildcard test (2026-07-14): `orky-probe-test.abilifi.net`, `random-xyz-9931.abilifi.net` → **NXDOMAIN, http 000**.\\\"\",\n  \"fix_ref\": \"BEB-2122 / BEB-2133\"\n }\n]",
      "subject": "BEB-2150"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786470785783,
+    "detail": "BEB-2572 failing at preflight 3× in 24h — LATEST (08-12T10:04): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-dispatcher/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2572"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-dispatcher/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
+     "subject": "BEB-2572"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786468509984,
+    "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-12T13:12): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
+    "refs": [
+     "BEB-2744"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
+     "subject": "BEB-2744"
     }
    },
    {
@@ -329,7 +371,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786549294666,
-    "detail": "BEB-2972 failing at claim 10× in 24h — LATEST (08-12T18:21): GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass",
+    "detail": "BEB-2972 failing at claim 3× in 24h — LATEST (08-12T16:39): GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass",
     "refs": [
      "BEB-2972"
     ],
@@ -343,7 +385,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786545697222,
-    "detail": "BEB-2976 failing at unrecorded 10× in 24h — LATEST (08-12T17:04): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
+    "detail": "BEB-2976 failing at unrecorded 9× in 24h — LATEST (08-12T16:23): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2976"
     ],
@@ -357,7 +399,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786550867086,
-    "detail": "BEB-2978 failing at refine 3× in 24h — LATEST (08-12T17:01): refine BEB-2978: refine completion rejected: \"not-refined\"",
+    "detail": "BEB-2978 failing at refine 3× in 24h — LATEST (08-12T17:01): refine BEB-2978: refine completion rejected: \"not-refined\" · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2978"
     ],
@@ -365,41 +407,28 @@
      "cls": "repeat-failer",
      "error": "refine BEB-2978: refine completion rejected: \"not-refined\"",
      "subject": "BEB-2978"
-    }
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786551777108,
-    "detail": "BEB-2980 failing at refine 3× in 24h — LATEST (08-12T17:21): refine BEB-2980: refine completion rejected: \"not-refined\" · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-    "refs": [
-     "BEB-2980"
-    ],
-    "orky": {
-     "cls": "repeat-failer",
-     "error": "refine BEB-2980: refine completion rejected: \"not-refined\"",
-     "subject": "BEB-2980"
-    }
-   },
-   {
-    "code": "REPEAT_FAILER",
-    "severity": "red",
-    "since": 1786474086888,
-    "detail": "abilifi-apps failing at codegen 40× in 24h — LATEST (08-12T18:06): verdict: codegen produced no usable code\ncodeLen: 3317\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | no request routing — the deliv · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468668611,
+    "detail": "abilifi-apps failing at codegen 41× in 24h — LATEST (08-12T16:37): verdict: codegen produced no usable code\ncodeLen: 3157\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | scene3d server-rendered summar",
     "refs": [
      "BEB-2412"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 3317\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 3157\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | scene3d server-rendered summary MISSING — keep the template's <div class=\"sum\"> block (row count / named EMPTY / named SOURCE UNREACHABLE); a JS-only page is BLANK to the browser gate | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
      "subject": "BEB-2412"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786473992818,
-    "detail": "abilifi-apps failing at heartbeat 78× in 24h — LATEST (08-12T18:22): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+    "since": 1786470812864,
+    "detail": "abilifi-apps failing at heartbeat 82× in 24h — LATEST (08-12T16:52): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
     "refs": [
      "BEB-2385"
     ],
@@ -412,8 +441,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786479491756,
-    "detail": "abilifi-dispatcher failing at codegen 13× in 24h — LATEST (08-12T18:21): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
+    "since": 1786469873020,
+    "detail": "abilifi-dispatcher failing at codegen 13× in 24h — LATEST (08-12T16:22): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2572"
     ],
@@ -426,22 +455,22 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786475230387,
-    "detail": "abilifi-dispatcher failing at deploy 24× in 24h — LATEST (08-12T17:49): codeLen: 2175\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never f",
+    "since": 1786473482775,
+    "detail": "abilifi-dispatcher failing at deploy 23× in 24h — LATEST (08-12T15:11): codeLen: 1701\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never f · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2572"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 2175\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-dispatcher",
+     "error": "codeLen: 1701\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-dispatcher",
      "subject": "BEB-2572"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786475230292,
-    "detail": "abilifi-dispatcher failing at land 24× in 24h — LATEST (08-12T17:49): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz)",
+    "since": 1786473482663,
+    "detail": "abilifi-dispatcher failing at land 23× in 24h — LATEST (08-12T15:11): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2572"
     ],
@@ -454,50 +483,50 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474137819,
-    "detail": "abilifi-payload failing at codegen 122× in 24h — LATEST (08-12T18:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 5/5 SEARCH text matches 2 places (lines ) and could not b",
+    "since": 1786468531821,
+    "detail": "abilifi-payload failing at codegen 128× in 24h — LATEST (08-12T17:01): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
     "refs": [
-     "BEB-2394"
+     "BEB-2127"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 5/5 SEARCH text matches 2 places (lines ) and could not be disambiguated by extending it up to 12 lines — the surrounding code is identical too. Anchor on something structurally unique instead.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
-     "subject": "BEB-2394"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2127"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786475285084,
-    "detail": "abilifi-payload failing at deploy 33× in 24h — LATEST (08-12T18:05): codeLen: 2821\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never f · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468807439,
+    "detail": "abilifi-payload failing at deploy 35× in 24h — LATEST (08-12T16:51): codeLen: 2876\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never f",
     "refs": [
      "BEB-2292"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 2821\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-payload",
+     "error": "codeLen: 2876\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-payload",
      "subject": "BEB-2292"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474901068,
-    "detail": "abilifi-payload failing at evaluate 47× in 24h — LATEST (08-12T18:21): contract 5dc40f78-8724-4887-8e0c-d6627835d456 UNPROVEN at evaluate (m8686 #3 — no green without data): not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from th",
+    "since": 1786468728883,
+    "detail": "abilifi-payload failing at evaluate 51× in 24h — LATEST (08-12T16:52): contract 5dc40f78 UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from the rendered surface (43 chars sampled) | real_ticket_row: \"BEB-\" ABSENT fro",
     "refs": [
      "BEB-2279"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "contract 5dc40f78-8724-4887-8e0c-d6627835d456 UNPROVEN at evaluate (m8686 #3 — no green without data): not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from the rendered surface (43 chars sampled) | real_ticket_row: \"BEB-\" ABSENT from the rendered surface (43 chars sampled)",
+     "error": "contract 5dc40f78 UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from the rendered surface (43 chars sampled) | real_ticket_row: \"BEB-\" ABSENT from the rendered surface (43 chars sampled)\nverify_url: https://app.abilifi.net/waterfall\ncommit: [redacted]",
      "subject": "BEB-2279"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786475284991,
-    "detail": "abilifi-payload failing at land 33× in 24h — LATEST (08-12T18:05): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468807356,
+    "detail": "abilifi-payload failing at land 35× in 24h — LATEST (08-12T16:51): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz)",
     "refs": [
      "BEB-2292"
     ],
@@ -524,36 +553,36 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786475213703,
-    "detail": "alexrollin/Projects/vlinux-apk-service failing at deploy 39× in 24h — LATEST (08-12T18:35): codeLen: 3150\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 9fe7e15eabd9e6a0",
+    "since": 1786468698236,
+    "detail": "alexrollin/Projects/vlinux-apk-service failing at deploy 40× in 24h — LATEST (08-12T16:21): codeLen: 2762\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: e266de6f7b44e4e8 · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-2948"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 3150\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/Projects/vlinux-apk-service",
+     "error": "codeLen: 2762\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/Projects/vlinux-apk-service",
      "subject": "BEB-2948"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474012097,
-    "detail": "alexrollin/abilifi-apps failing at codegen 553× in 24h — LATEST (08-12T17:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468470947,
+    "detail": "alexrollin/abilifi-apps failing at codegen 585× in 24h — LATEST (08-12T16:36): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size",
     "refs": [
-     "BEB-2540"
+     "BEB-2493"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WANTED: \"const json = (o, s) => new Response(JSON.stringify(o, null, 2)), { status: s || 200, heade\" · CLOSEST in file is line 4 (47% similar): \"const json = (o, s) => new Response(JSON.stringify(o, null, 2), { status: s || 200, header\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
-     "subject": "BEB-2540"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2493"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786479854819,
-    "detail": "alexrollin/abilifi-apps failing at complete 5× in 24h — LATEST (08-12T17:51): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at complete 3× in 24h — LATEST (08-12T13:22): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2851"
     ],
@@ -566,50 +595,50 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474067815,
-    "detail": "alexrollin/abilifi-apps failing at deploy 54× in 24h — LATEST (08-12T18:35): codeLen: 2994\ndeploy error: LAND REFUSED (base-moved): the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never f · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468553668,
+    "detail": "alexrollin/abilifi-apps failing at deploy 55× in 24h — LATEST (08-12T16:51): codeLen: 2946\ndeploy error: LAND REFUSED (base-moved): the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never f",
     "refs": [
-     "BEB-2533"
+     "BEB-2929"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 2994\ndeploy error: LAND REFUSED (base-moved): the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: alexrollin/abilifi-apps",
-     "subject": "BEB-2533"
+     "error": "codeLen: 2946\ndeploy error: LAND REFUSED (base-moved): the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: alexrollin/abilifi-apps",
+     "subject": "BEB-2929"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474907943,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 92× in 24h — LATEST (08-12T18:35): tracker status propagation FAILED for BEB-2895: wanted 'done' (lane complete on deploy evidence), tracker reads 'todo' after 2 attempts — lane and ticket DISAGREE",
+    "since": 1786468770644,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 93× in 24h — LATEST (08-12T16:37): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ",
     "refs": [
-     "BEB-2895"
+     "BEB-2744"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "tracker status propagation FAILED for BEB-2895: wanted 'done' (lane complete on deploy evidence), tracker reads 'todo' after 2 attempts — lane and ticket DISAGREE",
-     "subject": "BEB-2895"
+     "error": "contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ABSENT from the rendered surface (34 chars sampled) | credits_debited: \"credits\" ABSENT from the rendered surface (34 chars sampled)\nverify_url: https://app.abilifi.net/ledger\ncommit: [redacted]",
+     "subject": "BEB-2744"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474067730,
-    "detail": "alexrollin/abilifi-apps failing at land 42× in 24h — LATEST (08-12T18:35): the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never force, never fuzz) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468553583,
+    "detail": "alexrollin/abilifi-apps failing at land 41× in 24h — LATEST (08-12T16:51): the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never force, never fuzz)",
     "refs": [
-     "BEB-2533"
+     "BEB-2929"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never force, never fuzz)",
-     "subject": "BEB-2533"
+     "error": "the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never force, never fuzz)",
+     "subject": "BEB-2929"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786484996842,
-    "detail": "alexrollin/abilifi-apps failing at preflight 9× in 24h — LATEST (08-12T13:42): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at preflight 9× in 24h — LATEST (08-12T13:42): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
     "refs": [
      "BEB-1626"
     ],
@@ -623,7 +652,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786542053325,
-    "detail": "alexrollin/abilifi-apps failing at split 10× in 24h — LATEST (08-12T18:06): sections: Changes | Prior failed attempts (do NOT repeat these) | Hard requirement\nchildren: BEB-2968, BEB-2969, BEB-2970 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at split 8× in 24h — LATEST (08-12T16:52): sections: Changes | Prior failed attempts (do NOT repeat these) | Hard requirement\nchildren: BEB-2968, BEB-2969, BEB-2970",
     "refs": [
      "BEB-1626"
     ],
@@ -636,22 +665,22 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474720669,
-    "detail": "alexrollin/abilifi-dispatcher failing at deploy 35× in 24h — LATEST (08-12T17:18): codeLen: 1933\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786469844700,
+    "detail": "alexrollin/abilifi-dispatcher failing at deploy 36× in 24h — LATEST (08-12T16:36): codeLen: 2031\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher",
     "refs": [
      "BEB-2922"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "codeLen: 1933\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher",
+     "error": "codeLen: 2031\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher",
      "subject": "BEB-2922"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474720558,
-    "detail": "alexrollin/abilifi-dispatcher failing at land 35× in 24h — LATEST (08-12T17:18): repo meta 404 for alexrollin/abilifi-dispatcher · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786469844598,
+    "detail": "alexrollin/abilifi-dispatcher failing at land 36× in 24h — LATEST (08-12T16:36): repo meta 404 for alexrollin/abilifi-dispatcher",
     "refs": [
      "BEB-2922"
     ],
@@ -664,8 +693,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786525441805,
-    "detail": "dispatcher-pass failing at pass 5× in 24h — LATEST (08-12T10:51): Error: Network connection lost.\n    at async mcp (index.js:1322:11)\n    at async Dispatcher.dispatchBody (index.js:1841:17)\n    at async Dispatcher.dispatch (index.js:1825:14)",
+    "since": 1786468322868,
+    "detail": "dispatcher-pass failing at pass 11× in 24h — LATEST (08-12T10:51): Error: Network connection lost.\n    at async mcp (index.js:1322:11)\n    at async Dispatcher.dispatchBody (index.js:1841:17)\n    at async Dispatcher.dispatch (index.js:1825:14)",
     "refs": [
      "dispatcher-pass"
     ],
@@ -678,22 +707,22 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786483152319,
-    "detail": "n/a failing at codegen 3× in 24h — LATEST (08-12T09:29): verdict: codegen produced no usable code\ncodeLen: 3368\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786473390197,
+    "detail": "n/a failing at codegen 4× in 24h — LATEST (08-12T09:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size",
     "refs": [
-     "BEB-2043"
+     "BEB-2493"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 3368\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: n/a\ncodegen prompt head (what the MODEL received): [walls=6] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\n# BEB-2043: labtui: LIVE FRAGS panel + per-frag 👎 → auto files + sends a fix ticket (no diagnosis)\n\nRepo: n/a\nClass: CODE\nLane: part\n\nAlex: \"fix my tui — I need to see live frags + thumbs-down; don't tell me the issue, just ticket it and send it.\"\n\nDELIVERABLE (as a Paylo",
-     "subject": "BEB-2043"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: n/a\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2493"
     }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786474863145,
-    "detail": "n/a failing at complete 28× in 24h — LATEST (08-12T17:04): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786468905542,
+    "detail": "n/a failing at complete 29× in 24h — LATEST (08-12T13:41): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2043"
     ],
@@ -707,7 +736,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786510399638,
-    "detail": "n/a failing at evaluate 23× in 24h — LATEST (08-12T17:51): verify_url not 2xx after 12 probes — last HTTP 404: Not Found · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at evaluate 22× in 24h — LATEST (08-12T14:41): verify_url not 2xx after 12 probes — last HTTP 404: Not Found · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2043"
     ],
@@ -720,35 +749,77 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786560046994,
-    "detail": "BEB-2861 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "since": 1786554106985,
+    "detail": "BEB-2913 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
-     "BEB-2861"
+     "BEB-2913"
     ],
     "orky": {
      "cls": "proposed-never-claimed",
      "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-2861"
+     "subject": "BEB-2913"
     }
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786560046994,
-    "detail": "BEB-2785 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "since": 1786554106985,
+    "detail": "BEB-2912 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
-     "BEB-2785"
+     "BEB-2912"
     ],
     "orky": {
      "cls": "proposed-never-claimed",
      "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-2785"
+     "subject": "BEB-2912"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786554106985,
+    "detail": "BEB-2907 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2907"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2907"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786554106985,
+    "detail": "BEB-2931 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2931"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2931"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786554106985,
+    "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2770"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2770"
     }
    },
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786560046994,
+    "since": 1786554106985,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -968,6 +1039,26 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1786378345309,
+    "detail": "fix BEB-2406 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2406",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785909220026,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1785909220026,
     "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
     "refs": [
@@ -1029,6 +1120,16 @@
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785909220026,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785909220026,
     "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
     "refs": [
      "BEB-2737",
@@ -1078,204 +1179,116 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785909220026,
-    "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2913 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
-     "BEB-2737",
-     "refine"
+     "BEB-2716",
+     "BEB-2913"
     ]
    },
    {
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-2861 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "detail": "fix BEB-2716 for BEB-2912 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
      "BEB-2716",
-     "BEB-2861"
+     "BEB-2912"
     ]
    },
    {
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-2785 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "detail": "fix BEB-2716 for BEB-2907 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
      "BEB-2716",
-     "BEB-2785"
+     "BEB-2907"
     ]
    },
    {
-    "code": "REPEAT_FAILER",
+    "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786558230864,
-    "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (3 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
-    "refs": [],
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2931 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2931"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2770 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2770"
+    ]
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1786550739867,
+    "detail": "BEB-2977 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-2977"
+    ],
     "orky": {
-     "cls": "claim-refusal-uncoded",
-     "subject": "dispatcher-claim",
-     "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-2977"
     }
    },
    {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
-    "since": 1786557002764,
-    "detail": "BEB-2981 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "since": 1786550721430,
+    "detail": "BEB-2978 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
     "refs": [
-     "BEB-2981"
+     "BEB-2978"
     ],
     "orky": {
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2981"
+     "subject": "BEB-2978"
     }
    },
    {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
-    "since": 1786556994204,
-    "detail": "BEB-2982 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "since": 1786550717672,
+    "detail": "BEB-2979 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
     "refs": [
-     "BEB-2982"
+     "BEB-2979"
     ],
     "orky": {
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2982"
+     "subject": "BEB-2979"
     }
    },
    {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
-    "since": 1786556990240,
-    "detail": "BEB-2983 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "since": 1786550726042,
+    "detail": "BEB-2980 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
     "refs": [
-     "BEB-2983"
+     "BEB-2980"
     ],
     "orky": {
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2983"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786556986743,
-    "detail": "BEB-2984 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2984"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2984"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786556983052,
-    "detail": "BEB-2985 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2985"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2985"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786557006399,
-    "detail": "BEB-2986 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2986"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2986"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786557013601,
-    "detail": "BEB-2987 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2987"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2987"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786557010032,
-    "detail": "BEB-2988 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2988"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2988"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786557021411,
-    "detail": "BEB-2989 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2989"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2989"
-    }
-   },
-   {
-    "code": "BINDING_UNRESOLVABLE",
-    "severity": "red",
-    "since": 1786557017339,
-    "detail": "BEB-2990 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-    "refs": [
-     "BEB-2990"
-    ],
-    "orky": {
-     "cls": "binding-unresolvable",
-     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-     "subject": "BEB-2990"
+     "subject": "BEB-2980"
     }
    }
   ]
  },
  "bridge": {
-  "head_seq": 33567,
+  "head_seq": 33569,
   "cursor_fable": 30309,
-  "unread_for_fable": 3258,
+  "unread_for_fable": 3260,
   "last": [
-   {
-    "seq": 33563,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: refine of BEB-2987 REJECTED — no swarm-ready label added (no budget/steps). Bl"
-   },
-   {
-    "seq": 33564,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-2988 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
-   },
    {
     "seq": 33565,
     "from": "cc",
@@ -1293,6 +1306,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "3 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-2861), PROPOSED_NEVER_CLAIMED(BEB-2785), FIX_BURIED"
+   },
+   {
+    "seq": 33568,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 10 · wrote 8 · claimed 3 — BEB-2929→BUILD, BEB-2127→BUILD, BEB-2"
+   },
+   {
+    "seq": 33569,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-2978 failing at refine 3× in 24h — LATEST (08-12T17:01): refine BEB"
    }
   ]
  },
@@ -1388,7 +1413,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786560046994,
+   "since": 1786554106985,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -1402,7 +1427,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786560046994,
+   "since": 1786554106985,
    "detail": "ORKY CHAT BEB-2493 at /chat: mobile-first, Alex-only allowlist, memplug auto-attached as a graph edge, move a chat span into the build strea — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1477,7 +1502,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786560046994,
+   "since": 1786554106985,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -1584,7 +1609,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786479977895,
-   "detail": "BEB-1626 failing at preflight 4× in 24h — LATEST (08-12T16:51): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-1626 failing at preflight 4× in 24h — LATEST (08-12T16:51): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
    "refs": [
     "BEB-1626"
    ],
@@ -1597,8 +1622,22 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786475189436,
-   "detail": "BEB-2150 failing at preflight 40× in 24h — LATEST (08-12T17:32): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786470720185,
+   "detail": "BEB-2127 failing at preflight 3× in 24h — LATEST (08-12T00:49): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2127 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+   "refs": [
+    "BEB-2127"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2127 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
+    "subject": "BEB-2127"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786468499992,
+   "detail": "BEB-2150 failing at preflight 44× in 24h — LATEST (08-12T16:35): [\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}",
    "refs": [
     "BEB-2150"
    ],
@@ -1606,6 +1645,34 @@
     "cls": "repeat-failer",
     "error": "[\n {\n  \"class\": \"RESOURCE_FORECAST\",\n  \"why\": \"declares a surface this lane cannot provision: DNS record on abilifi.net. Needs Zone:DNS:Edit on the abilifi.net zone (Alex's account) — POST /zones/{id}/dns_records is refused with code 10000 (scope) on both credentials — measured. A workers custom domain writes its DNS implicitly, so prefer that; only a bare A/CNAME needs a human.. Discovering this mid-build is what makes it expensive; it is knowable now. [NOT re-tested — the watcher was unreachable, so this finding is UNVERIFIED rather than confirmed]\",\n  \"evidence\": \"declared in the ticket: \\\"- Wildcard test (2026-07-14): `orky-probe-test.abilifi.net`, `random-xyz-9931.abilifi.net` → **NXDOMAIN, http 000**.\\\"\",\n  \"fix_ref\": \"BEB-2122 / BEB-2133\"\n }\n]",
     "subject": "BEB-2150"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786470785783,
+   "detail": "BEB-2572 failing at preflight 3× in 24h — LATEST (08-12T10:04): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-dispatcher/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2572"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in abilifi-dispatcher/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
+    "subject": "BEB-2572"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786468509984,
+   "detail": "BEB-2744 failing at preflight 3× in 24h — LATEST (08-12T13:12): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
+   "refs": [
+    "BEB-2744"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
+    "subject": "BEB-2744"
    }
   },
   {
@@ -1668,7 +1735,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786549294666,
-   "detail": "BEB-2972 failing at claim 10× in 24h — LATEST (08-12T18:21): GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass",
+   "detail": "BEB-2972 failing at claim 3× in 24h — LATEST (08-12T16:39): GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass",
    "refs": [
     "BEB-2972"
    ],
@@ -1682,7 +1749,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786545697222,
-   "detail": "BEB-2976 failing at unrecorded 10× in 24h — LATEST (08-12T17:04): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
+   "detail": "BEB-2976 failing at unrecorded 9× in 24h — LATEST (08-12T16:23): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2976"
    ],
@@ -1696,7 +1763,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786550867086,
-   "detail": "BEB-2978 failing at refine 3× in 24h — LATEST (08-12T17:01): refine BEB-2978: refine completion rejected: \"not-refined\"",
+   "detail": "BEB-2978 failing at refine 3× in 24h — LATEST (08-12T17:01): refine BEB-2978: refine completion rejected: \"not-refined\" · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2978"
    ],
@@ -1704,41 +1771,28 @@
     "cls": "repeat-failer",
     "error": "refine BEB-2978: refine completion rejected: \"not-refined\"",
     "subject": "BEB-2978"
-   }
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786551777108,
-   "detail": "BEB-2980 failing at refine 3× in 24h — LATEST (08-12T17:21): refine BEB-2980: refine completion rejected: \"not-refined\" · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-   "refs": [
-    "BEB-2980"
-   ],
-   "orky": {
-    "cls": "repeat-failer",
-    "error": "refine BEB-2980: refine completion rejected: \"not-refined\"",
-    "subject": "BEB-2980"
-   }
-  },
-  {
-   "code": "REPEAT_FAILER",
-   "severity": "red",
-   "since": 1786474086888,
-   "detail": "abilifi-apps failing at codegen 40× in 24h — LATEST (08-12T18:06): verdict: codegen produced no usable code\ncodeLen: 3317\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | no request routing — the deliv · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468668611,
+   "detail": "abilifi-apps failing at codegen 41× in 24h — LATEST (08-12T16:37): verdict: codegen produced no usable code\ncodeLen: 3157\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | scene3d server-rendered summar",
    "refs": [
     "BEB-2412"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 3317\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 3157\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): scene3d shape lost — no three.js scene in the output | scene3d server-rendered summary MISSING — keep the template's <div class=\"sum\"> block (row count / named EMPTY / named SOURCE UNREACHABLE); a JS-only page is BLANK to the browser gate | no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
     "subject": "BEB-2412"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786473992818,
-   "detail": "abilifi-apps failing at heartbeat 78× in 24h — LATEST (08-12T18:22): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+   "since": 1786470812864,
+   "detail": "abilifi-apps failing at heartbeat 82× in 24h — LATEST (08-12T16:52): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
    "refs": [
     "BEB-2385"
    ],
@@ -1751,8 +1805,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786479491756,
-   "detail": "abilifi-dispatcher failing at codegen 13× in 24h — LATEST (08-12T18:21): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri",
+   "since": 1786469873020,
+   "detail": "abilifi-dispatcher failing at codegen 13× in 24h — LATEST (08-12T16:22): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output). The file was NOT rewri · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2572"
    ],
@@ -1765,22 +1819,22 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786475230387,
-   "detail": "abilifi-dispatcher failing at deploy 24× in 24h — LATEST (08-12T17:49): codeLen: 2175\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never f",
+   "since": 1786473482775,
+   "detail": "abilifi-dispatcher failing at deploy 23× in 24h — LATEST (08-12T15:11): codeLen: 1701\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never f · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2572"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 2175\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-dispatcher",
+    "error": "codeLen: 1701\ndeploy error: LAND REFUSED (base-moved): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-dispatcher",
     "subject": "BEB-2572"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786475230292,
-   "detail": "abilifi-dispatcher failing at land 24× in 24h — LATEST (08-12T17:49): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz)",
+   "since": 1786473482663,
+   "detail": "abilifi-dispatcher failing at land 23× in 24h — LATEST (08-12T15:11): the file was 5edd1fb8 when the lane generated its edit and is 3d8cdc1e on master now — returning to codegen against the current revision (never force, never fuzz) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2572"
    ],
@@ -1793,50 +1847,50 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474137819,
-   "detail": "abilifi-payload failing at codegen 122× in 24h — LATEST (08-12T18:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 5/5 SEARCH text matches 2 places (lines ) and could not b",
+   "since": 1786468531821,
+   "detail": "abilifi-payload failing at codegen 128× in 24h — LATEST (08-12T17:01): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
    "refs": [
-    "BEB-2394"
+    "BEB-2127"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 5/5 SEARCH text matches 2 places (lines ) and could not be disambiguated by extending it up to 12 lines — the surrounding code is identical too. Anchor on something structurally unique instead.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
-    "subject": "BEB-2394"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2127"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786475285084,
-   "detail": "abilifi-payload failing at deploy 33× in 24h — LATEST (08-12T18:05): codeLen: 2821\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never f · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468807439,
+   "detail": "abilifi-payload failing at deploy 35× in 24h — LATEST (08-12T16:51): codeLen: 2876\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never f",
    "refs": [
     "BEB-2292"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 2821\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-payload",
+    "error": "codeLen: 2876\ndeploy error: LAND REFUSED (base-moved): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: abilifi-payload",
     "subject": "BEB-2292"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474901068,
-   "detail": "abilifi-payload failing at evaluate 47× in 24h — LATEST (08-12T18:21): contract 5dc40f78-8724-4887-8e0c-d6627835d456 UNPROVEN at evaluate (m8686 #3 — no green without data): not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from th",
+   "since": 1786468728883,
+   "detail": "abilifi-payload failing at evaluate 51× in 24h — LATEST (08-12T16:52): contract 5dc40f78 UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from the rendered surface (43 chars sampled) | real_ticket_row: \"BEB-\" ABSENT fro",
    "refs": [
     "BEB-2279"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "contract 5dc40f78-8724-4887-8e0c-d6627835d456 UNPROVEN at evaluate (m8686 #3 — no green without data): not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from the rendered surface (43 chars sampled) | real_ticket_row: \"BEB-\" ABSENT from the rendered surface (43 chars sampled)",
+    "error": "contract 5dc40f78 UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | header_present: \"ticket\" ABSENT from the rendered surface (43 chars sampled) | real_ticket_row: \"BEB-\" ABSENT from the rendered surface (43 chars sampled)\nverify_url: https://app.abilifi.net/waterfall\ncommit: [redacted]",
     "subject": "BEB-2279"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786475284991,
-   "detail": "abilifi-payload failing at land 33× in 24h — LATEST (08-12T18:05): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468807356,
+   "detail": "abilifi-payload failing at land 35× in 24h — LATEST (08-12T16:51): the file was 36b35c7f when the lane generated its edit and is aee9aa68 on master now — returning to codegen against the current revision (never force, never fuzz)",
    "refs": [
     "BEB-2292"
    ],
@@ -1863,36 +1917,36 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786475213703,
-   "detail": "alexrollin/Projects/vlinux-apk-service failing at deploy 39× in 24h — LATEST (08-12T18:35): codeLen: 3150\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 9fe7e15eabd9e6a0",
+   "since": 1786468698236,
+   "detail": "alexrollin/Projects/vlinux-apk-service failing at deploy 40× in 24h — LATEST (08-12T16:21): codeLen: 2762\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: e266de6f7b44e4e8 · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-2948"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 3150\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/Projects/vlinux-apk-service",
+    "error": "codeLen: 2762\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-wp does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/Projects/vlinux-apk-service",
     "subject": "BEB-2948"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474012097,
-   "detail": "alexrollin/abilifi-apps failing at codegen 553× in 24h — LATEST (08-12T17:34): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468470947,
+   "detail": "alexrollin/abilifi-apps failing at codegen 585× in 24h — LATEST (08-12T16:36): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size",
    "refs": [
-    "BEB-2540"
+    "BEB-2493"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WANTED: \"const json = (o, s) => new Response(JSON.stringify(o, null, 2)), { status: s || 200, heade\" · CLOSEST in file is line 4 (47% similar): \"const json = (o, s) => new Response(JSON.stringify(o, null, 2), { status: s || 200, header\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
-    "subject": "BEB-2540"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2493"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786479854819,
-   "detail": "alexrollin/abilifi-apps failing at complete 5× in 24h — LATEST (08-12T17:51): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at complete 3× in 24h — LATEST (08-12T13:22): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2851"
    ],
@@ -1905,50 +1959,50 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474067815,
-   "detail": "alexrollin/abilifi-apps failing at deploy 54× in 24h — LATEST (08-12T18:35): codeLen: 2994\ndeploy error: LAND REFUSED (base-moved): the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never f · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468553668,
+   "detail": "alexrollin/abilifi-apps failing at deploy 55× in 24h — LATEST (08-12T16:51): codeLen: 2946\ndeploy error: LAND REFUSED (base-moved): the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never f",
    "refs": [
-    "BEB-2533"
+    "BEB-2929"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 2994\ndeploy error: LAND REFUSED (base-moved): the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: alexrollin/abilifi-apps",
-    "subject": "BEB-2533"
+    "error": "codeLen: 2946\ndeploy error: LAND REFUSED (base-moved): the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never force, never fuzz)\ncommit: none\ntarget: alexrollin/abilifi-apps",
+    "subject": "BEB-2929"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474907943,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 92× in 24h — LATEST (08-12T18:35): tracker status propagation FAILED for BEB-2895: wanted 'done' (lane complete on deploy evidence), tracker reads 'todo' after 2 attempts — lane and ticket DISAGREE",
+   "since": 1786468770644,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 93× in 24h — LATEST (08-12T16:37): contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ",
    "refs": [
-    "BEB-2895"
+    "BEB-2744"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "tracker status propagation FAILED for BEB-2895: wanted 'done' (lane complete on deploy evidence), tracker reads 'todo' after 2 attempts — lane and ticket DISAGREE",
-    "subject": "BEB-2895"
+    "error": "contract bfde550d UNPROVEN — not_blank: \"Payload Blank Template\" absent, as required | credits_ledger_heading: \"Credits Ledger\" ABSENT from the rendered surface (34 chars sampled) | debit_ref: \"BEB-\" ABSENT from the rendered surface (34 chars sampled) | credits_debited: \"credits\" ABSENT from the rendered surface (34 chars sampled)\nverify_url: https://app.abilifi.net/ledger\ncommit: [redacted]",
+    "subject": "BEB-2744"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474067730,
-   "detail": "alexrollin/abilifi-apps failing at land 42× in 24h — LATEST (08-12T18:35): the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never force, never fuzz) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468553583,
+   "detail": "alexrollin/abilifi-apps failing at land 41× in 24h — LATEST (08-12T16:51): the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never force, never fuzz)",
    "refs": [
-    "BEB-2533"
+    "BEB-2929"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "the file was dbc96b82 when the lane generated its edit and is 03c74efa on master now — returning to codegen against the current revision (never force, never fuzz)",
-    "subject": "BEB-2533"
+    "error": "the file was cbc8f64e when the lane generated its edit and is 5dbc8a44 on master now — returning to codegen against the current revision (never force, never fuzz)",
+    "subject": "BEB-2929"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786484996842,
-   "detail": "alexrollin/abilifi-apps failing at preflight 9× in 24h — LATEST (08-12T13:42): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at preflight 9× in 24h — LATEST (08-12T13:42): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-1626 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n]",
    "refs": [
     "BEB-1626"
    ],
@@ -1962,7 +2016,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786542053325,
-   "detail": "alexrollin/abilifi-apps failing at split 10× in 24h — LATEST (08-12T18:06): sections: Changes | Prior failed attempts (do NOT repeat these) | Hard requirement\nchildren: BEB-2968, BEB-2969, BEB-2970 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at split 8× in 24h — LATEST (08-12T16:52): sections: Changes | Prior failed attempts (do NOT repeat these) | Hard requirement\nchildren: BEB-2968, BEB-2969, BEB-2970",
    "refs": [
     "BEB-1626"
    ],
@@ -1975,22 +2029,22 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474720669,
-   "detail": "alexrollin/abilifi-dispatcher failing at deploy 35× in 24h — LATEST (08-12T17:18): codeLen: 1933\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786469844700,
+   "detail": "alexrollin/abilifi-dispatcher failing at deploy 36× in 24h — LATEST (08-12T16:36): codeLen: 2031\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher",
    "refs": [
     "BEB-2922"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "codeLen: 1933\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher",
+    "error": "codeLen: 2031\ndeploy error: LAND REFUSED (refused): repo meta 404 for alexrollin/abilifi-dispatcher\ncommit: none\ntarget: alexrollin/abilifi-dispatcher",
     "subject": "BEB-2922"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474720558,
-   "detail": "alexrollin/abilifi-dispatcher failing at land 35× in 24h — LATEST (08-12T17:18): repo meta 404 for alexrollin/abilifi-dispatcher · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786469844598,
+   "detail": "alexrollin/abilifi-dispatcher failing at land 36× in 24h — LATEST (08-12T16:36): repo meta 404 for alexrollin/abilifi-dispatcher",
    "refs": [
     "BEB-2922"
    ],
@@ -2003,8 +2057,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786525441805,
-   "detail": "dispatcher-pass failing at pass 5× in 24h — LATEST (08-12T10:51): Error: Network connection lost.\n    at async mcp (index.js:1322:11)\n    at async Dispatcher.dispatchBody (index.js:1841:17)\n    at async Dispatcher.dispatch (index.js:1825:14)",
+   "since": 1786468322868,
+   "detail": "dispatcher-pass failing at pass 11× in 24h — LATEST (08-12T10:51): Error: Network connection lost.\n    at async mcp (index.js:1322:11)\n    at async Dispatcher.dispatchBody (index.js:1841:17)\n    at async Dispatcher.dispatch (index.js:1825:14)",
    "refs": [
     "dispatcher-pass"
    ],
@@ -2017,22 +2071,22 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786483152319,
-   "detail": "n/a failing at codegen 3× in 24h — LATEST (08-12T09:29): verdict: codegen produced no usable code\ncodeLen: 3368\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786473390197,
+   "detail": "n/a failing at codegen 4× in 24h — LATEST (08-12T09:29): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-size",
    "refs": [
-    "BEB-2043"
+    "BEB-2493"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 3368\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): no request routing — the deliverable specifies routes but the output never reads url.pathname, so every path returns the same thing (the \"OK\" shell class)\ntarget: n/a\ncodegen prompt head (what the MODEL received): [walls=6] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\n# BEB-2043: labtui: LIVE FRAGS panel + per-frag 👎 → auto files + sends a fix ticket (no diagnosis)\n\nRepo: n/a\nClass: CODE\nLane: part\n\nAlex: \"fix my tui — I need to see live frags + thumbs-down; don't tell me the issue, just ticket it and send it.\"\n\nDELIVERABLE (as a Paylo",
-    "subject": "BEB-2043"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 14 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: n/a\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2493"
    }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786474863145,
-   "detail": "n/a failing at complete 28× in 24h — LATEST (08-12T17:04): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786468905542,
+   "detail": "n/a failing at complete 29× in 24h — LATEST (08-12T13:41): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2043"
    ],
@@ -2046,7 +2100,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786510399638,
-   "detail": "n/a failing at evaluate 23× in 24h — LATEST (08-12T17:51): verify_url not 2xx after 12 probes — last HTTP 404: Not Found · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at evaluate 22× in 24h — LATEST (08-12T14:41): verify_url not 2xx after 12 probes — last HTTP 404: Not Found · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2043"
    ],
@@ -2059,35 +2113,77 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786560046994,
-   "detail": "BEB-2861 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "since": 1786554106985,
+   "detail": "BEB-2913 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
-    "BEB-2861"
+    "BEB-2913"
    ],
    "orky": {
     "cls": "proposed-never-claimed",
     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-2861"
+    "subject": "BEB-2913"
    }
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786560046994,
-   "detail": "BEB-2785 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "since": 1786554106985,
+   "detail": "BEB-2912 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
-    "BEB-2785"
+    "BEB-2912"
    ],
    "orky": {
     "cls": "proposed-never-claimed",
     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-2785"
+    "subject": "BEB-2912"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786554106985,
+   "detail": "BEB-2907 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2907"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2907"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786554106985,
+   "detail": "BEB-2931 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2931"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2931"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786554106985,
+   "detail": "BEB-2770 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2770"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2770"
    }
   },
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786560046994,
+   "since": 1786554106985,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -2307,6 +2403,26 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
+   "since": 1786378345309,
+   "detail": "fix BEB-2406 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2406",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785909220026,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
    "since": 1785909220026,
    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
    "refs": [
@@ -2368,6 +2484,16 @@
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785909220026,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785909220026,
    "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
    "refs": [
     "BEB-2737",
@@ -2417,183 +2543,107 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785909220026,
-   "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2913 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
    "refs": [
-    "BEB-2737",
-    "refine"
+    "BEB-2716",
+    "BEB-2913"
    ]
   },
   {
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-2861 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "detail": "fix BEB-2716 for BEB-2912 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
    "refs": [
     "BEB-2716",
-    "BEB-2861"
+    "BEB-2912"
    ]
   },
   {
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-2785 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "detail": "fix BEB-2716 for BEB-2907 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
    "refs": [
     "BEB-2716",
-    "BEB-2785"
+    "BEB-2907"
    ]
   },
   {
-   "code": "REPEAT_FAILER",
+   "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786558230864,
-   "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (3 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
-   "refs": [],
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2931 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2931"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2770 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2770"
+   ]
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1786550739867,
+   "detail": "BEB-2977 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-2977"
+   ],
    "orky": {
-    "cls": "claim-refusal-uncoded",
-    "subject": "dispatcher-claim",
-    "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-2977"
    }
   },
   {
    "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
-   "since": 1786557002764,
-   "detail": "BEB-2981 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "since": 1786550721430,
+   "detail": "BEB-2978 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
    "refs": [
-    "BEB-2981"
+    "BEB-2978"
    ],
    "orky": {
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2981"
+    "subject": "BEB-2978"
    }
   },
   {
    "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
-   "since": 1786556994204,
-   "detail": "BEB-2982 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "since": 1786550717672,
+   "detail": "BEB-2979 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
    "refs": [
-    "BEB-2982"
+    "BEB-2979"
    ],
    "orky": {
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2982"
+    "subject": "BEB-2979"
    }
   },
   {
    "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
-   "since": 1786556990240,
-   "detail": "BEB-2983 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "since": 1786550726042,
+   "detail": "BEB-2980 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
    "refs": [
-    "BEB-2983"
+    "BEB-2980"
    ],
    "orky": {
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2983"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786556986743,
-   "detail": "BEB-2984 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2984"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2984"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786556983052,
-   "detail": "BEB-2985 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2985"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2985"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786557006399,
-   "detail": "BEB-2986 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2986"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2986"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786557013601,
-   "detail": "BEB-2987 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2987"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2987"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786557010032,
-   "detail": "BEB-2988 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2988"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2988"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786557021411,
-   "detail": "BEB-2989 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2989"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2989"
-   }
-  },
-  {
-   "code": "BINDING_UNRESOLVABLE",
-   "severity": "red",
-   "since": 1786557017339,
-   "detail": "BEB-2990 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
-   "refs": [
-    "BEB-2990"
-   ],
-   "orky": {
-    "cls": "binding-unresolvable",
-    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
-    "subject": "BEB-2990"
+    "subject": "BEB-2980"
    }
   }
  ]
