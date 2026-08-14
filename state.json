@@ -1,23 +1,24 @@
 {
- "mirrored_at": "2026-08-14T11:54:18.769Z",
- "ts": 1786708457086,
+ "mirrored_at": "2026-08-14T11:56:32.138Z",
+ "ts": 1786708590221,
  "loop": {
   "proposed_total": 1320,
   "by_state": {
-   "queued": 25,
-   "claimed": 14,
-   "done": 682,
-   "held": 97,
-   "blocked": 7,
+   "queued": 17,
+   "claimed": 17,
+   "done": 683,
+   "held": 98,
+   "blocked": 10,
    "parked": 456
   },
   "by_lane": {
    "BUILD": {
-    "claimed": 13,
-    "done": 289,
+    "blocked": 2,
+    "claimed": 15,
+    "done": 290,
     "held": 31,
     "parked": 450,
-    "queued": 6
+    "queued": 1
    },
    "REFINE": {
     "blocked": 2,
@@ -27,24 +28,33 @@
     "done": 88,
     "held": 13,
     "parked": 3,
-    "queued": 14
+    "queued": 13
    },
    "SPEC": {
-    "blocked": 5,
-    "claimed": 1,
+    "blocked": 6,
+    "claimed": 2,
     "done": 305,
-    "held": 51,
+    "held": 52,
     "parked": 3,
-    "queued": 5
+    "queued": 3
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786708431959,
-   "tally": "idle (no proposable work)"
+   "at": 1786708559754,
+   "tally": "BEB-2493→BUILD, BEB-2127→BUILD, BEB-2305→BUILD, BEB-3379→SPEC[blocked], BEB-2368→REFINE, BEB-3359→SPEC, BEB-2737→SPEC"
   },
   "reds": [
+   {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1786708486137,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2752"
+    ]
+   },
    {
     "code": "SINGLE_WRITER_VIOLATION",
     "severity": "red",
@@ -62,7 +72,7 @@
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786708420491,
+    "since": 1786708540515,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -76,7 +86,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786708420491,
+    "since": 1786708540515,
     "detail": "ORKY CHAT BEB-2493 at /chat: mobile-first, Alex-only allowlist, memplug auto-attached as a graph edge, move a chat span into the build strea — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -151,7 +161,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1786708420491,
+    "since": 1786708540515,
     "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
     "refs": [
      "BEB-2493"
@@ -286,7 +296,7 @@
     "code": "SILENT_REFUSAL",
     "severity": "red",
     "since": 1786707386900,
-    "detail": "BEB-3140 refused 3× in 30min — LATEST: GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-3140 refused 4× in 30min — LATEST: GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so",
     "refs": [
      "BEB-3140"
     ],
@@ -314,7 +324,7 @@
     "code": "SILENT_REFUSAL",
     "severity": "red",
     "since": 1786707378477,
-    "detail": "BEB-3209 refused 3× in 30min — LATEST: tracker unreachable while gating BEB-3209 — left queued, NOT parked (a read failure is not an absent ticket) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-3209 refused 5× in 30min — LATEST: tracker unreachable while gating BEB-3209 — left queued, NOT parked (a read failure is not an absent ticket)",
     "refs": [
      "BEB-3209"
     ],
@@ -364,6 +374,20 @@
      "cls": "silent-refusal-loop",
      "error": "ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333)",
      "subject": "BEB-3320"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786707396391,
+    "detail": "BEB-3335 refused 3× in 30min — LATEST: LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdic",
+    "refs": [
+     "BEB-3335"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.",
+     "subject": "BEB-3335"
     }
    },
    {
@@ -420,20 +444,6 @@
      "cls": "silent-refusal-loop",
      "error": "tracker unreachable while gating BEB-3384 — left queued, NOT parked (a read failure is not an absent ticket)",
      "subject": "BEB-3384"
-    }
-   },
-   {
-    "code": "SILENT_REFUSAL",
-    "severity": "red",
-    "since": 1786706634403,
-    "detail": "BEB-3391 refused 3× in 30min — LATEST: LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdic",
-    "refs": [
-     "BEB-3391"
-    ],
-    "orky": {
-     "cls": "silent-refusal-loop",
-     "error": "LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.",
-     "subject": "BEB-3391"
     }
    },
    {
@@ -602,34 +612,6 @@
      "cls": "repeat-failer",
      "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/Projects/vlinux-apk-service/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
      "subject": "BEB-2540"
-    }
-   },
-   {
-    "code": "REPEAT_FAILER",
-    "severity": "red",
-    "since": 1786639409606,
-    "detail": "BEB-2665 failing at evaluate 586× in 24h — LATEST (08-14T11:29): tracker status propagation FAILED for BEB-2737: wanted 'todo' (reopened — REPEAT_FAILER:BEB-3047:claim still fires on BEB-3047), tracker reads 'unreadable' after 2 attempts — lane and ticket DISAGREE · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-    "refs": [
-     "BEB-2737"
-    ],
-    "orky": {
-     "cls": "repeat-failer",
-     "error": "tracker status propagation FAILED for BEB-2737: wanted 'todo' (reopened — REPEAT_FAILER:BEB-3047:claim still fires on BEB-3047), tracker reads 'unreadable' after 2 attempts — lane and ticket DISAGREE",
-     "subject": "BEB-2737"
-    }
-   },
-   {
-    "code": "REPEAT_FAILER",
-    "severity": "red",
-    "since": 1786623799505,
-    "detail": "BEB-2665 failing at repair-reopen 13161× in 24h — LATEST (08-14T11:28): closed as done while its red REPEAT_FAILER:abilifi-apps/abilifi-marketplace:codegen was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-    "refs": [
-     "BEB-2737"
-    ],
-    "orky": {
-     "cls": "repeat-failer",
-     "error": "closed as done while its red REPEAT_FAILER:abilifi-apps/abilifi-marketplace:codegen was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked.",
-     "subject": "BEB-2737"
     }
    },
    {
@@ -944,7 +926,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786656739507,
-    "detail": "BEB-3140 failing at preflight 13× in 24h — LATEST (08-14T07:20): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-3140 failing at preflight 13× in 24h — LATEST (08-14T07:20): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
     "refs": [
      "BEB-3140"
     ],
@@ -1182,7 +1164,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786662559871,
-    "detail": "BEB-3209 failing at preflight 5× in 24h — LATEST (08-14T02:09): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-3209 failing at preflight 5× in 24h — LATEST (08-14T02:09): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
     "refs": [
      "BEB-3209"
     ],
@@ -1658,7 +1640,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786695217744,
-    "detail": "BEB-3335 failing at preflight 3× in 24h — LATEST (08-14T08:14): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-3335 failing at preflight 3× in 24h — LATEST (08-14T08:14): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
     "refs": [
      "BEB-3335"
     ],
@@ -1728,7 +1710,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786696034704,
-    "detail": "BEB-3350 failing at preflight 7× in 24h — LATEST (08-14T09:29): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "detail": "BEB-3350 failing at preflight 7× in 24h — LATEST (08-14T09:29): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3350"
     ],
@@ -1812,7 +1794,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786699863396,
-    "detail": "BEB-3372 failing at preflight 4× in 24h — LATEST (08-14T10:26): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
+    "detail": "BEB-3372 failing at preflight 4× in 24h — LATEST (08-14T10:26): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3372"
     ],
@@ -1821,6 +1803,21 @@
      "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
      "subject": "BEB-3372"
     }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786705695006,
+    "detail": "BEB-3375 failing at unrecorded 3× in 24h — LATEST (08-14T11:54): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-3375"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
+     "subject": "BEB-3375"
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
@@ -1854,7 +1851,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786622252828,
-    "detail": "abilifi-apps failing at heartbeat 1209× in 24h — LATEST (08-14T11:49): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+    "detail": "abilifi-apps failing at heartbeat 1211× in 24h — LATEST (08-14T11:54): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
     "refs": [
      "BEB-2385"
     ],
@@ -1937,15 +1934,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786622123799,
-    "detail": "abilifi-payload failing at codegen 73× in 24h — LATEST (08-14T11:46): verdict: codegen produced no usable code\ncodeLen: 2461\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 3 routes (/, /claim/:gers",
+    "since": 1786622156113,
+    "detail": "abilifi-payload failing at codegen 72× in 24h — LATEST (08-14T11:46): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2394"
+     "BEB-2127"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 2461\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 3 routes (/, /claim/:gers_id, /listing/:gers_id/edit) but only 0 dispatch site(s) — routes are listed and never handled, so every one of them answers \"unknown route\" while the page looks complete | duplicate top-level declaration 'stmt' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
-     "subject": "BEB-2394"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2127"
     }
    },
    {
@@ -2077,15 +2074,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786622097034,
-    "detail": "alexrollin/abilifi-apps failing at codegen 442× in 24h — LATEST (08-14T11:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN",
+    "since": 1786622259816,
+    "detail": "alexrollin/abilifi-apps failing at codegen 441× in 24h — LATEST (08-14T11:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
     "refs": [
-     "BEB-2540"
+     "BEB-2968"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WANTED: \"const json = (o, s) => new Response(JSON.stringify(o, null, 2)), { status: s || 200, heade\" · CLOSEST in file is line 4 (47% similar): \"const json = (o, s) => new Response(JSON.stringify(o, null, 2), { status: s || 200, header\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
-     "subject": "BEB-2540"
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+     "subject": "BEB-2968"
     }
    },
    {
@@ -2148,7 +2145,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786643530263,
-    "detail": "alexrollin/abilifi-apps failing at preflight 431× in 24h — LATEST (08-14T11:53): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
+    "detail": "alexrollin/abilifi-apps failing at preflight 433× in 24h — LATEST (08-14T11:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
     "refs": [
      "BEB-2744"
     ],
@@ -2175,15 +2172,15 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786622118307,
-    "detail": "alexrollin/abilifi-apps failing at wp-install 12× in 24h — LATEST (08-13T15:54): slug: beb-2917\ncodeLen: 2712\ninstall response: {\"error\":\"install failed\",\"detail\":\"r/www/html\\nPHP Parse error:  syntax error, unexpected token \\\"`\\\" in /var/www/html/wp-content/plugins/beb-2929/beb-2 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786622222394,
+    "detail": "alexrollin/abilifi-apps failing at wp-install 11× in 24h — LATEST (08-13T15:54): slug: beb-2929\ncodeLen: 8254\ninstall response: {\"error\":\"install failed\",\"detail\":\"/wp-cli.php(35): WP_CLI\\\\bootstrap()\\n#18 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc... · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-2917"
+     "BEB-2929"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "slug: beb-2917\ncodeLen: 2712\ninstall response: {\"error\":\"install failed\",\"detail\":\"r/www/html\\nPHP Parse error:  syntax error, unexpected token \\\"`\\\" in /var/www/html/wp-content/plugins/beb-2929/beb-2929.php on line 182\\nParse error: syntax error, unexpected token \\\"`\\\" in /var/www/html/wp-content/plugins/beb-2929/beb-2929.php on line 182\\nError",
-     "subject": "BEB-2917"
+     "error": "slug: beb-2929\ncodeLen: 8254\ninstall response: {\"error\":\"install failed\",\"detail\":\"/wp-cli.php(35): WP_CLI\\\\bootstrap()\\n#18 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc...')\\n#19 /usr/local/bin/wp(4): include('phar:///usr/loc...')\\n#20 {main}\\n  thrown in /var/www/html/wp-includes/capabilities.php on line 914\\nError:",
+     "subject": "BEB-2929"
     }
    },
    {
@@ -2274,7 +2271,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786622264327,
-    "detail": "n/a failing at codegen 80× in 24h — LATEST (08-14T11:45): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
+    "detail": "n/a failing at codegen 81× in 24h — LATEST (08-14T11:55): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
     "refs": [
      "BEB-3012"
     ],
@@ -2316,7 +2313,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786640346703,
-    "detail": "n/a failing at preflight 69× in 24h — LATEST (08-14T11:40): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2493 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at preflight 71× in 24h — LATEST (08-14T11:54): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2493 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2493"
     ],
@@ -2357,7 +2354,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786708420491,
+    "since": 1786708540515,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -2487,8 +2484,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786704939628,
-    "detail": "65 ticket(s) refused at the claim step for UNCODED in the last hour (121 rows) — one defect, not 65 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "since": 1786704947879,
+    "detail": "65 ticket(s) refused at the claim step for UNCODED in the last hour (122 rows) — one defect, not 65 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-uncoded",
@@ -2751,39 +2748,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 40033,
+  "head_seq": 40046,
   "cursor_fable": 38984,
-  "unread_for_fable": 1049,
+  "unread_for_fable": 1062,
   "last": [
    {
-    "seq": 40029,
-    "from": "cc",
-    "kind": "question",
-    "one_line": "SPEC QUESTIONS OPEN on BEB-3397 (BEB-2436, blocking — NO contract_id until answered). Firs"
-   },
-   {
-    "seq": 40030,
+    "seq": 40042,
     "from": "cc",
     "kind": "status",
-    "one_line": "2 NEW REDS: REPEAT_FAILER(BEB-2737), REPEAT_FAILER(BEB-2737) — full detail on get_state"
+    "one_line": "2 NEW REDS: VERIFY_PENDING(BEB-2752), SILENT_REFUSAL(BEB-3335) — full detail on get_state"
    },
    {
-    "seq": 40031,
+    "seq": 40043,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER: BEB-3397 SPEC completion REJECTED (evidence gate BEB-2114) — verification_outp"
+    "one_line": "RED REPEAT_FAILER: BEB-3375 failing at unrecorded 3× in 24h — LATEST (08-14T11:54): blocke"
    },
    {
-    "seq": 40032,
+    "seq": 40044,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-3349 REFUSED for BUILD — ticket status 'backlog' — owner-p"
+    "one_line": "DISPATCHER pass: proposed 7 · wrote 6 · claimed 17 — BEB-2493→BUILD, BEB-2127→BUILD, BEB-2"
    },
    {
-    "seq": 40033,
+    "seq": 40045,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3209 — REFINE_FAIL ×3. Codegen spend stopped;"
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2493 REFUSED for BUILD — ticket status 'done' — owner-park"
+   },
+   {
+    "seq": 40046,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-2127 REFUSED for BUILD — declared deps still open: BEB-215"
    }
   ]
  },
@@ -2877,6 +2874,15 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1786708486137,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2752"
+   ]
+  },
+  {
    "code": "SINGLE_WRITER_VIOLATION",
    "severity": "red",
    "since": 1786708008276,
@@ -2893,7 +2899,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786708420491,
+   "since": 1786708540515,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -2907,7 +2913,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786708420491,
+   "since": 1786708540515,
    "detail": "ORKY CHAT BEB-2493 at /chat: mobile-first, Alex-only allowlist, memplug auto-attached as a graph edge, move a chat span into the build strea — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -2982,7 +2988,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1786708420491,
+   "since": 1786708540515,
    "detail": "ORKY REVIEW (2493) — Alex asks Orky what happened at /chat and gets it from Orky, plus the unprompted 16:18 report. — last landed evidence NEVER",
    "refs": [
     "BEB-2493"
@@ -3117,7 +3123,7 @@
    "code": "SILENT_REFUSAL",
    "severity": "red",
    "since": 1786707386900,
-   "detail": "BEB-3140 refused 3× in 30min — LATEST: GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-3140 refused 4× in 30min — LATEST: GUARD_POLICY: every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\"ask\" — and a dispatched session has no human to answer it, so",
    "refs": [
     "BEB-3140"
    ],
@@ -3145,7 +3151,7 @@
    "code": "SILENT_REFUSAL",
    "severity": "red",
    "since": 1786707378477,
-   "detail": "BEB-3209 refused 3× in 30min — LATEST: tracker unreachable while gating BEB-3209 — left queued, NOT parked (a read failure is not an absent ticket) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-3209 refused 5× in 30min — LATEST: tracker unreachable while gating BEB-3209 — left queued, NOT parked (a read failure is not an absent ticket)",
    "refs": [
     "BEB-3209"
    ],
@@ -3195,6 +3201,20 @@
     "cls": "silent-refusal-loop",
     "error": "ticket status 'backlog' — owner-parked/cancelled/done is not buildable (BEB-2333)",
     "subject": "BEB-3320"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786707396391,
+   "detail": "BEB-3335 refused 3× in 30min — LATEST: LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdic",
+   "refs": [
+    "BEB-3335"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.",
+    "subject": "BEB-3335"
    }
   },
   {
@@ -3251,20 +3271,6 @@
     "cls": "silent-refusal-loop",
     "error": "tracker unreachable while gating BEB-3384 — left queued, NOT parked (a read failure is not an absent ticket)",
     "subject": "BEB-3384"
-   }
-  },
-  {
-   "code": "SILENT_REFUSAL",
-   "severity": "red",
-   "since": 1786706634403,
-   "detail": "BEB-3391 refused 3× in 30min — LATEST: LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdic",
-   "refs": [
-    "BEB-3391"
-   ],
-   "orky": {
-    "cls": "silent-refusal-loop",
-    "error": "LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.",
-    "subject": "BEB-3391"
    }
   },
   {
@@ -3433,34 +3439,6 @@
     "cls": "repeat-failer",
     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/Projects/vlinux-apk-service/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
     "subject": "BEB-2540"
-   }
-  },
-  {
-   "code": "REPEAT_FAILER",
-   "severity": "red",
-   "since": 1786639409606,
-   "detail": "BEB-2665 failing at evaluate 586× in 24h — LATEST (08-14T11:29): tracker status propagation FAILED for BEB-2737: wanted 'todo' (reopened — REPEAT_FAILER:BEB-3047:claim still fires on BEB-3047), tracker reads 'unreadable' after 2 attempts — lane and ticket DISAGREE · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-   "refs": [
-    "BEB-2737"
-   ],
-   "orky": {
-    "cls": "repeat-failer",
-    "error": "tracker status propagation FAILED for BEB-2737: wanted 'todo' (reopened — REPEAT_FAILER:BEB-3047:claim still fires on BEB-3047), tracker reads 'unreadable' after 2 attempts — lane and ticket DISAGREE",
-    "subject": "BEB-2737"
-   }
-  },
-  {
-   "code": "REPEAT_FAILER",
-   "severity": "red",
-   "since": 1786623799505,
-   "detail": "BEB-2665 failing at repair-reopen 13161× in 24h — LATEST (08-14T11:28): closed as done while its red REPEAT_FAILER:abilifi-apps/abilifi-marketplace:codegen was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked. · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
-   "refs": [
-    "BEB-2737"
-   ],
-   "orky": {
-    "cls": "repeat-failer",
-    "error": "closed as done while its red REPEAT_FAILER:abilifi-apps/abilifi-marketplace:codegen was STILL FIRING — reopened. The acceptance is the red clearing, not the ticket being marked.",
-    "subject": "BEB-2737"
    }
   },
   {
@@ -3775,7 +3753,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786656739507,
-   "detail": "BEB-3140 failing at preflight 13× in 24h — LATEST (08-14T07:20): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-3140 failing at preflight 13× in 24h — LATEST (08-14T07:20): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
    "refs": [
     "BEB-3140"
    ],
@@ -4013,7 +3991,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786662559871,
-   "detail": "BEB-3209 failing at preflight 5× in 24h — LATEST (08-14T02:09): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-3209 failing at preflight 5× in 24h — LATEST (08-14T02:09): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
    "refs": [
     "BEB-3209"
    ],
@@ -4489,7 +4467,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786695217744,
-   "detail": "BEB-3335 failing at preflight 3× in 24h — LATEST (08-14T08:14): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-3335 failing at preflight 3× in 24h — LATEST (08-14T08:14): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
    "refs": [
     "BEB-3335"
    ],
@@ -4559,7 +4537,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786696034704,
-   "detail": "BEB-3350 failing at preflight 7× in 24h — LATEST (08-14T09:29): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "detail": "BEB-3350 failing at preflight 7× in 24h — LATEST (08-14T09:29): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3350"
    ],
@@ -4643,7 +4621,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786699863396,
-   "detail": "BEB-3372 failing at preflight 4× in 24h — LATEST (08-14T10:26): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
+   "detail": "BEB-3372 failing at preflight 4× in 24h — LATEST (08-14T10:26): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3372"
    ],
@@ -4652,6 +4630,21 @@
     "error": "[\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session has no human to answer it, so ask resolves to DENY. The lane cannot write one line.\",\n  \"evidence\": \"line-guard.sh:21 (BEB-2125 still open — the headless-policy ruling has not landed)\",\n  \"fix_ref\": \"BEB-2125\"\n }\n]",
     "subject": "BEB-3372"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786705695006,
+   "detail": "BEB-3375 failing at unrecorded 3× in 24h — LATEST (08-14T11:54): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-3375"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
+    "subject": "BEB-3375"
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
@@ -4685,7 +4678,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786622252828,
-   "detail": "abilifi-apps failing at heartbeat 1209× in 24h — LATEST (08-14T11:49): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+   "detail": "abilifi-apps failing at heartbeat 1211× in 24h — LATEST (08-14T11:54): ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
    "refs": [
     "BEB-2385"
    ],
@@ -4768,15 +4761,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786622123799,
-   "detail": "abilifi-payload failing at codegen 73× in 24h — LATEST (08-14T11:46): verdict: codegen produced no usable code\ncodeLen: 2461\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 3 routes (/, /claim/:gers",
+   "since": 1786622156113,
+   "detail": "abilifi-payload failing at codegen 72× in 24h — LATEST (08-14T11:46): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2394"
+    "BEB-2127"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 2461\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | advertises 3 routes (/, /claim/:gers_id, /listing/:gers_id/edit) but only 0 dispatch site(s) — routes are listed and never handled, so every one of them answers \"unknown route\" while the page looks complete | duplicate top-level declaration 'stmt' — the file does not parse, CF PUT will reject it (10021), and a patch SEARCH anchor on that line can never match uniquely\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): [walls=6] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
-    "subject": "BEB-2394"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 21 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2127"
    }
   },
   {
@@ -4908,15 +4901,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786622097034,
-   "detail": "alexrollin/abilifi-apps failing at codegen 442× in 24h — LATEST (08-14T11:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WAN",
+   "since": 1786622259816,
+   "detail": "alexrollin/abilifi-apps failing at codegen 441× in 24h — LATEST (08-14T11:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
    "refs": [
-    "BEB-2540"
+    "BEB-2968"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (block 1/1 SEARCH text not found, even ignoring indentation. WANTED: \"const json = (o, s) => new Response(JSON.stringify(o, null, 2)), { status: s || 200, heade\" · CLOSEST in file is line 4 (47% similar): \"const json = (o, s) => new Response(JSON.stringify(o, null, 2), { status: s || 200, header\" · copy that line verbatim if it is the one you meant.). The file was NOT rewritten from scratch — that is what this mode exists to prevent.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n--",
-    "subject": "BEB-2540"
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)",
+    "subject": "BEB-2968"
    }
   },
   {
@@ -4979,7 +4972,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786643530263,
-   "detail": "alexrollin/abilifi-apps failing at preflight 431× in 24h — LATEST (08-14T11:53): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
+   "detail": "alexrollin/abilifi-apps failing at preflight 433× in 24h — LATEST (08-14T11:54): [\n {\n  \"class\": \"GUARD_POLICY\",\n  \"why\": \"every write this lane must make lands in alexrollin/abilifi-apps/src/*.ts, which line-guard answers with permissionDecision:\\\"ask\\\" — and a dispatched session",
    "refs": [
     "BEB-2744"
    ],
@@ -5006,15 +4999,15 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786622118307,
-   "detail": "alexrollin/abilifi-apps failing at wp-install 12× in 24h — LATEST (08-13T15:54): slug: beb-2917\ncodeLen: 2712\ninstall response: {\"error\":\"install failed\",\"detail\":\"r/www/html\\nPHP Parse error:  syntax error, unexpected token \\\"`\\\" in /var/www/html/wp-content/plugins/beb-2929/beb-2 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786622222394,
+   "detail": "alexrollin/abilifi-apps failing at wp-install 11× in 24h — LATEST (08-13T15:54): slug: beb-2929\ncodeLen: 8254\ninstall response: {\"error\":\"install failed\",\"detail\":\"/wp-cli.php(35): WP_CLI\\\\bootstrap()\\n#18 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc... · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-2917"
+    "BEB-2929"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "slug: beb-2917\ncodeLen: 2712\ninstall response: {\"error\":\"install failed\",\"detail\":\"r/www/html\\nPHP Parse error:  syntax error, unexpected token \\\"`\\\" in /var/www/html/wp-content/plugins/beb-2929/beb-2929.php on line 182\\nParse error: syntax error, unexpected token \\\"`\\\" in /var/www/html/wp-content/plugins/beb-2929/beb-2929.php on line 182\\nError",
-    "subject": "BEB-2917"
+    "error": "slug: beb-2929\ncodeLen: 8254\ninstall response: {\"error\":\"install failed\",\"detail\":\"/wp-cli.php(35): WP_CLI\\\\bootstrap()\\n#18 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc...')\\n#19 /usr/local/bin/wp(4): include('phar:///usr/loc...')\\n#20 {main}\\n  thrown in /var/www/html/wp-includes/capabilities.php on line 914\\nError:",
+    "subject": "BEB-2929"
    }
   },
   {
@@ -5105,7 +5098,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786622264327,
-   "detail": "n/a failing at codegen 80× in 24h — LATEST (08-14T11:45): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
+   "detail": "n/a failing at codegen 81× in 24h — LATEST (08-14T11:55): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
    "refs": [
     "BEB-3012"
    ],
@@ -5147,7 +5140,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786640346703,
-   "detail": "n/a failing at preflight 69× in 24h — LATEST (08-14T11:40): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2493 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at preflight 71× in 24h — LATEST (08-14T11:54): [\n {\n  \"class\": \"TARGET_BINDING\",\n  \"why\": \"ticket BEB-2493 unreadable from the tracker\",\n  \"evidence\": \"get_issue returned no identifier\",\n  \"fix_ref\": \"BEB-2007\"\n }\n] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2493"
    ],
@@ -5188,7 +5181,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786708420491,
+   "since": 1786708540515,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -5318,8 +5311,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786704939628,
-   "detail": "65 ticket(s) refused at the claim step for UNCODED in the last hour (121 rows) — one defect, not 65 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "since": 1786704947879,
+   "detail": "65 ticket(s) refused at the claim step for UNCODED in the last hour (122 rows) — one defect, not 65 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-uncoded",
