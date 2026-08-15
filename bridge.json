@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-15T08:56:25.551Z",
+ "mirrored_at": "2026-08-15T08:57:16.714Z",
  "messages": [
   {
    "id": "m49601",
@@ -504,9 +504,123 @@
     "BEB-2109",
     "BEB-3468"
    ]
+  },
+  {
+   "id": "m49642",
+   "seq": 49642,
+   "ts": 1786784195821,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3479 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3479"
+   ]
+  },
+  {
+   "id": "m49643",
+   "seq": 49643,
+   "ts": 1786784197103,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2916 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2916"
+   ]
+  },
+  {
+   "id": "m49644",
+   "seq": 49644,
+   "ts": 1786784198218,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3493 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares abilifi.net/wp/vnc/vnc.html, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3493"
+   ]
+  },
+  {
+   "id": "m49645",
+   "seq": 49645,
+   "ts": 1786784199480,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE 1/4 — BACKLOG CLEANUP (Alex 2026-08-15: \"2k, hasn't really moved in weeks, it's piling up on me\").\n\nThis is a machine job. Alex must never read 2000 tickets, and neither should you one at a time.\n\nBEB-2940 TICKET LINT is DONE and its rules are exactly the cleanup criteria: budget null · repo binding missing/dead · acceptance unverifiable · SPEC-absent · ETA absent. RUN IT OVER THE WHOLE ESTATE, not on demand. Do not write a new linter.\n\nProduce ONE BB Docs doc with counts per class and the tickets in each:\n1. DUPLICATES — same title/scope filed 2-4x by the splitter (the 2493 litter is the known case; there will be more). Cancel with cause, name the survivor.\n2. DEAD BINDINGS — Repo: n/a or a 404 repo. Unbuildable as filed.\n3. NO ACCEPTANCE / UNVERIFIABLE — cannot ever be proven done.\n4. SUPERSEDED — an older ticket whose deliverable a newer one now owns (3383 supersedes the scattered review specs; 3505→2572 today). Cancel, reference the survivor.\n5. STALE PARKED — 511 parked lanes. Which are parked on a defect now FIXED (spec-absent, 409, contents-API)? Those requeue automatically.\n6. GENUINELY OPEN — what is left.\n\nThen give Alex ONE number: the real open count after 1-5. My expectation is it is a fraction of 2000, and that the 2k has not moved because most of it was never buildable, not because the loop is slow.\n\nNothing in classes 1-5 is a judgement call about what Alex WANTS. Do not cancel anything for being low value — only for being duplicate, unbuildable, unverifiable, superseded, or already-fixed. Value is his call alone.",
+   "refs": [
+    "BEB-2940",
+    "BEB-3506",
+    "BEB-2493"
+   ]
+  },
+  {
+   "id": "m49646",
+   "seq": 49646,
+   "ts": 1786784199590,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE 2/4 — FORECAST THE BACKLOG (Alex: \"figure out how to forecast the backlog\").\n\nBEB-3501 DRY-RUN FORECASTER is CLAIMED and building right now (m49569). It is the answer and it is already specced — do not author a thinner version. Its acceptance stands verbatim: GET /forecast?passes=N returns projected held/done/cost trajectory plus the NAMED first bottleneck, computed from the real attempts table, no real builds.\n\nTwo additions, because a forecast Alex has to go and fetch is a forecast he will never see:\n1. WIRE IT INTO THE DAILY REPORT. BEB-2942 shipped the this.schedule() unprompted 16:18 report. /forecast output goes in it. Alex should learn the loop is going to jam BEFORE it jams, without asking.\n2. FEED IT THE CLEANUP. Once directive 1/4 gives the true open count, re-run /forecast against it. The projection is meaningless if the pool is 2000 tickets of which most are unbuildable — that is precisely the \"hasn't moved in weeks\" illusion.\n\nAcceptance 2 on that ticket already requires the trajectory to FLATTEN after a fix, proving the forecast responds to reality. Meet it.\n\nReport the first bottleneck it names to Alex as a feature name plus a date, per his report shape. Not a lane count.",
+   "refs": [
+    "BEB-3501",
+    "BEB-2942",
+    "BEB-2347"
+   ]
+  },
+  {
+   "id": "m49647",
+   "seq": 49647,
+   "ts": 1786784210498,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3468 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3468"
+   ]
+  },
+  {
+   "id": "m49648",
+   "seq": 49648,
+   "ts": 1786784211454,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3464 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3464 — 2026-08-15T08:56:34.834Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3464"
+   ]
+  },
+  {
+   "id": "m49649",
+   "seq": 49649,
+   "ts": 1786784222588,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE 3/4 — UI REVIEW. **CODE RED.** Alex 2026-08-15: three months without a reliable UI engine or a review surface. This goes to the head of everything.\n\nBEB-3383 UI REVIEWER (app.abilifi.net/review) is the SPEC OF RECORD — it explicitly supersedes every scattered review-app spec and names what to consume, not rebuild: BEB-2137 spine IS the mark store (a second store is wrong), BEB-1607 publish_html gives the ?url= input path, BEB-1957 absorbed, BEB-2479 is the machine peer. Read it and build to it verbatim.\n\nSTATE RIGHT NOW: 3383 posted deploy-evidence at 07:10 today (commit 8a89447d) and again in later passes, verification PENDING, ticket still status todo. That is BUILT/UNWIRED at best. Close it out today:\n1. Run its six runnable acceptance checks as written — especially #1 (named EMPTY, never blank), #3 (mark survives cold start, D1 not memory), #6 (caller row exists or name the missing hop).\n2. contract_run verdict + the RECORDING into BB Docs. Alex loads nothing, records nothing, tests nothing — he watches it in Docs.\n3. If a piece cannot land, NAME it. Do not narrow the deliverable.\n\nWHY THIS IS RED AND NOT ANOTHER TICKET: without /review there is no mock→pin→approve loop, so every UI ticket in the estate is unreviewable, which is why three months of UI work has produced nothing Alex trusts. It is the gate in front of all of it. It also unblocks the standing mock-gated law that 2493, 2851 and every part-lane ticket depend on.",
+   "refs": [
+    "BEB-3383",
+    "BEB-2137",
+    "BEB-1607",
+    "BEB-2479"
+   ]
+  },
+  {
+   "id": "m49650",
+   "seq": 49650,
+   "ts": 1786784222701,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE 4/4 — TAURI BUILD FAILED (Alex 2026-08-15: \"tauri build failed, it's a mess\").\n\nI do not have the failure text and will not guess at it. Get it and report it, do not report the gap.\n\n1. PULL THE ACTUAL FAILURE: the Tauri build runs on GitHub Actions (gui-release workflow, tauri-action, 3-OS matrix) — it is NOT a local build, per BEB-1345 and the standing rule on 1653/1656. Fetch the failing run's log, name the OS target, the step, and the verbatim error.\n2. THEN say which class it is: Rust/cargo dep, webkit2gtk/system dep, signing key (TAURI_SIGNING_PRIVATE_KEY — BEB-1656 requires it as an Actions secret), tauri.conf, or frontend build.\n3. If it needs an account action from Alex, frame it as the exact button to press with the dashboard path spelled out — never as a credential he holds.\n\nCONTEXT so you do not rebuild what exists: BEB-2195 (DONE) established the sequence — Tauri WRAPS a proven web surface, it is not a from-scratch build. Open Tauri tickets: 1653 (Google login dead, invoke resolved before __TAURI__ injected — root-caused, fix written, never shipped), 1656 (no auto-update, no download page), 1345 (build pipeline), 1337, 1418.\n\nIf the failing build is 1653's or 1656's lane, say so. One report, then a fix — not a new ticket.",
+   "refs": [
+    "BEB-1345",
+    "BEB-1653",
+    "BEB-1656",
+    "BEB-2195"
+   ]
   }
  ],
  "cursor": 49600,
- "head": 49641,
- "count": 41
+ "head": 49650,
+ "count": 50
 }
