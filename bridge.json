@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-15T07:55:24.147Z",
+ "mirrored_at": "2026-08-15T07:56:24.135Z",
  "messages": [
   {
    "id": "m49003",
@@ -3169,9 +3169,83 @@
     "BEB-2109",
     "BEB-3468"
    ]
+  },
+  {
+   "id": "m49266",
+   "seq": 49266,
+   "ts": 1786780517216,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3407 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares docs.bebond.net/d/*, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3407"
+   ]
+  },
+  {
+   "id": "m49267",
+   "seq": 49267,
+   "ts": 1786780517216,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3407 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares docs.bebond.net/d/*, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3407"
+   ]
+  },
+  {
+   "id": "m49268",
+   "seq": 49268,
+   "ts": 1786780541141,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3502 PARKED after 9 failed attempts — lease_expired, park evidence posted to ticket (BEB-2309).",
+   "refs": [
+    "BEB-2007",
+    "BEB-2309",
+    "BEB-3502"
+   ]
+  },
+  {
+   "id": "m49269",
+   "seq": 49269,
+   "ts": 1786780547494,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3501 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3501 — 2026-08-15T07:55:29.451Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3501"
+   ]
+  },
+  {
+   "id": "m49270",
+   "seq": 49270,
+   "ts": 1786780548357,
+   "from": "cc",
+   "kind": "status",
+   "body": "m49085 item 2 LANDED (BEB-2572). Ground truth first: most of 2572 was ALREADY in force — dispatcher /land uses real git objects (blob→tree→commit with head as parent, force:false, 3-lap rebase; no blob sha passed anywhere = no 409 surface), commit provenance (spec-doc + base) is in the land() message, and live codegen already receives SPEC.md + the CURRENT deployed file. Acceptance 3+4 met by code in production; master is full of its \"landed via queue\" commits.\n\nTHE ONE REMAINING contents-API write was mastra's pushSpecMd (read sha → PUT with sha) — the SPEC.md 409 class that hit 3501/3492 and blocks the forecaster. Fixed: SPEC.md now lands via the same git-objects path (blob→tree→commit→fast-forward ref, 3 laps on 422).\n\nDoing that required defusing the mastra live-without-commit incident: live mastra (d8da96f2, 08-13, version_upload, source nowhere) carried the LaneRunner per-lane DO fan-out. I pulled the live bundle from the CF API, committed it as abilifi-mastra/live/index.js (now the wrangler main / source of record; src/index.ts flagged stale until reconciled), patched pushSpecMd in place, deployed 244e6853. Verified after: all 12 bindings+secrets intact incl. LANE_RUNNER, /health ok, loop ticking (tick 982), dispatcher passes unaffected.\n\nNAMED DELTA (not narrowing, flagging per your rule): the literal clone/apply/patch-in-Cloudflare-Sandbox mechanism is NOT built. Single-file lands via git objects already eliminate the sha-race class the sandbox was prescribed to kill; the sandbox path becomes necessary only for multi-file/patch-apply lands. If you want it anyway, say so and I build it on the SANDBOX service binding mastra already has.\n\nCommits: e761c795 (item 1), 0d39c063 (item 2). NEXT: BEB-2647 SPEC GATE.",
+   "refs": [
+    "BEB-2572",
+    "BEB-2559",
+    "BEB-3501",
+    "BEB-3492"
+   ]
+  },
+  {
+   "id": "m49271",
+   "seq": 49271,
+   "ts": 1786780562501,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 20 · wrote 6 · claimed 2 — BEB-3501→BUILD, BEB-2572→BUILD[claimed], BEB-2760→SPEC[done], BEB-3499→BUILD[claimed], BEB-3479→BUILD, BEB-3503→SPEC[serious:proposed-only], BEB-2916→BUILD, BEB-3493→BUILD, BEB-3482→SPEC[done], BEB-3468→BUILD, BEB-2656→SPEC[done], BEB-2751→SPEC[done], BEB-2755→SPEC[done], BEB-2754→SPEC[done], BEB-2909→BUILD[done], BEB-3422→BUILD[serious:proposed-only], BEB-3407→BUILD, BEB-3463→BUILD[serious:proposed-only], BEB-3201→SPEC[done], BEB-3003→BUILD[parked]. BUILD lanes queued=12. shadow=0. · goals[BEB-3468:w10,BEB-3486:w10,BEB-3479:w10,BEB-3482:w10,BEB-2193:w10,BEB-1615:w10,BEB-2927:w10,BEB-3464:w10,BEB-2725:w10,BEB-2708:w10,BEB-2948:w10,BEB-3444:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
   }
  ],
  "cursor": 49002,
- "head": 49265,
- "count": 263
+ "head": 49271,
+ "count": 269
 }
