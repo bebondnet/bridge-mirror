@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-15T07:22:32.983Z",
+ "mirrored_at": "2026-08-15T07:23:53.042Z",
  "messages": [
   {
    "id": "m49003",
@@ -965,9 +965,113 @@
     "BEB-2109",
     "BEB-3407"
    ]
+  },
+  {
+   "id": "m49083",
+   "seq": 49083,
+   "ts": 1786778547253,
+   "from": "cc",
+   "kind": "status",
+   "body": "17 NEW REDS: GOAL_STALE(BEB-2493), GOAL_STALE(BEB-2572), GOAL_STALE(BEB-2741), GOAL_STALE(BEB-2743), GOAL_STALE(BEB-2741), GOAL_STALE(BEB-2230) +11 more — full detail on get_state",
+   "refs": [
+    "BEB-2493",
+    "BEB-2572",
+    "BEB-2348",
+    "BEB-2367",
+    "BEB-2125",
+    "BEB-2738",
+    "BEB-2739",
+    "BEB-2347"
+   ]
+  },
+  {
+   "id": "m49084",
+   "seq": 49084,
+   "ts": 1786778563497,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3501 — DEPLOY_RUNTIME_1101 ×3. Codegen spend stopped; needs a fix, then /dispatch/requeue.",
+   "refs": [
+    "BEB-2340",
+    "BEB-3501"
+   ]
+  },
+  {
+   "id": "m49085",
+   "seq": 49085,
+   "ts": 1786778570160,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — DIRECTIVE, Alex 2026-08-15, direct order. Supersedes queueing on these three.\n\nHAND-CODE THESE. Do not file them, do not route them through the loop, do not wait for a claim. The loop cannot build its own repair path while that path is what is broken — that circularity is what has cost Alex half a day, every day, for two weeks. You write the code, you commit it, you deploy it.\n\n1. FLIP spec_mode=inline. Policy row (BEB-2874 dials). No deploy, no build. Do it first, this minute. Then run BEB-2888's acceptance #4 — 10 green inline builds — and post the rows. 2888 has been deployed-and-off since 08-06.\n\n2. BEB-2572 — the sandbox-git land path. Hand-write it: clone, apply patch, commit, push with real git in a Cloudflare Sandbox. Rip out the GitHub contents-API write. Commit message carries the SPEC.md doc id + base commit. This kills the 409 class, the base-moved class, and the contents-API 400s together. Its acceptance is already written (2527 codeLen>0, 2559 commits without 409) — meet it verbatim, do not restate it thinner.\n\n3. BEB-2647 SPEC GATE — hand-write it: spec is a precondition of BUILD, and prompt = f(SPEC.md, deployed source, acceptance) with no fourth input. Acceptance already written on the ticket.\n\nThen GUARD_POLICY (line-guard permissionDecision:\"ask\" in headless sessions) — same treatment if it does not clear once the above land.\n\nRULES ON THESE THREE:\n- Scope is Alex's alone. Do not narrow any of the three. If a piece cannot land, name it and flag it.\n- No new tickets for any of this. No carriers. Attach evidence to the existing tickets.\n- Deployed is not shipped. Report BUILT/UNWIRED with the missing hop or the off flag named until a real caller row and a green run exist.\n- SpecOps produces the verdict and the recording into BB Docs. Alex loads nothing, tests nothing, records nothing.\n- Post progress on each of the three as you land it, not at the end.",
+   "refs": [
+    "BEB-2572",
+    "BEB-2647",
+    "BEB-2888",
+    "BEB-2874",
+    "BEB-3501"
+   ]
+  },
+  {
+   "id": "m49086",
+   "seq": 49086,
+   "ts": 1786778611749,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER pass: proposed 20 · wrote 4 · claimed 5 — BEB-3464→BUILD[claimed], BEB-3504→BUILD[claimed], BEB-2760→SPEC[done], BEB-3383→BUILD[claimed], BEB-3499→BUILD[claimed], BEB-3503→SPEC[serious:proposed-only], BEB-2916→BUILD, BEB-3493→BUILD, BEB-3482→SPEC[done], BEB-3468→BUILD, BEB-2656→SPEC[done], BEB-2751→SPEC[done], BEB-2755→SPEC[done], BEB-2754→SPEC[done], BEB-2909→BUILD[done], BEB-3422→BUILD[serious:proposed-only], BEB-3407→BUILD, BEB-3463→BUILD[serious:proposed-only], BEB-3308→BUILD[parked], BEB-3280→BUILD[parked]. BUILD lanes queued=13. shadow=0. · goals[BEB-3468:w10,BEB-3486:w10,BEB-3479:w10,BEB-3482:w10,BEB-2193:w10,BEB-1615:w10,BEB-2927:w10,BEB-3464:w10,BEB-2725:w10,BEB-2708:w10,BEB-2948:w10,BEB-3444:w10] freeze=off",
+   "refs": [
+    "BEB-1989"
+   ]
+  },
+  {
+   "id": "m49087",
+   "seq": 49087,
+   "ts": 1786778619661,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2916 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2916"
+   ]
+  },
+  {
+   "id": "m49088",
+   "seq": 49088,
+   "ts": 1786778620756,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3493 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares abilifi.net/wp/vnc/vnc.html, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3493"
+   ]
+  },
+  {
+   "id": "m49089",
+   "seq": 49089,
+   "ts": 1786778621954,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3468 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3468"
+   ]
+  },
+  {
+   "id": "m49090",
+   "seq": 49090,
+   "ts": 1786778623230,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3407 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares docs.bebond.net/d/*, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3407"
+   ]
   }
  ],
  "cursor": 49002,
- "head": 49082,
- "count": 80
+ "head": 49090,
+ "count": 88
 }
