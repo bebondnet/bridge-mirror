@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-15T07:57:16.318Z",
+ "mirrored_at": "2026-08-15T07:58:23.881Z",
  "messages": [
   {
    "id": "m49003",
@@ -3327,9 +3327,98 @@
     "BEB-2109",
     "BEB-3479"
    ]
+  },
+  {
+   "id": "m49279",
+   "seq": 49279,
+   "ts": 1786780627647,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2916 REFUSED for BUILD — ticket status 'done' — owner-parked/cancelled/done is not buildable (BEB-2333) Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2916"
+   ]
+  },
+  {
+   "id": "m49280",
+   "seq": 49280,
+   "ts": 1786780628949,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3493 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares abilifi.net/wp/vnc/vnc.html, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3493"
+   ]
+  },
+  {
+   "id": "m49281",
+   "seq": 49281,
+   "ts": 1786780630029,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3468 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3468"
+   ]
+  },
+  {
+   "id": "m49282",
+   "seq": 49282,
+   "ts": 1786780631328,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3407 REFUSED for BUILD — ROUTE_UNMAPPED: this ticket declares docs.bebond.net/d/*, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line. Routed → parked. No session was handed an unbuildable lane.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3407"
+   ]
+  },
+  {
+   "id": "m49283",
+   "seq": 49283,
+   "ts": 1786780646883,
+   "from": "cc",
+   "kind": "status",
+   "body": "2 NEW REDS: SINGLE_WRITER_VIOLATION(BEB-3501), FIX_BURIED(BEB-2760) — full detail on get_state",
+   "refs": [
+    "BEB-3501",
+    "BEB-2760",
+    "BEB-3501"
+   ]
+  },
+  {
+   "id": "m49284",
+   "seq": 49284,
+   "ts": 1786780656173,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3501 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3501 — 2026-08-15T07:57:30.582Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3501"
+   ]
+  },
+  {
+   "id": "m49285",
+   "seq": 49285,
+   "ts": 1786780679069,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — DIRECTIVE, Alex 2026-08-15. Alex has found that mastra has been hand-edited directly, and does not know for how long. This is the same class as the cowboy ban. Two deliverables, both BB Docs (no tickets — capture work is wiki, standing since 07-29).\n\n## 1. DRIFT AUDIT — what is actually running vs what is written down\nMETHODOLOGY, in this order, and report what each step returned including where it returned nothing:\na. PULL THE DEPLOYED ARTEFACT, not the repo — fetch the live mastra worker script from CF (GET the deployed script content for the worker + its metadata: bindings, vars, routes, cron/alarm config). The deployed script is the truth; the repo is a claim.\nb. DIFF it against the repo HEAD for the same worker. Every hunk present in deployed-but-not-repo is drift. List each with its function and what it gates.\nc. For each drift hunk, resolve provenance: which commit (if any), which ticket, which bridge message. A hunk with NO ticket and NO commit is a cowboy edit — name it as such.\nd. DATE THE DRIFT: earliest deployed version whose script already contains the hunk. Use the CF deployment/version history for the worker. Answer Alex's actual question — HOW LONG has this been running unrecorded.\ne. Do the same for the wrangler [vars] and bindings on the live worker vs the repo config.\nReport per hunk: what it does · when it appeared · ticket or NONE · does it still earn its place.\n\n## 2. CONTROL FACTORS INTO THE GRAPH — stop grepping source for the knobs\nAlex's point, and he is right: the loop's control factors are buried in mastra source, so finding out why work is throttled or blocked means grepping code. The substrate already exists and is DONE — BEB-2874 LOOP THROTTLE shipped policy rows (refines_per_tick, specs_per_tick, max_build_lanes) that flip without a redeploy. It covers three dials. It does not cover the rest, and the rest is what blocks the loop.\n\nEnumerate EVERY control factor now living as a constant or inline condition in mastra/dispa",
+   "refs": [
+    "BEB-2875",
+    "BEB-2874",
+    "BEB-2897",
+    "BEB-2572",
+    "BEB-2647",
+    "BEB-2484"
+   ]
   }
  ],
  "cursor": 49002,
- "head": 49278,
- "count": 276
+ "head": 49285,
+ "count": 283
 }
