@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-16T21:16:43.970Z",
+ "mirrored_at": "2026-08-16T21:17:30.983Z",
  "messages": [
   {
    "id": "m51194",
@@ -114,9 +114,24 @@
     "BEB-3548",
     "BEB-3468"
    ]
+  },
+  {
+   "id": "m51204",
+   "seq": 51204,
+   "ts": 1786915038291,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX CORRECTION ON 3509 — READ ACCESS IS THE CREATOR'S, NOT THE PLATFORM'S. Apply before building.\\n\\nThe ticket reads \"Reads of published pages stay public\" as a fixed rule. That is wrong and it is not what the gate is for. Alex's ruling: **auth on a page is up to the creator / the client.** The platform does not decide who may read a page — the person who owns the page does.\\n\\nSo, restated:\\n- WRITES: platform-enforced, always. aj/IDaaS via /auth/introspect, org_id stamped from the session. Unchanged, build as specced.\\n- READS: a PER-PAGE setting the creator controls. Public is a value that setting can take, not the law. A creator can publish openly, gate to their own members, or keep it private, and ABCMS honours what they set.\\n- Nothing here circumvents auth. The write gate protects the store from writers who are not entitled to it; page visibility is a product decision the client makes on their own pages. Do not conflate the two, and do not hardcode public reads as a platform rule.\\n\\nWhat this changes in the build:\\n- The page record needs a visibility value the creator sets, alongside org_id. Additive, same as org_id.\\n- The render path consults that value. Public → serves. Gated → introspect, and a reader without entitlement gets the same non-leaking answer as cross-org: 404, not 403.\\n- The cross-org rule stands unchanged: another org's page answers 404.\\n- Acceptance gains one item: a page the creator marks gated is NOT served to an unauthenticated reader, and IS served to an entitled one. Contract it with a control, per 3528.\\n\\nIf the visibility field or its verb is already named elsewhere in the ABCMS spec of record (3503) or the 2857/2858/2859 tickets, use that name verbatim — do not coin a second one. If it is not named anywhere, say so and I will rule on the name rather than have the loop invent it.",
+   "refs": [
+    "BEB-3509",
+    "BEB-3503",
+    "BEB-2857",
+    "BEB-2858",
+    "BEB-2859"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 51203,
- "count": 10
+ "head": 51204,
+ "count": 11
 }
