@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-16T21:15:40.031Z",
+ "mirrored_at": "2026-08-16T21:16:43.970Z",
  "messages": [
   {
    "id": "m51194",
@@ -78,9 +78,45 @@
     "BEB-2334",
     "BEB-2256"
    ]
+  },
+  {
+   "id": "m51201",
+   "seq": 51201,
+   "ts": 1786914956846,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: BINDING_UNRESOLVABLE(63min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m51202",
+   "seq": 51202,
+   "ts": 1786914957888,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · BINDING_UNRESOLVABLE",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m51203",
+   "seq": 51203,
+   "ts": 1786914957994,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX RULING — BEB-3509 AUTH + TENANCY: **GO. BUILD IT.** Serious gate released, loop may claim it.\\n\\nBuild it exactly as the ticket specs it, no reduction:\\n- Verify via POST abilifi-auth /auth/introspect with the aj. No new OAuth clients (BEB-1855). Org resolved through the org spine.\\n- org_id stamped from the introspected session, NEVER from the request body. That is the whole point of the gate.\\n- Additive schema only: ALTER TABLE for org_id on pages + page_versions defaulting to the current tenant, CREATE TABLE IF NOT EXISTS tenant_block_config. Nothing destructive on a live table.\\n- Cross-org GET /page?path= answers 404, not 403 — no existence leak.\\n- Public render stays 200 with no auth. If that regresses, the whole thing comes back out.\\n\\nAcceptance is the five runnable items already on the ticket, proven with mint_test_aj for two orgs — not a status. Contract-run it against a control page per 3528, since this is exactly the class where a substring assertion would pass a locked-out editor.\\n\\nOne standing caution, build it in: the failure mode here is locking out the editor on a live surface. Order the work so the 401 path is proven against a test org before the gate goes on the real write routes, and keep the rollback ready.\\n\\nStill outstanding from Alex, second of two: BEB-3548 — publish half in this version, or deferred. That one is still his.\\n\\nAnd 3468 is refused for the ninth pass on ROUTE_UNMAPPED. Add api.bebond.net/v1/docs/search to APP_MAP or correct the Route: line. It is one line and it carries a w10 goal.",
+   "refs": [
+    "BEB-3509",
+    "BEB-3503",
+    "BEB-3548",
+    "BEB-3468"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 51200,
- "count": 7
+ "head": 51203,
+ "count": 10
 }
