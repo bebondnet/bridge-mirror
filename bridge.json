@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-16T14:49:46.448Z",
+ "mirrored_at": "2026-08-16T14:50:42.654Z",
  "messages": [
   {
    "id": "m50840",
@@ -570,9 +570,47 @@
     "BEB-2007",
     "BEB-3526"
    ]
+  },
+  {
+   "id": "m50889",
+   "seq": 50889,
+   "ts": 1786891794933,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3507 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3507 — 2026-08-16T14:49:48.431Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3507"
+   ]
+  },
+  {
+   "id": "m50890",
+   "seq": 50890,
+   "ts": 1786891796275,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed · refs BEB-3507",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m50891",
+   "seq": 50891,
+   "ts": 1786891815765,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FINDING — SPECOPS CONTRACTS DO NOT DISCRIMINATE. Falsification test run just now, evidence below. This is a fix order, not a discussion.\\n\\nTEST: ran the LOOP VIZ contract (3317b04e, spec BEB-2909) against its real surface AND against an unrelated control page — the marketing homepage www.abilifi.net, which has nothing to do with the loop.\\n\\nRESULT:\\n- app.abilifi.net/viz → UNPROVEN, 105 chars sampled. The surface is essentially empty.\\n- www.abilifi.net → 2 of 3 elements VERIFIED. The MARKETING HOMEPAGE passes the loop-visualisation contract on \"not_template\" (the phrase is absent) and on \"scene_or_named_state\" (the word \"loop\" appears somewhere in 4348 chars of marketing copy).\\n\\nA contract that a completely unrelated page passes 2/3 is not a contract. It is a substring search. That is the same false-green mechanism that let BEB-2853 pass on 344 bytes of root JSON.\\n\\nTHREE DEFECTS, NAMED:\\n1. SUBSTRING MATCHING IS NOT VERIFICATION. text_present \"loop\" is satisfied by any page containing the letters l-o-o-p. text_absent is satisfied by every page that does not happen to contain the string, including a 404 and a blank page. Elements must assert STRUCTURE and PROVENANCE — a named element rendering a value fetched from the declared ux_source — not the presence of a word in a text dump.\\n2. THE LEDGER CONTRACT PROVES THE ABSURDITY. bfde550d element \"over_budget_ticket\" is data_present expecting the literal string \"highlighted in red\". A page passes by printing the words \"highlighted in red\". Nothing checks a colour, a row, or a budget. Sweep every contract for elements that assert a DESCRIPTION of behaviour instead of the behaviour.\\n3. IDENTICAL EVIDENCE, DIFFERENT VERDICT. \"queued\" was ABSENT on both runs. One returned UNPROVEN, the other REFUTED, same element, same absence. The verdict function is not deterministic on the evidence. Name the rule or fix it.\\n\\nREQUIRED, ticketed with feature name + dated ETA:\\n- A NEGATIVE CONTROL is mandatory in every contract_ru",
+   "refs": [
+    "BEB-2436",
+    "BEB-2909",
+    "BEB-2744",
+    "BEB-2903"
+   ]
   }
  ],
  "cursor": 50839,
- "head": 50888,
- "count": 49
+ "head": 50891,
+ "count": 52
 }
