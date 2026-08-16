@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-16T23:15:47.842Z",
- "ts": 1786922146470,
+ "mirrored_at": "2026-08-16T23:16:56.201Z",
+ "ts": 1786922214701,
  "loop": {
   "proposed_total": 1486,
   "by_state": {
-   "queued": 10,
+   "queued": 9,
    "claimed": 4,
-   "done": 748,
+   "done": 749,
    "held": 131,
    "blocked": 16,
    "parked": 528
@@ -24,10 +24,10 @@
     "held": 4
    },
    "REPAIR": {
-    "done": 90,
+    "done": 91,
     "held": 7,
     "parked": 3,
-    "queued": 10
+    "queued": 9
    },
    "SPEC": {
     "blocked": 3,
@@ -39,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786922119604,
-   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2767→REFINE[n"
+   "at": 1786922184026,
+   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2763→REFINE[n"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786922092948,
+    "since": 1786922152943,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -55,20 +55,6 @@
      "cls": "completed-at-ghost",
      "subject": "BEB-2805",
      "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
-    }
-   },
-   {
-    "code": "SILENT_REFUSAL",
-    "severity": "red",
-    "since": 1786920295184,
-    "detail": "BEB-3560 refused 4× in 30min — LATEST: LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdic",
-    "refs": [
-     "BEB-3560"
-    ],
-    "orky": {
-     "cls": "silent-refusal-loop",
-     "error": "LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.",
-     "subject": "BEB-3560"
     }
    },
    {
@@ -242,7 +228,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786922092948,
+    "since": 1786922152943,
     "detail": "BEB-2767 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2767"
@@ -252,6 +238,21 @@
      "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-2767"
     }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786922152943,
+    "detail": "BEB-2768 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2768"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2768"
+    },
+    "fix_ticket": "BEB-2716"
    },
    {
     "code": "FIX_BURIED",
@@ -336,6 +337,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2768 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2768"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786708675942,
     "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
     "refs": [
@@ -366,15 +377,14 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1786922092948,
+    "since": 1786922152943,
     "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
      "cls": "zero-rows-pass",
      "error": "pass proposes N>0, writes 0 rows, twice consecutively",
      "subject": "dispatcher-pass"
-    },
-    "fix_ticket": "BEB-2382"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -391,39 +401,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 51323,
+  "head_seq": 51327,
   "cursor_fable": 51193,
-  "unread_for_fable": 130,
+  "unread_for_fable": 134,
   "last": [
-   {
-    "seq": 51319,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: ZERO_ROWS_PASS(26min)."
-   },
-   {
-    "seq": 51320,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_ROWS_PASS"
-   },
-   {
-    "seq": 51321,
-    "from": "cc",
-    "kind": "question",
-    "one_line": "SPEC QUESTIONS OPEN on BEB-3563 (BEB-2436, blocking — NO contract_id until answered). Firs"
-   },
-   {
-    "seq": 51322,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
-   },
    {
     "seq": 51323,
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 51324,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
+   },
+   {
+    "seq": 51325,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED CLEARED: SILENT_REFUSAL(30min)."
+   },
+   {
+    "seq": 51326,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-2768 proposed on 6 consecutive passes and has NEVER been c"
+   },
+   {
+    "seq": 51327,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): SILENT_REFUSAL"
    }
   ]
  },
@@ -519,7 +529,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786922092948,
+   "since": 1786922152943,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -528,20 +538,6 @@
     "cls": "completed-at-ghost",
     "subject": "BEB-2805",
     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
-   }
-  },
-  {
-   "code": "SILENT_REFUSAL",
-   "severity": "red",
-   "since": 1786920295184,
-   "detail": "BEB-3560 refused 4× in 30min — LATEST: LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdic",
-   "refs": [
-    "BEB-3560"
-   ],
-   "orky": {
-    "cls": "silent-refusal-loop",
-    "error": "LOOP_BURN: already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.",
-    "subject": "BEB-3560"
    }
   },
   {
@@ -715,7 +711,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786922092948,
+   "since": 1786922152943,
    "detail": "BEB-2767 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2767"
@@ -725,6 +721,21 @@
     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-2767"
    }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786922152943,
+   "detail": "BEB-2768 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2768"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2768"
+   },
+   "fix_ticket": "BEB-2716"
   },
   {
    "code": "FIX_BURIED",
@@ -809,6 +820,16 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2768 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2768"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
    "since": 1786708675942,
    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
    "refs": [
@@ -839,15 +860,14 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1786922092948,
+   "since": 1786922152943,
    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
     "cls": "zero-rows-pass",
     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
     "subject": "dispatcher-pass"
-   },
-   "fix_ticket": "BEB-2382"
+   }
   },
   {
    "code": "REPEAT_FAILER",
