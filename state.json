@@ -1,19 +1,20 @@
 {
- "mirrored_at": "2026-08-16T16:59:45.278Z",
- "ts": 1786899583452,
+ "mirrored_at": "2026-08-16T17:00:42.637Z",
+ "ts": 1786899640932,
  "loop": {
   "proposed_total": 1455,
   "by_state": {
    "queued": 10,
-   "claimed": 0,
+   "claimed": 1,
    "done": 746,
    "held": 124,
-   "blocked": 12,
+   "blocked": 11,
    "parked": 516
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 8,
+    "blocked": 7,
+    "claimed": 1,
     "done": 301,
     "held": 69,
     "parked": 510
@@ -38,14 +39,24 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786899551898,
-   "tally": "BEB-2646→BUILD[blocked], BEB-2753→BUILD[claimed], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3468→BUILD, BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], B"
+   "at": 1786899611818,
+   "tally": "BEB-3496→BUILD, BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3468→BUILD, BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2931→B"
   },
   "reds": [
    {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1786899593661,
+    "detail": "2 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2753",
+     "BEB-2917"
+    ]
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786899532946,
+    "since": 1786899592947,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -59,7 +70,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1786897773159,
+    "since": 1786897833165,
     "detail": "BEB-3468 refused 29× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3468"
@@ -158,7 +169,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786875867046,
-    "detail": "alexrollin/vlinux-apk-service failing at wp-install 4× in 24h — LATEST (08-16T15:53): slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"}",
+    "detail": "alexrollin/vlinux-apk-service failing at wp-install 4× in 24h — LATEST (08-16T15:53): slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3496"
     ],
@@ -171,7 +182,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786899532946,
+    "since": 1786899592947,
     "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
     "refs": [
      "BEB-3468"
@@ -255,16 +266,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 51030,
+  "head_seq": 51031,
   "cursor_fable": 50839,
-  "unread_for_fable": 191,
+  "unread_for_fable": 192,
   "last": [
-   {
-    "seq": 51026,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: REPEAT_FAILER(47min)."
-   },
    {
     "seq": 51027,
     "from": "cc",
@@ -288,6 +293,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-2753 — commit 8"
+   },
+   {
+    "seq": 51031,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED VERIFY_PENDING: 2 done lane(s) with verification PENDING — not complete until passed ·"
    }
   ]
  },
@@ -381,9 +392,19 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1786899593661,
+   "detail": "2 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2753",
+    "BEB-2917"
+   ]
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786899532946,
+   "since": 1786899592947,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -397,7 +418,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1786897773159,
+   "since": 1786897833165,
    "detail": "BEB-3468 refused 29× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3468"
@@ -496,7 +517,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786875867046,
-   "detail": "alexrollin/vlinux-apk-service failing at wp-install 4× in 24h — LATEST (08-16T15:53): slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"}",
+   "detail": "alexrollin/vlinux-apk-service failing at wp-install 4× in 24h — LATEST (08-16T15:53): slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3496"
    ],
@@ -509,7 +530,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786899532946,
+   "since": 1786899592947,
    "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
    "refs": [
     "BEB-3468"
