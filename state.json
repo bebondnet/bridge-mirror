@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-16T22:17:21.872Z",
- "ts": 1786918640543,
+ "mirrored_at": "2026-08-16T22:18:29.244Z",
+ "ts": 1786918707791,
  "loop": {
-  "proposed_total": 1476,
+  "proposed_total": 1477,
   "by_state": {
    "queued": 9,
-   "claimed": 1,
+   "claimed": 2,
    "done": 749,
    "held": 129,
    "blocked": 14,
@@ -21,6 +21,7 @@
    },
    "REFINE": {
     "blocked": 1,
+    "claimed": 1,
     "held": 4
    },
    "REPAIR": {
@@ -39,14 +40,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786918622869,
-   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2762→REFINE[n"
+   "at": 1786918684274,
+   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3554→BUILD, B"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786918612940,
+    "since": 1786918672950,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -198,6 +199,21 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786918672950,
+    "detail": "BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-2762"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-2762"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785927165865,
@@ -278,9 +294,19 @@
     ]
    },
    {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-2762 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-2762"
+    ]
+   },
+   {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1786918612940,
+    "since": 1786918672950,
     "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
@@ -292,16 +318,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 51244,
+  "head_seq": 51245,
   "cursor_fable": 51193,
-  "unread_for_fable": 51,
+  "unread_for_fable": 52,
   "last": [
-   {
-    "seq": 51240,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ×4 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2770]→BEB-2716 · PROPOSED_NEVER_CLAIMED[BEB-"
-   },
    {
     "seq": 51241,
     "from": "cc",
@@ -325,6 +345,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×6 (BEB-2334): PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CLAIMED · PROPOSED_NEVER_CL"
+   },
+   {
+    "seq": 51245,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2762]→BEB-2716 · FIX_BURIED[BEB-2716,BEB-276"
    }
   ]
  },
@@ -420,7 +446,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786918612940,
+   "since": 1786918672950,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -572,6 +598,21 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786918672950,
+   "detail": "BEB-2762 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-2762"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-2762"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785927165865,
@@ -652,9 +693,19 @@
    ]
   },
   {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-2762 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-2762"
+   ]
+  },
+  {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1786918612940,
+   "since": 1786918672950,
    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
