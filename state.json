@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-16T22:44:45.377Z",
- "ts": 1786920283995,
+ "mirrored_at": "2026-08-16T22:46:05.674Z",
+ "ts": 1786920364111,
  "loop": {
   "proposed_total": 1485,
   "by_state": {
-   "queued": 11,
-   "claimed": 3,
-   "done": 748,
+   "queued": 9,
+   "claimed": 4,
+   "done": 749,
    "held": 131,
    "blocked": 16,
    "parked": 527
@@ -14,21 +14,20 @@
   "by_lane": {
    "BUILD": {
     "blocked": 12,
-    "claimed": 3,
+    "claimed": 4,
     "done": 300,
-    "held": 74,
-    "parked": 521,
-    "queued": 1
+    "held": 75,
+    "parked": 521
    },
    "REFINE": {
     "blocked": 1,
-    "held": 5
+    "held": 4
    },
    "REPAIR": {
-    "done": 90,
+    "done": 91,
     "held": 7,
     "parked": 3,
-    "queued": 10
+    "queued": 9
    },
    "SPEC": {
     "blocked": 3,
@@ -40,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786920255810,
+   "at": 1786920337596,
    "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2913→BUILD[se"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786920232947,
+    "since": 1786920352941,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -73,6 +72,20 @@
     }
    },
    {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786920254530,
+    "detail": "BEB-3560 refused 7× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3560 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask,",
+    "refs": [
+     "BEB-3560"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3560 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, never fill the gap with a plausible value): takeout-contents expects \"Describes the contents of the ",
+     "subject": "BEB-3560"
+    }
+   },
+   {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786919947645,
@@ -84,6 +97,20 @@
      "cls": "repeat-failer",
      "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
      "subject": "BEB-3557"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786920264943,
+    "detail": "BEB-3560 failing at preflight 6× in 24h — LATEST (08-16T22:45): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3560"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3560"
     }
    },
    {
@@ -317,54 +344,76 @@
     ]
    },
    {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1786920352941,
+    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
+   },
+   {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786918787411,
-    "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (6 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "detail": "5 ticket(s) refused at the claim step for UNCODED in the last hour (12 rows) — one defect, not 5 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-uncoded",
      "subject": "dispatcher-claim",
      "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
-    },
-    "fix_ticket": "BEB-2778"
+    }
    }
   ]
  },
  "bridge": {
-  "head_seq": 51299,
+  "head_seq": 51309,
   "cursor_fable": 51193,
-  "unread_for_fable": 106,
+  "unread_for_fable": 116,
   "last": [
    {
-    "seq": 51295,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "WAKE CC — build tick still hard-wedged, mastra REDEPLOY needed to evict the isolate; nothi"
-   },
-   {
-    "seq": 51296,
+    "seq": 51305,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED REPEAT_FAILER: 3 ticket(s) refused at the claim step for UNCODED in the last hour (6 r"
+    "one_line": "RED ×2 (BEB-2334): SILENT_REFUSAL[BEB-3560]→BEB-2368 · REPEAT_FAILER[BEB-3560]→BEB-2737"
    },
    {
-    "seq": 51297,
-    "from": "cc",
-    "kind": "question",
-    "one_line": "SPEC QUESTIONS OPEN on BEB-3560 (BEB-2436, blocking — NO contract_id until answered). Firs"
-   },
-   {
-    "seq": 51298,
+    "seq": 51306,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-3560 REFUSED for BUILD — BLOCKED-ON-SPEC (BEB-2647): no SP"
+    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3560 — REFINE_FAIL ×5. Codegen spend stopped;"
    },
    {
-    "seq": 51299,
+    "seq": 51307,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3560 — REFINE_FAIL ×3. Codegen spend stopped;"
+    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3560 — REFINE_FAIL ×6. Codegen spend stopped;"
+   },
+   {
+    "seq": 51308,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "2 NEW REDS: SILENT_REFUSAL(BEB-3560), REPEAT_FAILER(BEB-3560) — full detail on get_state"
+   },
+   {
+    "seq": 51309,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
    }
   ]
  },
@@ -460,7 +509,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786920232947,
+   "since": 1786920352941,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -486,6 +535,20 @@
    }
   },
   {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786920254530,
+   "detail": "BEB-3560 refused 7× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3560 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask,",
+   "refs": [
+    "BEB-3560"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3560 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, never fill the gap with a plausible value): takeout-contents expects \"Describes the contents of the ",
+    "subject": "BEB-3560"
+   }
+  },
+  {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786919947645,
@@ -497,6 +560,20 @@
     "cls": "repeat-failer",
     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
     "subject": "BEB-3557"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786920264943,
+   "detail": "BEB-3560 failing at preflight 6× in 24h — LATEST (08-16T22:45): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3560"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3560"
    }
   },
   {
@@ -730,17 +807,39 @@
    ]
   },
   {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1786920352941,
+   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
+  },
+  {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786918787411,
-   "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (6 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "detail": "5 ticket(s) refused at the claim step for UNCODED in the last hour (12 rows) — one defect, not 5 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-uncoded",
     "subject": "dispatcher-claim",
     "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
-   },
-   "fix_ticket": "BEB-2778"
+   }
   }
  ]
 }
