@@ -1,20 +1,287 @@
 {
- "mirrored_at": "2026-08-16T13:32:25.267Z",
- "ts": 1786887136745,
+ "mirrored_at": "2026-08-16T13:32:28.458Z",
+ "ts": 1786887146816,
  "loop": {
-  "error": "TimeoutError: The operation was aborted due to timeout"
+  "proposed_total": 1446,
+  "by_state": {
+   "queued": 11,
+   "claimed": 1,
+   "done": 742,
+   "held": 125,
+   "blocked": 9,
+   "parked": 511
+  },
+  "by_lane": {
+   "BUILD": {
+    "blocked": 5,
+    "claimed": 1,
+    "done": 297,
+    "held": 70,
+    "parked": 505,
+    "queued": 1
+   },
+   "REFINE": {
+    "blocked": 1,
+    "held": 4
+   },
+   "REPAIR": {
+    "done": 91,
+    "held": 6,
+    "parked": 3,
+    "queued": 10
+   },
+   "SPEC": {
+    "blocked": 3,
+    "done": 354,
+    "held": 45,
+    "parked": 3
+   }
+  },
+  "max_concurrent": 20,
+  "shadow": false,
+  "last_pass": {
+   "at": 1786887074677,
+   "tally": "BEB-3507→BUILD[claimed], BEB-3508→BUILD[claimed], BEB-2753→BUILD[blocked], BEB-3479→BUILD[blocked], BEB-2917→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3504→BUILD[claimed], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-3503→SPEC[serious:proposed-only], BEB-2857→BUILD[done], BEB-3515→BUILD[serious:proposed-only], BEB-3468→BUILD, BEB-3482→SPEC[done], BEB-3422→BUILD[serious:proposed-"
+  },
+  "reds": [
+   {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1786887120305,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-3508"
+    ]
+   },
+   {
+    "code": "COMPLETED_AT_GHOST",
+    "severity": "red",
+    "since": 1786887112944,
+    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
+    "refs": [
+     "BEB-2805"
+    ],
+    "orky": {
+     "cls": "completed-at-ghost",
+     "subject": "BEB-2805",
+     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786885342871,
+    "detail": "BEB-3468 refused 31× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3468"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line.",
+     "subject": "BEB-3468"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786801407212,
+    "detail": "abilifi-apps failing at heartbeat 93× in 24h — LATEST (08-16T13:15): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 1214 frozen 2641min, queued 17. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_",
+    "refs": [
+     "BEB-2385"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 1214 frozen 2641min, queued 17. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
+     "subject": "BEB-2385"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786885403968,
+    "detail": "alexrollin/Projects/vlinux-apk-service failing at evaluate 4× in 24h — LATEST (08-16T13:09): html-render class: verify_url serves 200 but renders BLANK in a real browser context (18 visible chars) — built-but-blank, the exact shape that curl cannot see",
+    "refs": [
+     "BEB-3464"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "html-render class: verify_url serves 200 but renders BLANK in a real browser context (18 visible chars) — built-but-blank, the exact shape that curl cannot see",
+     "subject": "BEB-3464"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786877055992,
+    "detail": "alexrollin/abilifi-apps failing at codegen 6× in 24h — LATEST (08-16T13:19): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3511"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: abilifi/build-system\nClass: CODE\nLane: frag\n\n## Changes\n1. Implement the necessary code changes for the specified section of BEB-3454.\n2. Ensure that the implementation adheres to the parent contract.\n3. Verify that the route/surface responds correctly.\n4. Address any missing details by",
+     "subject": "BEB-3511"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786876110237,
+    "detail": "alexrollin/abilifi-apps failing at complete 12× in 24h — LATEST (08-16T12:14): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard); WRONG_ADDRESS: the spec declares app.abilifi.net/viz and the ar",
+    "refs": [
+     "BEB-2909"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard); WRONG_ADDRESS: the spec declares app.abilifi.net/viz and the artifact is at widgets.abilifi.net/orky-beb-2859/page?path=%2Fviz — a live artifact at an address nobody asked for is not evidence (BEB-2759)",
+     "subject": "BEB-2909"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786814163644,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 50× in 24h — LATEST (08-16T13:30): verify_url not 2xx after 12 probes — last HTTP 400: {\"error\":\"return must be a https bebond.net or abilifi.net URL\"}",
+    "refs": [
+     "BEB-2929"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verify_url not 2xx after 12 probes — last HTTP 400: {\"error\":\"return must be a https bebond.net or abilifi.net URL\"}",
+     "subject": "BEB-2929"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786814262847,
+    "detail": "alexrollin/abilifi-apps failing at wp-install 8× in 24h — LATEST (08-16T13:16): slug: beb-2929\ncodeLen: 7242\ninstall response: {\"error\":\"install failed\",\"detail\":\"(WP_CLI\\\\Bootstrap\\\\BootstrapState))\\n#10 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/wp-cli.php(35): WP_CLI\\\\b",
+    "refs": [
+     "BEB-2929"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "slug: beb-2929\ncodeLen: 7242\ninstall response: {\"error\":\"install failed\",\"detail\":\"(WP_CLI\\\\Bootstrap\\\\BootstrapState))\\n#10 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/wp-cli.php(35): WP_CLI\\\\bootstrap()\\n#11 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc...')\\n#12 /usr/local/bin/wp(4): include('phar:///usr/loc..",
+     "subject": "BEB-2929"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786875867046,
+    "detail": "alexrollin/vlinux-apk-service failing at wp-install 3× in 24h — LATEST (08-16T13:05): slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"}",
+    "refs": [
+     "BEB-3496"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"}",
+     "subject": "BEB-3496"
+    }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1786887112944,
+    "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
+    "refs": [
+     "BEB-3468"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-3468"
+    }
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785927165865,
+    "detail": "fix BEB-2702 for heartbeat has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2702",
+     "heartbeat"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "wp-install"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-3468 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-3468"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786719380596,
+    "detail": "fix BEB-2742 for BEB-2742 has not moved in 24h while its subject red COMPLETED_AT_GHOST is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2742",
+     "BEB-2742"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786728673555,
+    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2524",
+     "complete"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "wp-install"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "evaluate"
+    ]
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786885011832,
+    "detail": "10 ticket(s) refused at the claim step for UNCODED in the last hour (15 rows) — one defect, not 10 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "refs": [],
+    "orky": {
+     "cls": "claim-refusal-uncoded",
+     "subject": "dispatcher-claim",
+     "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+    }
+   }
+  ]
  },
  "bridge": {
-  "head_seq": 50757,
+  "head_seq": 50758,
   "cursor_fable": 50134,
-  "unread_for_fable": 623,
+  "unread_for_fable": 624,
   "last": [
-   {
-    "seq": 50753,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3507 — commit 2"
-   },
    {
     "seq": 50754,
     "from": "cc",
@@ -38,6 +305,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER verification DOWNGRADE: BEB-3508 — declared-route probe: 5/5 route(s) the ticke"
+   },
+   {
+    "seq": 50758,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3507 — commit a"
    }
   ]
  },
@@ -129,5 +402,237 @@
    "probed": "/health"
   }
  ],
- "reds": []
+ "reds": [
+  {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1786887120305,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-3508"
+   ]
+  },
+  {
+   "code": "COMPLETED_AT_GHOST",
+   "severity": "red",
+   "since": 1786887112944,
+   "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
+   "refs": [
+    "BEB-2805"
+   ],
+   "orky": {
+    "cls": "completed-at-ghost",
+    "subject": "BEB-2805",
+    "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786885342871,
+   "detail": "BEB-3468 refused 31× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3468"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app and the land queue would land it. Add the host to APP_MAP or correct the Route: line.",
+    "subject": "BEB-3468"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786801407212,
+   "detail": "abilifi-apps failing at heartbeat 93× in 24h — LATEST (08-16T13:15): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 1214 frozen 2641min, queued 17. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_",
+   "refs": [
+    "BEB-2385"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 1214 frozen 2641min, queued 17. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
+    "subject": "BEB-2385"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786885403968,
+   "detail": "alexrollin/Projects/vlinux-apk-service failing at evaluate 4× in 24h — LATEST (08-16T13:09): html-render class: verify_url serves 200 but renders BLANK in a real browser context (18 visible chars) — built-but-blank, the exact shape that curl cannot see",
+   "refs": [
+    "BEB-3464"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "html-render class: verify_url serves 200 but renders BLANK in a real browser context (18 visible chars) — built-but-blank, the exact shape that curl cannot see",
+    "subject": "BEB-3464"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786877055992,
+   "detail": "alexrollin/abilifi-apps failing at codegen 6× in 24h — LATEST (08-16T13:19): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3511"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: abilifi/build-system\nClass: CODE\nLane: frag\n\n## Changes\n1. Implement the necessary code changes for the specified section of BEB-3454.\n2. Ensure that the implementation adheres to the parent contract.\n3. Verify that the route/surface responds correctly.\n4. Address any missing details by",
+    "subject": "BEB-3511"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786876110237,
+   "detail": "alexrollin/abilifi-apps failing at complete 12× in 24h — LATEST (08-16T12:14): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard); WRONG_ADDRESS: the spec declares app.abilifi.net/viz and the ar",
+   "refs": [
+    "BEB-2909"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard); WRONG_ADDRESS: the spec declares app.abilifi.net/viz and the artifact is at widgets.abilifi.net/orky-beb-2859/page?path=%2Fviz — a live artifact at an address nobody asked for is not evidence (BEB-2759)",
+    "subject": "BEB-2909"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786814163644,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 50× in 24h — LATEST (08-16T13:30): verify_url not 2xx after 12 probes — last HTTP 400: {\"error\":\"return must be a https bebond.net or abilifi.net URL\"}",
+   "refs": [
+    "BEB-2929"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verify_url not 2xx after 12 probes — last HTTP 400: {\"error\":\"return must be a https bebond.net or abilifi.net URL\"}",
+    "subject": "BEB-2929"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786814262847,
+   "detail": "alexrollin/abilifi-apps failing at wp-install 8× in 24h — LATEST (08-16T13:16): slug: beb-2929\ncodeLen: 7242\ninstall response: {\"error\":\"install failed\",\"detail\":\"(WP_CLI\\\\Bootstrap\\\\BootstrapState))\\n#10 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/wp-cli.php(35): WP_CLI\\\\b",
+   "refs": [
+    "BEB-2929"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "slug: beb-2929\ncodeLen: 7242\ninstall response: {\"error\":\"install failed\",\"detail\":\"(WP_CLI\\\\Bootstrap\\\\BootstrapState))\\n#10 phar:///usr/local/bin/wp/vendor/wp-cli/wp-cli/php/wp-cli.php(35): WP_CLI\\\\bootstrap()\\n#11 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc...')\\n#12 /usr/local/bin/wp(4): include('phar:///usr/loc..",
+    "subject": "BEB-2929"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786875867046,
+   "detail": "alexrollin/vlinux-apk-service failing at wp-install 3× in 24h — LATEST (08-16T13:05): slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"}",
+   "refs": [
+    "BEB-3496"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "slug: beb-3496\ncodeLen: 3619\ninstall response: {\"error\":\"no aj to auth /wp/install\"}",
+    "subject": "BEB-3496"
+   }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1786887112944,
+   "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
+   "refs": [
+    "BEB-3468"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-3468"
+   }
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785927165865,
+   "detail": "fix BEB-2702 for heartbeat has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2702",
+    "heartbeat"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "wp-install"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-3468 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-3468"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786719380596,
+   "detail": "fix BEB-2742 for BEB-2742 has not moved in 24h while its subject red COMPLETED_AT_GHOST is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2742",
+    "BEB-2742"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786728673555,
+   "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2524",
+    "complete"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "wp-install"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "evaluate"
+   ]
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786885011832,
+   "detail": "10 ticket(s) refused at the claim step for UNCODED in the last hour (15 rows) — one defect, not 10 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "refs": [],
+   "orky": {
+    "cls": "claim-refusal-uncoded",
+    "subject": "dispatcher-claim",
+    "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+   }
+  }
+ ]
 }
