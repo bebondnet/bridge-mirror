@@ -1,33 +1,34 @@
 {
- "mirrored_at": "2026-08-16T22:39:48.048Z",
- "ts": 1786919986596,
+ "mirrored_at": "2026-08-16T22:40:57.188Z",
+ "ts": 1786920055160,
  "loop": {
-  "proposed_total": 1481,
+  "proposed_total": 1482,
   "by_state": {
    "queued": 10,
-   "claimed": 0,
-   "done": 749,
-   "held": 129,
-   "blocked": 17,
+   "claimed": 2,
+   "done": 748,
+   "held": 130,
+   "blocked": 16,
    "parked": 527
   },
   "by_lane": {
    "BUILD": {
     "blocked": 12,
+    "claimed": 1,
     "done": 300,
-    "held": 73,
-    "parked": 521,
-    "queued": 1
+    "held": 74,
+    "parked": 521
    },
    "REFINE": {
-    "blocked": 2,
+    "blocked": 1,
+    "claimed": 1,
     "held": 4
    },
    "REPAIR": {
-    "done": 91,
+    "done": 90,
     "held": 7,
     "parked": 3,
-    "queued": 9
+    "queued": 10
    },
    "SPEC": {
     "blocked": 3,
@@ -39,21 +40,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786919951001,
-   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3509→BUILD[se"
+   "at": 1786920018236,
+   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3559→BUILD, B"
   },
   "reds": [
    {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1786919692937,
-    "detail": "claimed=0, queued=11, 5 passes, max_concurrent=20",
-    "refs": []
-   },
-   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786919932939,
+    "since": 1786919992946,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -63,6 +57,21 @@
      "subject": "BEB-2805",
      "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
     }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786919915214,
+    "detail": "BEB-3557 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3557 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-3557"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3557 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, never fill the gap with a plausible value): site-name expects \"Example Site Name\" — \"example\" appear",
+     "subject": "BEB-3557"
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "REPEAT_FAILER",
@@ -287,39 +296,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 51285,
+  "head_seq": 51289,
   "cursor_fable": 51193,
-  "unread_for_fable": 92,
+  "unread_for_fable": 96,
   "last": [
-   {
-    "seq": 51281,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_ROWS_PASS"
-   },
-   {
-    "seq": 51282,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-3557 REFUSED for BUILD — BLOCKED-ON-SPEC (BEB-2647): no SP"
-   },
-   {
-    "seq": 51283,
-    "from": "cc",
-    "kind": "question",
-    "one_line": "SPEC QUESTIONS OPEN on BEB-3557 (BEB-2436, blocking — NO contract_id until answered). Firs"
-   },
-   {
-    "seq": 51284,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-3557 — preflight HELD (BEB-2134) — LOOP_BURN: already refined"
-   },
    {
     "seq": 51285,
     "from": "cc",
     "kind": "question",
     "one_line": "SPEC QUESTIONS OPEN on BEB-3558 (BEB-2436, blocking — NO contract_id until answered). Firs"
+   },
+   {
+    "seq": 51286,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED SILENT_REFUSAL: BEB-3557 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no "
+   },
+   {
+    "seq": 51287,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
+   },
+   {
+    "seq": 51288,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-3557 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
+   },
+   {
+    "seq": 51289,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3557 — REFINE_FAIL ×3. Codegen spend stopped;"
    }
   ]
  },
@@ -413,16 +422,9 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1786919692937,
-   "detail": "claimed=0, queued=11, 5 passes, max_concurrent=20",
-   "refs": []
-  },
-  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786919932939,
+   "since": 1786919992946,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -432,6 +434,21 @@
     "subject": "BEB-2805",
     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
    }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786919915214,
+   "detail": "BEB-3557 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3557 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-3557"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3557 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, never fill the gap with a plausible value): site-name expects \"Example Site Name\" — \"example\" appear",
+    "subject": "BEB-3557"
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "REPEAT_FAILER",
