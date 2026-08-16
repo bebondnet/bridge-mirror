@@ -1,20 +1,19 @@
 {
- "mirrored_at": "2026-08-16T22:33:29.968Z",
- "ts": 1786919608690,
+ "mirrored_at": "2026-08-16T22:34:56.649Z",
+ "ts": 1786919694919,
  "loop": {
-  "proposed_total": 1478,
+  "proposed_total": 1479,
   "by_state": {
    "queued": 9,
-   "claimed": 1,
+   "claimed": 0,
    "done": 749,
    "held": 129,
-   "blocked": 15,
+   "blocked": 16,
    "parked": 527
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 11,
-    "claimed": 1,
+    "blocked": 12,
     "done": 300,
     "held": 73,
     "parked": 521
@@ -39,14 +38,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786919581817,
-   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3549→BUILD[no"
+   "at": 1786919654106,
+   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3556→BUILD[no"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786919572934,
+    "since": 1786919632946,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -200,7 +199,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786919572934,
+    "since": 1786919632946,
     "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-3549"
@@ -302,53 +301,54 @@
     ]
    },
    {
-    "code": "REPEAT_FAILER",
+    "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1786915989116,
-    "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (3 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "since": 1786919632946,
+    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
-     "cls": "claim-refusal-uncoded",
-     "subject": "dispatcher-claim",
-     "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
-    }
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
    }
   ]
  },
  "bridge": {
-  "head_seq": 51270,
+  "head_seq": 51274,
   "cursor_fable": 51193,
-  "unread_for_fable": 77,
+  "unread_for_fable": 81,
   "last": [
-   {
-    "seq": 51266,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 20 · wrote 1 · claimed 0 — BEB-2753→BUILD[blocked], BEB-2646→BUI"
-   },
-   {
-    "seq": 51267,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED CLEARED: ZERO_ROWS_PASS(10min)."
-   },
-   {
-    "seq": 51268,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): ZERO_CLAIM · ZERO_ROWS_PASS"
-   },
-   {
-    "seq": 51269,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3555 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
    {
     "seq": 51270,
     "from": "cc",
     "kind": "status",
     "one_line": "SELL-CUE-DOWN funnel v1 LIVE: claimed owner requests account via form on cue claim page → "
+   },
+   {
+    "seq": 51271,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED CLEARED: REPEAT_FAILER(13min)."
+   },
+   {
+    "seq": 51272,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-3555 completion REJECTED (evidence gate m713.1) — WP_TICKET_BUILT_AS_WIDGE"
+   },
+   {
+    "seq": 51273,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
+   },
+   {
+    "seq": 51274,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): REPEAT_FAILER"
    }
   ]
  },
@@ -444,7 +444,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786919572934,
+   "since": 1786919632946,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -598,7 +598,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786919572934,
+   "since": 1786919632946,
    "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-3549"
@@ -700,16 +700,17 @@
    ]
   },
   {
-   "code": "REPEAT_FAILER",
+   "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1786915989116,
-   "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (3 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "since": 1786919632946,
+   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
-    "cls": "claim-refusal-uncoded",
-    "subject": "dispatcher-claim",
-    "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
-   }
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
   }
  ]
 }
