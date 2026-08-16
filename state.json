@@ -1,24 +1,23 @@
 {
- "mirrored_at": "2026-08-16T15:08:43.958Z",
- "ts": 1786892922162,
+ "mirrored_at": "2026-08-16T15:09:39.601Z",
+ "ts": 1786892976810,
  "loop": {
   "proposed_total": 1453,
   "by_state": {
-   "queued": 11,
+   "queued": 10,
    "claimed": 3,
    "done": 744,
    "held": 126,
-   "blocked": 10,
+   "blocked": 11,
    "parked": 512
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 6,
+    "blocked": 7,
     "claimed": 3,
     "done": 299,
     "held": 71,
-    "parked": 506,
-    "queued": 1
+    "parked": 506
    },
    "REFINE": {
     "blocked": 1,
@@ -40,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786892889938,
+   "at": 1786892947174,
    "tally": "BEB-3507→BUILD[claimed], BEB-3524→BUILD[done], BEB-3503→SPEC[serious:proposed-only], BEB-2753→BUILD[blocked], BEB-3479→BUILD[blocked], BEB-2917→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3515→BUILD[serious:proposed-only], BEB-3468→BUILD, BEB-3482→SPEC[done], BEB-3422→BUILD[serious:proposed-only], BEB-2921→SPEC[done], "
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786892872992,
+    "since": 1786892932947,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -61,7 +60,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1786891126306,
+    "since": 1786891171806,
     "detail": "BEB-3468 refused 32× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3468"
@@ -173,7 +172,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786892872992,
+    "since": 1786892932947,
     "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
     "refs": [
      "BEB-3468"
@@ -182,20 +181,6 @@
      "cls": "proposed-never-claimed",
      "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-3468"
-    }
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1786892872992,
-    "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-    "refs": [
-     "BEB-2771"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-2771"
     }
    },
    {
@@ -269,20 +254,10 @@
     ]
    },
    {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-2771 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-    "refs": [
-     "BEB-2716",
-     "BEB-2771"
-    ]
-   },
-   {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786889315260,
-    "detail": "5 ticket(s) refused at the claim step for UNCODED in the last hour (17 rows) — one defect, not 5 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "since": 1786889440780,
+    "detail": "7 ticket(s) refused at the claim step for UNCODED in the last hour (18 rows) — one defect, not 7 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-uncoded",
@@ -293,22 +268,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 50917,
+  "head_seq": 50919,
   "cursor_fable": 50839,
-  "unread_for_fable": 78,
+  "unread_for_fable": 80,
   "last": [
-   {
-    "seq": 50913,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "MAKE IT GO — critical path, in order. Correction first, then the unblocks.\\n\\nCORRECTION A"
-   },
-   {
-    "seq": 50914,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-2785]→BEB-2716 · PROPOSED_NEVER_CLAIMED[BEB-"
-   },
    {
     "seq": 50915,
     "from": "cc",
@@ -326,6 +289,18 @@
     "from": "fable",
     "kind": "answer",
     "one_line": "3528 (discrimination) + 3529 (writer) unparked — SpecOps is now safely editable from repo."
+   },
+   {
+    "seq": 50918,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 50919,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-3529 completion REJECTED (evidence gate m713.1) — SOURCE_TICKET_BUILT_AS_W"
    }
   ]
  },
@@ -421,7 +396,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786892872992,
+   "since": 1786892932947,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -435,7 +410,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1786891126306,
+   "since": 1786891171806,
    "detail": "BEB-3468 refused 32× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3468"
@@ -547,7 +522,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786892872992,
+   "since": 1786892932947,
    "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
    "refs": [
     "BEB-3468"
@@ -556,20 +531,6 @@
     "cls": "proposed-never-claimed",
     "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-3468"
-   }
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1786892872992,
-   "detail": "BEB-2771 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-   "refs": [
-    "BEB-2771"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-2771"
    }
   },
   {
@@ -643,20 +604,10 @@
    ]
   },
   {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-2771 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-   "refs": [
-    "BEB-2716",
-    "BEB-2771"
-   ]
-  },
-  {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786889315260,
-   "detail": "5 ticket(s) refused at the claim step for UNCODED in the last hour (17 rows) — one defect, not 5 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "since": 1786889440780,
+   "detail": "7 ticket(s) refused at the claim step for UNCODED in the last hour (18 rows) — one defect, not 7 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-uncoded",
