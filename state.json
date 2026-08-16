@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-16T11:58:58.029Z",
- "ts": 1786881535921,
+ "mirrored_at": "2026-08-16T11:59:52.254Z",
+ "ts": 1786881591136,
  "loop": {
   "proposed_total": 1446,
   "by_state": {
-   "queued": 12,
-   "claimed": 0,
+   "queued": 11,
+   "claimed": 1,
    "done": 742,
    "held": 126,
    "blocked": 7,
@@ -14,10 +14,11 @@
   "by_lane": {
    "BUILD": {
     "blocked": 3,
+    "claimed": 1,
     "done": 297,
     "held": 71,
     "parked": 505,
-    "queued": 3
+    "queued": 2
    },
    "REFINE": {
     "blocked": 1,
@@ -39,10 +40,17 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786881518221,
-   "tally": "BEB-3383→BUILD, BEB-2760→SPEC[done], BEB-3522→BUILD[serious:proposed-only], BEB-2909→BUILD, BEB-3479→BUILD[blocked], BEB-3496→BUILD[blocked], BEB-2917→BUILD[blocked], BEB-2938→BUILD[done], BEB-3503→SPEC[serious:proposed-only], BEB-2857→BUILD[done], BEB-3515→BUILD[serious:proposed-only], BEB-3468→BUILD, BEB-3482→SPEC[done], BEB-3422→BUILD[serious:proposed-only], BEB-2921→SPEC[done], BEB-2193→SPEC[d"
+   "at": 1786881574363,
+   "tally": "BEB-3383→BUILD[claimed], BEB-2760→SPEC[done], BEB-3522→BUILD[serious:proposed-only], BEB-2909→BUILD, BEB-3479→BUILD[blocked], BEB-3496→BUILD[blocked], BEB-2917→BUILD[blocked], BEB-2938→BUILD[done], BEB-3503→SPEC[serious:proposed-only], BEB-2857→BUILD[done], BEB-3515→BUILD[serious:proposed-only], BEB-3468→BUILD, BEB-3482→SPEC[done], BEB-3422→BUILD[serious:proposed-only], BEB-2921→SPEC[done], BEB-21"
   },
   "reds": [
+   {
+    "code": "ZERO_CLAIM",
+    "severity": "red",
+    "since": 1786881495443,
+    "detail": "claimed=0, queued=12, 2 passes, max_concurrent=20",
+    "refs": []
+   },
    {
     "code": "SINGLE_WRITER_VIOLATION",
     "severity": "red",
@@ -60,7 +68,7 @@
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786881495443,
+    "since": 1786881555466,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -74,8 +82,8 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1786879752277,
-    "detail": "BEB-3468 refused 30× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786879805325,
+    "detail": "BEB-3468 refused 29× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3468"
     ],
@@ -125,8 +133,7 @@
      "cls": "repeat-failer",
      "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard); WRONG_ADDRESS: the spec declares app.abilifi.net/viz and the artifact is at widgets.abilifi.net/orky-beb-2859/page?path=%2Fviz — a live artifact at an address nobody asked for is not evidence (BEB-2759)",
      "subject": "BEB-2909"
-    },
-    "fix_ticket": "BEB-2524"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -159,21 +166,21 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786881495443,
-    "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
+    "since": 1786881555466,
+    "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-3468"
     ],
     "orky": {
      "cls": "proposed-never-claimed",
-     "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-3468"
     }
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786881495443,
+    "since": 1786881555466,
     "detail": "BEB-2799 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-2799"
@@ -187,7 +194,7 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1786881495443,
+    "since": 1786881555466,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
     "refs": [
      "BEB-2460",
@@ -202,16 +209,6 @@
     "refs": [
      "BEB-2702",
      "heartbeat"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1786728673555,
-    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
-    "refs": [
-     "BEB-2524",
-     "complete"
     ]
    },
    {
@@ -263,26 +260,24 @@
      "BEB-2716",
      "BEB-2799"
     ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786728673555,
+    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2524",
+     "complete"
+    ]
    }
   ]
  },
  "bridge": {
-  "head_seq": 50634,
+  "head_seq": 50636,
   "cursor_fable": 50134,
-  "unread_for_fable": 500,
+  "unread_for_fable": 502,
   "last": [
-   {
-    "seq": 50630,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 20 · wrote 2 · claimed 1 — BEB-3383→BUILD[claimed], BEB-2760→SPE"
-   },
-   {
-    "seq": 50631,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3383 completion REJECTED (evidence gate m713.1) — owner-facing surface (La"
-   },
    {
     "seq": 50632,
     "from": "cc",
@@ -300,6 +295,18 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+   },
+   {
+    "seq": 50635,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "2 NEW REDS: REPEAT_FAILER(BEB-2909), FIX_BURIED(BEB-2524) — full detail on get_state"
+   },
+   {
+    "seq": 50636,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_CLAIM: claimed=0, queued=12, 2 passes, max_concurrent=20"
    }
   ]
  },
@@ -393,6 +400,13 @@
  ],
  "reds": [
   {
+   "code": "ZERO_CLAIM",
+   "severity": "red",
+   "since": 1786881495443,
+   "detail": "claimed=0, queued=12, 2 passes, max_concurrent=20",
+   "refs": []
+  },
+  {
    "code": "SINGLE_WRITER_VIOLATION",
    "severity": "red",
    "since": 1786880671641,
@@ -409,7 +423,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786881495443,
+   "since": 1786881555466,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -423,8 +437,8 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1786879752277,
-   "detail": "BEB-3468 refused 30× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786879805325,
+   "detail": "BEB-3468 refused 29× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares api.bebond.net/v1/docs/search, but no app is declared as serving that host. The route->app map is explicit on purpose — a guess writes a route into the wrong app a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3468"
    ],
@@ -474,8 +488,7 @@
     "cls": "repeat-failer",
     "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard); WRONG_ADDRESS: the spec declares app.abilifi.net/viz and the artifact is at widgets.abilifi.net/orky-beb-2859/page?path=%2Fviz — a live artifact at an address nobody asked for is not evidence (BEB-2759)",
     "subject": "BEB-2909"
-   },
-   "fix_ticket": "BEB-2524"
+   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -508,21 +521,21 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786881495443,
-   "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
+   "since": 1786881555466,
+   "detail": "BEB-3468 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-3468"
    ],
    "orky": {
     "cls": "proposed-never-claimed",
-    "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-3468"
    }
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786881495443,
+   "since": 1786881555466,
    "detail": "BEB-2799 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-2799"
@@ -536,7 +549,7 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1786881495443,
+   "since": 1786881555466,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane ABSENT (never admitted)",
    "refs": [
     "BEB-2460",
@@ -551,16 +564,6 @@
    "refs": [
     "BEB-2702",
     "heartbeat"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1786728673555,
-   "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
-   "refs": [
-    "BEB-2524",
-    "complete"
    ]
   },
   {
@@ -611,6 +614,16 @@
    "refs": [
     "BEB-2716",
     "BEB-2799"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786728673555,
+   "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2524",
+    "complete"
    ]
   }
  ]
