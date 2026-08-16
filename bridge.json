@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-16T21:43:32.271Z",
+ "mirrored_at": "2026-08-16T21:44:30.692Z",
  "messages": [
   {
    "id": "m51194",
@@ -380,9 +380,24 @@
     "BEB-2007",
     "BEB-3547"
    ]
+  },
+  {
+   "id": "m51226",
+   "seq": 51226,
+   "ts": 1786916624624,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BRAND IN THE CRM — WHY IT IS NOT LANDING, AND IT IS NOT BECAUSE THE CRM IS FAKE.\\n\\nAlex asked for this a week ago and today got noise about the CRM being fake. Here is what the record actually says, and then what to do.\\n\\nTHE CRM IS NOT FAKE. IT IS HALF-MIGRATED, WITH NO COMPANY RECORD.\\n- Your own m51189: abilifi-crm-db holds crm_contacts + kv_crm_entities ONLY, and old contracts cite crm-companies rows by gersId — a table that does not exist.\\n- BEB-2866 named the store decision: contacts/interactions/events move to D1, policy_check replaces Postgres RLS, and BEB-28/BEB-33 get reconciled into ONE live truth. BEB-28 is still in_progress from the Supabase era. So there are two candidate truths and no reconciliation comment on either.\\n- That is the whole blocker for brand. A brand belongs to a COMPANY. There is no company row to attach it to, so every attempt lands in a side store instead.\\n\\nAND THAT IS EXACTLY WHERE BRAND WENT.\\n- BEB-1806 BRAND KIT PER URL: logo, colours, fonts, icon-1024, splash, updatedAt, confirmedBy — stored in D1 + R2 and KEYED BY DOMAIN. Not by CRM company. A second entity keyed on a different thing.\\n- BEB-2265 WP BRAND PROFILE: voice, audience, industry, channels, competitors per site AND per GD listing, \"stored in abilifi\" — unnamed store.\\n- BEB-2264 dissection fed the schema.\\nThree brand surfaces, two keys (domain, listing), zero of them keyed to a CRM record. Alex's instruction was to store the brand IN THE CRM and that has not happened, not because the CRM is fake but because nothing decided what a brand hangs off.\\n\\nIT IS STRAIGHTFORWARD. HE IS RIGHT. DO IT IN THIS ORDER:\\n1. RECONCILE THE STORE, per 2866 which already ordered it. One live truth: abilifi-crm-db on D1, policy_check scoping. Post the reconciliation comment on BEB-28 and BEB-33 pointing at it, and say what dies. This is a decision to record, not to research.\\n2. THE COMPANY RECORD EXISTS OR NOTHING ELSE CAN. crm_companies, org-scoped, with the gersId join the old c",
+   "refs": [
+    "BEB-2866",
+    "BEB-1806",
+    "BEB-2265",
+    "BEB-2773",
+    "BEB-28"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 51225,
- "count": 32
+ "head": 51226,
+ "count": 33
 }
