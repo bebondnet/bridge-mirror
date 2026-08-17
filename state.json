@@ -1,27 +1,28 @@
 {
- "mirrored_at": "2026-08-17T17:29:31.046Z",
- "ts": 1786987768567,
+ "mirrored_at": "2026-08-17T17:30:49.537Z",
+ "ts": 1786987846146,
  "loop": {
-  "proposed_total": 1513,
+  "proposed_total": 1516,
   "by_state": {
-   "queued": 8,
+   "queued": 10,
    "claimed": 1,
    "done": 754,
    "held": 144,
-   "blocked": 11,
+   "blocked": 12,
    "parked": 542
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 6,
-    "claimed": 1,
+    "blocked": 7,
     "done": 301,
     "held": 84,
     "parked": 536
    },
    "REFINE": {
     "blocked": 1,
-    "held": 7
+    "claimed": 1,
+    "held": 7,
+    "queued": 2
    },
    "REPAIR": {
     "done": 91,
@@ -39,14 +40,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786987727747,
+   "at": 1786987787403,
    "tally": "BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2742→SPEC[done], "
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786987717547,
+    "since": 1786987837548,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -196,7 +197,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786910930935,
-    "detail": "alexrollin/abilifi-apps failing at split 4× in 24h — LATEST (08-17T00:10): sections: Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions\nchildren: BEB-3537, BEB-3538, BEB-3539, BEB-3540, BEB-3541",
+    "detail": "alexrollin/abilifi-apps failing at split 5× in 24h — LATEST (08-17T17:30): sections: Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions\nchildren: BEB-3537, BEB-3538, BEB-3539, BEB-3540, BEB-3541",
     "refs": [
      "BEB-3534"
     ],
@@ -223,21 +224,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786987717547,
-    "detail": "BEB-1175 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-    "refs": [
-     "BEB-1175"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-1175"
-    }
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1786987717547,
+    "since": 1786987837548,
     "detail": "BEB-1642 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-1642"
@@ -251,7 +238,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786987717547,
+    "since": 1786987837548,
     "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-3549"
@@ -366,16 +353,6 @@
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-1175 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-    "refs": [
-     "BEB-2716",
-     "BEB-1175"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1785892434215,
     "detail": "fix BEB-2716 for BEB-1642 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
      "BEB-2716",
@@ -403,53 +380,86 @@
     ]
    },
    {
-    "code": "ZERO_ROWS_PASS",
+    "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
-    "since": 1786987717547,
-    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
-    "refs": [],
+    "since": 1786987826589,
+    "detail": "BEB-3584 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3584"
+    ],
     "orky": {
-     "cls": "zero-rows-pass",
-     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
-     "subject": "dispatcher-pass"
-    }
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3584"
+    },
+    "fix_ticket": "BEB-2736"
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1786987823034,
+    "detail": "BEB-3585 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3585"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3585"
+    },
+    "fix_ticket": "BEB-2736"
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1786987819498,
+    "detail": "BEB-3586 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3586"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3586"
+    },
+    "fix_ticket": "BEB-2736"
    }
   ]
  },
  "bridge": {
-  "head_seq": 51793,
+  "head_seq": 51799,
   "cursor_fable": 51193,
-  "unread_for_fable": 600,
+  "unread_for_fable": 606,
   "last": [
    {
-    "seq": 51789,
+    "seq": 51795,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): REPEAT_FAILER"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-3582 — AUTO-SPLIT into 4 child lanes (BEB-2967 codegen size-w"
    },
    {
-    "seq": 51790,
+    "seq": 51796,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-1175]→BEB-2716 · FIX_BURIED[BEB-2716,BEB-117"
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-3586 REFUSED for BUILD — no repo/frag target binding (or \""
    },
    {
-    "seq": 51791,
+    "seq": 51797,
     "from": "cc",
     "kind": "status",
-    "one_line": "2 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-1175), FIX_BURIED(BEB-2716) — full detail on get_st"
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-3585 REFUSED for BUILD — no repo/frag target binding (or \""
    },
    {
-    "seq": 51792,
+    "seq": 51798,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED[BEB-1642]→BEB-2716 · PROPOSED_NEVER_CLAIMED[BEB-"
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-3584 REFUSED for BUILD — no repo/frag target binding (or \""
    },
    {
-    "seq": 51793,
+    "seq": 51799,
     "from": "cc",
     "kind": "status",
-    "one_line": "2 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-1642), PROPOSED_NEVER_CLAIMED(BEB-3549) — full deta"
+    "one_line": "RED CLEARED: ZERO_ROWS_PASS(9min), PROPOSED_NEVER_CLAIMED(5min)."
    }
   ]
  },
@@ -545,7 +555,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786987717547,
+   "since": 1786987837548,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -695,7 +705,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786910930935,
-   "detail": "alexrollin/abilifi-apps failing at split 4× in 24h — LATEST (08-17T00:10): sections: Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions\nchildren: BEB-3537, BEB-3538, BEB-3539, BEB-3540, BEB-3541",
+   "detail": "alexrollin/abilifi-apps failing at split 5× in 24h — LATEST (08-17T17:30): sections: Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions\nchildren: BEB-3537, BEB-3538, BEB-3539, BEB-3540, BEB-3541",
    "refs": [
     "BEB-3534"
    ],
@@ -722,21 +732,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786987717547,
-   "detail": "BEB-1175 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-   "refs": [
-    "BEB-1175"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-1175"
-   }
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1786987717547,
+   "since": 1786987837548,
    "detail": "BEB-1642 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-1642"
@@ -750,7 +746,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786987717547,
+   "since": 1786987837548,
    "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-3549"
@@ -865,16 +861,6 @@
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-1175 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-   "refs": [
-    "BEB-2716",
-    "BEB-1175"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1785892434215,
    "detail": "fix BEB-2716 for BEB-1642 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
    "refs": [
     "BEB-2716",
@@ -902,16 +888,49 @@
    ]
   },
   {
-   "code": "ZERO_ROWS_PASS",
+   "code": "BINDING_UNRESOLVABLE",
    "severity": "red",
-   "since": 1786987717547,
-   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
-   "refs": [],
+   "since": 1786987826589,
+   "detail": "BEB-3584 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3584"
+   ],
    "orky": {
-    "cls": "zero-rows-pass",
-    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
-    "subject": "dispatcher-pass"
-   }
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3584"
+   },
+   "fix_ticket": "BEB-2736"
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1786987823034,
+   "detail": "BEB-3585 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3585"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3585"
+   },
+   "fix_ticket": "BEB-2736"
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1786987819498,
+   "detail": "BEB-3586 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3586"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3586"
+   },
+   "fix_ticket": "BEB-2736"
   }
  ]
 }
