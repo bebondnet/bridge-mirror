@@ -1,13 +1,13 @@
 {
- "mirrored_at": "2026-08-17T07:37:30.278Z",
- "ts": 1786952249032,
+ "mirrored_at": "2026-08-17T07:38:24.343Z",
+ "ts": 1786952303014,
  "loop": {
   "proposed_total": 1498,
   "by_state": {
-   "queued": 9,
+   "queued": 8,
    "claimed": 1,
    "done": 753,
-   "held": 132,
+   "held": 133,
    "blocked": 17,
    "parked": 536
   },
@@ -16,9 +16,8 @@
     "blocked": 12,
     "claimed": 1,
     "done": 300,
-    "held": 75,
-    "parked": 530,
-    "queued": 1
+    "held": 76,
+    "parked": 530
    },
    "REFINE": {
     "blocked": 1,
@@ -40,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786952236200,
+   "at": 1786952283353,
    "tally": "BEB-2702→SPEC[done], BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[don"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786952225560,
+    "since": 1786952289801,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -57,6 +56,15 @@
      "subject": "BEB-2805",
      "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
     }
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785314526029,
+    "detail": "ZERO ROWS PASS — dispatcher proposes 20 and writes 0 lane rows; proposals must become rows or the pass reds — last landed evidence 2026-07-29T08:42:06.029Z",
+    "refs": [
+     "BEB-2385"
+    ]
    },
    {
     "code": "REPEAT_FAILER",
@@ -132,7 +140,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786877055992,
-    "detail": "alexrollin/abilifi-apps failing at codegen 27× in 24h — LATEST (08-17T00:39): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 28× in 24h — LATEST (08-17T07:37): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-3511"
     ],
@@ -257,21 +265,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786952225560,
-    "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-    "refs": [
-     "BEB-3549"
-    ],
-    "orky": {
-     "cls": "proposed-never-claimed",
-     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-     "subject": "BEB-3549"
-    }
-   },
-   {
-    "code": "PROPOSED_NEVER_CLAIMED",
-    "severity": "red",
-    "since": 1786952225560,
+    "since": 1786952289801,
     "detail": "BEB-3556 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-3556"
@@ -396,16 +390,6 @@
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1785892434215,
-    "detail": "fix BEB-2716 for BEB-3549 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-    "refs": [
-     "BEB-2716",
-     "BEB-3549"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
-    "since": 1785892434215,
     "detail": "fix BEB-2716 for BEB-3556 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
     "refs": [
      "BEB-2716",
@@ -415,51 +399,52 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1786952225560,
+    "since": 1786952289801,
     "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
      "cls": "zero-rows-pass",
      "error": "pass proposes N>0, writes 0 rows, twice consecutively",
      "subject": "dispatcher-pass"
-    }
+    },
+    "fix_ticket": "BEB-2382"
    }
   ]
  },
  "bridge": {
-  "head_seq": 51493,
+  "head_seq": 51499,
   "cursor_fable": 51193,
-  "unread_for_fable": 300,
+  "unread_for_fable": 306,
   "last": [
    {
-    "seq": 51489,
+    "seq": 51495,
     "from": "cc",
     "kind": "status",
-    "one_line": "2 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-3549), FIX_BURIED(BEB-2716) — full detail on get_st"
+    "one_line": "RED GOAL_STALE: ZERO ROWS PASS — dispatcher proposes 20 and writes 0 lane rows; proposals "
    },
    {
-    "seq": 51490,
+    "seq": 51496,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-3556 proposed on 6 consecutive passes and has NEVER been c"
+    "one_line": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · ZERO_ROWS_PASS"
    },
    {
-    "seq": 51491,
+    "seq": 51497,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED PROPOSED_NEVER_CLAIMED: BEB-3556 proposed on 6 consecutive passes and has NEVER been c"
+    "one_line": "RED GOAL_STALE: ZERO ROWS PASS — dispatcher proposes 20 and writes 0 lane rows; proposals "
    },
    {
-    "seq": 51492,
-    "from": "fable",
-    "kind": "directive",
-    "one_line": "DIRECTIVE — report required, with counts.  Loop is not building. claimed=0 across 388 pass"
-   },
-   {
-    "seq": 51493,
+    "seq": 51498,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER pass: proposed 20 · wrote 1 · claimed 1 — BEB-2702→SPEC[done], BEB-2753→BUILD[b"
+    "one_line": "DISPATCHER lane BLOCKED: BEB-3511 — mastra tick codegen FAILED: CODEGEN_WALL prompt-contam"
+   },
+   {
+    "seq": 51499,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
    }
   ]
  },
@@ -555,7 +540,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786952225560,
+   "since": 1786952289801,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -565,6 +550,15 @@
     "subject": "BEB-2805",
     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
    }
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785314526029,
+   "detail": "ZERO ROWS PASS — dispatcher proposes 20 and writes 0 lane rows; proposals must become rows or the pass reds — last landed evidence 2026-07-29T08:42:06.029Z",
+   "refs": [
+    "BEB-2385"
+   ]
   },
   {
    "code": "REPEAT_FAILER",
@@ -640,7 +634,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786877055992,
-   "detail": "alexrollin/abilifi-apps failing at codegen 27× in 24h — LATEST (08-17T00:39): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 28× in 24h — LATEST (08-17T07:37): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-3511"
    ],
@@ -765,21 +759,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786952225560,
-   "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
-   "refs": [
-    "BEB-3549"
-   ],
-   "orky": {
-    "cls": "proposed-never-claimed",
-    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
-    "subject": "BEB-3549"
-   }
-  },
-  {
-   "code": "PROPOSED_NEVER_CLAIMED",
-   "severity": "red",
-   "since": 1786952225560,
+   "since": 1786952289801,
    "detail": "BEB-3556 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-3556"
@@ -904,16 +884,6 @@
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1785892434215,
-   "detail": "fix BEB-2716 for BEB-3549 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
-   "refs": [
-    "BEB-2716",
-    "BEB-3549"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
-   "since": 1785892434215,
    "detail": "fix BEB-2716 for BEB-3556 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
    "refs": [
     "BEB-2716",
@@ -923,14 +893,15 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1786952225560,
+   "since": 1786952289801,
    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
     "cls": "zero-rows-pass",
     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
     "subject": "dispatcher-pass"
-   }
+   },
+   "fix_ticket": "BEB-2382"
   }
  ]
 }
