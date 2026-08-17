@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-17T00:13:33.205Z",
- "ts": 1786925611704,
+ "mirrored_at": "2026-08-17T00:14:32.912Z",
+ "ts": 1786925671587,
  "loop": {
   "proposed_total": 1496,
   "by_state": {
-   "queued": 10,
-   "claimed": 2,
+   "queued": 9,
+   "claimed": 3,
    "done": 751,
    "held": 132,
    "blocked": 17,
@@ -31,23 +31,23 @@
    },
    "SPEC": {
     "blocked": 4,
+    "claimed": 1,
     "done": 360,
     "held": 46,
-    "parked": 3,
-    "queued": 1
+    "parked": 3
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786925585419,
-   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2771→BUILD[se"
+   "at": 1786925645041,
+   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2785→BUILD[se"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786925572938,
+    "since": 1786925632939,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -90,7 +90,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1786925507331,
-    "detail": "BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
     "refs": [
      "BEB-3569"
     ],
@@ -98,8 +98,7 @@
      "cls": "repeat-failer",
      "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
      "subject": "BEB-3569"
-    },
-    "fix_ticket": "BEB-2737"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -366,6 +365,29 @@
     ]
    },
    {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for unrecorded has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "unrecorded"
+    ]
+   },
+   {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1786925632939,
+    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
+   },
+   {
     "code": "BINDING_UNRESOLVABLE",
     "severity": "red",
     "since": 1786925110576,
@@ -480,39 +502,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 51404,
+  "head_seq": 51408,
   "cursor_fable": 51193,
-  "unread_for_fable": 211,
+  "unread_for_fable": 215,
   "last": [
-   {
-    "seq": 51400,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3572 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
-   {
-    "seq": 51401,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED BINDING_UNRESOLVABLE: BEB-3573 carries a dead binding — no repo/frag target binding (o"
-   },
-   {
-    "seq": 51402,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED REPEAT_FAILER: BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocke"
-   },
-   {
-    "seq": 51403,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3573 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
-   },
    {
     "seq": 51404,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER: BEB-3571 blocked with NO recorded attempt — the lane died before writing any f"
+   },
+   {
+    "seq": 51405,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER alarm: lease expired on BEB-3562 (attempt 1) — requeued."
+   },
+   {
+    "seq": 51406,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocke"
+   },
+   {
+    "seq": 51407,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
+   },
+   {
+    "seq": 51408,
+    "from": "cc",
+    "kind": "question",
+    "one_line": "SPEC QUESTIONS OPEN on BEB-3573 (BEB-2436, blocking — NO contract_id until answered). Firs"
    }
   ]
  },
@@ -608,7 +630,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786925572938,
+   "since": 1786925632939,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -651,7 +673,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1786925507331,
-   "detail": "BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
    "refs": [
     "BEB-3569"
    ],
@@ -659,8 +681,7 @@
     "cls": "repeat-failer",
     "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
     "subject": "BEB-3569"
-   },
-   "fix_ticket": "BEB-2737"
+   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -925,6 +946,29 @@
     "BEB-2737",
     "split"
    ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for unrecorded has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "unrecorded"
+   ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1786925632939,
+   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
