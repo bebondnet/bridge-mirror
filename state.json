@@ -1,14 +1,14 @@
 {
- "mirrored_at": "2026-08-17T15:30:46.491Z",
- "ts": 1786980644167,
+ "mirrored_at": "2026-08-17T15:33:54.570Z",
+ "ts": 1786980831915,
  "loop": {
   "proposed_total": 1511,
   "by_state": {
    "queued": 10,
-   "claimed": 1,
-   "done": 754,
-   "held": 141,
-   "blocked": 11,
+   "claimed": 0,
+   "done": 753,
+   "held": 142,
+   "blocked": 12,
    "parked": 541
   },
   "by_lane": {
@@ -16,19 +16,18 @@
     "blocked": 6,
     "done": 301,
     "held": 84,
-    "parked": 535,
-    "queued": 2
+    "parked": 535
    },
    "REFINE": {
-    "blocked": 1,
-    "claimed": 1,
-    "held": 4
+    "blocked": 2,
+    "held": 5,
+    "queued": 1
    },
    "REPAIR": {
-    "done": 91,
+    "done": 90,
     "held": 7,
     "parked": 3,
-    "queued": 8
+    "queued": 9
    },
    "SPEC": {
     "blocked": 4,
@@ -40,14 +39,21 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786980590459,
+   "at": 1786980794366,
    "tally": "BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2742→SPEC[done], "
   },
   "reds": [
    {
+    "code": "ZERO_CLAIM",
+    "severity": "red",
+    "since": 1786980697545,
+    "detail": "claimed=0, queued=10, 3 passes, max_concurrent=20",
+    "refs": []
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786980637552,
+    "since": 1786980817549,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -66,6 +72,48 @@
     "refs": [
      "BEB-2385"
     ]
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786980743784,
+    "detail": "BEB-3579 refused 6× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3579 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-3579"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3579 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable",
+     "subject": "BEB-3579"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786980690827,
+    "detail": "BEB-3580 refused 5× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3580 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable",
+    "refs": [
+     "BEB-3580"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3580 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable",
+     "subject": "BEB-3580"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1786980619697,
+    "detail": "BEB-3581 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3581 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3581"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3581 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, never fill the gap with a plausible value): edge-worker-status expects \"SPEC_ASK: What specific stat",
+     "subject": "BEB-3581"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -112,6 +160,21 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
+    "since": 1786980752330,
+    "detail": "BEB-3580 failing at refine 3× in 24h — LATEST (08-17T15:33): refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+    "refs": [
+     "BEB-3580"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+     "subject": "BEB-3580"
+    },
+    "fix_ticket": "BEB-2737"
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
     "since": 1786895213619,
     "detail": "abilifi-apps failing at heartbeat 94× in 24h — LATEST (08-17T15:15): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 2257 frozen 4204min, queued 10. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_",
     "refs": [
@@ -154,8 +217,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1786894279704,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 37× in 24h — LATEST (08-16T22:25): declared-route probe: 3/3 route(s) the ticket DECLARES do not exist on the deploy — GET /blocks/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"blocks\",\"detail\":\"Error: Worker not found.\"} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1786894528767,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 35× in 24h — LATEST (08-16T22:25): declared-route probe: 3/3 route(s) the ticket DECLARES do not exist on the deploy — GET /blocks/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"blocks\",\"detail\":\"Error: Worker not found.\"} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3507"
     ],
@@ -252,7 +315,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1786980637552,
+    "since": 1786980817549,
     "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-3549"
@@ -402,43 +465,98 @@
      "BEB-2716",
      "BEB-3549"
     ]
+   },
+   {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1786980817549,
+    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1786980807655,
+    "detail": "BEB-3579 carries a dead binding — refine BEB-3579: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\" — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3579"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "refine BEB-3579: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+     "subject": "BEB-3579"
+    },
+    "fix_ticket": "BEB-2736"
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1786980786242,
+    "detail": "BEB-3580 carries a dead binding — refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\" — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3580"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+     "subject": "BEB-3580"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1786980702599,
+    "detail": "BEB-3581 carries a dead binding — refine BEB-3581: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\" — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3581"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "refine BEB-3581: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+     "subject": "BEB-3581"
+    }
    }
   ]
  },
  "bridge": {
-  "head_seq": 51711,
+  "head_seq": 51729,
   "cursor_fable": 51193,
-  "unread_for_fable": 518,
+  "unread_for_fable": 536,
   "last": [
    {
-    "seq": 51707,
+    "seq": 51725,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3580 — REFINE_FAIL ×3. Codegen spend stopped;"
    },
    {
-    "seq": 51708,
+    "seq": 51726,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: ZERO_ROWS_PASS(142min)."
+    "one_line": "DISPATCHER: refine of BEB-3579 — SPEC.md push to alexrollin/abilifi-apps FAILED (default b"
    },
    {
-    "seq": 51709,
+    "seq": 51727,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · ZERO_ROWS_PASS"
+    "one_line": "DISPATCHER: refine of BEB-3579 — SPEC.md push to alexrollin/abilifi-apps FAILED (default b"
    },
    {
-    "seq": 51710,
+    "seq": 51728,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER gate (BEB-2109): BEB-3581 REFUSED for BUILD — BLOCKED-ON-SPEC (BEB-2647): no SP"
+    "one_line": "4 NEW REDS: ZERO_CLAIM(—), SILENT_REFUSAL(BEB-3579), SILENT_REFUSAL(BEB-3580), BINDING_UNR"
    },
    {
-    "seq": 51711,
+    "seq": 51729,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): ZERO_CLAIM · PROPOSED_NEVER_CLAIMED"
+    "one_line": "RED ×2 (BEB-2334): REPEAT_FAILER[BEB-3580]→BEB-2737 · BINDING_UNRESOLVABLE[BEB-3579]→BEB-2"
    }
   ]
  },
@@ -532,9 +650,16 @@
  ],
  "reds": [
   {
+   "code": "ZERO_CLAIM",
+   "severity": "red",
+   "since": 1786980697545,
+   "detail": "claimed=0, queued=10, 3 passes, max_concurrent=20",
+   "refs": []
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786980637552,
+   "since": 1786980817549,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -553,6 +678,48 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786980743784,
+   "detail": "BEB-3579 refused 6× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3579 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-3579"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3579 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable",
+    "subject": "BEB-3579"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786980690827,
+   "detail": "BEB-3580 refused 5× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3580 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable",
+   "refs": [
+    "BEB-3580"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3580 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — authoring reported nothing and no SPEC.md is readable",
+    "subject": "BEB-3580"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1786980619697,
+   "detail": "BEB-3581 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3581 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3581"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-3581 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — spec_author error: INVENTED ASSERTIONS (BEB-2436 §2 — ask, never fill the gap with a plausible value): edge-worker-status expects \"SPEC_ASK: What specific stat",
+    "subject": "BEB-3581"
+   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -599,6 +766,21 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
+   "since": 1786980752330,
+   "detail": "BEB-3580 failing at refine 3× in 24h — LATEST (08-17T15:33): refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+   "refs": [
+    "BEB-3580"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+    "subject": "BEB-3580"
+   },
+   "fix_ticket": "BEB-2737"
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
    "since": 1786895213619,
    "detail": "abilifi-apps failing at heartbeat 94× in 24h — LATEST (08-17T15:15): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 2257 frozen 4204min, queued 10. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_",
    "refs": [
@@ -641,8 +823,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1786894279704,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 37× in 24h — LATEST (08-16T22:25): declared-route probe: 3/3 route(s) the ticket DECLARES do not exist on the deploy — GET /blocks/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"blocks\",\"detail\":\"Error: Worker not found.\"} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1786894528767,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 35× in 24h — LATEST (08-16T22:25): declared-route probe: 3/3 route(s) the ticket DECLARES do not exist on the deploy — GET /blocks/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"blocks\",\"detail\":\"Error: Worker not found.\"} · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3507"
    ],
@@ -739,7 +921,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1786980637552,
+   "since": 1786980817549,
    "detail": "BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-3549"
@@ -889,6 +1071,61 @@
     "BEB-2716",
     "BEB-3549"
    ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1786980817549,
+   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1786980807655,
+   "detail": "BEB-3579 carries a dead binding — refine BEB-3579: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\" — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3579"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "refine BEB-3579: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+    "subject": "BEB-3579"
+   },
+   "fix_ticket": "BEB-2736"
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1786980786242,
+   "detail": "BEB-3580 carries a dead binding — refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\" — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3580"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "refine BEB-3580: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+    "subject": "BEB-3580"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1786980702599,
+   "detail": "BEB-3581 carries a dead binding — refine BEB-3581: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\" — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3581"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "refine BEB-3581: refine completion rejected: \"SPEC.md push failed: default branch ref unreadable (404)\"",
+    "subject": "BEB-3581"
+   }
   }
  ]
 }
