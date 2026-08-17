@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-17T07:12:31.243Z",
- "ts": 1786950749781,
+ "mirrored_at": "2026-08-17T07:14:06.774Z",
+ "ts": 1786950844869,
  "loop": {
-  "proposed_total": 1496,
+  "proposed_total": 1498,
   "by_state": {
    "queued": 9,
-   "claimed": 0,
+   "claimed": 1,
    "done": 752,
    "held": 132,
    "blocked": 17,
@@ -16,7 +16,8 @@
     "blocked": 12,
     "done": 300,
     "held": 75,
-    "parked": 531
+    "parked": 531,
+    "queued": 1
    },
    "REFINE": {
     "blocked": 1,
@@ -26,10 +27,11 @@
     "done": 91,
     "held": 7,
     "parked": 3,
-    "queued": 9
+    "queued": 8
    },
    "SPEC": {
     "blocked": 4,
+    "claimed": 1,
     "done": 361,
     "held": 46,
     "parked": 3
@@ -38,21 +40,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786950722930,
-   "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2799→BUILD[se"
+   "at": 1786950782563,
+   "tally": "BEB-2702→SPEC, BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BE"
   },
   "reds": [
    {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1786927252951,
-    "detail": "claimed=0, queued=9, 392 passes, max_concurrent=20",
-    "refs": []
-   },
-   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786950712944,
+    "since": 1786950832940,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -62,6 +57,16 @@
      "subject": "BEB-2805",
      "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
     }
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785314526029,
+    "detail": "Land BEB-2702 — resolve the 1016 origin DNS that makes eligibility unverifiable and holds claimed=0 — last landed evidence 2026-07-29T08:42:06.029Z",
+    "refs": [
+     "BEB-2702",
+     "BEB-2385"
+    ]
    },
    {
     "code": "REPEAT_FAILER",
@@ -262,16 +267,6 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
-    "since": 1785927165865,
-    "detail": "fix BEB-2702 for heartbeat has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
-    "refs": [
-     "BEB-2702",
-     "heartbeat"
-    ]
-   },
-   {
-    "code": "FIX_BURIED",
-    "severity": "red",
     "since": 1786708675942,
     "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
     "refs": [
@@ -378,55 +373,43 @@
      "BEB-2737",
      "unrecorded"
     ]
-   },
-   {
-    "code": "ZERO_ROWS_PASS",
-    "severity": "red",
-    "since": 1786950712944,
-    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
-    "refs": [],
-    "orky": {
-     "cls": "zero-rows-pass",
-     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
-     "subject": "dispatcher-pass"
-    }
    }
   ]
  },
  "bridge": {
-  "head_seq": 51473,
+  "head_seq": 51478,
   "cursor_fable": 51193,
-  "unread_for_fable": 280,
+  "unread_for_fable": 285,
   "last": [
    {
-    "seq": 51469,
+    "seq": 51474,
     "from": "cc",
     "kind": "status",
-    "one_line": "3 NEW REDS: PROPOSED_NEVER_CLAIMED(BEB-3549), PROPOSED_NEVER_CLAIMED(BEB-3556), FIX_BURIED"
+    "one_line": "DISPATCHER pass: proposed 20 · wrote 2 · claimed 0 — BEB-2702→SPEC, BEB-2753→BUILD[blocked"
    },
    {
-    "seq": 51470,
+    "seq": 51475,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(22min)."
+    "one_line": "DISPATCHER: BEB-3574 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
    },
    {
-    "seq": 51471,
+    "seq": 51476,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): PROPOSED_NEVER_CLAIMED"
+    "one_line": "RED CLEARED: FIX_BURIED(15619min), ZERO_ROWS_PASS(419min), ZERO_CLAIM(391min)."
    },
    {
-    "seq": 51472,
+    "seq": 51477,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED CLEARED: PROPOSED_NEVER_CLAIMED(24min), FIX_BURIED(24min)."
+    "one_line": "RED GOAL_STALE: Land BEB-2702 — resolve the 1016 origin DNS that makes eligibility unverif"
    },
    {
-    "seq": 51473,
+    "seq": 51478,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · FIX_BURIED"
+    "one_line": "CLEARED ×3 (BEB-2334): ZERO_CLAIM · FIX_BURIED · ZERO_ROWS_PASS"
    }
   ]
  },
@@ -520,16 +503,9 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1786927252951,
-   "detail": "claimed=0, queued=9, 392 passes, max_concurrent=20",
-   "refs": []
-  },
-  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786950712944,
+   "since": 1786950832940,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -539,6 +515,16 @@
     "subject": "BEB-2805",
     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
    }
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785314526029,
+   "detail": "Land BEB-2702 — resolve the 1016 origin DNS that makes eligibility unverifiable and holds claimed=0 — last landed evidence 2026-07-29T08:42:06.029Z",
+   "refs": [
+    "BEB-2702",
+    "BEB-2385"
+   ]
   },
   {
    "code": "REPEAT_FAILER",
@@ -739,16 +725,6 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
-   "since": 1785927165865,
-   "detail": "fix BEB-2702 for heartbeat has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
-   "refs": [
-    "BEB-2702",
-    "heartbeat"
-   ]
-  },
-  {
-   "code": "FIX_BURIED",
-   "severity": "red",
    "since": 1786708675942,
    "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
    "refs": [
@@ -855,18 +831,6 @@
     "BEB-2737",
     "unrecorded"
    ]
-  },
-  {
-   "code": "ZERO_ROWS_PASS",
-   "severity": "red",
-   "since": 1786950712944,
-   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
-   "refs": [],
-   "orky": {
-    "cls": "zero-rows-pass",
-    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
-    "subject": "dispatcher-pass"
-   }
   }
  ]
 }
