@@ -1,27 +1,26 @@
 {
- "mirrored_at": "2026-08-17T00:12:52.555Z",
- "ts": 1786925570990,
+ "mirrored_at": "2026-08-17T00:13:33.205Z",
+ "ts": 1786925611704,
  "loop": {
   "proposed_total": 1496,
   "by_state": {
-   "queued": 9,
-   "claimed": 4,
+   "queued": 10,
+   "claimed": 2,
    "done": 751,
-   "held": 131,
-   "blocked": 18,
-   "parked": 534
+   "held": 132,
+   "blocked": 17,
+   "parked": 535
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 13,
+    "blocked": 12,
     "claimed": 2,
     "done": 300,
     "held": 75,
-    "parked": 528
+    "parked": 529
    },
    "REFINE": {
     "blocked": 1,
-    "claimed": 1,
     "held": 4
    },
    "REPAIR": {
@@ -32,23 +31,23 @@
    },
    "SPEC": {
     "blocked": 4,
-    "claimed": 1,
     "done": 360,
-    "held": 45,
-    "parked": 3
+    "held": 46,
+    "parked": 3,
+    "queued": 1
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1786925526462,
+   "at": 1786925585419,
    "tally": "BEB-2753→BUILD[blocked], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-2771→BUILD[se"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1786925512878,
+    "since": 1786925572938,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -86,6 +85,21 @@
      "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
      "subject": "BEB-3560"
     }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1786925507331,
+    "detail": "BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-3569"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
+     "subject": "BEB-3569"
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
@@ -461,45 +475,44 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-3573"
-    },
-    "fix_ticket": "BEB-2736"
+    }
    }
   ]
  },
  "bridge": {
-  "head_seq": 51400,
+  "head_seq": 51404,
   "cursor_fable": 51193,
-  "unread_for_fable": 207,
+  "unread_for_fable": 211,
   "last": [
-   {
-    "seq": 51396,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3572 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
-   {
-    "seq": 51397,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3572 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
-   {
-    "seq": 51398,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: refine of BEB-3572 — SPEC.md push to alexrollin/abilifi-apps FAILED (branch he"
-   },
-   {
-    "seq": 51399,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER: BEB-3572 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
-   },
    {
     "seq": 51400,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER: BEB-3572 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
+   },
+   {
+    "seq": 51401,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED BINDING_UNRESOLVABLE: BEB-3573 carries a dead binding — no repo/frag target binding (o"
+   },
+   {
+    "seq": 51402,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocke"
+   },
+   {
+    "seq": 51403,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-3573 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
+   },
+   {
+    "seq": 51404,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER: BEB-3571 blocked with NO recorded attempt — the lane died before writing any f"
    }
   ]
  },
@@ -595,7 +608,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1786925512878,
+   "since": 1786925572938,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -633,6 +646,21 @@
     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
     "subject": "BEB-3560"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1786925507331,
+   "detail": "BEB-3569 failing at unrecorded 3× in 24h — LATEST (08-17T00:11): blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field. · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-3569"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "blocked with no recorded attempt: no failure or refusal row exists for this ticket in the failbase. The lane died before writing. This is a finding, not a missing field.",
+    "subject": "BEB-3569"
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
@@ -1008,8 +1036,7 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-3573"
-   },
-   "fix_ticket": "BEB-2736"
+   }
   }
  ]
 }
