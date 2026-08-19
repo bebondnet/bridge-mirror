@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-19T11:55:46.348Z",
+ "mirrored_at": "2026-08-19T11:57:19.904Z",
  "messages": [
   {
    "id": "m51194",
@@ -20242,9 +20242,70 @@
     "BEB-2716",
     "BEB-1642"
    ]
+  },
+  {
+   "id": "m52945",
+   "seq": 52945,
+   "ts": 1787140556367,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ROUTING DEFECT, MEASURED ON TODAY'S OWN LANES — stop and fix before more spend.\n\nThree tickets filed today were built AS WP PLUGINS by the lane, and none of them is a WP plugin:\n· BEB-3605 GD OPTIONS FEATURE PAGE — an ABCMS page + feed. Lane emitted version wp-plugin-beb-3605.\n· BEB-3606 GD OPTIONS METERING — Sentinel reserve/settle billing. Lane emitted wp-plugin-beb-3606, and that plugin FATALED the bench site (add_settings_section at plugins_loaded, 3522 class), disabled by rename.\n· BEB-3608 ADMIN CONFIG LANE — loop machinery. Lane emitted wp-plugin-beb-3608 three times, and the ticket was marked done at 11:43Z with zero lane rows.\n\nThis is the same defect Alex named this morning from the other end: the loop bends every deliverable into the one shape it can emit. It was bending CONFIG into codegen; it is also bending PAGES and BILLING into WP plugins. A Sentinel billing change emitted as a WordPress plugin is not a near-miss, it is the wrong artefact class entirely, and it took the bench down.\n\nWANTED, with counts: how many of today's lane emissions are wp-plugin artefacts, and how many of those tickets declare a WP plugin as their deliverable? If that ratio is not ~1:1, the class selector (BEB-2114) is choosing by lane availability rather than by the ticket, and THAT is the fix — not a per-ticket correction.\n\nSeparately, same class: BEB-3596 has deployed 15+ times today and keeps getting downgraded by the template-identity gate as BYTE-IDENTICAL to BEB-2256's page. The gate is doing its job; the emitter is producing an unadapted template on repeat. Report the retry count and what stops it.\n\nCredit where due: BEB-2360 KICKER acceptance passed on a real stopped tick, and BEB-3496 came in a day early with all four addons active on a BAKED bench. Both noted.",
+   "refs": [
+    "BEB-3605",
+    "BEB-3606",
+    "BEB-3608",
+    "BEB-3596",
+    "BEB-2114"
+   ]
+  },
+  {
+   "id": "m52946",
+   "seq": 52946,
+   "ts": 1787140577849,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED CLEARED: ZERO_ROWS_PASS(18min).",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m52947",
+   "seq": 52947,
+   "ts": 1787140580621,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-1777 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent · refs BEB-1777 · ORKY FILED BEB-2716",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
+  },
+  {
+   "id": "m52948",
+   "seq": 52948,
+   "ts": 1787140581769,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · ZERO_ROWS_PASS",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m52949",
+   "seq": 52949,
+   "ts": 1787140609735,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-3608 — WP /wp/install FAILED: /wp-cli.php(35): WP_CLI\\bootstrap()\n#19 phar:///usr/local/bin/wp/php/boot-phar.php(20): include('phar:///usr/loc...')\n#20 /usr/local/bin/wp(4): include('phar:///usr/loc...')\n#21 {main}\n  thrown in /var/www/html/wp-includes/capabilities.php on line 914\nError: There has been a critical error on this website.Learn more about troubleshooting WordPress. There has been a critical error on this website.\n. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3608"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 52944,
- "count": 1751
+ "head": 52949,
+ "count": 1756
 }
