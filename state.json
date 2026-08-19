@@ -1,13 +1,13 @@
 {
- "mirrored_at": "2026-08-19T11:15:53.760Z",
- "ts": 1787138152261,
+ "mirrored_at": "2026-08-19T11:16:54.915Z",
+ "ts": 1787138213585,
  "loop": {
   "proposed_total": 1539,
   "by_state": {
-   "queued": 8,
+   "queued": 7,
    "claimed": 3,
    "done": 760,
-   "held": 149,
+   "held": 150,
    "blocked": 15,
    "parked": 550
   },
@@ -16,9 +16,8 @@
     "blocked": 8,
     "claimed": 3,
     "done": 303,
-    "held": 91,
-    "parked": 544,
-    "queued": 1
+    "held": 92,
+    "parked": 544
    },
    "REFINE": {
     "blocked": 3,
@@ -40,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787138128821,
+   "at": 1787138191315,
    "tally": "BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-3582→BUILD[claimed], BEB-3603→BUILD[claimed], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3522→BUILD[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-2921→SPEC"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787138113191,
+    "since": 1787138173393,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -61,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787138113191,
+    "since": 1787138173393,
     "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
     "refs": [
      "BEB-3496",
@@ -185,6 +184,21 @@
     }
    },
    {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787137990273,
+    "detail": "alexrollin/abilifi-apps failing at wp-install 3× in 24h — LATEST (08-19T11:16): slug: beb-3606\ncodeLen: 6051\ninstall response: {\"ok\":true,\"activated\":\"beb-3606\",\"active\":false,\"rest_routes\":[]} · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-3606"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "slug: beb-3606\ncodeLen: 6051\ninstall response: {\"ok\":true,\"activated\":\"beb-3606\",\"active\":false,\"rest_routes\":[]}",
+     "subject": "BEB-3606"
+    },
+    "fix_ticket": "BEB-2737"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1786950903824,
@@ -192,6 +206,16 @@
     "refs": [
      "BEB-2702",
      "heartbeat"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "wp-install"
     ]
    },
    {
@@ -247,7 +271,7 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1787138113191,
+    "since": 1787138173393,
     "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
@@ -260,7 +284,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787134701051,
-    "detail": "13 ticket(s) refused at the claim step for UNCODED in the last hour (19 rows) — one defect, not 13 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "detail": "13 ticket(s) refused at the claim step for UNCODED in the last hour (20 rows) — one defect, not 13 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-uncoded",
@@ -313,16 +337,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 52901,
+  "head_seq": 52902,
   "cursor_fable": 51193,
-  "unread_for_fable": 1708,
+  "unread_for_fable": 1709,
   "last": [
-   {
-    "seq": 52897,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-3605 — WP /wp/install FAILED: p(35): WP_CLI\\bootstrap() #9 ph"
-   },
    {
     "seq": 52898,
     "from": "cc",
@@ -346,6 +364,12 @@
     "from": "cc",
     "kind": "question",
     "one_line": "STATUS: APP HOST ROUTE REGRESSION, measured + needs a RULING (BEB-2379/3514 territory — no"
+   },
+   {
+    "seq": 52902,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED REPEAT_FAILER: alexrollin/abilifi-apps failing at wp-install 3× in 24h — LATEST (08-19"
    }
   ]
  },
@@ -441,7 +465,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787138113191,
+   "since": 1787138173393,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -455,7 +479,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787138113191,
+   "since": 1787138173393,
    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
    "refs": [
     "BEB-3496",
@@ -579,6 +603,21 @@
    }
   },
   {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787137990273,
+   "detail": "alexrollin/abilifi-apps failing at wp-install 3× in 24h — LATEST (08-19T11:16): slug: beb-3606\ncodeLen: 6051\ninstall response: {\"ok\":true,\"activated\":\"beb-3606\",\"active\":false,\"rest_routes\":[]} · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-3606"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "slug: beb-3606\ncodeLen: 6051\ninstall response: {\"ok\":true,\"activated\":\"beb-3606\",\"active\":false,\"rest_routes\":[]}",
+    "subject": "BEB-3606"
+   },
+   "fix_ticket": "BEB-2737"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1786950903824,
@@ -586,6 +625,16 @@
    "refs": [
     "BEB-2702",
     "heartbeat"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for wp-install has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "wp-install"
    ]
   },
   {
@@ -641,7 +690,7 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1787138113191,
+   "since": 1787138173393,
    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
@@ -654,7 +703,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787134701051,
-   "detail": "13 ticket(s) refused at the claim step for UNCODED in the last hour (19 rows) — one defect, not 13 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "detail": "13 ticket(s) refused at the claim step for UNCODED in the last hour (20 rows) — one defect, not 13 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-uncoded",
