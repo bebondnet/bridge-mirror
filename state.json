@@ -1,28 +1,27 @@
 {
- "mirrored_at": "2026-08-19T10:45:07.702Z",
- "ts": 1787136306063,
+ "mirrored_at": "2026-08-19T10:47:03.355Z",
+ "ts": 1787136421454,
  "loop": {
   "proposed_total": 1535,
   "by_state": {
-   "queued": 11,
-   "claimed": 4,
+   "queued": 8,
+   "claimed": 6,
    "done": 758,
-   "held": 147,
-   "blocked": 12,
-   "parked": 549
+   "held": 146,
+   "blocked": 13,
+   "parked": 550
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 5,
-    "claimed": 4,
+    "blocked": 6,
+    "claimed": 6,
     "done": 302,
     "held": 88,
-    "parked": 543,
-    "queued": 3
+    "parked": 544
    },
    "REFINE": {
     "blocked": 3,
-    "held": 5
+    "held": 4
    },
    "REPAIR": {
     "done": 90,
@@ -40,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787136278520,
-   "tally": "BEB-3603→BUILD, BEB-2360→BUILD[claimed], BEB-2760→SPEC[done], BEB-3582→BUILD, BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-29"
+   "at": 1787136402843,
+   "tally": "BEB-3603→BUILD[claimed], BEB-2360→BUILD[claimed], BEB-2760→SPEC[done], BEB-3582→BUILD[claimed], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787136299101,
+    "since": 1787136402141,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -61,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787136299101,
+    "since": 1787136402141,
     "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
     "refs": [
      "BEB-3496",
@@ -132,7 +131,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787136295854,
-    "detail": "BEB-3590 failing at refine 3× in 24h — LATEST (08-19T10:44): refine BEB-3590: refine completion rejected: \"SyntaxError: Unexpected token 'e', \\\"error code: 1101\\n\\\" is not valid JSON\"",
+    "detail": "BEB-3590 failing at refine 4× in 24h — LATEST (08-19T10:45): refine BEB-3590: refine completion rejected: \"SyntaxError: Unexpected token 'e', \\\"error code: 1101\\n\\\" is not valid JSON\" · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3590"
     ],
@@ -140,8 +139,7 @@
      "cls": "repeat-failer",
      "error": "refine BEB-3590: refine completion rejected: \"SyntaxError: Unexpected token 'e', \\\"error code: 1101\\n\\\" is not valid JSON\"",
      "subject": "BEB-3590"
-    },
-    "fix_ticket": "BEB-2737"
+    }
    },
    {
     "code": "REPEAT_FAILER",
@@ -169,6 +167,20 @@
      "cls": "repeat-failer",
      "error": "verdict: codegen produced no usable code\ncodeLen: 3286\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | every response is a short string literal (\"Not Found\", \"Not Found\") and nothing is serialised — that is a shell, not the ticket's deliverable\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=2] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps\nClass: CODE\nLane: BUILD\n\nGAP FOUND 2026-08-19 (service audit). Every feed ticket in the estate assumes a hub and none of them builds one. BEB-2525 puts topics \"on the substack-core rails\", BEB-2018 fires \"a WebSub ping\", BEB-2935 promises \"a W",
      "subject": "BEB-3594"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787134783788,
+    "detail": "alexrollin/abilifi-apps failing at complete 3× in 24h — LATEST (08-19T10:45): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+    "refs": [
+     "BEB-3579"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+     "subject": "BEB-3579"
     }
    },
    {
@@ -222,6 +234,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1786728673555,
+    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2524",
+     "complete"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786885194180,
     "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
     "refs": [
@@ -240,10 +262,20 @@
     ]
    },
    {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "refine"
+    ]
+   },
+   {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787134254220,
-    "detail": "9 ticket(s) refused at the claim step for UNCODED in the last hour (12 rows) — one defect, not 9 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "detail": "10 ticket(s) refused at the claim step for UNCODED in the last hour (14 rows) — one defect, not 10 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
     "refs": [],
     "orky": {
      "cls": "claim-refusal-uncoded",
@@ -296,39 +328,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 52822,
+  "head_seq": 52840,
   "cursor_fable": 51193,
-  "unread_for_fable": 1629,
+  "unread_for_fable": 1647,
   "last": [
    {
-    "seq": 52818,
+    "seq": 52836,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED GOAL_STALE: BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 275"
+    "one_line": "DISPATCHER: BEB-3590 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
    },
    {
-    "seq": 52819,
+    "seq": 52837,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3596 — commit c"
+    "one_line": "DISPATCHER gate (BEB-2109): BEB-3590 REFUSED for BUILD — ticket status 'cancelled' — owner"
    },
    {
-    "seq": 52820,
+    "seq": 52838,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-3589 — mastra refine: refine completion rejected: \"SyntaxErro"
+    "one_line": "RED FIX_BURIED: fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_"
    },
    {
-    "seq": 52821,
+    "seq": 52839,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3590 — DEPLOY_RUNTIME_1101 ×3. Codegen spend "
+    "one_line": "RED ×2 (BEB-2334): REPEAT_FAILER[BEB-3579]→BEB-2524 · FIX_BURIED[BEB-2524,complete]"
    },
    {
-    "seq": 52822,
+    "seq": 52840,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3590 — DEPLOY_RUNTIME_1101 ×4. Codegen spend "
+    "one_line": "2 NEW REDS: REPEAT_FAILER(BEB-3579), FIX_BURIED(BEB-2524) — full detail on get_state"
    }
   ]
  },
@@ -424,7 +456,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787136299101,
+   "since": 1787136402141,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -438,7 +470,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787136299101,
+   "since": 1787136402141,
    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
    "refs": [
     "BEB-3496",
@@ -509,7 +541,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787136295854,
-   "detail": "BEB-3590 failing at refine 3× in 24h — LATEST (08-19T10:44): refine BEB-3590: refine completion rejected: \"SyntaxError: Unexpected token 'e', \\\"error code: 1101\\n\\\" is not valid JSON\"",
+   "detail": "BEB-3590 failing at refine 4× in 24h — LATEST (08-19T10:45): refine BEB-3590: refine completion rejected: \"SyntaxError: Unexpected token 'e', \\\"error code: 1101\\n\\\" is not valid JSON\" · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3590"
    ],
@@ -517,8 +549,7 @@
     "cls": "repeat-failer",
     "error": "refine BEB-3590: refine completion rejected: \"SyntaxError: Unexpected token 'e', \\\"error code: 1101\\n\\\" is not valid JSON\"",
     "subject": "BEB-3590"
-   },
-   "fix_ticket": "BEB-2737"
+   }
   },
   {
    "code": "REPEAT_FAILER",
@@ -546,6 +577,20 @@
     "cls": "repeat-failer",
     "error": "verdict: codegen produced no usable code\ncodeLen: 3286\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | every response is a short string literal (\"Not Found\", \"Not Found\") and nothing is serialised — that is a shell, not the ticket's deliverable\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=2] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps\nClass: CODE\nLane: BUILD\n\nGAP FOUND 2026-08-19 (service audit). Every feed ticket in the estate assumes a hub and none of them builds one. BEB-2525 puts topics \"on the substack-core rails\", BEB-2018 fires \"a WebSub ping\", BEB-2935 promises \"a W",
     "subject": "BEB-3594"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787134783788,
+   "detail": "alexrollin/abilifi-apps failing at complete 3× in 24h — LATEST (08-19T10:45): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+   "refs": [
+    "BEB-3579"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+    "subject": "BEB-3579"
    }
   },
   {
@@ -599,6 +644,16 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
+   "since": 1786728673555,
+   "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2524",
+    "complete"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
    "since": 1786885194180,
    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
    "refs": [
@@ -617,10 +672,20 @@
    ]
   },
   {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "refine"
+   ]
+  },
+  {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787134254220,
-   "detail": "9 ticket(s) refused at the claim step for UNCODED in the last hour (12 rows) — one defect, not 9 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "detail": "10 ticket(s) refused at the claim step for UNCODED in the last hour (14 rows) — one defect, not 10 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
    "refs": [],
    "orky": {
     "cls": "claim-refusal-uncoded",
