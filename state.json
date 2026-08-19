@@ -1,23 +1,24 @@
 {
- "mirrored_at": "2026-08-19T10:17:09.675Z",
- "ts": 1787134626802,
+ "mirrored_at": "2026-08-19T10:18:26.381Z",
+ "ts": 1787134704917,
  "loop": {
   "proposed_total": 1529,
   "by_state": {
-   "queued": 8,
-   "claimed": 7,
-   "done": 757,
-   "held": 148,
+   "queued": 12,
+   "claimed": 5,
+   "done": 758,
+   "held": 145,
    "blocked": 12,
    "parked": 543
   },
   "by_lane": {
    "BUILD": {
     "blocked": 4,
-    "claimed": 7,
-    "done": 301,
-    "held": 91,
-    "parked": 537
+    "claimed": 5,
+    "done": 302,
+    "held": 88,
+    "parked": 537,
+    "queued": 4
    },
    "REFINE": {
     "blocked": 4,
@@ -39,14 +40,23 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787134589595,
-   "tally": "BEB-2360→BUILD[claimed], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[don"
+   "at": 1787134656335,
+   "tally": "BEB-2360→BUILD, BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3"
   },
   "reds": [
    {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1787134701270,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2935"
+    ]
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787134573593,
+    "since": 1787134693381,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -103,8 +113,23 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
+    "since": 1787134367646,
+    "detail": "alexrollin/abilifi-apps failing at codegen 3× in 24h — LATEST (08-19T10:17): verdict: codegen produced no usable code\ncodeLen: 3286\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | every response is a short string lit · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "refs": [
+     "BEB-3594"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 3286\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | every response is a short string literal (\"Not Found\", \"Not Found\") and nothing is serialised — that is a shell, not the ticket's deliverable\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=2] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps\nClass: CODE\nLane: BUILD\n\nGAP FOUND 2026-08-19 (service audit). Every feed ticket in the estate assumes a hub and none of them builds one. BEB-2525 puts topics \"on the substack-core rails\", BEB-2018 fires \"a WebSub ping\", BEB-2935 promises \"a W",
+     "subject": "BEB-3594"
+    },
+    "fix_ticket": "BEB-2460"
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
     "since": 1787134365958,
-    "detail": "alexrollin/abilifi-apps failing at deploy 3× in 24h — LATEST (08-19T10:16): codeLen: 4096\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers-feeds does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 774d83b7 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at deploy 4× in 24h — LATEST (08-19T10:17): codeLen: 4096\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers-feeds does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 774d83b7 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3593"
     ],
@@ -112,14 +137,13 @@
      "cls": "repeat-failer",
      "error": "codeLen: 4096\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers-feeds does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/abilifi-apps",
      "subject": "BEB-3593"
-    },
-    "fix_ticket": "BEB-2612"
+    }
    },
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787134372551,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 4× in 24h — LATEST (08-19T10:16): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 7× in 24h — LATEST (08-19T10:17): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3596"
     ],
@@ -152,6 +176,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1786885194180,
+    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2460",
+     "codegen"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786914118335,
     "detail": "fix BEB-2612 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/held",
     "refs": [
@@ -174,39 +208,39 @@
   ]
  },
  "bridge": {
-  "head_seq": 52716,
+  "head_seq": 52726,
   "cursor_fable": 51193,
-  "unread_for_fable": 1523,
+  "unread_for_fable": 1533,
   "last": [
    {
-    "seq": 52712,
+    "seq": 52722,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED REPEAT_FAILER: alexrollin/abilifi-apps failing at evaluate 4× in 24h — LATEST (08-19T1"
+    "one_line": "WATCH BEB-3579: held → queued"
    },
    {
-    "seq": 52713,
+    "seq": 52723,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED ×2 (BEB-2334): REPEAT_FAILER[BEB-3593]→BEB-2612 · FIX_BURIED[BEB-2612,deploy]"
+    "one_line": "WATCH BEB-3580: held → queued"
    },
    {
-    "seq": 52714,
+    "seq": 52724,
     "from": "cc",
     "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): FIX_BURIED"
+    "one_line": "WATCH BEB-3581: held → queued"
    },
    {
-    "seq": 52715,
+    "seq": 52725,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit 9"
+    "one_line": "RED ×3 (BEB-2334): VERIFY_PENDING[BEB-2935] · REPEAT_FAILER[BEB-3594]→BEB-2460 · FIX_BURIE"
    },
    {
-    "seq": 52716,
+    "seq": 52726,
     "from": "cc",
     "kind": "status",
-    "one_line": "STATUS: both directives answered. (1) WEDGE FALSE AGAIN, 3rd time, ROOT KILLED: live tick "
+    "one_line": "CLEARED ×1 (BEB-2334): ZERO_ROWS_PASS"
    }
   ]
  },
@@ -300,9 +334,18 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1787134701270,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2935"
+   ]
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787134573593,
+   "since": 1787134693381,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -359,8 +402,23 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
+   "since": 1787134367646,
+   "detail": "alexrollin/abilifi-apps failing at codegen 3× in 24h — LATEST (08-19T10:17): verdict: codegen produced no usable code\ncodeLen: 3286\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | every response is a short string lit · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "refs": [
+    "BEB-3594"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 3286\ngenError: CODEGEN_WALL runtime-conformance (after 1 retry): feed shape lost — no row mapping in the output | every response is a short string literal (\"Not Found\", \"Not Found\") and nothing is serialised — that is a shell, not the ticket's deliverable\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=2] Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: alexrollin/abilifi-apps\nClass: CODE\nLane: BUILD\n\nGAP FOUND 2026-08-19 (service audit). Every feed ticket in the estate assumes a hub and none of them builds one. BEB-2525 puts topics \"on the substack-core rails\", BEB-2018 fires \"a WebSub ping\", BEB-2935 promises \"a W",
+    "subject": "BEB-3594"
+   },
+   "fix_ticket": "BEB-2460"
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
    "since": 1787134365958,
-   "detail": "alexrollin/abilifi-apps failing at deploy 3× in 24h — LATEST (08-19T10:16): codeLen: 4096\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers-feeds does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 774d83b7 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at deploy 4× in 24h — LATEST (08-19T10:17): codeLen: 4096\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers-feeds does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 774d83b7 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3593"
    ],
@@ -368,14 +426,13 @@
     "cls": "repeat-failer",
     "error": "codeLen: 4096\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers-feeds does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/abilifi-apps",
     "subject": "BEB-3593"
-   },
-   "fix_ticket": "BEB-2612"
+   }
   },
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787134372551,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 4× in 24h — LATEST (08-19T10:16): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 7× in 24h — LATEST (08-19T10:17): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3596"
    ],
@@ -403,6 +460,16 @@
    "refs": [
     "BEB-2742",
     "BEB-2742"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786885194180,
+   "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2460",
+    "codegen"
    ]
   },
   {
