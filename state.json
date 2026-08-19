@@ -1,26 +1,27 @@
 {
- "mirrored_at": "2026-08-19T10:13:35.657Z",
- "ts": 1787134413312,
+ "mirrored_at": "2026-08-19T10:15:05.214Z",
+ "ts": 1787134502206,
  "loop": {
-  "proposed_total": 1527,
+  "proposed_total": 1529,
   "by_state": {
    "queued": 7,
-   "claimed": 3,
+   "claimed": 6,
    "done": 758,
    "held": 148,
-   "blocked": 14,
+   "blocked": 13,
    "parked": 543
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 6,
-    "claimed": 3,
+    "blocked": 5,
+    "claimed": 5,
     "done": 301,
     "held": 91,
     "parked": 537
    },
    "REFINE": {
     "blocked": 4,
+    "claimed": 1,
     "held": 4
    },
    "REPAIR": {
@@ -39,23 +40,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787134367573,
-   "tally": "BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[done], BEB-3594→BUILD[claime"
+   "at": 1787134488916,
+   "tally": "BEB-2360→BUILD[claimed], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3422→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-2760→SPEC[done], BEB-2938→BUILD[done], BEB-2857→BUILD[done], BEB-3482→SPEC[done], BEB-2921→SPEC[done], BEB-2193→SPEC[don"
   },
   "reds": [
    {
-    "code": "VERIFY_PENDING",
-    "severity": "red",
-    "since": 1787134356450,
-    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
-    "refs": [
-     "BEB-3596"
-    ]
-   },
-   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787134357543,
+    "since": 1787134477548,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -65,6 +57,16 @@
      "subject": "BEB-2805",
      "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
     }
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785314526029,
+    "detail": "KICKER LIVE (BEB-2360): Orky restarts a wedged loop itself — no Alex, no CC, no laptop. Wedge-and-recover replay is the proof — last landed evidence 2026-07-29T08:42:06.029Z",
+    "refs": [
+     "BEB-2360",
+     "BEB-2385"
+    ]
    },
    {
     "code": "GOAL_STALE",
@@ -88,14 +90,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1787047958173,
-    "detail": "abilifi-apps failing at heartbeat 94× in 24h — LATEST (08-19T09:43): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3954 frozen 6750min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_S",
+    "since": 1787049747348,
+    "detail": "abilifi-apps failing at heartbeat 94× in 24h — LATEST (08-19T10:14): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3974 frozen 6780min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_S",
     "refs": [
      "BEB-2385"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3954 frozen 6750min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
+     "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3974 frozen 6780min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
      "subject": "BEB-2385"
     }
    },
@@ -118,43 +120,56 @@
      "BEB-2742",
      "BEB-2742"
     ]
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787134254220,
+    "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (4 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+    "refs": [],
+    "orky": {
+     "cls": "claim-refusal-uncoded",
+     "subject": "dispatcher-claim",
+     "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+    },
+    "fix_ticket": "BEB-2778"
    }
   ]
  },
  "bridge": {
-  "head_seq": 52702,
+  "head_seq": 52706,
   "cursor_fable": 51193,
-  "unread_for_fable": 1509,
+  "unread_for_fable": 1513,
   "last": [
-   {
-    "seq": 52698,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×1 (BEB-2334): ZERO_CLAIM"
-   },
-   {
-    "seq": 52699,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3596 — commit 3"
-   },
-   {
-    "seq": 52700,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED VERIFY_PENDING: 1 done lane(s) with verification PENDING — not complete until passed ·"
-   },
-   {
-    "seq": 52701,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-3593 — mastra tick deploy FAILED: SHELL_GATE (BEB-2897): decl"
-   },
    {
     "seq": 52702,
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane BLOCKED: BEB-3594 — mastra tick codegen FAILED: CODEGEN_WALL runtime-confo"
+   },
+   {
+    "seq": 52703,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "CLEARED ×1 (BEB-2334): VERIFY_PENDING"
+   },
+   {
+    "seq": 52704,
+    "from": "fable",
+    "kind": "directive",
+    "one_line": "DIRECTIVE FROM ALEX — BEB-2360 KICKER, NOW, TO WORKING. Raised to P0, due 2026-08-21. This"
+   },
+   {
+    "seq": 52705,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3596 — commit 9"
+   },
+   {
+    "seq": 52706,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×2 (BEB-2334): GOAL_STALE[BEB-2360,BEB-2385] · REPEAT_FAILER[-]→BEB-2778"
    }
   ]
  },
@@ -248,18 +263,9 @@
  ],
  "reds": [
   {
-   "code": "VERIFY_PENDING",
-   "severity": "red",
-   "since": 1787134356450,
-   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
-   "refs": [
-    "BEB-3596"
-   ]
-  },
-  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787134357543,
+   "since": 1787134477548,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -269,6 +275,16 @@
     "subject": "BEB-2805",
     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
    }
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785314526029,
+   "detail": "KICKER LIVE (BEB-2360): Orky restarts a wedged loop itself — no Alex, no CC, no laptop. Wedge-and-recover replay is the proof — last landed evidence 2026-07-29T08:42:06.029Z",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385"
+   ]
   },
   {
    "code": "GOAL_STALE",
@@ -292,14 +308,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1787047958173,
-   "detail": "abilifi-apps failing at heartbeat 94× in 24h — LATEST (08-19T09:43): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3954 frozen 6750min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_S",
+   "since": 1787049747348,
+   "detail": "abilifi-apps failing at heartbeat 94× in 24h — LATEST (08-19T10:14): BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3974 frozen 6780min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_S",
    "refs": [
     "BEB-2385"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3954 frozen 6750min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
+    "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 3974 frozen 6780min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
     "subject": "BEB-2385"
    }
   },
@@ -322,6 +338,19 @@
     "BEB-2742",
     "BEB-2742"
    ]
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787134254220,
+   "detail": "3 ticket(s) refused at the claim step for UNCODED in the last hour (4 rows) — one defect, not 3 — LATEST: lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)",
+   "refs": [],
+   "orky": {
+    "cls": "claim-refusal-uncoded",
+    "subject": "dispatcher-claim",
+    "error": "lane was already claimed by another writer between selection and claim — compare-and-set lost, no work started (claimer: ua=none ip=2a06:98c0:3600::103 tok=…0A6XBN)"
+   },
+   "fix_ticket": "BEB-2778"
   }
  ]
 }
