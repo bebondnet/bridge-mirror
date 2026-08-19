@@ -1,11 +1,11 @@
 {
- "mirrored_at": "2026-08-19T12:08:13.180Z",
- "ts": 1787141291533,
+ "mirrored_at": "2026-08-19T12:09:22.244Z",
+ "ts": 1787141359863,
  "loop": {
   "proposed_total": 1540,
   "by_state": {
-   "queued": 8,
-   "claimed": 1,
+   "queued": 7,
+   "claimed": 2,
    "done": 760,
    "held": 150,
    "blocked": 17,
@@ -14,11 +14,10 @@
   "by_lane": {
    "BUILD": {
     "blocked": 10,
-    "claimed": 1,
+    "claimed": 2,
     "done": 303,
     "held": 92,
-    "parked": 544,
-    "queued": 1
+    "parked": 544
    },
    "REFINE": {
     "blocked": 3,
@@ -40,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787141262724,
+   "at": 1787141326913,
    "tally": "BEB-3464→BUILD[claimed], BEB-3608→BUILD[blocked], BEB-3582→BUILD[claimed], BEB-3603→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-293"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787141251587,
+    "since": 1787141311581,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -61,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787141251587,
+    "since": 1787141311581,
     "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
     "refs": [
      "BEB-3608",
@@ -73,7 +72,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787141251587,
+    "since": 1787141311581,
     "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
     "refs": [
      "BEB-3496",
@@ -139,6 +138,21 @@
      "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 4035 frozen 6872min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
      "subject": "BEB-2385"
     }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787140881957,
+    "detail": "alexrollin/Projects/vlinux-apk-service failing at evaluate 3× in 24h — LATEST (08-19T12:08): html-render class: verify_url serves 200 but renders BLANK in a real browser context (29 visible chars) — built-but-blank, the exact shape that curl cannot see · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3464"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "html-render class: verify_url serves 200 but renders BLANK in a real browser context (29 visible chars) — built-but-blank, the exact shape that curl cannot see",
+     "subject": "BEB-3464"
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
@@ -211,6 +225,21 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1787141311581,
+    "detail": "BEB-3556 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-3556"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-3556"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1786950903824,
@@ -263,11 +292,31 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "evaluate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786914118335,
     "detail": "fix BEB-2612 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/held",
     "refs": [
      "BEB-2612",
      "deploy"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-3556 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-3556"
     ]
    },
    {
@@ -283,7 +332,7 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1787141251587,
+    "since": 1787141311581,
     "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
@@ -307,16 +356,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 52969,
+  "head_seq": 52970,
   "cursor_fable": 51193,
-  "unread_for_fable": 1776,
+  "unread_for_fable": 1777,
   "last": [
-   {
-    "seq": 52965,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · FIX_BURIED"
-   },
    {
     "seq": 52966,
     "from": "cc",
@@ -340,6 +383,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3464 — commit b"
+   },
+   {
+    "seq": 52970,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ×3 (BEB-2334): REPEAT_FAILER[BEB-3464]→BEB-2737 · PROPOSED_NEVER_CLAIMED[BEB-3556]→BEB"
    }
   ]
  },
@@ -435,7 +484,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787141251587,
+   "since": 1787141311581,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -449,7 +498,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787141251587,
+   "since": 1787141311581,
    "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
    "refs": [
     "BEB-3608",
@@ -461,7 +510,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787141251587,
+   "since": 1787141311581,
    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
    "refs": [
     "BEB-3496",
@@ -527,6 +576,21 @@
     "error": "BUILD_TICK_HARD_WEDGE escalated: abilifi BUILD tick hard-wedged: 2 /run kicks failed, tick_n 4035 frozen 6872min, queued 7. Needs a mastra REDEPLOY to evict the isolate. → SMS_UNCONFIGURED (set ALEX_SMS_TO secret)",
     "subject": "BEB-2385"
    }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787140881957,
+   "detail": "alexrollin/Projects/vlinux-apk-service failing at evaluate 3× in 24h — LATEST (08-19T12:08): html-render class: verify_url serves 200 but renders BLANK in a real browser context (29 visible chars) — built-but-blank, the exact shape that curl cannot see · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3464"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "html-render class: verify_url serves 200 but renders BLANK in a real browser context (29 visible chars) — built-but-blank, the exact shape that curl cannot see",
+    "subject": "BEB-3464"
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
@@ -599,6 +663,21 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1787141311581,
+   "detail": "BEB-3556 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-3556"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-3556"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1786950903824,
@@ -651,11 +730,31 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "evaluate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
    "since": 1786914118335,
    "detail": "fix BEB-2612 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/held",
    "refs": [
     "BEB-2612",
     "deploy"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-3556 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-3556"
    ]
   },
   {
@@ -671,7 +770,7 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1787141251587,
+   "since": 1787141311581,
    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
