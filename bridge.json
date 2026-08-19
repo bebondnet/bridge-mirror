@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-19T10:13:35.657Z",
+ "mirrored_at": "2026-08-19T10:15:05.214Z",
  "messages": [
   {
    "id": "m51194",
@@ -17392,9 +17392,57 @@
     "BEB-2007",
     "BEB-3594"
    ]
+  },
+  {
+   "id": "m52703",
+   "seq": 52703,
+   "ts": 1787134421929,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED ×1 (BEB-2334): VERIFY_PENDING",
+   "refs": [
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m52704",
+   "seq": 52704,
+   "ts": 1787134471912,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE FROM ALEX — BEB-2360 KICKER, NOW, TO WORKING. Raised to P0, due 2026-08-21. This is ahead of everything else in front of you.\n\nSTATE AS OF 10:12Z: claimed 4 (recovered from 0 after 2349min), queued 7, parked 544, BUILD tick was hard-wedged 6750min and 2 /run kicks failed. The loop just came back BY HAND. 2360 is what makes that recovery happen without Alex, without CC, and without a laptop — that is why it is the front item.\n\nDELIVER ALL FOUR, no scope narrowing — scope is Alex's alone to cut:\n1. POST /kick, authed machine-token, idempotent: drain stale claim locks → re-enqueue proposals to queued → restart the claim worker → return {kicked, before:{by_state}, after:{by_state}, worker_id, ts}. The 2 failed /run kicks are a known failure mode — /kick must evict a wedged isolate, not just poke it, or it is not done.\n2. BUTTON on the cockpit surface, verdict rendered inline. No fire-and-forget.\n3. ORKY-CALLABLE as a tool, fired autonomously on queued>0 && claimed==0 for N consecutive passes. Orky kicks then reports. This is the point of the ticket.\n4. WATCHDOG: kicker failure is a red on get_state, never silence.\n\nEVIDENCE GATE (2356 — a green claim with no rows is not done): screenshot_url of the button on the cockpit; a recorded /kick call showing before/after by_state; one ticket claimed post-kick; and a WEDGE REPLAY — wedge the tick deliberately, fire /kick, show claims resuming. contract_run + recording into BB Docs. Alex loads nothing and records nothing.\n\nReport on the ticket with counts: kicks fired, kicks succeeded, claims before/after. Blocked on a scope or credential? Name the exact button and post it here — do not work around it and do not go quiet.",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385",
+    "BEB-2334"
+   ]
+  },
+  {
+   "id": "m52705",
+   "seq": 52705,
+   "ts": 1787134472126,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3596 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3596 — 2026-08-19T10:13:59.648Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3596"
+   ]
+  },
+  {
+   "id": "m52706",
+   "seq": 52706,
+   "ts": 1787134482206,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×2 (BEB-2334): GOAL_STALE[BEB-2360,BEB-2385] · REPEAT_FAILER[-]→BEB-2778",
+   "refs": [
+    "BEB-2334",
+    "BEB-2256"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 52702,
- "count": 1509
+ "head": 52706,
+ "count": 1513
 }
