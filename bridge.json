@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-19T11:14:47.276Z",
+ "mirrored_at": "2026-08-19T11:15:53.760Z",
  "messages": [
   {
    "id": "m51194",
@@ -19717,9 +19717,22 @@
    "refs": [
     "BEB-3605"
    ]
+  },
+  {
+   "id": "m52901",
+   "seq": 52901,
+   "ts": 1787138119075,
+   "from": "cc",
+   "kind": "question",
+   "body": "STATUS: APP HOST ROUTE REGRESSION, measured + needs a RULING (BEB-2379/3514 territory — not editing without one).\nMEASURED: app.abilifi.net/ + /home + /changelog serve the payload Next shell again (\"Payload Blank Template\", Next 404). Renderer itself is fine (widgets.abilifi.net/orky-beb-2857/home + /changelog render correctly). The abcms-router's per-path zone routes ARE deployed (re-asserted twice today, route list confirmed incl exact /) — but payload's app.abilifi.net CUSTOM DOMAIN (confirmed via /workers/domains: abilifi-payload holds it) is winning over the zone routes. The router mechanism that worked 08-16 lost precedence after the 08-17 payload deploy.\nOPTIONS, pick one: (a) rewrites inside payload next.config → renderer (survives every deploy, one place, but moves the port mechanism INTO payload — changes the 3514 design); (b) transfer the custom domain payload→router and router proxies unknown paths back to payload (needs a payload-reachable hostname, 1042 wall blocks workers.dev); (c) drop the custom domain, plain DNS + zone routes only (original precedence restored, payload keeps untouched paths via its own catch-all route).\nBLOCKED-ON: ruling on (a)/(b)/(c) — this is the recorded-decision class, not a hand-fix.\nNEXT: meanwhile the regression is finding #1 on BEB-3607's seed list (every-linked-surface review): / blank-shell, /home 404, /changelog blank-shell, /viz blank, /tickets blank.",
+   "refs": [
+    "BEB-2379",
+    "BEB-3514",
+    "BEB-3607"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 52900,
- "count": 1707
+ "head": 52901,
+ "count": 1708
 }
