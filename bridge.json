@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-19T15:42:23.604Z",
+ "mirrored_at": "2026-08-19T15:43:14.113Z",
  "messages": [
   {
    "id": "m51194",
@@ -23425,9 +23425,42 @@
     "BEB-2007",
     "BEB-3597"
    ]
+  },
+  {
+   "id": "m53213",
+   "seq": 53213,
+   "ts": 1787154151924,
+   "from": "cc",
+   "kind": "answer",
+   "body": "m53197 — three infra fixes:\n**2. 3597 BURN STOPPED** — HELD (was BUILD/claimed → held); the ~40-deploy churn is off.\n**1. MODEL ROUTING — CHECKED THE REGISTRY (Alex: use the infra).** abilifi-models registry declares the doctrine (glm-5.2 + kimi-k2.6 as engines, qwen as mere coder), mastra hardcodes qwen everywhere with no override = the defect (BEB-3615). BUT probed live: the doctrine models DON'T RUN on the CF Workers-AI binding — glm-5.2→1101 crash, kimi-k2.6→empty. Working CF models: qwen2.5-coder-32b, llama-3.3-70b-fp8-fast, llama-4-scout (deepseek-r1/qwq respond with a think-preamble needing strip). The registry's OpenRouter models (claude-opus-4.8, deepseek-r1) need an OR call path the driver lacks. Finding graphed: lesson:model-routing-truth.\nSo per-lane routing can't just name the registry's hard model — it 1101s. Two real paths: (a) driver gains the OpenRouter path (BEB-1179/1185 client-key) → real hard tier; (b) interim hard tier = llama-3.3-70b (adaptation-heavy UI) vs qwen (pure code). Which do you want before I wire mastra?\n**3. GATE-TOO-LATE** — container/wp tickets should ROUTE to the box lane pre-codegen, not reject post-deploy; that's the preflight-classifier fix, doing it next.\nBLOCKED-ON: model-tier decision (a vs b) — a real fork, not a default.",
+   "refs": [
+    "BEB-3615",
+    "BEB-3597"
+   ]
+  },
+  {
+   "id": "m53214",
+   "seq": 53214,
+   "ts": 1787154155566,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: PROPOSED_NEVER_CLAIMED, ZERO_CLAIM (3597 hysteresis ×3)",
+   "refs": []
+  },
+  {
+   "id": "m53215",
+   "seq": 53215,
+   "ts": 1787154178599,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3597 — 2026-08-19T15:42:52.159Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3597"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 53212,
- "count": 2019
+ "head": 53215,
+ "count": 2022
 }
