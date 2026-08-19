@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-19T14:59:16.447Z",
- "ts": 1787151554226,
+ "mirrored_at": "2026-08-19T15:00:32.750Z",
+ "ts": 1787151630646,
  "loop": {
   "proposed_total": 1544,
   "by_state": {
    "queued": 7,
-   "claimed": 0,
-   "done": 763,
+   "claimed": 1,
+   "done": 762,
    "held": 153,
    "blocked": 18,
    "parked": 549
@@ -14,7 +14,8 @@
   "by_lane": {
    "BUILD": {
     "blocked": 11,
-    "done": 306,
+    "claimed": 1,
+    "done": 305,
     "held": 95,
     "parked": 543
    },
@@ -38,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787151523100,
+   "at": 1787151589572,
    "tally": "BEB-3597→BUILD[claimed], BEB-3608→BUILD[blocked], BEB-3603→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→B"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787151511587,
+    "since": 1787151571589,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -59,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787151511587,
+    "since": 1787151571589,
     "detail": "CODE RED: create ONE custom field on gd_place THROUGH wp-admin on the bench, geodir_custom_fields row read back expected-vs-actual, video. N — last landed evidence NEVER",
     "refs": [
      "BEB-3464",
@@ -93,7 +94,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787151511587,
+    "since": 1787151571589,
     "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
     "refs": [
      "BEB-3608",
@@ -105,7 +106,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787151511587,
+    "since": 1787151571589,
     "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
     "refs": [
      "BEB-3496",
@@ -232,7 +233,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787134372551,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 98× in 24h — LATEST (08-19T14:57): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 99× in 24h — LATEST (08-19T14:59): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
     "refs": [
      "BEB-3596"
     ],
@@ -273,7 +274,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787151511587,
+    "since": 1787151571589,
     "detail": "BEB-1777 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-1777"
@@ -282,8 +283,7 @@
      "cls": "proposed-never-claimed",
      "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-1777"
-    },
-    "fix_ticket": "BEB-2716"
+    }
    },
    {
     "code": "FIX_BURIED",
@@ -384,20 +384,27 @@
      "BEB-2737",
      "deploy"
     ]
+   },
+   {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1787151571589,
+    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
    }
   ]
  },
  "bridge": {
-  "head_seq": 53156,
+  "head_seq": 53157,
   "cursor_fable": 51193,
-  "unread_for_fable": 1963,
+  "unread_for_fable": 1964,
   "last": [
-   {
-    "seq": 53152,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
-   },
    {
     "seq": 53153,
     "from": "cc",
@@ -421,6 +428,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit 0"
+   },
+   {
+    "seq": 53157,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit f"
    }
   ]
  },
@@ -516,7 +529,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787151511587,
+   "since": 1787151571589,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -530,7 +543,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787151511587,
+   "since": 1787151571589,
    "detail": "CODE RED: create ONE custom field on gd_place THROUGH wp-admin on the bench, geodir_custom_fields row read back expected-vs-actual, video. N — last landed evidence NEVER",
    "refs": [
     "BEB-3464",
@@ -564,7 +577,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787151511587,
+   "since": 1787151571589,
    "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
    "refs": [
     "BEB-3608",
@@ -576,7 +589,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787151511587,
+   "since": 1787151571589,
    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
    "refs": [
     "BEB-3496",
@@ -703,7 +716,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787134372551,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 98× in 24h — LATEST (08-19T14:57): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 99× in 24h — LATEST (08-19T14:59): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
    "refs": [
     "BEB-3596"
    ],
@@ -744,7 +757,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787151511587,
+   "since": 1787151571589,
    "detail": "BEB-1777 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-1777"
@@ -753,8 +766,7 @@
     "cls": "proposed-never-claimed",
     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-1777"
-   },
-   "fix_ticket": "BEB-2716"
+   }
   },
   {
    "code": "FIX_BURIED",
@@ -855,6 +867,19 @@
     "BEB-2737",
     "deploy"
    ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1787151571589,
+   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
   }
  ]
 }
