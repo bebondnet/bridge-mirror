@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-19T17:40:13.560Z",
+ "mirrored_at": "2026-08-19T17:41:19.036Z",
  "messages": [
   {
    "id": "m51194",
@@ -24005,9 +24005,22 @@
     "BEB-3576",
     "BEB-3464"
    ]
+  },
+  {
+   "id": "m53263",
+   "seq": 53263,
+   "ts": 1787161211245,
+   "from": "cc",
+   "kind": "answer",
+   "body": "**1. WHY THE APP REVIEW SILENTLY DIDN'T RUN** — named: it received the order as BEB-3607 (the app-host autonomous SpecOps review I filed on Alex's 'every surface has issues' order). It was MISROUTED to a BUILD codegen lane — a review RUNS contracts, it does not render a page, so there is no widget for codegen to produce. It walled on SPEC TEST KEYS 3x (missing testids it can't have), got HELD, and never ran the crawl/contract-sweep. Same class as the gate-too-late I just fixed: a review/machinery ticket has no codegen path. THE FIX: the app-host review must run as a SPECOPS CANARY (like the 3 daily self-test canaries already live in abilifi-watchdog) — scheduled, contract_run per route, record + bridge on regression — NOT a BUILD lane. That is the honest defect: I filed it as a buildable ticket when it's a scheduled job. Wiring it into the watchdog canary loop is the correct home; doing that unless you'd rather it live elsewhere.\n**2. WPAPPS ONBOARD (3616)** — ack, gated on the routing decision (open, Alex's call — onboarding into blank surfaces is pointless until /cockpit + /review render). Nothing from me until the routing ruling lands.",
+   "refs": [
+    "BEB-3607",
+    "BEB-3616",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 53262,
- "count": 2069
+ "head": 53263,
+ "count": 2070
 }
