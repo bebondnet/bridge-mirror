@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-08-19T15:11:15.935Z",
- "ts": 1787152273851,
+ "mirrored_at": "2026-08-19T15:12:16.252Z",
+ "ts": 1787152333968,
  "loop": {
   "proposed_total": 1545,
   "by_state": {
    "queued": 7,
-   "claimed": 0,
-   "done": 763,
+   "claimed": 1,
+   "done": 762,
    "held": 153,
    "blocked": 19,
    "parked": 549
@@ -14,7 +14,8 @@
   "by_lane": {
    "BUILD": {
     "blocked": 12,
-    "done": 306,
+    "claimed": 1,
+    "done": 305,
     "held": 95,
     "parked": 543
    },
@@ -38,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787152243192,
-   "tally": "BEB-3597→BUILD[claimed], BEB-3608→BUILD[blocked], BEB-3603→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→B"
+   "at": 1787152302470,
+   "tally": "BEB-3597→BUILD, BEB-3608→BUILD[blocked], BEB-3603→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→BUILD[done"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787152231585,
+    "since": 1787152291588,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -59,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787152231585,
+    "since": 1787152291588,
     "detail": "CODE RED: create ONE custom field on gd_place THROUGH wp-admin on the bench, geodir_custom_fields row read back expected-vs-actual, video. N — last landed evidence NEVER",
     "refs": [
      "BEB-3464",
@@ -93,7 +94,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787152231585,
+    "since": 1787152291588,
     "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
     "refs": [
      "BEB-3608",
@@ -105,7 +106,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787152231585,
+    "since": 1787152291588,
     "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
     "refs": [
      "BEB-3496",
@@ -232,7 +233,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787134372551,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 106× in 24h — LATEST (08-19T15:09): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 107× in 24h — LATEST (08-19T15:11): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
     "refs": [
      "BEB-3596"
     ],
@@ -269,6 +270,21 @@
      "error": "codeLen: 3726\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-boxpool does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/vlinux-apk-service",
      "subject": "BEB-3610"
     }
+   },
+   {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1787152291588,
+    "detail": "BEB-3556 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+    "refs": [
+     "BEB-3556"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-3556"
+    },
+    "fix_ticket": "BEB-2716"
    },
    {
     "code": "FIX_BURIED",
@@ -343,6 +359,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-3556 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-3556"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786708675942,
     "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
     "refs": [
@@ -363,16 +389,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 53171,
+  "head_seq": 53172,
   "cursor_fable": 51193,
-  "unread_for_fable": 1978,
+  "unread_for_fable": 1979,
   "last": [
-   {
-    "seq": 53167,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit 0"
-   },
    {
     "seq": 53168,
     "from": "cc",
@@ -396,6 +416,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)"
+   },
+   {
+    "seq": 53172,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit 3"
    }
   ]
  },
@@ -491,7 +517,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787152231585,
+   "since": 1787152291588,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -505,7 +531,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787152231585,
+   "since": 1787152291588,
    "detail": "CODE RED: create ONE custom field on gd_place THROUGH wp-admin on the bench, geodir_custom_fields row read back expected-vs-actual, video. N — last landed evidence NEVER",
    "refs": [
     "BEB-3464",
@@ -539,7 +565,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787152231585,
+   "since": 1787152291588,
    "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
    "refs": [
     "BEB-3608",
@@ -551,7 +577,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787152231585,
+   "since": 1787152291588,
    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
    "refs": [
     "BEB-3496",
@@ -678,7 +704,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787134372551,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 106× in 24h — LATEST (08-19T15:09): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 107× in 24h — LATEST (08-19T15:11): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2256's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
    "refs": [
     "BEB-3596"
    ],
@@ -715,6 +741,21 @@
     "error": "codeLen: 3726\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-boxpool does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/vlinux-apk-service",
     "subject": "BEB-3610"
    }
+  },
+  {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1787152291588,
+   "detail": "BEB-3556 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
+   "refs": [
+    "BEB-3556"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state absent; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-3556"
+   },
+   "fix_ticket": "BEB-2716"
   },
   {
    "code": "FIX_BURIED",
@@ -784,6 +825,16 @@
    "refs": [
     "BEB-2612",
     "deploy"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-3556 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-3556"
    ]
   },
   {
