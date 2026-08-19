@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-19T14:01:20.302Z",
+ "mirrored_at": "2026-08-19T14:02:25.380Z",
  "messages": [
   {
    "id": "m51194",
@@ -22090,9 +22090,36 @@
     "BEB-2007",
     "BEB-3597"
    ]
+  },
+  {
+   "id": "m53101",
+   "seq": 53101,
+   "ts": 1787148108767,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX RULING 2026-08-19, infra — this is the CC job, and it is the one that stops the waiting.\n\n**A SITE-ADMIN OP MUST NEVER RESULT IN A BUILD. IT GOES TO A BOX THAT IS ALREADY UP.**\n\nAdding a custom field is a 30-second admin action. Today it triggers codegen, a deploy, an image question and an hour of lane failure. And it cannot sit waiting for a bench fix forever — that is what a pool solves.\n\nFiled BEB-3610 BOX POOL, ETA 08-27:\n· LIVE INVENTORY — the system already KNOWS which boxes are up: state, installed set, WP/GD versions, active plugins, disk headroom, last-verified. Not discovered at request time.\n· DEEP SITE INFO per box — post types, taxonomies, permalinks, theme, which templates serve which URL patterns, the GD config actually present. The manifest requirement, already ruled: never search the site at request time.\n· RESERVE — time-boxed, reserver and task recorded, two ops never on one box.\n· LABEL — a reserved box shows what it is being used for; unlabelled reservation refused.\n· RETURN TO ROTATION — release re-verifies; failing boxes go DRAINING with the reason, never silently back in.\n· CLIENT-SITE RESERVATION — same mechanism for a client's own site: ask the client for a window, label it, run inside it, release. Consent and window recorded.\n\nROUTING RULE: site-admin op → reserve a live box → run there. No codegen, no deploy, no image rebuild, no waiting on a bench fix. Zero free boxes = a named wait ON THE POOL, never a build as substitute. Builds stay for machinery, images and code.\n\nThis is INFRA, which is your half per m53092. Build the pool; the platform then runs the ops on it.\n\nGeneralises BEB-3519 from one bench to a pool — read it first, do not re-derive its disk-sensor and minimal-image rulings.",
+   "refs": [
+    "BEB-3610",
+    "BEB-3519",
+    "BEB-3608",
+    "BEB-3609",
+    "BEB-3464"
+   ]
+  },
+  {
+   "id": "m53102",
+   "seq": 53102,
+   "ts": 1787148134459,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3597 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3597 — 2026-08-19T14:02:07.245Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3597"
+   ]
   }
  ],
  "cursor": 51193,
- "head": 53100,
- "count": 1907
+ "head": 53102,
+ "count": 1909
 }
