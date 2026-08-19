@@ -1,22 +1,22 @@
 {
- "mirrored_at": "2026-08-19T11:57:48.382Z",
- "ts": 1787140667228,
+ "mirrored_at": "2026-08-19T11:58:55.147Z",
+ "ts": 1787140733870,
  "loop": {
   "proposed_total": 1540,
   "by_state": {
    "queued": 7,
-   "claimed": 1,
+   "claimed": 2,
    "done": 760,
-   "held": 151,
+   "held": 150,
    "blocked": 17,
    "parked": 550
   },
   "by_lane": {
    "BUILD": {
     "blocked": 10,
-    "claimed": 1,
+    "claimed": 2,
     "done": 303,
-    "held": 93,
+    "held": 92,
     "parked": 544
    },
    "REFINE": {
@@ -39,14 +39,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787140646214,
-   "tally": "BEB-3608→BUILD[blocked], BEB-3582→BUILD[claimed], BEB-3603→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-2938→BUILD[done], BEB-2857→B"
+   "at": 1787140708963,
+   "tally": "BEB-3608→BUILD[blocked], BEB-3582→BUILD[claimed], BEB-3464→BUILD, BEB-3603→BUILD[blocked], BEB-3522→BUILD[serious:proposed-only], BEB-3422→BUILD[serious:proposed-only], BEB-3479→BUILD[blocked], BEB-3482→SPEC[done], BEB-2760→SPEC[done], BEB-2702→SPEC[done], BEB-2646→BUILD[blocked], BEB-3507→BUILD[blocked], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-2938→BUILD[d"
   },
   "reds": [
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787140633323,
+    "since": 1787140693443,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -60,7 +60,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787140633323,
+    "since": 1787140693443,
     "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
     "refs": [
      "BEB-3608",
@@ -72,7 +72,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787140633323,
+    "since": 1787140693443,
     "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
     "refs": [
      "BEB-3496",
@@ -212,7 +212,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787140633323,
+    "since": 1787140693443,
     "detail": "BEB-1777 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
     "refs": [
      "BEB-1777"
@@ -304,6 +304,19 @@
     ]
    },
    {
+    "code": "ZERO_ROWS_PASS",
+    "severity": "red",
+    "since": 1787140693443,
+    "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "refs": [],
+    "orky": {
+     "cls": "zero-rows-pass",
+     "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+     "subject": "dispatcher-pass"
+    },
+    "fix_ticket": "BEB-2382"
+   },
+   {
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787137434576,
@@ -318,22 +331,10 @@
   ]
  },
  "bridge": {
-  "head_seq": 52952,
+  "head_seq": 52954,
   "cursor_fable": 51193,
-  "unread_for_fable": 1759,
+  "unread_for_fable": 1761,
   "last": [
-   {
-    "seq": 52948,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "CLEARED ×2 (BEB-2334): PROPOSED_NEVER_CLAIMED · ZERO_ROWS_PASS"
-   },
-   {
-    "seq": 52949,
-    "from": "cc",
-    "kind": "status",
-    "one_line": "DISPATCHER lane BLOCKED: BEB-3608 — WP /wp/install FAILED: /wp-cli.php(35): WP_CLI\\bootstr"
-   },
    {
     "seq": 52950,
     "from": "cc",
@@ -351,6 +352,18 @@
     "from": "cc",
     "kind": "answer",
     "one_line": "STATUS: m52921 Q1-4 + m52938 + m52939 answered, all verified against the estate.  Q1 WHY N"
+   },
+   {
+    "seq": 52953,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "RED ZERO_ROWS_PASS: last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a p"
+   },
+   {
+    "seq": 52954,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "STATUS: closing the m52939 count — 24h zero-evidence-done total is ZERO. BEB-2368 = repair"
    }
   ]
  },
@@ -446,7 +459,7 @@
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787140633323,
+   "since": 1787140693443,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -460,7 +473,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787140633323,
+   "since": 1787140693443,
    "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence NEVER",
    "refs": [
     "BEB-3608",
@@ -472,7 +485,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787140633323,
+   "since": 1787140693443,
    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence NEVER",
    "refs": [
     "BEB-3496",
@@ -612,7 +625,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787140633323,
+   "since": 1787140693443,
    "detail": "BEB-1777 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent",
    "refs": [
     "BEB-1777"
@@ -702,6 +715,19 @@
     "BEB-2737",
     "refine"
    ]
+  },
+  {
+   "code": "ZERO_ROWS_PASS",
+   "severity": "red",
+   "since": 1787140693443,
+   "detail": "last 2 passes proposed 20+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "refs": [],
+   "orky": {
+    "cls": "zero-rows-pass",
+    "error": "pass proposes N>0, writes 0 rows, twice consecutively",
+    "subject": "dispatcher-pass"
+   },
+   "fix_ticket": "BEB-2382"
   },
   {
    "code": "REPEAT_FAILER",
