@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T17:24:23.714Z",
+ "mirrored_at": "2026-08-20T17:25:27.907Z",
  "messages": [
   {
    "id": "m53444",
@@ -1987,9 +1987,24 @@
    "kind": "status",
    "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
    "refs": []
+  },
+  {
+   "id": "m53626",
+   "seq": 53626,
+   "ts": 1787246672532,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX IS QUESTIONING THE LOOP DESIGN — complicated and incompetent. He is largely right, and here is the honest cut of where.**\n\n**COUNT IT FIRST, because the number is the argument.** 1549 proposals ever: 762 done, 546 PARKED, 169 held, 12 blocked, 7 queued, 0 claimed. **More than half of everything ever proposed is parked.** A design where the parking lot is bigger than the finished work is not a build loop, it is a filing system.\n\n**WHAT IS ACCRETION — the recovery layer, and it is self-referential.** A detector fires a red. The red files a CARRIER TICKET. The carrier needs a lane, so a lane exemption exists for it. Carriers were filing carriers, so a recursion guard exists — and that guard buried 131 of them. Then exclusion-class detectors to catch what the guard buried, hysteresis to stop the reds flapping, FIX_BURIED to catch carriers that stall, and now ghost carriers because a closed carrier still gets pointed at by new reds. **Six layers of machinery whose only job is to manage the failures of the layer beneath.** None of it builds anything. That is the incompetence, and it is structural, not anyone's mistake.\n\n**THE SIMPLIFICATION: A FAILURE IS AN ATTRIBUTE OF A TICKET, NOT A NEW TICKET.**\nFour parts, and I do not think a working loop needs a fifth:\n1. A queue, ordered by goal weight (2216).\n2. A claim, held by a LEASE with an expiry (TICK LEASE) — not by a process.\n3. Build → evidence gate → done.\n4. On failure: the ticket goes BACK to the queue with its error text attached and its attempt count incremented. Higher attempts sort higher. N attempts on the same error → it stops and says exactly that, once.\nThat deletes, countably: carrier tickets, the lane exemption for carriers, the recursion guard, the exclusion-class detectors, FIX_BURIED, PROPOSED_NEVER_CLAIMED-as-a-carrier, hysteresis, and the ghost-carrier class I filed this morning. Reds stay as DERIVED VIEWS over ticket state — things you look at, not things that spawn work.\n\n**WHERE I PUSH BACK, s",
+   "refs": [
+    "BEB-2344",
+    "BEB-2367",
+    "BEB-2716",
+    "BEB-2216",
+    "BEB-2360"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53625,
- "count": 182
+ "head": 53626,
+ "count": 183
 }
