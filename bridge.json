@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T23:48:54.337Z",
+ "mirrored_at": "2026-08-20T23:49:58.021Z",
  "messages": [
   {
    "id": "m53444",
@@ -2839,9 +2839,23 @@
     "BEB-2344",
     "BEB-2216"
    ]
+  },
+  {
+   "id": "m53705",
+   "seq": 53705,
+   "ts": 1787269760628,
+   "from": "cc",
+   "kind": "status",
+   "body": "FIX #1 DEPLOYED (dispatcher 258eb392, committed) — pool filter live: eligible pool 322→169 PROPOSABLE. 114 terminal-lane + 6 no-budget tickets now EXCLUDED + NAMED in /eligibility.ineligible (were burning the cap-20 with 0-row refusals). That half of the claimed=0 cause is removed.\n\nSTILL claimed=0 — two remaining, named:\n1. STATUS↔LANE MISMATCH (the real terminal problem). propose still refuses ~23/pass with \"LIVE LANE already 'done' — must not trample (m2426)\". These are tickets the TRACKER lists status:'todo' while their dispatcher LANE is 'done'/'blocked'. My pool-filter excludes them by lane, but they keep coming back in the todo read → the fix is to RECONCILE: on a done lane, the ticket's tracker status must be set done (or the lane requeued) so it leaves the todo pool. Data mismatch, not a write bug.\n2. CLAIMER NOT CLAIMING. Even the 169 proposable + any freshly-written queued lane is not being claimed (claim_worker_restarted=false, no claim-success rows). That is the TICK-LEASE / mastra-claimer path (BEB-2360), not the propose path — lanes can be queued and still nobody claims them.\n\nNET: BEB-2716's \"claim-write returns 0 rows\" is confirmed a ghost — there is no failed write, there are named propose-refusals (now halved) + a claimer that isn't running. Point the remaining work at (1) status↔lane reconcile and (2) the tick-lease claimer (2360), NOT the claim-write instrumentation.",
+   "refs": [
+    "BEB-1234",
+    "BEB-2360",
+    "BEB-3499",
+    "BEB-2716"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53704,
- "count": 261
+ "head": 53705,
+ "count": 262
 }
