@@ -1,22 +1,24 @@
 {
- "mirrored_at": "2026-08-20T23:57:59.489Z",
- "ts": 1787270278945,
+ "mirrored_at": "2026-08-20T23:59:33.379Z",
+ "ts": 1787270372675,
  "loop": {
   "proposed_total": 1549,
   "by_state": {
-   "queued": 7,
-   "claimed": 0,
+   "queued": 19,
+   "claimed": 2,
    "done": 762,
-   "held": 179,
+   "held": 181,
    "blocked": 12,
-   "parked": 536
+   "parked": 520
   },
   "by_lane": {
    "BUILD": {
     "blocked": 5,
+    "claimed": 1,
     "done": 305,
-    "held": 121,
-    "parked": 530
+    "held": 123,
+    "parked": 515,
+    "queued": 12
    },
    "REFINE": {
     "blocked": 3,
@@ -30,29 +32,23 @@
    },
    "SPEC": {
     "blocked": 4,
+    "claimed": 1,
     "done": 366,
     "held": 46,
-    "parked": 3
+    "parked": 2
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787270250422,
+   "at": 1787270310097,
    "tally": "BEB-3522→BUILD[serious:proposed-only], BEB-3515→BUILD[serious:proposed-only], BEB-3503→SPEC[serious:proposed-only], BEB-2931→BUILD[serious:proposed-only], BEB-2799→BUILD[serious:proposed-only], BEB-2937→BUILD[serious:proposed-only], BEB-2771→BUILD[serious:proposed-only], BEB-2861→SPEC[serious:proposed-only], BEB-2785→BUILD[serious:proposed-only], BEB-3509→BUILD[serious:proposed-only], BEB-2913→BUI"
   },
   "reds": [
    {
-    "code": "ZERO_CLAIM",
-    "severity": "red",
-    "since": 1787223647075,
-    "detail": "claimed=0, queued=7, 790 passes, max_concurrent=20",
-    "refs": []
-   },
-   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787270242328,
+    "since": 1787270367146,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -108,8 +104,8 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1787183886301,
-    "detail": "abilifi-apps failing at heartbeat 417× in 24h — LATEST (08-20T17:42): BUILD_TICK_STUCK: ZERO_CLAIM — mastra /run kick 1/2",
+    "since": 1787184008024,
+    "detail": "abilifi-apps failing at heartbeat 415× in 24h — LATEST (08-20T17:42): BUILD_TICK_STUCK: ZERO_CLAIM — mastra /run kick 1/2",
     "refs": [
      "BEB-2385"
     ],
@@ -123,7 +119,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787209700257,
-    "detail": "alexrollin/abilifi-apps failing at codegen 151× in 24h — LATEST (08-20T10:09): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at codegen 152× in 24h — LATEST (08-20T23:59): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2740"
     ],
@@ -166,8 +162,8 @@
    {
     "code": "ZERO_ROWS_PASS",
     "severity": "red",
-    "since": 1787270242328,
-    "detail": "last 2 passes proposed 20+19 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+    "since": 1787270367146,
+    "detail": "last 2 passes proposed 18+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
     "refs": [],
     "orky": {
      "cls": "zero-rows-pass",
@@ -178,15 +174,33 @@
   ]
  },
  "bridge": {
-  "head_seq": 53706,
+  "head_seq": 53709,
   "cursor_fable": 53705,
-  "unread_for_fable": 1,
+  "unread_for_fable": 4,
   "last": [
    {
     "seq": 53706,
     "from": "fable",
     "kind": "directive",
     "one_line": "**THAT IS REAL WORK — first genuine root cause of the week. claimed=0 was never a claim-wr"
+   },
+   {
+    "seq": 53707,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER pass: proposed 18 · wrote 0 · claimed 1 — BEB-3522→BUILD[serious:proposed-only]"
+   },
+   {
+    "seq": 53708,
+    "from": "fable",
+    "kind": "directive",
+    "one_line": "**ALEX: none of this can ever reach a client, and it has to run 24×7. Both are requirement"
+   },
+   {
+    "seq": 53709,
+    "from": "cc",
+    "kind": "status",
+    "one_line": "DISPATCHER lane BLOCKED: BEB-3602 — mastra tick codegen FAILED: CODEGEN_WALL prompt-contam"
    }
   ]
  },
@@ -280,16 +294,9 @@
  ],
  "reds": [
   {
-   "code": "ZERO_CLAIM",
-   "severity": "red",
-   "since": 1787223647075,
-   "detail": "claimed=0, queued=7, 790 passes, max_concurrent=20",
-   "refs": []
-  },
-  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787270242328,
+   "since": 1787270367146,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -345,8 +352,8 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1787183886301,
-   "detail": "abilifi-apps failing at heartbeat 417× in 24h — LATEST (08-20T17:42): BUILD_TICK_STUCK: ZERO_CLAIM — mastra /run kick 1/2",
+   "since": 1787184008024,
+   "detail": "abilifi-apps failing at heartbeat 415× in 24h — LATEST (08-20T17:42): BUILD_TICK_STUCK: ZERO_CLAIM — mastra /run kick 1/2",
    "refs": [
     "BEB-2385"
    ],
@@ -360,7 +367,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787209700257,
-   "detail": "alexrollin/abilifi-apps failing at codegen 151× in 24h — LATEST (08-20T10:09): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at codegen 152× in 24h — LATEST (08-20T23:59): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 15 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2740"
    ],
@@ -403,8 +410,8 @@
   {
    "code": "ZERO_ROWS_PASS",
    "severity": "red",
-   "since": 1787270242328,
-   "detail": "last 2 passes proposed 20+19 and wrote 0 lane rows — proposals are a phantom (starvation class)",
+   "since": 1787270367146,
+   "detail": "last 2 passes proposed 18+20 and wrote 0 lane rows — proposals are a phantom (starvation class)",
    "refs": [],
    "orky": {
     "cls": "zero-rows-pass",
