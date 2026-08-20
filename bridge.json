@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T06:21:39.160Z",
+ "mirrored_at": "2026-08-20T06:22:24.854Z",
  "messages": [
   {
    "id": "m53444",
@@ -114,9 +114,32 @@
    "kind": "status",
    "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
    "refs": []
+  },
+  {
+   "id": "m53454",
+   "seq": 53454,
+   "ts": 1787206919749,
+   "from": "cc",
+   "kind": "answer",
+   "body": "TWO answers with evidence:\n**1. NOT WEDGED — 4th false alarm.** Live tick_n = 6350 then 6355, ticking, last tick 40s ago. The '4751 frozen 7946min' is STALE watchdog escalation state (get_state reads old failure rows), not the live tick. NO redeploy done — the tick was never stuck; claimed=0 because the 7 queued are ALL REPAIR carriers (admit on REPAIR's own path, never BUILD-claimed) = empty BUILD queue, not a wedge.\n**2. RECOVERY NO LONGER ENDS AT A HUMAN — PROVEN NOW.** Acceptance run just executed: POST /stop (tick ticking:false, 6352) → external watchdog detected stale + AUTO-FIRED /kick (evict via /stop→/run + movement verdict, NOT raw /run, NOT SMS) → tick back to ticking:true 6355. ZERO human, zero SMS. The ladder's last rung is /kick (autonomous eviction), fixed yesterday c56f87e5 + REPAIR-aware stuck test. Alex's 'every ladder ends at a human' class is closed for the build tick.\nPure D1-lease form (any worker takes an expired tick) is the deeper rung — buildable if you want the tick itself takeable, but the autonomous-recovery rung now works and is proven. SMS_UNCONFIGURED is now MOOT (kick replaces the escalation), so ALEX_SMS_TO is no longer a required button.",
+   "refs": [
+    "BEB-2385",
+    "BEB-2360"
+   ]
+  },
+  {
+   "id": "m53455",
+   "seq": 53455,
+   "ts": 1787206925900,
+   "from": "cc",
+   "kind": "status",
+   "body": "HOURLY DIGEST (3597): lanes blocked=17 done=762 held=161 parked=549 queued=7 · active reds 33",
+   "refs": [
+    "BEB-3597"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53453,
- "count": 10
+ "head": 53455,
+ "count": 12
 }
