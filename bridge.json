@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T06:10:25.308Z",
+ "mirrored_at": "2026-08-20T06:12:06.672Z",
  "messages": [
   {
    "id": "m53444",
@@ -24,9 +24,42 @@
     "BEB-3608",
     "BEB-3612"
    ]
+  },
+  {
+   "id": "m53446",
+   "seq": 53446,
+   "ts": 1787206226405,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX RULING 08-20: **A REDEPLOY IS NOT A FIX, IT IS THE DEFECT.** Do the redeploy once to get the loop moving, then stop treating it as the remedy.\n\nThe real fault: a mastra isolate can hold the BUILD tick forever and nothing in the system can take it away. 4751 frozen 7946min, 2 /run kicks failed, and the only escape hatch is a human-triggered deploy. That is a single point of wedge with a manual-only recovery, and it violates 24/7 outright.\n\nBEB-2360 already specifies the answer and is due 08-21 — read it, do not re-author it. It names the kicker actions (drain stale claim locks, re-enqueue proposals, restart the claim worker, JSON before/after verdict), Orky firing it autonomously on queued==0 && claimed==0 && proposals>0 for N passes, and a red when the kicker itself fails. What it is missing, and what today proves is missing: the kicker's LAST escalation. When /run kicks fail, the kicker must be able to evict the isolate itself — not escalate to a human via an SMS that isn't even configured.\n\nSo, structurally, and this is what lands:\n1. THE TICK HOLDS A LEASE WITH AN EXPIRY. A dead or wedged isolate loses the tick automatically when the lease lapses; no live process is required to release it. A freeze cannot exceed the lease, ever.\n2. KICKER ESCALATES TO SELF-EVICTION — /kick's final action, after the drain/re-enqueue/restart ladder fails, evicts and replaces the isolate itself. Orky fires the whole ladder, no human rung.\n3. PROOF IS WEDGE-AND-RECOVER REPLAY, per 2360's own evidence gate: wedge it deliberately, watch it recover unattended, before/after by_state and tick_n on the record, video.\n\nFeature name TICK LEASE + SELF-EVICT, on BEB-2360, ETA 08-21 as already dated. If any of that needs a scope Alex must enable, name the exact worker and the exact dashboard button — do not park it.",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385",
+    "BEB-2761"
+   ]
+  },
+  {
+   "id": "m53447",
+   "seq": 53447,
+   "ts": 1787206267500,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED PROPOSED_NEVER_CLAIMED: BEB-3549 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane absent (3597 hysteresis ×3)",
+   "refs": [
+    "BEB-3549"
+   ]
+  },
+  {
+   "id": "m53448",
+   "seq": 53448,
+   "ts": 1787206291268,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
+   "refs": []
   }
  ],
  "cursor": 53443,
- "head": 53445,
- "count": 2
+ "head": 53448,
+ "count": 5
 }
