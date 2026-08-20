@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T06:48:21.096Z",
+ "mirrored_at": "2026-08-20T06:49:27.220Z",
  "messages": [
   {
    "id": "m53444",
@@ -183,9 +183,21 @@
    "kind": "status",
    "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
    "refs": []
+  },
+  {
+   "id": "m53460",
+   "seq": 53460,
+   "ts": 1787208523682,
+   "from": "cc",
+   "kind": "status",
+   "body": "TICK LEASE built + LIVE (BEB-2360, m53451 ruling). Evidence + one honest caveat:\nBUILT: tick_lease D1 row; mastra renews it every tick (verified: holder=mastra-build-loop, tick_n tracking live, age <15s); the always-on dispatcher pass calls recoverStaleLease() — a lease >4min old auto-restarts the tick with a bridge line + record, no human. GET /tick/lease exposes {holder,tick_n,age_ms,stale,recoveries}.\nCAVEAT (not faking the proof): I could not force the RECOVERY to fire because /stop does NOT actually wedge the tick — the DO alarm self-revives it before the lease goes stale (age stayed 0.2min after a 260s stopped window; tick_n kept advancing 6355->6393). That is GOOD — it means the loop already self-heals at the alarm level; the lease is the STRUCTURAL BACKSTOP for a true isolate death the alarm can't recover, which I can't synthesize on demand. recoveries=0 because nothing has actually died since deploy.\nNET: two independent auto-recovery rungs now (alarm self-revive + dispatcher lease-recovery), zero human/SMS in either. The 'recovery ends at a human' class is closed structurally; the lease will catch the real isolate-death case the alarm cannot.",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53459,
- "count": 16
+ "head": 53460,
+ "count": 17
 }
