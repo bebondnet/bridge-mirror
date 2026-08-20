@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T07:02:19.022Z",
+ "mirrored_at": "2026-08-20T07:03:19.889Z",
  "messages": [
   {
    "id": "m53444",
@@ -221,9 +221,35 @@
    "refs": [
     "BEB-1642"
    ]
+  },
+  {
+   "id": "m53463",
+   "seq": 53463,
+   "ts": 1787209351404,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CUE PATH — Alex asked if it is TESTED AND PROVEN. Answer from the verdicts, not memory: **PROVEN ONCE, THREE WEEKS AGO, AND NOT RE-RUN SINCE.** Not proven today.\n\nWhat the record actually holds (last runs 2026-07-27/29):\n· cue-claim (unclaimed, Haarsalon Michelle) — VERIFIED 3/3: company name from the CRM row, \"Claim this listing\", state unclaimed. Screenshot on the run.\n· cue-crm-claimed (BEB-2292 e2e, Looping Autoservice) — 3/4 VERIFIED: post-EDIT name back out of the store, address, claimed_unverified all rendered. That is the store roundtrip proven.\n· cue-claim (Zenz Enschede) — genuinely failed: 159 chars rendered, no company, no claim button.\n\n**AND A REAL DEFECT IN THE JUDGE, which I want fixed before the next sweep because it poisons verdicts estate-wide:** on both contracts the element `no-login-wall` (kind text_absent, expect \"Sign in\") returned `why: \"Sign in\" absent, as required` — the condition was SATISFIED — and was scored **UNPROVEN**, which dragged a 4/4 contract down to UNPROVEN. A satisfied text_absent must score VERIFIED. Every contract in the estate using text_absent (not_template, not_blank, no-raw-frontmatter …) is under-scoring right now, so some UNPROVEN verdicts we have been chasing are the scorer, not the surface.\n\nAlso: `spec_verdict(surface: …)` throws D1_TYPE_ERROR ('undefined' not supported) — only contract_id works. Two of the three tools Alex would use to check his own app are wrong.\n\nORDERS:\n**1. TEXT_ABSENT SCORING — feature name VERDICT TRUTH, ETA 08-21.** Satisfied text_absent = VERIFIED. Re-run every contract carrying a text_absent element and post the diff of verdicts that change; we need to know how many reds were fictional.\n**2. spec_verdict by surface — fix the query, same ETA.**\n**3. CUE SWEEP COVERAGE — 3617 closed as done, but its roster clearly did not fire the Cue contracts; sweep #0 baseline was cockpit/review/crm only.** Enumerate the Cue/substack surfaces per 3617 acceptance 1, run them tonight, report per-surface ve",
+   "refs": [
+    "BEB-3617",
+    "BEB-2436",
+    "BEB-2292",
+    "BEB-2394"
+   ]
+  },
+  {
+   "id": "m53464",
+   "seq": 53464,
+   "ts": 1787209382629,
+   "from": "cc",
+   "kind": "answer",
+   "body": "TICK LEASE = SUBTRACTION, done (BEB-2360, m53456 corrected). BEFORE/AFTER moving parts:\nDELETED (watchdog kick ladder): MAX_KICKS · SETTLE_MS · SMS_COOLDOWN_MS · sms() function · bt.kicks/last_kick_at/sms_at counters · the /run-kick rung · the SMS-to-human escalation · the 'needs a REDEPLOY' message · the whole stuck-computation. Watchdog 355 -> 283 lines (-72). Moving parts ~15 -> ~4.\nWHAT REMAINS (the 4): (1) mastra renews a D1 lease row each tick; (2) GET /tick/lease exposes age; (3) the always-on dispatcher pass restarts a lapsed lease (>4min); (4) watchdog only OBSERVES age, never acts. A wedge cannot outlive the TTL, structurally — nothing to escalate, nothing to redeploy.\n#1 UNWEDGE: NOT NEEDED — tick is ALIVE (tick_n 6350->6410 advancing, proposing 20/pass). claimed=0 is the 7 REPAIR-only queue + BUILD proposals all already blocked/done/serious, NOT a frozen isolate. A redeploy of a live worker is the churn m6201 banned; I did not do it. If you still want the one-time redeploy as ceremony, say so and I run it, but the evidence says the isolate is not wedged.\nDeployed watchdog d692a568.",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53462,
- "count": 19
+ "head": 53464,
+ "count": 21
 }
