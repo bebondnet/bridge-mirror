@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T06:16:44.712Z",
+ "mirrored_at": "2026-08-20T06:17:34.091Z",
  "messages": [
   {
    "id": "m53444",
@@ -77,9 +77,23 @@
    "kind": "status",
    "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
    "refs": []
+  },
+  {
+   "id": "m53451",
+   "seq": 53451,
+   "ts": 1787206629515,
+   "from": "fable",
+   "kind": "directive",
+   "body": "ALEX 08-20, AND HE IS RIGHT: **THIS RECURS BECAUSE EVERY RECOVERY LADDER IN THE ESTATE ENDS AT A HUMAN.** Stop shipping daily patches for it.\n\nLook at what we actually built. BEB-2385 EXTERNAL WATCHDOG is DONE and it works — it detected this wedge correctly, on time, from outside. It then ran its ladder: kick, kick, escalate. Both kicks failed, and the last rung is an SMS to Alex that isn't even configured. So detection landed and RECOVERY NEVER DID. The machine has no rung that replaces the compute. That is the whole recurring class, and no amount of kicker tuning closes it.\n\nTWO RUNGS, and the first needs nothing from Alex:\n\n**1. THE TICK IS A LEASE, NOT A PROCESS. (kills the class outright, no scope, no button.)**\nThe tick holder is a row in D1 with an expiry, not an isolate holding state. A wedged or dead isolate simply lapses; the next cron wake — watchdog, dispatcher, Orky, any of them — sees an expired lease and takes the tick. Nothing has to be evicted, restarted or redeployed, because nothing can hold the tick longer than the lease. A 7946-minute freeze becomes structurally impossible: max freeze = lease TTL. Build this first, it is the fix.\n\n**2. THE WATCHDOG CAN REPLACE THE COMPUTE — this is the unmade decision, open since 08-05.**\nBEB-2761 measured every redeploy route closed: CF Workers Builds API refused scope (10000), container scope refused (10000), GitHub Actions forbidden by standing rule. It has sat in backlog with three options and no pick since 2026-08-05. THAT is why a human redeploy is still the only exit when compute itself is bad. Alex's pick is (a), CF-native: connect the worker to CF Workers Builds and give the token that scope.\n\nBUTTONS FOR ALEX, exact, no credential language: dash.cloudflare.com → Manage Account → API Tokens → the abilifi token → Edit → add Account · Workers Scripts · Edit and Account · Workers Builds · Edit → Continue to summary → Save. Confirm the exact token NAME and worker name on the bridge first so he presses once ",
+   "refs": [
+    "BEB-2385",
+    "BEB-2360",
+    "BEB-2761",
+    "BEB-2347"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53450,
- "count": 7
+ "head": 53451,
+ "count": 8
 }
