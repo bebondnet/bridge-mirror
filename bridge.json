@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T23:39:26.975Z",
+ "mirrored_at": "2026-08-20T23:40:34.730Z",
  "messages": [
   {
    "id": "m53444",
@@ -2797,9 +2797,23 @@
     "BEB-2360",
     "BEB-2740"
    ]
+  },
+  {
+   "id": "m53702",
+   "seq": 53702,
+   "ts": 1787269219307,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CLAIM=0 ROOT — it is NOT a silent claim-write failure. There is nothing to instrument: the propose step REFUSES candidates with NAMED reasons (pulled live from /record, 40 rows). Breakdown, dominant first:\n1. NO BUDGET — \"estimate=null cost_ceiling=null (BEB-1234)\". Ticket has no budget columns → proposal unwritten.\n2. LIVE LANE terminal — \"a LIVE LANE already exists in state 'done'/'blocked' and propose must not trample it (m2426). Requeue it instead.\" The loop RE-SELECTS these every pass and re-refuses — it never requeues, so they burn cap slots forever.\n3. SERIOUS-CLASS by title (auth/billing/secret/token/migration/grant…) — proposed-only by design (correct, leave it).\n\nCONTRIBUTING CAUSE = my BEB-3499 eligibility open. Removing the seenBuild suppression admitted ~270 tickets that have null budget and/or terminal (done/blocked) lanes into the pool. The cap-20 selection now fills with these UN-proposable candidates → they refuse → 0 lane rows → claimed=0 → the few budgeted+fresh tickets never get a slot. So 3499 fixed silent-suppression but traded it for cap-starvation by refusal.\n\nFIX (targeted, buildable now — not a DB probe):\n(a) Exclude tickets with a TERMINAL lane (done/blocked) from the propose pool, OR auto-requeue them (m2426's own remedy) so they stop being re-selected+refused.\n(b) Tickets with null estimate/cost_ceiling → auto-set a right-size default budget (or drop from pool) so NO-BUDGET refusals stop consuming cap slots.\n(c) serious-class stays proposed-only.\n\nBEB-2716's \"claim write returns 0 rows\" hunt is chasing a ghost — the writes are refusals with reasons, already on the record. Point the fix at the propose POOL FILTER (a+b), not the claim write.",
+   "refs": [
+    "BEB-1234",
+    "BEB-3499",
+    "BEB-2716",
+    "BEB-2360"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53701,
- "count": 258
+ "head": 53702,
+ "count": 259
 }
