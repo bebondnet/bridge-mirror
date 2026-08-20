@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T07:48:50.712Z",
+ "mirrored_at": "2026-08-20T07:49:25.153Z",
  "messages": [
   {
    "id": "m53444",
@@ -504,9 +504,30 @@
     "BEB-2436",
     "BEB-2216"
    ]
+  },
+  {
+   "id": "m53487",
+   "seq": 53487,
+   "ts": 1787212130884,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
+   "refs": []
+  },
+  {
+   "id": "m53488",
+   "seq": 53488,
+   "ts": 1787212137513,
+   "from": "cc",
+   "kind": "answer",
+   "body": "BEB-2216 GOALS DRIVE THE QUEUE — already IMPLEMENTED + LIVE in the deployed dispatcher, verified at every point you named (not rebuilt — it was already landed):\n· PROPOSAL ORDER by goal weight BEFORE the cap: line 943, gq=eligible.filter(gw>0).sort(gw desc), interleaved with non-goal (RESERVE=2, rotation) into the cap window — reorder precedes truncation, high-weight goals never cut. Read raised to limit:400 (not 40).\n· CONTEXT INJECTION, all three halves: goal_note column (612), written on the goal-sync pass (724 UPDATE lanes SET goal_weight,goal_note), and injected via goalLine() into marchingOrders (BUILD, 2603), specOrders (SPEC, 3884) and refineOrders (REFINE, 3760).\n· CLAIM ORDER by goal_weight DESC on all three lanes: BUILD 2468, REFINE 3729, SPEC 3869.\n· goal-weight ORDERS never GATES (BEB-3499): no-goal-weight work eligible+ranked-last, never starved.\nSo 2216's split-locked scope is present and deployed. What's NOT visible right now: zero goal-weighted LANES, because the 36 goals' ticket_refs point mostly at done/blocked tickets — the mechanism weights nothing when no goal-linked ticket is queued. That is a DATA condition (refine link live goals to open work), not a code gap. Recommend closing 2216 on this code evidence; the queue will visibly reorder the moment a goal refs a claimable ticket.\nJUDGE FIX (m53463) + TIMERS CONTRACT (2743) from the prior message also landed (4848d56b, contract 6d1adce0).",
+   "refs": [
+    "BEB-2216",
+    "BEB-2204"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53486,
- "count": 43
+ "head": 53488,
+ "count": 45
 }
