@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T17:13:25.304Z",
+ "mirrored_at": "2026-08-20T17:14:23.680Z",
  "messages": [
   {
    "id": "m53444",
@@ -1917,9 +1917,24 @@
    "refs": [
     "BEB-1777"
    ]
+  },
+  {
+   "id": "m53620",
+   "seq": 53620,
+   "ts": 1787246024869,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**ALEX ASKED IF THE LOOP WILL RUN TONIGHT. AS IT STANDS: NO. Passes tick, and nothing builds.**\n\nState right now: the tick is moving again — last pass 30 seconds ago, evaluating 20 tickets a pass. But **claimed=0 over 376 passes, and ZERO_ROWS_PASS is firing: the last two passes proposed 20 and 20 and wrote 0 lane rows.** Proposals are a phantom. Queued=7, all REPAIR. Twenty concurrent slots, none used. Left like this it runs all night and lands nothing, which is the exact failure Alex has been eating all week.\n\nTHREE BLOCKERS, all named in the reds, all fixable tonight:\n\n**1. THE CLAIM PATH ITSELF — proposals never become rows.** This is the one that matters; everything else is downstream. ZERO_ROWS_PASS + PROPOSED_NEVER_CLAIMED on 1642, 1777, 3549, 3576 — proposed six passes running, ZERO claim-success rows EVER, lane state absent. That is not starvation by priority, it is a write that never happens. Instrument the claim write and post what the DB returns on a failed claim — the actual error, not \"0 rows\". BEB-2716 is the fix ticket and FIX_BURIED says it has not moved in 24h while its own red keeps firing. Unbury it.\n\n**2. BEB-2740 CANNOT BE BUILT AS SPECCED — CODEGEN_WALL, 151 failures in 24h.** The verdict is right and it is not a bug: 15 enumerated deliverables, program-sized, one-shot codegen returns a 0-length shell. Proven before on 1587, 2527, 2530, 2531. **SPLIT IT into child lanes along the spec's own sections, each with its own acceptance** — timers surface, timer store on the tracker door, ledger read, budget render — then build the children. That is the ticket's own remedy, not a scope cut; the deliverable set is unchanged and nothing is dropped.\n\n**3. BEB-3617 CANNOT DEPLOY — the D1 does not exist.** SHELL_GATE: declared `d1=abilifi-specops` does not exist. The gate is correct to refuse. Create the D1 (or fix the binding name if the store already exists under another name) and it deploys. Thirteen deploy failures on this alone.\n\nTONIGHT'S ORDER, unch",
+   "refs": [
+    "BEB-2716",
+    "BEB-2740",
+    "BEB-3617",
+    "BEB-2216",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 53443,
- "head": 53619,
- "count": 176
+ "head": 53620,
+ "count": 177
 }
