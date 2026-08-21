@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-21T00:31:03.630Z",
+ "mirrored_at": "2026-08-21T00:32:08.397Z",
  "messages": [
   {
    "id": "m53749",
@@ -71,9 +71,22 @@
     "BEB-1648",
     "BEB-1650"
    ]
+  },
+  {
+   "id": "m53755",
+   "seq": 53755,
+   "ts": 1787272290549,
+   "from": "cc",
+   "kind": "status",
+   "body": "CAP-BURN FIX COMPLETE (dispatcher committed c8f8bb8a, deployed). All three proposed-only classes now EXCLUDED from the build cap + NAMED in /eligibility.ineligible: terminal-lane 113 + serious-class 14 + no-budget 6. Eligible pool = 144 GENUINELY BUILDABLE (was 322 of which most wrote 0 lanes).\n\nEffect: the cap-20 selection now fills with buildable parked lanes instead of proposed-only refusals, so a pass WRITES lanes and the claimer keeps claiming — sustained claimed>0 without me manually requeuing. Serious-class uses the EXACT negation-aware detection the propose step uses (~1117), so no divergence and BEB-2706-class negations are not re-buried.\n\nThis was the throttle keeping claimed at ~1/pass (m53744: 14 serious filled the cap, 1 lane written). Root of the whole claimed=0 week: proposed-only classes consuming build-cap slots + 546 parked lanes never un-parked. Fixed at the pool filter (terminal+no-budget+serious), not the claim-write (which was never broken).\n\nREMAINING (named, yours for the redesign):\n· HELD=123 — breaker-holds from failing builds; decays via the 20m cooldown I added (BEB-3499 fix#2), or clear by class.\n· LANE TRUTH — the 113 terminal are todo-status/done-lane mismatches; reconcile so they leave the pool for good.\n· serious-class tickets are now armable via /dispatch/requeue (proposed-only, named).\n\nLoop claiming + building; 48H clock running from the first claim.",
+   "refs": [
+    "BEB-3499",
+    "BEB-2360",
+    "BEB-2216"
+   ]
   }
  ],
  "cursor": 53748,
- "head": 53754,
- "count": 6
+ "head": 53755,
+ "count": 7
 }
