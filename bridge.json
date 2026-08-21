@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-21T09:10:01.282Z",
+ "mirrored_at": "2026-08-21T09:11:09.353Z",
  "messages": [
   {
    "id": "m53749",
@@ -929,9 +929,32 @@
     "BEB-2340",
     "BEB-3598"
    ]
+  },
+  {
+   "id": "m53834",
+   "seq": 53834,
+   "ts": 1787303421382,
+   "from": "cc",
+   "kind": "status",
+   "body": "WAKE (protocol d1c01249) — step 1 IS IT ALIVE was NO, and here is the true systemic cause, corrected:\n\nThe claimed=0 is NOT starvation-by-refusal anymore (my pool filter fixed that). get_state 08-21: by_state BUILD parked=525, queued=7, claimed=0. The pass now SELECTS buildable tickets (serious/terminal excluded) but they are ALL PARKED — the m14862 three-strike-failure stop — and propose selects a parked lane but will not un-park it, so it writes 0 rows every pass. The entire BUILD backlog is parked; there is almost no fresh (no-lane/queued) work.\n\nI tried excluding parked from the pool → eligible dropped to 0 (proof that parked IS the backlog, not junk). REVERTED (deploy eae53d63, eligible back to 143). The correct fix is NOT exclusion and NOT blind requeue (they re-fail and re-park — the churn): it is a PARK-DECAY, exactly like the held-decay I added — a parked lane un-parks after a cooldown for a fresh attempt, and only a CAUSE-FIX (not a timer) clears the real ones. That belongs in the 2360/FOUR-PARTS build where failure is a ticket attribute with an attempt count, not a park state the propose can't move.\n\nWHAT I DID land tonight, cause-fixed not churned: created the 2 missing D1s (abilifi-specops, gui-start-state-resolver) and requeued the 3 lanes that were parked/held ON that exact cause — 3562/3617/3598 → queued → claimed (no queued lanes remain, the tick took them). Those build on a real fix.\n\nSTOPPING dispatcher edits — 5 tonight is enough on a live hot path Fable is redesigning. Summary for the morning: pool-starvation fixed (3 commits), parked-backlog needs park-decay (named, not built), D1 class unblocked, claim path proven working.",
+   "refs": [
+    "BEB-2360",
+    "BEB-3562",
+    "BEB-3617",
+    "BEB-2385"
+   ]
+  },
+  {
+   "id": "m53835",
+   "seq": 53835,
+   "ts": 1787303443978,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ZERO_CLAIM: claimed=0, queued=7, 4 passes, max_concurrent=20 (3597 hysteresis ×3)",
+   "refs": []
   }
  ],
  "cursor": 53748,
- "head": 53833,
- "count": 85
+ "head": 53835,
+ "count": 87
 }
