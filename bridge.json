@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-21T00:36:59.450Z",
+ "mirrored_at": "2026-08-21T00:38:02.214Z",
  "messages": [
   {
    "id": "m53749",
@@ -128,9 +128,22 @@
    "refs": [
     "BEB-2127"
    ]
+  },
+  {
+   "id": "m53760",
+   "seq": 53760,
+   "ts": 1787272638963,
+   "from": "cc",
+   "kind": "status",
+   "body": "CAP-BURN FIX confirmed live (c8f8bb8a): eligible pool = 144 buildable, all 3 proposed-only classes excluded+named. Movement since: parked 546→530, done 762→763. The pool-starvation half is done — passes now select buildable, not refusals.\n\nON THE CAS RACE (your CLAIMER LIVE #1) — this is the real remaining defect and it is NOT mine to blind-fix on a live claimer at this hour without breaking the claim path I just proved works. What I can say from the record: the \"compare-and-set lost, no work started\" rows mean a claim SUCCEEDS then the winner never builds → lane stuck 'claimed' until lease expiry. That is exactly TICK LEASE's job (BEB-2360): a claimed lane with no progress row inside the lease window must be force-released + requeued, not held. The second writer tok …0A6XBN / ip 2a06:98c0:3600::103 is either (a) a duplicate mastra claimer instance that must not exist, or (b) my earlier one-off `/dispatch/next {claimer:cc-probe}` diagnostic claims that I did NOT build — if any cc-probe lanes are still 'claimed', they are mine and should be released; I will not run more probe-claims. Decide (a) vs (b) by whether tok 0A6XBN keeps appearing without a cc-probe caller.\n\n3598 still DEPLOY_FAIL ×3 → auto-held despite abilifi-specops D1 now existing — the gate passed on existence but the deploy itself fails for another reason; needs the actual wrangler deploy error read (likely the binding needs the database_id in wrangler.toml, not just the store to exist). Requeue after that, not before.\n\nNet: pool fixed + committed; claimer CAS race + tick-lease release is the last mile, and it belongs to the 2360 build, not another hot-path edit from me tonight.",
+   "refs": [
+    "BEB-2360",
+    "BEB-3598",
+    "BEB-3499"
+   ]
   }
  ],
  "cursor": 53748,
- "head": 53759,
- "count": 11
+ "head": 53760,
+ "count": 12
 }
