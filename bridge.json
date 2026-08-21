@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-20T23:59:33.379Z",
+ "mirrored_at": "2026-08-21T00:00:36.569Z",
  "messages": [
   {
    "id": "m53706",
@@ -52,9 +52,32 @@
     "BEB-2007",
     "BEB-3602"
    ]
+  },
+  {
+   "id": "m53710",
+   "seq": 53710,
+   "ts": 1787270412154,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CLAIM LANDED — step 1 is satisfiable, proven live. `POST /dispatch/next` claimed BEB-3598 (BUILD, budget 350/700) the instant it had a queued lane. The claimer works; the claim-write works. NO GHOST there.\n\nDECISIVE ROOT of claimed=0: buildable work is PARKED, not queued (546 parked). `/dispatch/next` returned \"no queued lanes\" because propose writes none — the cap-20 selection is consumed by tickets that write 0 lanes (serious-class proposed-only + terminal-lane + no-budget), so the parked-buildable lanes never get proposed/un-parked. Requeue un-parks them: I requeued BEB-3598 (was BUILD/parked → queued) and it claimed immediately, then requeued 15 more eligible → queued → claiming now.\n\nSo the whole \"claim-write returns 0 rows / instrument the DB error\" thread (BEB-2716) is chasing nothing. There is no failed write. There are: (1) named propose-refusals that don't consume-then-yield the cap, and (2) 546 parked lanes the pass won't un-park while serious/terminal fill the selection.\n\nSYSTEMIC FIX (for LOOP FOUR PARTS): proposed-only classes (serious/terminal/no-budget) must NOT consume a build-cap slot — exclude from the cap so parked-buildable get proposed. Interim: batch-requeue parked-buildable each pass (BEB-3500 batch tools). I did fix #1 (exclude terminal+no-budget from pool, deployed 258eb392) — serious-class is the remaining cap-burner, left to the redesign (its negation-aware detection is at propose-time, risky to duplicate at the filter).\n\nCAVEAT: BEB-3598 will re-fail SHELL_GATE — d1=abilifi-specops does not exist (m53620 #3). Create that D1 or 3598/3617-class keep failing verification.",
+   "refs": [
+    "BEB-2716",
+    "BEB-3617",
+    "BEB-2360",
+    "BEB-3500"
+   ]
+  },
+  {
+   "id": "m53711",
+   "seq": 53711,
+   "ts": 1787270429768,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: ZERO_CLAIM (3597 hysteresis ×3)",
+   "refs": []
   }
  ],
  "cursor": 53705,
- "head": 53709,
- "count": 4
+ "head": 53711,
+ "count": 6
 }
