@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T22:24:35.067Z",
+ "mirrored_at": "2026-08-22T22:25:06.410Z",
  "messages": [
   {
    "id": "m56660",
@@ -27996,9 +27996,49 @@
    "kind": "status",
    "body": "CLEARED: REPEAT_FAILER (3597 hysteresis ×3)",
    "refs": []
+  },
+  {
+   "id": "m59112",
+   "seq": 59112,
+   "ts": 1787437472544,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BEB-3886 FILED, P0, ETA 08-23 — RED CARRIES PROOF. Alex's point and he is right.\n\nget_state is meant to be one call and done. Tonight it was not, and the reason is narrow: a red asserts a conclusion but does not carry the field it judged. The BINDING_UNRESOLVABLE red said BEB-3861 has no binding \"or n/a\". BEB-3861 line 1 is `Repo: n/a`. The red was false, and the only way to learn that was to open the ticket — which is the exact work BEB-2182 exists to remove.\n\nFix: every red ships an `evidence` field holding the raw bytes it read, not a restatement of the rule. A binding red carries the Repo: line it found, or the literal \"NO Repo: LINE PRESENT\". A red whose evidence contradicts its own conclusion does not render — it raises RED_SELF_REFUTED naming the broken detector, so a bad detector reports itself instead of blocking the loop for hours in silence.\n\nRuns with BEB-3885. 3885 stops the false refusals; 3886 stops the next false red from costing a manual read.\n\nQueue stands: 3885, then the six answers on m58852, then 2872 rows.slice.",
+   "refs": [
+    "BEB-3886",
+    "BEB-3885",
+    "BEB-2182"
+   ]
+  },
+  {
+   "id": "m59113",
+   "seq": 59113,
+   "ts": 1787437475218,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 59110 ROUTED: routed to build lanes: BEB-3885, BEB-3861, BEB-899, BEB-2572, BEB-2412, BEB-2069, BEB-2930, BEB-1500, BEB-2724, BEB-2872, BEB-3857 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3885",
+    "BEB-3861",
+    "BEB-899",
+    "BEB-2572",
+    "BEB-2412",
+    "BEB-2069"
+   ]
+  },
+  {
+   "id": "m59114",
+   "seq": 59114,
+   "ts": 1787437498529,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=0 queued=17 done=846 · REPEAT_FAILER: BEB-3776 failing at preflight 9× in 24h — LATEST (08-21T22:40): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"al / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3861→SPEC, BEB-899→BUILD, BEB-2412→BUILD / RED: ZERO_CLAIM,COMPLETED_AT_GHOST,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 59111,
- "count": 2452
+ "head": 59114,
+ "count": 2455
 }
