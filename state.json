@@ -1,22 +1,23 @@
 {
- "mirrored_at": "2026-08-22T10:33:54.926Z",
- "ts": 1787394832865,
+ "mirrored_at": "2026-08-22T10:35:11.896Z",
+ "ts": 1787394910066,
  "loop": {
   "proposed_total": 1767,
   "by_state": {
-   "queued": 9,
+   "queued": 10,
    "claimed": 0,
    "done": 822,
    "held": 331,
    "blocked": 24,
-   "parked": 528
+   "parked": 527
   },
   "by_lane": {
    "BUILD": {
     "blocked": 7,
     "done": 327,
     "held": 239,
-    "parked": 521
+    "parked": 520,
+    "queued": 1
    },
    "REFINE": {
     "blocked": 3,
@@ -39,21 +40,21 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787394812329,
-   "tally": "BEB-2740→BUILD, BEB-2368→REFINE, BEB-3800→BUILD[parked], BEB-3831→BUILD[parked], BEB-1768→BUILD[parked], BEB-1775→SPEC[parked], BEB-1691→BUILD[parked], BEB-1780→BUILD[parked], BEB-1855→BUILD[parked], BEB-1776→BUILD[parked], BEB-1792→BUILD[parked], BEB-1769→BUILD[parked], BEB-1753→BUILD[parked], BEB-1752→BUILD[parked], BEB-1916→BUILD[parked], BEB-1758→SPEC[parked], BEB-1770→BUILD[parked], BEB-1774→"
+   "at": 1787394875957,
+   "tally": "BEB-2740→BUILD, BEB-2368→REFINE, BEB-1752→BUILD[parked], BEB-1916→BUILD[parked], BEB-1758→SPEC[parked], BEB-1770→BUILD[parked], BEB-1774→BUILD[parked], BEB-1815→BUILD[parked], BEB-1907→BUILD[parked], BEB-1964→BUILD[parked], BEB-1757→BUILD[parked], BEB-1902→BUILD[parked], BEB-1796→BUILD[parked], BEB-3602→BUILD[parked], BEB-3586→BUILD[parked], BEB-3578→BUILD[parked], BEB-3547→BUILD[parked], BEB-3563"
   },
   "reds": [
    {
     "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1787394728818,
-    "detail": "claimed=0, queued=9, 2 passes, max_concurrent=20",
+    "detail": "claimed=0, queued=9, 3 passes, max_concurrent=20",
     "refs": []
    },
    {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787394788821,
+    "since": 1787394848856,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -67,7 +68,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787394788821,
+    "since": 1787394848856,
     "detail": "LOOP GREEN SIGNAL — Alex walks away: one message when all six loop fixes hold green for 3h, one if it regresses, silence otherwise. No daily — last landed evidence NEVER",
     "refs": [
      "BEB-3640",
@@ -134,7 +135,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787394788821,
+    "since": 1787394848856,
     "detail": "PUBLIC FEED LABELLED - each landing carries public flag + public_title + public_body at write time; one feed feeds the internal picture, the — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -153,7 +154,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787394788821,
+    "since": 1787394848856,
     "detail": "CHANGELOG BACKFILL full - remaining 12 weeks (05-21..08-13) in weekly batches, same voice, dated and published so three months read back to  — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -162,7 +163,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787394788821,
+    "since": 1787394848856,
     "detail": "CHANGELOG BACKFILL week one - 7 dated public entries for 08-14..08-20 from the record only, Alex reviews, his corrections become the written — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -171,7 +172,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787394788821,
+    "since": 1787394848856,
     "detail": "DAILY CHANGELOG (public) - features in plain language, the craft it took, privacy and sovereignty choices explicit, published daily, evidenc — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -364,7 +365,7 @@
    {
     "code": "SILENT_REFUSAL",
     "severity": "red",
-    "since": 1787393021719,
+    "since": 1787393141716,
     "detail": "BEB-2740 refused 26× in 30min — LATEST: tracker unreachable while gating BEB-2740 — left queued, NOT parked (a read failure is not an absent ticket) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2740"
@@ -2238,6 +2239,21 @@
     }
    },
    {
+    "code": "PROPOSED_NEVER_CLAIMED",
+    "severity": "red",
+    "since": 1787394848856,
+    "detail": "BEB-3800 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
+    "refs": [
+     "BEB-3800"
+    ],
+    "orky": {
+     "cls": "proposed-never-claimed",
+     "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
+     "subject": "BEB-3800"
+    },
+    "fix_ticket": "BEB-2716"
+   },
+   {
     "code": "FIX_BURIED",
     "severity": "red",
     "since": 1787135237199,
@@ -3170,6 +3186,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1785892434215,
+    "detail": "fix BEB-2716 for BEB-3800 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2716",
+     "BEB-3800"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786708675942,
     "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
     "refs": [
@@ -3679,13 +3705,13 @@
    "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1787394728818,
-   "detail": "claimed=0, queued=9, 2 passes, max_concurrent=20",
+   "detail": "claimed=0, queued=9, 3 passes, max_concurrent=20",
    "refs": []
   },
   {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787394788821,
+   "since": 1787394848856,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -3699,7 +3725,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787394788821,
+   "since": 1787394848856,
    "detail": "LOOP GREEN SIGNAL — Alex walks away: one message when all six loop fixes hold green for 3h, one if it regresses, silence otherwise. No daily — last landed evidence NEVER",
    "refs": [
     "BEB-3640",
@@ -3766,7 +3792,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787394788821,
+   "since": 1787394848856,
    "detail": "PUBLIC FEED LABELLED - each landing carries public flag + public_title + public_body at write time; one feed feeds the internal picture, the — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -3785,7 +3811,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787394788821,
+   "since": 1787394848856,
    "detail": "CHANGELOG BACKFILL full - remaining 12 weeks (05-21..08-13) in weekly batches, same voice, dated and published so three months read back to  — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -3794,7 +3820,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787394788821,
+   "since": 1787394848856,
    "detail": "CHANGELOG BACKFILL week one - 7 dated public entries for 08-14..08-20 from the record only, Alex reviews, his corrections become the written — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -3803,7 +3829,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787394788821,
+   "since": 1787394848856,
    "detail": "DAILY CHANGELOG (public) - features in plain language, the craft it took, privacy and sovereignty choices explicit, published daily, evidenc — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -3996,7 +4022,7 @@
   {
    "code": "SILENT_REFUSAL",
    "severity": "red",
-   "since": 1787393021719,
+   "since": 1787393141716,
    "detail": "BEB-2740 refused 26× in 30min — LATEST: tracker unreachable while gating BEB-2740 — left queued, NOT parked (a read failure is not an absent ticket) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2740"
@@ -5870,6 +5896,21 @@
    }
   },
   {
+   "code": "PROPOSED_NEVER_CLAIMED",
+   "severity": "red",
+   "since": 1787394848856,
+   "detail": "BEB-3800 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane parked",
+   "refs": [
+    "BEB-3800"
+   ],
+   "orky": {
+    "cls": "proposed-never-claimed",
+    "error": "lane state parked; ZERO claim-success rows ever, despite 6 consecutive proposals",
+    "subject": "BEB-3800"
+   },
+   "fix_ticket": "BEB-2716"
+  },
+  {
    "code": "FIX_BURIED",
    "severity": "red",
    "since": 1787135237199,
@@ -6797,6 +6838,16 @@
    "refs": [
     "BEB-2737",
     "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1785892434215,
+   "detail": "fix BEB-2716 for BEB-3800 has not moved in 24h while its subject red PROPOSED_NEVER_CLAIMED is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2716",
+    "BEB-3800"
    ]
   },
   {
