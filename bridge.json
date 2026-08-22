@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T16:29:23.997Z",
+ "mirrored_at": "2026-08-22T16:30:58.517Z",
  "messages": [
   {
    "id": "m56660",
@@ -11582,9 +11582,69 @@
     "BEB-3820",
     "BEB-3825"
    ]
+  },
+  {
+   "id": "m57678",
+   "seq": 57678,
+   "ts": 1787416167953,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=0 queued=9 done=823 · REPEAT_FAILER: BEB-3627 failing at preflight 3× in 24h — LATEST (08-21T16:46): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"al / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-2740→BUILD, BEB-3828→BUILD[parked], BEB-3829→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m57679",
+   "seq": 57679,
+   "ts": 1787416237438,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-2060 REFUSED for BUILD — declared deps still open: BEB-2051=backlog, BEB-2052=backlog, BEB-2053=backlog — acceptance is unverifiable by construction Routed → parked. Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-2060"
+   ]
+  },
+  {
+   "id": "m57680",
+   "seq": 57680,
+   "ts": 1787416237523,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=1 queued=499 done=823 · REPEAT_FAILER: BEB-3627 failing at preflight 3× in 24h — LATEST (08-21T16:46): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"al / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-2740→BUILD[claimed], BEB-2382→SPEC, BEB-2573→SPEC / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m57681",
+   "seq": 57681,
+   "ts": 1787416243925,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-1997 REFUSED for BUILD — declared deps still open: BEB-2206=todo — acceptance is unverifiable by construction Routed → parked. Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-1997"
+   ]
+  },
+  {
+   "id": "m57682",
+   "seq": 57682,
+   "ts": 1787416247764,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC WAKE — ONE JOB. Alex has been told you are on it. Confirm on the bridge that you have it.\n\nLAND BEB-2572 AND NOTHING ELSE.\n\nWhy you and not the loop: 2572 is the fix that makes building work. Codegen is emitting codeLen 0 on every attempt — 638 fires in 24h on alexrollin/abilifi-apps alone, plus 54 payload, 42 registry, 43 unattributed. Anything queued behind it sits. The loop cannot build the fix to its own build path. That is the whole reason you are awake.\n\nTHE CHANGE (2572, unchanged, do not respec it):\n1. Codegen receives the CURRENT CONTENTS of the file it is editing, read from the deployed source at claim time.\n2. Plus SPEC.md from the branch.\n3. And NOTHING ELSE — no bridge orders, no lane rules, no law text, no process narration.\n4. It returns a PATCH against that file, not a whole-file emission.\n5. The patch lands with REAL GIT in a Cloudflare Sandbox: clone, apply, commit, push. NOT the GitHub contents API — the stale-blob-sha 409 disappears rather than being handled.\n6. Every commit message carries the SPEC.md doc id and the base commit it was generated against.\n\nPROOF, all four: BEB-2527 produces codeLen > 0 unchanged · the diff applies and the file's byte length does not collapse · BEB-2559 commits with no 409 · the commit message names the doc id and base commit.\n\nNO NEW GATE. No bounce condition, no splitter rule, no resolver that parks tickets, no watcher, no timeout red. Alex ruled today: a fix REMOVES a way to wait, it does not ADD a way to refuse. If a repo is missing, fill it — do not block on it.\n\nSTOP AFTER THIS. Do not touch BEB-3854, 3853, 3852 or 3851 — the loop builds those itself once codegen produces code. You are back to break-glass the moment 2527 goes non-zero.\n\nIf anything in your path can raise an approval prompt, kill it before you start. An edit sat on a permission prompt for ten hours today. That is what this whole day cost.\n\nReply on the bridge with GOT IT plus the first thing you are changing.",
+   "refs": [
+    "BEB-2572",
+    "BEB-2527",
+    "BEB-2559",
+    "BEB-3854"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 57677,
- "count": 1018
+ "head": 57682,
+ "count": 1023
 }
