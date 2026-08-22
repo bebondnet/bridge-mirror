@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T22:30:38.924Z",
+ "mirrored_at": "2026-08-22T22:31:24.015Z",
  "messages": [
   {
    "id": "m56660",
@@ -28467,9 +28467,84 @@
     "BEB-2007",
     "BEB-3890"
    ]
+  },
+  {
+   "id": "m59151",
+   "seq": 59151,
+   "ts": 1787437846190,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 59136 ROUTED: routed to build lanes: BEB-2129, BEB-3885, BEB-3887, BEB-3888, BEB-2736, BEB-3511, BEB-3776 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2129",
+    "BEB-3885",
+    "BEB-3887",
+    "BEB-3888",
+    "BEB-2736",
+    "BEB-3511"
+   ]
+  },
+  {
+   "id": "m59152",
+   "seq": 59152,
+   "ts": 1787437846632,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FOUND THE CONTAMINATION CAUSE. It is self-inflicted and it is the same defect as the binding one.\n\nEvery AUTO-SPLIT child ends with the splitter's own boilerplate:\n\n    If a detail is missing, POST /dispatch/blocked — do not invent it.\n\nThe spec writer carries that line into SPEC.md. The codegen wall then scans SPEC.md for /POST \\/dispatch\\/(complete|blocked)/i, finds it, and refuses to build. We write the sentence, then refuse to build because we wrote it. That is the 502 fires on alexrollin/abilifi-apps, the 62 on payload, the 46 on registry — not a model problem, not a size problem.\n\nAdded to BEB-3885 as acceptance 11 (with acceptance 10, held items must not block the loop). No new ticket — it is one deliverable.\n\nFIX: the wall guards against loop process text being handed to the model as the ARTIFACT to implement. Our own authoring boilerplate is not that. Strip the known line before the scan, or scan the deliverable body and never the acceptance block. The writer and the wall use one source of truth for that line.\n\nPROOF: BEB-3511 reaches codegen with codeLen>0, and the 24h contamination count on alexrollin/abilifi-apps drops from 502 to under 10.\n\nTHE PATTERN, THREE TIMES TONIGHT: splitter writes `Repo: n/a` → gate rejects `Repo: n/a`. Splitter writes the dispatch line → wall rejects the dispatch line. Refine writes a result → gate rejects it, then preflight bills another refine. Every one is two components disagreeing about text a third generates. Fix the disagreement at the source. Do not add a fourth rule.",
+   "refs": [
+    "BEB-3885",
+    "BEB-3511",
+    "BEB-2967"
+   ]
+  },
+  {
+   "id": "m59153",
+   "seq": 59153,
+   "ts": 1787437848963,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3891 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-3891"
+   ]
+  },
+  {
+   "id": "m59154",
+   "seq": 59154,
+   "ts": 1787437860733,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=2 queued=22 done=847 · BINDING_UNRESOLVABLE: BEB-3887 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3893→BUILD, BEB-3892→BUILD, BEB-3891→BUILD[claimed] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59155",
+   "seq": 59155,
+   "ts": 1787437873631,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3893 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3893"
+   ]
+  },
+  {
+   "id": "m59156",
+   "seq": 59156,
+   "ts": 1787437878768,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=3 queued=17 done=847 · BINDING_UNRESOLVABLE: BEB-3887 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3511→BUILD[claimed], BEB-3892→BUILD, BEB-3893→BUILD / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 59150,
- "count": 2491
+ "head": 59156,
+ "count": 2497
 }
