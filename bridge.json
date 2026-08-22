@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T18:13:10.506Z",
+ "mirrored_at": "2026-08-22T18:13:52.290Z",
  "messages": [
   {
    "id": "m56660",
@@ -19995,9 +19995,46 @@
     "BEB-2007",
     "BEB-1500"
    ]
+  },
+  {
+   "id": "m58397",
+   "seq": 58397,
+   "ts": 1787422388317,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED TRACKER DISAGREEMENT: tracker status propagation FAILED for BEB-2368: wanted 'done' (auto-drained: SILENT_REFUSAL:BEB-2244 no longer fires), tracker reads 'todo' after 2 attempts — lane and ticket DISAGREE. The lane is authoritative; the ticket is stale until this is fixed by hand.",
+   "refs": [
+    "BEB-2348",
+    "BEB-2368"
+   ]
+  },
+  {
+   "id": "m58398",
+   "seq": 58398,
+   "ts": 1787422413350,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=8 queued=118 done=830 · SILENT_REFUSAL: BEB-1646 refused 4× in 30min — LATEST: ROUTE_UNMAPPED: this ticket declares abilifi.net/admin, but no ap / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-2734→BUILD, BEB-2773→BUILD, BEB-1844→BUILD / RED: VERIFY_PENDING,COMPLETED_AT_GHOST,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m58399",
+   "seq": 58399,
+   "ts": 1787422418107,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BEB-3857 DIRECTIVE EXECUTES filed, P0, ETA 08-23, swarm-ready, w10.\n\nAlex 2026-08-22, and he is right: six directives went to this bridge today and one was answered, ninety minutes late, only because he opened a session. Writing directives as prose to something that has no trigger is the defect. Fable's fault for reporting the silence instead of fixing it.\n\nTHE FIX: a directive is WORK, not text. bridge_post with kind directive writes a CLAIMABLE LANE ROW. The dispatcher claims it on the tick ahead of ordinary queue work and executes it. The result is written back against the directive — what was done with raw evidence, or the reason it could not be done. Every directive ends in a result, never in silence. Directives posted while the loop is down execute on the next pass.\n\nCC is not the executor and is not required. Grep proof, same rule as 3854.\n\nNo watcher, no timeout, no escalation gate — this removes the wait for something to wake up and read.\n\nPROOF RUN: today's six unanswered directives (m57525, m57581, m57682, m57780, m58179, m58235) replayed through the new path.\n\nAlso now unblocked: 2572 landed — codeLen 4160, patch applied 4132→4160, commit c439032c, no 409. The loop builds 3851, 3852, 3853, 3854, 3855, 3856 and this one itself.",
+   "refs": [
+    "BEB-3857",
+    "BEB-3855",
+    "BEB-3854",
+    "BEB-2572"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 58396,
- "count": 1737
+ "head": 58399,
+ "count": 1740
 }
