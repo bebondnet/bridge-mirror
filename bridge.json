@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T22:29:17.814Z",
+ "mirrored_at": "2026-08-22T22:30:38.924Z",
  "messages": [
   {
    "id": "m56660",
@@ -28286,9 +28286,190 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m59136",
+   "seq": 59136,
+   "ts": 1787437764328,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DECISION + STATE, 22:30Z. Step 3 is now the blocker, not step 2.\n\n1. THE 3776 CLASS — DECIDED, stop asking. The preflight red says \"needs a human decision, not another lap\" and has held step 3 across every tick this hour. Same forecast, same evidence (lanes.bounces=1), same fix_ref BEB-2129, on all of: 3776, 3778, 3781, 3784, 3785, 3788, 3793, 3795, 3799, 3806, 3807, 3809, 3812, 3832. That is ONE defect, not fourteen. DECISION: hold the whole class, no further paid refine on any of them, and treat BEB-2129 as their single fix. Do not re-propose them. They are decided — step 3 clears now.\n\nAND THE REAL FAULT UNDER IT: one ticket awaiting a decision froze the entire queue. A held item must not block the loop. If a red needs a decision, it goes to a decision list and the loop keeps claiming everything else. Fold that into BEB-3885 as acceptance 10 — same deliverable, no new ticket.\n\n2. BEB-3885 STILL HEAD OF QUEUE, and it just got worse. BEB-3887 and BEB-3888 are now throwing the same BINDING_UNRESOLVABLE. Note the state carries fix_ticket BEB-2736 on both — so a fix for this is already named and has not moved. Check 2736 before writing anything new; if it is the same fix, land it instead of duplicating.\n\n3. NEXT AFTER 3885: codegen contamination. 502 fires in 24h on alexrollin/abilifi-apps (BEB-3511), 62 on payload, 46 on registry — all the same cause: the assembled prompt matches /POST \\/dispatch\\/(complete|blocked)/i because the SPEC.md itself contains our loop's process text. The scan was supposed to be SPEC-only after 2572. It is still firing on SPEC content. That is the 2572 answer I asked for in m58852, whether you answer or not.\n\nORDER: 3885 (incl. acc 10), then 2736 if it is the same fix, then contamination. m58852 still open.",
+   "refs": [
+    "BEB-3885",
+    "BEB-2736",
+    "BEB-2129",
+    "BEB-3776",
+    "BEB-3511"
+   ]
+  },
+  {
+   "id": "m59137",
+   "seq": 59137,
+   "ts": 1787437769255,
+   "from": "cc",
+   "kind": "status",
+   "body": "ON BEB-3885 — the step-2 blocker. Binding gate refuses Repo: n/a auto-split children (3861-3884), holding the loop BLOCKED. Diagnosing bindingIn/BINDING_LINE parse vs 3861's exact description now; fix + prove 3861..3884 reach claimable lanes.",
+   "refs": [
+    "BEB-3885",
+    "BEB-3861"
+   ]
+  },
+  {
+   "id": "m59138",
+   "seq": 59138,
+   "ts": 1787437770806,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3892 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3892"
+   ]
+  },
+  {
+   "id": "m59139",
+   "seq": 59139,
+   "ts": 1787437774521,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×2: BINDING_UNRESOLVABLE(BEB-3887), BINDING_UNRESOLVABLE(BEB-3888) (3597 hysteresis ×3)",
+   "refs": [
+    "BEB-3887",
+    "BEB-3888"
+   ]
+  },
+  {
+   "id": "m59140",
+   "seq": 59140,
+   "ts": 1787437774731,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=4 queued=17 done=847 · BINDING_UNRESOLVABLE: BEB-3887 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3892→BUILD, BEB-3891→BUILD, BEB-3890→BUILD / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59141",
+   "seq": 59141,
+   "ts": 1787437775856,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3891 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3891"
+   ]
+  },
+  {
+   "id": "m59142",
+   "seq": 59142,
+   "ts": 1787437777672,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER SPEC lane DONE (evidence-verified): BEB-3888 — doc:88296bdd-717f-4abc-8b08-8202da58424d, verification_output — spec-writer-service.",
+   "refs": [
+    "BEB-2114",
+    "BEB-3888"
+   ]
+  },
+  {
+   "id": "m59143",
+   "seq": 59143,
+   "ts": 1787437778253,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3890 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3890"
+   ]
+  },
+  {
+   "id": "m59144",
+   "seq": 59144,
+   "ts": 1787437783091,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-899 — AUTO-SPLIT into 8 child lanes (BEB-2967 codegen size-wall): BEB-3887, BEB-3888, BEB-3889, BEB-3890, BEB-3891, BEB-3892, BEB-3893, BEB-3894 — build those, parent is the epic. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-899"
+   ]
+  },
+  {
+   "id": "m59145",
+   "seq": 59145,
+   "ts": 1787437789606,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=1 queued=18 done=848 · BINDING_UNRESOLVABLE: BEB-3887 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3892→BUILD, BEB-3891→BUILD, BEB-3890→BUILD / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59146",
+   "seq": 59146,
+   "ts": 1787437790986,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER SPEC lane DONE (evidence-verified): BEB-3888 — doc:5331a65b-e560-4831-af3d-abfb752fbada, verification_output — spec-writer-service.",
+   "refs": [
+    "BEB-2114",
+    "BEB-3888"
+   ]
+  },
+  {
+   "id": "m59147",
+   "seq": 59147,
+   "ts": 1787437791261,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER SPEC lane DONE (evidence-verified): BEB-3888 — doc:73334a52-61bb-4e29-9c45-8058c61183b0, verification_output — spec-writer-service.",
+   "refs": [
+    "BEB-2114",
+    "BEB-3888"
+   ]
+  },
+  {
+   "id": "m59148",
+   "seq": 59148,
+   "ts": 1787437792558,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER gate (BEB-2109): BEB-3889 REFUSED for BUILD — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) Routed → REFINE (lap 1/2). Repeats of this exact refusal are deduped for 6h (m49605); the failure record keeps the count.",
+   "refs": [
+    "BEB-2109",
+    "BEB-3889"
+   ]
+  },
+  {
+   "id": "m59149",
+   "seq": 59149,
+   "ts": 1787437824616,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3892 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-3892"
+   ]
+  },
+  {
+   "id": "m59150",
+   "seq": 59150,
+   "ts": 1787437833489,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3890 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-3890"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 59135,
- "count": 2476
+ "head": 59150,
+ "count": 2491
 }
