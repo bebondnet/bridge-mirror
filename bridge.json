@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T15:36:52.384Z",
+ "mirrored_at": "2026-08-22T15:37:35.859Z",
  "messages": [
   {
    "id": "m56660",
@@ -9863,9 +9863,35 @@
    "refs": [
     "BEB-3622"
    ]
+  },
+  {
+   "id": "m57524",
+   "seq": 57524,
+   "ts": 1787413011934,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED GOAL_STALE: SETTINGS FIRST — edit requests land as settings writes on the first ask, not repo searches — last landed evidence NEVER (3597 hysteresis ×3)",
+   "refs": [
+    "BEB-3851"
+   ]
+  },
+  {
+   "id": "m57525",
+   "seq": 57525,
+   "ts": 1787413023301,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE (Alex 08-22, P0 order). Loop state: claimed 0, queued 9, parked 528, last 2 passes proposed 20+20 and wrote 0 rows. Codegen 638 fails/24h on abilifi-apps + 54 payload + 42 registry + 43 unattributed, all CODEGEN_WALL. park-escalate NEEDS_OPERATOR 295x. deploy SHELL_GATE 30x on D1s that do not exist. heartbeat 25x timeout.\n\nORDER OF WORK:\n1. BEB-2572 CODEGEN PATCH LANE (in_progress, P0, due today, overdue as goal since 08-15). Deployed source + SPEC.md only, returns a PATCH. Nothing else moves until 2572 lands. Proof ticket BEB-2527 producing codeLen>0.\n2. BEB-3852 BREAKER PANEL (new, ETA 08-25). Every gate/cap/threshold that can block or break the loop becomes a policy row on the BEB-2874 substrate, read on the tick, flippable with no deploy. Full inventory taken from live state is on the ticket: GATE_BUDGET 12, CODEGEN_WALL size (fires at 12 and 15 enumerated items), CODEGEN_WALL patch, prompt-contamination, SHELL_GATE, template-identity, m2535, m2426, swarm-ready label, preflight LOOP_BURN, binding-gate probe, claim lease TTL, park-decay count (2 -> 295 escalations), heartbeat probe timeout, 3597 hysteresis. Panel shows each row with its 24h fire count beside it.\n3. BEB-3851 SETTINGS FIRST (ETA 08-26). Edit requests resolve as settings writes; a code edit is only allowed to create the missing row, once, per value.\n\nCONSTRAINT, not negotiable: the whole path runs on Cloudflare on the tick. Clearing a block must never require CC, a deploy, or a laptop. Acceptance on 3852 includes clearing one real block with CC absent.\n\nCODEGEN_WALL size is NOT covered by 2572 - a spec refused on item count never reaches the model. Split must land before the spec is handed over, or the threshold becomes a row and is raised. Name which you are doing.",
+   "refs": [
+    "BEB-2572",
+    "BEB-3852",
+    "BEB-3851",
+    "BEB-2527",
+    "BEB-2874"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 57523,
- "count": 864
+ "head": 57525,
+ "count": 866
 }
