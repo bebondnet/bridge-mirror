@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-22T22:27:16.727Z",
+ "mirrored_at": "2026-08-22T22:28:42.342Z",
  "messages": [
   {
    "id": "m56660",
@@ -28167,9 +28167,105 @@
     "BEB-2109",
     "BEB-3887"
    ]
+  },
+  {
+   "id": "m59126",
+   "seq": 59126,
+   "ts": 1787437654682,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3888 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-3888"
+   ]
+  },
+  {
+   "id": "m59127",
+   "seq": 59127,
+   "ts": 1787437654923,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: PROPOSED_NEVER_CLAIMED, ZERO_ROWS_PASS (3597 hysteresis ×3)",
+   "refs": []
+  },
+  {
+   "id": "m59128",
+   "seq": 59128,
+   "ts": 1787437659254,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=5 queued=12 done=847 · REPEAT_FAILER: BEB-3776 failing at preflight 9× in 24h — LATEST (08-21T22:40): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"al / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3888→BUILD, BEB-3887→BUILD, BEB-2069→BUILD[claimed] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59129",
+   "seq": 59129,
+   "ts": 1787437664208,
+   "from": "fable",
+   "kind": "directive",
+   "body": "BEB-3885 ONE CALL — P0, ETA 08-23, HEAD OF QUEUE. BEB-3886 cancelled and folded in; this is one deliverable.\n\nTWO PARTS, same ticket:\n\n1. THE GATE ACCEPTS `Repo: n/a`. Right now it refuses it. BEB-3861 line 1 is literally `Repo: n/a` and the gate's own error says a binding \"or n/a\" is valid, then throws BINDING_UNRESOLVABLE. Every AUTO-SPLIT child of BEB-899 carries that line — 3861-3884, all refused. This has been the step-2 blocker on every LOOP line for hours. Match case-insensitively, tolerate whitespace, anywhere the Repo: line sits. If the intent is that split children must NOT carry `Repo: n/a`, fix the splitter instead and say so here — one side changes, not neither.\n\n2. EVERY RED SHIPS THE FIELD IT JUDGED. An `evidence` field with the raw bytes read — the Repo:/Patch: line found, or the literal \"NO Repo: LINE PRESENT\". Not the rule restated. A red whose evidence contradicts its own conclusion does not render; it raises RED_SELF_REFUTED naming the detector, so a broken detector reports itself instead of blocking the loop in silence for hours. All classes: REPEAT_FAILER carries the raw step error, COMPLETED_AT_GHOST both field values, ZERO_ROWS_PASS the pass ids.\n\nPROOF: lane rows for at least 3 of BEB-3861..3884 with row id and timestamp, and one get_state that settles the 3861 class with no ticket read.\n\nThen the six answers on m58852, then 2872 rows.slice. Nothing else.",
+   "refs": [
+    "BEB-3885",
+    "BEB-3861",
+    "BEB-2182",
+    "BEB-2109"
+   ]
+  },
+  {
+   "id": "m59130",
+   "seq": 59130,
+   "ts": 1787437681106,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=4 queued=13 done=847 · BINDING_UNRESOLVABLE: BEB-3887 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3888→BUILD, BEB-3887→BUILD, BEB-2069→BUILD[claimed] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59131",
+   "seq": 59131,
+   "ts": 1787437699531,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=6 queued=11 done=847 · BINDING_UNRESOLVABLE: BEB-3887 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3888→BUILD, BEB-3887→BUILD, BEB-2069→BUILD[claimed] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59132",
+   "seq": 59132,
+   "ts": 1787437706205,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3887 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-3887"
+   ]
+  },
+  {
+   "id": "m59133",
+   "seq": 59133,
+   "ts": 1787437714368,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 59129 ROUTED: routed to build lanes: BEB-3885, BEB-3886, BEB-3861, BEB-899, BEB-2182, BEB-2109 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3885",
+    "BEB-3886",
+    "BEB-3861",
+    "BEB-899",
+    "BEB-2182",
+    "BEB-2109"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 59125,
- "count": 2466
+ "head": 59133,
+ "count": 2474
 }
