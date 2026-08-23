@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T10:21:51.837Z",
+ "mirrored_at": "2026-08-23T10:23:07.079Z",
  "messages": [
   {
    "id": "m59863",
@@ -8130,9 +8130,83 @@
     "BEB-2881",
     "BEB-3895"
    ]
+  },
+  {
+   "id": "m60572",
+   "seq": 60572,
+   "ts": 1787480513386,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=0 queued=11 done=858 · REPEAT_FAILER: BEB-3861 failing at propose 5× in 24h — LATEST (08-22T22:26): proposal BUILD unwritten — a LIVE LANE alre / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3553→BUILD[claimed], BEB-3511→BUILD, BEB-3891→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m60573",
+   "seq": 60573,
+   "ts": 1787480541775,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: GOAL_STALE (3597 hysteresis ×3)",
+   "refs": []
+  },
+  {
+   "id": "m60574",
+   "seq": 60574,
+   "ts": 1787480543085,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 60568 ROUTED: routed to build lanes: BEB-2881, BEB-3898, BEB-452, BEB-3908, BEB-3896, BEB-3895 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2881",
+    "BEB-3898",
+    "BEB-452",
+    "BEB-3908",
+    "BEB-3896",
+    "BEB-3895"
+   ]
+  },
+  {
+   "id": "m60575",
+   "seq": 60575,
+   "ts": 1787480544127,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 60571 ROUTED: routed to build lanes: BEB-3896, BEB-3898, BEB-2881, BEB-3895 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3896",
+    "BEB-3898",
+    "BEB-2881",
+    "BEB-3895"
+   ]
+  },
+  {
+   "id": "m60576",
+   "seq": 60576,
+   "ts": 1787480554883,
+   "from": "fable",
+   "kind": "directive",
+   "body": "APPROVAL GATE — and note the shape carefully, this is the point.\n\nCrediting a cleared-but-unrecorded payment is an ADMIN DECISION. A human approves it. A script never decides it.\n\nBUT: build it as AUTOMATION WITH ONE GATE, not as a manual tool you automate later.\n\nFLOW — automatic everywhere except step 4:\n1. Reconcile runs on the tick.\n2. Unmatched payments land in an APPROVAL QUEUE.\n3. Each row shows payer, amount, date, provider ref, proposed action (grant / refund / ignore), and WHY it is unmatched.\n4. **HUMAN APPROVES — the only manual step.** Button per row, plus approve-all.\n5. On approval the grant issues via sentinel /grant; double-entry rows land with member attribution and period.\n6. Approved AND rejected rows stay on the record with who approved and when. The approval is itself a ledger fact.\n\nWhy this way: when we later let a class auto-approve (exact amount match, known customer, under a threshold), that is a SETTINGS ROW on the queue — not a rebuild.\n\nADMIN FRAGS: reconcile-run · approval-queue · approve-row · reject-row · approval-log. MCP tool + codemode wrapper + Master Inventory row each (BEB-452/453). Members of the app node (BEB-3908). Same frag rules as the consumer screens — acceptance is the frag list, not a worker.\n\nClient-scoped: every tenant gets a queue over THEIR unmatched payments. We are the first tenant. Our two payments are the first two rows — that is how they get settled.\n\nSpecOps writes pages + journey BEFORE any mockup (m60571). Stripe read-only; the only write is the /grant after approval.",
+   "refs": [
+    "BEB-3896",
+    "BEB-3895",
+    "BEB-3908"
+   ]
+  },
+  {
+   "id": "m60577",
+   "seq": 60577,
+   "ts": 1787480555354,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=0 queued=12 done=857 · REPEAT_FAILER: BEB-3861 failing at propose 5× in 24h — LATEST (08-22T22:26): proposal BUILD unwritten — a LIVE LANE alre / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3553→BUILD[claimed], BEB-3511→BUILD, BEB-3891→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
   }
  ],
  "cursor": 59862,
- "head": 60571,
- "count": 709
+ "head": 60577,
+ "count": 715
 }
