@@ -1,43 +1,2172 @@
 {
- "mirrored_at": "2026-08-23T20:00:19.742Z",
- "ts": 1787515214053,
+ "mirrored_at": "2026-08-23T20:00:58.685Z",
+ "ts": 1787515256399,
  "loop": {
-  "error": "TimeoutError: The operation was aborted due to timeout"
+  "proposed_total": 1866,
+  "by_state": {
+   "queued": 27,
+   "claimed": 4,
+   "done": 875,
+   "held": 374,
+   "blocked": 25,
+   "parked": 213
+  },
+  "by_lane": {
+   "BUILD": {
+    "blocked": 5,
+    "claimed": 4,
+    "done": 349,
+    "held": 310,
+    "parked": 210,
+    "queued": 12
+   },
+   "REFINE": {
+    "blocked": 3,
+    "held": 20,
+    "queued": 1
+   },
+   "REPAIR": {
+    "done": 89,
+    "held": 5,
+    "parked": 1,
+    "queued": 13
+   },
+   "SPEC": {
+    "blocked": 17,
+    "done": 437,
+    "held": 39,
+    "parked": 2,
+    "queued": 1
+   }
+  },
+  "max_concurrent": 20,
+  "shadow": false,
+  "last_pass": {
+   "at": 1787515153517,
+   "tally": "BEB-3511→BUILD[claimed], BEB-3641→BUILD, BEB-3984→BUILD, BEB-3977→BUILD, BEB-3982→BUILD, BEB-3981→BUILD[claimed], BEB-3980→BUILD[refine-lap], BEB-3979→BUILD[refine-lap], BEB-3978→BUILD[refine-lap], BEB-3882→BUILD[parked], BEB-3874→BUILD[parked], BEB-3872→BUILD[parked], BEB-3880→BUILD[parked], BEB-3566→BUILD[parked], BEB-3618→BUILD[parked], BEB-3544→BUILD[parked], BEB-3827→BUILD[parked], BEB-3881→B"
+  },
+  "reds": [
+   {
+    "code": "COMPLETED_AT_GHOST",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
+    "refs": [
+     "BEB-2805"
+    ],
+    "orky": {
+     "cls": "completed-at-ghost",
+     "subject": "BEB-2805",
+     "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
+    }
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1786180623443,
+    "detail": "MONEY RECONCILE — Stripe read in the loop, reconcile pass, fulfil-or-refund; the two cleared-but-uncredited payments settled with rows — last landed evidence 2026-08-08T09:17:03.443Z",
+    "refs": [
+     "BEB-3896",
+     "BEB-2881"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "PAYWALL GATEWAY — sentinel wired (caller rows), then status, then sold as an app: L402 + x402 + WP connect — last landed evidence NEVER",
+    "refs": [
+     "BEB-2214",
+     "BEB-1603",
+     "BEB-1935",
+     "BEB-1105"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "LOOP CONFORMANCE — every loop scored on: no CC fallback, cloud MCP trigger, gates are settings, tracked every time — last landed evidence NEVER",
+    "refs": [
+     "BEB-3856"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "BRIDGE IDENTITY — dispatcher posts as dispatcher, not as CC; silence is visible in the data — last landed evidence NEVER",
+    "refs": [
+     "BEB-3855"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "SELF HEAL — unresolvable red escalates to a big model, patches, verifies, reverts on failure; loop back online unattended — last landed evidence NEVER",
+    "refs": [
+     "BEB-3854"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "NO PROMPT — every approval step removed from the loop's edit path; runs unattended in cloud — last landed evidence NEVER",
+    "refs": [
+     "BEB-3853"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "SETTINGS FIRST — edit requests land as settings writes on the first ask, not repo searches — last landed evidence NEVER",
+    "refs": [
+     "BEB-3851"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233447430,
+    "detail": "GD COVERAGE (3625) — every GD ticket in one query with DERIVED evidence state and wall-clock per wp-admin task; 2916/2752 duplicate fires un — last landed evidence 2026-08-20T13:44:07.430Z",
+    "refs": [
+     "BEB-3625",
+     "BEB-3608",
+     "BEB-3464"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785961995617,
+    "detail": "MACHINERY EVIDENCE (3624) — machinery tickets verified by state delta, not by a 200; gate ships shadow-first, flips only on a pass the LOOP  — last landed evidence 2026-08-05T20:33:15.617Z",
+    "refs": [
+     "BEB-3624",
+     "BEB-2326",
+     "BEB-2348"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787304246831,
+    "detail": "PARK DECAY TODAY — claimed>0 and rows>0 on 3 consecutive passes; parked lanes un-park on cause-clear or backoff, and the phantom claimer (to — last landed evidence 2026-08-21T09:24:06.831Z",
+    "refs": [
+     "BEB-3623",
+     "BEB-2360",
+     "BEB-2385"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "PUBLIC FEED LABELLED - each landing carries public flag + public_title + public_body at write time; one feed feeds the internal picture, the — last landed evidence NEVER",
+    "refs": [
+     "BEB-2127"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785775703588,
+    "detail": "CHANGELOG WATCH - snapshot the full 3-month record durably BEFORE writing; evidence captured at land-time with permanent keys; a day with no — last landed evidence 2026-08-03T16:48:23.588Z",
+    "refs": [
+     "BEB-2127",
+     "BEB-2347"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "CHANGELOG BACKFILL full - remaining 12 weeks (05-21..08-13) in weekly batches, same voice, dated and published so three months read back to  — last landed evidence NEVER",
+    "refs": [
+     "BEB-2127"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "CHANGELOG BACKFILL week one - 7 dated public entries for 08-14..08-20 from the record only, Alex reviews, his corrections become the written — last landed evidence NEVER",
+    "refs": [
+     "BEB-2127"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787515211574,
+    "detail": "DAILY CHANGELOG (public) - features in plain language, the craft it took, privacy and sovereignty choices explicit, published daily, evidenc — last landed evidence NEVER",
+    "refs": [
+     "BEB-2127"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233448353,
+    "detail": "48H CLEAN RUN — loop runs 48h with no human touch: claimed>0 every hour, no pass writing 0 rows, no red older than 60min unactioned, evidenc — last landed evidence 2026-08-20T13:44:08.353Z",
+    "refs": [
+     "BEB-2716",
+     "BEB-2360",
+     "BEB-2385",
+     "BEB-2216"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233448353,
+    "detail": "GOALS DRIVE THE QUEUE (2204 closed on evidence → 2216 unparked): dated w10 goals reorder the lane queue and inject goal text into agent cont — last landed evidence 2026-08-20T13:44:08.353Z",
+    "refs": [
+     "BEB-2216",
+     "BEB-2204",
+     "BEB-2344"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787418085077,
+    "detail": "HARVEST UI LIVE FOR THE TEAM — /timers reads real entries (ABCMS port regression fixed), contract minted, VERIFIED + recording in BB Docs, t — last landed evidence 2026-08-22T17:01:25.077Z",
+    "refs": [
+     "BEB-2743",
+     "BEB-2740",
+     "BEB-631",
+     "BEB-3503",
+     "BEB-3617"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785314526029,
+    "detail": "WATCHDOG REDEPLOY — decide BEB-2761 (CF Workers Builds scope) so the watchdog replaces bad compute itself; last rung is never Alex — last landed evidence 2026-07-29T08:42:06.029Z",
+    "refs": [
+     "BEB-2761",
+     "BEB-2385"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233447758,
+    "detail": "TICK LEASE — tick holder is a D1 row with expiry, not an isolate; wedged process lapses, next wake takes it. Max freeze = TTL. No redeploy,  — last landed evidence 2026-08-20T13:44:07.758Z",
+    "refs": [
+     "BEB-2360",
+     "BEB-2385"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787303159719,
+    "detail": "TONIGHT: GD infra builds overnight (3612 map, 2526 catalog, 3482 docs, CODE RED readback) + SPECOPS SWEEP 3617 baseline on app + Cue. Mornin — last landed evidence 2026-08-21T09:05:59.719Z",
+    "refs": [
+     "BEB-3617",
+     "BEB-3612",
+     "BEB-2526",
+     "BEB-3482",
+     "BEB-3464"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233447921,
+    "detail": "MODEL ROUTING FIXED AND RETRIED (3615): per-lane selection restored, model recorded per attempt, 3597 re-run produces a non-identical page o — last landed evidence 2026-08-20T13:44:07.921Z",
+    "refs": [
+     "BEB-3615",
+     "BEB-3597",
+     "BEB-3596"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233676974,
+    "detail": "TODAY: the whole WP config chain built AND Orky empowered with all of it — 3464 engine, 3612 map, 2526 shortcodes, 3609 mode, 3608 lane, 361 — last landed evidence 2026-08-20T13:47:56.974Z",
+    "refs": [
+     "BEB-3464",
+     "BEB-3612",
+     "BEB-2526",
+     "BEB-3609",
+     "BEB-3608",
+     "BEB-3611",
+     "BEB-3610",
+     "BEB-3613"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233447430,
+    "detail": "CODE RED: create ONE custom field on gd_place THROUGH wp-admin on the bench, geodir_custom_fields row read back expected-vs-actual, video. N — last landed evidence 2026-08-20T13:44:07.430Z",
+    "refs": [
+     "BEB-3464",
+     "BEB-2752",
+     "BEB-3608"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233448033,
+    "detail": "PROVEN HANDS IN WP — TODAY: Playwright on the bench drives wp-admin, one real config action, readback-asserted, recordVideo as byproduct. Ar — last landed evidence 2026-08-20T13:44:08.033Z",
+    "refs": [
+     "BEB-3464",
+     "BEB-3450",
+     "BEB-3496",
+     "BEB-3608",
+     "BEB-2752"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233447921,
+    "detail": "BRIDGE QUIET (3597) — Alex: the red flap is unacceptable. One message per real transition, hysteresis, flap quarantine, hourly digest. TODAY — last landed evidence 2026-08-20T13:44:07.921Z",
+    "refs": [
+     "BEB-3597",
+     "BEB-2334"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233448033,
+    "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence 2026-08-20T13:44:08.033Z",
+    "refs": [
+     "BEB-3608",
+     "BEB-2752",
+     "BEB-3603",
+     "BEB-3496"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233448033,
+    "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence 2026-08-20T13:44:08.033Z",
+    "refs": [
+     "BEB-3496",
+     "BEB-2752",
+     "BEB-2753",
+     "BEB-3603",
+     "BEB-3582"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1787233447758,
+    "detail": "KICKER LIVE (BEB-2360): Orky restarts a wedged loop itself — no Alex, no CC, no laptop. Wedge-and-recover replay is the proof — last landed evidence 2026-08-20T13:44:07.758Z",
+    "refs": [
+     "BEB-2360",
+     "BEB-2385"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1785314526029,
+    "detail": "ZERO ROWS PASS — dispatcher proposes 20 and writes 0 lane rows; proposals must become rows or the pass reds — last landed evidence 2026-07-29T08:42:06.029Z",
+    "refs": [
+     "BEB-2385"
+    ]
+   },
+   {
+    "code": "GOAL_STALE",
+    "severity": "red",
+    "since": 1786950903824,
+    "detail": "Land BEB-2702 — resolve the 1016 origin DNS that makes eligibility unverifiable and holds claimed=0 — last landed evidence 2026-08-17T07:15:03.824Z",
+    "refs": [
+     "BEB-2702",
+     "BEB-2385"
+    ]
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787513588260,
+    "detail": "BEB-3936 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3936"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3936"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787513588243,
+    "detail": "BEB-3943 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3943"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3943"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787513876687,
+    "detail": "BEB-3945 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3945"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3945"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787513913685,
+    "detail": "BEB-3951 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3951"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3951"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514138820,
+    "detail": "BEB-3954 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3954"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3954"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514134494,
+    "detail": "BEB-3955 refused 6× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3955"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3955"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514130294,
+    "detail": "BEB-3956 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3956"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3956"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514126803,
+    "detail": "BEB-3957 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3957"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3957"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514123573,
+    "detail": "BEB-3958 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3958"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3958"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514120302,
+    "detail": "BEB-3959 refused 6× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3959"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3959"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514113490,
+    "detail": "BEB-3960 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3960"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3960"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514117935,
+    "detail": "BEB-3966 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3966"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3966"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514101842,
+    "detail": "BEB-3967 refused 6× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3967"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3967"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514190151,
+    "detail": "BEB-3968 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3968"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3968"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514370501,
+    "detail": "BEB-3969 refused 10× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3969"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3969"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514394734,
+    "detail": "BEB-3970 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3970"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3970"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514362238,
+    "detail": "BEB-3971 refused 7× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3971"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3971"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514332607,
+    "detail": "BEB-3972 refused 7× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "refs": [
+     "BEB-3972"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3972"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514309902,
+    "detail": "BEB-3975 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3975"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3975"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787514950942,
+    "detail": "BEB-3977 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3977"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3977"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787515032106,
+    "detail": "BEB-3978 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3978"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3978"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787515028147,
+    "detail": "BEB-3979 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3979"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3979"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787515024936,
+    "detail": "BEB-3980 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3980"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3980"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787515021420,
+    "detail": "BEB-3981 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3981"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3981"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787515018056,
+    "detail": "BEB-3982 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3982"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3982"
+    }
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1787515006530,
+    "detail": "BEB-3984 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3984"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3984"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787494419324,
+    "detail": "BEB-3535 failing at preflight 6× in 24h — LATEST (08-23T14:15): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3535"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3535"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787471082545,
+    "detail": "BEB-3897 failing at refine 3× in 24h — LATEST (08-23T07:44): refine BEB-3897: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+    "refs": [
+     "BEB-3897"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "refine BEB-3897: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+     "subject": "BEB-3897"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787471051506,
+    "detail": "BEB-3899 failing at refine 3× in 24h — LATEST (08-23T07:44): refine BEB-3899: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+    "refs": [
+     "BEB-3899"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "refine BEB-3899: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+     "subject": "BEB-3899"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787513876640,
+    "detail": "BEB-3938 failing at propose 3× in 24h — LATEST (08-23T19:38): proposal BUILD unwritten — a LIVE LANE already exists in state 'queued' and propose must not trample it (m2426). Requeue it instead of waiting for a proposal.",
+    "refs": [
+     "BEB-3938"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "proposal BUILD unwritten — a LIVE LANE already exists in state 'queued' and propose must not trample it (m2426). Requeue it instead of waiting for a proposal.",
+     "subject": "BEB-3938"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787514617376,
+    "detail": "BEB-3966 failing at preflight 3× in 24h — LATEST (08-23T19:50): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3966"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3966"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787514664236,
+    "detail": "BEB-3967 failing at preflight 5× in 24h — LATEST (08-23T19:52): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3967"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3967"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787514859974,
+    "detail": "BEB-3968 failing at preflight 3× in 24h — LATEST (08-23T19:54): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3968"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3968"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787514981770,
+    "detail": "BEB-3969 failing at preflight 6× in 24h — LATEST (08-23T19:59): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3969"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3969"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787514930638,
+    "detail": "BEB-3971 failing at preflight 4× in 24h — LATEST (08-23T19:55): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3971"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3971"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787514951193,
+    "detail": "BEB-3972 failing at preflight 4× in 24h — LATEST (08-23T19:57): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+    "refs": [
+     "BEB-3972"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+     "subject": "BEB-3972"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787429678999,
+    "detail": "abilifi-apps failing at codegen 34× in 24h — LATEST (08-23T19:40): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output) and the whole-file fall · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-2412"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output) and the whole-file fallback did not qualify (len 4272 vs base 1498). Change only what SPEC.md asks; keep every existing route.\ntarget: abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+     "subject": "BEB-2412"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787443235087,
+    "detail": "abilifi-apps failing at heartbeat 12× in 24h — LATEST (08-23T19:58): SPECOPS_REGRESSION (BEB-3531 canaries): discrimination REGRESSED: control page scores 1 VERIFIED (not_template)",
+    "refs": [
+     "BEB-2385"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "SPECOPS_REGRESSION (BEB-3531 canaries): discrimination REGRESSED: control page scores 1 VERIFIED (not_template)",
+     "subject": "BEB-2385"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787432198315,
+    "detail": "abilifi-apps failing at park-escalate 4× in 24h — LATEST (08-23T18:23): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "refs": [
+     "BEB-2707"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+     "subject": "BEB-2707"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787431755678,
+    "detail": "abilifi-apps/abilifi-auth failing at evaluate 5× in 24h — LATEST (08-22T22:42): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-3525's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+    "refs": [
+     "BEB-2069"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-3525's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of this ticket's deliverable.",
+     "subject": "BEB-2069"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787436630941,
+    "detail": "abilifi-apps/abilifi-dispatcher failing at park-escalate 4× in 24h — LATEST (08-23T16:30): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "refs": [
+     "BEB-2121"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+     "subject": "BEB-2121"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787433937389,
+    "detail": "abilifi-mastra failing at park-escalate 3× in 24h — LATEST (08-23T19:17): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "refs": [
+     "BEB-2186"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+     "subject": "BEB-2186"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787429867857,
+    "detail": "abilifi-payload failing at codegen 21× in 24h — LATEST (08-23T17:46): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3707"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nParent: BEB-2520 (AUTO-SPLIT on codegen size-wall, BEB-2967). Build ONLY this section as one lane-sized deliverable — not the whole parent.\nLane: BUILD\n\n## READER PART (the three-pane UI)\n- LEFT: folder tree (folders → feeds), unread badges, Quick-Add (+) — one input, debounced discovery, \"Fo",
+     "subject": "BEB-3707"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787432677061,
+    "detail": "abilifi-payload failing at park-escalate 19× in 24h — LATEST (08-23T19:21): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "refs": [
+     "BEB-3758"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+     "subject": "BEB-3758"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787431402608,
+    "detail": "abilifi-registry failing at codegen 35× in 24h — LATEST (08-23T19:52): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
+    "refs": [
+     "BEB-3766"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: abilifi-registry\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nParent: BEB-2520 (AUTO-SPLIT on codegen size-wall, BEB-2967). Build ONLY this section as one lane-sized deliverable — not the whole parent.\nLane: BUILD\n\n## READER FRAG (backend)\n1. SUBSCRIBE: WebSub subscriptions to any topic (ours or external); feed autodiscovery on URL/domain; OPML import/e",
+     "subject": "BEB-3766"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787493709741,
+    "detail": "alexrollin/abilifi-apps failing at binding-gate 10× in 24h — LATEST (08-23T14:26): §6.5 build-gate probe threw: TimeoutError: The operation was aborted due to timeout",
+    "refs": [
+     "BEB-3403"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "§6.5 build-gate probe threw: TimeoutError: The operation was aborted due to timeout",
+     "subject": "BEB-3403"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787429676926,
+    "detail": "alexrollin/abilifi-apps failing at codegen 244× in 24h — LATEST (08-23T19:48): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-3511"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: abilifi/build-system\nClass: CODE\nLane: frag\n\n## Changes\n1. Implement the necessary code changes for the specified section of BEB-3454.\n2. Ensure that the implementation adheres to the parent contract.\n3. Verify that the route/surface responds correctly.\n4. Address any missing details by",
+     "subject": "BEB-3511"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787471125979,
+    "detail": "alexrollin/abilifi-apps failing at complete 41× in 24h — LATEST (08-23T19:42): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+    "refs": [
+     "BEB-3898"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+     "subject": "BEB-3898"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787438159175,
+    "detail": "alexrollin/abilifi-apps failing at deploy 26× in 24h — LATEST (08-23T19:01): codeLen: 2876\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 76fbd07ff35875",
+    "refs": [
+     "BEB-2930"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "codeLen: 2876\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/abilifi-apps",
+     "subject": "BEB-2930"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787431976376,
+    "detail": "alexrollin/abilifi-apps failing at evaluate 242× in 24h — LATEST (08-23T19:31): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2724's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+    "refs": [
+     "BEB-2872"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2724's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of this ticket's deliverable.",
+     "subject": "BEB-2872"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787429109841,
+    "detail": "alexrollin/abilifi-apps failing at park-escalate 111× in 24h — LATEST (08-23T19:34): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "refs": [
+     "BEB-1769"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+     "subject": "BEB-1769"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787513805451,
+    "detail": "alexrollin/abilifi-apps failing at split 5× in 24h — LATEST (08-23T19:52): sections: User journey | Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions | Auth & scope | Codemode + metering | Interface\nchildren: BEB",
+    "refs": [
+     "BEB-3896"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "sections: User journey | Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions | Auth & scope | Codemode + metering | Interface\nchildren: BEB-3944, BEB-3945, BEB-3946, BEB-3947, BEB-3948, BEB-3949, BEB-3950, BEB-3951",
+     "subject": "BEB-3896"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787437897753,
+    "detail": "n/a failing at codegen 320× in 24h — LATEST (08-23T19:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
+    "refs": [
+     "BEB-3776"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: n/a\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: n/a\nClass: CODE\nLane: part\n\nParent: BEB-1775 (AUTO-SPLIT on codegen size-wall, BEB-2967). Build ONLY this section as one lane-sized deliverable — not the whole parent.\nLane: BUILD\n\n## STEPS\n1. Locate current Cue APK status: check BEB-1747–72 batch tickets + repos for any existing Androi",
+     "subject": "BEB-3776"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787431966543,
+    "detail": "n/a failing at complete 8× in 24h — LATEST (08-23T16:57): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in",
+    "refs": [
+     "BEB-1759"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + install response) or bench-probed proof; owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+     "subject": "BEB-1759"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787492417490,
+    "detail": "n/a failing at deploy 9× in 24h — LATEST (08-23T16:05): codeLen: 4651\ndeploy error: DEPLOY REFUSED by 2 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a",
+    "refs": [
+     "BEB-2521"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "codeLen: 4651\ndeploy error: DEPLOY REFUSED by 2 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a divider line landed in the bundle and it cannot parse — FIX: return either whole-file code OR search/replace blocks, never both, and never a divider inside whole-file output | W10021-two-default-exports: the source declares `export default` more than once — the answer carries two rival implementations, and the bundle cannot parse — FIX: emit exactly one export default: the final implementation, not the alternatives that led to it\ncommit: none\ntarget: n/a",
+     "subject": "BEB-2521"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787429417666,
+    "detail": "n/a failing at park-escalate 55× in 24h — LATEST (08-23T19:29): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "refs": [
+     "BEB-2828"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+     "subject": "BEB-2828"
+    }
+   },
+   {
+    "code": "REPEAT_FAILER",
+    "severity": "red",
+    "since": 1787432274682,
+    "detail": "n/a failing at split 5× in 24h — LATEST (08-23T07:56): sections: What | Existing infra to reuse | Storage approach | Schema additions (BB Docs DB) | MCP tool additions (`doc.bebond.net/mcp`) | Frontend (BB Docs editor) | Producer side — how generators emi",
+    "refs": [
+     "BEB-899"
+    ],
+    "orky": {
+     "cls": "repeat-failer",
+     "error": "sections: What | Existing infra to reuse | Storage approach | Schema additions (BB Docs DB) | MCP tool additions (`doc.bebond.net/mcp`) | Frontend (BB Docs editor) | Producer side — how generators emit videos | Auth + privacy | Billing (BB Credits — metered) | Done criteria | Out of scope | Hard rules | Dependencies\nchildren: BEB-3877, BEB-3878, BEB-3879, BEB-3880, BEB-3881, BEB-3882, BEB-3883, BEB-3884",
+     "subject": "BEB-899"
+    }
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1787416192501,
+    "detail": "fix BEB-2491 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2491",
+     "evaluate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1787416261595,
+    "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2573",
+     "codegen"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786950903824,
+    "detail": "fix BEB-2702 for heartbeat has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2702",
+     "heartbeat"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "codegen"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786741396403,
+    "detail": "fix BEB-2522 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2522",
+     "codegen"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1787416192501,
+    "detail": "fix BEB-2671 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2671",
+     "deploy"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786718656770,
+    "detail": "fix BEB-2532 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2532",
+     "complete"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786719319689,
+    "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2515",
+     "codegen"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for split has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "split"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for binding-gate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "binding-gate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786719380596,
+    "detail": "fix BEB-2742 for BEB-2742 has not moved in 24h while its subject red COMPLETED_AT_GHOST is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2742",
+     "BEB-2742"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786728673555,
+    "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2524",
+     "complete"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786885194180,
+    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2460",
+     "codegen"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1787416192501,
+    "detail": "fix BEB-2612 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2612",
+     "deploy"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for split has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "split"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "park-escalate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "park-escalate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "park-escalate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "park-escalate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "park-escalate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "evaluate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "refine"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "refine"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "park-escalate"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for propose has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "propose"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786708675942,
+    "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2737",
+     "preflight"
+    ]
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513913827,
+    "detail": "BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3936"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3936"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513805637,
+    "detail": "BEB-3937 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3937"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3937"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513562346,
+    "detail": "BEB-3938 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3938"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3938"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513558281,
+    "detail": "BEB-3939 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3939"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3939"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513684830,
+    "detail": "BEB-3940 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3940"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3940"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513591637,
+    "detail": "BEB-3941 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3941"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3941"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513805681,
+    "detail": "BEB-3943 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3943"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3943"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513913774,
+    "detail": "BEB-3944 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3944"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3944"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514015134,
+    "detail": "BEB-3945 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3945"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3945"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513872525,
+    "detail": "BEB-3946 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3946"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3946"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514000090,
+    "detail": "BEB-3947 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3947"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3947"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514000048,
+    "detail": "BEB-3948 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3948"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3948"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787513913731,
+    "detail": "BEB-3949 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3949"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3949"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514159263,
+    "detail": "BEB-3951 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3951"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3951"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514190193,
+    "detail": "BEB-3952 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3952"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3952"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514003483,
+    "detail": "BEB-3953 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3953"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3953"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514155351,
+    "detail": "BEB-3954 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3954"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3954"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514617906,
+    "detail": "BEB-3955 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3955"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3955"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514155268,
+    "detail": "BEB-3956 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3956"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3956"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514155226,
+    "detail": "BEB-3957 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3957"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3957"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514155185,
+    "detail": "BEB-3958 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3958"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3958"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514477771,
+    "detail": "BEB-3959 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3959"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3959"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514141623,
+    "detail": "BEB-3960 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3960"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3960"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514237490,
+    "detail": "BEB-3961 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3961"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3961"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514092761,
+    "detail": "BEB-3962 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3962"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3962"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514060950,
+    "detail": "BEB-3963 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3963"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3963"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514117935,
+    "detail": "BEB-3966 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3966"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3966"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514101842,
+    "detail": "BEB-3967 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3967"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3967"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514190151,
+    "detail": "BEB-3968 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3968"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3968"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514396103,
+    "detail": "BEB-3969 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3969"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3969"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514396063,
+    "detail": "BEB-3970 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3970"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3970"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514363482,
+    "detail": "BEB-3971 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3971"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3971"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514333667,
+    "detail": "BEB-3972 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3972"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3972"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514333432,
+    "detail": "BEB-3973 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3973"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3973"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787514744740,
+    "detail": "BEB-3975 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3975"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3975"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515055005,
+    "detail": "BEB-3977 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3977"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3977"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515078929,
+    "detail": "BEB-3978 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3978"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3978"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515078892,
+    "detail": "BEB-3979 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3979"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3979"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515078853,
+    "detail": "BEB-3980 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3980"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3980"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515078814,
+    "detail": "BEB-3981 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3981"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3981"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515078778,
+    "detail": "BEB-3982 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3982"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3982"
+    }
+   },
+   {
+    "code": "BINDING_UNRESOLVABLE",
+    "severity": "red",
+    "since": 1787515078740,
+    "detail": "BEB-3984 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+    "refs": [
+     "BEB-3984"
+    ],
+    "orky": {
+     "cls": "binding-unresolvable",
+     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+     "subject": "BEB-3984"
+    }
+   }
+  ],
+  "wake_record": [
+   {
+    "tick_n": 9829,
+    "ts": 1787515242534,
+    "step_reached": 2,
+    "blocked_predicate": "S2 CAN SHIP: infra blocker BINDING_UNRESOLVABLE",
+    "blocked_error": "BINDING_UNRESOLVABLE: BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) [BEB-3936]",
+    "action": "STEP 2: infra blocker named; a goal cannot land through a closed door — codegen/claim held this wake until it clears.",
+    "action_step": 2,
+    "evidence_ref": null,
+    "report_hash": "1050197147"
+   },
+   {
+    "tick_n": 24500,
+    "ts": 1787515192756,
+    "step_reached": 2,
+    "blocked_predicate": "S2 CAN SHIP: infra blocker BINDING_UNRESOLVABLE",
+    "blocked_error": "BINDING_UNRESOLVABLE: BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) [BEB-3936]",
+    "action": "STEP 2: infra blocker named; a goal cannot land through a closed door — codegen/claim held this wake until it clears.",
+    "action_step": 2,
+    "evidence_ref": null,
+    "report_hash": "2627377596"
+   },
+   {
+    "tick_n": 13957,
+    "ts": 1787515153073,
+    "step_reached": 2,
+    "blocked_predicate": "S2 CAN SHIP: infra blocker BINDING_UNRESOLVABLE",
+    "blocked_error": "BINDING_UNRESOLVABLE: BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) [BEB-3936]",
+    "action": "STEP 2: infra blocker named; a goal cannot land through a closed door — codegen/claim held this wake until it clears.",
+    "action_step": 2,
+    "evidence_ref": null,
+    "report_hash": "1172147594"
+   }
+  ]
  },
  "bridge": {
-  "head_seq": 62279,
+  "head_seq": 62286,
   "cursor_fable": 59862,
-  "unread_for_fable": 2417,
+  "unread_for_fable": 2424,
   "last": [
    {
-    "seq": 62275,
+    "seq": 62282,
     "from": "cc",
     "kind": "status",
-    "one_line": "RED ×7: REPEAT_FAILER(BEB-3969), BINDING_UNRESOLVABLE(BEB-3978), BINDING_UNRESOLVABLE(BEB-"
+    "one_line": "LOOP: step 2 BLOCKED · claimed=3 queued=28 done=875 · BINDING_UNRESOLVABLE: BEB-3936 carri"
    },
    {
-    "seq": 62276,
+    "seq": 62283,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3969 — REFINE_FAIL ×6. Codegen spend stopped;"
+    "one_line": "DISPATCHER: BEB-3980 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
    },
    {
-    "seq": 62277,
+    "seq": 62284,
     "from": "cc",
     "kind": "status",
-    "one_line": "LOOP: step 2 BLOCKED · claimed=7 queued=23 done=876 · BINDING_UNRESOLVABLE: BEB-3936 carri"
+    "one_line": "DISPATCHER: BEB-3980 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
    },
    {
-    "seq": 62278,
+    "seq": 62285,
     "from": "cc",
     "kind": "status",
-    "one_line": "LOOP: step 2 BLOCKED · claimed=8 queued=24 done=875 · BINDING_UNRESOLVABLE: BEB-3936 carri"
+    "one_line": "DISPATCHER: BEB-3980 REFINED → SPEC lane queued (claimable now) — deliverable class DOC (B"
    },
    {
-    "seq": 62279,
+    "seq": 62286,
     "from": "cc",
     "kind": "status",
-    "one_line": "DISPATCHER: BEB-3981 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
+    "one_line": "DISPATCHER: BEB-3980 REFINED → BUILD lane queued (claimable now) — deliverable class CODE "
    }
   ]
  },
@@ -129,6 +2258,2091 @@
    "probed": "/health"
   }
  ],
- "reds": [],
- "wake_record": []
+ "reds": [
+  {
+   "code": "COMPLETED_AT_GHOST",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
+   "refs": [
+    "BEB-2805"
+   ],
+   "orky": {
+    "cls": "completed-at-ghost",
+    "subject": "BEB-2805",
+    "error": "two fields, one truth: 1 rows fail (completed_at IS NOT NULL AND status != 'done') OR (status='done' AND completed_at IS NULL)"
+   }
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1786180623443,
+   "detail": "MONEY RECONCILE — Stripe read in the loop, reconcile pass, fulfil-or-refund; the two cleared-but-uncredited payments settled with rows — last landed evidence 2026-08-08T09:17:03.443Z",
+   "refs": [
+    "BEB-3896",
+    "BEB-2881"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "PAYWALL GATEWAY — sentinel wired (caller rows), then status, then sold as an app: L402 + x402 + WP connect — last landed evidence NEVER",
+   "refs": [
+    "BEB-2214",
+    "BEB-1603",
+    "BEB-1935",
+    "BEB-1105"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "LOOP CONFORMANCE — every loop scored on: no CC fallback, cloud MCP trigger, gates are settings, tracked every time — last landed evidence NEVER",
+   "refs": [
+    "BEB-3856"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "BRIDGE IDENTITY — dispatcher posts as dispatcher, not as CC; silence is visible in the data — last landed evidence NEVER",
+   "refs": [
+    "BEB-3855"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "SELF HEAL — unresolvable red escalates to a big model, patches, verifies, reverts on failure; loop back online unattended — last landed evidence NEVER",
+   "refs": [
+    "BEB-3854"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "NO PROMPT — every approval step removed from the loop's edit path; runs unattended in cloud — last landed evidence NEVER",
+   "refs": [
+    "BEB-3853"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "SETTINGS FIRST — edit requests land as settings writes on the first ask, not repo searches — last landed evidence NEVER",
+   "refs": [
+    "BEB-3851"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233447430,
+   "detail": "GD COVERAGE (3625) — every GD ticket in one query with DERIVED evidence state and wall-clock per wp-admin task; 2916/2752 duplicate fires un — last landed evidence 2026-08-20T13:44:07.430Z",
+   "refs": [
+    "BEB-3625",
+    "BEB-3608",
+    "BEB-3464"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785961995617,
+   "detail": "MACHINERY EVIDENCE (3624) — machinery tickets verified by state delta, not by a 200; gate ships shadow-first, flips only on a pass the LOOP  — last landed evidence 2026-08-05T20:33:15.617Z",
+   "refs": [
+    "BEB-3624",
+    "BEB-2326",
+    "BEB-2348"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787304246831,
+   "detail": "PARK DECAY TODAY — claimed>0 and rows>0 on 3 consecutive passes; parked lanes un-park on cause-clear or backoff, and the phantom claimer (to — last landed evidence 2026-08-21T09:24:06.831Z",
+   "refs": [
+    "BEB-3623",
+    "BEB-2360",
+    "BEB-2385"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "PUBLIC FEED LABELLED - each landing carries public flag + public_title + public_body at write time; one feed feeds the internal picture, the — last landed evidence NEVER",
+   "refs": [
+    "BEB-2127"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785775703588,
+   "detail": "CHANGELOG WATCH - snapshot the full 3-month record durably BEFORE writing; evidence captured at land-time with permanent keys; a day with no — last landed evidence 2026-08-03T16:48:23.588Z",
+   "refs": [
+    "BEB-2127",
+    "BEB-2347"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "CHANGELOG BACKFILL full - remaining 12 weeks (05-21..08-13) in weekly batches, same voice, dated and published so three months read back to  — last landed evidence NEVER",
+   "refs": [
+    "BEB-2127"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "CHANGELOG BACKFILL week one - 7 dated public entries for 08-14..08-20 from the record only, Alex reviews, his corrections become the written — last landed evidence NEVER",
+   "refs": [
+    "BEB-2127"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787515211574,
+   "detail": "DAILY CHANGELOG (public) - features in plain language, the craft it took, privacy and sovereignty choices explicit, published daily, evidenc — last landed evidence NEVER",
+   "refs": [
+    "BEB-2127"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233448353,
+   "detail": "48H CLEAN RUN — loop runs 48h with no human touch: claimed>0 every hour, no pass writing 0 rows, no red older than 60min unactioned, evidenc — last landed evidence 2026-08-20T13:44:08.353Z",
+   "refs": [
+    "BEB-2716",
+    "BEB-2360",
+    "BEB-2385",
+    "BEB-2216"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233448353,
+   "detail": "GOALS DRIVE THE QUEUE (2204 closed on evidence → 2216 unparked): dated w10 goals reorder the lane queue and inject goal text into agent cont — last landed evidence 2026-08-20T13:44:08.353Z",
+   "refs": [
+    "BEB-2216",
+    "BEB-2204",
+    "BEB-2344"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787418085077,
+   "detail": "HARVEST UI LIVE FOR THE TEAM — /timers reads real entries (ABCMS port regression fixed), contract minted, VERIFIED + recording in BB Docs, t — last landed evidence 2026-08-22T17:01:25.077Z",
+   "refs": [
+    "BEB-2743",
+    "BEB-2740",
+    "BEB-631",
+    "BEB-3503",
+    "BEB-3617"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785314526029,
+   "detail": "WATCHDOG REDEPLOY — decide BEB-2761 (CF Workers Builds scope) so the watchdog replaces bad compute itself; last rung is never Alex — last landed evidence 2026-07-29T08:42:06.029Z",
+   "refs": [
+    "BEB-2761",
+    "BEB-2385"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233447758,
+   "detail": "TICK LEASE — tick holder is a D1 row with expiry, not an isolate; wedged process lapses, next wake takes it. Max freeze = TTL. No redeploy,  — last landed evidence 2026-08-20T13:44:07.758Z",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787303159719,
+   "detail": "TONIGHT: GD infra builds overnight (3612 map, 2526 catalog, 3482 docs, CODE RED readback) + SPECOPS SWEEP 3617 baseline on app + Cue. Mornin — last landed evidence 2026-08-21T09:05:59.719Z",
+   "refs": [
+    "BEB-3617",
+    "BEB-3612",
+    "BEB-2526",
+    "BEB-3482",
+    "BEB-3464"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233447921,
+   "detail": "MODEL ROUTING FIXED AND RETRIED (3615): per-lane selection restored, model recorded per attempt, 3597 re-run produces a non-identical page o — last landed evidence 2026-08-20T13:44:07.921Z",
+   "refs": [
+    "BEB-3615",
+    "BEB-3597",
+    "BEB-3596"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233676974,
+   "detail": "TODAY: the whole WP config chain built AND Orky empowered with all of it — 3464 engine, 3612 map, 2526 shortcodes, 3609 mode, 3608 lane, 361 — last landed evidence 2026-08-20T13:47:56.974Z",
+   "refs": [
+    "BEB-3464",
+    "BEB-3612",
+    "BEB-2526",
+    "BEB-3609",
+    "BEB-3608",
+    "BEB-3611",
+    "BEB-3610",
+    "BEB-3613"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233447430,
+   "detail": "CODE RED: create ONE custom field on gd_place THROUGH wp-admin on the bench, geodir_custom_fields row read back expected-vs-actual, video. N — last landed evidence 2026-08-20T13:44:07.430Z",
+   "refs": [
+    "BEB-3464",
+    "BEB-2752",
+    "BEB-3608"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233448033,
+   "detail": "PROVEN HANDS IN WP — TODAY: Playwright on the bench drives wp-admin, one real config action, readback-asserted, recordVideo as byproduct. Ar — last landed evidence 2026-08-20T13:44:08.033Z",
+   "refs": [
+    "BEB-3464",
+    "BEB-3450",
+    "BEB-3496",
+    "BEB-3608",
+    "BEB-2752"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233447921,
+   "detail": "BRIDGE QUIET (3597) — Alex: the red flap is unacceptable. One message per real transition, hysteresis, flap quarantine, hourly digest. TODAY — last landed evidence 2026-08-20T13:44:07.921Z",
+   "refs": [
+    "BEB-3597",
+    "BEB-2334"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233448033,
+   "detail": "ADMIN CONFIG LANE (3608): the loop can CONFIGURE a WP site through wp-admin, not only write plugins — every step recorded as it works, linka — last landed evidence 2026-08-20T13:44:08.033Z",
+   "refs": [
+    "BEB-3608",
+    "BEB-2752",
+    "BEB-3603",
+    "BEB-3496"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233448033,
+   "detail": "BUILD GAPS FRONTED (Alex 08-19): 3496 addon activate → 2752 CPT seed → 2753 rollup, each landing a wp-admin RECORDING. No recording = not do — last landed evidence 2026-08-20T13:44:08.033Z",
+   "refs": [
+    "BEB-3496",
+    "BEB-2752",
+    "BEB-2753",
+    "BEB-3603",
+    "BEB-3582"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1787233447758,
+   "detail": "KICKER LIVE (BEB-2360): Orky restarts a wedged loop itself — no Alex, no CC, no laptop. Wedge-and-recover replay is the proof — last landed evidence 2026-08-20T13:44:07.758Z",
+   "refs": [
+    "BEB-2360",
+    "BEB-2385"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1785314526029,
+   "detail": "ZERO ROWS PASS — dispatcher proposes 20 and writes 0 lane rows; proposals must become rows or the pass reds — last landed evidence 2026-07-29T08:42:06.029Z",
+   "refs": [
+    "BEB-2385"
+   ]
+  },
+  {
+   "code": "GOAL_STALE",
+   "severity": "red",
+   "since": 1786950903824,
+   "detail": "Land BEB-2702 — resolve the 1016 origin DNS that makes eligibility unverifiable and holds claimed=0 — last landed evidence 2026-08-17T07:15:03.824Z",
+   "refs": [
+    "BEB-2702",
+    "BEB-2385"
+   ]
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787513588260,
+   "detail": "BEB-3936 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3936"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3936"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787513588243,
+   "detail": "BEB-3943 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3943"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3943"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787513876687,
+   "detail": "BEB-3945 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3945"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3945"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787513913685,
+   "detail": "BEB-3951 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3951"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3951"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514138820,
+   "detail": "BEB-3954 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3954"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3954"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514134494,
+   "detail": "BEB-3955 refused 6× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3955"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3955"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514130294,
+   "detail": "BEB-3956 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3956"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3956"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514126803,
+   "detail": "BEB-3957 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3957"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3957"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514123573,
+   "detail": "BEB-3958 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3958"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3958"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514120302,
+   "detail": "BEB-3959 refused 6× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3959"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3959"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514113490,
+   "detail": "BEB-3960 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3960"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3960"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514117935,
+   "detail": "BEB-3966 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3966"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3966"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514101842,
+   "detail": "BEB-3967 refused 6× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3967"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3967"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514190151,
+   "detail": "BEB-3968 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3968"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3968"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514370501,
+   "detail": "BEB-3969 refused 10× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3969"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3969"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514394734,
+   "detail": "BEB-3970 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3970"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3970"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514362238,
+   "detail": "BEB-3971 refused 7× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3971"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3971"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514332607,
+   "detail": "BEB-3972 refused 7× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+   "refs": [
+    "BEB-3972"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3972"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514309902,
+   "detail": "BEB-3975 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3975"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3975"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787514950942,
+   "detail": "BEB-3977 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3977"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3977"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787515032106,
+   "detail": "BEB-3978 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3978"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3978"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787515028147,
+   "detail": "BEB-3979 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3979"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3979"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787515024936,
+   "detail": "BEB-3980 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3980"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3980"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787515021420,
+   "detail": "BEB-3981 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3981"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3981"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787515018056,
+   "detail": "BEB-3982 refused 4× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3982"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3982"
+   }
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1787515006530,
+   "detail": "BEB-3984 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3984"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3984"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787494419324,
+   "detail": "BEB-3535 failing at preflight 6× in 24h — LATEST (08-23T14:15): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3535"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3535"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787471082545,
+   "detail": "BEB-3897 failing at refine 3× in 24h — LATEST (08-23T07:44): refine BEB-3897: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+   "refs": [
+    "BEB-3897"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "refine BEB-3897: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+    "subject": "BEB-3897"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787471051506,
+   "detail": "BEB-3899 failing at refine 3× in 24h — LATEST (08-23T07:44): refine BEB-3899: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+   "refs": [
+    "BEB-3899"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "refine BEB-3899: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\"",
+    "subject": "BEB-3899"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787513876640,
+   "detail": "BEB-3938 failing at propose 3× in 24h — LATEST (08-23T19:38): proposal BUILD unwritten — a LIVE LANE already exists in state 'queued' and propose must not trample it (m2426). Requeue it instead of waiting for a proposal.",
+   "refs": [
+    "BEB-3938"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "proposal BUILD unwritten — a LIVE LANE already exists in state 'queued' and propose must not trample it (m2426). Requeue it instead of waiting for a proposal.",
+    "subject": "BEB-3938"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787514617376,
+   "detail": "BEB-3966 failing at preflight 3× in 24h — LATEST (08-23T19:50): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3966"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3966"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787514664236,
+   "detail": "BEB-3967 failing at preflight 5× in 24h — LATEST (08-23T19:52): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3967"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3967"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787514859974,
+   "detail": "BEB-3968 failing at preflight 3× in 24h — LATEST (08-23T19:54): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3968"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3968"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787514981770,
+   "detail": "BEB-3969 failing at preflight 6× in 24h — LATEST (08-23T19:59): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3969"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3969"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787514930638,
+   "detail": "BEB-3971 failing at preflight 4× in 24h — LATEST (08-23T19:55): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3971"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3971"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787514951193,
+   "detail": "BEB-3972 failing at preflight 4× in 24h — LATEST (08-23T19:57): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
+   "refs": [
+    "BEB-3972"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "[\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid refine buys the same verdict. This needs a human decision, not another lap.\",\n  \"evidence\": \"lanes.bounces=1 (BEB-2131 cap is 2 — this is the forecast, the cap is the backstop)\",\n  \"fix_ref\": \"BEB-2129\"\n }\n]",
+    "subject": "BEB-3972"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787429678999,
+   "detail": "abilifi-apps failing at codegen 34× in 24h — LATEST (08-23T19:40): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output) and the whole-file fall · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-2412"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output) and the whole-file fallback did not qualify (len 4272 vs base 1498). Change only what SPEC.md asks; keep every existing route.\ntarget: abilifi-apps\ncodegen prompt head (what the MODEL received): [walls=5] Edit the Worker below so it satisfies SPEC.md. Return ONLY search/replace blocks, no prose,\nno whole-file output, in exactly this format (the SEARCH text must match the file byte for byte):\n<<<<<<< SEARCH\n(exact existing lines)\n=======\n(replacement lines)\n>>>>>>> REPLACE\n\nChange as little as possible. Anything SPEC.md does not ask you to change, leave alone.\n\n--- SPEC.md ---\n# ",
+    "subject": "BEB-2412"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787443235087,
+   "detail": "abilifi-apps failing at heartbeat 12× in 24h — LATEST (08-23T19:58): SPECOPS_REGRESSION (BEB-3531 canaries): discrimination REGRESSED: control page scores 1 VERIFIED (not_template)",
+   "refs": [
+    "BEB-2385"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "SPECOPS_REGRESSION (BEB-3531 canaries): discrimination REGRESSED: control page scores 1 VERIFIED (not_template)",
+    "subject": "BEB-2385"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787432198315,
+   "detail": "abilifi-apps failing at park-escalate 4× in 24h — LATEST (08-23T18:23): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+   "refs": [
+    "BEB-2707"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "subject": "BEB-2707"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787431755678,
+   "detail": "abilifi-apps/abilifi-auth failing at evaluate 5× in 24h — LATEST (08-22T22:42): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-3525's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+   "refs": [
+    "BEB-2069"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-3525's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of this ticket's deliverable.",
+    "subject": "BEB-2069"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787436630941,
+   "detail": "abilifi-apps/abilifi-dispatcher failing at park-escalate 4× in 24h — LATEST (08-23T16:30): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+   "refs": [
+    "BEB-2121"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "subject": "BEB-2121"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787433937389,
+   "detail": "abilifi-mastra failing at park-escalate 3× in 24h — LATEST (08-23T19:17): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+   "refs": [
+    "BEB-2186"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "subject": "BEB-2186"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787429867857,
+   "detail": "abilifi-payload failing at codegen 21× in 24h — LATEST (08-23T17:46): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3707"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: abilifi-payload\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nParent: BEB-2520 (AUTO-SPLIT on codegen size-wall, BEB-2967). Build ONLY this section as one lane-sized deliverable — not the whole parent.\nLane: BUILD\n\n## READER PART (the three-pane UI)\n- LEFT: folder tree (folders → feeds), unread badges, Quick-Add (+) — one input, debounced discovery, \"Fo",
+    "subject": "BEB-3707"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787432677061,
+   "detail": "abilifi-payload failing at park-escalate 19× in 24h — LATEST (08-23T19:21): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+   "refs": [
+    "BEB-3758"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "subject": "BEB-3758"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787431402608,
+   "detail": "abilifi-registry failing at codegen 35× in 24h — LATEST (08-23T19:52): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
+   "refs": [
+    "BEB-3766"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: abilifi-registry\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nParent: BEB-2520 (AUTO-SPLIT on codegen size-wall, BEB-2967). Build ONLY this section as one lane-sized deliverable — not the whole parent.\nLane: BUILD\n\n## READER FRAG (backend)\n1. SUBSCRIBE: WebSub subscriptions to any topic (ours or external); feed autodiscovery on URL/domain; OPML import/e",
+    "subject": "BEB-3766"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787493709741,
+   "detail": "alexrollin/abilifi-apps failing at binding-gate 10× in 24h — LATEST (08-23T14:26): §6.5 build-gate probe threw: TimeoutError: The operation was aborted due to timeout",
+   "refs": [
+    "BEB-3403"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "§6.5 build-gate probe threw: TimeoutError: The operation was aborted due to timeout",
+    "subject": "BEB-3403"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787429676926,
+   "detail": "alexrollin/abilifi-apps failing at codegen 244× in 24h — LATEST (08-23T19:48): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-3511"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: abilifi/build-system\nClass: CODE\nLane: frag\n\n## Changes\n1. Implement the necessary code changes for the specified section of BEB-3454.\n2. Ensure that the implementation adheres to the parent contract.\n3. Verify that the route/surface responds correctly.\n4. Address any missing details by",
+    "subject": "BEB-3511"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787471125979,
+   "detail": "alexrollin/abilifi-apps failing at complete 41× in 24h — LATEST (08-23T19:42): owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+   "refs": [
+    "BEB-3898"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+    "subject": "BEB-3898"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787438159175,
+   "detail": "alexrollin/abilifi-apps failing at deploy 26× in 24h — LATEST (08-23T19:01): codeLen: 2876\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: 76fbd07ff35875",
+   "refs": [
+    "BEB-2930"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "codeLen: 2876\ndeploy error: SHELL_GATE (BEB-2897): declared d1=abilifi-gers does not exist — create the D1 first or fix the name. Not shipping a worker bound to a missing store.\ncommit: [redacted]\ntarget: alexrollin/abilifi-apps",
+    "subject": "BEB-2930"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787431976376,
+   "detail": "alexrollin/abilifi-apps failing at evaluate 242× in 24h — LATEST (08-23T19:31): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2724's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi",
+   "refs": [
+    "BEB-2872"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2724's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of this ticket's deliverable.",
+    "subject": "BEB-2872"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787429109841,
+   "detail": "alexrollin/abilifi-apps failing at park-escalate 111× in 24h — LATEST (08-23T19:34): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+   "refs": [
+    "BEB-1769"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "subject": "BEB-1769"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787513805451,
+   "detail": "alexrollin/abilifi-apps failing at split 5× in 24h — LATEST (08-23T19:52): sections: User journey | Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions | Auth & scope | Codemode + metering | Interface\nchildren: BEB",
+   "refs": [
+    "BEB-3896"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "sections: User journey | Capability | UX: what question does Alex answer by looking at this | Screen states | Assertions | Open questions | Auth & scope | Codemode + metering | Interface\nchildren: BEB-3944, BEB-3945, BEB-3946, BEB-3947, BEB-3948, BEB-3949, BEB-3950, BEB-3951",
+    "subject": "BEB-3896"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787437897753,
+   "detail": "n/a failing at codegen 320× in 24h — LATEST (08-23T19:53): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the",
+   "refs": [
+    "BEB-3776"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.\ntarget: n/a\ncodegen prompt head (what the MODEL received): Build EXACTLY the deliverable specified in this SPEC.md. Output only the complete plain-JS Worker module.\n\nRepo: n/a\nClass: CODE\nLane: part\n\nParent: BEB-1775 (AUTO-SPLIT on codegen size-wall, BEB-2967). Build ONLY this section as one lane-sized deliverable — not the whole parent.\nLane: BUILD\n\n## STEPS\n1. Locate current Cue APK status: check BEB-1747–72 batch tickets + repos for any existing Androi",
+    "subject": "BEB-3776"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787431966543,
+   "detail": "n/a failing at complete 8× in 24h — LATEST (08-23T16:57): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in",
+   "refs": [
+    "BEB-1759"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + install response) or bench-probed proof; owner-facing surface (Lane: part) with no contract_id (m2535 guard); owner-facing surface with no evaluator_pass evidence (m2535 guard)",
+    "subject": "BEB-1759"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787492417490,
+   "detail": "n/a failing at deploy 9× in 24h — LATEST (08-23T16:05): codeLen: 4651\ndeploy error: DEPLOY REFUSED by 2 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a",
+   "refs": [
+    "BEB-2521"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "codeLen: 4651\ndeploy error: DEPLOY REFUSED by 2 known wall(s) — W10021-diff-markers: the source contains search/replace conflict markers — an answer meant as a PATCH was uploaded as a whole file, so a divider line landed in the bundle and it cannot parse — FIX: return either whole-file code OR search/replace blocks, never both, and never a divider inside whole-file output | W10021-two-default-exports: the source declares `export default` more than once — the answer carries two rival implementations, and the bundle cannot parse — FIX: emit exactly one export default: the final implementation, not the alternatives that led to it\ncommit: none\ntarget: n/a",
+    "subject": "BEB-2521"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787429417666,
+   "detail": "n/a failing at park-escalate 55× in 24h — LATEST (08-23T19:29): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+   "refs": [
+    "BEB-2828"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane",
+    "subject": "BEB-2828"
+   }
+  },
+  {
+   "code": "REPEAT_FAILER",
+   "severity": "red",
+   "since": 1787432274682,
+   "detail": "n/a failing at split 5× in 24h — LATEST (08-23T07:56): sections: What | Existing infra to reuse | Storage approach | Schema additions (BB Docs DB) | MCP tool additions (`doc.bebond.net/mcp`) | Frontend (BB Docs editor) | Producer side — how generators emi",
+   "refs": [
+    "BEB-899"
+   ],
+   "orky": {
+    "cls": "repeat-failer",
+    "error": "sections: What | Existing infra to reuse | Storage approach | Schema additions (BB Docs DB) | MCP tool additions (`doc.bebond.net/mcp`) | Frontend (BB Docs editor) | Producer side — how generators emit videos | Auth + privacy | Billing (BB Credits — metered) | Done criteria | Out of scope | Hard rules | Dependencies\nchildren: BEB-3877, BEB-3878, BEB-3879, BEB-3880, BEB-3881, BEB-3882, BEB-3883, BEB-3884",
+    "subject": "BEB-899"
+   }
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1787416192501,
+   "detail": "fix BEB-2491 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2491",
+    "evaluate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1787416261595,
+   "detail": "fix BEB-2573 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2573",
+    "codegen"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786950903824,
+   "detail": "fix BEB-2702 for heartbeat has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2702",
+    "heartbeat"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "codegen"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786741396403,
+   "detail": "fix BEB-2522 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2522",
+    "codegen"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1787416192501,
+   "detail": "fix BEB-2671 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2671",
+    "deploy"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786718656770,
+   "detail": "fix BEB-2532 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2532",
+    "complete"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786719319689,
+   "detail": "fix BEB-2515 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2515",
+    "codegen"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for split has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "split"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for binding-gate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "binding-gate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786719380596,
+   "detail": "fix BEB-2742 for BEB-2742 has not moved in 24h while its subject red COMPLETED_AT_GHOST is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2742",
+    "BEB-2742"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786728673555,
+   "detail": "fix BEB-2524 for complete has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2524",
+    "complete"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786885194180,
+   "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2460",
+    "codegen"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1787416192501,
+   "detail": "fix BEB-2612 for deploy has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2612",
+    "deploy"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for split has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "split"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for evaluate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "evaluate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "refine"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for refine has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "refine"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for park-escalate has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "park-escalate"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for propose has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "propose"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786708675942,
+   "detail": "fix BEB-2737 for preflight has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2737",
+    "preflight"
+   ]
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513913827,
+   "detail": "BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3936"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3936"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513805637,
+   "detail": "BEB-3937 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3937"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3937"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513562346,
+   "detail": "BEB-3938 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3938"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3938"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513558281,
+   "detail": "BEB-3939 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3939"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3939"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513684830,
+   "detail": "BEB-3940 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3940"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3940"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513591637,
+   "detail": "BEB-3941 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3941"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3941"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513805681,
+   "detail": "BEB-3943 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3943"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3943"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513913774,
+   "detail": "BEB-3944 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3944"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3944"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514015134,
+   "detail": "BEB-3945 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3945"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3945"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513872525,
+   "detail": "BEB-3946 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3946"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3946"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514000090,
+   "detail": "BEB-3947 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3947"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3947"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514000048,
+   "detail": "BEB-3948 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3948"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3948"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787513913731,
+   "detail": "BEB-3949 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3949"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3949"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514159263,
+   "detail": "BEB-3951 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3951"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3951"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514190193,
+   "detail": "BEB-3952 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3952"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3952"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514003483,
+   "detail": "BEB-3953 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3953"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3953"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514155351,
+   "detail": "BEB-3954 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3954"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3954"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514617906,
+   "detail": "BEB-3955 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3955"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3955"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514155268,
+   "detail": "BEB-3956 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3956"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3956"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514155226,
+   "detail": "BEB-3957 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3957"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3957"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514155185,
+   "detail": "BEB-3958 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3958"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3958"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514477771,
+   "detail": "BEB-3959 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3959"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3959"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514141623,
+   "detail": "BEB-3960 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3960"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3960"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514237490,
+   "detail": "BEB-3961 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3961"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3961"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514092761,
+   "detail": "BEB-3962 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3962"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3962"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514060950,
+   "detail": "BEB-3963 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3963"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3963"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514117935,
+   "detail": "BEB-3966 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3966"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3966"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514101842,
+   "detail": "BEB-3967 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3967"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3967"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514190151,
+   "detail": "BEB-3968 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3968"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3968"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514396103,
+   "detail": "BEB-3969 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3969"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3969"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514396063,
+   "detail": "BEB-3970 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3970"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3970"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514363482,
+   "detail": "BEB-3971 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3971"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3971"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514333667,
+   "detail": "BEB-3972 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3972"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3972"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514333432,
+   "detail": "BEB-3973 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3973"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3973"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787514744740,
+   "detail": "BEB-3975 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3975"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3975"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515055005,
+   "detail": "BEB-3977 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3977"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3977"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515078929,
+   "detail": "BEB-3978 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3978"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3978"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515078892,
+   "detail": "BEB-3979 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3979"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3979"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515078853,
+   "detail": "BEB-3980 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3980"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3980"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515078814,
+   "detail": "BEB-3981 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3981"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3981"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515078778,
+   "detail": "BEB-3982 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3982"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3982"
+   }
+  },
+  {
+   "code": "BINDING_UNRESOLVABLE",
+   "severity": "red",
+   "since": 1787515078740,
+   "detail": "BEB-3984 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6)",
+   "refs": [
+    "BEB-3984"
+   ],
+   "orky": {
+    "cls": "binding-unresolvable",
+    "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
+    "subject": "BEB-3984"
+   }
+  }
+ ],
+ "wake_record": [
+  {
+   "tick_n": 9829,
+   "ts": 1787515242534,
+   "step_reached": 2,
+   "blocked_predicate": "S2 CAN SHIP: infra blocker BINDING_UNRESOLVABLE",
+   "blocked_error": "BINDING_UNRESOLVABLE: BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) [BEB-3936]",
+   "action": "STEP 2: infra blocker named; a goal cannot land through a closed door — codegen/claim held this wake until it clears.",
+   "action_step": 2,
+   "evidence_ref": null,
+   "report_hash": "1050197147"
+  },
+  {
+   "tick_n": 24500,
+   "ts": 1787515192756,
+   "step_reached": 2,
+   "blocked_predicate": "S2 CAN SHIP: infra blocker BINDING_UNRESOLVABLE",
+   "blocked_error": "BINDING_UNRESOLVABLE: BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) [BEB-3936]",
+   "action": "STEP 2: infra blocker named; a goal cannot land through a closed door — codegen/claim held this wake until it clears.",
+   "action_step": 2,
+   "evidence_ref": null,
+   "report_hash": "2627377596"
+  },
+  {
+   "tick_n": 13957,
+   "ts": 1787515153073,
+   "step_reached": 2,
+   "blocked_predicate": "S2 CAN SHIP: infra blocker BINDING_UNRESOLVABLE",
+   "blocked_error": "BINDING_UNRESOLVABLE: BEB-3936 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — correct the Repo: line, never substitute a plausible one (m8495 §6) [BEB-3936]",
+   "action": "STEP 2: infra blocker named; a goal cannot land through a closed door — codegen/claim held this wake until it clears.",
+   "action_step": 2,
+   "evidence_ref": null,
+   "report_hash": "1172147594"
+  }
+ ]
 }
