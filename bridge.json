@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T07:57:17.764Z",
+ "mirrored_at": "2026-08-23T07:58:27.310Z",
  "messages": [
   {
    "id": "m59863",
@@ -2894,9 +2894,120 @@
     "BEB-2109",
     "BEB-3922"
    ]
+  },
+  {
+   "id": "m60109",
+   "seq": 60109,
+   "ts": 1787471840868,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED BINDING_UNRESOLVABLE: BEB-3918 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB- — cor (3597 hysteresis ×3)",
+   "refs": [
+    "BEB-3918"
+   ]
+  },
+  {
+   "id": "m60110",
+   "seq": 60110,
+   "ts": 1787471850864,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 60104 ROUTED: routed to build lanes: BEB-1005, BEB-3895, BEB-2214 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-1005",
+    "BEB-3895",
+    "BEB-2214"
+   ]
+  },
+  {
+   "id": "m60111",
+   "seq": 60111,
+   "ts": 1787471852341,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER: BEB-3923 REFINED → BUILD lane queued (claimable now) — deliverable class CODE (BEB-2114).",
+   "refs": [
+    "BEB-2007",
+    "BEB-3923"
+   ]
+  },
+  {
+   "id": "m60112",
+   "seq": 60112,
+   "ts": 1787471856443,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CC — DO THESE BY HAND, NOW. Alex's order: not through the loop. Break-glass, direct execution, this session. The loop has burned the morning refusing its own tickets; these five are infrastructure it cannot fix from inside.\n\n1. CREATE THE D1. Deliberately, with the schema below — not codegen's guess. Then bind it and redeploy so BEB-3895 stops hitting SHELL_GATE.\n   Entry row, append-only, never updated, never deleted:\n   id · org_id · period · ts · direction · amount_micros (INTEGER) · counterparty · entry_class · contract_type · cost_micros · markup_micros · tax_micros · rounding_remainder_micros · service · worker · reason · activity · ref (ticket/session/resource) · sold_by · sold_at_rate · reserve_id · idempotency_key · prev_hash.\n   INTEGER micros only, never a float. Indexes on (org_id, ts), (org_id, period), (idempotency_key UNIQUE), (ref).\n   The DO keeps balance + escrow ONLY. D1 is the ledger of record. Both written on settle (BEB-1005).\n\n2. THE WALLET KEY IS org_id. Three names are live — tenantId, site, org — and the ambiguity is now blocking the D1 schema, the CRM join and the settle payload. FABLE'S CALL, and it stands unless Alex says otherwise: **org_id**, because the CRM company record is already org-scoped (PRIMARY KEY(org_id,id)), policy_check scopes on org, and the org is what we invoice. tenantId and site become aliases that RESOLVE to org_id; they are not stored. Fix the settle payload mismatch ({tenantId,reqId,ttv,cfCost,contributorId,success} vs {site,idem,dev_share}) to one shape while you are in there — that mismatch is the documented 400-bug.\n\n3. FIX THE SPEC.md PUSH RACE BY HAND. Fetch-and-rebase onto the moved head before pushing, or serialise pushes per repo. Then /dispatch/requeue BEB-3897 and BEB-3899, which are auto-HELD by the 2340 breaker on REFINE_FAIL ×3 through no fault of their own.\n\n4. BEB-2214, THE WIRE — BY HAND. One sentinel, one custom domain, abilifi-rpc pointed at it, the workers.dev rail retired. Then make ONE real met",
+   "refs": [
+    "BEB-3895",
+    "BEB-2214",
+    "BEB-3897",
+    "BEB-3899",
+    "BEB-3553",
+    "BEB-1005"
+   ]
+  },
+  {
+   "id": "m60113",
+   "seq": 60113,
+   "ts": 1787471863893,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 2 BLOCKED · claimed=1 queued=17 done=854 · BINDING_UNRESOLVABLE: BEB-3900 carries a dead binding — no repo/frag target binding (or \"n/a\") in the description, in an / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3553→BUILD[claimed], BEB-3923→BUILD, BEB-3922→BUILD / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m60114",
+   "seq": 60114,
+   "ts": 1787471886136,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane BLOCKED: BEB-3766 — mastra tick codegen FAILED: CODEGEN_WALL prompt-contamination: the assembled prompt contains loop process text matching /POST \\/dispatch\\/(?:complete|blocked)/i — the codegen prompt is SPEC.md + deployed source + acceptance and nothing else (m16352). Refusing to build rather than asking a model to implement our process as the artifact.. First of this class this hour; repeats are on the failure record, not here.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3766"
+   ]
+  },
+  {
+   "id": "m60115",
+   "seq": 60115,
+   "ts": 1787471887556,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER auto-HOLD (BEB-2340 breaker): BEB-3895 — DEPLOY_FAIL ×4. Codegen spend stopped; needs a fix, then /dispatch/requeue.",
+   "refs": [
+    "BEB-2340",
+    "BEB-3895"
+   ]
+  },
+  {
+   "id": "m60116",
+   "seq": 60116,
+   "ts": 1787471901114,
+   "from": "cc",
+   "kind": "status",
+   "body": "RED ×3: BINDING_UNRESOLVABLE(BEB-3919), BINDING_UNRESOLVABLE(BEB-3920), BINDING_UNRESOLVABLE(BEB-3921) (3597 hysteresis ×3)",
+   "refs": [
+    "BEB-3919",
+    "BEB-3920",
+    "BEB-3921"
+   ]
+  },
+  {
+   "id": "m60117",
+   "seq": 60117,
+   "ts": 1787471902608,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTIONS OPEN on BEB-3918 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact format and structure of the `attach_video` and `insert_video_block` tools required by the BB Docs MCP? · answer via spec_answer id=e12dd108-dbcd-4a73-a7ca-bf6393c03f00 · list them all with spec_questions {spec_id:\"BEB-3918\"}",
+   "refs": [
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 59862,
- "head": 60108,
- "count": 246
+ "head": 60117,
+ "count": 255
 }
