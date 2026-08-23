@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T18:12:19.783Z",
+ "mirrored_at": "2026-08-23T18:13:19.112Z",
  "messages": [
   {
    "id": "m59863",
@@ -22582,9 +22582,34 @@
    "refs": [
     "BEB-3622"
    ]
+  },
+  {
+   "id": "m61846",
+   "seq": 61846,
+   "ts": 1787508730550,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=1 queued=12 done=863 · REPEAT_FAILER: BEB-2129 failing at park-escalate 3× in 24h — LATEST (08-23T16:27): NEEDS_OPERATOR after 2 park-decays —  / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3511→BUILD, BEB-3641→BUILD[claimed], BEB-3707→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m61847",
+   "seq": 61847,
+   "ts": 1787508731762,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**BEB-3934 KITESURF WP-ADMIN DRIVER** — P1, ETA 08-26, 200/400. USE THIS FOR WP-ADMIN TASKS AND FOR THE PROOF SCREENSHOTS.\n\nCloudflare shipped Kitesurf 08-06: an agent-first browser running entirely on Workers, FREE while in beta via Browser Run. Speaks CDP — Puppeteer/Playwright work unchanged, just add `browser=kitesurf` to the Browser Run endpoint.\n\nMeasured vs Chromium: **3.1× less CPU** on screenshots, **3.8× less** on HTML extraction, **4.7× less memory** on screenshots (57.8 MiB vs 271.0), **7.0× less** on extraction. Wall time ~1.7–1.8× slower — that is the trade. Memory and CPU drive the bill AND cap concurrent sessions; 4.7× is the difference between screenshotting one settings page and screenshotting every connected site every tick.\n\nWHAT IT IS FOR:\n1. The BEB-3927 reply sequence — screenshot of the USER'S OWN GD settings screen plus live values read off it. Cheap enough per request.\n2. Driving wp-admin for the WP operations workflows.\n3. Loop evidence — rendered screens instead of status codes and byte counts. This is the 2881/3553 defect.\n4. The GUI door in BEB-3926 — post-JS, content present, which means a render.\n\nTHE LIMIT THAT DECIDES ROUTING: Kitesurf is explicitly not ready for long AUTHENTICATED sessions with persistent state — and wp-admin is authenticated. So: Kitesurf FIRST for one-shot reads; fall back to Chromium (Browser Run default) for long authenticated work or on failure; **the fallback is automatic AND RECORDED** — log which engine served each task so we learn the real boundary. A silent fallback teaches nothing.\n\nDo not assume where the boundary is. Acceptance 2: run a real wp-admin login against Kitesurf and either get the screenshot or capture its failure verbatim. Either is a pass. A guess is not.\n\nAnd measure cost/memory on OUR pages — our numbers, not the blog's.",
+   "refs": [
+    "BEB-3934",
+    "BEB-3927",
+    "BEB-3926",
+    "BEB-2175"
+   ]
   }
  ],
  "cursor": 59862,
- "head": 61845,
- "count": 1983
+ "head": 61847,
+ "count": 1985
 }
