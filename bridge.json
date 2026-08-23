@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T07:09:18.264Z",
+ "mirrored_at": "2026-08-23T07:10:26.554Z",
  "messages": [
   {
    "id": "m56660",
@@ -35929,9 +35929,75 @@
    "refs": [
     "BEB-3622"
    ]
+  },
+  {
+   "id": "m59831",
+   "seq": 59831,
+   "ts": 1787468955621,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE → CC. START ON SENTINEL. Alex's direction, 2026-08-23.\n\nSENTINEL IS AN APP, not a ledger endpoint — the Stripe-shaped product: sentinel.abilifi.net is the front door with sign-up, gated resources, keys, charges and reports. Underneath it is COOP ACCOUNTING: double entry, markup as its own line, patronage refund at settlement. Frame doc: BB Docs 8d2c9380 §0. Read that before writing any money code.\n\nMEASURED TODAY, so nobody re-derives it:\n· abilifi.net IS abilifi-sentinel v1.0.0 and answers /health /reserve /settle /grant /sync-credits /balance/:t /ledger/:t /margin.\n· /ledger/<any tenant> returns entries:[] and /balance returns 0 — ZERO caller rows. BUILT BUT UNWIRED (doc 3aab6d78).\n· A SECOND sentinel is live: abilifi-sentinel-kv.alex-rollin.workers.dev, workers.dev only, no custom domain — the one abilifi-rpc calls, so reserve/settle never land (BEB-2214).\n· sentinel.abilifi.net = 530, no route.\n· abilifi.net apex serves raw API JSON as the public face.\n\nORDER OF WORK, Alex's sequence — WIRE, then STATUS, then SERVICE:\n1. BEB-2214 — ONE sentinel, one custom domain, rpc reaches it. DONE = a CALLER ROW in /ledger/:t from a real pass, raw row attached. Not a 200 from /health.\n2. BEB-3896 MONEY RECONCILE (P0) — Stripe READ tools on mcp.bebond.net + codemode + Master Inventory, key from the vault, no CLI on Alex's machine. Then the reconcile pass and fulfil-or-refund on a settings row. Two real payments cleared Stripe and were never credited; they are the first run.\n3. BEB-3895 PAYWALL GATEWAY — the app itself. BEB-3898 LIVE USAGE, BEB-3897 CLIENT EXCHANGE RATE, BEB-3899 PLUGIN LICENSING follow.\n\nRULINGS ALREADY MADE TODAY — do not re-litigate:\n· MONEY IS INTEGER MICRO-EUROS. 1 credit = 1 cent = 10,000 micros. Cents display only. Round ONCE at the charge; the remainder is its own ledger line.\n· CREDITS NEVER EXPIRE. No expiry field, no sweep. BEB-1174's 90-day trial expiry is removed, not left unused. Free-before-paid ORDER stays.\n· ONE credit unit, ONE payer pe",
+   "refs": [
+    "BEB-2214",
+    "BEB-3895",
+    "BEB-3896",
+    "BEB-3897",
+    "BEB-3898",
+    "BEB-3899"
+   ]
+  },
+  {
+   "id": "m59832",
+   "seq": 59832,
+   "ts": 1787468972773,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=1 queued=10 done=850 · REPEAT_FAILER: BEB-3861 failing at propose 5× in 24h — LATEST (08-22T22:26): proposal BUILD unwritten — a LIVE LANE alre / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3891→BUILD[parked], BEB-3890→BUILD[parked], BEB-3893→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m59833",
+   "seq": 59833,
+   "ts": 1787468974019,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 59831 ROUTED: routed to build lanes: BEB-2214, BEB-3896, BEB-3895, BEB-3898, BEB-3897, BEB-3899, BEB-1174 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2214",
+    "BEB-3896",
+    "BEB-3895",
+    "BEB-3898",
+    "BEB-3897",
+    "BEB-3899"
+   ]
+  },
+  {
+   "id": "m59834",
+   "seq": 59834,
+   "ts": 1787469009374,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3553 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3553 — 2026-08-23T07:09:52.858Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3553"
+   ]
+  },
+  {
+   "id": "m59835",
+   "seq": 59835,
+   "ts": 1787469014474,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=0 queued=10 done=851 · REPEAT_FAILER: BEB-3861 failing at propose 5× in 24h — LATEST (08-22T22:26): proposal BUILD unwritten — a LIVE LANE alre / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3553→BUILD[done], BEB-3891→BUILD[parked], BEB-3890→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
   }
  ],
  "cursor": 56659,
- "head": 59830,
- "count": 3171
+ "head": 59835,
+ "count": 3176
 }
