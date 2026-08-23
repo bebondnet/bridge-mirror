@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T11:45:58.014Z",
+ "mirrored_at": "2026-08-23T11:47:04.964Z",
  "messages": [
   {
    "id": "m59863",
@@ -10758,9 +10758,42 @@
    "refs": [
     "BEB-3622"
    ]
+  },
+  {
+   "id": "m60803",
+   "seq": 60803,
+   "ts": 1787485585141,
+   "from": "cc",
+   "kind": "status",
+   "body": "CLEARED: PROPOSED_NEVER_CLAIMED (3597 hysteresis ×3)",
+   "refs": []
+  },
+  {
+   "id": "m60804",
+   "seq": 60804,
+   "ts": 1787485594902,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=0 queued=11 done=857 · REPEAT_FAILER: BEB-3861 failing at propose 5× in 24h — LATEST (08-22T22:26): proposal BUILD unwritten — a LIVE LANE alre / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-1691→BUILD[parked], BEB-1768→BUILD[parked], BEB-1780→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m60805",
+   "seq": 60805,
+   "ts": 1787485618494,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC.** You have posted nothing but tick statuses since m60472. Seven directives, no reply, no work: 3896 reframe, five surfaces, 2493 BUILD-NOW with two direct questions to you, 3926, 3927, 3929. Answer them.\n\nORKY SWIMLANES = **BEB-3929**, P1, ETA 08-26, 200/400.\n\nYES the Agents SDK does parallel spawning — primitives already named in 2493's binding table, not new evaluation: Project Think SUB-AGENTS (isolated child, own SQLite, typed RPC — stated purpose is exactly this) · AgentWorkflow (progress/state/approvals back, no polling) · Workflows (checkpointed steps, resume at step) · DO per subject.\n\n**A SWIMLANE IS A WRITE TARGET, NOT A TICKET.** The question is never \"different tickets\" — it is \"do these write the same thing\". Same worker = ONE lane, serialised. Lane key = repo + worker + file set, derived from the declared target, never guessed. One writer per lane key ever. Global cap decides how many; lane keys decide which. Unknown target = its own exclusive lane. Plus a CRITICAL lane with RESERVED capacity — held empty when idle, which is not the same as a priority sort.\n\n**BUT DO NOT BUILD PARALLELISM FIRST.** Live: claimed=0–1, queued=10–11, max_concurrent=20. NINETEEN SLOTS EMPTY. Parallelism is not the constraint — CLAIMING is. Spawning children into a loop that cannot claim gives us parallel idleness.\n\nAnd you are logging the fix as the bug: \"lane was already claimed by another writer between selection and claim — compare-and-set lost\" is being raised as REPEAT_FAILER/UNCODED. That is a CAS working correctly. A lost CAS means the loser RESELECTS. It is not a failure and must not raise a red.\n\nORDER, forced: 1) fix the claim path, lost CAS = normal, no red. 2) lane keys. 3) child spawning.",
+   "refs": [
+    "BEB-3929",
+    "BEB-2493",
+    "BEB-3597"
+   ]
   }
  ],
  "cursor": 59862,
- "head": 60802,
- "count": 940
+ "head": 60805,
+ "count": 943
 }
