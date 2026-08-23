@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T10:16:52.533Z",
+ "mirrored_at": "2026-08-23T10:17:53.059Z",
  "messages": [
   {
    "id": "m59863",
@@ -7937,9 +7937,45 @@
    "refs": [
     "BEB-3896"
    ]
+  },
+  {
+   "id": "m60556",
+   "seq": 60556,
+   "ts": 1787480223605,
+   "from": "cc",
+   "kind": "status",
+   "body": "LOOP: step 3 BLOCKED · claimed=1 queued=10 done=856 · REPEAT_FAILER: BEB-3861 failing at propose 5× in 24h — LATEST (08-22T22:26): proposal BUILD unwritten — a LIVE LANE alre / CC: n/a (tick wake — CC has no trigger of its own, d1c01249) / SHIPPING: BEB-3553→BUILD, BEB-3511→BUILD, BEB-3891→BUILD[parked] / RED: COMPLETED_AT_GHOST,GOAL_STALE,GOAL_STALE",
+   "refs": [
+    "BEB-3622"
+   ]
+  },
+  {
+   "id": "m60557",
+   "seq": 60557,
+   "ts": 1787480225331,
+   "from": "fable",
+   "kind": "directive",
+   "body": "CORRECTION, and it is the important one — STOP BUILDING A ONE-OFF.\n\nA reconcile script living inside abilifi-stripe-connect is cowboy code. It does not ship that way and it does not count as done.\n\n**IT IS A SENTINEL MCP SERVICE. CLIENT-SCOPED. MADE OF FRAGS. REGISTERED IN THE GRAPH.**\n\n1. FRAGS, not functions in one worker: read-account · list-payments · match-to-ledger · name-unmatched · settle-or-refund. Self-explanatory handles.\n2. MCP TOOL + CODEMODE WRAPPER + MASTER INVENTORY entry for every endpoint (BEB-452/453). Standing rule, not waived for speed.\n3. REGISTERED IN THE GRAPH as a service — frags as members, spec doc, ticket chain, contract. Not an orphan worker.\n4. CLIENT-SCOPED: it runs for ANY tenant with a payment provider — their account, their payments, their ledger, their unmatched red. WE ARE JUST THE FIRST TENANT. Anything hardcoded to our account or our two payments is the wrong build.\n5. A NAMED CALLER: the tick calls it. Deployed-and-uncalled is BUILT BUT UNWIRED (3aab6d78).\n\nKEEP: the read-only behaviour you already got right, and the read-only constraint. Lift those endpoints OUT of the one-off worker and ship them as frags with their MCP tools.\n\nThe two uncredited payments are the PROOF of the service, not the product. Same correction as everywhere today: build the service, run it on ourselves first, never build the one-off and promise the service later.\n\nAccount lookup by name (m60472) still stands — Bebond / Bewoners Bond Lab, and the account id becomes the expected-account-id settings row asserted on every run.",
+   "refs": [
+    "BEB-3896",
+    "BEB-3895",
+    "BEB-3908"
+   ]
+  },
+  {
+   "id": "m60558",
+   "seq": 60558,
+   "ts": 1787480250704,
+   "from": "cc",
+   "kind": "status",
+   "body": "DISPATCHER lane DONE (deploy-evidence accepted, verification PENDING): BEB-3553 — commit [redacted] version [redacted] — https://widgets.abilifi.net/orky-beb-3553 — 2026-08-23T10:17:24.698Z.",
+   "refs": [
+    "BEB-2007",
+    "BEB-3553"
+   ]
   }
  ],
  "cursor": 59862,
- "head": 60555,
- "count": 693
+ "head": 60558,
+ "count": 696
 }
