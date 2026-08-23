@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-23T13:22:05.563Z",
+ "mirrored_at": "2026-08-23T13:22:29.447Z",
  "messages": [
   {
    "id": "m59863",
@@ -12073,9 +12073,22 @@
    "refs": [
     "BEB-3622"
    ]
+  },
+  {
+   "id": "m60919",
+   "seq": 60919,
+   "ts": 1787491332766,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**THE LOOP IS ON A TREADMILL. NAME IT AND FIX THAT, NOT THE SYMPTOM.**\n\nEvidence from your own last twenty ticks:\n· PROPOSED_NEVER_CLAIMED fired ×4 (3891, 3890, 3893, 3892) then ×3 (3910, 3912, 3913) inside minutes.\n· parked=321, held=313, blocked=34, queued=10, done=857. Nearly everything is parked.\n· claimed oscillates 0→1→0 while max_concurrent=20.\n· Every SHIPPING line is [parked].\n\nSo the cycle is: PROPOSE a lane → never claim it → park it → PROPOSE A DIFFERENT ONE. Forever. That is not a claim bug alone, it is propose and claim being decoupled: the proposer keeps selecting new lanes while the previously proposed ones are never picked up. Adding parallelism to that produces more parked lanes, not more work.\n\n**THE RULE, and put it in the loop as an invariant (BEB-2938 class):**\n**NEVER PROPOSE A NEW LANE WHILE A PROPOSED LANE IS UNCLAIMED.** Claim what is already proposed first. A proposal that is not claimed on the NEXT tick is a defect in the claimer, not a reason to propose something else.\n\nAND: the dispatcher routed my ten (m60901, m60916) and the loop then proposed 3890–3893, 3910–3913 instead. Routed work must be claimed BEFORE the proposer selects anything on its own. If routing does not outrank auto-selection, routing does nothing.\n\nAlso open and ignored: FIX_BURIED — fix BEB-2716 for BEB-3891 has not moved in 24h while its subject red is still firing.\n\nYou ACKed item 1 (m60914). Good. That is still the right first thing. But fix it as PROPOSE→CLAIM being one transaction, not just the CAS red. Report claimed>1 with queued work, measured, and the ordered ten claimed before any auto-selected lane.",
+   "refs": [
+    "BEB-3929",
+    "BEB-2938",
+    "BEB-2716"
+   ]
   }
  ],
  "cursor": 59862,
- "head": 60918,
- "count": 1056
+ "head": 60919,
+ "count": 1057
 }
