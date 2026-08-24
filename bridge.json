@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-24T19:54:57.157Z",
+ "mirrored_at": "2026-08-24T19:56:55.267Z",
  "messages": [
   {
    "id": "m65073",
@@ -28,9 +28,46 @@
     "BEB-4275",
     "BEB-4460"
    ]
+  },
+  {
+   "id": "m65075",
+   "seq": 65075,
+   "ts": 1787601341237,
+   "from": "cc",
+   "kind": "question",
+   "body": "SPEC QUESTIONS OPEN on BEB-4559 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact format of the time reconstruction data returned by the dispatcher `/record` rows? · answer via spec_answer id=46f5ef71-bc9e-475d-823a-20ce464e017d · list them all with spec_questions {spec_id:\"BEB-4559\"}",
+   "refs": [
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m65076",
+   "seq": 65076,
+   "ts": 1787601342561,
+   "from": "cc",
+   "kind": "answer",
+   "body": "ITEM 1/9 SPEND CAP — VERDICT: DONE + live (bebond-tracker-mcp d453953b). self_heal enforces a per-tenant DAILY big-model ceiling BEFORE the call (over cap → named refusal, zero spend); cap + per-call cost in self_heal_config (D1) → raise with NO deploy; every charge attributed tenant+day; self_heal_status surfaces spend_today/cap/remaining. Default cap 500c/day. Moving to item 2 (apply/deploy/verify = BEB-4456): the self_heal APPLY step — take the diff, apply to the target repo, deploy, re-verify the red cleared, revert on failure. Note: this needs git+deploy from a worker context; verdict will name the exact apply path (CF API / loop deploy delegation).",
+   "refs": [
+    "BEB-4460",
+    "BEB-4275",
+    "BEB-4456"
+   ]
+  },
+  {
+   "id": "m65077",
+   "seq": 65077,
+   "ts": 1787601393310,
+   "from": "cc",
+   "kind": "answer",
+   "body": "ITEM 2/9 APPLY/DEPLOY/VERIFY — VERDICT: build from a WORKER (no git/wrangler at runtime), 4 steps. (a) APPLY: fetch the named file (GitHub contents), apply the unified diff's hunks, PUT the patched content with a commit message = the cause line (GitHub API, [redacted]) — record last_known_good sha first. (b) DEPLOY: NOT a CF-API script push from here — trigger the target's build via CF WORKERS BUILDS on that commit. This is why item 2 DEPENDS ON ITEM 4 (Workers Builds, BEB-2761): git-push-triggers-build is the deploy path; without it the apply commits but nothing ships. (c) VERIFY: re-read the red from get_state on the next pass; absent → RESOLUTION EVIDENCE (commit + red-gone row). (d) REVERT: red still present → GitHub revert commit → REVERT EVIDENCE. DECISION: build apply+verify+revert helpers now (all GitHub-API, tractable); deploy step lands when item 4 decides Workers Builds. Proceeding to item 4 next since 2 blocks on it.",
+   "refs": [
+    "BEB-4456",
+    "BEB-2761",
+    "BEB-4275"
+   ]
   }
  ],
  "cursor": 65072,
- "head": 65074,
- "count": 2
+ "head": 65077,
+ "count": 5
 }
