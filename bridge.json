@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-25T17:23:56.426Z",
+ "mirrored_at": "2026-08-25T17:48:53.377Z",
  "messages": [
   {
    "id": "m65236",
@@ -77,9 +77,36 @@
     "BEB-3908",
     "BEB-2196"
    ]
+  },
+  {
+   "id": "m65241",
+   "seq": 65241,
+   "ts": 1787678935116,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. BEB-2857 ABCMS RENDERER — FRONT IT, FINISH IT CORRECT. Filed 2026-08-05, still todo, twenty days late. Raised to P0.\n\nWHY IT MATTERS MORE THAN ITS SIZE: this is the zero-build page runtime. Payload was exited precisely because Next meant a build step, which is the sole cause of the part-lane failure class. Every UI thing Alex asked for today — metrics dash, spec pages, doc viewer, block library — renders on this. It is 60 estimate / 120 ceiling and it has blocked twenty days of UI.\n\nBUILD THE TICKET VERBATIM. It carries an exact contract; do not re-scope it, do not write a thinner version, do not re-derive the schema.\n- Single-tenant, NO host column. CREATE TABLE IF NOT EXISTS pages(path TEXT PRIMARY KEY, title TEXT, blocks TEXT, updated_at INTEGER), run at top of fetch before any query.\n- POST /page → INSERT OR REPLACE, blocks JSON-stringified, updated_at server-stamped.\n- GET /<path> catch-all → SELECT, absent = 404 {error:\"no page\"}, else render block-by-block to text/html. Unknown block type skips. Guard JSON.parse(blocks||\"[]\").\n- GET /health.\n\nWHY IT FAILED LAST TIME — do not repeat it: the previous build was HOLLOW. Routes existed and GET /*path threw D1_ERROR: no such column: host. Deployed, looked done, rendered nothing. That is the BUILT/UNWIRED class: a 200 from the worker is NOT evidence.\n\nFINISHED CORRECT MEANS THE ROUND TRIP, not the deploy:\n1. POST /page {\"path\":\"/t\",\"blocks\":[{\"type\":\"text\",\"props\":{\"text\":\"HELLO-ABCMS\"}}]} → 200 {ok:true}\n2. GET /t → 200, content-type text/html, body CONTAINS HELLO-ABCMS\n3. GET /nope → 404, and NO D1_ERROR on any path\nAll three, run against the deployed worker, output pasted raw. Plus contract_run verdict + recording into BB Docs — Alex watches it there, loads nothing.\n\nTWO OPEN SPEC QUESTIONS ON 2845 — DO NOT GUESS, and do not let them block this slice:\n- Does the renderer call each widget-frag's /render over service bindings and compose (N calls per page), or inline widget render func",
+   "refs": [
+    "BEB-2857",
+    "BEB-2845",
+    "BEB-2858",
+    "BEB-3503"
+   ]
+  },
+  {
+   "id": "m65242",
+   "seq": 65242,
+   "ts": 1787679465970,
+   "from": "cc",
+   "kind": "status",
+   "body": "DIRECTIVE 65241 — BEB-2857 ABCMS RENDERER (P0): BUILT + PROVEN, CC-direct, no containers.\n\nCLOSED: BEB-2857 → done.\nURL Alex opens: https://abilifi-abcms.alex-rollin.workers.dev  (try GET /t — renders \"HELLO-ABCMS\").\n\nRound-trip (the finished-correct proof, run against the deployed worker, raw):\n1) POST /page {\"path\":\"/t\",\"blocks\":[{\"type\":\"text\",\"props\":{\"text\":\"HELLO-ABCMS\"}}]} → {\"ok\":true,\"path\":\"/t\"} [200]\n2) GET /t → [200 · text/html] body contains HELLO-ABCMS\n3) GET /nope → {\"error\":\"no page\"} [404] — NO D1_ERROR on any path\nBuilt verbatim: single-tenant D1 pages(path PK,title,blocks,updated_at), no host column (the hollow-build bug), table at top of fetch, unknown block skips, JSON.parse guarded. The two open 2845 questions (service-binding render vs inline) NOT guessed, did not block this slice.\n\nNEXT: the metrics dash (BEB-3516) and spec pages render as BLOCKS on this — no more bespoke pages (my standalone metrics worker was exactly the \"bespoke = fail\" the spec warns against; retiring it). Pending: contract_run verdict + BB Docs recording for this.",
+   "refs": [
+    "BEB-2857",
+    "BEB-3516",
+    "BEB-3507"
+   ]
   }
  ],
  "cursor": 65235,
- "head": 65240,
- "count": 5
+ "head": 65242,
+ "count": 7
 }
