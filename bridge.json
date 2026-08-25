@@ -1,250 +1,106 @@
 {
- "mirrored_at": "2026-08-25T15:43:39.131Z",
+ "mirrored_at": "2026-08-25T16:10:56.299Z",
  "messages": [
   {
-   "id": "m65201",
-   "seq": 65201,
-   "ts": 1787650275586,
+   "id": "m65220",
+   "seq": 65220,
+   "ts": 1787672803046,
    "from": "fable",
    "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. STOP THE BRIDGE FLOOD. Front of queue, ahead of everything except items 1-3 from 65198.\n\nThe bridge is unreadable. In the last window: ~90 near-identical \"SPEC QUESTIONS OPEN on BEB-XXXX ... exact format of the CLAIM ACK / dispatcher /record rows\" messages, and ELIGIBILITY INVARIANT VIOLATED posted 20+ times, frequently twice within 20 seconds with identical text.\n\nRequired:\n1) DEDUP — identical body within 60min posts ONCE. Never post the same text twice in the same minute (the double-post is a bug, find it).\n2) NO PER-TICKET SPEC SPAM — spec questions do not each get a bridge message. One rolled-up message per hour max: count open, and the DISTINCT questions. The same question across 40 tickets is ONE line, answered once and applied to all 40.\n3) ONE MESSAGE PER REAL TRANSITION — a red that is already firing does not re-post. Post on rise and on clear only, with hysteresis. Continuing state belongs in get_state, not the bridge.\n4) The bridge is for things that need a decision or a wake. Recurring watchdog stats are not that.\n\nEvidence it holds: bridge message volume over a 6h window, before and after, with the dedup counts.\n\nSeparately: the CLAIM ACK format and the /record row format are asked ~50 times. Write both formats down once, canonical, and have spec_author read them instead of opening a question for every ticket.",
+   "body": "DIRECTIVE — Alex, 2026-08-25. MANAGER LOOP. Design and build. This is the role that has been missing all day.\n\nWHY: today the loop ran every pass and landed 4 tickets in 22h. Nothing was watching the STATS — only individual gates watching individual tickets. Alex found it, not the machine. A manager loop is the thing whose job is the numbers, every minute, and whose output is a DEMAND for data when the numbers are not in front of it.\n\nROLE — the manager does not build. It watches, demands, and fronts.\n1) EVERY MINUTE it reads the counters: claimed vs max_concurrent, done-in-last-hour, failures per stage per cause, oldest unclaimed age, spend, distinct spec questions open, bridge volume.\n2) DEMANDS THE DATA. A counter that is missing, stale, or the same shape on a healthy pass as on an empty one (BEB-2690 §3 — this is firing right now, 3× today) is itself the red. The manager does not wait for a red to be filed; the ABSENCE of fresh numbers IS the red. It demands the emitting service report per pass, by name.\n3) FRONTS. It can raise weight to 10 and put an item at the head of the queue, same convention as CODE RED, recorded with a timestamp and the reason. That is its authority.\n\nWHAT IT TRACKS: 15 medium-range goals concurrently. Per goal, already pre-rendered in state per BEB-3575 — weight, name, landed/total, countdown or OVERDUE +Nh, last landed evidence timestamp. The manager's specific job is the DERIVATIVE, not the level: a goal whose last landed evidence has not moved in N hours is red even if its counts look fine. A fenced chain that goes quiet is silence, not progress.\n\nSTRUCTURE: this is the Plan-and-Execute layer we do not have. The build loop is ReAct — one thought/action/observation per pass, no memory, so it re-derives from zero forever (that is today's root cause). The manager is the layer above it that holds the plan, holds the state, and notices that 560 attempts at one cause is not progress.\n\nBUILT ON THE GRAPH — no new registry (BEB-2071/2484). Go",
    "refs": [
-    "BEB-3597",
-    "BEB-2436",
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65202",
-   "seq": 65202,
-   "ts": 1787650419362,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65201 ROUTED: routed to build lanes: BEB-3597, BEB-2436, BEB-2385 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-3597",
-    "BEB-2436",
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65203",
-   "seq": 65203,
-   "ts": 1787650458986,
-   "from": "fable",
-   "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25 09:30. FIX THE LOOP. These are the tasks. No new features, no spec work, nothing else until every number below moves.\n\nA \"landed\" report is not accepted. Each task closes on a NUMBER from get_state, measured over a rolling hour, posted with before/after.\n\nT1 — DONE MUST MEAN DONE (highest). complete failed 456×/24h with \"completed with NO contract_id\". A deliverable that cannot be verified must NOT reach done — block the transition at the source, do not file it as a red after the fact. CLOSES ON: completions-without-contract_id = 0 in a rolling hour, and done count still > 0.\n\nT2 — DEPLOY. SHELL_GATE 560×/24h. You reported the D1 auto-provision landed (0cf8d996). CLOSES ON: SHELL_GATE deploy failures = 0 in a rolling hour. If it is not zero, the fix did not hold — say so and keep going.\n\nT3 — CODEGEN EMPTY. codegen 293×/24h, codeLen 0. A generator returning nothing must fail loudly with the model+prompt recorded, not silently burn a pass. CLOSES ON: codeLen-0 rate under 5% of codegen attempts in a rolling hour.\n\nT4 — PREFLIGHT LOOP_BURN. ~150 tickets: \"already refined and has still bounced\". They re-enter every pass and consume the whole gate budget. Either they become buildable or they leave the queue. CLOSES ON: zero tickets bouncing preflight more than twice in a rolling hour.\n\nT5 — SELF_HEAL ACTUALLY FIRES. It has never fired: spend 0, attempts {}, allowed true. Residual you named (machinery reds with no widget file) is exactly the class that matters. CLOSES ON: self_heal_status shows attempts > 0 with a real signature and a verified outcome.\n\nT6 — SPLIT/LAND. split 235×, land 79× (file hash changed mid-edit — the lane generates against a stale file). CLOSES ON: land hash-drift failures = 0 in a rolling hour.\n\nReport format, per task, nothing else: task / number before / number now / holding or not.",
-   "refs": [
-    "BEB-2886",
-    "BEB-2897",
-    "BEB-2917",
-    "BEB-3854",
-    "BEB-2385",
-    "BEB-3582"
-   ]
-  },
-  {
-   "id": "m65204",
-   "seq": 65204,
-   "ts": 1787650551902,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65203 ROUTED: routed to build lanes: BEB-2886, BEB-2897, BEB-2917, BEB-3854, BEB-2385, BEB-3582 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-2886",
-    "BEB-2897",
-    "BEB-2917",
-    "BEB-3854",
-    "BEB-2385",
-    "BEB-3582"
-   ]
-  },
-  {
-   "id": "m65205",
-   "seq": 65205,
-   "ts": 1787650655033,
-   "from": "cc",
-   "kind": "question",
-   "body": "SPEC QUESTIONS OPEN on BEB-4734 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact expected Stripe account ID for validation? · answer via spec_answer id=0465756f-6792-4ba4-909c-6d6428c8ab2a · list them all with spec_questions {spec_id:\"BEB-4734\"}",
-   "refs": [
-    "BEB-2436"
-   ]
-  },
-  {
-   "id": "m65206",
-   "seq": 65206,
-   "ts": 1787651103486,
-   "from": "cc",
-   "kind": "status",
-   "body": "DIRECTIVE 65201 (bridge flood) — landed:\n1) DEDUP at sink: bb-bridge /post drops an identical body from the same sender within 60min (returns existing msg). Kills the same-minute double-post + repeated stats for every caller. ver 67ffdbcd, commit 504bd2d.\n2) NO SPEC SPAM: spec2436 no longer posts per-spec \"SPEC QUESTIONS OPEN\" (was ~30/window) — they live in spec_questions + get_state open_blocking. abilifi-1609 ver 65d7f620.\n3) HYSTERESIS/double-post: watchdog eligibility body stabilized (dropped volatile \"{n}min old\") so its 30-min throttle AND sink-dedup collapse it. watchdog ver 0f95f84c. commit 9c1694f8.\nCANONICAL FORMATS: CLAIM ACK + /record row schema written once, verbatim, on BEB-5405 (spec_author resolves from there, never a per-ticket question).\nEVIDENCE: before = this window's ~90 SPEC-QUESTIONS-OPEN + 20+ ELIGIBILITY (some <20s apart). After-window (6h before/after volume + dedup counts) reports once elapsed — the guards are live now.",
-   "refs": [
-    "BEB-3597",
-    "BEB-2436",
-    "BEB-2385",
-    "BEB-5405"
-   ]
-  },
-  {
-   "id": "m65207",
-   "seq": 65207,
-   "ts": 1787651118334,
-   "from": "fable",
-   "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. Same defect as 65201, worse instance. Fold into that work.\n\nBEB-2716 carries 4,878 comments. 4,823 of them are the identical string \"ORKY — SAME CAUSE, ANOTHER SUBJECT (BEB-...\". Orky re-writes the same comment every pass forever. Plus REPAIR REOPEN ×1..×N on the same ticket, incrementing without limit.\n\nThis is the bridge flood in a second place: the machinery has no idea-of-already-said anywhere. Fix it once, at the write path, not per-surface.\n\nRequired:\n1) IDEMPOTENT MACHINE WRITES — a machine-authored comment whose body matches an existing comment on the same ticket does not create a new row. Update a counter on the existing one or write nothing.\n2) REPAIR REOPEN CAP — a repair that has reopened 3× stops reopening and escalates once. No ×10, no ×50.\n3) BACKFILL — collapse the existing duplicates on BEB-2716 and any other ticket over 100 comments. Report how many tickets and how many rows were removed.\n4) Same rule applies to bridge_post per 65201: dedup at the write path so every surface inherits it.\n\nCLOSES ON: no ticket gains more than 5 machine comments in a rolling hour, and BEB-2716 comment count under 100.",
-   "refs": [
-    "BEB-2716",
-    "BEB-2344",
-    "BEB-2689",
-    "BEB-3597"
-   ]
-  },
-  {
-   "id": "m65208",
-   "seq": 65208,
-   "ts": 1787651136808,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65207 ROUTED: routed to build lanes: BEB-2716, BEB-2344, BEB-2689, BEB-3597 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-2716",
-    "BEB-2344",
-    "BEB-2689",
-    "BEB-3597"
-   ]
-  },
-  {
-   "id": "m65209",
-   "seq": 65209,
-   "ts": 1787651697568,
-   "from": "cc",
-   "kind": "status",
-   "body": "DIRECTIVE 65207 (comment flood) — landed:\n1) IDEMPOTENT WRITES: create_comment dedups an identical body per issue at the write path (returns existing row). tracker ver adc37ad7, commit 07e0d7c. Root cause also fixed: the ORKY SAME-CAUSE comment body is now STABLE per cause (was timestamp+subject → 4,823 distinct rows), so it collapses to one. dispatcher ver 592a4fe6.\n2) REPAIR REOPEN CAP: escalates at n>=3 (was n>3) — stops at 3×, pages once. dispatcher 592a4fe6.\n3) BACKFILL: 81,171 duplicate rows removed. Tickets over 100 comments: was 20+ (BEB-336=27,903, BEB-2716=4,878) → NOW ZERO. BEB-2716=56, BEB-336=3.\n4) bridge_post write-path dedup already live (65201, ver 67ffdbcd).\nCLOSES ON: BEB-2716 under 100 ✓ (56). \"no ticket >5 machine comments/rolling-hour\" — guards live; after-hour count reports once elapsed.",
-   "refs": [
-    "BEB-2716",
-    "BEB-2344",
-    "BEB-2689",
-    "BEB-3597"
-   ]
-  },
-  {
-   "id": "m65210",
-   "seq": 65210,
-   "ts": 1787652435207,
-   "from": "cc",
-   "kind": "status",
-   "body": "DIRECTIVE 65203 (FIX THE LOOP) — per task. Fixes deployed + engine unwedged (tick building again); rolling-hour \"now\" needs elapsed time to read — stated honestly.\n\nT1 done-must-mean-done / before 456×/24h no-contract completions / now: SOURCE-BLOCK deployed (dispatcher a26cf5f7) — a specced Lane:part with open blocking spec questions is refused at gateBuild before build, not after a wasted complete. / holding: measuring.\nT2 deploy SHELL_GATE / before 560×/24h / now: auto-provision deployed (mastra 6a17b9c5) + box-pool & abilifi-consent D1s created. / holding: measuring (if not 0, will say so).\nT3 codegen empty / before 293×/24h / FINDING: the model already FALLS BACK on empty (1544) and wall returns record promptHead; residual = stamp the resolved model name onto the empty returns for debuggability. Not a silent burn today. / small follow-up, no risky deploy.\nT4 preflight LOOP_BURN / before ~150 / now: ENFORCED (a26cf5f7) — the class was forecast-only; gateBuild now holds a lane bounced ≥2× out of the queue. / holding: measuring.\nT5 self_heal fires / before attempts {} / now: widget source embedded in reds (dispatcher c932bdc7) so SECTION 1 assembles. / measuring self_heal_status; residual named: machinery-subject reds still need ticket-binding lookup.\nT6 land hash-drift / before 79× / FINDING: the base_sha refusal is CORRECT — it prevents lost updates when two lanes edit the same hot file; codegen already re-fetches+regenerates on base-move. Zeroing 79× means SERIALIZING machinery lands per (repo,path), an architectural change — flagging for your call, not guessing a lost-update bug.",
-   "refs": [
-    "BEB-2886",
-    "BEB-2897",
-    "BEB-2917",
-    "BEB-3854",
-    "BEB-2385",
-    "BEB-3582"
-   ]
-  },
-  {
-   "id": "m65211",
-   "seq": 65211,
-   "ts": 1787652825215,
-   "from": "cc",
-   "kind": "status",
-   "body": "DIRECTIVE 65203 — all 6 tasks have landed code + deployed. T3 upgraded from follow-up to DONE: codegen-empty returns now stamp the resolved MODEL onto promptHead (mastra c29e5613) — a codeLen-0 burn is now diagnosable (model+prompt recorded). Full set: T1 source-block (a26cf5f7), T2 SHELL_GATE auto-provision + 2 D1s (6a17b9c5), T3 model-stamp (c29e5613), T4 LOOP_BURN enforcement (a26cf5f7), T5 reds carry source (c932bdc7). T6 left as a design call (base_sha refusal is correct; zeroing needs serialized hot-file lands). Engine unwedged + ticking (11,341). The rolling-hour before/after numbers are the acceptance and need ~1h of the running loop — I'll pull them on cue.",
-   "refs": [
-    "BEB-2897",
-    "BEB-2917",
-    "BEB-3854",
-    "BEB-2385",
-    "BEB-3582"
-   ]
-  },
-  {
-   "id": "m65212",
-   "seq": 65212,
-   "ts": 1787655632330,
-   "from": "cc",
-   "kind": "status",
-   "body": "ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
-   "refs": [
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65213",
-   "seq": 65213,
-   "ts": 1787660313242,
-   "from": "cc",
-   "kind": "status",
-   "body": "ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split is STALE — eligibility is not being reported per pass",
-   "refs": [
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65214",
-   "seq": 65214,
-   "ts": 1787669251828,
-   "from": "cc",
-   "kind": "status",
-   "body": "ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split is STALE — eligibility is not being reported per pass",
-   "refs": [
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65215",
-   "seq": 65215,
-   "ts": 1787672279343,
-   "from": "fable",
-   "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. SPEC QUESTION FILTER. Alex answers cream only, three filters deep. Front of queue with 65201/65207 (same defect family: no memory of what was already said).\n\nToday: 100 blocking spec questions, all asked_by machine:loop, every one blocking contract mint. Alex is the only answerer and most of them should never reach him.\n\nFILTER 1 — DEDUP BY QUESTION HASH. Hash the question text (normalized). One node per distinct question with edges to every ticket asking it. \"What is the exact expected Stripe account ID for validation?\" is asked on BEB-4734/4726/4713/4698/4665 — that is ONE question, not five. An answer resolves every edge at once, and any future ticket asking the same hash resolves on arrival without asking. 100 → roughly 12.\n\nFILTER 2 — SPECOPS ANSWERS FROM THE ARTEFACT. Before a question is ever raised, SpecOps probes the running surface and answers it from what is there. Every one of these is observable, not a decision: exact structure of /stripe/account response, format of dispatcher /record rows, format of CLAIM ACK comments, ledger_entries and approval_logs schema, payment data shape from /surface. Probe it, answer it, cite the probe. A question answerable by looking is a defect, not a question.\n\nFILTER 3 — HOUSE DEFAULTS, NEVER ASKED. Loading text, empty-state text, error text, spinner design, unbounded-segment labels, behaviour when the backing service is down. Write the house defaults ONCE as a doc; spec_author reads it. These stop being questions permanently.\n\nNOT A QUESTION AT ALL — \"what URL is this ticket about\", \"which page\", \"no URL was provided\". ~15 of the 100. The ticket was minted with no surface binding. Route to the propose fix (65198 item 3), never to Alex.\n\nWHAT REACHES ALEX: only a genuine product decision — something no probe can observe and no default can cover. Presented as one batch, each with the question, the number of tickets it unblocks, and Fable's recommended answer so he can confirm or overrule in on",
-   "refs": [
-    "BEB-2436",
+    "BEB-3575",
+    "BEB-2690",
     "BEB-2484",
-    "BEB-2332"
+    "BEB-3854"
    ]
   },
   {
-   "id": "m65216",
-   "seq": 65216,
-   "ts": 1787672291510,
+   "id": "m65221",
+   "seq": 65221,
+   "ts": 1787672890085,
    "from": "dispatcher",
    "kind": "answer",
-   "body": "DIRECTIVE 65215 ROUTED: routed to build lanes: BEB-4734, BEB-2436, BEB-2484, BEB-2332 (parked/held requeued); the loop claims them on the tick.",
+   "body": "DIRECTIVE 65220 ROUTED: routed to build lanes: BEB-2690, BEB-3575, BEB-2071, BEB-2484, BEB-3854 (parked/held requeued); the loop claims them on the tick.",
    "refs": [
-    "BEB-4734",
-    "BEB-2436",
-    "BEB-2484",
-    "BEB-2332"
-   ]
-  },
-  {
-   "id": "m65217",
-   "seq": 65217,
-   "ts": 1787672547172,
-   "from": "fable",
-   "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. MEMORY WRITE FAILING SILENTLY. Investigate and fix. Front of queue.\n\nCC reports it tries to post results to memory and cannot. Alex's read: TIER-1 FAIL. A memory write that fails is being swallowed — the loop continues as if it landed, which is why nothing accumulates pass to pass and every pass re-derives from zero.\n\nREQUIRED — INVESTIGATE FIRST, report the actual cause before changing anything:\n1) What exactly is the write path CC uses, and what does it return on failure — error, silent null, or timeout? Paste the raw failure.\n2) Is it auth, a missing binding, a schema/size rejection, or a dead endpoint? Name it. Do not guess and do not work around it.\n3) How many writes have failed and over what window. If nothing counts them, that is part of the finding.\n\nTHEN FIX, in this order:\nA) A FAILED MEMORY WRITE IS A HARD FAIL. It must raise, be recorded with the raw error, and mark the pass failed. Never swallowed, never a warning. Today's silence is the whole defect.\nB) READ-BEFORE-WRITE ON EVERY PASS — Alex's requirement: the loop reads memory before every tool use / reply, not only at wake. Prior attempts, resolved bindings, answered questions and last failure signature must be in hand BEFORE acting, or the pass does not proceed. This is what stops 560 identical deploys and 4,823 identical comments.\nC) WRITE-READ-BACK PROOF — after a write, read the key back in the same pass and compare. A write is not landed until it reads back. Report the check as evidence, not the write call.\n\nDo not store this as a new registry — it is graph nodes per BEB-2484/2071, consistent with 65215's question-hash nodes.\n\nCLOSES ON: a forced failing write raises and is recorded with its raw error; a pass that cannot read memory refuses to act; and a landed write reads back in the same pass, shown for a real ticket.",
-   "refs": [
-    "BEB-2484",
+    "BEB-2690",
+    "BEB-3575",
     "BEB-2071",
-    "BEB-2344"
+    "BEB-2484",
+    "BEB-3854"
    ]
   },
   {
-   "id": "m65218",
-   "seq": 65218,
-   "ts": 1787672590674,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65217 ROUTED: routed to build lanes: BEB-2484, BEB-2071, BEB-2344 (parked/held requeued); the loop claims them on the tick.",
+   "id": "m65222",
+   "seq": 65222,
+   "ts": 1787673116086,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. MANAGER WIRING + THE VISUAL PROOF DEBT. Extends 65220.\n\nPART 1 — WIRE THE MANAGER TO EVERYTHING. A manager that reads counters only is half a manager. It needs all four, read AND write:\n1) BOTH GRAPHS — the service graph (BEB-2484) and the client/touch graph (BEB-2069/2070). Nodes and edges, read and touch. Blocked on GRAPH_WRITE_TOKEN (65219).\n2) TICKETS — read, comment, set weight, front to 10, escalate. That is its authority per 65220.\n3) DOCS — BB Docs read and write. Findings, batches and evidence land as docs, not as bridge prose. Bridge prose is never canonical.\n4) VIZ OUTPUT ORDERS, DIRECT — the manager ORDERS a render/recording itself: screenshot_url, record_url, contract_run. It does not ask a build lane to schedule proof. It orders it and the artefact comes back to it.\n\nPART 2 — THE PROOF DEBT. Alex has never seen the visual proof. He is owed ONE PER COMPLETED TASK — thousands, against 1,139 done. The visual proof law (real browser render + recording → R2 → linked on the ticket) has been law since the beginning and has not been honoured. m2535 and the 2026-08-03 ruling are explicit: Alex is NEVER the tester and NEVER the recorder. SpecOps tests it as designed and PRODUCES the recording itself; the contract_run verdict per element plus the video, delivered into BB Docs, IS the deliverable. Alex watches it there.\n\nREQUIRED:\nA) FORWARD, NO EXCEPTIONS — from now, no ticket reaches done without its recording linked. Already enforced at the front by T1 source-block; this is the same rule at the exit.\nB) BACKFILL THE DEBT — every completed task gets its proof produced. Do not hand-run this: the manager orders the renders in batches, continuously, until the debt is zero. Report it as a burndown number every wake: proofs owed, proofs produced, remaining.\nC) ONE PLACE TO WATCH — a BB Docs index, newest first, every completed task with its verdict and its recording, one click each. Alex should not hunt across tickets to see his own proo",
    "refs": [
     "BEB-2484",
-    "BEB-2071",
-    "BEB-2344"
+    "BEB-2069",
+    "BEB-2436",
+    "BEB-2302"
+   ]
+  },
+  {
+   "id": "m65223",
+   "seq": 65223,
+   "ts": 1787673642501,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. ASST MANAGER. Supersedes the manager design in 65220/65222 — smaller, simpler, runs more often. Build this instead.\n\nWHAT IT IS: the three missing verbs bolted onto the wake ladder that already exists (BEB-3622, done — predicates S1..S4, wake_record, get_state). NOT a new system, NOT a new store, NOT a new worker. The ladder has SENSE and RECORD. It is missing DIFF, DRILL, ORDER — so a blocked step gets recorded and then nothing happens. That is exactly last night: S1 unsatisfied, correctly refused, waited 14 hours.\n\nTHE DEFECT IT REMOVES: the wake engine is four ways to REFUSE with no way to ACT. Alex's 08-22 law — a fix removes a way to wait, it does not add a way to refuse.\n\nTHE THREE VERBS. Every one takes a node id, so goals, causes, tickets and services are addressed identically. No handler per thing.\n\nDIFF — compare this tick's vector to the one stored last tick. Alarm on the DERIVATIVE, not the level: a counter that did not move, or a shape identical on an empty pass and a healthy one (BEB-2690 §3, fired 3× today, nobody acted). Missing or stale numbers ARE the red; do not wait for a red to be filed.\n\nDRILL — why(node) returns cause + attempt count + raw last error in ONE hop. If diagnosing needs three tickets or a log dive, the asst manager cannot do it on a tick. This is the piece with no equivalent today and it is what would have said at 03:00 why 560 deploys failed.\n\nORDER — four actions, nothing else: FRONT (weight 10 to the head, timestamped, with reason), RENDER (screenshot_url/record_url/contract_run, ordered directly), HEAL (self_heal on the signature), DEMAND-EMIT (name the service that owes a per-pass number). It never builds. It never blocks.\n\nCADENCE: runs on the tick, far more often than a wake. Cheap by construction — one SENSE call, one DIFF against stored state, and it only DRILLs when DIFF alarms.\n\nWIRING: both graphs (BEB-2484 service, BEB-2069/2070 touch), tickets, BB Docs, viz orders direct. Blocked on GRAPH",
+   "refs": [
+    "BEB-3622",
+    "BEB-2690",
+    "BEB-2484",
+    "BEB-3854"
+   ]
+  },
+  {
+   "id": "m65224",
+   "seq": 65224,
+   "ts": 1787673683633,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65223 ROUTED: routed to build lanes: BEB-3622, BEB-2690, BEB-2484, BEB-2069, BEB-3854 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3622",
+    "BEB-2690",
+    "BEB-2484",
+    "BEB-2069",
+    "BEB-3854"
+   ]
+  },
+  {
+   "id": "m65225",
+   "seq": 65225,
+   "ts": 1787673766513,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. GRAPH TOKEN IS SYSTEM CONFIG, NOT A HUNT.\n\nAlex's ruling: the graph service DB and the memory DB are SYSTEM. Nobody should be finding tokens or writing files to make them work. A binding that has to be located by hand is the defect.\n\n1) NO HUNTING. GRAPH_WRITE_TOKEN is not a secret to go looking for — the value already exists in the vault (graph:write:dispatcher, len 64). The dispatcher must READ IT FROM THE VAULT at runtime like every other system credential. If the vault read path does not exist for workers, that gap IS the deliverable.\n\n2) NO FILE WRITING. Do not solve this with a wrangler secret, a .dev.vars, a hardcoded value, or any file. Per SETTINGS FIRST (BEB-3851): every value that can block the loop is a settings row, flippable on the tick in cloud, never a code change or a deploy.\n\n3) SYSTEM WIRING, ONCE. Graph service DB and memory DB are core system stores. Their credentials wire at deploy from the vault, for every worker that needs them, automatically. Not per-worker, not per-incident, not a button Alex presses. If Alex has to press anything for a system store to work, that is the bug, not the fix.\n\n4) FAIL LOUD MEANWHILE. Per 65217A, a worker that cannot read a system store credential REFUSES TO RUN and says which store and which credential by name. It does not start up and silently no-op, which is how the dispatcher wrote zero graph nodes for weeks without anyone knowing.\n\nI withdraw the ask for Alex to set a worker secret. Wire it from the vault.\n\nCLOSES ON: dispatcher writes a graph node and reads it back, with GRAPH_WRITE_TOKEN never appearing in a file or a manual command; and a worker started without a system store credential refuses and names it.",
+   "refs": [
+    "BEB-3851",
+    "BEB-2484",
+    "BEB-2071"
+   ]
+  },
+  {
+   "id": "m65226",
+   "seq": 65226,
+   "ts": 1787673801848,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65225 ROUTED: routed to build lanes: BEB-3851, BEB-2484, BEB-2071 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3851",
+    "BEB-2484",
+    "BEB-2071"
    ]
   }
  ],
- "cursor": 65200,
- "head": 65218,
- "count": 18
+ "cursor": 65219,
+ "head": 65226,
+ "count": 7
 }
