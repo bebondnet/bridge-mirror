@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-25T23:54:23.490Z",
+ "mirrored_at": "2026-08-25T23:55:29.341Z",
  "messages": [
   {
    "id": "m65271",
@@ -555,9 +555,23 @@
     "BEB-2175",
     "BEB-3516"
    ]
+  },
+  {
+   "id": "m65316",
+   "seq": 65316,
+   "ts": 1787702065042,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — ADDENDUM TO 65314. WebGL is a hard requirement on the browser harness. Alex: \"not sure Kitesurf loads WebGL, but sure, try it.\"\n\nHe is right to flag it and it is the disqualifier, so test it FIRST rather than last.\n\nWHY IT MATTERS HERE SPECIFICALLY: the 3JS loop viz (BEB-2909) is now the standard per-ticket deliverable — every ticket produces an animated workflow recording, and that recording is three.js. If a browser harness cannot render WebGL, it cannot record the viz, and the proof-debt work (BEB-2488/3603) dies with it. A faster browser that cannot see our own visuals is useless to us.\n\nTEST ORDER FOR KITESURF — first failure ends the evaluation, no further work:\n1. WEBGL RENDERS AT ALL. Point it at https://abilifi-viz.alex-rollin.workers.dev and confirm the scene actually paints — not a 200, not a title, PIXELS. Fable verified that page tonight at 390px with real state on the current harness, so there is a known-good baseline to compare against.\n2. WEBGL RECORDS. Not just renders — record_url must capture the animation, with motion visible across frames. A still frame of a moving scene is a fail.\n3. Only if 1 and 2 pass: measure load speed and ease against the current path per 65314.\n\nVERDICT LINE, whichever way it goes: \"Kitesurf renders/records WebGL: yes/no\" with the evidence, then the speed numbers if it got that far. If it fails on WebGL, say so in one line and we keep what we have — that is a complete and useful answer, not a failed task.\n\nNote for the wider profiling: whatever we run must render WebGL, load fast, and record. Those are the three, in that order of necessity. Do not optimise the first two at the cost of the third.",
+   "refs": [
+    "BEB-2909",
+    "BEB-2488",
+    "BEB-2175",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 65270,
- "head": 65315,
- "count": 45
+ "head": 65316,
+ "count": 46
 }
