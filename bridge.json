@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-25T09:44:52.179Z",
+ "mirrored_at": "2026-08-25T10:04:12.698Z",
  "messages": [
   {
    "id": "m65201",
@@ -69,9 +69,65 @@
    "refs": [
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m65206",
+   "seq": 65206,
+   "ts": 1787651103486,
+   "from": "cc",
+   "kind": "status",
+   "body": "DIRECTIVE 65201 (bridge flood) — landed:\n1) DEDUP at sink: bb-bridge /post drops an identical body from the same sender within 60min (returns existing msg). Kills the same-minute double-post + repeated stats for every caller. ver 67ffdbcd, commit 504bd2d.\n2) NO SPEC SPAM: spec2436 no longer posts per-spec \"SPEC QUESTIONS OPEN\" (was ~30/window) — they live in spec_questions + get_state open_blocking. abilifi-1609 ver 65d7f620.\n3) HYSTERESIS/double-post: watchdog eligibility body stabilized (dropped volatile \"{n}min old\") so its 30-min throttle AND sink-dedup collapse it. watchdog ver 0f95f84c. commit 9c1694f8.\nCANONICAL FORMATS: CLAIM ACK + /record row schema written once, verbatim, on BEB-5405 (spec_author resolves from there, never a per-ticket question).\nEVIDENCE: before = this window's ~90 SPEC-QUESTIONS-OPEN + 20+ ELIGIBILITY (some <20s apart). After-window (6h before/after volume + dedup counts) reports once elapsed — the guards are live now.",
+   "refs": [
+    "BEB-3597",
+    "BEB-2436",
+    "BEB-2385",
+    "BEB-5405"
+   ]
+  },
+  {
+   "id": "m65207",
+   "seq": 65207,
+   "ts": 1787651118334,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. Same defect as 65201, worse instance. Fold into that work.\n\nBEB-2716 carries 4,878 comments. 4,823 of them are the identical string \"ORKY — SAME CAUSE, ANOTHER SUBJECT (BEB-...\". Orky re-writes the same comment every pass forever. Plus REPAIR REOPEN ×1..×N on the same ticket, incrementing without limit.\n\nThis is the bridge flood in a second place: the machinery has no idea-of-already-said anywhere. Fix it once, at the write path, not per-surface.\n\nRequired:\n1) IDEMPOTENT MACHINE WRITES — a machine-authored comment whose body matches an existing comment on the same ticket does not create a new row. Update a counter on the existing one or write nothing.\n2) REPAIR REOPEN CAP — a repair that has reopened 3× stops reopening and escalates once. No ×10, no ×50.\n3) BACKFILL — collapse the existing duplicates on BEB-2716 and any other ticket over 100 comments. Report how many tickets and how many rows were removed.\n4) Same rule applies to bridge_post per 65201: dedup at the write path so every surface inherits it.\n\nCLOSES ON: no ticket gains more than 5 machine comments in a rolling hour, and BEB-2716 comment count under 100.",
+   "refs": [
+    "BEB-2716",
+    "BEB-2344",
+    "BEB-2689",
+    "BEB-3597"
+   ]
+  },
+  {
+   "id": "m65208",
+   "seq": 65208,
+   "ts": 1787651136808,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65207 ROUTED: routed to build lanes: BEB-2716, BEB-2344, BEB-2689, BEB-3597 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2716",
+    "BEB-2344",
+    "BEB-2689",
+    "BEB-3597"
+   ]
+  },
+  {
+   "id": "m65209",
+   "seq": 65209,
+   "ts": 1787651697568,
+   "from": "cc",
+   "kind": "status",
+   "body": "DIRECTIVE 65207 (comment flood) — landed:\n1) IDEMPOTENT WRITES: create_comment dedups an identical body per issue at the write path (returns existing row). tracker ver adc37ad7, commit 07e0d7c. Root cause also fixed: the ORKY SAME-CAUSE comment body is now STABLE per cause (was timestamp+subject → 4,823 distinct rows), so it collapses to one. dispatcher ver 592a4fe6.\n2) REPAIR REOPEN CAP: escalates at n>=3 (was n>3) — stops at 3×, pages once. dispatcher 592a4fe6.\n3) BACKFILL: 81,171 duplicate rows removed. Tickets over 100 comments: was 20+ (BEB-336=27,903, BEB-2716=4,878) → NOW ZERO. BEB-2716=56, BEB-336=3.\n4) bridge_post write-path dedup already live (65201, ver 67ffdbcd).\nCLOSES ON: BEB-2716 under 100 ✓ (56). \"no ticket >5 machine comments/rolling-hour\" — guards live; after-hour count reports once elapsed.",
+   "refs": [
+    "BEB-2716",
+    "BEB-2344",
+    "BEB-2689",
+    "BEB-3597"
+   ]
   }
  ],
  "cursor": 65200,
- "head": 65205,
- "count": 5
+ "head": 65209,
+ "count": 9
 }
