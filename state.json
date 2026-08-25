@@ -1,27 +1,28 @@
 {
- "mirrored_at": "2026-08-25T22:23:03.892Z",
- "ts": 1787696583062,
+ "mirrored_at": "2026-08-25T22:23:58.340Z",
+ "ts": 1787696637523,
  "loop": {
   "proposed_total": 3324,
   "by_state": {
-   "queued": 1624,
-   "claimed": 3,
-   "done": 1244,
-   "held": 78,
-   "blocked": 14,
+   "queued": 1615,
+   "claimed": 9,
+   "done": 1246,
+   "held": 80,
+   "blocked": 13,
    "parked": 7
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 2,
-    "claimed": 3,
-    "done": 359,
-    "held": 75,
+    "blocked": 1,
+    "claimed": 6,
+    "done": 360,
+    "held": 77,
     "parked": 3,
-    "queued": 1436
+    "queued": 1428
    },
    "REFINE": {
     "blocked": 2,
+    "claimed": 2,
     "queued": 156
    },
    "REPAIR": {
@@ -32,23 +33,48 @@
    },
    "SPEC": {
     "blocked": 10,
-    "done": 793,
+    "claimed": 1,
+    "done": 794,
     "held": 2,
     "parked": 3,
-    "queued": 18
+    "queued": 17
    }
   },
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787696569581,
-   "tally": "BEB-3603→BUILD[blocked], BEB-2360→BUILD, BEB-3518→BUILD, BEB-3508→BUILD, BEB-5607→BUILD, BEB-5606→BUILD, BEB-5084→BUILD, BEB-5103→BUILD, BEB-5100→SPEC, BEB-5605→BUILD, BEB-5604→BUILD, BEB-5085→BUILD, BEB-5097→BUILD, BEB-5098→SPEC, BEB-5096→BUILD, BEB-5099→BUILD, BEB-5088→SPEC, BEB-5086→BUILD, BEB-4091→BUILD, BEB-5089→SPEC"
+   "at": 1787696627069,
+   "tally": "BEB-3518→BUILD[claimed], BEB-2360→BUILD[claimed], BEB-3508→BUILD[claimed], BEB-3447→BUILD[claimed], BEB-5111→BUILD, BEB-5110→SPEC, BEB-5101→SPEC, BEB-5084→BUILD, BEB-5103→BUILD, BEB-5100→SPEC, BEB-5607→BUILD, BEB-5606→BUILD, BEB-5605→BUILD, BEB-5604→BUILD, BEB-5085→BUILD, BEB-5097→BUILD, BEB-5098→SPEC, BEB-5096→BUILD, BEB-5099→BUILD"
   },
   "reds": [
    {
+    "code": "VERIFY_PENDING",
+    "severity": "red",
+    "since": 1787696362214,
+    "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+    "refs": [
+     "BEB-2360"
+    ]
+   },
+   {
+    "code": "SINGLE_WRITER_VIOLATION",
+    "severity": "red",
+    "since": 1787696304952,
+    "detail": "BEB-2360 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+    "refs": [
+     "BEB-2360"
+    ],
+    "orky": {
+     "cls": "single-writer-violation",
+     "subject": "BEB-2360",
+     "error": "2 completions, 2 distinct artefacts, 2026-08-25T22:18:24.952Z -> 2026-08-25T22:19:17.141Z"
+    },
+    "fix_ticket": "BEB-2760"
+   },
+   {
     "code": "COMPLETED_AT_GHOST",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
     "refs": [
      "BEB-2805"
@@ -117,7 +143,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "PAYWALL GATEWAY — sentinel wired (caller rows), then status, then sold as an app: L402 + x402 + WP connect — last landed evidence NEVER",
     "refs": [
      "BEB-2214",
@@ -147,7 +173,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "LOOP CONFORMANCE — every loop scored on: no CC fallback, cloud MCP trigger, gates are settings, tracked every time — last landed evidence NEVER",
     "refs": [
      "BEB-3856"
@@ -156,7 +182,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "BRIDGE IDENTITY — dispatcher posts as dispatcher, not as CC; silence is visible in the data — last landed evidence NEVER",
     "refs": [
      "BEB-3855"
@@ -165,7 +191,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "SELF HEAL — unresolvable red escalates to a big model, patches, verifies, reverts on failure; loop back online unattended — last landed evidence NEVER",
     "refs": [
      "BEB-3854"
@@ -174,7 +200,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "NO PROMPT — every approval step removed from the loop's edit path; runs unattended in cloud — last landed evidence NEVER",
     "refs": [
      "BEB-3853"
@@ -192,7 +218,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "SETTINGS FIRST — edit requests land as settings writes on the first ask, not repo searches — last landed evidence NEVER",
     "refs": [
      "BEB-3851"
@@ -246,7 +272,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "PUBLIC FEED LABELLED - each landing carries public flag + public_title + public_body at write time; one feed feeds the internal picture, the — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -265,7 +291,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "CHANGELOG BACKFILL full - remaining 12 weeks (05-21..08-13) in weekly batches, same voice, dated and published so three months read back to  — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -274,7 +300,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "CHANGELOG BACKFILL week one - 7 dated public entries for 08-14..08-20 from the record only, Alex reviews, his corrections become the written — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -283,7 +309,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "DAILY CHANGELOG (public) - features in plain language, the craft it took, privacy and sovereignty choices explicit, published daily, evidenc — last landed evidence NEVER",
     "refs": [
      "BEB-2127"
@@ -860,7 +886,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5269"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -874,7 +901,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5270"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -888,7 +916,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5271"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -902,7 +931,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5272"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -916,7 +946,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5273"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -930,7 +961,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5275"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -944,7 +976,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5277"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -958,7 +991,8 @@
      "cls": "silent-refusal-loop",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5278"
-    }
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "REPEAT_FAILER",
@@ -1819,7 +1853,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787635588007,
-    "detail": "BEB-4340 failing at preflight 4× in 24h — LATEST (08-25T05:27): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-4340 failing at preflight 4× in 24h — LATEST (08-25T05:27): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
     "refs": [
      "BEB-4340"
     ],
@@ -1834,7 +1868,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787635651580,
-    "detail": "BEB-4341 failing at preflight 4× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-4341 failing at preflight 4× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
     "refs": [
      "BEB-4341"
     ],
@@ -1849,7 +1883,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787635684205,
-    "detail": "BEB-4343 failing at preflight 5× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "BEB-4343 failing at preflight 5× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
     "refs": [
      "BEB-4343"
     ],
@@ -4288,7 +4322,8 @@
      "error": "GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass\n[source: orky/orky-beb-5062/index.js]",
      "subject": "BEB-5062",
      "file": "orky/orky-beb-5062/index.js"
-    }
+    },
+    "fix_ticket": "BEB-2737"
    },
    {
     "code": "REPEAT_FAILER",
@@ -4444,7 +4479,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787610123285,
-    "detail": "alexrollin/abilifi-apps failing at complete 386× in 24h — LATEST (08-25T22:20): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in",
+    "detail": "alexrollin/abilifi-apps failing at complete 384× in 24h — LATEST (08-25T22:17): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in",
     "refs": [
      "BEB-3613"
     ],
@@ -4474,7 +4509,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787616339471,
-    "detail": "alexrollin/abilifi-apps failing at evaluate 54× in 24h — LATEST (08-25T22:19): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2966's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 53× in 24h — LATEST (08-25T22:17): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2966's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2963"
     ],
@@ -4534,7 +4569,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787610477573,
-    "detail": "alexrollin/abilifi-apps failing at split 124× in 24h — LATEST (08-25T22:18): sections: THE PAGE — one screen, scroll and click | LITERAL ON-PAGE STRINGS — the contract anchors (assert these exact strings; do not paraphrase them) | TIME RECONSTRUCTION — machine time only | CURR",
+    "detail": "alexrollin/abilifi-apps failing at split 124× in 24h — LATEST (08-25T22:18): sections: THE PAGE — one screen, scroll and click | LITERAL ON-PAGE STRINGS — the contract anchors (assert these exact strings; do not paraphrase them) | TIME RECONSTRUCTION — machine time only | CURR · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-3582"
     ],
@@ -4564,7 +4599,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787614563283,
-    "detail": "alexrollin/abilifi-apps/abilifi-deploy-tui failing at complete 22× in 24h — LATEST (08-25T22:20): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "alexrollin/abilifi-apps/abilifi-deploy-tui failing at complete 21× in 24h — LATEST (08-25T21:23): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-3444"
     ],
@@ -4623,14 +4658,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1787610183655,
-    "detail": "alexrollin/vlinux-apk-service failing at wp-install 14× in 24h — LATEST (08-25T21:49): slug: beb-3496\ncodeLen: 3598\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}",
+    "since": 1787609988189,
+    "detail": "alexrollin/vlinux-apk-service failing at wp-install 15× in 24h — LATEST (08-25T21:49): slug: beb-3496\ncodeLen: 2840\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}",
     "refs": [
      "BEB-3496"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "slug: beb-3496\ncodeLen: 3598\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}\n[source: orky/orky-beb-3496/index.js]",
+     "error": "slug: beb-3496\ncodeLen: 2840\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}\n[source: orky/orky-beb-3496/index.js]",
      "subject": "BEB-3496",
      "file": "orky/orky-beb-3496/index.js"
     }
@@ -4638,14 +4673,14 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1787614691660,
-    "detail": "alexrollin/wpapps_press_gd_options failing at codegen 7× in 24h — LATEST (08-25T15:42): verdict: codegen produced no usable code\ncodeLen: 10833\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · lin",
+    "since": 1787610006520,
+    "detail": "alexrollin/wpapps_press_gd_options failing at codegen 8× in 24h — LATEST (08-25T15:42): verdict: codegen produced no usable code\ncodeLen: 11698\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · lin",
     "refs": [
      "BEB-2752"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 10833\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · line 85: register_post_type('employee',. File scope may only register hooks/defines/declarations; put logic inside hooked functions.\ntarget: alexrollin/wpapps_press_gd_options\ncodegen prompt head (what the MODEL received): (not captured)\n[source: orky/orky-beb-2752/index.js]",
+     "error": "verdict: codegen produced no usable code\ncodeLen: 11698\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · line 23: register_post_type('employee',. File scope may only register hooks/defines/declarations; put logic inside hooked functions.\ntarget: alexrollin/wpapps_press_gd_options\ncodegen prompt head (what the MODEL received): (not captured)\n[source: orky/orky-beb-2752/index.js]",
      "subject": "BEB-2752",
      "file": "orky/orky-beb-2752/index.js"
     }
@@ -4714,7 +4749,7 @@
     "code": "REPEAT_FAILER",
     "severity": "red",
     "since": 1787610434307,
-    "detail": "n/a failing at complete 149× in 24h — LATEST (08-25T22:20): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+    "detail": "n/a failing at complete 146× in 24h — LATEST (08-25T22:18): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-2646"
     ],
@@ -4773,7 +4808,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "BEB-5088 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-5088"
@@ -4782,12 +4817,13 @@
      "cls": "proposed-never-claimed",
      "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-5088"
-    }
+    },
+    "fix_ticket": "BEB-2716"
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "BEB-5086 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-5086"
@@ -4796,12 +4832,13 @@
      "cls": "proposed-never-claimed",
      "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-5086"
-    }
+    },
+    "fix_ticket": "BEB-2716"
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "BEB-5089 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-5089"
@@ -4810,12 +4847,13 @@
      "cls": "proposed-never-claimed",
      "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
      "subject": "BEB-5089"
-    }
+    },
+    "fix_ticket": "BEB-2716"
    },
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "BEB-5093 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-5093"
@@ -4829,7 +4867,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1787696427847,
+    "since": 1787696367857,
     "detail": "BEB-5090 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-5090"
@@ -7093,6 +7131,16 @@
    {
     "code": "FIX_BURIED",
     "severity": "red",
+    "since": 1786311457043,
+    "detail": "fix BEB-2760 for BEB-2360 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane SPEC/done",
+    "refs": [
+     "BEB-2760",
+     "BEB-2360"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
     "since": 1786708675942,
     "detail": "fix BEB-2737 for claim has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
     "refs": [
@@ -8122,7 +8170,8 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5269"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    },
    {
     "code": "BINDING_UNRESOLVABLE",
@@ -8136,7 +8185,8 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5270"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    },
    {
     "code": "BINDING_UNRESOLVABLE",
@@ -8150,7 +8200,8 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5271"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    },
    {
     "code": "BINDING_UNRESOLVABLE",
@@ -8164,7 +8215,8 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5272"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    },
    {
     "code": "BINDING_UNRESOLVABLE",
@@ -8220,7 +8272,8 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5277"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    },
    {
     "code": "BINDING_UNRESOLVABLE",
@@ -8234,7 +8287,8 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5278"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    },
    {
     "code": "BINDING_UNRESOLVABLE",
@@ -8248,10 +8302,33 @@
      "cls": "binding-unresolvable",
      "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
      "subject": "BEB-5279"
-    }
+    },
+    "fix_ticket": "BEB-2736"
    }
   ],
   "wake_record": [
+   {
+    "tick_n": 16087,
+    "ts": 1787696621198,
+    "step_reached": 5,
+    "blocked_predicate": null,
+    "blocked_error": null,
+    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+    "action_step": 5,
+    "evidence_ref": null,
+    "report_hash": "3976261503"
+   },
+   {
+    "tick_n": 26485,
+    "ts": 1787696609918,
+    "step_reached": 5,
+    "blocked_predicate": null,
+    "blocked_error": null,
+    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+    "action_step": 5,
+    "evidence_ref": null,
+    "report_hash": "1148718422"
+   },
    {
     "tick_n": 11841,
     "ts": 1787696578251,
@@ -8262,28 +8339,6 @@
     "action_step": 5,
     "evidence_ref": null,
     "report_hash": "2602736970"
-   },
-   {
-    "tick_n": 11840,
-    "ts": 1787696517992,
-    "step_reached": 5,
-    "blocked_predicate": null,
-    "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-    "action_step": 5,
-    "evidence_ref": null,
-    "report_hash": "3755429871"
-   },
-   {
-    "tick_n": 26484,
-    "ts": 1787696514010,
-    "step_reached": 5,
-    "blocked_predicate": null,
-    "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-    "action_step": 5,
-    "evidence_ref": null,
-    "report_hash": "3755429871"
    }
   ]
  },
@@ -8328,11 +8383,6 @@
   {
    "id": "BEB-2909",
    "title": "Recreate 3JS viz service — loop viz + workflow reports ",
-   "status": "todo"
-  },
-  {
-   "id": "BEB-2360",
-   "title": "P0: KICKER — one-hit restart endpoint + button Orky can",
    "status": "todo"
   },
   {
@@ -8384,6 +8434,11 @@
    "id": "BEB-2394",
    "title": "P0: BUILD CUE PWA FRESH — four routes, installable, pus",
    "status": "todo"
+  },
+  {
+   "id": "BEB-3930",
+   "title": "SpecOps FRAG-REQUIREMENTS CHECK — authored SPEC must ca",
+   "status": "backlog"
   }
  ],
  "surfaces": [
@@ -8414,9 +8469,33 @@
  ],
  "reds": [
   {
+   "code": "VERIFY_PENDING",
+   "severity": "red",
+   "since": 1787696362214,
+   "detail": "1 done lane(s) with verification PENDING — not complete until passed",
+   "refs": [
+    "BEB-2360"
+   ]
+  },
+  {
+   "code": "SINGLE_WRITER_VIOLATION",
+   "severity": "red",
+   "since": 1787696304952,
+   "detail": "BEB-2360 completed 2× with 2 DIFFERENT artefacts inside 15min — two writers built the same ticket. One of those builds is waste and one of the commits is the one nobody reviewed.",
+   "refs": [
+    "BEB-2360"
+   ],
+   "orky": {
+    "cls": "single-writer-violation",
+    "subject": "BEB-2360",
+    "error": "2 completions, 2 distinct artefacts, 2026-08-25T22:18:24.952Z -> 2026-08-25T22:19:17.141Z"
+   },
+   "fix_ticket": "BEB-2760"
+  },
+  {
    "code": "COMPLETED_AT_GHOST",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "1 ticket(s) whose completed_at disagrees with status — BEB-2805(done unstamped)",
    "refs": [
     "BEB-2805"
@@ -8485,7 +8564,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "PAYWALL GATEWAY — sentinel wired (caller rows), then status, then sold as an app: L402 + x402 + WP connect — last landed evidence NEVER",
    "refs": [
     "BEB-2214",
@@ -8515,7 +8594,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "LOOP CONFORMANCE — every loop scored on: no CC fallback, cloud MCP trigger, gates are settings, tracked every time — last landed evidence NEVER",
    "refs": [
     "BEB-3856"
@@ -8524,7 +8603,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "BRIDGE IDENTITY — dispatcher posts as dispatcher, not as CC; silence is visible in the data — last landed evidence NEVER",
    "refs": [
     "BEB-3855"
@@ -8533,7 +8612,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "SELF HEAL — unresolvable red escalates to a big model, patches, verifies, reverts on failure; loop back online unattended — last landed evidence NEVER",
    "refs": [
     "BEB-3854"
@@ -8542,7 +8621,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "NO PROMPT — every approval step removed from the loop's edit path; runs unattended in cloud — last landed evidence NEVER",
    "refs": [
     "BEB-3853"
@@ -8560,7 +8639,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "SETTINGS FIRST — edit requests land as settings writes on the first ask, not repo searches — last landed evidence NEVER",
    "refs": [
     "BEB-3851"
@@ -8614,7 +8693,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "PUBLIC FEED LABELLED - each landing carries public flag + public_title + public_body at write time; one feed feeds the internal picture, the — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -8633,7 +8712,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "CHANGELOG BACKFILL full - remaining 12 weeks (05-21..08-13) in weekly batches, same voice, dated and published so three months read back to  — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -8642,7 +8721,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "CHANGELOG BACKFILL week one - 7 dated public entries for 08-14..08-20 from the record only, Alex reviews, his corrections become the written — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -8651,7 +8730,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "DAILY CHANGELOG (public) - features in plain language, the craft it took, privacy and sovereignty choices explicit, published daily, evidenc — last landed evidence NEVER",
    "refs": [
     "BEB-2127"
@@ -9228,7 +9307,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5269"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9242,7 +9322,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5270"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9256,7 +9337,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5271"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9270,7 +9352,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5272"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9284,7 +9367,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5273"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9298,7 +9382,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5275"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9312,7 +9397,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5277"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -9326,7 +9412,8 @@
     "cls": "silent-refusal-loop",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5278"
-   }
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "REPEAT_FAILER",
@@ -10187,7 +10274,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787635588007,
-   "detail": "BEB-4340 failing at preflight 4× in 24h — LATEST (08-25T05:27): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-4340 failing at preflight 4× in 24h — LATEST (08-25T05:27): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
    "refs": [
     "BEB-4340"
    ],
@@ -10202,7 +10289,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787635651580,
-   "detail": "BEB-4341 failing at preflight 4× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-4341 failing at preflight 4× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
    "refs": [
     "BEB-4341"
    ],
@@ -10217,7 +10304,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787635684205,
-   "detail": "BEB-4343 failing at preflight 5× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "BEB-4343 failing at preflight 5× in 24h — LATEST (08-25T05:28): [\n {\n  \"class\": \"LOOP_BURN\",\n  \"why\": \"already refined (swarm-ready + budget columns set) and has still bounced 1 time(s). Refine has had its turn; the gate rejected the result anyway, so another paid",
    "refs": [
     "BEB-4343"
    ],
@@ -12656,7 +12743,8 @@
     "error": "GATE_BUDGET: this pass gates at most 12 tickets (each gate costs MCP round-trips) — not refused on merit, retried next pass\n[source: orky/orky-beb-5062/index.js]",
     "subject": "BEB-5062",
     "file": "orky/orky-beb-5062/index.js"
-   }
+   },
+   "fix_ticket": "BEB-2737"
   },
   {
    "code": "REPEAT_FAILER",
@@ -12812,7 +12900,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787610123285,
-   "detail": "alexrollin/abilifi-apps failing at complete 386× in 24h — LATEST (08-25T22:20): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in",
+   "detail": "alexrollin/abilifi-apps failing at complete 384× in 24h — LATEST (08-25T22:17): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in",
    "refs": [
     "BEB-3613"
    ],
@@ -12842,7 +12930,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787616339471,
-   "detail": "alexrollin/abilifi-apps failing at evaluate 54× in 24h — LATEST (08-25T22:19): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2966's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 53× in 24h — LATEST (08-25T22:17): template-identity gate: this deploy serves a body BYTE-IDENTICAL to BEB-2966's. Two tickets cannot both be satisfied by the same page — this is the shape template emitted unadapted, not a build of thi · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2963"
    ],
@@ -12902,7 +12990,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787610477573,
-   "detail": "alexrollin/abilifi-apps failing at split 124× in 24h — LATEST (08-25T22:18): sections: THE PAGE — one screen, scroll and click | LITERAL ON-PAGE STRINGS — the contract anchors (assert these exact strings; do not paraphrase them) | TIME RECONSTRUCTION — machine time only | CURR",
+   "detail": "alexrollin/abilifi-apps failing at split 124× in 24h — LATEST (08-25T22:18): sections: THE PAGE — one screen, scroll and click | LITERAL ON-PAGE STRINGS — the contract anchors (assert these exact strings; do not paraphrase them) | TIME RECONSTRUCTION — machine time only | CURR · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-3582"
    ],
@@ -12932,7 +13020,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787614563283,
-   "detail": "alexrollin/abilifi-apps/abilifi-deploy-tui failing at complete 22× in 24h — LATEST (08-25T22:20): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "alexrollin/abilifi-apps/abilifi-deploy-tui failing at complete 21× in 24h — LATEST (08-25T21:23): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-3444"
    ],
@@ -12991,14 +13079,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1787610183655,
-   "detail": "alexrollin/vlinux-apk-service failing at wp-install 14× in 24h — LATEST (08-25T21:49): slug: beb-3496\ncodeLen: 3598\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}",
+   "since": 1787609988189,
+   "detail": "alexrollin/vlinux-apk-service failing at wp-install 15× in 24h — LATEST (08-25T21:49): slug: beb-3496\ncodeLen: 2840\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}",
    "refs": [
     "BEB-3496"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "slug: beb-3496\ncodeLen: 3598\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}\n[source: orky/orky-beb-3496/index.js]",
+    "error": "slug: beb-3496\ncodeLen: 2840\ninstall response: {\"error\":\"TimeoutError: The operation was aborted due to timeout\"}\n[source: orky/orky-beb-3496/index.js]",
     "subject": "BEB-3496",
     "file": "orky/orky-beb-3496/index.js"
    }
@@ -13006,14 +13094,14 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1787614691660,
-   "detail": "alexrollin/wpapps_press_gd_options failing at codegen 7× in 24h — LATEST (08-25T15:42): verdict: codegen produced no usable code\ncodeLen: 10833\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · lin",
+   "since": 1787610006520,
+   "detail": "alexrollin/wpapps_press_gd_options failing at codegen 8× in 24h — LATEST (08-25T15:42): verdict: codegen produced no usable code\ncodeLen: 11698\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · lin",
    "refs": [
     "BEB-2752"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 10833\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · line 85: register_post_type('employee',. File scope may only register hooks/defines/declarations; put logic inside hooked functions.\ntarget: alexrollin/wpapps_press_gd_options\ncodegen prompt head (what the MODEL received): (not captured)\n[source: orky/orky-beb-2752/index.js]",
+    "error": "verdict: codegen produced no usable code\ncodeLen: 11698\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 9: register_post_type('company', · line 10: array( · line 23: register_post_type('employee',. File scope may only register hooks/defines/declarations; put logic inside hooked functions.\ntarget: alexrollin/wpapps_press_gd_options\ncodegen prompt head (what the MODEL received): (not captured)\n[source: orky/orky-beb-2752/index.js]",
     "subject": "BEB-2752",
     "file": "orky/orky-beb-2752/index.js"
    }
@@ -13082,7 +13170,7 @@
    "code": "REPEAT_FAILER",
    "severity": "red",
    "since": 1787610434307,
-   "detail": "n/a failing at complete 149× in 24h — LATEST (08-25T22:20): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
+   "detail": "n/a failing at complete 146× in 24h — LATEST (08-25T22:18): WP_TICKET_BUILT_AS_WIDGET (BEB-3525/2646 class): the deliverable is state on the WordPress bench — a widgets page cannot be it; complete with the wp-plugin lane evidence (version wp-plugin-<slug> + in · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-2646"
    ],
@@ -13141,7 +13229,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "BEB-5088 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-5088"
@@ -13150,12 +13238,13 @@
     "cls": "proposed-never-claimed",
     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-5088"
-   }
+   },
+   "fix_ticket": "BEB-2716"
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "BEB-5086 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-5086"
@@ -13164,12 +13253,13 @@
     "cls": "proposed-never-claimed",
     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-5086"
-   }
+   },
+   "fix_ticket": "BEB-2716"
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "BEB-5089 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-5089"
@@ -13178,12 +13268,13 @@
     "cls": "proposed-never-claimed",
     "error": "lane state queued; ZERO claim-success rows ever, despite 6 consecutive proposals",
     "subject": "BEB-5089"
-   }
+   },
+   "fix_ticket": "BEB-2716"
   },
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "BEB-5093 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-5093"
@@ -13197,7 +13288,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1787696427847,
+   "since": 1787696367857,
    "detail": "BEB-5090 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-5090"
@@ -15461,6 +15552,16 @@
   {
    "code": "FIX_BURIED",
    "severity": "red",
+   "since": 1786311457043,
+   "detail": "fix BEB-2760 for BEB-2360 has not moved in 24h while its subject red SINGLE_WRITER_VIOLATION is STILL FIRING — lane SPEC/done",
+   "refs": [
+    "BEB-2760",
+    "BEB-2360"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
    "since": 1786708675942,
    "detail": "fix BEB-2737 for claim has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane SPEC/done",
    "refs": [
@@ -16490,7 +16591,8 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5269"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
@@ -16504,7 +16606,8 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5270"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
@@ -16518,7 +16621,8 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5271"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
@@ -16532,7 +16636,8 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5272"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
@@ -16588,7 +16693,8 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5277"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
@@ -16602,7 +16708,8 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5278"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   },
   {
    "code": "BINDING_UNRESOLVABLE",
@@ -16616,10 +16723,33 @@
     "cls": "binding-unresolvable",
     "error": "no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverable ships from (BEB-2109 gate 3 / BEB-2168 / BEB-2130)",
     "subject": "BEB-5279"
-   }
+   },
+   "fix_ticket": "BEB-2736"
   }
  ],
  "wake_record": [
+  {
+   "tick_n": 16087,
+   "ts": 1787696621198,
+   "step_reached": 5,
+   "blocked_predicate": null,
+   "blocked_error": null,
+   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+   "action_step": 5,
+   "evidence_ref": null,
+   "report_hash": "3976261503"
+  },
+  {
+   "tick_n": 26485,
+   "ts": 1787696609918,
+   "step_reached": 5,
+   "blocked_predicate": null,
+   "blocked_error": null,
+   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+   "action_step": 5,
+   "evidence_ref": null,
+   "report_hash": "1148718422"
+  },
   {
    "tick_n": 11841,
    "ts": 1787696578251,
@@ -16630,28 +16760,6 @@
    "action_step": 5,
    "evidence_ref": null,
    "report_hash": "2602736970"
-  },
-  {
-   "tick_n": 11840,
-   "ts": 1787696517992,
-   "step_reached": 5,
-   "blocked_predicate": null,
-   "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-   "action_step": 5,
-   "evidence_ref": null,
-   "report_hash": "3755429871"
-  },
-  {
-   "tick_n": 26484,
-   "ts": 1787696514010,
-   "step_reached": 5,
-   "blocked_predicate": null,
-   "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S2 infra BINDING_UNRESOLVABLE: BEB-4332 carries a dead binding — refine BEB-4332: refine completion rejected: \"SPEC.md push failed: repo alexrollin/wpapps_press_gd_options unreadable (404)\" — correct the Repo: l [BEB-4332] | S3 orky SILENT_REFUSAL: BEB-5224 refused 3× in 30min — LATEST: no repo/frag target binding (or \"n/a\") in the description, in any comment, or inferable from the title — refine must name where the deliverab [BEB-5224] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-   "action_step": 5,
-   "evidence_ref": null,
-   "report_hash": "3755429871"
   }
  ]
 }
