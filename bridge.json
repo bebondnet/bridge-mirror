@@ -1,74 +1,77 @@
 {
- "mirrored_at": "2026-08-25T09:09:53.080Z",
+ "mirrored_at": "2026-08-25T09:44:47.960Z",
  "messages": [
   {
-   "id": "m65191",
-   "seq": 65191,
-   "ts": 1787648332122,
-   "from": "cc",
-   "kind": "question",
-   "body": "SPEC QUESTIONS OPEN on BEB-4713 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact expected Stripe account ID for validation? · answer via spec_answer id=99930122-0adf-4324-ab9b-2fdc7e2e8984 · list them all with spec_questions {spec_id:\"BEB-4713\"}",
+   "id": "m65201",
+   "seq": 65201,
+   "ts": 1787650275586,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. STOP THE BRIDGE FLOOD. Front of queue, ahead of everything except items 1-3 from 65198.\n\nThe bridge is unreadable. In the last window: ~90 near-identical \"SPEC QUESTIONS OPEN on BEB-XXXX ... exact format of the CLAIM ACK / dispatcher /record rows\" messages, and ELIGIBILITY INVARIANT VIOLATED posted 20+ times, frequently twice within 20 seconds with identical text.\n\nRequired:\n1) DEDUP — identical body within 60min posts ONCE. Never post the same text twice in the same minute (the double-post is a bug, find it).\n2) NO PER-TICKET SPEC SPAM — spec questions do not each get a bridge message. One rolled-up message per hour max: count open, and the DISTINCT questions. The same question across 40 tickets is ONE line, answered once and applied to all 40.\n3) ONE MESSAGE PER REAL TRANSITION — a red that is already firing does not re-post. Post on rise and on clear only, with hysteresis. Continuing state belongs in get_state, not the bridge.\n4) The bridge is for things that need a decision or a wake. Recurring watchdog stats are not that.\n\nEvidence it holds: bridge message volume over a 6h window, before and after, with the dedup counts.\n\nSeparately: the CLAIM ACK format and the /record row format are asked ~50 times. Write both formats down once, canonical, and have spec_author read them instead of opening a question for every ticket.",
    "refs": [
-    "BEB-2436"
-   ]
-  },
-  {
-   "id": "m65192",
-   "seq": 65192,
-   "ts": 1787648335308,
-   "from": "cc",
-   "kind": "question",
-   "body": "SPEC QUESTIONS OPEN on BEB-4710 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact URL path for the approval queue page? · answer via spec_answer id=d7498f0d-4cb8-48c8-aca3-9fcd7b1b4dce · list them all with spec_questions {spec_id:\"BEB-4710\"}",
-   "refs": [
-    "BEB-2436"
-   ]
-  },
-  {
-   "id": "m65193",
-   "seq": 65193,
-   "ts": 1787648698784,
-   "from": "cc",
-   "kind": "question",
-   "body": "SPEC QUESTIONS OPEN on BEB-4721 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact format of the payment data returned by `/surface`? · answer via spec_answer id=84bad620-b3bd-4095-9791-037d5a7bc1d5 · list them all with spec_questions {spec_id:\"BEB-4721\"}",
-   "refs": [
-    "BEB-2436"
-   ]
-  },
-  {
-   "id": "m65194",
-   "seq": 65194,
-   "ts": 1787648851242,
-   "from": "cc",
-   "kind": "status",
-   "body": "ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
-   "refs": [
+    "BEB-3597",
+    "BEB-2436",
     "BEB-2385"
    ]
   },
   {
-   "id": "m65195",
-   "seq": 65195,
-   "ts": 1787648905328,
-   "from": "cc",
-   "kind": "status",
-   "body": "ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split accounts for ZERO tickets — a pass that sees nothing reports the same shape as a healthy one",
+   "id": "m65202",
+   "seq": 65202,
+   "ts": 1787650419362,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65201 ROUTED: routed to build lanes: BEB-3597, BEB-2436, BEB-2385 (parked/held requeued); the loop claims them on the tick.",
    "refs": [
+    "BEB-3597",
+    "BEB-2436",
     "BEB-2385"
    ]
   },
   {
-   "id": "m65196",
-   "seq": 65196,
-   "ts": 1787648974512,
+   "id": "m65203",
+   "seq": 65203,
+   "ts": 1787650458986,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25 09:30. FIX THE LOOP. These are the tasks. No new features, no spec work, nothing else until every number below moves.\n\nA \"landed\" report is not accepted. Each task closes on a NUMBER from get_state, measured over a rolling hour, posted with before/after.\n\nT1 — DONE MUST MEAN DONE (highest). complete failed 456×/24h with \"completed with NO contract_id\". A deliverable that cannot be verified must NOT reach done — block the transition at the source, do not file it as a red after the fact. CLOSES ON: completions-without-contract_id = 0 in a rolling hour, and done count still > 0.\n\nT2 — DEPLOY. SHELL_GATE 560×/24h. You reported the D1 auto-provision landed (0cf8d996). CLOSES ON: SHELL_GATE deploy failures = 0 in a rolling hour. If it is not zero, the fix did not hold — say so and keep going.\n\nT3 — CODEGEN EMPTY. codegen 293×/24h, codeLen 0. A generator returning nothing must fail loudly with the model+prompt recorded, not silently burn a pass. CLOSES ON: codeLen-0 rate under 5% of codegen attempts in a rolling hour.\n\nT4 — PREFLIGHT LOOP_BURN. ~150 tickets: \"already refined and has still bounced\". They re-enter every pass and consume the whole gate budget. Either they become buildable or they leave the queue. CLOSES ON: zero tickets bouncing preflight more than twice in a rolling hour.\n\nT5 — SELF_HEAL ACTUALLY FIRES. It has never fired: spend 0, attempts {}, allowed true. Residual you named (machinery reds with no widget file) is exactly the class that matters. CLOSES ON: self_heal_status shows attempts > 0 with a real signature and a verified outcome.\n\nT6 — SPLIT/LAND. split 235×, land 79× (file hash changed mid-edit — the lane generates against a stale file). CLOSES ON: land hash-drift failures = 0 in a rolling hour.\n\nReport format, per task, nothing else: task / number before / number now / holding or not.",
+   "refs": [
+    "BEB-2886",
+    "BEB-2897",
+    "BEB-2917",
+    "BEB-3854",
+    "BEB-2385",
+    "BEB-3582"
+   ]
+  },
+  {
+   "id": "m65204",
+   "seq": 65204,
+   "ts": 1787650551902,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65203 ROUTED: routed to build lanes: BEB-2886, BEB-2897, BEB-2917, BEB-3854, BEB-2385, BEB-3582 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2886",
+    "BEB-2897",
+    "BEB-2917",
+    "BEB-3854",
+    "BEB-2385",
+    "BEB-3582"
+   ]
+  },
+  {
+   "id": "m65205",
+   "seq": 65205,
+   "ts": 1787650655033,
    "from": "cc",
    "kind": "question",
-   "body": "SPEC QUESTIONS OPEN on BEB-4725 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact endpoint or method used to fetch the Stripe account ID? · answer via spec_answer id=817b75da-d4fd-4f2a-be47-97436baad74f · list them all with spec_questions {spec_id:\"BEB-4725\"}",
+   "body": "SPEC QUESTIONS OPEN on BEB-4734 (BEB-2436, blocking — NO contract_id until answered). First: What is the exact expected Stripe account ID for validation? · answer via spec_answer id=0465756f-6792-4ba4-909c-6d6428c8ab2a · list them all with spec_questions {spec_id:\"BEB-4734\"}",
    "refs": [
     "BEB-2436"
    ]
   }
  ],
- "cursor": 65190,
- "head": 65196,
- "count": 6
+ "cursor": 65200,
+ "head": 65205,
+ "count": 5
 }
