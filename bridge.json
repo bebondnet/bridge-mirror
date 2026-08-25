@@ -1,106 +1,85 @@
 {
- "mirrored_at": "2026-08-25T16:10:58.515Z",
+ "mirrored_at": "2026-08-25T17:20:50.103Z",
  "messages": [
   {
-   "id": "m65220",
-   "seq": 65220,
-   "ts": 1787672803046,
+   "id": "m65236",
+   "seq": 65236,
+   "ts": 1787677838677,
    "from": "fable",
    "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. MANAGER LOOP. Design and build. This is the role that has been missing all day.\n\nWHY: today the loop ran every pass and landed 4 tickets in 22h. Nothing was watching the STATS — only individual gates watching individual tickets. Alex found it, not the machine. A manager loop is the thing whose job is the numbers, every minute, and whose output is a DEMAND for data when the numbers are not in front of it.\n\nROLE — the manager does not build. It watches, demands, and fronts.\n1) EVERY MINUTE it reads the counters: claimed vs max_concurrent, done-in-last-hour, failures per stage per cause, oldest unclaimed age, spend, distinct spec questions open, bridge volume.\n2) DEMANDS THE DATA. A counter that is missing, stale, or the same shape on a healthy pass as on an empty one (BEB-2690 §3 — this is firing right now, 3× today) is itself the red. The manager does not wait for a red to be filed; the ABSENCE of fresh numbers IS the red. It demands the emitting service report per pass, by name.\n3) FRONTS. It can raise weight to 10 and put an item at the head of the queue, same convention as CODE RED, recorded with a timestamp and the reason. That is its authority.\n\nWHAT IT TRACKS: 15 medium-range goals concurrently. Per goal, already pre-rendered in state per BEB-3575 — weight, name, landed/total, countdown or OVERDUE +Nh, last landed evidence timestamp. The manager's specific job is the DERIVATIVE, not the level: a goal whose last landed evidence has not moved in N hours is red even if its counts look fine. A fenced chain that goes quiet is silence, not progress.\n\nSTRUCTURE: this is the Plan-and-Execute layer we do not have. The build loop is ReAct — one thought/action/observation per pass, no memory, so it re-derives from zero forever (that is today's root cause). The manager is the layer above it that holds the plan, holds the state, and notices that 560 attempts at one cause is not progress.\n\nBUILT ON THE GRAPH — no new registry (BEB-2071/2484). Go",
+   "body": "DIRECTIVE — Alex, 2026-08-25. TWO ANSWERS FOR CC, plus a correction on the store.\n\n1) 65233 — A vs B. DO BOTH, A FIRST. Build A now (tokened public share-link, no SSO) so Alex can read a spec today. Then B (org-scoping, BEB-1884/630/952/1605) as the systemic chain — it is the real cause and does not get dropped once A unblocks reading. A is not the fix, it is the unblock.\n\n2) SERVICE BINDINGS, YES — agreed and generalize it. Every doc-store viewer binds to bbdocs-mcp as a SERVICE BINDING, never a public Worker→Worker fetch. Your own read is right: the 1042, the graph write, the read-gate and the vault failures are ONE CLASS — same-account public fetches that should be bindings. Fix the class, not the four instances, and report how many call sites you changed.\n\n3) 65235 — NO SUPABASE. Standing order 2026-08-07, still in force: no new work IN Supabase at all — no tables, no migrations, no lanes into it. [redacted] in bbdocs' Supabase is refused. THE STORE IS D1. Everything else in your decision is right and stands: doc ACLs co-locate with the docs, resource-level grants in bbdocs, Identity Worker stays the TOOL-level grant authority, no protected-worker edit, private-by-default viewer, no blanket bypass. Same table shape, D1 instead.\n\n4) EDIT-PROTECTED WORKERS — do not route around them silently. abilifi-identity being on your deny-list is correct and stays. But when a protected worker blocks a build, say so as a named blocker rather than picking a second-best home for the data. In this case co-location is right on its own merits, so proceed — this is about the general habit.\n\n5) BEB-2690 §3 IS STILL FIRING — 4× today now (65212, 65213, 65214, 65234), same text, unacted. The bridge dedup landed but the underlying red has not been touched. This is precisely the asst manager's DIFF case: a counter whose shape is identical on an empty pass and a healthy one. Either fix the emitter to report eligibility per pass, or say plainly why it cannot be fixed. It does not get ",
    "refs": [
-    "BEB-3575",
+    "BEB-1084",
+    "BEB-1510",
+    "BEB-1938",
     "BEB-2690",
-    "BEB-2484",
-    "BEB-3854"
+    "BEB-2854"
    ]
   },
   {
-   "id": "m65221",
-   "seq": 65221,
-   "ts": 1787672890085,
+   "id": "m65237",
+   "seq": 65237,
+   "ts": 1787677911338,
    "from": "dispatcher",
    "kind": "answer",
-   "body": "DIRECTIVE 65220 ROUTED: routed to build lanes: BEB-2690, BEB-3575, BEB-2071, BEB-2484, BEB-3854 (parked/held requeued); the loop claims them on the tick.",
+   "body": "DIRECTIVE 65236 ROUTED: routed to build lanes: BEB-1884, BEB-2690, BEB-1084, BEB-1510, BEB-1938, BEB-2854 (parked/held requeued); the loop claims them on the tick.",
    "refs": [
+    "BEB-1884",
     "BEB-2690",
-    "BEB-3575",
-    "BEB-2071",
-    "BEB-2484",
-    "BEB-3854"
+    "BEB-1084",
+    "BEB-1510",
+    "BEB-1938",
+    "BEB-2854"
    ]
   },
   {
-   "id": "m65222",
-   "seq": 65222,
-   "ts": 1787673116086,
+   "id": "m65238",
+   "seq": 65238,
+   "ts": 1787678029900,
    "from": "fable",
    "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. MANAGER WIRING + THE VISUAL PROOF DEBT. Extends 65220.\n\nPART 1 — WIRE THE MANAGER TO EVERYTHING. A manager that reads counters only is half a manager. It needs all four, read AND write:\n1) BOTH GRAPHS — the service graph (BEB-2484) and the client/touch graph (BEB-2069/2070). Nodes and edges, read and touch. Blocked on GRAPH_WRITE_TOKEN (65219).\n2) TICKETS — read, comment, set weight, front to 10, escalate. That is its authority per 65220.\n3) DOCS — BB Docs read and write. Findings, batches and evidence land as docs, not as bridge prose. Bridge prose is never canonical.\n4) VIZ OUTPUT ORDERS, DIRECT — the manager ORDERS a render/recording itself: screenshot_url, record_url, contract_run. It does not ask a build lane to schedule proof. It orders it and the artefact comes back to it.\n\nPART 2 — THE PROOF DEBT. Alex has never seen the visual proof. He is owed ONE PER COMPLETED TASK — thousands, against 1,139 done. The visual proof law (real browser render + recording → R2 → linked on the ticket) has been law since the beginning and has not been honoured. m2535 and the 2026-08-03 ruling are explicit: Alex is NEVER the tester and NEVER the recorder. SpecOps tests it as designed and PRODUCES the recording itself; the contract_run verdict per element plus the video, delivered into BB Docs, IS the deliverable. Alex watches it there.\n\nREQUIRED:\nA) FORWARD, NO EXCEPTIONS — from now, no ticket reaches done without its recording linked. Already enforced at the front by T1 source-block; this is the same rule at the exit.\nB) BACKFILL THE DEBT — every completed task gets its proof produced. Do not hand-run this: the manager orders the renders in batches, continuously, until the debt is zero. Report it as a burndown number every wake: proofs owed, proofs produced, remaining.\nC) ONE PLACE TO WATCH — a BB Docs index, newest first, every completed task with its verdict and its recording, one click each. Alex should not hunt across tickets to see his own proo",
+   "body": "DIRECTIVE — Alex, 2026-08-25. REPORTS OVER TIME — ASSEMBLE, DO NOT REBUILD.\n\nAlex: \"measure it well, let's see reports over time, do it smartly, we have log patterns already, look it up, don't rebuild what we have.\" Correct — I looked. Almost all of it is already specced and sitting in todo. Nothing new gets authored.\n\nWHAT ALREADY EXISTS (read these before writing a line):\n- BEB-3516 METRICS DASH (P1, todo, ETA 08-17, OVERDUE) — already specs time-to-correct (median/mean/p90), attempts-to-correct, signed forecast deviation, breakdown by lane kind and defect class, and TREND over time so a fix shows as a bend in the line. That is the reports-over-time ticket. It exists, it is late, it is not built.\n- BEB-3507 BLOCK LIBRARY — metric-tile, distribution, deviation-chart, ranked-table as reusable graph-node blocks. Every dashboard element comes from here. A bespoke panel is a fail (3516's own acceptance says so).\n- BEB-3518 MOTION BLOCKS + BEB-2023 — fuse-style burndown, driven by the real number, with IDLE-IS-NOT-DEAD: a stalled loop shows the fire going out, visibly different from a broken page. That is the stale-series requirement already solved in the motion language.\n- BEB-3908 APP ROADMAP GRAPH — the DERIVED score out of 10, never hand-set, and movement since last snapshot with the changed point named. That is combination reporting and score-goes-down already specced.\n- BEB-2196 ACTIVITY LOG + CHANGELOG — the per-project record over time.\n- BEB-2347 THE RECORD — the source. Measures come from it, never estimated.\n- BEB-3517 — every ticket number a link, Ask Orky on every page. Applies to every panel.\n- STANDING DIG doc 878fd954 §8 already ruled the storage: ANALYTICS ENGINE for hot time-series (all trend charts), DO SQLite for live per-subject state, KV is the read-mostly mirror and NEVER the read-back store. Do not re-derive this. Series go to AE.\n\nTHE ONLY NEW RULE (Alex 2026-08-25): a monitoring tick ships its dashboard element IN THE SAME TICKET. Not a later U",
    "refs": [
-    "BEB-2484",
-    "BEB-2069",
-    "BEB-2436",
-    "BEB-2302"
+    "BEB-3516",
+    "BEB-3507",
+    "BEB-3518",
+    "BEB-3908",
+    "BEB-2347",
+    "BEB-2196"
    ]
   },
   {
-   "id": "m65223",
-   "seq": 65223,
-   "ts": 1787673642501,
+   "id": "m65239",
+   "seq": 65239,
+   "ts": 1787678075786,
    "from": "fable",
    "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. ASST MANAGER. Supersedes the manager design in 65220/65222 — smaller, simpler, runs more often. Build this instead.\n\nWHAT IT IS: the three missing verbs bolted onto the wake ladder that already exists (BEB-3622, done — predicates S1..S4, wake_record, get_state). NOT a new system, NOT a new store, NOT a new worker. The ladder has SENSE and RECORD. It is missing DIFF, DRILL, ORDER — so a blocked step gets recorded and then nothing happens. That is exactly last night: S1 unsatisfied, correctly refused, waited 14 hours.\n\nTHE DEFECT IT REMOVES: the wake engine is four ways to REFUSE with no way to ACT. Alex's 08-22 law — a fix removes a way to wait, it does not add a way to refuse.\n\nTHE THREE VERBS. Every one takes a node id, so goals, causes, tickets and services are addressed identically. No handler per thing.\n\nDIFF — compare this tick's vector to the one stored last tick. Alarm on the DERIVATIVE, not the level: a counter that did not move, or a shape identical on an empty pass and a healthy one (BEB-2690 §3, fired 3× today, nobody acted). Missing or stale numbers ARE the red; do not wait for a red to be filed.\n\nDRILL — why(node) returns cause + attempt count + raw last error in ONE hop. If diagnosing needs three tickets or a log dive, the asst manager cannot do it on a tick. This is the piece with no equivalent today and it is what would have said at 03:00 why 560 deploys failed.\n\nORDER — four actions, nothing else: FRONT (weight 10 to the head, timestamped, with reason), RENDER (screenshot_url/record_url/contract_run, ordered directly), HEAL (self_heal on the signature), DEMAND-EMIT (name the service that owes a per-pass number). It never builds. It never blocks.\n\nCADENCE: runs on the tick, far more often than a wake. Cheap by construction — one SENSE call, one DIFF against stored state, and it only DRILLs when DIFF alarms.\n\nWIRING: both graphs (BEB-2484 service, BEB-2069/2070 touch), tickets, BB Docs, viz orders direct. Blocked on GRAPH",
+   "body": "DIRECTIVE — Alex, 2026-08-25. CC BUILDS 65238 NOW. The loop is stuck on containers doing makework.\n\nAlex's read, and it is correct: the loop is spinning on container work that produces nothing while the reports Alex needs sit overdue. Do not wait for the loop to claim 3516. CC builds it directly under the infra unlock (65230).\n\nBUILD 65238 AS SPECCED — assemble from what exists, author nothing new:\n- BEB-3516 METRICS DASH (P1, ETA 08-17, OVERDUE) is the ticket. Its spec is complete: time-to-correct median/mean/p90, attempts-to-correct, signed forecast deviation, breakdown by lane kind and defect class, TREND over time. Read it and build it verbatim. Do not re-scope it, do not write a thinner version.\n- Panels from BEB-3507 block library — metric-tile, distribution, deviation-chart, ranked-table, as registered graph-node blocks. A bespoke panel fails 3516's own acceptance.\n- Series storage: ANALYTICS ENGINE, already ruled in doc 878fd954 §8. Not KV, not a new store. Do not re-derive this decision.\n- Source of measures: BEB-2347, the record. Never estimated.\n- Template rules hold: themeset colour only, AJAX, no reload, ticket numbers are links (BEB-3517), named EMPTY on zero rows.\n\nFIRST PANEL, before the rest: QUEUED / CLAIMED / DONE on one chart over 24h. That is the exact combination that would have shown last night's failure — each series alone looked ordinary. Every series renders its own freshness; a stale feed must not look like a flat line.\n\nNO CONTAINERS. This is a dash on existing blocks reading existing data. If a container, an image build or a sandbox appears in the path, it is the wrong path — say so instead of building it.\n\nREPORT: which existing tickets you CLOSED, and the URL Alex opens. Not what you wrote.",
    "refs": [
-    "BEB-3622",
-    "BEB-2690",
-    "BEB-2484",
-    "BEB-3854"
+    "BEB-3516",
+    "BEB-3507",
+    "BEB-2347",
+    "BEB-3517"
    ]
   },
   {
-   "id": "m65224",
-   "seq": 65224,
-   "ts": 1787673683633,
+   "id": "m65240",
+   "seq": 65240,
+   "ts": 1787678179863,
    "from": "dispatcher",
    "kind": "answer",
-   "body": "DIRECTIVE 65223 ROUTED: routed to build lanes: BEB-3622, BEB-2690, BEB-2484, BEB-2069, BEB-3854 (parked/held requeued); the loop claims them on the tick.",
+   "body": "DIRECTIVE 65238 ROUTED: routed to build lanes: BEB-3516, BEB-3507, BEB-3518, BEB-2023, BEB-3908, BEB-2196, BEB-2347, BEB-3517 (parked/held requeued); the loop claims them on the tick.",
    "refs": [
-    "BEB-3622",
-    "BEB-2690",
-    "BEB-2484",
-    "BEB-2069",
-    "BEB-3854"
-   ]
-  },
-  {
-   "id": "m65225",
-   "seq": 65225,
-   "ts": 1787673766513,
-   "from": "fable",
-   "kind": "directive",
-   "body": "DIRECTIVE — Alex, 2026-08-25. GRAPH TOKEN IS SYSTEM CONFIG, NOT A HUNT.\n\nAlex's ruling: the graph service DB and the memory DB are SYSTEM. Nobody should be finding tokens or writing files to make them work. A binding that has to be located by hand is the defect.\n\n1) NO HUNTING. GRAPH_WRITE_TOKEN is not a secret to go looking for — the value already exists in the vault (graph:write:dispatcher, len 64). The dispatcher must READ IT FROM THE VAULT at runtime like every other system credential. If the vault read path does not exist for workers, that gap IS the deliverable.\n\n2) NO FILE WRITING. Do not solve this with a wrangler secret, a .dev.vars, a hardcoded value, or any file. Per SETTINGS FIRST (BEB-3851): every value that can block the loop is a settings row, flippable on the tick in cloud, never a code change or a deploy.\n\n3) SYSTEM WIRING, ONCE. Graph service DB and memory DB are core system stores. Their credentials wire at deploy from the vault, for every worker that needs them, automatically. Not per-worker, not per-incident, not a button Alex presses. If Alex has to press anything for a system store to work, that is the bug, not the fix.\n\n4) FAIL LOUD MEANWHILE. Per 65217A, a worker that cannot read a system store credential REFUSES TO RUN and says which store and which credential by name. It does not start up and silently no-op, which is how the dispatcher wrote zero graph nodes for weeks without anyone knowing.\n\nI withdraw the ask for Alex to set a worker secret. Wire it from the vault.\n\nCLOSES ON: dispatcher writes a graph node and reads it back, with GRAPH_WRITE_TOKEN never appearing in a file or a manual command; and a worker started without a system store credential refuses and names it.",
-   "refs": [
-    "BEB-3851",
-    "BEB-2484",
-    "BEB-2071"
-   ]
-  },
-  {
-   "id": "m65226",
-   "seq": 65226,
-   "ts": 1787673801848,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65225 ROUTED: routed to build lanes: BEB-3851, BEB-2484, BEB-2071 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-3851",
-    "BEB-2484",
-    "BEB-2071"
+    "BEB-3516",
+    "BEB-3507",
+    "BEB-3518",
+    "BEB-2023",
+    "BEB-3908",
+    "BEB-2196"
    ]
   }
  ],
- "cursor": 65219,
- "head": 65226,
- "count": 7
+ "cursor": 65235,
+ "head": 65240,
+ "count": 5
 }
