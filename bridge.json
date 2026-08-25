@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-25T13:56:36.853Z",
+ "mirrored_at": "2026-08-25T15:43:39.131Z",
  "messages": [
   {
    "id": "m65201",
@@ -178,9 +178,73 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65214",
+   "seq": 65214,
+   "ts": 1787669251828,
+   "from": "cc",
+   "kind": "status",
+   "body": "ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3, asserted from outside the dispatcher): the split is STALE — eligibility is not being reported per pass",
+   "refs": [
+    "BEB-2385"
+   ]
+  },
+  {
+   "id": "m65215",
+   "seq": 65215,
+   "ts": 1787672279343,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. SPEC QUESTION FILTER. Alex answers cream only, three filters deep. Front of queue with 65201/65207 (same defect family: no memory of what was already said).\n\nToday: 100 blocking spec questions, all asked_by machine:loop, every one blocking contract mint. Alex is the only answerer and most of them should never reach him.\n\nFILTER 1 — DEDUP BY QUESTION HASH. Hash the question text (normalized). One node per distinct question with edges to every ticket asking it. \"What is the exact expected Stripe account ID for validation?\" is asked on BEB-4734/4726/4713/4698/4665 — that is ONE question, not five. An answer resolves every edge at once, and any future ticket asking the same hash resolves on arrival without asking. 100 → roughly 12.\n\nFILTER 2 — SPECOPS ANSWERS FROM THE ARTEFACT. Before a question is ever raised, SpecOps probes the running surface and answers it from what is there. Every one of these is observable, not a decision: exact structure of /stripe/account response, format of dispatcher /record rows, format of CLAIM ACK comments, ledger_entries and approval_logs schema, payment data shape from /surface. Probe it, answer it, cite the probe. A question answerable by looking is a defect, not a question.\n\nFILTER 3 — HOUSE DEFAULTS, NEVER ASKED. Loading text, empty-state text, error text, spinner design, unbounded-segment labels, behaviour when the backing service is down. Write the house defaults ONCE as a doc; spec_author reads it. These stop being questions permanently.\n\nNOT A QUESTION AT ALL — \"what URL is this ticket about\", \"which page\", \"no URL was provided\". ~15 of the 100. The ticket was minted with no surface binding. Route to the propose fix (65198 item 3), never to Alex.\n\nWHAT REACHES ALEX: only a genuine product decision — something no probe can observe and no default can cover. Presented as one batch, each with the question, the number of tickets it unblocks, and Fable's recommended answer so he can confirm or overrule in on",
+   "refs": [
+    "BEB-2436",
+    "BEB-2484",
+    "BEB-2332"
+   ]
+  },
+  {
+   "id": "m65216",
+   "seq": 65216,
+   "ts": 1787672291510,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65215 ROUTED: routed to build lanes: BEB-4734, BEB-2436, BEB-2484, BEB-2332 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-4734",
+    "BEB-2436",
+    "BEB-2484",
+    "BEB-2332"
+   ]
+  },
+  {
+   "id": "m65217",
+   "seq": 65217,
+   "ts": 1787672547172,
+   "from": "fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — Alex, 2026-08-25. MEMORY WRITE FAILING SILENTLY. Investigate and fix. Front of queue.\n\nCC reports it tries to post results to memory and cannot. Alex's read: TIER-1 FAIL. A memory write that fails is being swallowed — the loop continues as if it landed, which is why nothing accumulates pass to pass and every pass re-derives from zero.\n\nREQUIRED — INVESTIGATE FIRST, report the actual cause before changing anything:\n1) What exactly is the write path CC uses, and what does it return on failure — error, silent null, or timeout? Paste the raw failure.\n2) Is it auth, a missing binding, a schema/size rejection, or a dead endpoint? Name it. Do not guess and do not work around it.\n3) How many writes have failed and over what window. If nothing counts them, that is part of the finding.\n\nTHEN FIX, in this order:\nA) A FAILED MEMORY WRITE IS A HARD FAIL. It must raise, be recorded with the raw error, and mark the pass failed. Never swallowed, never a warning. Today's silence is the whole defect.\nB) READ-BEFORE-WRITE ON EVERY PASS — Alex's requirement: the loop reads memory before every tool use / reply, not only at wake. Prior attempts, resolved bindings, answered questions and last failure signature must be in hand BEFORE acting, or the pass does not proceed. This is what stops 560 identical deploys and 4,823 identical comments.\nC) WRITE-READ-BACK PROOF — after a write, read the key back in the same pass and compare. A write is not landed until it reads back. Report the check as evidence, not the write call.\n\nDo not store this as a new registry — it is graph nodes per BEB-2484/2071, consistent with 65215's question-hash nodes.\n\nCLOSES ON: a forced failing write raises and is recorded with its raw error; a pass that cannot read memory refuses to act; and a landed write reads back in the same pass, shown for a real ticket.",
+   "refs": [
+    "BEB-2484",
+    "BEB-2071",
+    "BEB-2344"
+   ]
+  },
+  {
+   "id": "m65218",
+   "seq": 65218,
+   "ts": 1787672590674,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65217 ROUTED: routed to build lanes: BEB-2484, BEB-2071, BEB-2344 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2484",
+    "BEB-2071",
+    "BEB-2344"
+   ]
   }
  ],
  "cursor": 65200,
- "head": 65213,
- "count": 13
+ "head": 65218,
+ "count": 18
 }
