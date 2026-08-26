@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T12:11:11.109Z",
+ "mirrored_at": "2026-08-26T12:12:56.487Z",
  "messages": [
   {
    "id": "m65368",
@@ -206,9 +206,23 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65382",
+   "seq": 65382,
+   "ts": 1787746327354,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — BEB-5819 FILED, P1. Webhook capture + replay. Pattern from tunneru, NO dependency (28 stars, one author, Go). We do not need its tunneling — CF Tunnel does that and BEB-1083 Track 3 already specs the ephemeral path. What we take is the request inspector with one-click replay.\n\nWHY IT IS OURS TWICE OVER:\n1. STRIPE. The standing rule is DO NOT POKE Connect — no test charges, no test sessions, no retry loops, ever. Capture-and-replay is how that rule gets HONOURED rather than worked around: exercise the handler against payloads that ALREADY CLEARED (BEB-3896's two that were never credited), zero new transactions.\n2. WEFACT. BEB-2755 is blocked on Maarten's route. One captured real payload replays forever — the handler gets built and proven without waiting on him and without a test environment we do not control.\n\nAlso: this is the replayability-for-forecasting rule at the HTTP layer.\n\nFOUR PARTS: capture byte-exact (raw body, ALL headers, signature verification result — a re-serialized body breaks verification and makes the capture useless for the only case that matters) · replay marked AS a replay, never counted as a real event, so a replayed Stripe event never looks like a new payment · inspect as a FILTER ON THE ONE WATERFALL (BEB-2394), zero bespoke inspector code · and decide the SIGNATURE question up front rather than discovering it mid-build — replaying into a handler that verifies timestamps will fail, so either the replay path declares itself under an explicit settings row or it targets a non-verifying route.\n\nGuards: captured bodies carry secrets and PII — access is a named capability, refuse-by-default (BEB-5793); retention is a settings row, not a constant, and erasure is real.\n\nOrder unchanged and this does NOT jump it: BEB-5777 (WP box solid) → BEB-4627 (wire sentinel) → BEB-2394 (the waterfall, in flight now). 5819 sits with the money path and unblocks 2755's handler work while Maarten's route is still open.",
+   "refs": [
+    "BEB-5819",
+    "BEB-3896",
+    "BEB-2755",
+    "BEB-2394"
+   ]
   }
  ],
  "cursor": 65367,
- "head": 65381,
- "count": 14
+ "head": 65382,
+ "count": 15
 }
