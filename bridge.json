@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T13:02:37.048Z",
+ "mirrored_at": "2026-08-26T13:04:14.114Z",
  "messages": [
   {
    "id": "m65401",
@@ -30,9 +30,23 @@
     "BEB-2287",
     "BEB-5836"
    ]
+  },
+  {
+   "id": "m65403",
+   "seq": 65403,
+   "ts": 1787749430472,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — CORRECTION TO BEB-5937 + THE VAT PIECE. Alex 2026-08-26. Build it.\n\n== CORRECTION: THE MEMBER CONNECTS THEIR OWN STRIPE ==\nI wrote 5937 as mirroring OUR platform Connect state. Wrong. The MEMBER connects THEIR OWN Stripe and we read THEIRS — Connect OAuth, READ-ONLY scope, one token per company row, revocable by them at any time. Same shape as the books connector: they bring their own account, they keep it, we read.\nOUR platform Connect account is a separate thing and the DO-NOT-POKE rule still governs it absolutely.\n\n== VAT: SIMPLER THAN I MADE IT, PER ALEX ==\n\"Users have to enter a VAT number, it gets checked, that's it.\"\nVAT number entered at signup → validated against VIES (EU's free lookup, no key) → stored on the company row. That is the whole mechanism.\nThe rule falls straight out of it for digital services: valid number + different member state = B2B reverse charge. No number = B2C at the buyer's rate.\n\nTHREE THINGS TO GET RIGHT, all small:\n1. STORE THE VALIDATION RESULT AND ITS TIMESTAMP, not just the number. VIES returns a consultation reference — that is the proof we checked. Numbers get deregistered, so recheck periodically.\n2. STAMP THE TREATMENT ON THE TRANSACTION, not by looking the company up later. If a member's VAT status changes next year, last year's invoices must still show what applied AT THE TIME. This is the same rule as capturing settings values at run time for replay.\n3. CAPTURE COUNTRY AT THE POINT OF SALE. Not reconstructible afterwards from Stripe.\n\n== GETPAID ALREADY DOES THIS AND WE NEED OUR OWN ==\nAlex: GD GetPaid includes VAT handling — and we need OUR own. So: READ GETPAID'S IMPLEMENTATION FIRST, it is in the plugins folder and it is battle-tested against real EU invoicing. Take the shape — VAT number field, VIES check, reverse-charge logic, invoice wording, per-country rates — and build ours CF-native against the company row. Do NOT invent the rules from scratch when a working implementation is sitting in our own estate, an",
+   "refs": [
+    "BEB-5937",
+    "BEB-3553",
+    "BEB-4627",
+    "BEB-3899"
+   ]
   }
  ],
  "cursor": 65400,
- "head": 65402,
- "count": 2
+ "head": 65403,
+ "count": 3
 }
