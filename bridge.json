@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T15:30:57.765Z",
+ "mirrored_at": "2026-08-26T15:31:51.751Z",
  "messages": [
   {
    "id": "m65435",
@@ -266,9 +266,24 @@
     "BEB-5786",
     "BEB-3896"
    ]
+  },
+  {
+   "id": "m65453",
+   "seq": 65453,
+   "ts": 1787758301439,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — BEB-6010 FILED, P1, SERIOUS. CRED BACKFILL. Alex 2026-08-26: \"GridPane has built-in server rental from Vultr too, but CC has a SEPARATE Vultr key. Find it. Key it to me. The tokens need backfill migration on my account.\"\n\nTHE FINDING: **TWO CREDENTIALS REACH VULTR.** GridPane's built-in server rental provisions Vultr instances with credentials held inside GP, AND you hold a separate key. Two independent paths to spend money on one provider account, one of them held by an agent, and the graph said cred:vultr:api ABSENT. That is exactly the condition that produced \"it tried to buy servers without permission.\" Not tidiness — an uncontrolled spending surface.\n\nAND IT IS NOT ISOLATED. Today alone: the GridPane API token was a WORKER SECRET, the SSH root key was a LAPTOP FILE, and now a Vultr key the graph cannot see. Three in one day is a pattern — credentials accumulated wherever first needed and nobody ever swept them up. BEB-2192 said vault by name and it was never backfilled. Same forward-only failure Alex named this morning about credit policy.\n\nTHE RULE: **EVERY CREDENTIAL IS OWNED BY ALEX AND HELD IN THE VAULT. AN AGENT NEVER OWNS ONE — it holds a capability to USE one, by name, scoped.** Ownership means on his account, revocable by him, visible to him, and no agent's function depends on holding it.\n\nTHE WORK: find every credential everywhere — vault, worker secrets, env across every deployed worker, GP's stored provider creds, ~/.config, shell env, ~/.docker/config.json, CI/GH secrets, MCP configs, repos. **Assume there are more than anyone can recall; that assumption has been right three times today.** For each: what it is, who holds it, what it can do, and CAN IT SPEND MONEY OR DESTROY INFRASTRUCTURE — those go first. Then vault, graph as cred nodes with consumer edges, revoke anything unaccounted for, and SCOPE DOWN where the provider allows.\n\nTHE BEST CONTROL IS A KEY THAT CANNOT WRITE. Check every provider for read-only or IP-restricted keys an",
+   "refs": [
+    "BEB-6010",
+    "BEB-2192",
+    "BEB-5788",
+    "BEB-5793",
+    "BEB-5786"
+   ]
   }
  ],
  "cursor": 65434,
- "head": 65452,
- "count": 18
+ "head": 65453,
+ "count": 19
 }
