@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T13:34:36.725Z",
+ "mirrored_at": "2026-08-26T13:37:14.507Z",
  "messages": [
   {
    "id": "m65401",
@@ -195,9 +195,54 @@
     "BEB-5886",
     "BEB-3553"
    ]
+  },
+  {
+   "id": "m65414",
+   "seq": 65414,
+   "ts": 1787751324807,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — BEB-5986 RAISED TO P1 AND RETITLED: GD LETS. Alex 2026-08-26: \"just make the LETS system for GD and stop talking about it. With full IDaaS, Cue confirm on delivery.\"\n\nHe is telling us to stop specifying. Three corrections that make it concrete, all on the ticket:\n\n1. IT IS A GD FEATURE, not a generic time bank with a GD adapter bolted on later. Every Bebond customer runs GeoDirectory — so listings, categories, locations, the connect plugin and GetPaid are the substrate from the first line.\n\n2. FULL IDaaS. No local accounts, no per-vereniging user table, no shadow identity. A member is an IDaaS subject, the SAME subject they are everywhere else. That is what makes cross-org transfer possible at all — you cannot send hours to a person who exists as two records.\n\n3. CONFIRM-ON-DELIVERY THROUGH CUE, and this is the mechanic that decides whether the whole thing is trustworthy. The helper logs the hour; the RECIPIENT confirms it IN CUE — which is the waterfall filtered to events addressed to this person, already ruled in BEB-2394, needing no new surface. Until confirmed the hour is UNPROVEN: not counted, not spendable, not in a balance, not in a funder report. Every LETS scheme that failed, failed here.\n\nEverything else stands: five API calls first then MCP then UI, GD surface through the existing connect plugin, hours as a GetPaid gateway using the same reserve/settle two-phase as money. Four hard rules as CAPABILITY CHECKS not documentation — price in hours never a rate, no redemption, non-commercial circle only with a commercial org refused BY NAME, no euro refunds.\n\nStill behind the spine, and it does not jump it: BEB-3553 → wallet key + handle names → 4627 → 5903. But it is P1 now and it is a build ticket, not a spec.",
+   "refs": [
+    "BEB-5986",
+    "BEB-2394",
+    "BEB-2265",
+    "BEB-5886",
+    "BEB-3553"
+   ]
+  },
+  {
+   "id": "m65415",
+   "seq": 65415,
+   "ts": 1787751359370,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65414 ROUTED: routed to build lanes: BEB-5986, BEB-2394, BEB-3553, BEB-2265, BEB-5886 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-5986",
+    "BEB-2394",
+    "BEB-3553",
+    "BEB-2265",
+    "BEB-5886"
+   ]
+  },
+  {
+   "id": "m65416",
+   "seq": 65416,
+   "ts": 1787751426327,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — GD APPOINTMENTS IS THE SUBSTRATE, AND SETTLEMENT IS INTERRUPTED. Alex 2026-08-26, on BEB-5986. Goal set, weight 7, 2026-09-30.\n\n1. DO NOT INVENT A BOOKING MECHANISM. GD already has geodir_appointments — in the premium addons folder, installed three times over. It already models SERVICE, PROVIDER, AVAILABILITY, BOOKING and STATUS. That is the entire front half of a LETS exchange, battle-tested. LETS RIDES IT. A neighbour offering boodschappen doen is a SERVICE on a listing; a request is a BOOKING. We add the hours payment and the ledger; we do not rebuild scheduling. Same rule as GetPaid for VAT and WP Easy Updates for delivery: read the shipped feature, take the shape, add only our part. READ IT FIRST and map the states, the hooks on book/complete/cancel/no-show, and the gateway integration point. Name what we do NOT use.\n\n2. SETTLEMENT IS INTERRUPTED, and this is the correction that matters. An appointment is BOOKED IN ADVANCE and DELIVERED LATER, so hours must NOT settle at booking:\n   BOOK → RESERVE. Held, not spent — the requester cannot double-spend the same hours across two bookings.\n   DELIVERY → provider marks delivered, RECIPIENT CONFIRMS IN CUE. Only that settles the reserve.\n   CANCEL / NO-SHOW → RELEASE, and the release is a LEDGER ROW, never an absence.\n   HOLD TTL — an unsettled reserve is a leak and a named red. BEB-1665's hold-TTL sweep is the existing pattern. Never leak a hold.\nThat is Sentinel's two-phase reserve/settle unchanged — one mechanism, different unit. It is also why the money path had to be right first: we are not building a second settlement engine for hours.\n\n3. WHAT THE INTERRUPTION FORCES US TO DECIDE, named in the build rather than discovered: who confirms a no-show and what happens when the recipient simply does not answer — a TIMEOUT WITH A DEFAULT OUTCOME per the HITL bound, because a parked confirmation with no timeout is a silent stall, the 46-stalls class · whether a late cancel releases or partially settles, as a SET",
+   "refs": [
+    "BEB-5986",
+    "BEB-1665",
+    "BEB-2394",
+    "BEB-5886",
+    "BEB-5556"
+   ]
   }
  ],
  "cursor": 65400,
- "head": 65413,
- "count": 13
+ "head": 65416,
+ "count": 16
 }
