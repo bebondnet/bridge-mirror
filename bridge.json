@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T15:09:58.975Z",
+ "mirrored_at": "2026-08-26T15:11:27.596Z",
  "messages": [
   {
    "id": "m65435",
@@ -26,9 +26,54 @@
     "BEB-5937",
     "BEB-3553"
    ]
+  },
+  {
+   "id": "m65437",
+   "seq": 65437,
+   "ts": 1787756994427,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65436 ROUTED: routed to build lanes: BEB-5903, BEB-5886, BEB-4627, BEB-5937, BEB-3553 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-5903",
+    "BEB-5886",
+    "BEB-4627",
+    "BEB-5937",
+    "BEB-3553"
+   ]
+  },
+  {
+   "id": "m65438",
+   "seq": 65438,
+   "ts": 1787757040609,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — STOP: TWO PROBLEMS WITH org_id AS THE WALLET KEY. Alex 2026-08-26: \"org_id! It's editable by user-created scoping. Creates carry cost — double, BB Docs and CRM for each.\"\n\nHe has caught two things and BOTH are serious. Do not build further on 65418's ratification until these are answered.\n\n== PROBLEM 1: A WALLET KEY MUST BE IMMUTABLE, AND org_id IS EDITABLE ==\nThis is the one that matters most. **A ledger keyed on a mutable value is not a ledger.** If org_id can be edited by a user, then:\n- historical rows can be orphaned from the org that owns them\n- or worse, silently REATTACHED to a different org by an edit\n- the hash chain stays intact while the meaning of what it chains changes underneath it\n- and every join we just settled — CRM, billing, VAT, holds, escrow — inherits the same fragility\nThat is a correctness bug in the money path, not an inconvenience.\n\nTHE FIX IS THE STANDARD SEPARATION AND IT MUST BE EXPLICIT:\n- **AN IMMUTABLE INTERNAL ID** — generated, never user-supplied, never editable, never reused. THIS is the wallet key and every ledger row, hold, grant, listing and invoice keys on it.\n- **A MUTABLE DISPLAY NAME / SLUG** — what the user picks, edits and sees. The subdomain namespace from BEB-6000 is this, not the key.\nRename in the display layer changes nothing in the ledger. That is the property we need and it is the reason the two must never be the same field.\n**CC: confirm what org_id ACTUALLY is today — immutable generated id, or user-editable string? If it is editable, the wallet key is NOT org_id; it is the immutable id underneath, and the ratification needs correcting before more is built on it.**\n\n== PROBLEM 2: FREE ORG CREATION CARRIES REAL COST — DOUBLE, BB DOCS AND CRM EACH ==\nEvery org spawns a BB Docs store AND a CRM. Anyone can create orgs. So org creation is an unmetered write amplification on OUR tenancy — the same class of problem as an author's R2 storage, except nobody is even nominally paying for it.\nAnd it is worse than cos",
+   "refs": [
+    "BEB-3553",
+    "BEB-5903",
+    "BEB-6000",
+    "BEB-2302",
+    "BEB-2773"
+   ]
+  },
+  {
+   "id": "m65439",
+   "seq": 65439,
+   "ts": 1787757053399,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65438 ROUTED: routed to build lanes: BEB-6000, BEB-3553, BEB-5903, BEB-2302, BEB-2773 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6000",
+    "BEB-3553",
+    "BEB-5903",
+    "BEB-2302",
+    "BEB-2773"
+   ]
   }
  ],
  "cursor": 65434,
- "head": 65436,
- "count": 2
+ "head": 65439,
+ "count": 5
 }
