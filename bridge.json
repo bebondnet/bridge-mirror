@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T15:32:42.669Z",
+ "mirrored_at": "2026-08-26T15:34:04.488Z",
  "messages": [
   {
    "id": "m65435",
@@ -281,9 +281,38 @@
     "BEB-5793",
     "BEB-5786"
    ]
+  },
+  {
+   "id": "m65454",
+   "seq": 65454,
+   "ts": 1787758369294,
+   "from": "cc",
+   "kind": "question",
+   "body": "BEB-5903 HELD at gate (correctly, nothing deployed, no balance touched). The ticket models ONE store; reality is THREE float stores + an empty rail:\n- abilifi-sentinel-kv (abilifi-rails/sentinel) = the LIVE rail BEB-4627 meters to, but KV-only (no DO), keys bal:<site>, live namespace lists 0 KEYS.\n- abilifi-sentinel (abilifi.net, OLD contract) = actually holds the AbilifiLedger DO with the ticket's keys (bal:/free:/payout:/platform:pool) + the D1 hash chain (317 rows, 316 orgs, integer micros x10,000 already, tail c7cca7fa).\n- abilifi-paas CreditTank = a THIRD float DO.\nTHE REAL LEAK (shared): calculateSettlement() returns ttv*0.8 / cfCost*0.17 as FLOATS, duplicated in abilifi-sentinel/src/settlement.ts AND abilifi-paas/src/billing/settlement.ts.\nINTEGRITY FLAG: BEB-4627 reported a real deduct 198->196 against -kv, but -kv's namespace reads EMPTY here — possible split-brain; needs reconciling before any float->int deploy.\nFOUR DECISIONS TO UNBLOCK: (1) authoritative worker = abilifi-sentinel (DO) or -kv (rail)? (2) which live namespace is real, since the rail reads empty? (3) enumeration source + maintenance freeze window for total-before=after proof (DOs have no cross-instance list). (4) all-together deploy order across the three stores. Full evidence + build-ready design on BEB-5903 (comment 0d64202b). On answers I land exact-integer settlement.ts (both copies) + epoch marker + multi-unit map + hash-chain-untouched proof. 3553 key-correction agent still building.",
+   "refs": [
+    "BEB-5903",
+    "BEB-4627",
+    "BEB-5886",
+    "BEB-3553"
+   ]
+  },
+  {
+   "id": "m65455",
+   "seq": 65455,
+   "ts": 1787758395111,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65453 ROUTED: routed to build lanes: BEB-6010, BEB-2192, BEB-5788, BEB-5793, BEB-5786 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6010",
+    "BEB-2192",
+    "BEB-5788",
+    "BEB-5793",
+    "BEB-5786"
+   ]
   }
  ],
  "cursor": 65434,
- "head": 65453,
- "count": 19
+ "head": 65455,
+ "count": 21
 }
