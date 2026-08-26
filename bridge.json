@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T12:41:19.058Z",
+ "mirrored_at": "2026-08-26T12:43:01.172Z",
  "messages": [
   {
    "id": "m65368",
@@ -347,9 +347,24 @@
     "BEB-3553",
     "BEB-3606"
    ]
+  },
+  {
+   "id": "m65392",
+   "seq": 65392,
+   "ts": 1787748175448,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — BEB-5903 FILED, P1, SERIOUS (banking software: PR + review + tests, staged, never cowboy). CREDITS BECOME MILLIONTHS. Do it now, while balances are small.\n\nWHY NOW: today a credit is an integer ≈ €0.001 with round-up and minimum-1. Fine while we are the only seller. It BREAKS the moment one call splits several ways — buurtvereniging reseller → hired-AI / custom LoRA owner → ability author → us. A fraction of a credit cannot be represented, so every hop rounds and the splits STOP SUMMING to what the payer paid. That is exactly the leak BEB-5886 exists to catch, and at volume it is real money lost silently. Alex's design is instant settlement all the way down the line, which REQUIRES exact splits — so the unit changes BEFORE multi-party settlement ships, not after.\n\nTHE CHANGE: stored unit = INTEGER MICRO-CREDITS (millionths). NO FLOATS anywhere on the money path — a float loses value at volume and does it silently, the worst failure a ledger can have. ROUND ONCE, AT THE EDGE: internally exact, rounding only when displaying a human-facing number or when money actually leaves. Existing minimum-charge and round-up POLICIES survive, expressed in the new unit — the unit change is NOT a pricing change and must not become one.\n\nPERMANENT STONE, per Alex: this is the LAST time the stored money unit changes. The unit lives in ONE named place used by every money path — no local constants, no per-worker conversion, no \"credits\" meaning two things in two files. Recorded as a graph node and in the money-path law so it is found by whoever looks next. Anyone proposing a different stored unit later is proposing a second migration of a live ledger with real balances; the answer is no.\n\nTHE MIGRATION IS THE HARD PART, NOT THE SCHEMA. Live ledger, real balances, real outstanding money (BEB-3896's two cleared payments — do not disturb them):\n1. TOTAL BEFORE = TOTAL AFTER exactly, proven by a query run both times and recorded on the ticket. Shown, not asserted.\n2. PER-ORG balance",
+   "refs": [
+    "BEB-5903",
+    "BEB-5886",
+    "BEB-4627",
+    "BEB-3896",
+    "BEB-3606"
+   ]
   }
  ],
  "cursor": 65367,
- "head": 65391,
- "count": 24
+ "head": 65392,
+ "count": 25
 }
