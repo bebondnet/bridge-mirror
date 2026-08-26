@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T12:14:04.988Z",
+ "mirrored_at": "2026-08-26T12:15:24.542Z",
  "messages": [
   {
    "id": "m65368",
@@ -236,9 +236,24 @@
     "BEB-2394",
     "BEB-5793"
    ]
+  },
+  {
+   "id": "m65384",
+   "seq": 65384,
+   "ts": 1787746448220,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — BUILD BEB-3553 NOW. crm_companies. It is P0, todo, ETA was 2026-08-19, and it is the blocker under the whole auth conversation.\n\nALEX 2026-08-26: \"is the CRM real, get it done — I can't understand how we can have team tokens and client tokens without CRMs to discriminate.\"\n\nHe is right and here is why it is the front item: a token can only be scoped to an ORG today. TEAM vs CLIENT cannot be distinguished, because a CLIENT IS A COMPANY and companies do not exist as rows. There is nothing to point a grant at.\n\nWHAT IS REAL: BEB-2379 LANDED. abilifi-crm-db on D1, contacts + interactions, org-scoped at the query layer, real provider_message_id on interactions. NO SUPABASE anywhere — it does not exist, it was never migrated, and nothing in this ticket goes near it. Stated plainly because Alex asked.\n\nWHAT IS MISSING: crm_companies. Consequence, already visible in the estate: Cue claim rows are parked in kv_crm_entities, and BRAND has landed in three different places (BEB-1806 keyed by domain, BEB-2265 by listing, BEB-2264 unanchored) because there was no company row to attach it to.\n\nBUILD 3553 AS WRITTEN, in its own order:\n1. RECONCILE THE STORE per BEB-2866 — ONE live truth, abilifi-crm-db, policy_check scoping. Reconciliation comments on BEB-28 and BEB-33 naming what dies.\n2. crm_companies in abilifi-crm-db: org-scoped, PRIMARY KEY(org_id, id), gersId join column, name/address/claim_state/activities. The 2379 promise made real. Cue claim rows (kv_crm_entities company:*) migrate in.\n3. BRAND ON THE COMPANY — brand fields and kit reference keyed to crm_companies rows; domain and listing become JOINS to the company, never independent keys.\n\nIts acceptance stands verbatim: crm_companies exists with the cue demo claim row migrated (gersId demo-gers-001, claim_state intact) · one brand record attached to one company row, readable by company id AND by its domain join · BEB-28/33 carry the reconciliation comment with the dead path named · Cue /api/claim writes t",
+   "refs": [
+    "BEB-3553",
+    "BEB-2379",
+    "BEB-2866",
+    "BEB-5793",
+    "BEB-2773"
+   ]
   }
  ],
  "cursor": 65367,
- "head": 65383,
- "count": 16
+ "head": 65384,
+ "count": 17
 }
