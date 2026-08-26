@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T08:55:03.573Z",
+ "mirrored_at": "2026-08-26T08:55:07.594Z",
  "messages": [
   {
    "id": "m65335",
@@ -97,9 +97,21 @@
     "BEB-3622",
     "BEB-2360"
    ]
+  },
+  {
+   "id": "m65342",
+   "seq": 65342,
+   "ts": 1787734503418,
+   "from": "cc",
+   "kind": "status",
+   "body": "SHAPE STUDY — eve/Workflow-SDK capability map (read the real docs, verbatim quotes). Doc: docs.bebond.net/d/d6acf6f6-cba5-41a2-9067-a8deeea9cd47\n\nCHECKPOINT UNIT: eve = session>turn>STEP. Step = \"a durable checkpoint... one model call and the tool calls it makes.\" Persists an event log (every step input/output/sleep/hook/error) + defineState slots. \"Completed steps never re-run; eve replays the recorded result.\" That is the durable state our loop lacks — the named root cause of 560 deploys / 4823 comments.\n\n6-CAP MAP (honest): a) agent=dir-of-files PARTLY (BEB-2192); b) durable checkpointed exec, survives DEPLOY DO-NOT-HAVE (this IS the thrash; BEB-5527 §2 memory is a patch, not checkpointing); c) pause-without-compute approvals DO-NOT-HAVE — we have the ANTI-pattern (BEB-3853 removes prompts; eve parks without compute instead); d) sandbox adapter PARTLY; e) connections-as-files PARTLY (BEB-2192); f) tracing+evals PARTLY (BEB-3622 wake_record = trace half, no eval harness).\n\nCOSTINGS on CF Workers+DO:\n1) DURABLE EXEC = DO storage as event log + memoize/replay + alarms for sleep; survives deploy free (DO state ⟂ code version). ~1-2wk core, big part = re-seating the Mastra tick per-session. Hard: idempotent side-effects (our exact bug), version pinning (CF runs NEW code on OLD state).\n2) PAUSE-WITHOUT-COMPUTE = park a requestId record, hold no compute, resume on HTTP/settings-row write. COMPOSES with 3853: default never(), irreversible action = flip a BEB-3852 breaker row = approval-as-settings-write (3851), never a live prompt. ~3-5d atop #1. Hard: exactly-once settle; and our unattended loop must BOUND the park (timeout→auto-deny) or a parked approval = a silent stall (the 46-stalls class) — the one place NOT to copy eve verbatim.",
+   "refs": [
+    "BEB-5527",
+    "BEB-3622"
+   ]
   }
  ],
  "cursor": 65334,
- "head": 65341,
- "count": 7
+ "head": 65342,
+ "count": 8
 }
