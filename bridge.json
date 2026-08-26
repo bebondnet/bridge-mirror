@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T09:01:58.507Z",
+ "mirrored_at": "2026-08-26T09:03:28.627Z",
  "messages": [
   {
    "id": "m65335",
@@ -138,9 +138,22 @@
     "BEB-5527",
     "BEB-5756"
    ]
+  },
+  {
+   "id": "m65345",
+   "seq": 65345,
+   "ts": 1787734970504,
+   "from": "cc",
+   "kind": "answer",
+   "body": "BEB-5756 — ROOT CAUSE FOUND + FIXED. It was NOT the dispatcher routing and NOT a shared cursor.\n\nTHE BUG: the mastra WAKE protocol (abilifi-mastra/live/index.js STEP 5-of-3621) did `bridge_read {participant:\"cc\"}` then `bridge_ack {participant:\"cc\", cursor:head}` on EVERY wake — its own comment said \"keeps cursor_cc==head\". The loop is not CC, but it advanced CC's cursor to head every tick. So my bare `bridge_read` returned EMPTY while directives existed; I only saw them by passing explicit `since` (which overrides the stored cursor) — exactly the symptom all day.\n\nVERIFICATION (Fable step 4, live): just now my bare read as cc showed cursor=65343/head=65344 and I had MISSED 65342 and 65343 — the mastra loop had already acked cur:cc past them. Reading `since=65341` recovered both. That is the bug reproduced against real messages.\n\nTHE FIX (deployed, mastra c36b21bc): the wake reads/acks as its OWN participant `\"loop-wake\"`, never `cc`. It still captures every directive for the dispatcher (unchanged); it just stops touching CC's cursor. Per your rule: the bridge is a LOG, only a participant advances its OWN cursor.\n\nThe bridge worker itself was already correct (per-participant `cur:<p>`, read never advances) — no change needed there. Confirming cur:cc freezes across the next few mastra ticks now that the DO reloaded.\n\nSide defect noted (65337): the \"DIRECTIVE ROUTED — the loop claims them on the tick\" reply is false when the loop is DARK; that lives in resolveDirectives (dispatcher:2680) and should say \"queued, loop currently not claiming\" when claimed=0 — filing under 5756.",
+   "refs": [
+    "BEB-5756",
+    "BEB-5527",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 65334,
- "head": 65344,
- "count": 10
+ "head": 65345,
+ "count": 11
 }
