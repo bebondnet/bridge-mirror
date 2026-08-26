@@ -1,7 +1,38 @@
 {
- "mirrored_at": "2026-08-26T18:34:49.123Z",
- "messages": [],
+ "mirrored_at": "2026-08-26T18:35:55.093Z",
+ "messages": [
+  {
+   "id": "m65486",
+   "seq": 65486,
+   "ts": 1787769283187,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — WRITE THE DEV DROP-IN GUIDE: HOW TO SWITCH TO SENTINEL BILLING. Alex 2026-08-26, after 3899 landed.\n\nHuge session: 2265 connect door, 3606 standing charge, 3899 per-day plugin sales, all landed with real ledger rows. Buy → bill → 402 → top-up → licence-gated update is REAL end to end.\n**NOW WRITE THE THING THAT LETS SOMEONE ELSE USE IT.** Alex wants the DROP-IN, FULL, WITH INSTRUCTIONS, FOR DEVS: how to switch a plugin to Sentinel billing.\n\n== WHO IT IS FOR ==\nA WordPress plugin author on EDD, Freemius or their own licence server, who has never heard of us. **They should be able to read it and switch without asking a question.** That is the bar. If a step needs us to explain it, the step is wrong.\n\n== WHAT \"DROP-IN\" MUST MEAN ==\nNot a tutorial — **CODE THEY PASTE.** The wire shape is already EDD-SL / WP Easy Updates compatible, which is the whole advantage: **their existing update code mostly does not change, only where it points.** Lead with that, because it is the difference between an afternoon and a rewrite.\n- the exact snippet, copy-pasteable, with real values marked as placeholders\n- what changes in their plugin header (Update URI / Update ID)\n- what they call, what comes back, verbatim response shapes\n- the licence-check and update-gate calls, with the REAL 200 and REAL 402 bodies from today's proven runs\n- how to test it before shipping to a single customer\n\n== THE FIVE QUESTIONS AN AUTHOR ACTUALLY ASKS — answer each one plainly ==\n1. **What happens to my existing customers?** Answer honestly: they stay on their current licence to term. Both endpoints run. Migration is by attrition, nobody is cut off. (BEB-3899's wpapps transition.)\n2. **What happens when someone stops paying?** We proved it: the update endpoint returns a named 402, the **INSTALL SURVIVES with data intact**, and paying resumes it automatically. Say exactly that — it is a better answer than any incumbent gives and it is the one authors worry about most.\n3. **When and how do I ge",
+   "refs": [
+    "BEB-3899",
+    "BEB-2265",
+    "BEB-3606",
+    "BEB-6080",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m65487",
+   "seq": 65487,
+   "ts": 1787769323718,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — CORRECTION TO THE DEV GUIDE: SENTINEL BILLING MUST NOT REQUIRE THE ABILIFI CONNECT PLUGIN. Alex 2026-08-26.\n\n\"It should not require abilifi connect, nice as that might be. They need to register before they get it.\"\n\n== THE RULE ==\n**AN AUTHOR SWITCHES THEIR PLUGIN TO SENTINEL BILLING WITHOUT INSTALLING ANYTHING OF OURS.** Their plugin talks to our endpoints directly — HTTP, their own code, their own release. No dependency on abilifi-connect, no bundled library they have to ship, no second plugin their customers must install.\n**IF THE GUIDE'S FIRST STEP IS \"INSTALL OUR PLUGIN\", WE HAVE LOST MOST AUTHORS AT STEP ONE.** No serious author adds a hard dependency on an unknown vendor's plugin, and no author wants to tell their own customers to install a second plugin to receive updates. That is a bigger ask than the billing change itself.\n\n== WHAT THIS CHANGES IN THE GUIDE ==\n- The drop-in is **PLAIN HTTP CALLS AN AUTHOR PASTES INTO THEIR OWN PLUGIN.** Endpoint, headers, request, response — nothing more.\n- It works from ANY PHP, any framework, any plugin structure. Not only from a GD site, not only alongside our plugin.\n- **abilifi-connect stays a CONVENIENCE, NEVER A REQUIREMENT.** If it makes life easier for authors already in our world, offer it as an optional path — clearly marked optional, second, and never the only documented route.\n- Anywhere the current implementation assumes connect is present, that assumption is a DEFECT for this purpose. **Find and name every one.**\n\n== REGISTRATION COMES FIRST, AND IT IS THE ONLY PREREQUISITE ==\n**They register before they get anything.** That is the gate, and it is the right one — an account, a handle, a wallet, credentials. Then the endpoints answer for them.\nSo the guide's shape is: **REGISTER → GET CREDENTIALS → PASTE THE CALLS → DONE.** Registration is the only thing they must do on our side, and it must be self-serve — no sales contact, no approval queue, no waiting on us. **An author who has to email someo",
+   "refs": [
+    "BEB-3899",
+    "BEB-2265",
+    "BEB-3606",
+    "BEB-6079",
+    "BEB-6080"
+   ]
+  }
+ ],
  "cursor": 65485,
- "head": 65485,
- "count": 0
+ "head": 65487,
+ "count": 2
 }
