@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T18:40:05.913Z",
+ "mirrored_at": "2026-08-26T18:41:34.501Z",
  "messages": [
   {
    "id": "m65486",
@@ -105,9 +105,24 @@
     "BEB-3606",
     "BEB-5938"
    ]
+  },
+  {
+   "id": "m65493",
+   "seq": 65493,
+   "ts": 1787769630483,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — THE UPDATE IS THE WP-ADMIN MECHANISM, NOT A ZIP LINK. Alex 2026-08-26: \"I'm talking about plugin update through wp-admin, that's not just a zip file link. And they need to be notified through wp-admin when an update is available, reporting info.\"\n\nHe is correcting me and he is right. **A signed download URL is the LAST step of the update, not the update.** What makes a plugin update real in WordPress is the METADATA that gets injected into the update transient — the zip is what WP fetches afterwards, on its own.\n\n== WHAT ACTUALLY HAS TO HAPPEN, IN WP TERMS ==\n1. **HOOK THE UPDATE CHECK PROPERLY.** WordPress 5.8+ added the `Update URI` plugin header and the `update_plugins_{$hostname}` filter specifically so a self-hosted plugin can serve its own updates **without hijacking the whole `pre_set_site_transient_update_plugins` transient.** Use that path — it is the modern, correct, well-behaved one, and it is exactly what the Update URI / Update ID headers in the GD premium zips are already doing.\n2. **RETURN A REAL UPDATE OBJECT**, not a link: slug, plugin file, `new_version`, `package` (the signed URL), `url`, `tested`, `requires`, `requires_php`, icons and banners. **`new_version` is what makes the notice appear at all.** Miss a field and the row renders wrong or the update silently never offers.\n3. **SERVE `plugins_api` FOR THE \"VIEW DETAILS\" MODAL** — description, CHANGELOG, upgrade notice, screenshots, author, last updated. **This is the \"reporting info\" Alex is asking for.** A plugin that offers an update with an empty details modal looks broken and untrustworthy, and a site owner will not click update on it.\n4. **THEN WP DOES THE REST ITSELF** — Plugin_Upgrader downloads the package, unzips, replaces, reactivates. We do not implement installation; we must not.\n5. **THE NOTICES FOLLOW AUTOMATICALLY** once the transient is right: the Plugins-list row, the Dashboard → Updates entry, and the admin-menu update count. **Getting the metadata right IS getti",
+   "refs": [
+    "BEB-2265",
+    "BEB-3899",
+    "BEB-3606",
+    "BEB-2744",
+    "BEB-2177"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65492,
- "count": 7
+ "head": 65493,
+ "count": 8
 }
