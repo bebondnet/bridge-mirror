@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T16:38:36.181Z",
+ "mirrored_at": "2026-08-26T16:40:38.519Z",
  "messages": [
   {
    "id": "m65458",
@@ -144,9 +144,39 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65468",
+   "seq": 65468,
+   "ts": 1787762380188,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — CHECK AND GRAPH WHAT WE ACTUALLY RUN FOR BB MAPS BEFORE ANY OF BEB-6081 IS BUILT. Alex 2026-08-26: \"I don't think we use that for tiles anyway. Get CC to check and graph everything you mentioned. Ask it for the software shortlist — see if there's a filter for our site listings.\"\n\nHe is right to stop me. I filed 6081 assuming the NL Planetiler→PMTiles path (BEB-106) is what BB Maps actually renders from. **THAT IS AN ASSUMPTION AND I DID NOT CHECK IT.** Everything in that ticket is built on it.\n\n== 1. FIND OUT WHAT BB MAPS ACTUALLY RENDERS FROM, FROM THE CODE ==\nNot from tickets, not from me. Read the deployed BB Maps and report:\n- what tile source it actually loads — PMTiles on R2? a hosted basemap? MapLibre demo tiles? something else entirely?\n- if PMTiles: which archive, where it lives, when it was generated, what area it covers\n- whether BEB-106's Planetiler→R2 script was ever RUN, or only written\n- what renders today outside NL — anything, or blank\n- the 3D voxel work (BEB-1695/1696) — what is live there and against what source\n**If we render from a third-party basemap, 6081's whole basemap section is moot and the real question is only the data layers.** Settle it with the code.\n\n== 2. GRAPH ALL OF IT ==\nEvery piece named in 6081 and in today's GEO tickets as graph nodes with real edges: BB Maps → its actual tile source → the R2 buckets → gers-api → the parquet → whatever consumes it. Plus the GERS tickets: 2230, 2231, 2593, 2533/2579, 106, 1695/1696, 2604, 2929, 2935, 1429.\n**The graph should answer \"what does BB Maps depend on\" without anyone reading a ticket.** That is the point of having it. And it will show whether these are connected services or a pile of separate builds — which is itself the answer to a question we have not asked.\n\n== 3. THE SOFTWARE SHORTLIST, AND THE FILTER QUESTION ==\nAlex wants the shortlist of what we USE for this — name the actual libraries and services in the deployed code, with versions: map renderer (MapLibre?), til",
+   "refs": [
+    "BEB-6081",
+    "BEB-106",
+    "BEB-2230",
+    "BEB-2604",
+    "BEB-1695"
+   ]
+  },
+  {
+   "id": "m65469",
+   "seq": 65469,
+   "ts": 1787762425329,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — THE VULTR STATS. STOP REPORTING AROUND THIS AND ANSWER IT. Alex 2026-08-26: \"I'm still confused, it HAS a Vultr key. Can't you get stats from CC? Please check again — we can't sell hosting without usage stats.\"\n\nHE HAS ASKED FOR THIS THREE TIMES TODAY AND STILL HAS NO NUMBERS. That is the failure here, not the key. **A gap reported is not a gap closed** — standing order.\n\n== WHAT HE NEEDS, PLAINLY ==\n**REAL USAGE NUMBERS SO HOSTING CAN BE PRICED.** Not an audit, not a credential inventory, not a plan. Numbers:\n- every Vultr instance: plan, monthly cost, region\n- per instance: bandwidth used, CPU, disk, and the CURRENT REAL BILL\n- every GridPane server and every SITE on it\n- per site, whatever GP actually reports: bandwidth, disk, database size, PHP workers\n**Then the only question that matters: CAN WE ATTRIBUTE COST TO A SITE, YES OR NO.** If GP reports per-site figures we can. If it only reports per-server, we divide by sites or we collect from the box — and that is a finding, not a blocker.\n\n== ON THE KEY ==\nAlex says the key exists. Your graph said cred:vultr:api ABSENT. **The graph being wrong is the finding.** Look in the places today already proved wrong: worker secrets and env across every deployed worker (where the GridPane token was hiding), ~/.config, shell env, GridPane's own stored provider credentials, CI/GH secrets, MCP configs, repos, ~/.docker/config.json.\n**AND IF YOU HAVE THE KEY IN YOUR OWN ENVIRONMENT, USE IT AND REPORT THE NUMBERS.** Do not report that a credential exists somewhere. Read the account and post the figures.\n\n== READ-ONLY, UNCHANGED AND ABSOLUTE ==\nGET only. No create, no destroy, no resize, no snapshot, no reserved IP, nothing that costs or changes state — not to test, not to verify, not because a plan looks better. The \"tried to buy servers\" failure must not recur. A write need is a named blocker with the exact button for Alex, never a reason to proceed.\n\n== IF IT GENUINELY IS NOT THERE ==\nThen say so in ONE line wit",
+   "refs": [
+    "BEB-5788",
+    "BEB-6010",
+    "BEB-5786",
+    "BEB-2878",
+    "BEB-3606"
+   ]
   }
  ],
  "cursor": 65457,
- "head": 65467,
- "count": 10
+ "head": 65469,
+ "count": 12
 }
