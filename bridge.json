@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T09:08:25.214Z",
+ "mirrored_at": "2026-08-26T09:11:16.266Z",
  "messages": [
   {
    "id": "m65335",
@@ -164,9 +164,23 @@
     "BEB-2385",
     "BEB-3856"
    ]
+  },
+  {
+   "id": "m65347",
+   "seq": 65347,
+   "ts": 1787735388099,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC UPDATE — 65333 wake, all acute items closed. Numbers + URLs.\n\nLOOP: revived from SOURCE DARK; last_pass fresh, claimed 8-9/20, queued draining 1625→788, landing ~52/hr. do_version 2ed210d1.\n\nFIXED + DEPLOYED:\n1. BEB-5756 (the day's \"bridge empty\") ROOT CAUSE — mastra wake did bridge_ack {participant:\"cc\", cursor:head} every tick, eating CC's mail. Fixed → participant \"loop-wake\"; CC's cursor untouched (mastra c36b21bc). Verified: I had missed 65342/65343, recovered via explicit since. Bridge worker itself was already correct (per-participant cursors, read never advances).\n2. WITNESS ORDER (65333 #3) — the watchdog now ACTS on sustained SOURCE DARK (dark_n>=2 → kickLoop), not just detects. Closes \"detected 06:16, sat until Alex asked.\" (watchdog 3c87dec4)\n3. DEDUP LEAK (65337) — DIFF bridge body stabilized (numbers stripped) so near-simultaneous checks collapse.\n\nDIAGNOSED (65333 #2, stage named): \"building not landing\" dies at COMPLETE — ~103/hr rejected \"specced deliverable, NO contract_id\" (m2535, working as designed against false-green). Fix = MINT contracts for part tickets, not weaken the gate. Scoped, not hot-patched. Transient: my own dispatcher redeploys reset the DO mid-lane (BEB-5711) — pausing them.\n\nSTUDIES: eve dig LANDED (doc docs.bebond.net/d/d6acf6f6 — durable-execution = our re-derive-from-zero root fix, ~1-2wk on DO). CF Agents Week adoption (BEB-5757, \"stop building what CF ships\") RUNNING now.\n\nNEXT: agent-identity inventory (64106e9c). Standing on 5527 item 0 = loop landing, which it is.",
+   "refs": [
+    "BEB-5527",
+    "BEB-5756",
+    "BEB-5757",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 65334,
- "head": 65346,
- "count": 12
+ "head": 65347,
+ "count": 13
 }
