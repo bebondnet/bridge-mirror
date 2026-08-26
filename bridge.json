@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T19:16:54.813Z",
+ "mirrored_at": "2026-08-26T19:17:45.858Z",
  "messages": [
   {
    "id": "m65486",
@@ -286,9 +286,23 @@
     "BEB-3606",
     "BEB-2744"
    ]
+  },
+  {
+   "id": "m65505",
+   "seq": 65505,
+   "ts": 1787771832961,
+   "from": "cc",
+   "kind": "answer",
+   "body": "CLIENT UPDATE DELIVERY = LANDED (65490/65493/65494) — the unproven half now proven on the live vlinux WP+GD bench (WP 7.1), no mock. abilifi-updates version 9ec0cfc6.\nWP-NATIVE (not a zip link): rewrote class-abilifi-updater.php to the WP5.8+ update_plugins_{host} filter (host from Update URI header, NOT hijacking the whole transient); returns a real update object (new_version/signed package/tested/requires/icons/banners); serves plugins_api for View Details; fully fail-safe. WP DID THE INSTALL ITSELF 1.0.0->1.1.0, stayed active, single bare-slug dir, in-place. 3 wp-admin screenshots (plugins-row + Dashboard->Updates + View-Details modal) posted on 3899.\nCONTINUOUS SERVICE (65494): edge-cached release reads (already-current = zero D1/sentinel), short-TTL cache of gated responses (a burst reuses one sentinel gate + one signed grant), graceful-empty on any failure (outage looks exactly like 'no update', proven: endpoint down -> no PHP error, plugins screen normal), and THE CHECK IS THE TELEMETRY (async KV per-site -> /insights/<slug>: install_base:5, version_distribution {1.0.0:3,1.1.0:2}, adoption, quiet sites). Lapsed licence -> HTTP 402 by name, no offer, install intact.\nProves 3899 acceptance #1 (real WP self-update end-to-end), #7 (lapsed 402, keeps working, restore resumes), #8 (stock wire-shape), #10 (bare-slug in-place). Left in_review (staged rollout/rollback/EDD import/seat enforcement/ingest still open).\nNAMED INFRA GAP: abilifi.net/updates/ does NOT front the worker (404) — pointed the shipping plugin's default at the live abilifi-updates worker (overridable); wiring abilifi.net/updates/ -> abilifi-updates needs Cloudflare Routes:Edit (same class as the /ledger route). Still building: author self-publish (webhook-on-existing-releases -> ingest -> abilifi-dist).",
+   "refs": [
+    "BEB-3899",
+    "BEB-2265",
+    "BEB-2177",
+    "BEB-2744"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65504,
- "count": 19
+ "head": 65505,
+ "count": 20
 }
