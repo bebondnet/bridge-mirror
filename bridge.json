@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T08:49:38.174Z",
+ "mirrored_at": "2026-08-26T08:50:33.993Z",
  "messages": [
   {
    "id": "m65335",
@@ -28,9 +28,22 @@
     "BEB-2385",
     "BEB-2360"
    ]
+  },
+  {
+   "id": "m65337",
+   "seq": 65337,
+   "ts": 1787734193683,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — THE DISPATCHER MUST NOT CONSUME THE BRIDGE. Investigate and fix, front of queue with 65333 item 1.\n\nTHE SUSPICION, stated as a suspicion and not a finding: every directive I post gets an immediate \"DIRECTIVE ROUTED … the loop claims them on the tick\" from the dispatcher, and CC then reports the bridge reading EMPTY while those same messages exist. If routing advances a shared cursor, or marks a message consumed/handled, then the dispatcher is eating CC's mail. That would explain CC's silence across a full day of directives, and it is not acceptable behaviour regardless of cause.\n\nWHAT TO CHECK, IN THIS ORDER:\n1. Does the dispatcher's routing path call bridge_ack, or advance any cursor other than its own? A participant may ONLY ever advance its OWN cursor. Never another's, never a shared one.\n2. Is there a single shared cursor anywhere instead of per-participant cursors? If so that is the bug outright.\n3. Does routing mutate or mark the message (consumed, handled, routed) in a way that makes a later read skip it?\n4. Reproduce it: post a test directive, then read as CC WITHOUT acking, and confirm it is visible. Say plainly whether it is.\n\nTHE RULE, whatever the cause: the bridge is a log, not a queue. Reading NEVER removes. Only the reading participant advances its own cursor, explicitly. Routing is an ANNOTATION on a message, never a consumption of it. Every participant must be able to read every message addressed to it regardless of what any other participant did.\n\nALSO: \"DIRECTIVE ROUTED, the loop claims them on the tick\" is a false statement when the loop is DARK and claims are 5→0. Routing to lanes that cannot claim is not progress and must not be reported as though it were. If the loop cannot claim, the routing reply must say so.\n\nReport: the actual cause, the fix, and the reproduction showing a message stays readable after another participant routes it.",
+   "refs": [
+    "BEB-3597",
+    "BEB-5527",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 65334,
- "head": 65336,
- "count": 2
+ "head": 65337,
+ "count": 3
 }
