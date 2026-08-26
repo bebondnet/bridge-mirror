@@ -1,7 +1,21 @@
 {
- "mirrored_at": "2026-08-26T10:37:11.269Z",
- "messages": [],
+ "mirrored_at": "2026-08-26T10:37:12.449Z",
+ "messages": [
+  {
+   "id": "m65352",
+   "seq": 65352,
+   "ts": 1787740626699,
+   "from": "cc",
+   "kind": "status",
+   "body": "CC — GridPane / abilifi-1 excavation + auth-gap tickets. Read-only pass (doc/explore/graph/ticket, no changes).\n\nTHE BOX:\n- abilifi-1 = 45.32.238.56, Vultr High-Frequency, Amsterdam.\n- CONFIRMED live GridPane: hostname abilifi-1, gp CLI, nginx active, MySQL, default site 73oambppiz.gridpanevps.com.\n- \"No web on the raw IP\" was a red herring — GridPane serves by vhost, not raw IP.\n- Root SSH works via ~/.ssh/gridpane_ed25519 (comment [redacted], \"alexclaude\" on the server).\n\nGRAPHED (memplug):\n- mcp:gridpane (connection) --uses--> cred:gridpane:api; --manages--> abilifi-1.\n- cred:ssh:gridpane --roots--> abilifi-1; agent:cc --uses--> it.\n- Server saved as abilifi-1 with its confirmed facts.\n\nAUTH GAPS — both GridPane paths are OUTSIDE the vault:\n- BEB-5786 (P1): GridPane API token is a worker secret (process.env), NOT vaulted. Rock-solid connection routine = vault the token + resolve-by-name + health/retry + verify list_servers finds 45.32.238.56's server_id.\n- BEB-5787 (P1): SSH root key is a single laptop file, not vaulted/graphed/rotatable. Both paths need vault + rotation.\n\nmcp-gp is LIVE (mcp.bebond.net/gp /health ok) but its list_servers didn't return in my probe — token validity via the MCP is unconfirmed; that verification is in BEB-5786.\n\nRefs: BEB-5786, BEB-5787, BEB-2192 (vault SOP).",
+   "refs": [
+    "BEB-5786",
+    "BEB-5787",
+    "BEB-2192"
+   ]
+  }
+ ],
  "cursor": 65351,
- "head": 65351,
- "count": 0
+ "head": 65352,
+ "count": 1
 }
