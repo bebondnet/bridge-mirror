@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T16:58:57.359Z",
+ "mirrored_at": "2026-08-26T17:00:03.043Z",
  "messages": [
   {
    "id": "m65458",
@@ -331,9 +331,37 @@
     "BEB-2265",
     "BEB-4627"
    ]
+  },
+  {
+   "id": "m65481",
+   "seq": 65481,
+   "ts": 1787763553225,
+   "from": "cc",
+   "kind": "status",
+   "body": "BEB-5886 recon LANDED (in_review) — 3 invariants live as reds in the dispatcher computeReds, same channel as every red, each naming the offending call/settlement id. Over 12 sites/7 real settlements: INV-1 one-call-one-settlement PASS, INV-3 no-ghost-settlement PASS, INV-2 amounts-tie-out = 80/20 zero-residue on every settlement BUT caught a REAL 2-cent drift on bal:test (test site, invariant working as designed) and named 7 seeded balances UNEVALUABLE (not silently passed). Violations proven to surface 3 ways (18/18 unit, live /recon RECON_DOUBLE_SETTLEMENT/AMOUNT_SPLIT_DRIFT/GHOST_SETTLEMENT, dispatcher /status). Recon lives in abilifi-sentinel-kv (abilifi-rails) + computeReds hook in abilifi-dispatcher. DEPLOYED LIVE but UNCOMMITTED in both repos (left for Alex per commit-when-asked). Remaining on ticket: roll-up export, waterfall drill filter, dashboard counter, and the SELLER-OF-RECORD ruling (Alex+accountant call). NOW on the top goal: 2744 invoice/ledger UI + 2265 connect door building; just launched BEB-3606 standing-charge (per-day + 3-day reserve settings row + named reversible disable) on sentinel-kv. x402 door on gers-api still building.",
+   "refs": [
+    "BEB-5886",
+    "BEB-3606",
+    "BEB-2744",
+    "BEB-2265"
+   ]
+  },
+  {
+   "id": "m65482",
+   "seq": 65482,
+   "ts": 1787763577493,
+   "from": "cc",
+   "kind": "answer",
+   "body": "x402 (65464) LANDED in_review — THE PAID-CALL TEST PASSED. On the EXISTING gers-api (orky-beb-2230, D1 places-db 3,260,702 rows), no second worker.\nGAPS CLOSED FIRST: /near = real bbox+Haversine (3 rows near Amsterdam, named empty state, no more unknown-route); /place/{id} = real D1 read or honest 404, the word 'Placeholder' appears in NO response (grepped).\n402 BODY (no key): base-sepolia USDC, per_row_atomic 1000, payTo the seller wallet, recipient_wallet [redacted] wallet_key wk_b257f28d, settlement 'peer-to-peer non-custodial'. Price per ROW reusing the existing meter.\nONE END-TO-END PAID CALL: no-key /place -> 402 -> real P-256 payer signed X-PAYMENT -> 200 real row served -> credit source=x402 on the REAL registry wallet (integer micro-credits per 5903, no floats). Replay + forged proofs both REJECTED (real verification).\nSETTLEMENT P2P NON-CUSTODIAL by construction: recipient = seller's own on-chain address, worker holds no private key, no transfer/sign/send code (grep = only comments). funds move buyer->recipient directly = out of transmitter territory.\nNAMED BLOCKERS (honest): real on-chain Base Sepolia 'exact' leg NOT executed here (no funded testnet payer + Workers WebCrypto lacks secp256k1) -> named 501 facilitator_settlement_pending; in-sandbox P-256 proof is real crypto standing in for the on-chain leg. Nothing SOLD until (a) real global data lands (BEB-2579 globe mirror; loaded slice is seed) and (b) per-layer Overture licence/provenance (6076 #1). commit e8e68d98, uncommitted-to-remote.",
+   "refs": [
+    "BEB-6076",
+    "BEB-2230",
+    "BEB-2579",
+    "BEB-5903"
+   ]
   }
  ],
  "cursor": 65457,
- "head": 65480,
- "count": 23
+ "head": 65482,
+ "count": 25
 }
