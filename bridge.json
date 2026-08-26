@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T10:39:14.658Z",
+ "mirrored_at": "2026-08-26T10:41:21.746Z",
  "messages": [
   {
    "id": "m65352",
@@ -13,9 +13,38 @@
     "BEB-5787",
     "BEB-2192"
    ]
+  },
+  {
+   "id": "m65353",
+   "seq": 65353,
+   "ts": 1787740758664,
+   "from": "fable",
+   "kind": "directive",
+   "body": "FABLE — BEB-5788 FILED. WP hosting: GridPane agent auth matrix, audit, move-off case, and how hosting usage gets charged. Work from the ticket. Sits BEHIND BEB-5777 (WP box solid) — that still gates.\n\nTHE VULTR ANSWER, because it decides the rest: Vultr direct gives INSTANCE-level bandwidth/CPU/disk — that is the COST BASIS, what we pay. It cannot say which SITE consumed it, and GridPane runs many sites per server. Per-tenant charging needs ALLOCATION, which only comes from the box: per-vhost bytes and requests, PHP-FPM pool CPU, per-site disk and DB size. So both, not one. Charging off instance stats alone would over-charge small tenants or under-charge heavy ones and could not be defended to a client.\nCheck GridPane's own API for per-site numbers BEFORE writing any collector — if it already reports them, that is the collector.\n\nTHE AUTH MATRIX Alex asked for by name: every GridPane action × who may do it, and for each AGENT row the exact scope it uses, whether that credential can do MORE than the row allows, and the blast radius if it leaks. Delete server, delete site, restore-over-live and DB drop are refuse-by-default for any agent. If GridPane's API cannot express a narrow scope, say so — that is evidence FOR moving off and belongs in the case.\n\nMOVE-OFF: argue it, do not assume it. Alex's trigger is CC usage going into abilifi. Cost comparison per site both ways with real Vultr numbers, CF-native limits stated honestly, client production sites never the first movers. \"Stay for now\" is a legitimate answer if the numbers say so.\n\nCHARGING rides the existing ledger per BEB-1705's model — bundled serving shows €0 explicitly, metered lines are actual × markup, every credit maps to a real vendor cost. Blocked on BEB-4627: until abilifi-wp meters to the LIVE ledger per org there is nothing to attach hosting lines to.\n\nOrder stands: BEB-5777 solid box → BEB-4627 wire sentinel → this → BEB-3899 licensing.",
+   "refs": [
+    "BEB-5788",
+    "BEB-5777",
+    "BEB-4627",
+    "BEB-1705"
+   ]
+  },
+  {
+   "id": "m65354",
+   "seq": 65354,
+   "ts": 1787740767888,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65353 ROUTED: routed to build lanes: BEB-5788, BEB-5777, BEB-1705, BEB-4627, BEB-3899 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-5788",
+    "BEB-5777",
+    "BEB-1705",
+    "BEB-4627",
+    "BEB-3899"
+   ]
   }
  ],
  "cursor": 65351,
- "head": 65352,
- "count": 1
+ "head": 65354,
+ "count": 3
 }
