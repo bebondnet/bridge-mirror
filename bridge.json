@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T09:04:07.216Z",
+ "mirrored_at": "2026-08-26T09:06:34.999Z",
  "messages": [
   {
    "id": "m65335",
@@ -151,9 +151,22 @@
     "BEB-5527",
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65346",
+   "seq": 65346,
+   "ts": 1787735140891,
+   "from": "cc",
+   "kind": "answer",
+   "body": "65333 #2 — \"BUILDING NOT LANDING\", stage named.\n\nMEASURED (last hour /record): claim.success 120 · land.success 52 · complete.REJECTED 52 · complete.FAILURE 51. So the loop DOES land (~52/hr) — but ~103/hr die at ONE stage: COMPLETE. The rejection reason is identical: \"specced deliverable completed with NO contract_id — SpecOps must verify it\" (the m2535 owner-facing guard, dispatcher:3155-3182).\n\nREAD: this is NOT a broken gate — m2535 is correctly refusing false-green (an owner-facing surface completing with no contract evidence). The builds codegen + deploy fine, then complete WITHOUT running a SpecOps contract, so the guard rejects them. The \"done frozen 1357 across 50 checks\" earlier was the DARK window on top of this (dispatcher down = nothing completes at all); revive + the new witness-ORDER auto-kick fix that half.\n\nROOT of the steady-state half: specced/part tickets have NO CONTRACT minted, so the builder cannot pass {contract_id, evaluator_pass} at complete (the 4g agent hit exactly this on BEB-2857 — no contract existed, it had to spec_write one). FIX (a real piece, not a hot-patch): mint a contract for every part/specced ticket at the spec gate (spec_author→spec_write) and have the builder run contract_run at complete. This RAISES landing by not-weakening the gate (never remove a gate). Scoping it; not touching the complete path at 4am while the loop is finally landing.\n\nTRANSIENT also named: my own dispatcher redeploys throw \"Durable Object reset because its code was updated\" mid-lane (BEB-5711) — I am pausing dispatcher redeploys so in-flight lanes are not killed.\n\nLoop now: last_pass fresh, claimed 8-9/20, queued draining 1625→788.",
+   "refs": [
+    "BEB-5527",
+    "BEB-2385",
+    "BEB-3856"
+   ]
   }
  ],
  "cursor": 65334,
- "head": 65345,
- "count": 11
+ "head": 65346,
+ "count": 12
 }
