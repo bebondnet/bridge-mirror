@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-26T18:35:55.093Z",
+ "mirrored_at": "2026-08-26T18:37:42.157Z",
  "messages": [
   {
    "id": "m65486",
@@ -30,9 +30,69 @@
     "BEB-6079",
     "BEB-6080"
    ]
+  },
+  {
+   "id": "m65488",
+   "seq": 65488,
+   "ts": 1787769375052,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65486 ROUTED: routed to build lanes: BEB-3899, BEB-2265, BEB-3606, BEB-6080, BEB-2744 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3899",
+    "BEB-2265",
+    "BEB-3606",
+    "BEB-6080",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m65489",
+   "seq": 65489,
+   "ts": 1787769377493,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65487 ROUTED: routed to build lanes: BEB-3899, BEB-2265, BEB-3606, BEB-6079, BEB-6080 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3899",
+    "BEB-2265",
+    "BEB-3606",
+    "BEB-6079",
+    "BEB-6080"
+   ]
+  },
+  {
+   "id": "m65490",
+   "seq": 65490,
+   "ts": 1787769396432,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — THE OTHER HALF: OUR PLUGIN IS THE CLIENT SIDE, AND IT DOES BOTH BILLING AND UPDATE DELIVERY. Alex 2026-08-26.\n\n\"And ours has to get the client billed but also do updates to file.\"\n\n== TWO SIDES, TWO SHAPES — DO NOT CONFUSE THEM ==\n**AUTHOR SIDE (65487): NO PLUGIN OF OURS REQUIRED.** They paste HTTP calls into their own plugin, register, publish. Nothing installed.\n**CLIENT SIDE: abilifi-connect IS the plugin, and it does TWO jobs on the client's site:**\n1. **BILLING** — the client buys GD Options and premium plugins, and it charges their wallet. That is 2265, landed and proven: purchase → 200 → charged → real ledger row → drained org gets a named 402 pointing at top-up.\n2. **UPDATE DELIVERY — IT ACTUALLY WRITES THE FILES.** Checks for updates, pulls the signed download, installs the plugin on the site. **This is the half that has not been proven and it is the half that has to work for anything to be real.**\n\n== WHY BOTH BELONG IN ONE PLUGIN ==\n**They are the same transaction seen twice.** A client pays for a plugin and expects it to appear and stay current; a client who stops paying stops receiving updates while keeping what they have installed. Splitting billing and delivery across two plugins would mean a site that is paid up but not updating, or updating but not paid — and reconciling that afterwards is exactly the class of problem we spent today removing from the ledger.\nOne plugin, one bill, one update channel, for **everything the client bought** — GD Options, our plugins, third-party authors' plugins. **That is the client-facing value in one sentence, and it is what 3899's ONE BILL result already demonstrates on the money side.**\n\n== WHAT UPDATE DELIVERY HAS TO DO, CONCRETELY ==\n- present available updates in wp-admin the normal WordPress way — **it must look like every other plugin update, because a bespoke update UI is a support burden forever**\n- call the update endpoint with the site's credentials\n- receive the licence verdict and the signed",
+   "refs": [
+    "BEB-2265",
+    "BEB-3899",
+    "BEB-3606",
+    "BEB-2744",
+    "BEB-4627"
+   ]
+  },
+  {
+   "id": "m65491",
+   "seq": 65491,
+   "ts": 1787769427835,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65490 ROUTED: routed to build lanes: BEB-2265, BEB-3899, BEB-3606, BEB-2744, BEB-4627 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2265",
+    "BEB-3899",
+    "BEB-3606",
+    "BEB-2744",
+    "BEB-4627"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65487,
- "count": 2
+ "head": 65491,
+ "count": 6
 }
