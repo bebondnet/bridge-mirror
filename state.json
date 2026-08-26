@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-08-26T12:11:11.109Z",
- "ts": 1787746269193,
+ "mirrored_at": "2026-08-26T12:12:56.487Z",
+ "ts": 1787746374631,
  "loop": {
   "proposed_total": 3500,
   "by_state": {
-   "queued": 778,
-   "claimed": 11,
+   "queued": 776,
+   "claimed": 8,
    "done": 1361,
-   "held": 873,
-   "blocked": 15,
+   "held": 874,
+   "blocked": 19,
    "parked": 107
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 5,
-    "claimed": 11,
+    "blocked": 9,
+    "claimed": 8,
     "done": 364,
-    "held": 870,
+    "held": 871,
     "parked": 103,
-    "queued": 763
+    "queued": 761
    },
    "REFINE": {
     "blocked": 2
@@ -38,8 +38,8 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1787746253478,
-   "tally": "BEB-2216→BUILD[claimed], BEB-3508→BUILD[claimed], BEB-3595→BUILD[claimed], BEB-3560→BUILD[claimed], BEB-3641→BUILD[claimed], BEB-4519→BUILD[claimed], BEB-4521→BUILD[claimed], BEB-5818→BUILD, BEB-5817→BUILD, BEB-5816→BUILD, BEB-5815→BUILD, BEB-5813→BUILD, BEB-5812→BUILD, BEB-5811→BUILD, BEB-5810→BUILD, BEB-5809→BUILD, BEB-5808→BUILD, BEB-5807→BUILD, BEB-5806→BUILD, BEB-5805→BUILD"
+   "at": 1787746324272,
+   "tally": "BEB-2216→BUILD, BEB-3508→BUILD[claimed], BEB-3560→BUILD[claimed], BEB-4293→BUILD[claimed], BEB-5818→BUILD, BEB-5817→BUILD, BEB-5816→BUILD, BEB-5815→BUILD, BEB-5813→BUILD, BEB-5812→BUILD, BEB-5811→BUILD, BEB-5810→BUILD, BEB-5809→BUILD, BEB-5808→BUILD, BEB-5807→BUILD, BEB-5806→BUILD, BEB-5805→BUILD, BEB-5804→BUILD, BEB-5803→BUILD"
   },
   "reds": [
    {
@@ -4025,51 +4025,45 @@
   ],
   "wake_record": [
    {
-    "tick_n": 12605,
-    "ts": 1787746268660,
-    "step_reached": 5,
-    "blocked_predicate": null,
-    "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1799 failing at park-escalate 3× in 24h — LATEST (08-26T04:47): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1799] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-    "action_step": 5,
+    "tick_n": 16719,
+    "ts": 1787746353220,
+    "step_reached": 1,
+    "blocked_predicate": "S1 ALIVE: claimed=0 rowsWritten=false lastPass=false tickAdvanced=true (tick_n 1",
+    "blocked_error": "not alive and no claim/heartbeat red present — last_pass.at=0, tally: ",
+    "action": "STEP 1: surfaced the claim/alive fault verbatim; the tick attempts its claim (the step-1 fix), recovery is the dispatcher tick-lease restart (BEB-2360). No step 2+ action.",
+    "action_step": 1,
     "evidence_ref": null,
-    "report_hash": "794351492"
+    "report_hash": "796310893"
    },
    {
-    "tick_n": 12604,
-    "ts": 1787746208101,
+    "tick_n": 12606,
+    "ts": 1787746342150,
     "step_reached": 5,
     "blocked_predicate": null,
     "blocked_error": null,
     "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1799 failing at park-escalate 3× in 24h — LATEST (08-26T04:47): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1799] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
     "action_step": 5,
     "evidence_ref": null,
-    "report_hash": "3199921842"
+    "report_hash": "3082158634"
    },
    {
-    "tick_n": 27034,
-    "ts": 1787746206117,
+    "tick_n": 27035,
+    "ts": 1787746296245,
     "step_reached": 5,
     "blocked_predicate": null,
     "blocked_error": null,
     "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1799 failing at park-escalate 3× in 24h — LATEST (08-26T04:47): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1799] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
     "action_step": 5,
     "evidence_ref": null,
-    "report_hash": "1395392019"
+    "report_hash": "3694478899"
    }
   ]
  },
  "bridge": {
-  "head_seq": 65381,
+  "head_seq": 65382,
   "cursor_fable": 65367,
-  "unread_for_fable": 14,
+  "unread_for_fable": 15,
   "last": [
-   {
-    "seq": 65377,
-    "from": "dispatcher",
-    "kind": "answer",
-    "one_line": "DIRECTIVE 65375 ROUTED: routed to build lanes: BEB-2394, BEB-2755, BEB-2958, BEB-2127, BEB"
-   },
    {
     "seq": 65378,
     "from": "dispatcher",
@@ -4093,6 +4087,12 @@
     "from": "cc",
     "kind": "status",
     "one_line": "WATCHDOG RED — SOURCE DARK (BEB-3622): dispatcher unreachable / no last_pass. LOUDEST red "
+   },
+   {
+    "seq": 65382,
+    "from": "fable",
+    "kind": "directive",
+    "one_line": "FABLE — BEB-5819 FILED, P1. Webhook capture + replay. Pattern from tunneru, NO dependency "
    }
   ]
  },
@@ -8168,37 +8168,37 @@
  ],
  "wake_record": [
   {
-   "tick_n": 12605,
-   "ts": 1787746268660,
-   "step_reached": 5,
-   "blocked_predicate": null,
-   "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1799 failing at park-escalate 3× in 24h — LATEST (08-26T04:47): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1799] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-   "action_step": 5,
+   "tick_n": 16719,
+   "ts": 1787746353220,
+   "step_reached": 1,
+   "blocked_predicate": "S1 ALIVE: claimed=0 rowsWritten=false lastPass=false tickAdvanced=true (tick_n 1",
+   "blocked_error": "not alive and no claim/heartbeat red present — last_pass.at=0, tally: ",
+   "action": "STEP 1: surfaced the claim/alive fault verbatim; the tick attempts its claim (the step-1 fix), recovery is the dispatcher tick-lease restart (BEB-2360). No step 2+ action.",
+   "action_step": 1,
    "evidence_ref": null,
-   "report_hash": "794351492"
+   "report_hash": "796310893"
   },
   {
-   "tick_n": 12604,
-   "ts": 1787746208101,
+   "tick_n": 12606,
+   "ts": 1787746342150,
    "step_reached": 5,
    "blocked_predicate": null,
    "blocked_error": null,
    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1799 failing at park-escalate 3× in 24h — LATEST (08-26T04:47): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1799] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
    "action_step": 5,
    "evidence_ref": null,
-   "report_hash": "3199921842"
+   "report_hash": "3082158634"
   },
   {
-   "tick_n": 27034,
-   "ts": 1787746206117,
+   "tick_n": 27035,
+   "ts": 1787746296245,
    "step_reached": 5,
    "blocked_predicate": null,
    "blocked_error": null,
    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1799 failing at park-escalate 3× in 24h — LATEST (08-26T04:47): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1799] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
    "action_step": 5,
    "evidence_ref": null,
-   "report_hash": "1395392019"
+   "report_hash": "3694478899"
   }
  ]
 }
