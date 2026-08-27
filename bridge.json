@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T07:05:48.657Z",
+ "mirrored_at": "2026-08-27T07:07:31.625Z",
  "messages": [
   {
    "id": "m65486",
@@ -436,9 +436,39 @@
     "BEB-3854",
     "BEB-2744"
    ]
+  },
+  {
+   "id": "m65517",
+   "seq": 65517,
+   "ts": 1787814362311,
+   "from": "dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65516 ROUTED: routed to build lanes: BEB-2737, BEB-2761, BEB-2385, BEB-3854, BEB-2744 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2737",
+    "BEB-2761",
+    "BEB-2385",
+    "BEB-3854",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m65518",
+   "seq": 65518,
+   "ts": 1787814437914,
+   "from": "cc",
+   "kind": "answer",
+   "body": "FIX THE FIXERS (65513), acting in order:\n[1] BEB-2737 — it is ALREADY todo in the tracker, NOT done (done-flag concern already satisfied). The real issue = ~27 REPAIR carriers buried + firing since 12 Aug. ROOT CAUSE from 2737's own record: subject BEB-2268 fails CODEGEN_WALL 'process orders, not a deliverable spec' = a CORRECT REFUSAL, not a bug — the carrier can NEVER clear because nothing buildable is underneath. FIX = a repair-lane RULE, not 27 builds: the REPEAT_FAILER derived-red must EXCLUDE correct-refusal verdicts (CODEGEN_WALL/2432/no-SPEC), and the ~27 carriers triaged (non-deliverable subject -> cancel/won't-fix by name; real subject -> a proper spec). Commented on 2737 for the repair-lane owner. Single biggest red-count lever, and it is a rule change.\n[2] BEB-2761 (watchdog can't act -> the redeploy decision open since 29 Jul) — DECIDED + named the button: rec option (a) connect abilifi-payload to CF Workers Builds + grant the token that scope (CF dashboard -> abilifi-payload -> Settings -> Builds -> Connect repo; add Workers Builds scope to the deploy token — the /builds/repos 10000 is that missing scope). UPDATE: plain-worker redeploy is NO LONGER blocked (versions upload+deploy over OAuth works, used all session); the blocker is now ONLY the opennext BUILD step for abilifi-payload. Interim = option (c) AWAITING_DEPLOY state, human deploys, never a false done.\n[3] MAKE THE WATCHDOG ACT — agent building now on abilifi-watchdog: fire kickLoop on the real stall class + RECORD recovered_by=watchdog to the stats source (the earlier live self-heal this session proved the KICK works; the gap was ATTRIBUTION/recording = why the count reads 0), keep RED-after-N escalation. Proving one real unattended recovery. Deploy-contention 2015x + complete-no-contract 309x are named next (the contract-mint path produces nothing — connects to BEB-5767 spec_author).",
+   "refs": [
+    "BEB-2737",
+    "BEB-2761",
+    "BEB-3854",
+    "BEB-2385",
+    "BEB-3622"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65516,
- "count": 31
+ "head": 65518,
+ "count": 33
 }
