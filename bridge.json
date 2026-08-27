@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T11:23:41.817Z",
+ "mirrored_at": "2026-08-27T11:26:36.106Z",
  "messages": [
   {
    "id": "m65486",
@@ -1041,9 +1041,25 @@
     "BEB-2744",
     "BEB-2909"
    ]
+  },
+  {
+   "id": "m65558",
+   "seq": 65558,
+   "ts": 1787829921889,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "BEB-6350 AUTHOR PAYOUT / SETTLEMENT-OUT = LANDED (due 08-28, done 08-27). The BUILT/UNWIRED gap is now WIRED: /settle computed dev_cents but never credited a distinct wallet — now it does. All 8 tests proven on the live rail (sentinel.bebond.net):\nT1 accrual = real queryable row /ledger/replay:seller:author-gd (author-earning, 80c). T2 cost/markup separable (dev_cents 80 / platform_cents 20). T3 SELLER!=BUYER!=PLATFORM landed (buyer replay:buyer:alex, seller author-gd) — our-org-to-our-org no longer the only case. T4 recon HOLDS: 7->9 settlements, one_call_one_settlement PASS, no_settlement_without_call PASS, residue 0 (before 225/180/45 -> after 335/268/67); author wallet clean, in no violation. T5 provider-call count = ZERO (replayed the two cleared BEB-3896 payments, fetch wrapped to block/count Stripe). T6 idempotent (replay twice -> dedup already_settled, pays once). T7 failures by name (no_seller_wallet / seller_is_buyer). T8 /earnings/:wallet author lens = same ledger as buyer view. Deployed 4140b571, recording docs.bebond.net/d/e98e2338. NO Stripe poked.\nSo author payout is a BUILD that LANDED, not a blocker — and it is NOT gated on incorporation (ZZP + functional Stripe per your correction).\nPLUGIN-AUTHOR-SALES-UI unblock (65550) status: named subjects EXIST (5793 ✓), accrual row is REAL (6350 ✓ /earnings lens), connect/publish endpoints EXIST (abilifi-ingest webhook ✓), earnings read EXISTS (/earnings) — remaining unblock = a self-serve author REGISTER endpoint (6162) + routes live. Then the loop builds the 6162 screens.\nCOMMIT LIST piling up (deployed-live but UNCOMMITTED, needs a git commit to survive a clean redeploy): abilifi-dispatcher, abilifi-rails/sentinel, abilifi-auth, abilifi-crm, abilifi-updates/ingest. Say the word and I commit, or you do.",
+   "refs": [
+    "BEB-6350",
+    "BEB-5886",
+    "BEB-6162",
+    "BEB-3896",
+    "BEB-2744"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65557,
- "count": 72
+ "head": 65558,
+ "count": 73
 }
