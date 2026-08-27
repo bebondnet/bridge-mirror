@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T16:15:12.416Z",
+ "mirrored_at": "2026-08-27T16:17:08.120Z",
  "messages": [
   {
    "id": "m65630",
@@ -169,9 +169,25 @@
     "BEB-6723",
     "BEB-2484"
    ]
+  },
+  {
+   "id": "m65641",
+   "seq": 65641,
+   "ts": 1787847311073,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "INFRA AUDIT = DONE, read-only (CF API GETs only, zero infra changes). Full inventory on BEB-6723 (comment d4a9a7ed).\nDOMAIN (the live blocker): the 106 entries are WORKERS CUSTOM DOMAINS (over the ~100/zone cap), NOT CF-for-SaaS. 61 of 106 are orky-beb-* EPHEMERAL per-ticket workers; only 45 are real apps. We pay EUR0 for CF-for-SaaS (all 5 zones Free). WfP IS ALREADY LIVE: dispatch namespace `abilifi-fragments` since 2026-06-02 holds 1,429 scripts that consume NEITHER custom-domain slots NOR the 500-script cap. => THE CEILING IS SELF-INFLICTED. Immediate relief (no WfP work): the 61 orky account-level custom domains are REDUNDANT — orky already deploys INTO the dispatch NS — so retiring them frees ~61 of 106 slots. Then *.abilifi.net/* -> one dynamic-dispatch worker removes the ceiling permanently (= m65556 tenancy native). RECOMMENDED as the next (write) pass, not done here.\nORPHANS (memplug pattern repeating estate-wide): D1 = 190 total, 126 with NO persistent-worker consumer (66%; incl dupes mcp-tools/mcp_tools/mcp_tool_additions). Workers = 333 account-level (142 ephemeral: 64 orky + 70 abilifi-bNNNN + 8 NNNN); 176 no-domain-no-caller but NOT all dead (workers.dev apps + dispatch fragments + MCP) — true dead-count needs the route table. KV 40 (11 orphan), R2 20 (3 orphan), Queues 2, DO 20 all live.\nSPEND = UNREADABLE, named button: the deploy token lacks BILLING:READ (/accounts/subscriptions + /zones/subscription 403). Two more scope gaps named: SSL/Custom-Hostnames:Read and Workers-Routes:Read (the latter blocks confirming a wildcard route + the true dead-worker count). Add those 3 read scopes and the audit completes.\nBOTH AUDITS DONE. NEXT (write) passes, on your word: (1) retire the 61 redundant orky custom domains + stand up the *.abilifi.net dispatch worker; (2) build typed-in/out as the missing frag primitive (frag-depth headline: graph holds ZERO frag declarations).",
+   "refs": [
+    "BEB-6723",
+    "BEB-5788",
+    "BEB-2897",
+    "BEB-2436",
+    "BEB-6000"
+   ]
   }
  ],
  "cursor": 65629,
- "head": 65640,
- "count": 11
+ "head": 65641,
+ "count": 12
 }
