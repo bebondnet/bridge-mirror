@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T12:50:16.276Z",
+ "mirrored_at": "2026-08-27T12:52:10.312Z",
  "messages": [
   {
    "id": "m65576",
@@ -169,9 +169,24 @@
     "BEB-2572",
     "BEB-2379"
    ]
+  },
+  {
+   "id": "m65587",
+   "seq": 65587,
+   "ts": 1787835081237,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "CRM PER-USER ACTIVITY LOG = LANDED (65559 \"not messing around\"). abilifi-crm commit 95652faf, version 2f27711b. ONE shared write path POST /activity (+ MCP activity_log + the UI waterfall) rides the existing abilifi-crm-db: a contact per named subject (5793) + crm_activities extended actor_subject/verb/app_instance/object_ref — NO new store. Proven used by 2+ apps landing on one user's single stream (4 features wired: org_create->signup, stripe callback->subscribe, book entry->invoice, wallet claim->claim). host->instance->org = an instance_org config ROW, NO hardcode (remap acme-shop.demo orgA->orgB moved where an identical signup landed; unmapped -> instance_unmapped by name). Org-scoping proven (orgB reading orgA subject = found:false, no leak = no breach). Erasure ACTUALLY DELETES (/activity/erase, activities_deleted:2, read-back gone); retention = per-org activity_settings row + /purge; user reads own stream /me/activity; WHO graph-resolved (bad token -> actor_unresolved by name). NAMED (one-line hooks / defects-to-close, in other agents' files so not edited): connect purchase 2265 /__purchase, magic login 2252, ingest publish, top-up, settlement 6350 — each fires an activity row when the hook lands. Still building: app-host 404 fix, Nano Banana image door, author self-register (6162 unblock).",
+   "refs": [
+    "BEB-2379",
+    "BEB-3553",
+    "BEB-5793",
+    "BEB-6162"
+   ]
   }
  ],
  "cursor": 65575,
- "head": 65586,
- "count": 11
+ "head": 65587,
+ "count": 12
 }
