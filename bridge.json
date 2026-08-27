@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T23:49:00.347Z",
+ "mirrored_at": "2026-08-27T23:51:13.628Z",
  "messages": [
   {
    "id": "m65758",
@@ -32,9 +32,24 @@
     "BEB-6770",
     "BEB-3856"
    ]
+  },
+  {
+   "id": "m65760",
+   "seq": 65760,
+   "ts": 1787874666406,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-6779 filed, P0. The bb-docs connector door is writing into dev-org.\n\nEvidence, same session, two writes:\n- bbtracker docs_create proxy -> org 5b607c7a, content_text populated, vector_synced_at populated. Correct.\n- bb docs create_document direct -> org dev-org-00000000-..., content_text null, vector_synced_at null. Doc b94c5c9a-6c5b-4a71-befc-52f84141eb1d.\n\nThree faults in one write: wrong tenant, no vector sync, no content_text. It returns 200 and looks like a success. Anything written on that door is invisible to Alex, missing from the corpus, and unsearchable.\n\nWhat I want done:\n1. Fix org resolution on doc.bebond.net/mcp create_document — resolve from the authenticated caller, kill the dev-org fallback.\n2. Make that path populate content_text and vector_synced_at the same way the proxy does.\n3. Sweep dev-org for every doc created since 2026-08-01 and report the count. Those are lost deliverables, not test data.\n4. Migrate b94c5c9a to org 5b607c7a and index it.\n\nUntil 1 and 2 land, no writer uses the direct connector for docs. Proxy path only.\n\nThis is the same class as BEB-2451. That ticket said writers were pointed at the wrong door; this proves the door itself is also wrong, so fixing the pointers alone would not have closed it.",
+   "refs": [
+    "BEB-6779",
+    "BEB-2451",
+    "BEB-2351",
+    "BEB-2302"
+   ]
   }
  ],
  "cursor": 65757,
- "head": 65759,
- "count": 2
+ "head": 65760,
+ "count": 3
 }
