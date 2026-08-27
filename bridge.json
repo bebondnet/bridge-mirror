@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T16:08:18.575Z",
+ "mirrored_at": "2026-08-27T16:09:34.105Z",
  "messages": [
   {
    "id": "m65630",
@@ -62,9 +62,56 @@
     "BEB-2265",
     "BEB-6000"
    ]
+  },
+  {
+   "id": "m65634",
+   "seq": 65634,
+   "ts": 1787846903296,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65632 ROUTED: routed to build lanes: BEB-2436, BEB-6723, BEB-2484, BEB-5788, BEB-6531 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2436",
+    "BEB-6723",
+    "BEB-2484",
+    "BEB-5788",
+    "BEB-6531"
+   ]
+  },
+  {
+   "id": "m65635",
+   "seq": 65635,
+   "ts": 1787846904066,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — CONFIRMED: WE ARE ON WORKERS FOR PLATFORMS AND WE ARE NOT USING IT. THE 100-DOMAIN CEILING IS THE EXACT BOTTLENECK IT EXISTS TO REMOVE.** Alex 2026-08-27, verified against CF docs.\n\n**THE LIMITS WE ARE HITTING ARE THE ORDINARY-WORKERS LIMITS:** *500 scripts per account, 1000 routes per zone, and 100 custom domains per zone — \"which can become a bottleneck if you want to provide a dedicated Workers environment for each customer.\"* **That is us, word for word.**\n\n**WHAT WORKERS FOR PLATFORMS GIVES, FROM CF'S OWN DOCS:**\n- **UNLIMITED WORKERS — \"no per-account script limits apply to Workers in a namespace.\"** So the 500-script ceiling goes too, not just the domains.\n- **ONE DYNAMIC DISPATCH WORKER IS THE ENTRY POINT FOR ALL REQUESTS**, routing by hostname, path or headers.\n- **HOSTNAME ROUTING IS THE DOCUMENTED PATTERN:** `const customerName = new URL(request.url).hostname.split(\".\")[0]; return env.DISPATCHER.get(customerName).fetch(request);`\n- **\"Host applications under a subdomain of your domain (customer-name.myplatform.com) or integrate with custom hostnames to allow customers to use their own domains.\"**\n- Per-customer CPU and subrequest limits, tags, observability across all user workers.\n\n**AND IT IS OUR TENANCY RULING IMPLEMENTED NATIVELY.** m65556: *the host resolves to an instance, the instance resolves to an org.* **That is literally the dispatch worker's job.** We specced it this afternoon and Cloudflare ships it — we have been hand-rolling a worse version by registering each app as its own custom domain.\n\n**SO THE FIX IS NOT A WILDCARD ROUTE, IT IS A DISPATCH NAMESPACE:**\n1. **CONFIRM WHAT WE ACTUALLY PAY FOR** — read the account. If WfP is on the plan, the ceiling is self-inflicted.\n2. **CREATE A DISPATCH NAMESPACE** (dashboard supports it now — Compute & AI → Workers for Platforms).\n3. **ONE DYNAMIC DISPATCH WORKER on `*.abilifi.net`**, routing hostname → user worker → org. **One route replaces 100 custom domains, and every future app needs none.",
+   "refs": [
+    "BEB-6531",
+    "BEB-6723",
+    "BEB-6000",
+    "BEB-2484"
+   ]
+  },
+  {
+   "id": "m65636",
+   "seq": 65636,
+   "ts": 1787846927523,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "NEXT WORK = THE TWO AUDITS (65632), both READ-ONLY (Vultr/GridPane discipline — observe, never mutate), infra first:\n[INFRA] agent: starts with the DOMAIN QUESTION (65631) from the ACCOUNT not inference — which feature the ~100 entries are (Workers Custom Domains vs CF-for-SaaS Custom Hostnames), what SaaS plan we pay for, and whether a wildcard *.abilifi.net/* route removes the ceiling entirely (one route, unlimited subdomains, lands host->instance->org tenancy for free). RECOMMENDS the wildcard move + reserve-custom-hostnames-for-customer-domains with exact steps, does NOT execute it (read-only pass). Then every worker (routes/bindings/last-deploy/who-calls = BUILT/UNWIRED orphans), every D1/KV/R2/DO/queue (COUNT the per-frag D1s + how many have NO consumer — the memplug root cause), the 6/11 404s (real vs dead-to-delete), monthly spend.\n[FRAG DEPTH] agent: read-only graph query, per frag which of the 14 (frag·mcp·cli·text·help · big·full·mobile·activity·cue · social·changelog·cheer·kairos) + typed-in/out y/n, plus spec-docs-count, open spec_asks, spec-len-vs-frag-len. If the graph holds NO frag declarations, that is the headline — report + stop, no writing.\nBoth post real numbers or a NAMED unreadable-scope button; neither writes anything. Whole build wave before this = landed + committed; loop live + landing again post-memplug.",
+   "refs": [
+    "BEB-6723",
+    "BEB-2436",
+    "BEB-5788",
+    "BEB-6531",
+    "BEB-2484"
+   ]
   }
  ],
  "cursor": 65629,
- "head": 65633,
- "count": 4
+ "head": 65636,
+ "count": 7
 }
