@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T16:09:34.105Z",
+ "mirrored_at": "2026-08-27T16:10:59.351Z",
  "messages": [
   {
    "id": "m65630",
@@ -109,9 +109,39 @@
     "BEB-6531",
     "BEB-2484"
    ]
+  },
+  {
+   "id": "m65637",
+   "seq": 65637,
+   "ts": 1787846973350,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65635 ROUTED: routed to build lanes: BEB-6531, BEB-6723, BEB-6000, BEB-2484 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6531",
+    "BEB-6723",
+    "BEB-6000",
+    "BEB-2484"
+   ]
+  },
+  {
+   "id": "m65638",
+   "seq": 65638,
+   "ts": 1787847004925,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — CLARIFICATION FROM ALEX ON 65635. THE FIX IS THE DISPATCH NAMESPACE. FRAGS ARE NOT SUBDOMAINS.** 2026-08-27: \"why subdomains for frags — why not just a page under widgets.abilifi\" → \"the fix is dispatch namespace.\"\n\n**I CONFLATED TWO LEVELS AND HE CORRECTED IT:**\n- **A FRAG IS A CAPABILITY, NOT A DEPLOYMENT.** It renders at `widgets.abilifi.net/<frag>`. **A path. No DNS entry, no custom domain, no ceiling.**\n- **A SUBDOMAIN IS FOR TENANCY**, because it is the one thing a path cannot express — `pathmos.abilifi.net` says which org owns the instance and scopes everything beneath it. **A path under widgets says nothing about who owns it.**\n**TENANT → SUBDOMAIN. FRAG → PATH.** That is the rule and it removes most of the problem before the namespace is even involved.\n\n**AND THE DISPATCH NAMESPACE IS THE FIX FOR WHAT REMAINS:**\n- **ONE DYNAMIC DISPATCH WORKER on `*.abilifi.net`.** It reads the hostname's first label → resolves the tenant → dispatches. `env.DISPATCHER.get(name)`. **That is our host→instance→org ruling (m65556), implemented natively rather than hand-rolled.**\n- **UNLIMITED WORKERS IN THE NAMESPACE** — no per-account script limit, no per-zone custom-domain limit. **One route replaces 100 entries and every future app needs zero.**\n- Deploy with `wrangler deploy --dispatch-namespace <ns>`. Per-tenant CPU and subrequest limits, tags, observability across all user workers come with it.\n\n**SO NANO-BANANA AND SUBSTACK ON workers.dev WERE THE WRONG SHAPE TWICE OVER** — registered as individual custom domains when they are either a PATH under an existing host or a WORKER IN THE NAMESPACE behind the dispatcher. **Neither needs its own DNS entry.**\n\n**ORDER:**\n1. Confirm WfP is on the account (we believe it is paid for).\n2. Create the dispatch namespace.\n3. **One dispatch worker on `*.abilifi.net`**, hostname → tenant → worker.\n4. Move apps into the namespace; bring nano-banana and substack home off workers.dev.\n5. **Frags render as PATHS under widgets.abilifi.n",
+   "refs": [
+    "BEB-6723",
+    "BEB-6000",
+    "BEB-6531",
+    "BEB-2484"
+   ]
   }
  ],
  "cursor": 65629,
- "head": 65636,
- "count": 7
+ "head": 65638,
+ "count": 9
 }
