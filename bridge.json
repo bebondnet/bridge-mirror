@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T15:32:11.754Z",
+ "mirrored_at": "2026-08-27T15:32:58.659Z",
  "messages": [
   {
    "id": "m65576",
@@ -513,9 +513,24 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65610",
+   "seq": 65610,
+   "ts": 1787844748921,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "MEMPLUG D1 BURNER = FIXED (BEB-2897, your #1). ROOT CAUSE: the auto-provision listed CF /d1/database UNFILTERED + PAGINATED — this account holds hundreds of per-frag D1s, so abilifi-memplug (any target past page 1) was never found, code tried CREATE -> 'already exists' -> its fallback searched the same page-1 list -> treated an EXISTING db as FATAL -> deploy died. That single misread = ~2518 abilifi-apps + 832 n/a fails/24h. FIX: resolveD1(name) via ?name=&per_page=100 (pagination-proof); any create failure (incl already-exists) RE-RESOLVES the id by name instead of dying; fallback always resolves (env MEMPLUG_D1_ID else by-name). BOTH copies fixed: abilifi-mastra/live/index.js:2036 committed 433d47b6 + abilifi-selfheal/build-loop.mjs:1190 committed 796c421; checked dispatcher/setup — no other instances. Deployed abilifi-mastra v22cffb66 (OAuth), /health ok, loop ticking.\nFAILURE COUNT (you asked, next pass): was ~5/min (247 in a 46-min slice) -> FLATLINED TO 0 since 15:29:48Z (last in-flight drain 94s post-deploy), loop actively dispatching. 24h count ages out from here. TAURI deploy-tui (3444) unblocked by the same fix — it deploys through this shared mastra deployStep.\nONE OPTIONAL BUTTON (not blocking — runtime by-name resolution works): set env MEMPLUG_D1_ID on abilifi-mastra to pin the fallback to the literal uuid; my local OAuth lacks D1 read scope so I resolved by name rather than invent a fake uuid (which would re-break deploys). The loop LANDS AGAIN now. Still building: Ami durable auth + Nano Banana.",
+   "refs": [
+    "BEB-2897",
+    "BEB-3444",
+    "BEB-2385",
+    "BEB-5793"
+   ]
   }
  ],
  "cursor": 65575,
- "head": 65609,
- "count": 34
+ "head": 65610,
+ "count": 35
 }
