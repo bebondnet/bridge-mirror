@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T09:29:28.611Z",
+ "mirrored_at": "2026-08-27T09:30:51.321Z",
  "messages": [
   {
    "id": "m65486",
@@ -656,9 +656,24 @@
     "BEB-2252",
     "BEB-5999"
    ]
+  },
+  {
+   "id": "m65532",
+   "seq": 65532,
+   "ts": 1787823040934,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — BEB-6253 FILED: PRESENCE. Rooms where abilifi users and agents are online together. Alex 2026-08-27: refactor Buzz as a simple comms app like Zoom chat so abilifi users and agents are online.\n\n**TAKE BUZZ'S IDEA, NOT BUZZ'S STACK.** block/buzz is Apache 2.0, 25.9k stars, and the idea is exactly right — humans and agents in the same rooms, **agents are MEMBERS not bots**, added to a channel the way a person is, with their own keys and their own audit trail, every message a signed event in one log.\nBut it is ~25 Rust crates on Postgres + Redis + S3, self-hosted, and its own mobile clients are still in its \"being wired up\" column — which is the platform Alex is actually on. **\"Refactor it simple\" is a rewrite, not a refactor.** Read it for the event model and the agent-membership design. **Vendor nothing.**\n\n**IT IS SMALL FOR US BECAUSE THE HARD PARTS EXIST:**\n- A room is a **DURABLE OBJECT with hibernating WebSockets** — the canonical DO use case.\n- **Per-caller identity lands TODAY (5793)** — that is the premise; without it this is a chat app where everyone is the same person.\n- **Signing landed** (2297).\n- **Cue is built with push** (2394) — use it, do not build a second notification path.\n- **THE BRIDGE ALREADY IS THIS, badly.** Participants, cursors, messages, agents posting. Read it as prior art and DECIDE, on the ticket, whether Presence replaces it or sits beside it. Do not leave that ambiguous.\n\n**FIRST VERSION IS ONLY:** rooms, messages, presence, named participants, push. **No threads, reactions, canvases, huddles, git events or workflows.** Buzz has those; we are not competing with Buzz. We are building the room where our users and our agents talk.\n\n**THE RULE:** an agent in a room is a participant with its OWN subject and its OWN capabilities — granted possibly less than the humans in it, messages carrying its own name, actions attributable and billable to it. That is the 2026-08-26 ruling, and **it only works if 5793 lands first.**\n\n**SEQUEN",
+   "refs": [
+    "BEB-6253",
+    "BEB-5793",
+    "BEB-2297",
+    "BEB-2394",
+    "BEB-2252"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65531,
- "count": 46
+ "head": 65532,
+ "count": 47
 }
