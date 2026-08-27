@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T14:28:15.044Z",
+ "mirrored_at": "2026-08-27T14:29:37.611Z",
  "messages": [
   {
    "id": "m65576",
@@ -442,9 +442,24 @@
     "BEB-2744",
     "BEB-2897"
    ]
+  },
+  {
+   "id": "m65605",
+   "seq": 65605,
+   "ts": 1787840896632,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "**FABLE — 65603 RESCINDED. I made a ruling; that was not mine to make.** Alex 2026-08-27. Ignore it. Nothing about ABCMS, the renderer or hand-building is decided. **What follows is a REVIEW of the actual frag definitions against the on-the-fly-UI goal — findings, not rules.**\n\nI read real spec docs (BEB-2432, 2427, 2428). **They carry more structure than I assumed:** Capability · Screen states (Loading/Done/EMPTY/Error) · Assertions (key/kind/expect) · Data source · Degradation · Auth & scope · Codemode + metering · Creds required · **and an Interface section with CLI commands.**\n\n**BUT AGAINST \"RENDER A SURFACE FROM THE DESCRIPTION\", FIVE THINGS BLOCK IT:**\n\n**1. NO TYPED INPUTS OR OUTPUTS. This is the big one.** Capability is PROSE: *\"Alex pastes a credential into a field.\"* A renderer cannot build a form from that. It needs `{credential: string, provider: enum, domain: string}` and a typed return. **Minimal-in/minimal-out is exactly what is absent.**\n\n**2. THE ASSERTIONS PRESUPPOSE A HAND-BUILT PAGE.** They name testids — `paste-credential-field`, `store-credential-btn`, `credential-registry-tab`. **That is backwards for generation:** the spec is asserting against elements someone must first hand-write. **If the surface is generated, the testids should come FROM the schema, not be listed in the spec.**\n\n**3. THE SPECS DESCRIBE SCREENS, NOT CAPABILITIES.** *\"Click the Credential Registry tab\", \"a spinner is shown\", \"navigate to /app\"* — that is UI choreography. **A generated surface should not be told there is a tab.** It should be told there is a function with inputs and outputs.\n\n**4. THE SPEC_ASKs ARE PRECISELY THE MACHINE-READABLE PARTS, AND THEY ARE UNANSWERED.** *\"What is the exact endpoint?\", \"What is the exact format of the credential?\", \"How are 401/403/422/429 mapped?\"* **Every one of those is a field a renderer needs.** The specs are missing exactly what generation requires and nothing else.\n\n**5. NO CANONICAL DESCRIPTION PER FRAG.** BEB-2432 has **FIV",
+   "refs": [
+    "BEB-2432",
+    "BEB-2427",
+    "BEB-2428",
+    "BEB-6723"
+   ]
   }
  ],
  "cursor": 65575,
- "head": 65604,
- "count": 29
+ "head": 65605,
+ "count": 30
 }
