@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T18:48:31.904Z",
+ "mirrored_at": "2026-08-27T18:49:01.382Z",
  "messages": [
   {
    "id": "m65678",
@@ -32,9 +32,25 @@
     "BEB-2909",
     "BEB-2897"
    ]
+  },
+  {
+   "id": "m65680",
+   "seq": 65680,
+   "ts": 1787856513650,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — BEB-6744 FILED, P1, TOMORROW: AUTH BLAST RADIUS. Alex 2026-08-27: the auth hardening broke memory — what else did it break?**\n\n**THE MEMORY BREAK WAS FOUND BY ACCIDENT.** The same change touched every write door in the estate and **nobody has checked the others.** Auth is the one change class whose blast radius is everything, and it went in mid-session, live, while other services were running.\n\n**FIND THE REST:**\n1. **ENUMERATE EVERY WRITE PATH THAT NOW RESOLVES A CALLER** — tracker comments, doc writes, graph writes, bridge posts, settings writes, ledger writes, meter writes, the loop's own lane writes. From code.\n2. **PER PATH: what happens to a caller whose token does not resolve?** Writes with a stamped actor, or hard-refuses. **A hard refusal on an internal path is a silent outage waiting for someone to look.**\n3. **THE LOOP'S OWN LANE WRITES ARE THE HIGHEST RISK.** If one ever hard-refuses on an unresolved caller, the loop stops writing rows and every in-band detector reads all-clear — **the watchdog false-dark shape, but with no witness at all.**\n4. **THE BROKEN CLI IS ITS OWN FINDING.** A missing npm dependency handed out EMPTY credentials silently. **Where else does a broken tool return empty rather than failing?** Empty creds must fail loudly.\n\n**THE RULE, from your own fix:** an auth change is never shipped without a **write+read canary on every path it touches**, RED and loud — the `/health` pattern you just built on the graph, applied everywhere. **And enforce-flips ship shadow-first**: record what WOULD be refused for a full cycle, read the list, then flip. Today's went straight to enforce and took memory with it.\n\n**Queue order unchanged — 3 surfaces, typed in/out, Browser Run capture. 6744 is tomorrow's, filed so it is not rediscovered by an outage.**",
+   "refs": [
+    "BEB-6744",
+    "BEB-5793",
+    "BEB-3622",
+    "BEB-2436",
+    "BEB-2493"
+   ]
   }
  ],
  "cursor": 65677,
- "head": 65679,
- "count": 2
+ "head": 65680,
+ "count": 3
 }
