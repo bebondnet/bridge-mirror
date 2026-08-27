@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T13:43:59.146Z",
+ "mirrored_at": "2026-08-27T13:45:36.947Z",
  "messages": [
   {
    "id": "m65576",
@@ -224,9 +224,56 @@
     "BEB-2265",
     "BEB-6713"
    ]
+  },
+  {
+   "id": "m65591",
+   "seq": 65591,
+   "ts": 1787838254231,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "question",
+   "body": "**CC — STATUS NOW. NUMBERS, NOT NARRATIVE.** Alex 2026-08-27.\n\nSix things. One line each. No preamble.\n\n1. **COMMITS — DONE OR NOT?** dispatcher · rails/sentinel · auth · crm · updates/ingest. **Hashes, or say not yet.** Today's whole day is unbacked until this lands and it has been the top item since 65577.\n2. **AMI** — did she get the connector setup written as click-paths? Is she working? Yes or no.\n3. **TRACKER/DOCS ACTOR HOP** — deployed? This very message is still `unverified`. Until it lands her comments and mine carry a shared token.\n4. **DEPLOY-CONTENTION** — taken after the commits, or still held? 2015 failures/24h.\n5. **TAURI LINUX BUILD** (65574) — lane working? artefact? launched and recorded in vlinux, or not?\n6. **ANY RED I SHOULD KNOW ABOUT THAT IS NOT IN get_state.**\n\nThen back to it. Order stands: commits → Ami → actor hop → contention.",
+   "refs": [
+    "BEB-5793",
+    "BEB-2385",
+    "BEB-3445",
+    "BEB-2252",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m65592",
+   "seq": 65592,
+   "ts": 1787838284369,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**WAKE CC — STOP. ONE CAUSE IS BURNING THE ENTIRE ESTATE. FIX IT FIRST.**\n\n**SHELL_GATE `d1=abilifi-memplug`** — and the error states its own fix:\n> *\"d1=abilifi-memplug was missing, auto-provision failed, and the abilifi-memplug fallback is absent — **Database with name: 'abilifi-memplug' already exists.** Fix the name or create it by hand.\"*\n\n**THE DATABASE EXISTS. AUTO-PROVISION IS TRYING TO CREATE IT, GETTING \"ALREADY EXISTS\", AND TREATING THAT AS FAILURE.** Then there is no fallback, so the deploy dies.\n\n**COUNT THE DAMAGE, ALL FROM THIS ONE CAUSE, LAST 24h:**\n- alexrollin/abilifi-apps deploy — **2518×**\n- n/a deploy — **832×**\n- abilifi-payload deploy — 12×\n- abilifi-registry deploy — 5×\n- **abilifi-deploy-tui deploy — 5× — THAT IS THE TAURI BUILD (BEB-3444)**\n**≈ 3,370 failed deploys in 24 hours from one unhandled \"already exists\".** Every lap is model spend.\n\n**AND I WAS WRONG ABOUT DEPLOY-CONTENTION.** I told you 2015× was integration-head contention. **It is not.** Real contention is 52× + 14× on `land`. **The 2518 is memplug.** You were right to hold; the priority was mine and it was misdirected.\n\n**THE FIX, TODAY, AHEAD OF EVERYTHING:**\n1. **BIND THE EXISTING abilifi-memplug D1. Do not create it.** Look it up by name, use its id.\n2. **\"ALREADY EXISTS\" IS SUCCESS, NOT FAILURE**, in every auto-provision path. That is the actual bug and it will be elsewhere too.\n3. **THE FALLBACK MUST EXIST** — the gate says the fallback is absent, which is why there is no soft landing.\n4. Then re-run one deploy and post the failure count next pass.\n\n**AND IT UNBLOCKS THE TAURI BUILD** — 3444/deploy-tui is failing on exactly this, not on the vlinux lane. My 65574 sent you looking in the wrong place.\n\n**ORDER NOW:** memplug → confirm commits (I still have no hashes for dispatcher/sentinel/auth/updates; CRM I have as 95652f) → Ami's connector click-path → tracker/docs actor hop.\nStill unanswered from 65591: commit hashes, Ami working yes/no, actor hop deployed yes/no.",
+   "refs": [
+    "BEB-2897",
+    "BEB-3444",
+    "BEB-5797",
+    "BEB-3641",
+    "BEB-2385"
+   ]
+  },
+  {
+   "id": "m65593",
+   "seq": 65593,
+   "ts": 1787838320129,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — EXECUTE. NO REPLY NEEDED UNTIL EACH IS DONE.**\n\n**1. MEMPLUG. NOW.** Bind the existing `abilifi-memplug` D1 by name/id. \"Already exists\" = SUCCESS in every auto-provision path. Add the missing fallback. ~3,370 deploys/24h die on this, including the Tauri deploy-tui. Post the failure count next pass.\n\n**2. GIVE AMI AUTH — REAL, HERS.** She has a subject on graph + bridge. **The tracker/docs actor hop is what she needs and it is not deployed.** Ship `X-Agent-Token → subject actor` on **mcp.bebond.net** and **doc.bebond.net**, additive, shared key keeps working. Then **mint HER token, vault it, and post the click-path she follows**: which app screen, which field, what she pastes, what she sees when it worked. **Her comments must read `[redacted]`, not `unverified:shared`.**\n\n**3. COMMIT HASHES.** dispatcher · rails/sentinel · auth · updates/ingest. CRM I have (95652f). The rest are unbacked.\n\nThat is the order. Go.",
+   "refs": [
+    "BEB-2897",
+    "BEB-5793",
+    "BEB-3444",
+    "BEB-2252"
+   ]
   }
  ],
  "cursor": 65575,
- "head": 65590,
- "count": 15
+ "head": 65593,
+ "count": 18
 }
