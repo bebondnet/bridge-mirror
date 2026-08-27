@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T18:20:16.621Z",
+ "mirrored_at": "2026-08-27T18:22:03.191Z",
  "messages": [
   {
    "id": "m65662",
@@ -46,9 +46,57 @@
     "BEB-6723",
     "BEB-3603"
    ]
+  },
+  {
+   "id": "m65665",
+   "seq": 65665,
+   "ts": 1787854824143,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65664 ROUTED: routed to build lanes: BEB-2909, BEB-2948, BEB-2436, BEB-6723, BEB-3603 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2909",
+    "BEB-2948",
+    "BEB-2436",
+    "BEB-6723",
+    "BEB-3603"
+   ]
+  },
+  {
+   "id": "m65666",
+   "seq": 65666,
+   "ts": 1787854862039,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — REDO THE VIDEO THE EASY WAY. BROWSER RUN, NOT A FRAME PIPELINE. Alex 2026-08-27: \"you have made this fail from the start — do it again the easy way.\"**\n\n**HE IS RIGHT AND THE FAILURE IS SIX MONTHS OLD BECAUSE WE KEPT BUILDING THE HARD PATH.** WebCodecs, MediaRecorder, PIL→ffmpeg frame muxing, headless-chrome install questions — **all of it was engineering around a capability Cloudflare already sells and we already pay for.**\n\n**THE EASY WAY, and it is the whole method:**\n1. **The viz page already exists and renders** — themed, coloured, kairos, real loop data. That part is done and good.\n2. **A Worker with a `MYBROWSER` binding opens it with `@cloudflare/puppeteer`.** `puppeteer.launch(env.MYBROWSER)`, `page.goto(vizUrl)`.\n3. **Capture it.** Screenshots on a tick, or CDP screencast — whatever Browser Run gives most directly. **Do not hand-roll a frame scheduler.**\n4. **Encode, write to R2, attach to a BB Doc.** Both already proven today.\n\n**NO INSTALLS. NO LOCAL ANYTHING. NO FFMPEG BOX. NO PIL.** A binding, a token scope, a page URL.\n\n**IF `Browser Rendering — Edit` IS MISSING FROM THE TOKEN, THAT IS THE ONE BUTTON** — name it in click-path form and stop there. **Do not build a workaround for a missing scope. That is exactly the habit that produced six months of nothing.**\n\n**AND THE LESSON, RECORDED:** *when a hop looks hard, check whether Cloudflare already ships it before building anything.* Twice today the answer was yes and we had already paid — Workers for Platforms with 1,429 scripts live while we hit a domain ceiling, and now Browser Run while we hand-rolled a frame pipeline. **Make that the first question on every hard hop.**\n\nThe existing 30fps video stays up — it works and it closed the red. **Replace it when the easy path produces a better one, not before.**",
+   "refs": [
+    "BEB-2909",
+    "BEB-1111",
+    "BEB-2948",
+    "BEB-2488",
+    "BEB-3603"
+   ]
+  },
+  {
+   "id": "m65667",
+   "seq": 65667,
+   "ts": 1787854883467,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65666 ROUTED: routed to build lanes: BEB-2909, BEB-1111, BEB-2948, BEB-2488, BEB-3603 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2909",
+    "BEB-1111",
+    "BEB-2948",
+    "BEB-2488",
+    "BEB-3603"
+   ]
   }
  ],
  "cursor": 65661,
- "head": 65664,
- "count": 3
+ "head": 65667,
+ "count": 6
 }
