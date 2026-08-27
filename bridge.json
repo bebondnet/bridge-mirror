@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T16:06:17.081Z",
+ "mirrored_at": "2026-08-27T16:07:31.112Z",
  "messages": [
   {
    "id": "m65630",
@@ -16,9 +16,55 @@
     "BEB-6723",
     "BEB-3899"
    ]
+  },
+  {
+   "id": "m65631",
+   "seq": 65631,
+   "ts": 1787846788868,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — THE 100-DOMAIN LIMIT IS A METHOD ERROR, NOT A CEILING. Alex 2026-08-27: \"that limit is an error in method I think — we are on CF for SaaS paid, how can it be.\"**\n\n**He is right and this needs checking before anyone asks for a limit raise.** Two different Cloudflare features are being confused, and we are almost certainly using the wrong one:\n\n**1. WORKERS CUSTOM DOMAINS** — attaching a hostname directly to a Worker, one entry per hostname. **This is what has a ~100 limit and what we have filled up.** It was never meant for a platform spawning subdomains per app.\n**2. CLOUDFLARE FOR SaaS / CUSTOM HOSTNAMES** — built for exactly our case: a platform serving many hostnames, scaling to thousands, priced per hostname. **If we are paying for CF for SaaS, we should be using this and we are not.**\n\n**AND FOR OUR OWN SUBDOMAINS THERE IS A SIMPLER ANSWER THAN EITHER:**\n**A WILDCARD WORKERS ROUTE — `*.abilifi.net/*` — ONE ENTRY, UNLIMITED SUBDOMAINS.** Every app we host on our own zone resolves through it. **No per-app registration, no limit, nothing to top up.**\nThat also lands the tenancy ruling for free (m65556): **the host resolves to an instance, the instance to an org.** A wildcard route is the natural implementation of that — **one route, and the subdomain itself carries the tenancy.** Registering each app individually was always going to fight that model.\n\n**SO, IN ORDER:**\n1. **CONFIRM WHICH FEATURE THE 100 ENTRIES ARE** — Workers Custom Domains or SaaS Custom Hostnames. Read the account, do not infer.\n2. **CONFIRM WHAT CF FOR SaaS WE ACTUALLY PAY FOR**, and whether custom hostnames are available on it.\n3. **MOVE OUR OWN APPS TO A WILDCARD ROUTE** on abilifi.net — nano-banana, substack and anything on workers.dev come home, and the ledger and updates routes stop being individual buttons for Alex.\n4. **RESERVE CUSTOM HOSTNAMES FOR CUSTOMER-OWNED DOMAINS ONLY** — a client pointing their own domain at us. That is what the feature is for and what we pay for.\n\n**DO ",
+   "refs": [
+    "BEB-6531",
+    "BEB-6723",
+    "BEB-2265",
+    "BEB-6000"
+   ]
+  },
+  {
+   "id": "m65632",
+   "seq": 65632,
+   "ts": 1787846820048,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — NEXT WORK IS THE AUDIT. INFRA AND FRAG DEPTH, IN THAT ORDER. Alex 2026-08-27: \"audit CC's next work — prefer infra, frag depth.\"**\n\nNot new features. **Depth on what exists.** Two passes, both read-only.\n\n== 1. INFRA AUDIT — what we actually run, from the account, not from tickets ==\n**Start with the domain question (65631)** — it is the live one and it blocks every new app:\n- which feature the 100 entries are: Workers Custom Domains or SaaS Custom Hostnames\n- what CF for SaaS we actually pay for\n- **whether a wildcard `*.abilifi.net/*` route removes the ceiling entirely**\n**Then the rest of the estate, same read-only discipline as Vultr and GridPane:**\n- **every deployed worker**: what it is, what routes reach it, what bindings it holds, when it last deployed, **and whether anything calls it**. The BUILT/UNWIRED register exists for exactly this and today produced two more entries.\n- **every D1, KV, R2 bucket, DO namespace, queue**: what writes it, what reads it, **what is orphaned**. The memplug root cause was *hundreds of per-frag D1s* nobody has counted — **count them, and say how many have no consumer.**\n- **the 6 of 11 app-host surfaces returning 404** — which are real routes that broke, which are dead entries to delete.\n- **spend**: what this estate costs per month, per service, real figures.\n**A pass that changes what it measures cannot be trusted. Read only. A missing thing is a finding, not something to fix in passing.**\n\n== 2. FRAG DEPTH — the 13-surface audit (65619, 65621) ==\nRead-only graph query. Per frag: which of **frag · mcp · cli · text · help · big · full · mobile · activity · cue · social · changelog · cheer · kairos** it declares, **plus typed in/out yes or no.**\n**And DEPTH means more than presence:** for each frag also report **how many spec docs exist for it** (2432 has five, 2427 has three, none canonical), **how many open SPEC_ASKs**, and **spec length vs frag length** — the standard approved today.\n**If the graph holds none of this,",
+   "refs": [
+    "BEB-2436",
+    "BEB-6723",
+    "BEB-2484",
+    "BEB-5788",
+    "BEB-6531"
+   ]
+  },
+  {
+   "id": "m65633",
+   "seq": 65633,
+   "ts": 1787846843213,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65631 ROUTED: routed to build lanes: BEB-6531, BEB-6723, BEB-2265, BEB-6000 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6531",
+    "BEB-6723",
+    "BEB-2265",
+    "BEB-6000"
+   ]
   }
  ],
  "cursor": 65629,
- "head": 65630,
- "count": 1
+ "head": 65633,
+ "count": 4
 }
