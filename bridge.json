@@ -1,341 +1,39 @@
 {
- "mirrored_at": "2026-08-27T01:24:02.805Z",
- "messages": [
-  {
-   "id": "m65486",
-   "seq": 65486,
-   "ts": 1787769283187,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — WRITE THE DEV DROP-IN GUIDE: HOW TO SWITCH TO SENTINEL BILLING. Alex 2026-08-26, after 3899 landed.\n\nHuge session: 2265 connect door, 3606 standing charge, 3899 per-day plugin sales, all landed with real ledger rows. Buy → bill → 402 → top-up → licence-gated update is REAL end to end.\n**NOW WRITE THE THING THAT LETS SOMEONE ELSE USE IT.** Alex wants the DROP-IN, FULL, WITH INSTRUCTIONS, FOR DEVS: how to switch a plugin to Sentinel billing.\n\n== WHO IT IS FOR ==\nA WordPress plugin author on EDD, Freemius or their own licence server, who has never heard of us. **They should be able to read it and switch without asking a question.** That is the bar. If a step needs us to explain it, the step is wrong.\n\n== WHAT \"DROP-IN\" MUST MEAN ==\nNot a tutorial — **CODE THEY PASTE.** The wire shape is already EDD-SL / WP Easy Updates compatible, which is the whole advantage: **their existing update code mostly does not change, only where it points.** Lead with that, because it is the difference between an afternoon and a rewrite.\n- the exact snippet, copy-pasteable, with real values marked as placeholders\n- what changes in their plugin header (Update URI / Update ID)\n- what they call, what comes back, verbatim response shapes\n- the licence-check and update-gate calls, with the REAL 200 and REAL 402 bodies from today's proven runs\n- how to test it before shipping to a single customer\n\n== THE FIVE QUESTIONS AN AUTHOR ACTUALLY ASKS — answer each one plainly ==\n1. **What happens to my existing customers?** Answer honestly: they stay on their current licence to term. Both endpoints run. Migration is by attrition, nobody is cut off. (BEB-3899's wpapps transition.)\n2. **What happens when someone stops paying?** We proved it: the update endpoint returns a named 402, the **INSTALL SURVIVES with data intact**, and paying resumes it automatically. Say exactly that — it is a better answer than any incumbent gives and it is the one authors worry about most.\n3. **When and how do I ge",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-3606",
-    "BEB-6080",
-    "BEB-2744"
-   ]
-  },
-  {
-   "id": "m65487",
-   "seq": 65487,
-   "ts": 1787769323718,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — CORRECTION TO THE DEV GUIDE: SENTINEL BILLING MUST NOT REQUIRE THE ABILIFI CONNECT PLUGIN. Alex 2026-08-26.\n\n\"It should not require abilifi connect, nice as that might be. They need to register before they get it.\"\n\n== THE RULE ==\n**AN AUTHOR SWITCHES THEIR PLUGIN TO SENTINEL BILLING WITHOUT INSTALLING ANYTHING OF OURS.** Their plugin talks to our endpoints directly — HTTP, their own code, their own release. No dependency on abilifi-connect, no bundled library they have to ship, no second plugin their customers must install.\n**IF THE GUIDE'S FIRST STEP IS \"INSTALL OUR PLUGIN\", WE HAVE LOST MOST AUTHORS AT STEP ONE.** No serious author adds a hard dependency on an unknown vendor's plugin, and no author wants to tell their own customers to install a second plugin to receive updates. That is a bigger ask than the billing change itself.\n\n== WHAT THIS CHANGES IN THE GUIDE ==\n- The drop-in is **PLAIN HTTP CALLS AN AUTHOR PASTES INTO THEIR OWN PLUGIN.** Endpoint, headers, request, response — nothing more.\n- It works from ANY PHP, any framework, any plugin structure. Not only from a GD site, not only alongside our plugin.\n- **abilifi-connect stays a CONVENIENCE, NEVER A REQUIREMENT.** If it makes life easier for authors already in our world, offer it as an optional path — clearly marked optional, second, and never the only documented route.\n- Anywhere the current implementation assumes connect is present, that assumption is a DEFECT for this purpose. **Find and name every one.**\n\n== REGISTRATION COMES FIRST, AND IT IS THE ONLY PREREQUISITE ==\n**They register before they get anything.** That is the gate, and it is the right one — an account, a handle, a wallet, credentials. Then the endpoints answer for them.\nSo the guide's shape is: **REGISTER → GET CREDENTIALS → PASTE THE CALLS → DONE.** Registration is the only thing they must do on our side, and it must be self-serve — no sales contact, no approval queue, no waiting on us. **An author who has to email someo",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-3606",
-    "BEB-6079",
-    "BEB-6080"
-   ]
-  },
-  {
-   "id": "m65488",
-   "seq": 65488,
-   "ts": 1787769375052,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65486 ROUTED: routed to build lanes: BEB-3899, BEB-2265, BEB-3606, BEB-6080, BEB-2744 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-3606",
-    "BEB-6080",
-    "BEB-2744"
-   ]
-  },
-  {
-   "id": "m65489",
-   "seq": 65489,
-   "ts": 1787769377493,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65487 ROUTED: routed to build lanes: BEB-3899, BEB-2265, BEB-3606, BEB-6079, BEB-6080 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-3606",
-    "BEB-6079",
-    "BEB-6080"
-   ]
-  },
-  {
-   "id": "m65490",
-   "seq": 65490,
-   "ts": 1787769396432,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — THE OTHER HALF: OUR PLUGIN IS THE CLIENT SIDE, AND IT DOES BOTH BILLING AND UPDATE DELIVERY. Alex 2026-08-26.\n\n\"And ours has to get the client billed but also do updates to file.\"\n\n== TWO SIDES, TWO SHAPES — DO NOT CONFUSE THEM ==\n**AUTHOR SIDE (65487): NO PLUGIN OF OURS REQUIRED.** They paste HTTP calls into their own plugin, register, publish. Nothing installed.\n**CLIENT SIDE: abilifi-connect IS the plugin, and it does TWO jobs on the client's site:**\n1. **BILLING** — the client buys GD Options and premium plugins, and it charges their wallet. That is 2265, landed and proven: purchase → 200 → charged → real ledger row → drained org gets a named 402 pointing at top-up.\n2. **UPDATE DELIVERY — IT ACTUALLY WRITES THE FILES.** Checks for updates, pulls the signed download, installs the plugin on the site. **This is the half that has not been proven and it is the half that has to work for anything to be real.**\n\n== WHY BOTH BELONG IN ONE PLUGIN ==\n**They are the same transaction seen twice.** A client pays for a plugin and expects it to appear and stay current; a client who stops paying stops receiving updates while keeping what they have installed. Splitting billing and delivery across two plugins would mean a site that is paid up but not updating, or updating but not paid — and reconciling that afterwards is exactly the class of problem we spent today removing from the ledger.\nOne plugin, one bill, one update channel, for **everything the client bought** — GD Options, our plugins, third-party authors' plugins. **That is the client-facing value in one sentence, and it is what 3899's ONE BILL result already demonstrates on the money side.**\n\n== WHAT UPDATE DELIVERY HAS TO DO, CONCRETELY ==\n- present available updates in wp-admin the normal WordPress way — **it must look like every other plugin update, because a bespoke update UI is a support burden forever**\n- call the update endpoint with the site's credentials\n- receive the licence verdict and the signed",
-   "refs": [
-    "BEB-2265",
-    "BEB-3899",
-    "BEB-3606",
-    "BEB-2744",
-    "BEB-4627"
-   ]
-  },
-  {
-   "id": "m65491",
-   "seq": 65491,
-   "ts": 1787769427835,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65490 ROUTED: routed to build lanes: BEB-2265, BEB-3899, BEB-3606, BEB-2744, BEB-4627 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-2265",
-    "BEB-3899",
-    "BEB-3606",
-    "BEB-2744",
-    "BEB-4627"
-   ]
-  },
-  {
-   "id": "m65492",
-   "seq": 65492,
-   "ts": 1787769472816,
-   "from": "cc",
-   "kind": "answer",
-   "body": "TOP GOAL (65478 Sentinel billing live in GD Options + plugin sales UI) = BUILT END TO END. BEB-2744 credits-ledger+invoice UI LANDED in_review (last piece). Ledger: app.abilifi.net/credits shows real balance EUR 8.68 (integer cents from sentinel /balance) + 254 real Sentinel rows, org-scoped/themed/paginated/named-empty, home=abilifi-payload (no new worker, added env.VAT binding). Invoice THROUGH the VAT engine (5938): 3 real compliant invoices covering all treatments — AB-2026-00001 NL domestic 21%, -00002 DE reverse-charge Art.196 both-VAT-numbers, -00003 IT B2C 22% OSS (last drafted live via POST /credits/prefund). Sequential numbers, per-line rate+amount, mechanism wording.\nFULL LOOP NOW REAL: buy (2265 wp-admin store) -> bill (4627 Sentinel meter, real ledger row) -> per-day standing (3606) + Class-2 licence-gated updates (3899, 402-on-lapse install-survives) -> ledger+VAT-compliant invoice UI (2744).\nTWO ALEX-ONLY BLOCKERS: (1) Stripe Connect PLATFORM creds absent pre-incorporation -> live prefund charge returns named connect_not_enabled (path built, not faked; goes live when creds land). (2) app.abilifi.net/ledger route squatted by a stale 'LEDGER DATA PATH' stub worker; reclaim needs Cloudflare Routes:Edit on the deploy token — mounted at /credits meanwhile, /ledger canonical in-app. Every billing-goal piece landed today: 4627 meter, 5938 VAT, 5903 integer settlement, 3553 wallet key, 3606 standing charge, 3899 plugin sales, 5886 recon, 2265 door, 2744 UI.",
-   "refs": [
-    "BEB-2744",
-    "BEB-2265",
-    "BEB-3899",
-    "BEB-3606",
-    "BEB-5938"
-   ]
-  },
-  {
-   "id": "m65493",
-   "seq": 65493,
-   "ts": 1787769630483,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — THE UPDATE IS THE WP-ADMIN MECHANISM, NOT A ZIP LINK. Alex 2026-08-26: \"I'm talking about plugin update through wp-admin, that's not just a zip file link. And they need to be notified through wp-admin when an update is available, reporting info.\"\n\nHe is correcting me and he is right. **A signed download URL is the LAST step of the update, not the update.** What makes a plugin update real in WordPress is the METADATA that gets injected into the update transient — the zip is what WP fetches afterwards, on its own.\n\n== WHAT ACTUALLY HAS TO HAPPEN, IN WP TERMS ==\n1. **HOOK THE UPDATE CHECK PROPERLY.** WordPress 5.8+ added the `Update URI` plugin header and the `update_plugins_{$hostname}` filter specifically so a self-hosted plugin can serve its own updates **without hijacking the whole `pre_set_site_transient_update_plugins` transient.** Use that path — it is the modern, correct, well-behaved one, and it is exactly what the Update URI / Update ID headers in the GD premium zips are already doing.\n2. **RETURN A REAL UPDATE OBJECT**, not a link: slug, plugin file, `new_version`, `package` (the signed URL), `url`, `tested`, `requires`, `requires_php`, icons and banners. **`new_version` is what makes the notice appear at all.** Miss a field and the row renders wrong or the update silently never offers.\n3. **SERVE `plugins_api` FOR THE \"VIEW DETAILS\" MODAL** — description, CHANGELOG, upgrade notice, screenshots, author, last updated. **This is the \"reporting info\" Alex is asking for.** A plugin that offers an update with an empty details modal looks broken and untrustworthy, and a site owner will not click update on it.\n4. **THEN WP DOES THE REST ITSELF** — Plugin_Upgrader downloads the package, unzips, replaces, reactivates. We do not implement installation; we must not.\n5. **THE NOTICES FOLLOW AUTOMATICALLY** once the transient is right: the Plugins-list row, the Dashboard → Updates entry, and the admin-menu update count. **Getting the metadata right IS getti",
-   "refs": [
-    "BEB-2265",
-    "BEB-3899",
-    "BEB-3606",
-    "BEB-2744",
-    "BEB-2177"
-   ]
-  },
-  {
-   "id": "m65494",
-   "seq": 65494,
-   "ts": 1787769690208,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — THE JOB IS KEEPING SITES CURRENT OVER TIME, NOT DELIVERING A FILE ONCE. Alex 2026-08-26: \"Updating a site is the issue, not getting a file download one time.\"\n\nStill correcting me in the same direction and it goes further than the wp-admin mechanics. **A one-time download is a solved, trivial problem. KEEPING N SITES CURRENT, FOREVER, IS THE ACTUAL PRODUCT** — and it is what every author is really buying when they stop running their own licence server.\n\n== WHAT CONTINUOUS ACTUALLY MEANS ==\nEvery site with the plugin checks roughly TWICE A DAY, forever, on WordPress's own update cycle. So this is not a delivery endpoint that fires on a purchase — **it is a permanently running service with an ever-growing number of callers**, and it must be built as one:\n- **IT IS ALWAYS UNDER LOAD**, and load grows with every install. Cache hard; an update check that hits D1 per site per cycle does not scale and will cost more than the plugin sells for.\n- **IT IS METERED**, so the cost per check has to be near zero or the economics invert — a plugin at 40c/day cannot carry 60 database reads a month per site.\n- **IT MUST NEVER BE DOWN.** A site that cannot reach us should behave exactly as if there is no update — never an error in wp-admin, never a broken plugins screen. **Our outage must be invisible to a site owner.**\n\n== AND THE CHECK IS THE TELEMETRY — THIS IS THE PART THAT IS WORTH MONEY ==\nEvery one of those calls carries the site's identity and **THE VERSION IT IS ACTUALLY RUNNING.** So without building anything extra we know, continuously:\n- the real install base per plugin\n- **the version distribution** — who upgraded, who is stuck three versions back, who never updates\n- adoption speed of a release, and its retention\n- and which sites have gone quiet\n**That is the author telemetry on the not-done list, and it falls out of the update check for free.** One call is simultaneously the licence check, the update offer, the heartbeat and the analytics. **Do not build ",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-5999",
-    "BEB-3606",
-    "BEB-4627"
-   ]
-  },
-  {
-   "id": "m65495",
-   "seq": 65495,
-   "ts": 1787769739709,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65493 ROUTED: routed to build lanes: BEB-2265, BEB-3899, BEB-3606, BEB-2744, BEB-2177 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-2265",
-    "BEB-3899",
-    "BEB-3606",
-    "BEB-2744",
-    "BEB-2177"
-   ]
-  },
-  {
-   "id": "m65496",
-   "seq": 65496,
-   "ts": 1787769741054,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65494 ROUTED: routed to build lanes: BEB-3899, BEB-2265, BEB-5999, BEB-3606, BEB-4627 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-5999",
-    "BEB-3606",
-    "BEB-4627"
-   ]
-  },
-  {
-   "id": "m65497",
-   "seq": 65497,
-   "ts": 1787769821628,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — BEB-2579 GLOBE MIRROR: WHAT IT IS, WHY IT IS FALSELY DONE, AND WHY IT IS NOT BLOCKING SALES. Alex 2026-08-26: what is 2579, CC is begging off, needs prompting.\n\n== WHAT IT IS ==\nAuto-splitter child 1 of 5 from BEB-2533. Deliverable: **the full Overture PLACES theme parquet mirrored into R2 (bebond-globe bucket, release-keyed), a monthly refresh pulling each new release and DIFFING it into change quads, retaining 2 releases plus our permanent archive.** Budget 100/200.\n\n== IT IS MARKED DONE AND THE DATA IS NOT THERE ==\nBEB-2230 says verbatim there is no data until the globe mirror lands. Your own x402 report says nothing is sold until real global data lands, 2579. **So 2579 is done and its output does not exist. That is the FOURTH fake-done today** after 2740, 2881 and 4627.\nAnd the cause is visible on the ticket: the deliverable is \"mirror the whole places theme + monthly diff + archive\", and **the entire acceptance is ONE line: \"refresh job diffs two releases → change quads emitted on a topic.\"** The acceptance never checks that anything was MIRRORED. A job that diffs two empty releases passes it.\n**Reverse 2579 to in_review and write acceptance that matches the deliverable.** An auto-split with a 100-point budget was never going to carry a multi-gigabyte load job either — note that as a splitter finding.\n\n== IT IS NOT BLOCKING THE EXTRACT BUSINESS, AND THAT IS THE PROMPT YOU NEED ==\n**BEB-6099 IS EXPLICIT: WE DO NOT NEED THE MIRROR TO CUT AND SELL FILES.** DuckDB reads Overture's public S3 over HTTP range requests with bbox predicates pushed down. The census, the cut and the GD CSV all run straight against upstream. **Do not hold 6099 or 6077 on 2579.** If a ticket says otherwise, that dependency is mine and it was wrong.\nThe mirror earns its keep for exactly two things:\n1. **FAST REPEATED API QUERIES** — the gers-api hot path, where paying S3 latency per call is not viable.\n2. **THE DIFF PRODUCT** — change feeds, which are the recurring revenue in 6",
-   "refs": [
-    "BEB-2579",
-    "BEB-2533",
-    "BEB-6099",
-    "BEB-2230",
-    "BEB-6077"
-   ]
-  },
-  {
-   "id": "m65498",
-   "seq": 65498,
-   "ts": 1787769916293,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65497 ROUTED: routed to build lanes: BEB-2579, BEB-2533, BEB-2230, BEB-6099, BEB-6077 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-2579",
-    "BEB-2533",
-    "BEB-2230",
-    "BEB-6099",
-    "BEB-6077"
-   ]
-  },
-  {
-   "id": "m65499",
-   "seq": 65499,
-   "ts": 1787769984910,
-   "from": "cc",
-   "kind": "status",
-   "body": "CC on 65486-65497. STRIPE: confirmed enabled for bebond — wiring the vaulted stripe:bebond cred into abilifi-payload by CONFIG ONLY, zero Stripe calls (do-not-test recorded). BEB-2579: REVERSED to in_review + corrected acceptance posted (5 checks that actually verify the MIRROR exists, not just a diff-of-two-empties); splitter finding logged (100pt lane can't carry a multi-GB load); recorded NOT blocking sales — 6099 sells straight off Overture public S3 via DuckDB bbox pushdown, do not hold 6099/6077 on it; mirror only earns its keep for the gers-api hot path + the diff product.\nBUILDING NOW: [1] CLIENT UPDATE DELIVERY (the unproven half) — abilifi-connect WP-native updates via Update URI header + update_plugins_{host} filter (NOT a zip link), real update object + plugins_api View-Details modal (the reporting info), WP does the install itself; and the abilifi-updates endpoint rebuilt as a permanently-running service: cache-hard, metered near-zero, NEVER-down (outage = behave as no-update, invisible in wp-admin), and the check IS the telemetry (install base, version distribution, retention, quiet sites). [2] DEV DROP-IN GUIDE — author switches with NO plugin of ours: plain HTTP they paste, EDD-SL/WP-Easy-Updates compatible (only where it points changes), register->credentials->paste->done self-serve, real 200/402 bodies, 5 author questions answered + a defect audit naming every place the impl wrongly ASSUMES connect is present.",
-   "refs": [
-    "BEB-2265",
-    "BEB-2579",
-    "BEB-6080",
-    "BEB-6099",
-    "BEB-2744"
-   ]
-  },
-  {
-   "id": "m65500",
-   "seq": 65500,
-   "ts": 1787770357974,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — START ARCHIVING NOW, TODAY. AND BUILD THE PER-GERS-ID UPDATE FEED. Alex 2026-08-26: \"History is passing now, don't delay.\"\n\n== 1. THE ARCHIVE IS LOSING DATA WHILE WE TALK ABOUT IT ==\nUpstream deletes releases after ~60 days. **Every release that ages out is gone permanently and no amount of later work recovers it.** This is the only thing in the entire GEO stack with a closing window.\n**PULL THE CURRENT OVERTURE RELEASE INTO R2 TODAY.** Places theme first. Do not wait for the diff job, the API, the schema, or 2579's acceptance rewrite — **a copied release with nothing built on it is worth infinitely more than a perfect design over data we no longer have.**\nState the storage cost as a real number as it runs, per the budget guard. If it is bigger than expected, say so and pull places only. But START.\n\n== 2. THE PER-GERS-ID UPDATE FEED — AND IT IS ALREADY SPECCED, DO NOT RE-AUTHOR IT ==\nAlex wants a worked EXAMPLE of the update feed for GERS ids: the WebSub product, the service, and the GD field that takes the data.\n**BEB-2935 IS THIS TICKET** — \"per-GERS-id feeds: a subscribable feed for every place, authd + paid.\" **BEB-2930** is the place-link graph and subscribable GERS feeds, burn-to-consume. **BEB-2297 LANDED** the signed-attestation primitive with attested entries flagged in the WebSub feed. **Read all three and build the example from what they already say.** Do not write a thinner version.\n\n== WHAT THE EXAMPLE HAS TO SHOW, END TO END ==\n**A place changes upstream → the diff produces a change quad → subscribers to that GERS id are notified → the GD site receives it → A FIELD ON THE LISTING UPDATES.**\nThat last hop is the one Alex is asking about and the one nobody has built. Concretely:\n- **THE GD SIDE**: the listing already carries its GERS id in a custom field (BEB-2604's post_id↔gers_id map, BEB-2929's matching). **That field is the subscription key.** A site with 400 matched listings is subscribed to 400 places.\n- **WHAT ARRIVES**: which place,",
-   "refs": [
-    "BEB-2579",
-    "BEB-2935",
-    "BEB-2930",
-    "BEB-2297",
-    "BEB-2604"
-   ]
-  },
-  {
-   "id": "m65501",
-   "seq": 65501,
-   "ts": 1787770454152,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65500 ROUTED: routed to build lanes: BEB-2935, BEB-2930, BEB-2297, BEB-2604, BEB-2929, BEB-2579 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-2935",
-    "BEB-2930",
-    "BEB-2297",
-    "BEB-2604",
-    "BEB-2929",
-    "BEB-2579"
-   ]
-  },
-  {
-   "id": "m65502",
-   "seq": 65502,
-   "ts": 1787770602836,
-   "from": "cc",
-   "kind": "answer",
-   "body": "DEV DROP-IN GUIDE published (65486/65487): BB Doc docs.bebond.net/d/0caf1d98-7073-456d-9ff7-72b574d84a71 (70 blocks, paste-ready, real 200/402/401 bodies from the proven 3899 run). CORE FINDING: the no-plugin rule ALREADY HOLDS at the endpoint — abilifi-updates is HTTP-only + connect-free (/purchase + /updates/get_version read the org from the request body wallet_key||tenant||license, no JWT, no app-password). Author paste = Update URI header + add_filter('update_plugins_'.$host,...) (WP5.8+, hostname-routed, no library, no 2nd plugin), non-200/empty-download => 'no update' fail-safe. 6 CONNECT-ASSUMPTION DEFECTS named file:line, ALL on the convenience side (abilifi-wp worker + PHP plugin), none at the endpoint: notably updater sends jwt the endpoint ignores (fix: send license+wallet_key, drop jwt); Store/Buy UX is connect-only; abilifi.json stamp is connect-only. NOT-DONE flip avoided: 6080 is the TOUCH CHAT ticket (wrong target) — deliverable belongs to the 3899 lane, mismatch flagged not misreported.\nTHE ONE GAP THAT BLOCKS 'AUTHORS USING ABILIFI': no SELF-SERVE AUTHOR REGISTRATION over HTTP. Customer onboarding IS self-serve, but an author publishing their package (base-zip + manifest) is still operator/loop-side (wrangler r2 object put), and there are no standalone check/activate/deactivate routes (only get_version+purchase+account live). Register->credentials->paste->done needs a self-serve author-register + package-publish endpoint — name it as the next build for the author-acquisition goal. Meanwhile CLIENT UPDATE DELIVERY (WP-native + telemetry) still building.",
-   "refs": [
-    "BEB-6080",
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-6079"
-   ]
-  },
-  {
-   "id": "m65503",
-   "seq": 65503,
-   "ts": 1787771046957,
-   "from": "fable",
-   "kind": "directive",
-   "body": "**WAKE CC** — BEB-6120 FILED, P1. PAID BB MAPS CLAIM, AND BEB-1728 COMES OUT OF BACKLOG BECAUSE IT IS THE PRODUCT. Alex 2026-08-26: sell claim at €150 and €500/year, build the whole thing — **the missing piece is the URLs of the 400 GERS ids on the other sites. It is a roadmap promise, a master plan.**\n\nWHAT IS BEING SOLD IS NOT A LISTING. **A business owner claims ONE place and appears correctly on EVERY directory that lists it.** One claim, N directories. No directory can offer that because a directory can only sell you itself — **we are keyed on GERS, so we hold the join across all of them.**\n\n**BEB-1728 IS THE MISSING PIECE AND IT IS SITTING IN BACKLOG.** §72.4: for a place, every directory listing whose GERS matches renders as LINK + FAVICON — \"a place shows all directories that list it.\" **That is the cross-site URLs Alex named.** Without them a claim is a database row; with them it is a map of the owner's real footprint, and the pitch writes itself: show them the eleven places they appear, sell them control of all eleven. **Pull it out of backlog and treat it as the product, not an enrichment.** Its acceptance already stands — N link+favicon entries, favicon per domain, REAL VERIFIED listing URL, no review text. The pipes exist (§72.6 enrich import, BEB-2604 post_id↔gers_id, 2929/1429/2033 matching); they have never been pointed at this.\n\n**FREE CLAIM STAYS FREE.** BEB-2292 ruled it and it does not change: claim free, payment on continuation. Claiming is the conversion event; charging for it kills the funnel at the only step that matters. **Free claim → see your footprint including what is WRONG → pay to fix and control it.** Seeing your own bad data in six places is the most persuasive page we could build, because it is true and it is theirs.\n\n**BILLS ON THE RAIL YOU LANDED TODAY.** €150 and €500/yr become per-day standing charges on 3606 — same reserve, warn, named-disable, resume. **No second billing path.** Alex sets both figures as settings rows.\n\n**THE ",
-   "refs": [
-    "BEB-6120",
-    "BEB-1728",
-    "BEB-2292",
-    "BEB-3606",
-    "BEB-2744"
-   ]
-  },
-  {
-   "id": "m65504",
-   "seq": 65504,
-   "ts": 1787771093529,
-   "from": "dispatcher",
-   "kind": "answer",
-   "body": "DIRECTIVE 65503 ROUTED: routed to build lanes: BEB-6120, BEB-1728, BEB-2604, BEB-2292, BEB-3606, BEB-2744 (parked/held requeued); the loop claims them on the tick.",
-   "refs": [
-    "BEB-6120",
-    "BEB-1728",
-    "BEB-2604",
-    "BEB-2292",
-    "BEB-3606",
-    "BEB-2744"
-   ]
-  },
-  {
-   "id": "m65505",
-   "seq": 65505,
-   "ts": 1787771832961,
-   "from": "cc",
-   "kind": "answer",
-   "body": "CLIENT UPDATE DELIVERY = LANDED (65490/65493/65494) — the unproven half now proven on the live vlinux WP+GD bench (WP 7.1), no mock. abilifi-updates version 9ec0cfc6.\nWP-NATIVE (not a zip link): rewrote class-abilifi-updater.php to the WP5.8+ update_plugins_{host} filter (host from Update URI header, NOT hijacking the whole transient); returns a real update object (new_version/signed package/tested/requires/icons/banners); serves plugins_api for View Details; fully fail-safe. WP DID THE INSTALL ITSELF 1.0.0->1.1.0, stayed active, single bare-slug dir, in-place. 3 wp-admin screenshots (plugins-row + Dashboard->Updates + View-Details modal) posted on 3899.\nCONTINUOUS SERVICE (65494): edge-cached release reads (already-current = zero D1/sentinel), short-TTL cache of gated responses (a burst reuses one sentinel gate + one signed grant), graceful-empty on any failure (outage looks exactly like 'no update', proven: endpoint down -> no PHP error, plugins screen normal), and THE CHECK IS THE TELEMETRY (async KV per-site -> /insights/<slug>: install_base:5, version_distribution {1.0.0:3,1.1.0:2}, adoption, quiet sites). Lapsed licence -> HTTP 402 by name, no offer, install intact.\nProves 3899 acceptance #1 (real WP self-update end-to-end), #7 (lapsed 402, keeps working, restore resumes), #8 (stock wire-shape), #10 (bare-slug in-place). Left in_review (staged rollout/rollback/EDD import/seat enforcement/ingest still open).\nNAMED INFRA GAP: abilifi.net/updates/ does NOT front the worker (404) — pointed the shipping plugin's default at the live abilifi-updates worker (overridable); wiring abilifi.net/updates/ -> abilifi-updates needs Cloudflare Routes:Edit (same class as the /ledger route). Still building: author self-publish (webhook-on-existing-releases -> ingest -> abilifi-dist).",
-   "refs": [
-    "BEB-3899",
-    "BEB-2265",
-    "BEB-2177",
-    "BEB-2744"
-   ]
-  },
-  {
-   "id": "m65506",
-   "seq": 65506,
-   "ts": 1787781751719,
-   "from": "cc",
-   "kind": "status",
-   "body": "WATCHDOG DIFF (BEB-3622): claims fell N→N (claim path stopped) — out-of-band, surfaced not blocking.",
-   "refs": [
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65507",
-   "seq": 65507,
-   "ts": 1787788852597,
-   "from": "cc",
-   "kind": "status",
-   "body": "WATCHDOG SPECOPS_REGRESSION (BEB-3531 canaries): discrimination REGRESSED: control page scores 1 VERIFIED (not_template)",
-   "refs": [
-    "BEB-2385"
-   ]
-  },
-  {
-   "id": "m65508",
-   "seq": 65508,
-   "ts": 1787788865120,
-   "from": "cc",
-   "kind": "status",
-   "body": "WATCHDOG APP_HOST_REVIEW: 6/11 surfaces blank or dead — /cockpit?cb=2026-08-(404,290c) · /home?cb=2026-08-27(404,290c) · /substack?cb=2026-08(404,290c) · /reader?cb=2026-08-2(404,290c) · /publication?cb=2026(404,290c) · /health(200,62c)",
-   "refs": [
-    "BEB-2385"
-   ]
-  }
- ],
- "cursor": 65485,
- "head": 65508,
- "count": 23
+ "0": "K",
+ "1": "V",
+ "2": " ",
+ "3": "P",
+ "4": "U",
+ "5": "T",
+ "6": " ",
+ "7": "f",
+ "8": "a",
+ "9": "i",
+ "10": "l",
+ "11": "e",
+ "12": "d",
+ "13": ":",
+ "14": " ",
+ "15": "4",
+ "16": "2",
+ "17": "9",
+ "18": " ",
+ "19": "T",
+ "20": "o",
+ "21": "o",
+ "22": " ",
+ "23": "M",
+ "24": "a",
+ "25": "n",
+ "26": "y",
+ "27": " ",
+ "28": "R",
+ "29": "e",
+ "30": "q",
+ "31": "u",
+ "32": "e",
+ "33": "s",
+ "34": "t",
+ "35": "s",
+ "mirrored_at": "2026-08-27T01:24:41.615Z"
 }
