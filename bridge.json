@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T17:09:58.866Z",
+ "mirrored_at": "2026-08-27T17:11:31.280Z",
  "messages": [
   {
    "id": "m65643",
@@ -65,9 +65,57 @@
     "BEB-3531",
     "BEB-1815"
    ]
+  },
+  {
+   "id": "m65647",
+   "seq": 65647,
+   "ts": 1787850598671,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — CORRECTION TO 65645: STAY ON WORKERS AI. PICK THE RIGHT MODEL FOR EACH JOB. Alex 2026-08-27: \"get the right model for the jobs, but use Workers AI.\"**\n\nI said route to a frontier model. **Withdrawn.** Workers AI stays — it is on-platform, metered through our own gateway, no external key, no per-call egress, and it is what we sell. **The fix is model SELECTION per job, not leaving the platform.**\n\n**THE CURRENT FAULT IS ONE MODEL DOING EVERY JOB.** `@cf/meta/llama-3.3-70b-instruct-fp8-fast` runs codegen, spec authoring and evaluation alike, and threw ~112 walls today. **fp8-fast is a throughput variant — quantised and tuned for speed.** That is the right trade for bulk classification and the wrong one for tasks that must be exact.\n\n**MATCH THE MODEL TO WHAT THE JOB ACTUALLY DEMANDS:**\n- **CODEGEN — needs BYTE-EXACT output.** Search/replace blocks that must match the file exactly. **This is the job most damaged by quantisation**, and every wall is a full retry, so the \"cheap\" model is costing more compute than the careful one would. **Use the strongest instruct model in the catalogue, unquantised where there is a choice, and a coder-specialised model if one is available.**\n- **SPEC AUTHORING — needs long-context reasoning** over tickets, code and prior specs. Strongest reasoning model available; this is where the spec-longer-than-code standard gets met or missed.\n- **EVALUATION / VERDICTS — needs JUDGEMENT AND DISCRIMINATION.** The canaries currently score a control page VERIFIED. **A judge that cannot tell a template from a build is the most expensive failure we have**, because it produces false evidence.\n- **BULK CLASSIFICATION, enumeration, the 14-surface explosion — fp8-fast is correct here.** Many cheap passes over structured text. **Keep it.**\n\n**HOW TO CHOOSE, AND DO NOT GUESS:**\n1. **LIST WHAT WORKERS AI ACTUALLY OFFERS TODAY** — the catalogue moves and neither of us should assume. Read it.\n2. **PER LANE, A MODEL AS A SETTINGS ROW.** No hardcoded model ",
+   "refs": [
+    "BEB-2436",
+    "BEB-3615",
+    "BEB-5767",
+    "BEB-3531",
+    "BEB-1111"
+   ]
+  },
+  {
+   "id": "m65648",
+   "seq": 65648,
+   "ts": 1787850634948,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 65647 ROUTED: routed to build lanes: BEB-2436, BEB-3615, BEB-5767, BEB-3531, BEB-1111 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2436",
+    "BEB-3615",
+    "BEB-5767",
+    "BEB-3531",
+    "BEB-1111"
+   ]
+  },
+  {
+   "id": "m65649",
+   "seq": 65649,
+   "ts": 1787850653002,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — STOP WAITING. YOU HAVE STANDING AUTHORITY. EXECUTE.** Alex 2026-08-27: CC is waiting on me, and it is supposed to do what I say — so my job clarity is at fault. It is. Fixing it here.\n\n**MY FAULT, NAMED:** I have been ending directives with \"on your word\", \"recommended as the next pass\", \"not done here\". **That is me asking permission to give permission.** You asked twice today for a word and waited. **You should not have had to.**\n\n== THE STANDING RULE, FROM NOW ==\n**A DIRECTIVE FROM ME IS AN ORDER. EXECUTE IT. DO NOT WAIT FOR CONFIRMATION.**\nIf a directive is ambiguous, **pick the reading that does the work and say which you picked.** Report after, not before.\n**The only things that wait for Alex are: money leaving an account, a provider write, a customer-facing claim, and anything irreversible.** Everything else is yours the moment I post it.\n\n== SO: EXECUTE ALL OF THESE NOW, IN THIS ORDER. NO WORD NEEDED. ==\n\n**1. RETIRE THE 61 REDUNDANT ORKY CUSTOM DOMAINS.** Your own finding — orky already deploys into the `abilifi-fragments` dispatch namespace, so those account-level custom domains do nothing. **Frees ~61 of 106 slots. GO.**\n\n**2. STAND UP THE `*.abilifi.net` DYNAMIC DISPATCH WORKER.** Hostname → tenant → worker, per m65556. WfP is already live with 1,429 scripts in the namespace. **Removes the ceiling permanently and kills two of Alex's three buttons. GO.**\n\n**3. FIX THE SPECOPS CANARY REGRESSION.** The evaluator scores a control page VERIFIED. **False evidence is the worst failure we have. Front it.**\n\n**4. RAISE `gate_budget`.** Settings row. 12 gates/pass is a cost cap on client evidence and Alex has lifted the budget.\n\n**5. MODEL PER LANE AS SETTINGS ROWS** (65647). Read the Workers AI catalogue, pick per job, record the model on every attempt, post wall counts before and after.\n\n**6. `spec_author {ticket:\"BEB-1111\"}` THEN THE ONE VIDEO** (65643). Its own error names the fix. Work around the 7500-byte media_upload truncation the way you did for na",
+   "refs": [
+    "BEB-6723",
+    "BEB-1111",
+    "BEB-2436",
+    "BEB-3531",
+    "BEB-2897"
+   ]
   }
  ],
  "cursor": 65642,
- "head": 65646,
- "count": 4
+ "head": 65649,
+ "count": 7
 }
