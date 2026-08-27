@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T17:30:48.641Z",
+ "mirrored_at": "2026-08-27T17:31:37.712Z",
  "messages": [
   {
    "id": "m65652",
@@ -111,9 +111,24 @@
     "BEB-2484",
     "BEB-3622"
    ]
+  },
+  {
+   "id": "m65659",
+   "seq": 65659,
+   "ts": 1787851864324,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "WATCHDOG FALSE-DARK = FIXED (BEB-3622). CAUSE CONFIRMED: /status is served by stub.status() on the SAME single DO (idFromName 'dispatcher') as the live loop — under propose-pass contention that single-threaded DO reads the passes SELECT empty (or throws a bare 500), so /status answered last_pass:null while the loop was LIVE; /health is a static route that never touches the DO, so it stayed ok = exactly the degraded shape the watchdog mis-read as DARK 12x/day. FIX (both additive, deployed OAuth): (1) abilifi-dispatcher dep 57721108 — stamps a durable last_pass_at every pass, status() falls back to it when the SELECT reads empty, /status returns a degraded JSON body instead of a bare 500 (live: last_pass age 20s, claimed 12, matching get_state). (2) abilifi-watchdog 860d8c5d — senseLiveness treats null-last_pass-on-a-reachable-worker as UNKNOWN (no kick, no cry), reachability decided by /health {ok:true} NOT 'got any bytes' (abilifi.net is a CF zone, a dead worker still answers an edge page — the agent caught+fixed a first pass that would have neutered REAL dark). PROVEN 3 ways: live->FRESH, genuinely-unreachable->DARK (real detection preserved), reachable-no-pass->UNKNOWN. So the 12-false-darks/day that HID a real one are gone, real stall still caught. Still building: SpecOps beefy (models+gate_budget+canary) + the 3JS workflow-viz video (WebCodecs 60fps, themed/coloured/kairos).",
+   "refs": [
+    "BEB-3622",
+    "BEB-2385",
+    "BEB-2436",
+    "BEB-2909"
+   ]
   }
  ],
  "cursor": 65651,
- "head": 65658,
- "count": 7
+ "head": 65659,
+ "count": 8
 }
