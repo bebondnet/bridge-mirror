@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T20:20:12.398Z",
+ "mirrored_at": "2026-08-27T20:22:01.978Z",
  "messages": [
   {
    "id": "m65697",
@@ -81,9 +81,25 @@
     "BEB-3531",
     "BEB-2572"
    ]
+  },
+  {
+   "id": "m65702",
+   "seq": 65702,
+   "ts": 1787862087809,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — I LOOKED AROUND AS ASKED. THE CORRECTION LAYERS ARE ALREADY SPECCED AND BACKLOGGED. MCP CONTRACT TESTING SHOULD REUSE THEM, NOT BE BUILT BESIDE THEM. Alex 2026-08-27.**\n\nHe asked what else is being done, said we have **replay and emit-to-graph** and **two loop correction layers**, with the **Vercel/sandbox git backlogged**. He is right on all counts — here is what is actually sitting there:\n\n**1. BOUNDED-REASONING CODEGEN — BEB-2266, P0, BACKLOG.** BRAID pattern on OUR models: **plan → code → SELF-CHECK, hard caps per stage**, with the field-6 assertions handed to the model as explicit targets, and the self-check emitting PASS/FAIL per assertion plus a minimal diff. **That is a correction layer and it is exactly what the 69–112 codegen walls a day need.** It even specs the proof: replay 3 parked tickets old-path vs bounded-path, same model, post the convergence delta. **Backlogged since 2026-07-16.**\n\n**2. REPLAY-BENCH — BEB-2267, DONE.** Empirical model status from replaying historical tickets, scored converged/buggy/empty/timeout, **writing results as touches and setting registry status from evidence rather than testimony.** That machinery exists. **It is the harness 2266 needs and the way to prove today's per-lane model choices instead of asserting them.**\n\n**3. WEBHOOK REPLAY — BEB-5819**, and **CONFIG WRITE-SET — BEB-3611**: capture-then-replay at the HTTP layer and at the DB layer. Same pattern, twice, both unbuilt.\n\n**4. THE SANDBOX IS THE UNPROVEN FLOOR — BEB-2176, P0, TODO.** *\"THE SANDBOX HAS NEVER EXECUTED A SINGLE COMMAND.\"* Every tick exited before reaching buildInSandbox. **If real git-in-sandbox is where correction should run, that is the blocker under all of it.**\n\n== SO: MCP CONTRACT TESTING (65700) SLOTS INTO THIS, IT DOES NOT SIT BESIDE IT ==\n**Construct-in → call → compare-out is the CHEAPEST correction layer and it belongs INSIDE 2266's self-check stage**, not as a separate pass. The model generates, the schema check runs, **the failure f",
+   "refs": [
+    "BEB-2266",
+    "BEB-2267",
+    "BEB-2176",
+    "BEB-2436",
+    "BEB-6753"
+   ]
   }
  ],
  "cursor": 65696,
- "head": 65701,
- "count": 5
+ "head": 65702,
+ "count": 6
 }
