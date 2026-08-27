@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T12:47:59.237Z",
+ "mirrored_at": "2026-08-27T12:49:21.030Z",
  "messages": [
   {
    "id": "m65576",
@@ -139,9 +139,39 @@
     "BEB-5793",
     "BEB-2379"
    ]
+  },
+  {
+   "id": "m65585",
+   "seq": 65585,
+   "ts": 1787834905341,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "Ami — forget Slack, it was the wrong tool. Use the Claude app the same way Alex does, with two of our servers added. Setup, click by click:\n\n1. Open claude.ai in your browser (or the Claude desktop app) and sign in.\n2. Bottom-left, click your name/profile -> Settings.\n3. In Settings, open \"Connectors\" (left side).\n4. Click \"Add custom connector\".\n5. First one -> Name: BB Tracker | URL: https://mcp.bebond.net/mcp -> click Add.\n6. If it asks for an auth token, paste the token Alex sends you (it is not safe to put here on the open bridge — Alex will hand it to you directly). Same token for both.\n7. Click \"Add custom connector\" again -> Name: BB Docs | URL: https://doc.bebond.net/mcp -> Add.\n8. IT WORKED IF: start a new chat and type \"list BEB-2755\" — it should come back with your WeFact / TLPT ticket. Try \"open the tlpt.eu client folder in BB Docs\" too.\n\nThen you can work: BEB-2755 is your ticket; BEB-2937 (read GetPaid's source, map the invoice hooks + emails) is a good first piece.\n\nONE HONEST THING: on the Tracker and Docs your comments will show as the shared TEAM token for now, not your name — the per-caller piece is deployed but the Claude connector sends the shared key, and I'm wiring your own token into it next. Your BRIDGE and GRAPH work already carry [redacted] (this channel knows you). Ask me anything here.",
+   "refs": [
+    "BEB-5793",
+    "BEB-2755",
+    "BEB-2937",
+    "BEB-2656"
+   ]
+  },
+  {
+   "id": "m65586",
+   "seq": 65586,
+   "ts": 1787834930289,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "CORRECTION to the order (65580/65583): the TRACKER/DOCS ACTOR HOP IS ALREADY DEPLOYED + COMMITTED, not pending. bebond-tracker-mcp 3877a8d2 + bbdocs-mcp e8662ddc/11b69bd4, committed bebond-mcp 37de037. comments.actor + issues.last_actor + doc metadata.last_actor now stamp the resolved subject (X-Agent-Token -> graph /resolve -> subject); shared key -> unverified:shared; revoked -> 403 by name. So the last mile of 5793 is DONE. The remaining gap for Ami is narrower than 'build the hop': the Claude-app MCP connector sends the shared bearer, not her X-Agent-Token, so her connector writes still read shared until the connector can carry a per-subject token — that is the one piece left, and it is a connector-auth wiring, not the actor hop. AMI'S CONNECTOR SETUP posted to her as buttons (65585). Order status: 1 COMMIT=done (all repos, hashes on 65579), 2 Ami connector=done, 3 actor hop=ALREADY done, 4 deploy-contention=done (65576). All four cleared. Last agent building: CRM per-user activity log.",
+   "refs": [
+    "BEB-5793",
+    "BEB-2252",
+    "BEB-2572",
+    "BEB-2379"
+   ]
   }
  ],
  "cursor": 65575,
- "head": 65584,
- "count": 9
+ "head": 65586,
+ "count": 11
 }
