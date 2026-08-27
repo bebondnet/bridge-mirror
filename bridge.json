@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T17:19:10.353Z",
+ "mirrored_at": "2026-08-27T17:21:05.327Z",
  "messages": [
   {
    "id": "m65652",
@@ -64,9 +64,41 @@
     "BEB-4595",
     "BEB-3603"
    ]
+  },
+  {
+   "id": "m65656",
+   "seq": 65656,
+   "ts": 1787851148933,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "SOURCE DARK (65652) = FALSE POSITIVE, proven. The loop IS LIVE: get_state (authoritative) shows last_pass 49s FRESH + actively claiming (4595/3603/6728...), by_state queued 1417/claimed 5/done 1367. BUT the dispatcher /status endpoint returns last_pass_age_s:NULL (+ last_pass_at/claimed/ticking all null) while /health is ok — and /status.last_pass_age_s is exactly what the watchdog reads, so it declares DARK on a NULL, not a stall. That is why 12 darks recovered NOTHING: nothing was ever down. The memplug fix did NOT stop the loop; the loop kept landing (done held ~1367 because the big queued backlog is draining slowly + many are held/blocked). FIXING NOW (its own defect): (1) ROOT — dispatcher /status populated from the real DO last_pass so it stops returning null; (2) ROBUSTNESS — watchdog senseLiveness treats reachable+null as UNKNOWN not DARK, falls back to the authoritative last_pass, only cries DARK on genuine unreachable OR genuinely-stale, so it stops the 12-false-darks/day that HIDE a real one. Agent building both.\nVIDEO: subject set to the PLUGIN SELF-UPDATE (1.0->1.1 in wp-admin) per your pick — client-facing, deepest thing today; agent recording it now (spec_author{1111} first, direct-to-R2 workaround). \nIN FLIGHT (no word needed, 65649): 61-orky-domain retire + *.abilifi.net dispatch worker · SpecOps beefy (gate_budget raise + per-lane Workers AI models + canary-regression fix) · the video · this watchdog fix. Reporting after each lands. Alex: noted you stopped — this is the record for when you're back.",
+   "refs": [
+    "BEB-3622",
+    "BEB-2385",
+    "BEB-1111",
+    "BEB-6723",
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m65657",
+   "seq": 65657,
+   "ts": 1787851200172,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "65654 ORDER CHANGE APPLIED — withdrew the wp-admin screencast (was the wrong substitution), re-steered the agent to the REAL deliverable: the 3JS WORKFLOW VIZ (BEB-2909/2488) of a real loop run animated propose->spec->codegen->gate->deploy->contract->evidence, from REAL loop data (today's passes + the 3,370 memplug refusals). THREE requirements enforced: (1) EXTRACT THEME from ABCMS tokens / shared theme.js, not three.js grey; (2) COLOURED BY MEANING — landed/refused/waiting/dead legible at a glance, the refusal walls visible AS colour; (3) KAIROS — opens on the moment that matters (a gate refused + lane recovered), not frame zero, the viz picks its own moment. Path: themed coloured web/three.js viz driven by real data -> record it animating -> mp4 -> direct-to-R2 bbdocs-media (truncation workaround) -> a BB Doc that PLAYS. Likely hard hop named up front: headless WebGL capture. spec_author{1111} still first. \nFIVE IN FLIGHT now: workflow-viz video · 61-orky-domain retire + *.abilifi.net dispatch worker · SpecOps beefy (gate_budget + per-lane Workers AI models + canary fix) · watchdog false-dark fix (proven: /status returns null, loop is live per get_state 49s fresh). Reporting after each lands; Alex reads when back.",
+   "refs": [
+    "BEB-2909",
+    "BEB-2488",
+    "BEB-1111",
+    "BEB-3622",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 65651,
- "head": 65655,
- "count": 4
+ "head": 65657,
+ "count": 6
 }
