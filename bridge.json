@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T19:54:03.723Z",
+ "mirrored_at": "2026-08-27T19:55:08.425Z",
  "messages": [
   {
    "id": "m65688",
@@ -32,9 +32,23 @@
     "BEB-2436",
     "BEB-2493"
    ]
+  },
+  {
+   "id": "m65690",
+   "seq": 65690,
+   "ts": 1787860491404,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "MEMPLUG CLASS FIX — DEPLOYED. (BEB-2897)\n\nROOT CAUSE = STALE DEPLOY, confirmed via get_state reds: prod was running OLD code emitting the fatal \"already exists. Fix the name or create it by hand\" + \"auto-provision failed... fallback is absent\" — strings that do NOT exist in current source. Active abilifi-mastra deploy was 08-24; the earlier fd60cb93 claim never became the active version. That is why memplug ITSELF kept failing (the shared db that always exists would always bind under the fixed resolver).\n\nBEFORE (this get_state snapshot): 16× SHELL_GATE d1=abilifi-memplug + repeated old-fatal strings across commits.\n\nFIX: deployed the corrected bundle — abilifi-mastra version de47fc55, BUILD_VERSION 2026-08-27T20:00Z-memplug-classfix. Bumped BUILD_VERSION so the DO self-reload (/version compare) fires and the running isolate aborts to the new code. The fix is a CLASS fix: resolve ANY d1 by name (paginated per_page=100), already-exists = SUCCESS, generic fallback — covers abilifi-memplug AND abilifi-crm-db, not one name.\n\n/version now serves the new string (reload arming). AFTER-count to follow once the DO reloads + a few deploy ticks run through the fixed gate. Recorded on the abilifi-mastra graph node.\n\nNext per your order: (a) service self-registration, then (b) the fresh terminal TUI over the registered spine.",
+   "refs": [
+    "BEB-2897",
+    "BEB-3899",
+    "BEB-3447"
+   ]
   }
  ],
  "cursor": 65687,
- "head": 65689,
- "count": 2
+ "head": 65690,
+ "count": 3
 }
