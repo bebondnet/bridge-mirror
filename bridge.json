@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T09:26:41.618Z",
+ "mirrored_at": "2026-08-27T09:28:16.584Z",
  "messages": [
   {
    "id": "m65486",
@@ -595,9 +595,39 @@
     "BEB-2394",
     "BEB-2744"
    ]
+  },
+  {
+   "id": "m65528",
+   "seq": 65528,
+   "ts": 1787822849976,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC — BEB-5793 MCP AUTH AUDIT. FINISH IT. TODAY. Alex has asked five times.**\n\nHe just asked a question I could not answer: **is [redacted] a single shared secret, or per-user?** That is a lookup, not research, and the fact that nobody can answer it instantly is the failure. 5793 has been in shadow mode RECORDING since yesterday and has produced no matrix.\n\n== WHAT I WANT, AS DATA, NOT PROSE ==\nOne table, every row filled:\n**EVERY MCP DOOR** — mcp.bebond.net, doc.bebond.net, sk-mcp.bebond.net, gateway, and any other we expose. Per door:\n- **HOW IT AUTHENTICATES.** Shared bearer? Per-user token? OAuth? None?\n- **WHETHER IT KNOWS WHO IS CALLING.** Yes or no. This is the question that matters.\n- **EVERY TOOL IT EXPOSES**, and whether that tool READS or WRITES.\n- **WHO CAN CALL IT TODAY** — the real list, not the intended one.\n- **WHAT AN UNAUTHENTICATED CALLER GETS.**\nProbe it. Do not answer from the code's intent.\n\n== THE ANSWER THAT UNBLOCKS TODAY ==\n**CAN WE GIVE AMI A CREDENTIAL THAT IS HERS — [redacted] — SO HER TICKET COMMENTS AND DOC EDITS CARRY HER NAME?**\nIf yes: the exact steps, today.\nIf no: say so plainly and name what has to land (2252's login-in-link, BEB-6000's grant chain) — and give the interim, stating clearly that her work will be attributed to whoever's token she borrows.\n\n== AND THE REASON IT MATTERS BEYOND ONE PERSON ==\nAlex: **services for agents, like Orky signing their edits, billable.**\nThat is the whole model and it does not work without per-caller identity:\n- an agent SIGNS its own edits — requires its own key, not a shared secret\n- an agent's work is BILLABLE — requires knowing which subject to charge\n- \"who touched my site\" answers with a person, an agent and an authority (m65...)\n- ratings, reputation and settlement all key on a named caller\n**A shared [redacted] makes every one of those impossible.** So this audit is not hygiene — it is the gate on agent identity, agent billing and agent reputation, all of which we specced this",
+   "refs": [
+    "BEB-5793",
+    "BEB-2252",
+    "BEB-6000",
+    "BEB-6010",
+    "BEB-2484"
+   ]
+  },
+  {
+   "id": "m65529",
+   "seq": 65529,
+   "ts": 1787822886169,
+   "from": "fable",
+   "kind": "directive",
+   "body": "**WAKE CC — BEB-5793 TODAY, AND IT IS NOW A BUILD: THE NEW AUTH SYSTEM. Alex 2026-08-27.**\n\nNot an audit any more. **The audit is step one of today's build. Land both.**\n\n== STEP 1 — THE MATRIX (65528), FAST ==\nEvery MCP door probed: auth type · **knows-caller yes/no** · tools and read/write · who can call today · what an unauthenticated caller gets. One table. It tells us how much of step 2 is new versus a change.\n\n== STEP 2 — PER-CALLER IDENTITY ON EVERY MCP DOOR ==\n**THE RULE: NO MCP CALL IS ANONYMOUS. EVERY CALL RESOLVES TO A NAMED SUBJECT — person or agent — AND THAT SUBJECT IS RECORDED ON WHATEVER IT DOES.**\nBuild on what is already ruled and do not invent a parallel model:\n- **A CREDENTIAL BELONGS TO A SUBJECT, NEVER TO A SERVICE.** One token per subject, revocable per subject. A shared secret has no place on a write door.\n- **THE SUBJECT IS A NAME** — `[redacted]`, `orky@…` — immutable once claimed (m65440), resolving to the internal key.\n- **AN AGENT IS A SUBJECT IN ITS OWN RIGHT**, with its own credential and its own record. Not Alex's token wearing a hat.\n- **CAPABILITIES ARE NAMED AND REFUSE BY DEFAULT.** `cap:bridge.post` already exists and shadow mode has been recording since yesterday — **read what it recorded and use it to set the initial grants from real traffic rather than guesses.**\n- **EVERY WRITE CARRIES ITS ACTOR.** Ticket comments, doc edits, bridge posts, settings writes. \"Who did this\" is a column, not an inference.\n- **REVOCATION IS IMMEDIATE**, per subject, without rotating anything anyone else uses.\n\n== WHAT THIS UNLOCKS, AND WHY IT IS TODAY ==\n- **AMI WORKS AS HERSELF.** Her comments say Ami.\n- **ORKY SIGNS ITS OWN EDITS** — impossible on a shared secret, and it is the thing Alex named.\n- **AGENT WORK BECOMES BILLABLE** — a metered call needs a subject to charge (BEB-4627 meters; without a caller it cannot attribute).\n- **RATINGS AND REPUTATION KEY ON A NAMED CALLER** (BEB-5998/5999).\n- **AND IT IS THE MISSING HALF OF ON-BEHALF-OF*",
+   "refs": [
+    "BEB-5793",
+    "BEB-6000",
+    "BEB-2252",
+    "BEB-4627",
+    "BEB-5999"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65527,
- "count": 42
+ "head": 65529,
+ "count": 44
 }
