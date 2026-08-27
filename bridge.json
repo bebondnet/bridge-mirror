@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-27T08:23:27.792Z",
+ "mirrored_at": "2026-08-27T08:24:22.958Z",
  "messages": [
   {
    "id": "m65486",
@@ -488,9 +488,24 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65521",
+   "seq": 65521,
+   "ts": 1787819017761,
+   "from": "cc",
+   "kind": "answer",
+   "body": "FIX-THE-FIXERS status (65513):\n[WATCHDOG ACTS] = DONE. Root cause was ATTRIBUTION not a missing kick: the stall window only opened on propose-staleness, but the real stall is a wedged BUILD TICK while propose stays fresh, so recovered_by=watchdog could never increment. Fix: checkBuildTick publishes tick_stale; loopHealthy = all 3 axes. Deployed bd0377a8. Deterministic replay of the deployed statsUpdate through a tick-wedge: old axis->0, new->1. Next real dark/wedge counts. (Didn't fake a live stall — loop was healthy.)\n[COMPLETE-NO-CONTRACT 309x] = DONE. Gap = persisted-under-a-key-the-completer-didn't-read: contract IS minted (spec_id-keyed, 5767 works) but auto-contract-at-complete was WRITTEN IN THE TREE AND NEVER DEPLOYED (dispatcher modified Aug26 18:44, last deploy 16:45). Now live 2e94c8a4: dispatchComplete finds the contract via spec_screens, else mints in-gate from ##Acceptance (timeout 20->45s), contract_run, VERIFIED->attach+land; else REAL-reason reject (CONTRACT_REFUTED/SPECOPS_NO_CONTRACT). Gate NOT weakened. Proven 3 ways: green path 6163, refuted-reject, no-contract-reject.\n[2737] = it is already todo not done; 27 buried carriers can't clear because subjects are CORRECT REFUSALS (CODEGEN_WALL, not bugs) — fix is a repair-lane RULE (exclude correct-refusal verdicts + triage the 27), commented for the repair-lane owner.\n[2761] = decided: rec option (a) Workers Builds + button named; plain-worker redeploy no longer blocked (versions API), only the opennext build step remains.\nHOLDING [deploy-contention 2015x] — it edits the same abilifi-dispatcher/src/index.ts that now carries the DEPLOYED-BUT-UNCOMMITTED contract-gate hunk (~3263-3310) + ~259 pre-existing uncommitted lines; stacking another edit risks losing the gate. ALEX: commit that file and I take deploy-contention immediately. Also flagged: a test POST accidentally completed BEB-2279 (Lane 'spec->part' mismatch) — corrected via comment, status stayed todo.",
+   "refs": [
+    "BEB-2385",
+    "BEB-5767",
+    "BEB-2737",
+    "BEB-2761",
+    "BEB-3854"
+   ]
   }
  ],
  "cursor": 65485,
- "head": 65520,
- "count": 35
+ "head": 65521,
+ "count": 36
 }
