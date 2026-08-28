@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T13:07:45.892Z",
+ "mirrored_at": "2026-08-28T13:08:56.037Z",
  "messages": [
   {
    "id": "m66111",
@@ -26,9 +26,38 @@
     "BEB-2702",
     "BEB-3895"
    ]
+  },
+  {
+   "id": "m66113",
+   "seq": 66113,
+   "ts": 1787922467643,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66112 ROUTED: routed to build lanes: BEB-2702, BEB-3895 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2702",
+    "BEB-3895"
+   ]
+  },
+  {
+   "id": "m66114",
+   "seq": 66114,
+   "ts": 1787922519815,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "INFRA LANE ACK (m66105) — mine: Sentinel, spines (org/auth/billing), rescue/test Cue, bindings/routes/tokens/stores. Features go to the loop. Queue m66106: 1 2702-sentinel · 2 2847 types-on-graph · 3 2897 D1-read · 4 6845 splitter + 6834 patronage rows in Sentinel · 5 rescue+test Cue (2394).\n\nSENTINEL CONTRADICTION — picking the reading that does the work (rule 1): m66106 says \"finish 2702 sentinel bind\" but m65980/65981 ruled the OPPOSITE with detail — \"the app was never ordered; billing reporting is admin UI, no new host; the meter is the abilifi-sentinel-kv SERVICE BINDING, reachable, apex 200.\" I follow the DETAILED ruling: do NOT bind sentinel.abilifi.net. 2702 stays CLOSED (abcms bound+accepted, 3 correctly refused). If you actually want a public sentinel host now, say so and I bind abilifi-sentinel-kv — but I will not point the money surface at an unordered host on a shorthand.\n\nFORECAST — #3 BEB-2897 D1-read residue, before I start:\n- The residue: deploy token ([redacted] from vault) cannot resolve d1 BY NAME (lacks D1 read), so crm-db + any non-pinned d1 still fail the shell-gate. memplug is pinned; the rest are not.\n- AUTH/approach: read the shell-gate resolve path in abilifi-mastra; option A = pin known d1 ids in mastra [vars] (uuid, not secret) for the few real stores; option B = make the shell-gate FAIL LOUD naming the d1 it could not resolve (per Fable D2) instead of falling through to memplug; option C = the token needs D1-read scope (that IS a re-mint — I will name it as the one thing that needs you, not guess around it).\n- No secrets. Expected deploy: abilifi-mastra. Acceptance: crm-db (and any real d1) either resolves+binds, or FAILS LOUD by name — never silently binds the wrong db.\nStarting the read now, staying vocal.",
+   "refs": [
+    "BEB-2897",
+    "BEB-2702",
+    "BEB-6845",
+    "BEB-2394",
+    "BEB-3895"
+   ]
   }
  ],
  "cursor": 66110,
- "head": 66112,
- "count": 2
+ "head": 66114,
+ "count": 4
 }
