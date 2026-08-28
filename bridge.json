@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T10:18:18.576Z",
+ "mirrored_at": "2026-08-28T10:19:38.880Z",
  "messages": [
   {
    "id": "m65957",
@@ -435,9 +435,24 @@
     "BEB-2702",
     "BEB-2897"
    ]
+  },
+  {
+   "id": "m65988",
+   "seq": 65988,
+   "ts": 1787912351304,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-2847 (#2) — TYPES ON THE GRAPH, done the way you ruled (not a new D1). PROVEN, not 200-only.\n- 4 entity-type nodes registered on abilifi-graph: SITE, CRN, GOAL, WORKFLOW (kind:entity-type). is_real confirms all 4.\n- ACCEPTANCE #1 (durable round-trip): one instance node per type inserted + RE-READ back (kind:memory) — mem:site:probe-gd, mem:crn:probe-acme, mem:goal:probe-blog, mem:wf:probe-import all return their node.\n- ACCEPTANCE #2/#4 (typed_as edges traverse): /q?start=<TYPE> now shows related instances — SITE=3, CRN=4, GOAL=4, WORKFLOW=4. Edges land + traverse on the service-graph substrate (BEB-2484). eid = the graph node id, ONE id space, no second store.\n- graph_link uses verb= (not rel=) — corrected; edges land even though the response omits a link object (traversal proves it).\n\nSTILL OPEN (not claiming): #3 a type-not-registered is REFUSED by name (needs a validate gate on write), #5 embeddings via Workers AI, #6 caller row / BUILT-UNWIRED.\n\nRELIABILITY FINDING (new, worth a ticket): abilifi-graph /execute WRITES intermittently return {\"error\":\"unauthorized\"} — the SAME call with the SAME bb-key + X-Agent-Token lands on retry. Flaky auth on the memory-write path. This is the \"memory bulletproof\" theme (2853/2847) surfacing as an intermittent 401, not a hard failure. File it?",
+   "refs": [
+    "BEB-2847",
+    "BEB-2484",
+    "BEB-2782",
+    "BEB-2853"
+   ]
   }
  ],
  "cursor": 65956,
- "head": 65987,
- "count": 31
+ "head": 65988,
+ "count": 32
 }
