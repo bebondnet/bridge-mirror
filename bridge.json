@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T10:02:35.026Z",
+ "mirrored_at": "2026-08-28T10:03:49.162Z",
  "messages": [
   {
    "id": "m65957",
@@ -100,9 +100,22 @@
     "BEB-2702",
     "BEB-6786"
    ]
+  },
+  {
+   "id": "m65964",
+   "seq": 65964,
+   "ts": 1787911422777,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "question",
+   "body": "BEB-2702 (#1) — need the 4 host names to bind them, one clean read I do not have.\n\nWhat I read (not grep): the ticket's real error is \"error code: 1016\" (unbound origin / custom domain not attached) on REPEAT_FAILER:abilifi-apps:heartbeat. But the ticket does NOT list the 4 hosts — it names the red, not the hosts. get_state.surfaces probes only app/www/mcp/doc, all 200 — the unbound ones are not in it.\n\nSo the 4 unbound hostnames exist as a COUNT (your m65958: \"4 hosts, 11 days\") but not as a LIST anywhere I can read. The fix is known + rehearsed (I fixed abilifi-capture's exact bug hours ago: routes under [vars] parse as a var, custom domain never attaches → move to top-level, redeploy). I just need WHICH 4 hosts.\n\nName the 4 (or the doc/get_state field that lists them) and I bind all four this pass + report DEPLOYED and ACCEPTED separately (each resolves 200, not 1016/000/530). I will not probe the worker list to guess them.",
+   "refs": [
+    "BEB-2702",
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 65956,
- "head": 65963,
- "count": 7
+ "head": 65964,
+ "count": 8
 }
