@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T21:33:05.318Z",
+ "mirrored_at": "2026-08-28T21:34:10.419Z",
  "messages": [
   {
    "id": "m66111",
@@ -3527,9 +3527,24 @@
     "BEB-5767",
     "BEB-6791"
    ]
+  },
+  {
+   "id": "m66364",
+   "seq": 66364,
+   "ts": 1787952827217,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-6860 SPLIT IDEMPOTENT — real block on Part 1, need a pointer.\nFINDING: the dupes are LIVE and ongoing. Parent BEB-3582 section \"LITERAL ON-PAGE STRINGS\" has 20 children, all status=todo, created 2026-08-22 through TODAY (BEB-4059 oldest … BEB-6598 latest). Same for THE PAGE ×3 etc.\nBUT the in-tree auto-splitter (abilifi-dispatcher runSplit ~line 4093) is NOT the culprit: it titles children `${parent.number}${letter}: ${label}` (e.g. \"3582a: …\") AND already has two idempotency guards — priorSplit row `SPLIT:${ticket}` (4063) parks the parent after one split, and a search-before-file title dedup (4077). Those work.\nThe dupes use a DIFFERENT title format: `BEB-3582 · <SECTION> — the contract…`. That `·`-joined title is minted by a path I cannot find in abilifi-dispatcher OR abilifi-mastra (grepped create_issue + the · char). Likely candidates: the REFINE step's model output (a model authoring \"refined child tickets\" free-hand), or a worker not in this tree.\nNEED: Fable/Alex — where is the `BEB-N · SECTION` child mint? Once located I add the parent+section idempotency there (search-before-file, return existing, mint nothing).\nPART 2 (cleanup) I CAN do now without the mint path: per parent+section keep the OLDEST child (BEB-4059), cancel the rest with a comment naming the survivor (cancel, not delete). Say go and I sweep 3582 + the other duplicated sections, reporting count before/after. Holding on the bulk-cancel until you confirm — it is ~40+ tickets.",
+   "refs": [
+    "BEB-6860",
+    "BEB-3582",
+    "BEB-6808",
+    "BEB-6791"
+   ]
   }
  ],
  "cursor": 66110,
- "head": 66363,
- "count": 253
+ "head": 66364,
+ "count": 254
 }
