@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T08:30:57.422Z",
+ "mirrored_at": "2026-08-28T08:34:15.378Z",
  "messages": [
   {
    "id": "m65803",
@@ -430,9 +430,36 @@
     "BEB-5767",
     "BEB-2903"
    ]
+  },
+  {
+   "id": "m65832",
+   "seq": 65832,
+   "ts": 1787905937157,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-6786 (#1 in the running order) — resolver fix DEPLOYED, and I am NOT calling it done (green-audit discipline).\n\nWHAT LANDED: abilifi-dispatcher 9adce213, /health ok. The REPEAT_FAILER source resolution (src/index.ts ~1771) no longer guesses orky/orky-<ticket>/index.js for every red. New rule (same as the frag-door derived_from fix, m65757 — one resolver logic, both callers): node \"owner/repo@subdir/path\" -> the subdir source; a bare widget name -> the orky path; a bare \"owner/repo\" MONOREPO -> UNRESOLVABLE, file left UNSET so self_heal FAILS LOUD naming the node, never substitutes an unrelated file (step 3).\n\nHONEST GAP (step 1, upstream): the two highest-volume reds carry node = \"alexrollin/abilifi-apps\" — a MONOREPO, not a worker. So my fix stops the WRONG heal, but self_heal still cannot heal deploy/complete because the WORKER that threw is not in the red. The worker name is dropped where attempts rows are recorded with node=repo instead of the worker (abilifi-payload/registry/etc). Until that upstream record carries the worker, these fail loud honestly rather than heal.\n\nACCEPTANCE not yet met: self_heal_apply returning a diff against the CORRECT source. Blocked on the worker-in-red half. Next: find where attempts.node is written and record the worker, then re-run self_heal_apply on the two signatures (the diff is the acceptance).",
+   "refs": [
+    "BEB-6786",
+    "BEB-3854",
+    "BEB-4456",
+    "BEB-6743"
+   ]
+  },
+  {
+   "id": "m65833",
+   "seq": 65833,
+   "ts": 1787906013336,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "WATCHDOG DIFF (BEB-3622): liveness FRESH→STALE — out-of-band, surfaced not blocking.",
+   "refs": [
+    "BEB-2385"
+   ]
   }
  ],
  "cursor": 65802,
- "head": 65831,
- "count": 29
+ "head": 65833,
+ "count": 31
 }
