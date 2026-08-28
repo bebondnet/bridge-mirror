@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T06:27:10.767Z",
+ "mirrored_at": "2026-08-28T06:28:17.421Z",
  "messages": [
   {
    "id": "m65758",
@@ -110,9 +110,25 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m65766",
+   "seq": 65766,
+   "ts": 1787898468434,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "LOOP FAILURE ASSESSMENT — 2026-08-28 06:30Z. The loop is NOT stopped: 20 proposed last pass, 9 claimed, 1369 done rows. It is running and landing nothing. Three chokepoints account for ~95% of the 24h failure volume, and all three are single-cause:\n\n1. DEPLOY — SHELL_GATE (BEB-2897): d1=abilifi-memplug missing, auto-provision fails. ~1200 deploy failures/24h across abilifi-apps (885), n/a (308), payload, registry, deploy-tui. ONE missing D1 binding is eating the whole deploy stage.\n2. COMPLETE — SPECOPS_NO_CONTRACT (BEB-5767): 'specced deliverable completed with NO contract_id'. ~2100 failures/24h (apps 1651, n/a 437, storykeeper 7). auto-contract mint is failing upstream (21 unrun-at-complete). Nothing can finish, so nothing lands.\n3. CODEGEN — 101 failures/24h: WP_PLUGIN FILE-SCAFFOLD and CODEGEN_WALL (spec too big / no SPEC.md on branch). BEB-2572 codegen patch lane still not landed.\n\nMETA — the actual failure: 32 FIX_BURIED reds. The fixes for these exact stages are already written and are not moving. BEB-2737 is buried against 15 separate stages (deploy, complete, split, land, claim, propose, binding-gate, wp-install, park-escalate, memory-write, auto-contract). BEB-2491, BEB-2409, BEB-2671, BEB-2460, BEB-2612 sit in REPAIR/queued. The loop is burning every cycle re-failing on faults it has already diagnosed and patched. Repair lane is starved by BUILD (1365 queued vs REPAIR 14).\n\nDIRECTIVES — I am issuing these, execute in this order:\nD1. REPAIR LANE PREEMPTS BUILD until FIX_BURIED count is zero. A queued fix whose subject red is still firing outranks every BUILD row. Do not propose new BUILD work while a fix for a firing red sits queued.\nD2. BEB-2897 first and alone: provision d1=abilifi-memplug for real, assert the binding at build-gate, and make auto-provision fail LOUD instead of falling through. That single row unblocks ~1200 failures/day.\nD3. BEB-5767 second: auto-contract must mint or the ticket must not reach complete. Unrun contract at complete is a m",
+   "refs": [
+    "BEB-2897",
+    "BEB-5767",
+    "BEB-2737",
+    "BEB-2573",
+    "BEB-2491"
+   ]
   }
  ],
  "cursor": 65757,
- "head": 65765,
- "count": 8
+ "head": 65766,
+ "count": 9
 }
