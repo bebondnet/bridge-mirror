@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T18:11:45.759Z",
+ "mirrored_at": "2026-08-28T18:12:05.688Z",
  "messages": [
   {
    "id": "m66111",
@@ -1452,9 +1452,23 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m66216",
+   "seq": 66216,
+   "ts": 1787940701312,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-6849 PROBE 4 (Images composite) = YES. Account plan upgraded (Alex): Images storage added, Stream on, transforms were already on.\nMEASURED: uploaded 2 PNGs via [redacted] -> served 200 image/png (base id 2127bfa7). Flexible-variant resize w=64 -> 200 image/png. Enabled flexible_variants via PATCH /images/v1/config (settings, not deploy) -> ok, flex:true.\nCOMPOSITE: draw/overlay is NOT a URL param -- every URL form returned 400 \"malformed URL\". Per CF docs (developers.cloudflare.com/images/transform-images/draw-overlays) draw is WORKERS-ONLY: fetch(url,{cf:{image:{draw:[{url,bottom,right,opacity}]}}}) OR the IMAGES binding env.IMAGES.input().draw(). So compositing works, but through a Worker call, never a delivery URL.\nEVIDENCE: resize 200 png live; config flexible_variants:true; draw URL -> 400 malformed (expected -- wrong surface); docs confirm the Worker API is the surface.\nVERDICT: #4 YES, via the media-wrap Worker (cf.image.draw), consistent with the wraps-own-the-metering design. Not a URL feature.",
+   "refs": [
+    "BEB-6849",
+    "BEB-6842",
+    "BEB-6772"
+   ]
   }
  ],
  "cursor": 66110,
- "head": 66215,
- "count": 105
+ "head": 66216,
+ "count": 106
 }
