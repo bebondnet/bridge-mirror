@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T13:11:52.161Z",
+ "mirrored_at": "2026-08-28T13:14:23.566Z",
  "messages": [
   {
    "id": "m66111",
@@ -55,9 +55,39 @@
     "BEB-2394",
     "BEB-3895"
    ]
+  },
+  {
+   "id": "m66115",
+   "seq": 66115,
+   "ts": 1787922711373,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-2897 D1-READ RESIDUE (#3) — DEPLOYED + gate-verified (m65959: deployed vs accepted separate).\n- abilifi-mastra 110b72c6, deploy-verify PASS. Shell-gate fallback (live/index.js ~2061) FIXED: was falling back to abilifi-memplug for ANY unresolved d1 → silently bound the WRONG db (crm-db got memplug's data). Now a PINNED-ID MAP resolves the real stores by uuid (abilifi-memplug b45a5b37, abilifi-crm-db 7fe98385 — public ids from wrangler d1 list, not secrets), and a d1 NOT in the map FAILS LOUD by name instead of wrong-binding (Fable D2).\n- ACCEPTANCE (time-based): the residual crm-db deploy fails (~308/24h) drop; unknown d1 shows a named SHELL_GATE fail, never a silent memplug bind. Reading the count from state, not claiming yet.\n- Recorded operating rule cc-forecast-then-go: forecast ON SCREEN up front AND GO in the same motion — the forecast is a heads-up not a gate (Alex drilled it 2026-08-28).\n\nINFRA QUEUE now: 1 2702 ✓closed · 2 2847 ✓core (types on graph) · 3 2897 D1-read ✓deployed(count pending) · NEXT 4 BEB-6845 splitter + 6834 patronage rows in Sentinel · 5 rescue+test Cue (2394). Forecasting #4 before I start.",
+   "refs": [
+    "BEB-2897",
+    "BEB-6845",
+    "BEB-6834",
+    "BEB-2394"
+   ]
+  },
+  {
+   "id": "m66116",
+   "seq": 66116,
+   "ts": 1787922787205,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "question",
+   "body": "#4 BEB-6845 splitter + 6834 patronage rows — BLOCKED on Sentinel source location (tried, verbatim gap).\n\nSearched the abilifi-apps tree: NO abilifi-sentinel-kv dir, no dedicated Sentinel meter worker. reserve/settle logic lives only in the shared framework.ts (copied into frags) and sentinel-demo (a demo). The real Sentinel meter (mastra's SENTINEL=abilifi-sentinel-kv service binding) has its source OUTSIDE this repo — same gap as the sentinel host and the mcp.bebond.net backend.\n\nSo the buy-out ALLOCATION ROW on settle (6845) and the PATRONAGE ROW read (6834) need to be added to the Sentinel meter worker, whose source I cannot find here. Where does abilifi-sentinel-kv's source live (repo/dir)? Name it and I add the allocation + patronage rows.\n\nAlso on the record (rule 2): building the row MECHANISM is infra/mine, but the FIRST real patronage number (6834) reads LIVE ledger rows — I will build the read + the row-write mechanism, but a settle that moves real credit waits for your go.\n\nMeanwhile locked graph-only-never-md as a node; #1-3 done (2702 closed, 2847 types-on-graph, 2897 D1-read pinned-map 110b72c6 gate-PASS).",
+   "refs": [
+    "BEB-6845",
+    "BEB-6834",
+    "BEB-3895",
+    "BEB-2394"
+   ]
   }
  ],
  "cursor": 66110,
- "head": 66114,
- "count": 4
+ "head": 66116,
+ "count": 6
 }
