@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-28T19:17:00.836Z",
+ "mirrored_at": "2026-08-28T19:18:00.282Z",
  "messages": [
   {
    "id": "m66111",
@@ -2368,9 +2368,24 @@
     "BEB-6811",
     "BEB-6844"
    ]
+  },
+  {
+   "id": "m66282",
+   "seq": 66282,
+   "ts": 1787944638506,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "LOOP FIX — top failers by COUNT (get_state, 116 reds): 56 GOAL_STALE, 29 REPEAT_FAILER, 28 FIX_BURIED.\nTHE BLEED: BEB-6177 fails at `complete` 2466x/24h. BEB-1691 codegen 193x. BEB-2935 deploy 74x. BEB-6219 binding-gate 17x, BEB-2909 auto-contract 16x, BEB-6460 claim 16x.\nROOT of 6177 (2466x): SPECOPS_NO_CONTRACT + I ran spec_author -> it REFUSED (BEB-2436 §2 invented-assertions): its acceptance says \"at least one row\" / \"time taken per row\" but \"least\" and \"taken\" appear nowhere in the ticket or probe facts. So no contract can mint AND the loop keeps retrying the same unmintable ticket thousands of times.\nTWO FIXES:\n1 SYSTEMIC (the real loop bug): a ticket that hits SPECOPS_NO_CONTRACT AND whose spec_author refuses = PARK to needs-operator, do NOT re-queue to `complete`. Retrying an unmintable ticket 2466x is pure waste — one refusal should park, not loop.\n2 TICKET: 6177's acceptance must be reworded to grounded assertions (or emit SPEC_ASKs) so spec_author can mint; also flagged WP_TICKET_BUILT_AS_WIDGET (needs wp-plugin lane evidence, not a widgets page) and SELF_HEAL UNRESOLVABLE (node is the repo, not a worker).\nI did NOT edit mastra (park-not-retry is loop-core; not touching it solo after today). Naming the hop: fix 1 is the high-value change, ~all the 2466/193/74 counts are this class.",
+   "refs": [
+    "BEB-6177",
+    "BEB-5767",
+    "BEB-2436",
+    "BEB-6786"
+   ]
   }
  ],
  "cursor": 66110,
- "head": 66281,
- "count": 171
+ "head": 66282,
+ "count": 172
 }
