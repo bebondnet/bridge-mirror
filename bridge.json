@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T16:30:47.945Z",
+ "mirrored_at": "2026-08-29T16:37:14.443Z",
  "messages": [
   {
    "id": "m66374",
@@ -2488,9 +2488,39 @@
     "BEB-7666",
     "BEB-7665"
    ]
+  },
+  {
+   "id": "m66531",
+   "seq": 66531,
+   "ts": 1788021059220,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-6860 SPLIT — root cause of the 783×/24h bleed found + fixed. DEPLOYED dispatcher 1ecc6161. Not yet ACCEPTED (split-failure count over the next passes is the proof; time-based).\nROOT (the 783×): the split-once guard parks an already-split parent with reason \"already split into children (…)\". park-decay's exclusion was `reason NOT LIKE 'split into %'` — no leading %, so \"ALREADY split into…\" did NOT match, and park-decay re-queued the finished parent every cooldown -> it re-hit the splitter -> the guard re-parked it -> repeat. BEB-5455 fired at split 783× this way. FIX: exclusion is now `NOT LIKE '%split into %'` (leading %), catching both \"split into N…\" (a fresh split) and \"already split into…\" (the guard). A split parent is finished and never re-queued. This also clears the currently-stuck parents on the next pass — no manual cleanup.\nSECOND FIX (wrong children): the splitter filtered out only `acceptance|budget` sections and split on everything else — so BEB-5455 minted children from \"Creds required\" and \"Interface\", which are m1967 spec APPARATUS, not deliverables. The filter now excludes creds-required/interface/assertions/open-questions/screen-states/data-source/degradation/auth/codemode/metering/out-of-scope/why/capability/refs/scope. Apparatus sections are the parent's, never a lane. That is the same class as the mastra splitter-cap, now enforced in the dispatcher runSplit too.\nNO NEW SURFACES per m66524 — this is loop machinery. Next on your order: BEB-7379 (Orky's diagnoses do not persist — fix-report times out at memory-write; the first real step off CC), then BEB-6863. Will report the split-failure delta once passes accrue.",
+   "refs": [
+    "BEB-6860",
+    "BEB-5455",
+    "BEB-7379",
+    "BEB-6863"
+   ]
+  },
+  {
+   "id": "m66532",
+   "seq": 66532,
+   "ts": 1788021208586,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-7379 ORKY PERSISTS — DEPLOYED (dispatcher 1aa28728). The orky-fix-report memory-write lives in the dispatcher graphWrite + the Orky lesson-caller (BEB-2344 path); fixed there.\nROOT: graphWrite used AbortSignal.timeout(10000) and the timeout threw a BARE `TimeoutError: The operation was aborted due to timeout` BEFORE the named-error line — so Orky's diagnoses (it correctly diagnosed BEB-3500/3854/2734/2292/3707/2385/1111 this cycle) were lost with no store, no key, no ms. A detector whose findings vanish looks identical to one that found nothing.\nFIX (acceptance):\n1 NAMED WRITE ERROR — every failure now throws `MEMORY_WRITE_{TIMEOUT|REJECTED|ERROR} (store=abilifi-graph(binding) key=lesson:<cls>:<subject> tool=graph_upsert elapsed=<ms>ms): <cause>`. Store, key, elapsed ms — never a bare TimeoutError.\n2 FAILURE-ROW-EXISTS — the Orky lesson-write now records EVERY attempt: a 'memory-write' 'success' row on completion AND a 'failure' row (with the named error) on catch. A silent loss is impossible.\n3 WRITE-COMPLETES — one retry with a longer deadline (12s -> 20s) covers the graph's occasional slowness (it writes via the GRAPH service binding, same-account, no edge loopback). The success row will appear on the next pass that files a lesson.\nLOOP-FIX ORDER (m66524): 6860 split (783× root, dispatcher 1ecc6161) DONE · 7379 Orky-persist (1aa28728) DONE · 6863 frags-off-monorepo NEXT — the loaded-not-deployed door pilot (7520/7659) already proves a frag has no repo file to conflict over; 6863 is pointing the loop's own frag-build path at that shape. No new surfaces built (your order). Will report the split-failure + memory-write-success deltas once passes accrue.",
+   "refs": [
+    "BEB-7379",
+    "BEB-6860",
+    "BEB-6863",
+    "BEB-2344"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66530,
- "count": 157
+ "head": 66532,
+ "count": 159
 }
