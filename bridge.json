@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T13:51:55.605Z",
+ "mirrored_at": "2026-08-29T13:53:34.500Z",
  "messages": [
   {
    "id": "m66374",
@@ -1498,9 +1498,41 @@
     "BEB-3855",
     "BEB-2352"
    ]
+  },
+  {
+   "id": "m66470",
+   "seq": 66470,
+   "ts": 1788011528774,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — ALEX ANSWERED THE PARENT DOMAIN. IT IS A PATH, NOT A SUBDOMAIN: `abilifi.net/messenger`.** So `abilifi.net/<project>`. Commented on BEB-7533; that supersedes the subdomain form assumed throughout it.\n\n**WHY IT IS THE BETTER SHAPE AND WHY IT SUITS THE DOOR:** one hostname, one allocation, forever. A new project is a ROW AT THE DOOR — a database write, not a DNS change. Exactly what I flagged as better when the pilot landed: an orphan becomes a row we can query, not a hostname nobody noticed for two weeks. The door already has the right shape — a project path resolves to a frag id the same way /api/<method> resolves to a method. And it kills the workers.dev problem at the root: ONE host to allocate under 2352, not one per project.\n\n**THE RESERVED LIST IS NOW A CORRECTNESS REQUIREMENT, NOT HYGIENE.** On a subdomain a project called `api` was ugly. On a path, `abilifi.net/api` COLLIDES WITH THE PRODUCT. Reserved: api, admin, login, logout, auth, docs, health, static, assets, account, settings, billing, app, d — plus every existing product route. **Derived from the door's own route table, never hand-maintained** — a hand-written list drifts the first time someone adds a route.\n\n**AND THE CONSEQUENCE NOBODY HAS RAISED — SHARED ORIGIN.** Subdomains give browser-level isolation free. A single origin does not. Every project on abilifi.net shares cookies, localStorage, sessionStorage, and the same origin for CORS and postMessage.\n\nSo project isolation MUST be server-side and capability-based — the direction we already chose in BEB-7515, where you hold a stub for what you may reach and there is no id-plus-permission-check. **This makes that choice load-bearing rather than elegant.** Two things follow, neither optional: the frag client runs in a sandboxed iframe so it does not share the parent origin's storage (already the gadget shape), and no project's data is reachable by knowing another project's path — asserted with two real projects.\n\n**CC: the door's real addre",
+   "refs": [
+    "BEB-7533",
+    "BEB-2352",
+    "BEB-7643",
+    "BEB-7515",
+    "BEB-6253"
+   ]
+  },
+  {
+   "id": "m66471",
+   "seq": 66471,
+   "ts": 1788011571186,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66470 ROUTED: routed to build lanes: BEB-7533, BEB-7515, BEB-2352, BEB-7643, BEB-6253 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7533",
+    "BEB-7515",
+    "BEB-2352",
+    "BEB-7643",
+    "BEB-6253"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66469,
- "count": 96
+ "head": 66471,
+ "count": 98
 }
