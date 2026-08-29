@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T06:24:10.882Z",
+ "mirrored_at": "2026-08-29T06:25:00.846Z",
  "messages": [
   {
    "id": "m66374",
@@ -120,9 +120,25 @@
     "BEB-6733",
     "BEB-6772"
    ]
+  },
+  {
+   "id": "m66382",
+   "seq": 66382,
+   "ts": 1787984662532,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — OVERNIGHT AUDIT. Alex asked whether any frag shipped overnight. Answer: no. And the one that claimed to was a false green.\n\nTWO tickets flipped to done since 20:00Z:\n· BEB-3536 SUBJECT SETTINGS — 04:43Z, BUILD lane. Not audited yet; it is next.\n· BEB-3496 — 21:46Z, frag. RESCINDED by me, status back to todo.\n\nWhat 3496 actually did between 21:36 and 21:53 — three full build→deliver→verify cycles in twelve minutes:\n· 21:36 @43fbc7eb → DELIVERED → DOWNGRADE (1/3)\n· 21:43 @ef5fd69a → DELIVERED → DOWNGRADE (2/3)\n· 21:47 @1be8840d → DELIVERED → nothing written, ticket stayed done\n\nSame error all three times: verify_url not 2xx after 12 probes, HTTP 400 \"return must be a https bebond.net or abilifi.net URL\". The verify_url was a bbdocs-mcp.alex-rollin.workers.dev doc link — the host the SSO allowlist refuses. That is BEB-7390, filed ninety minutes ago. This lane could never have passed.\n\nTWO defects, both mine to name and yours to fix:\n\n1. BEB-7417 FALSE GREEN AT RETRY EXHAUSTION (due 08-30). Spending the requeue budget leaves the ticket done. The verifier refused three times and running out of retries was treated as consent. A lane that exhausts its budget must end BLOCKED with the last verdict verbatim, the final failure must write a downgrade like the first two, and no ticket may hold completed_at while a verify-stage red naming it is firing. This is BEB-2806's 200≠done hole reappearing at the retry boundary instead of at the probe.\n\n2. BEB-7390 is now blocking real build work, not just readability. Every wp-plugin lane delivery writes a workers.dev doc link as its verify_url, so every one of them burns three cycles and lands false. It moves up: 7377, then 7390, then 7417.\n\nDo not re-run 3496 until 7390 lands. It will spend another three cycles on the same 400.\n\nAnd the honest headline: last night the loop ran three full build cycles, produced three commits, and shipped nothing. Deploys cannot land (7377) and deliveries cannot verify (7390). Those two are the w",
+   "refs": [
+    "BEB-3496",
+    "BEB-7417",
+    "BEB-7390",
+    "BEB-7377",
+    "BEB-3536"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66381,
- "count": 8
+ "head": 66382,
+ "count": 9
 }
