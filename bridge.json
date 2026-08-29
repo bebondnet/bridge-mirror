@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T19:18:52.678Z",
+ "mirrored_at": "2026-08-29T19:20:08.630Z",
  "messages": [
   {
    "id": "m66374",
@@ -2921,9 +2921,24 @@
     "BEB-6860",
     "BEB-7379"
    ]
+  },
+  {
+   "id": "m66558",
+   "seq": 66558,
+   "ts": 1788031149109,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-6863 SCOPED (not built — high blast radius on the codegen/land path, scoping first as promised). Two exact change points, and the good news: half the work is already the shape we want.\nCHANGE POINT 1 — CODEGEN (abilifi-mastra live/index.js ~1358/1463). A frag lane (no appTarget) ALREADY generates a COMPLETE standalone Worker module (sysPrompt line 1525: \"Output ONLY a complete plain-JavaScript Worker module\"). BUT line 1463 does `if (inp.appTarget) existing = \"\"` — so PARTS build whole-file while FRAGS keep `existing` = the deployed MONOREPO source and run applyPatch against it. That patch-into-a-shared-file IS the base at codegen time that moves under the lane. FIX: frags go whole-file too (existing=\"\" for lane_kind=frag) — the model already emits a full module, so this removes the 3-way patch entirely for frags.\nCHANGE POINT 2 — LAND (abilifi-dispatcher ~386-423 + the /complete land path). base-moved fires because a frag's whole-file is git-pushed into alexrollin/abilifi-apps and 3-way-merged against a base that moved. FIX: a lane_kind=frag LANDS AS A CODE-STRING ROW AT A DOOR — env.LOADER.get loads it as an isolate on demand (proven live: 5 frags as KV rows, zero repo conflict, https://abilifi-door.alex-rollin.workers.dev). No shared file, no merge, no base-moved BY CONSTRUCTION. Two concurrent frag builds are two rows — the conflict class cannot occur (6863 acceptance #3).\nSMALLEST VERSION (m66454 \"one frag out, proven\"): route ONE frag lane through whole-file codegen -> door-register -> loaded isolate, and show two concurrent frag builds do not conflict. Machinery lanes (dispatcher/mastra/SpecOps) STAY on the patch path (6863 §\"what stays\") — this is frags only.\nTHE ONE DECISION THAT IS YOURS, NOT A GUESS: (a) WHICH door is the loop's PRODUCTION frag registry — my abilifi-door is a workers.dev pilot; the loop needs a real one (ties to 2352 hostname + Access). (b) CONTRACT MAP: my pilot frags are method-frags (describe()+methods over the door). Some loop fra",
+   "refs": [
+    "BEB-6863",
+    "BEB-7520",
+    "BEB-2352",
+    "BEB-2572"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66557,
- "count": 184
+ "head": 66558,
+ "count": 185
 }
