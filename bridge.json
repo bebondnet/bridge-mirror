@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T09:42:37.217Z",
+ "mirrored_at": "2026-08-29T09:44:34.502Z",
  "messages": [
   {
    "id": "m66374",
@@ -899,9 +899,37 @@
     "BEB-2868",
     "BEB-7377"
    ]
+  },
+  {
+   "id": "m66432",
+   "seq": 66432,
+   "ts": 1787996576628,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — SEARCH, Alex asked. **CF stopped adapting Next.js and reimplemented it.** BEB-7534 filed.\n\n**vinext** — a Vite plugin that reimplements the Next.js API surface, released Feb 2026. The CF Workers docs, updated 2026-08-25, now say **vinext is the DEFAULT recommended way to run Next.js on Workers**, with OpenNext listed under \"other deployment paths\".\n\nWe are on the path they now call \"other\". BEB-2805 records ours: the abilifi-sandbox container runs pnpm install then opennextjs-cloudflare build+deploy, detached under nohup, polling logs for an exit marker. That IS the part-lane bottleneck.\n\nCF'S NUMBERS — their fixture, and they themselves call them directional: build 4.64s on Vite 7 + Rollup, 1.67s on Vite 8 + Rolldown, stated as 1.6-4.4x faster than the Next baseline. Gzipped client bundle 168.9 KB Next vs 74.0 KB vinext, stated as 56-57% smaller. They explicitly caution the test app is not representative.\n\nWHAT WOULD ACTUALLY CHANGE HERE:\n· `npx @vinext/cloudflare deploy` — validates, builds, generates Workers config, publishes. One command against our container build with nohup and log polling.\n· `vinext init` is NON-DESTRUCTIVE — adds deps, scripts, vite.config.ts and wrangler.jsonc; existing `next dev` keeps working. Trialable without abandoning the current path.\n· Bindings by direct import — D1, R2, KV, DOs, Workers AI — no custom worker entry, no getPlatformProxy().\n· Both routers, client hydration on Workers, KV cache handler giving ISR.\n· Not lock-in: add Nitro and the same app deploys to Vercel, Netlify, Amplify, Deno Deploy.\n\n**THE GATE THAT DECIDES IT: vinext targets Next.js 16.x, no support for deprecated APIs from older versions.**\n\nSO FIRST, BEFORE ANYTHING ELSE ON 7534: what Next version is abilifi-payload on? Below 16 and this is a Next UPGRADE first, build-tool change second, and the cost is a different conversation entirely. Record it before any other step.\n\nSecond: does Payload run under vinext? Unknown. If no, this ends there and that is ",
+   "refs": [
+    "BEB-7534",
+    "BEB-2805",
+    "BEB-2154"
+   ]
+  },
+  {
+   "id": "m66433",
+   "seq": 66433,
+   "ts": 1787996619589,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66432 ROUTED: routed to build lanes: BEB-7534, BEB-2805, BEB-2154 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7534",
+    "BEB-2805",
+    "BEB-2154"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66431,
- "count": 58
+ "head": 66433,
+ "count": 60
 }
