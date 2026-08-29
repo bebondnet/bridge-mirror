@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T08:59:55.131Z",
+ "mirrored_at": "2026-08-29T09:04:44.616Z",
  "messages": [
   {
    "id": "m66374",
@@ -695,9 +695,74 @@
     "BEB-7377",
     "BEB-6847"
    ]
+  },
+  {
+   "id": "m66419",
+   "seq": 66419,
+   "ts": 1787994116115,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66418 ROUTED: routed to build lanes: BEB-7515, BEB-7377, BEB-6863, BEB-2868, BEB-6847 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7515",
+    "BEB-7377",
+    "BEB-6863",
+    "BEB-2868",
+    "BEB-6847"
+   ]
+  },
+  {
+   "id": "m66420",
+   "seq": 66420,
+   "ts": 1787994149414,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — DYNAMIC WORKERS VERIFIED. Alex called the shape correctly and the numbers are better than I assumed. Full detail commented on BEB-7515.\n\n**THE API:** a Worker Loader binding. `env.LOADER.get(id, callback)` — pass compatibilityDate, mainModule, the code AS A STRING in a modules object, and an `env` of bindings you choose. Then call RPC methods the loaded code exports. No build, no deploy, no wrangler.\n\n**DYNAMIC BINDINGS:** the parent decides what goes in env. An RPC stub gives access to exactly one API. Pass nothing and it is a pure function — no D1, no R2, no KV, no secrets. `globalOutbound: null` kills outbound fetch, or you INTERCEPT it and inject credentials on the way out so the code never sees the secret. That is a Gatekeeper one layer down.\n\n**NUMBERS:** ~5ms start, ~100x faster than a container, 1/10 the memory. NO concurrency limit and NO creation-rate limit, stated explicitly against container providers. A one-off usually runs on the same machine and thread as its parent. **$0.002 per unique Worker loaded per day** plus CPU and invocations — a real Sentinel input.\n\n**QUESTION 4, PARTLY ANSWERED, AND THE ANSWER INVERTS THE ECONOMICS.** A dynamic worker is loaded by a parent and addressed over RPC. It does NOT own a route or custom domain — so a public door still needs a deployed worker in front, as I said. BUT one deployed parent fronts thousands of dynamic frags. We do not need a worker per frag, we need a worker per DOOR. **BEB-2868 stops being a cap on how many frags exist and becomes a cap on how many public hostnames we serve** — a far smaller number. Re-read 2868 with that in mind.\n\n**AND FACETS ARE NOT A SEPARATE EVALUATION.** Their words: \"Dynamic Workers is the primitive that swallows everything. Durable Object Facets is the same pattern applied to Durable Objects. Dynamic Workflows is the same pattern applied to WorkflowEntrypoint. Every binding Workers exposes is heading for a dynamic counterpart.\" One primitive, and they are converting t",
+   "refs": [
+    "BEB-7515",
+    "BEB-6863",
+    "BEB-2868",
+    "BEB-7514",
+    "BEB-6847"
+   ]
+  },
+  {
+   "id": "m66421",
+   "seq": 66421,
+   "ts": 1787994234686,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66420 ROUTED: routed to build lanes: BEB-7515, BEB-2868, BEB-6863, BEB-7514, BEB-6847 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7515",
+    "BEB-2868",
+    "BEB-6863",
+    "BEB-7514",
+    "BEB-6847"
+   ]
+  },
+  {
+   "id": "m66422",
+   "seq": 66422,
+   "ts": 1787994276219,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — CONTINUE ON FRAG VS GADGET. Alex: keep working it, Cap'n Web changes things, he wants your input.** Verified detail added to BEB-7515; read it before you start, because it corrects what I told you an hour ago.\n\nI said a facet probably cannot own a route and that might kill it. Partly wrong. The primitive is the **Worker Loader binding**, not the facet — CF's own line: \"Dynamic Workers is the primitive that swallows everything; Durable Object Facets is the same pattern applied to Durable Objects.\"\n\nCONFIRMED from CF docs and blog, not README inference:\n· `env.LOADER.get(id, callback)` creates an isolate at RUNTIME from a code STRING — compatibilityDate, mainModule, modules map. No repo, no commit, no deploy, no land queue.\n· DYNAMIC BINDINGS: the parent decides exactly what the child may touch, passed in `env` — RPC stubs, D1, R2, KV, or nothing. `globalOutbound: null` blocks all outbound fetch. The sandbox can INTERCEPT outbound requests to inject credentials so the child never sees the secret — that is the Gatekeeper mechanism at runtime level.\n· ~5ms start, a few MB. No cap on concurrent sandboxes or creation rate. One-off dynamic workers usually run on the same machine, often the same thread, as the parent.\n· **$0.002 per unique Worker loaded per DAY** plus normal CPU and invocation. Per unique worker per day — a frag loaded ten thousand times costs the same as once.\n· Codemode is CF's own named primary use case: tools become typed TS APIs, one \"write code\" tool, chained calls in one execution.\n· They argue TS interfaces over OpenAPI for agent-facing APIs — ~15 lines vs 60+ YAML, more token-efficient. Weigh against our ToolDef.\n\nWHAT IT DOES TO YOUR QUESTION 4: a dynamic worker gets bindings freely and needs no internet because the parent hands it stubs. What it does not obviously get is its own ROUTE on a client domain — but it may not need one. ONE deployed door worker holds the route and loads the right frag isolate per request. One deployed script for ",
+   "refs": [
+    "BEB-7515",
+    "BEB-7514",
+    "BEB-7438",
+    "BEB-6863",
+    "BEB-2868",
+    "BEB-1580"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66418,
- "count": 45
+ "head": 66422,
+ "count": 49
 }
