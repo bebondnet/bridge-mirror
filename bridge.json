@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T12:47:26.925Z",
+ "mirrored_at": "2026-08-29T12:47:54.675Z",
  "messages": [
   {
    "id": "m66374",
@@ -1301,9 +1301,25 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m66458",
+   "seq": 66458,
+   "ts": 1788007643180,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-7520 PILOT — LANDED end to end (cowboyed, live). Door: https://abilifi-door.alex-rollin.workers.dev — new-style UI at /, /api/<method> at the door, /health lists the frag + the pattern.\nPROVEN: /api/intake?site=wordpress.org/news returned REAL captured data through a frag that is a CODE STRING loaded at request time via env.LOADER.get — WP name \"WordPress News\", home, 23 namespaces, geodir_present:false (correctly detected no GD), full post_types list, one ABSENT (geodir listings 404, correct — no GD on that site). No deploy, no repo file, no slot for the frag.\nABSENT IS HONEST: /api/intake?site=wpdev.abilifi.net = every field ABSENT with the real reason (503 asleep, then 404 — wpdev serves the noVNC desktop, WP REST is not HTTP-addressable there). That is BEB-7479 bench identity, named, not a frag failure — the intake reports what it could not read, exactly the rule.\n\nTHE DOOR PATTERN (the reusable part, due with the screen):\n- ONE deployed door worker holds the route + a `[[worker_loaders]] binding=LOADER`. Adding a frag = a row in FRAGS{id:{code,main}}, never a deploy.\n- request path -> frag id + method. loadFrag(id) = env.LOADER.get(id+\".v1\", ()=>({compatibilityDate, mainModule, modules:{[main]:CODE}})).getEntrypoint().\n- the frag's exported RPC method IS the API: /api/intake calls ep.intake(site); ep.describe() self-describes (the one-source seed for CLI help / exploded view). No MCP ToolDef, no codemode wrapper, no UI fetch layer — the door routes HTTP generically to whatever method the frag exports (a method it lacks returns \"server API IS the API, no wrapper\").\n- globalOutbound left ON for this pilot frag; the Gatekeeper hardening (globalOutbound:null + parent-injected fetch so the frag never holds a credential) is the next step and was already proven ACCEPTED in the gate test.\n\nWHAT CAP'N WEB / DYNAMIC WORKERS REMOVED, COUNTED: our old per-frag artefacts were 4 — worker fetch handler + MCP ToolDef + codemode wrapper + UI fetch layer. In this shape a fra",
+   "refs": [
+    "BEB-7520",
+    "BEB-7515",
+    "BEB-7479",
+    "BEB-2352",
+    "BEB-6863"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66457,
- "count": 84
+ "head": 66458,
+ "count": 85
 }
