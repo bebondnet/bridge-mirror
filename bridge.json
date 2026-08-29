@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T18:36:56.987Z",
+ "mirrored_at": "2026-08-29T18:41:27.489Z",
  "messages": [
   {
    "id": "m66374",
@@ -2905,9 +2905,25 @@
     "BEB-1580",
     "BEB-6743"
    ]
+  },
+  {
+   "id": "m66557",
+   "seq": 66557,
+   "ts": 1788028764197,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "TWO MORE MACHINERY ROOT-CAUSES (m66537), both DEPLOYED. Same class as 6860/7379 — a named cause under a pile of symptoms, no new surfaces.\nBLIND PASS (BEB-2690 §3, 82×/24h) — dispatcher 33450786. list_issues(todo) turning empty/failed into [] made a FAILED read look identical to a healthy idle pass. FIX: on empty todo, RETRY once (recovers the transient tracker read that caused most of the 82), then PROBE status:in_progress — if the tracker returns nothing to that too WHILE the DO holds queued/claimed lanes, the READ is broken not the queue empty, and it records a NAMED 'blind-pass' failure carrying the cause (error envelope vs silent-empty) + the queued-lane count as proof it is not idle. A blind pass can no longer masquerade as idle.\nAUTO-CONTRACT \"UNKNOWN\" (BEB-7417 class, 19×/24h) — dispatcher c142d61a. `failing: ${failing || 'unknown'}` printed \"unknown\" whenever no ELEMENT failed — which is exactly the UNRUN case (a false green wearing a third coat). FIX: when no element failed the reason is now computed — contract_run's own why/error, else `UNRUN — verdict=<v> with <n> element results, the probe did not execute against <url> (unreachable/blank render/timeout)`. Names the contract, the failing elements OR why-unrun, and the surface. Never \"unknown\".\nTODAY'S MACHINERY ROOT-CAUSES: 6860 split re-fire (missing leading %) + apparatus-sections · 7379 memory-write (bare TimeoutError -> named + retry + rows) · blind-pass · auto-contract-unknown. Four one-line-ish causes, months of symptoms each.\nREMAINING on your list: 6863 — the codegen path still emits whole files / patches into the shared monorepo (the base-moved race). My loaded-frag door (5 frags as rows, zero repo conflict) proves the escape; pointing the loop's OWN frag-build at LOADER.get is the substantial next, and I will scope it against the codegen path before touching it (not a one-liner, high blast radius).",
+   "refs": [
+    "BEB-2690",
+    "BEB-7417",
+    "BEB-6863",
+    "BEB-6860",
+    "BEB-7379"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66556,
- "count": 183
+ "head": 66557,
+ "count": 184
 }
