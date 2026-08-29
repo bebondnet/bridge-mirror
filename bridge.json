@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T07:36:35.863Z",
+ "mirrored_at": "2026-08-29T07:42:52.944Z",
  "messages": [
   {
    "id": "m66374",
@@ -225,9 +225,95 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m66389",
+   "seq": 66389,
+   "ts": 1787989157693,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — ALEX RULING 2026-08-29: **GD ADD-LISTING IS THE SINGLE MOST IMPORTANT FRAG.** Canonical ticket is BEB-1580, now P0, due 08-31. Full ruling is on the ticket — read it there, not here.\n\nThe short of it: add-listing is not a page, it is ONE ability that every surface calls. Same code path, same validation, same errors, same idempotency. Six interfaces: MCP tool (Orky-callable, returns id AND url), Codemode wrapper, wp-admin via the connector plugin's dynamic discovery, Cue/chat, REST, frag UI. A surface that reaches GD by its own route is the defect.\n\nAnd it goes through GD'S OWN PATH — POST geodir/v2/listings or geodir_add_listing_page_url. Never a third route. A bespoke form skips custom fields, package/pricing, moderation status, owner emails, claim state, ratings — a row that looks right and is missing all of it is worse than a failure because it passes.\n\nAlex also ruled the integration, and that is what makes it the most important frag rather than one of many: Sentinel metering, enrich (BEB-1579) landing fields on the listing, the GERS key present, IDaaS org scope, and a graph node with real caller rows per interface. BUILT/UNWIRED until each interface has one.\n\n**BEB-7479 BENCH IDENTITY is filed P0 due TODAY and blocks 1580.** WP_HOME/WP_SITEURL are baked to localhost:8080, so /wp-json/geodir/v2/* 301s to an unreachable host. That is why the earlier attempt built a form — the builder concluded the API was unusable. It is not unusable, it is misaddressed. Fix the bench identity or the next builder takes the same wrong turn. It must survive a restart, so it goes in the boot seed, not a one-off wp-cli call.\n\nBEB-1177, BEB-1176 and the 3464 probe work FEED 1580. They do not compete with it.\n\nAnd no rebuild before the probe: call it as Orky would, from chat, TWICE with the same input, and report four lines — what came back, is the id and url in the result, do two listings exist or one, which field types survived read back expected-vs-actual. That answers calla",
+   "refs": [
+    "BEB-1580",
+    "BEB-7479",
+    "BEB-1177",
+    "BEB-1579",
+    "BEB-2177",
+    "BEB-3464"
+   ]
+  },
+  {
+   "id": "m66390",
+   "seq": 66390,
+   "ts": 1787989227092,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66389 ROUTED: routed to build lanes: BEB-1580, BEB-1579, BEB-7479, BEB-1177, BEB-1176, BEB-2177, BEB-3464 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-1580",
+    "BEB-1579",
+    "BEB-7479",
+    "BEB-1177",
+    "BEB-1176",
+    "BEB-2177"
+   ]
+  },
+  {
+   "id": "m66391",
+   "seq": 66391,
+   "ts": 1787989270987,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — CORRECTION on BEB-1580. Alex: \"there are more interfaces.\" He is right, six was short. Sixteen, each traced to a ticket that ALREADY requires it. Full list is on BEB-1580; the ones I had missed:\n\n· **CLI surface** — BEB-1841 states a frag lacking one is a conformance bug. Add-listing has none.\n· **The frag interaction contract, BEB-1842** — handles, exploded view with every piece clickable, refine-before-send with model choice and cost preview, thumbs-down repair, instruction-annotated content. Required of EVERY frag. The exploded view doubles as the marketplace view.\n· **x402/L402 paid call** (BEB-2214/1935) — an outside machine pays and calls it.\n· **Marketplace/publisher ability** (BEB-1769/1579) — priced, metered, rate card, author split.\n· **Sove voice** — push-to-talk, transcribe, confirm, send.\n· **Email inbound** (BEB-1795/1796 rails).\n· **Bulk/CSV import** (BEB-904) — through the same ability, never a separate importer.\n· **Desktop/deploy TUI** (BEB-3444).\n· **Mobile app shell** (BEB-1964) — must work inside a stamped tenant shell, not only our domain.\n· **GD's own add-listing page** on the client site — their native logged-in path, untouched.\n· **The client site front end** via the core WP plugin's unified auth and seat matching (BEB-2265) — their visitors, their identity, their domain.\n\nTHE RULE: sixteen interfaces, ONE write path. Every one ends at POST geodir/v2/listings or geodir_add_listing_page_url. A surface that reaches the database another way IS the defect — grep the count of write paths, it must be one.\n\nAnd the graph decides what is real: ONE REAL CALLER ROW PER INTERFACE, or that interface is BUILT/UNWIRED and gets reported by name. Sixteen rows is done. Fewer is a named list of what is missing, never a summary.\n\nBEB-1842 and BEB-1841 move onto the 1580 chain — they are not separate nice-to-haves, they are two of the sixteen. BEB-2706 (the Cue write half) is a third and is still open.\n\nOrder unchanged: 7479 bench identity · 7377 land q",
+   "refs": [
+    "BEB-1580",
+    "BEB-1841",
+    "BEB-1842",
+    "BEB-2214",
+    "BEB-1769",
+    "BEB-1964",
+    "BEB-2265",
+    "BEB-2706",
+    "BEB-904"
+   ]
+  },
+  {
+   "id": "m66392",
+   "seq": 66392,
+   "ts": 1787989287976,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66391 ROUTED: routed to build lanes: BEB-1580, BEB-1841, BEB-1842, BEB-2214, BEB-1769, BEB-1795, BEB-904, BEB-3444, BEB-1964, BEB-2265, BEB-2706 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-1580",
+    "BEB-1841",
+    "BEB-1842",
+    "BEB-2214",
+    "BEB-1769",
+    "BEB-1795"
+   ]
+  },
+  {
+   "id": "m66393",
+   "seq": 66393,
+   "ts": 1787989312697,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — BEB-1580, four more interfaces from Alex. Twenty now.\n\n**17 CLI HELP** — `--help` prints the ability describing itself: every parameter, type, required, what it returns, what it costs. GENERATED from the ToolDef, never hand-written. If help and the tool can disagree, help is a lie waiting to happen.\n\n**18 THE TICKETS** — the frag renders the tickets it came from, live from the tracker: ids, titles, acceptance clauses, status. Not copied text.\n\n**19 TEXT** — plain collapsed form for a terminal, a chat reply, a log line. Same content, structure by indentation.\n\n**20 EXPLODED MARKDOWN INCLUDING THE REQUIREMENTS** — the exploded view is a MARKDOWN DOCUMENT, not just a UI state. Parameters, write path, steps, sub-abilities, loaded artefacts, and the REQUIREMENTS beside them so each part sits next to the clause that asked for it. Copyable, diffable, readable outside the app.\n\nThat markdown is three things at once, deliberately: BEB-1842's exploded transparency view, the marketplace listing (a buyer reads the process and the requirements before buying — that IS the sales page), and the spec a reviewer checks against.\n\n**THE RULE: ONE SOURCE, EVERY RENDERING.** The ToolDef and the tickets are the source. CLI help, the text form, the exploded markdown and the UI are RENDERINGS. Nothing is authored by hand for its own surface. The moment help is written separately from the ToolDef, or the exploded view separately from the tickets, they drift — and a drifted transparency view is worse than none, because it is believed.\n\nSame test as the write path, and grep for both: how many places describe the ability's parameters, and how many write to GD. Each must be one.\n\nTwenty interfaces, one caller row each, or named BUILT/UNWIRED.",
+   "refs": [
+    "BEB-1580",
+    "BEB-1842",
+    "BEB-1841",
+    "BEB-452"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66388,
- "count": 15
+ "head": 66393,
+ "count": 20
 }
