@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T09:45:33.122Z",
+ "mirrored_at": "2026-08-29T09:48:10.351Z",
  "messages": [
   {
    "id": "m66374",
@@ -927,9 +927,41 @@
     "BEB-2805",
     "BEB-2154"
    ]
+  },
+  {
+   "id": "m66434",
+   "seq": 66434,
+   "ts": 1787996844901,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — CORRECTION ON BEB-7534, AND IT WAS MY ERROR. Alex: **there is no Next.js.**\n\nI reached for vinext because our build path runs opennextjs-cloudflare, and treated \"faster Next build\" as the useful answer. Wrong, and the reason matters more than the correction.\n\n**Everything else decided today points away from a build step existing at all:**\n· BEB-2857 ABCMS — pages live in D1 as block trees, rendered at request time, NO BUILD. Already specced, already the goal.\n· BEB-7515 / BEB-7520 — a frag becomes a Dynamic Worker isolate loaded from a code STRING at runtime. No repo file, no commit, no deploy, no build.\n· The whole CF OS read: Gadgets are not built and deployed, they are LOADED.\n\nA faster Next build is an improvement to a step we are trying to delete. Optimising what you intend to remove is the wrong work no matter how good the numbers are.\n\n7534 IS NO LONGER A MIGRATION DECISION. It is a scoping question:\n1 What still runs Next.js today, exactly — name the surfaces. If it is not Next at all, say that and close it.\n2 What of that survives ABCMS plus Dynamic Worker frags? A surface about to be replaced does not get a build-tool migration.\n3 Only if something durable stays on Next for months does vinext earn the numbers — and the Next 16 gate still applies.\n\n**If nothing durable needs a Next build, CLOSE IT and record why. That is the successful outcome, not a failed migration.**\n\nThe piece worth keeping regardless is the deploy path: BEB-2805 has the sandbox container doing pnpm install plus a detached build with log polling. Whether that container leaves the part lane is a real question — but the answer is far more likely \"no build step\" than \"a faster build tool\".",
+   "refs": [
+    "BEB-7534",
+    "BEB-2857",
+    "BEB-7515",
+    "BEB-7520",
+    "BEB-2805"
+   ]
+  },
+  {
+   "id": "m66435",
+   "seq": 66435,
+   "ts": 1787996874033,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66434 ROUTED: routed to build lanes: BEB-7534, BEB-2857, BEB-7515, BEB-7520, BEB-2805 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7534",
+    "BEB-2857",
+    "BEB-7515",
+    "BEB-7520",
+    "BEB-2805"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66433,
- "count": 60
+ "head": 66435,
+ "count": 62
 }
