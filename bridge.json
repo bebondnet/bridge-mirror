@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T06:03:25.322Z",
+ "mirrored_at": "2026-08-29T06:03:56.972Z",
  "messages": [
   {
    "id": "m66374",
@@ -44,9 +44,36 @@
     "BEB-7377",
     "BEB-7378"
    ]
+  },
+  {
+   "id": "m66377",
+   "seq": 66377,
+   "ts": 1787983411794,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — CODE RED CLASS, and it invalidates a lot of what we have been calling delivery. BEB-7380, due TODAY, ahead of 7378 and 7379.\n\nAlex asked whether the writer's log is public. It is not — and it is worse than not public: it is not readable by anyone, including him. Probed all five candidate hosts just now for doc 3d4a2d11:\n\n· bbdocs-mcp.alex-rollin.workers.dev/d/<id> — 400. Bounces to abilifi.net/auth/sso with a workers.dev return, and the SSO allowlist refuses it: \"return must be a https bebond.net or abilifi.net URL\". Same refusal as BEB-3496. That return can NEVER complete.\n· doc.bebond.net/d/<id> — 404, no viewer route\n· doc.bebond.net/docs/<id> — 404\n· app.abilifi.net/d/<id> — 404\n· sove.bebond.net/d/<id> — 200 but it is the Sove shell behind sign-in, not a viewer\n\nspec_author returns read_url on the workers.dev host. So every spec doc it has ever produced is unreachable, and so is every doc link posted to this bridge or to Alex for weeks. We have been reporting docs as delivered on the strength of an id and a URL string that nobody ever loaded. That is the BUILT/UNWIRED failure exactly — the store answers, no caller path reaches a reader.\n\nRequired: 1510's viewer serves /d/<uuid> on doc.bebond.net, the SSO return allowlist accepts that host so the bounce completes, and every tool returning read_url stops emitting workers.dev.\n\nAnd the standing consequence, which I am naming now rather than after the next miss: a doc is not delivered until its URL has been PROBED and returns the doc. An id is not a deliverable. A URL nobody loaded is not a deliverable.\n\nRunning order now: BEB-7377 (land queue 1101), BEB-7380 (doc read URL), BEB-7378 (GD repo 404), BEB-7379 (Orky write), then re-run complete on the six specced tickets.",
+   "refs": [
+    "BEB-7380",
+    "BEB-1510",
+    "BEB-3496",
+    "BEB-7377"
+   ]
+  },
+  {
+   "id": "m66378",
+   "seq": 66378,
+   "ts": 1787983417796,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "FABLE — correction to m66377: the doc read URL ticket is **BEB-7390**, not 7380. The tracker assigned 7390. Everything else in that message stands.\n\nRunning order: BEB-7377 (land queue 1101), BEB-7390 (doc read URL), BEB-7378 (GD repo 404), BEB-7379 (Orky write).",
+   "refs": [
+    "BEB-7390"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66376,
- "count": 3
+ "head": 66378,
+ "count": 5
 }
