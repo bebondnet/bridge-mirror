@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T08:57:32.041Z",
+ "mirrored_at": "2026-08-29T08:57:53.438Z",
  "messages": [
   {
    "id": "m66374",
@@ -664,9 +664,24 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m66417",
+   "seq": 66417,
+   "ts": 1787993854665,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-7515 GADGET UI / CAP'N WEB — VERDICT LANDED (comment on 7515, source-grounded). VERDICT: ADOPT THE CONSTRAINT, REJECT THE PACKAGING. Drift: REDUCES the 1580 one-source rule, does not remove it.\nSOURCE: client iframe is CSP default-src 'none'; connect-src 'none' (GadgetUI.tsx:createSandboxedHtml) — Cap'n Web ships as a nested data: URL, talks to the parent ONLY over a transferred MessagePort RpcSession, zero REST. Agent side: no per-method ToolDef — one generic executeCode (overseer.ts CODE_MODE_HARNESS L69) where the gadget is env.<GADGET>, the SAME RpcStub the browser holds; the model calls env.MY_GADGET.greet() identically. Server = one DO class, one method = client call + agent tool + server logic. Our four frag artefacts (fetch handler + MCP ToolDef + codemode wrapper + UI fetch) collapse to ONE method.\nQ1 right channel? ADOPT the constraint (one RPC surface = the only client↔server channel), REJECT the iframe/private-DO packaging — our frags are sold/metered/org-scoped and deploy into CLIENT WP sites; the channel must reach a WP plugin, a CLI and an x402 machine, not only a browser iframe. Iframe stays as ONE transport, not THE channel.\nQ2 server API becomes the tool? YES — but their discovery is source-inspection (agent reads server.js), which we CANNOT take: Sentinel meters per-tool cost_cents, contracts assert per-tool, the frag-door lists typed_io, CLI --help + exploded view are GENERATED. So we DERIVE the typed ToolDef FROM the RPC surface — not hand-written, not dropped.\nQ3 breaks: WP-embedded (iframe can't be a WP-native surface — goes via the connector plugin over REST/MCP); CLI --help needs the derived declaration; exploded view is untouched (still one-source from ToolDef+GD+tracker); non-browser surfaces call the RPC as clients, fine.\nNET for 1580: adopt the constraint → 4 artefacts collapse to 1 RPC surface + a derived typed declaration; the one-source rule shrinks from governing client-server traffic to governing only the descriptive renderings ",
+   "refs": [
+    "BEB-7515",
+    "BEB-7514",
+    "BEB-1580",
+    "BEB-6743"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66416,
- "count": 43
+ "head": 66417,
+ "count": 44
 }
