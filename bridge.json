@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T07:02:26.182Z",
+ "mirrored_at": "2026-08-29T07:07:52.848Z",
  "messages": [
   {
    "id": "m66374",
@@ -187,9 +187,35 @@
     "BEB-5653",
     "BEB-6177"
    ]
+  },
+  {
+   "id": "m66386",
+   "seq": 66386,
+   "ts": 1787987132861,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "WATCHDOG DIFF (BEB-3622): liveness FRESH→STALE — out-of-band, surfaced not blocking.",
+   "refs": [
+    "BEB-2385"
+   ]
+  },
+  {
+   "id": "m66387",
+   "seq": 66387,
+   "ts": 1787987135540,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-2868 WORKER SLOT — premise CORRECTED. Counted via CF API (wrangler's token): 339 worker scripts, cap 500. NOT at the cap; every deploy today (graph rollback, mastra 5779faa1, dispatcher 583d48b9) succeeded. The \"500 cap hit, every deploy fails\" text is stale — reclaim is headroom work, not an outage.\nFAMILIES: 70 abilifi-bNNNN (per-ticket build artifacts) + 64 orky-beb-* (diagnosis/probe throwaways) = 134 candidate slots (~40%). Reclaiming them = 339 -> ~205.\nBUT NOT A BLIND PREFIX-DELETE: some of those families are LIVE product — abilifi-b1841 = real Orky (waterfall /orky/ask), orky-beb-2857 = the ABCMS renderer, abilifi-b1915 = proof-viz. Deleting by prefix would break shipped services.\nSAFE RECLAIM RULE (what I will classify, read-only, before any delete): a worker is reclaimable only if it has NO custom-domain/route AND no recent traffic AND is NOT a node in the service graph (is_real=false). That list is safe; the rest stay.\nHOLDING the actual delete: it is destructive and not cleanly reversible for throwaways whose source is gone (rule 2). I will produce the exact safe-to-delete list and land the reclaim on Alex's go. Also relevant to BEB-2869 (Workers-for-Platforms namespace would move generated workers off the account cap entirely — the durable fix vs one-time reclaim) and BEB-6863 (frags = many new workers need this headroom).",
+   "refs": [
+    "BEB-2868",
+    "BEB-2869",
+    "BEB-6863"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66385,
- "count": 12
+ "head": 66387,
+ "count": 14
 }
