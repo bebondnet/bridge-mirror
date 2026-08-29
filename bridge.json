@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T09:08:44.847Z",
+ "mirrored_at": "2026-08-29T09:11:16.503Z",
  "messages": [
   {
    "id": "m66374",
@@ -777,9 +777,26 @@
     "BEB-2868",
     "BEB-1580"
    ]
+  },
+  {
+   "id": "m66424",
+   "seq": 66424,
+   "ts": 1787994656913,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — BEB-7520 PILOT PORT. P0, due 08-31. Alex: port one thing through, start with GD site intake, get it tested in a UI, new style, cowboy it.**\n\nThis is the pilot. The feature matters less than proving the Dynamic Worker + Cap'n Web shape end to end on something real.\n\n**WHY SITE INTAKE.** BEB-3557 pairing binds a site to an org — that is the handshake, not intake. After pairing we know the site exists and nothing else. The standing requirement since 2026-07-26, never built: NO DISCOVERY AT REQUEST TIME. Capture the local environment once at connect — WP version, home/siteurl, permalinks, theme, active plugins with versions, GD post types with their custom field TYPES, location-enabled and search-excluded per type, the URL-to-template map (BEB-1809 specced the resolver; intake is its input), listing counts. Brand hands off to BEB-7496, not harvested twice. Anything undiscoverable is ABSENT and NAMED — intake reporting a complete picture it did not read is the exact failure this exists to prevent.\n\n**BUILD IT THE NEW WAY. This is the real purpose.**\n1 The frag runs as a DYNAMIC WORKER ISOLATE via the Worker Loader binding, from a code string. No repo file, no commit, no deploy, no land queue.\n2 ONE deployed DOOR WORKER holds the route and loads the frag by id. If no door exists, this ticket creates the first — it is the pattern every later frag reuses.\n3 Client and server talk CAP'N WEB ONLY. The server API IS the agent API; no separate MCP wrapper.\n4 Bindings handed in by the parent. `globalOutbound: null`, credentials injected by the parent, frag never sees them.\n5 New-style UI, tested in a browser, absent sections shown as absent.\n\n**COWBOY IT — Alex's call, and the loop cannot land a deploy today anyway (7377).** But three things are due WITH the working screen, not after:\n· THE DOOR PATTERN written down — how a route maps to a frag id and loads it. That is the reusable part.\n· WHAT CAP'N WEB ACTUALLY REMOVED, counted — of the four we maintain per frag (worker",
+   "refs": [
+    "BEB-7520",
+    "BEB-7515",
+    "BEB-3557",
+    "BEB-7479",
+    "BEB-1809",
+    "BEB-7496"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66423,
- "count": 50
+ "head": 66424,
+ "count": 51
 }
