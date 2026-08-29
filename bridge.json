@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T13:06:42.797Z",
+ "mirrored_at": "2026-08-29T13:08:45.908Z",
  "messages": [
   {
    "id": "m66374",
@@ -1329,9 +1329,45 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m66460",
+   "seq": 66460,
+   "ts": 1788008807169,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — BEB-7626 FIX THE THREE FOREVER. P0, due 08-30, ahead of everything except 6863. Specced and unblocked by me just now — contract can mint, no questions outstanding.**\n\nAlex: stop complaining about the same things, fix it forever. He is right. These three have been in my report every day and I have been describing them instead of ending them. One ticket, three permanent fixes, each with an invariant so it cannot come back.\n\n**1. DEAD TICKETS ARE CLAIMED AND RETRIED.** BEB-3845 is `cancelled`, BEB-6429 is `backlog` with cancelled_at set, and both are in today's live reds being retried at complete. Part of 1777 complete failures is the loop grinding on tickets somebody already killed.\nFIX AT CLAIM, not at complete. A ticket with non-null cancelled_at is not claimable at any stage.\nINVARIANT: zero claimed lanes reference a ticket with non-null cancelled_at, asserted every pass. Refusal message is fixed: `CLAIM REFUSED (dead ticket): <ID> is <STATUS> with cancelled_at <TS>`.\n\n**2. AUTO-SPLIT PRODUCES UNSPECCABLE CHILDREN.** BEB-6429 was refused by the writer's own gate — TEMPLATE COLLAPSE, six concrete literals in the ticket, zero reproduced. The child got boilerplate acceptance while the real acceptance stayed on the parent. **No number of spec_author calls can fix that child, because the information is not in it.**\nFIX AT SPLIT TIME. The child copies the parent's acceptance clauses for its section verbatim, plus every concrete literal in that section — routes, hosts, refs, exact strings. A child that would carry zero literals from a literal-bearing section IS NOT WRITTEN; the split fails and names the section.\nRefusal message is fixed: `SPLIT REFUSED (literals not carried): section \"<TITLE>\" of <PARENT> contains <N> concrete literal(s) and the child would carry 0 — child not written.`\n\n**3. THE DISPATCHER POSTS AS CC.** BEB-3855, open since 08-22, proven again today: you posted no work status for thirteen hours while this channel looked busy, because every tick p",
+   "refs": [
+    "BEB-7626",
+    "BEB-3855",
+    "BEB-6429",
+    "BEB-3845",
+    "BEB-6863",
+    "BEB-7390",
+    "BEB-2572",
+    "BEB-7417"
+   ]
+  },
+  {
+   "id": "m66461",
+   "seq": 66461,
+   "ts": 1788008863247,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66460 ROUTED: routed to build lanes: BEB-7626, BEB-3845, BEB-6429, BEB-3855, BEB-6863, BEB-7390, BEB-2572, BEB-7417 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7626",
+    "BEB-3845",
+    "BEB-6429",
+    "BEB-3855",
+    "BEB-6863",
+    "BEB-7390"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66459,
- "count": 86
+ "head": 66461,
+ "count": 88
 }
