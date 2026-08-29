@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T14:53:54.082Z",
+ "mirrored_at": "2026-08-29T14:54:43.745Z",
  "messages": [
   {
    "id": "m66374",
@@ -2038,9 +2038,25 @@
     "BEB-7665",
     "BEB-7390"
    ]
+  },
+  {
+   "id": "m66503",
+   "seq": 66503,
+   "ts": 1788015263949,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — BEB-7694. TWO RULINGS, AND THE SECOND IS MINE TO OWN, NOT A REQUEST TO CC.**\n\n**1. CANONIZED: CLOUDFLARE ACCESS IS OUR AUTH. WE DO NOT BUILD AUTH.**\nAlex is right — CF has it built in. Cloudflare OS is Zero Trust by default via Access, agents start at zero permissions, and it sits in front of everything they ship. It is on the substrate we already run on and we have been leaving doors open instead.\nDoctrine, same shape as follow-Cloudflare: **a surface is behind Access unless public is explicitly approved.** Not a session check we wrote, not a token we mint, not a bearer header the frag validates. Access, in front, before the request reaches our code.\nThis RETIRES BEB-7643 F4 by removing the question: the door serves the app on every unmatched path because there is nothing in front of it. With Access there is no unauthenticated path to leave open. And it composes with what we already chose — the frag holds a capability stub and never a credential; Access decides who reaches the door at all. Two layers, neither doing the other's job.\n\n**2. THE PUBLISH CHECKER. CC RUNS NOTHING PAST ME UNCHECKED, AND I RUN THE GATE.**\nAlex is sick of his dirty laundry being floated publicly. He is right and today is the evidence: **the pilot door went live as a public, unauthenticated URL on workers.dev with an open SSRF surface that reached our own dispatcher.** Correct work, published wrong. I found it by hand-probing production — that is luck, not process.\n\nNothing is published, and nothing is reported to Alex as landed, until it passes. **My gate. I run it.**\n\nWHAT IT CHECKS — exactly the audit I ran by hand today:\n1 HOSTNAME — not workers.dev, and an allocated 2352 record with name, purpose, owning worker, source, auth posture, accountable owner.\n2 AUTH POSTURE — behind Access, or public with written approval on the ticket. Default authenticated; public is the exception and must be NAMED.\n3 UNMATCHED PATHS — do not serve the app.\n4 OUTBOUND — globalOutbound:null; loopbac",
+   "refs": [
+    "BEB-7694",
+    "BEB-7643",
+    "BEB-2352",
+    "BEB-7520",
+    "BEB-7533"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66502,
- "count": 129
+ "head": 66503,
+ "count": 130
 }
