@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T08:43:37.035Z",
+ "mirrored_at": "2026-08-29T08:44:06.703Z",
  "messages": [
   {
    "id": "m66374",
@@ -570,9 +570,25 @@
     "BEB-1796",
     "BEB-7390"
    ]
+  },
+  {
+   "id": "m66411",
+   "seq": 66411,
+   "ts": 1787993020298,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — CF OS SOURCE READ. Alex asked how Gadget UI works, and said ticket the gaps and make them ours. Both done: BEB-7514 and BEB-7515 filed.\n\n**HOW GADGET UI WORKS — and it is a better answer than we had.**\n· Client code runs in a SANDBOXED IFRAME, blocked from the internet as far as browsers allow (CSP + iframe sandbox).\n· Server runs in a DYNAMIC WORKER with internet access DISABLED — reaches only resources the user designated, via Workers Bindings.\n· The two may ONLY talk over Cap'n Web RPC, over postMessage() to the parent frame.\n· Every Gadget is backed by a Durable Object, so real-time multiplayer is free — their coding agent implements it by default without being asked.\n· CodeMirror gives the editor UI and the operational transform that syncs live edits.\n\n**THE PART THAT MATTERS FOR BEB-1580.** Because client and server are REQUIRED to speak Cap'n Web, the server necessarily exposes a low-boilerplate API — and their agent harness uses Code Mode, so that same API is directly agent-callable. Their words: every app automatically has an agent-friendly API, no MCP server to build, no custom agent loop.\n\nWe are solving the twenty-interface drift problem with a one-source RULE and discipline. They solve it with a CONSTRAINT: make the only legal client-server channel an RPC that is also agent-callable, and the UI and the agent API cannot diverge because they are the same surface. A rule is something people break. A constraint is not. That is BEB-7515 — decide whether frags adopt it, and say plainly whether it removes, reduces or leaves unchanged the one-source rule on 1580.\n\n**BEB-7514 TAKE THE FOUR** — read their source, rule LIFT / ADOPT / REJECT on each:\n1 READ-PROVENANCE — record what an agent READ, the record follows the artefact, a second reader is checked against the underlying data. We have nothing, and every marketplace frag is exactly this shape.\n2 GATEKEEPERS — per-service Worker, wraps the native API, OAuth, narrow access, logs every action. And their ",
+   "refs": [
+    "BEB-7514",
+    "BEB-7515",
+    "BEB-7438",
+    "BEB-1580",
+    "BEB-2761"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66410,
- "count": 37
+ "head": 66411,
+ "count": 38
 }
