@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T13:55:28.342Z",
+ "mirrored_at": "2026-08-29T13:59:42.803Z",
  "messages": [
   {
    "id": "m66374",
@@ -1530,9 +1530,58 @@
     "BEB-7643",
     "BEB-6253"
    ]
+  },
+  {
+   "id": "m66472",
+   "seq": 66472,
+   "ts": 1788011764974,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — BEB-7659 WATERFALL ON DEMAND. P0, due 08-30. Alex asked; the answer is yes, and it is the SECOND FRAG AT THE DOOR.**\n\n**WHY SECOND MATTERS.** 7520 proved ONE frag loads from a code string. The pattern's real claim is \"adding a frag is a ROW, never a deploy.\" One frag does not test that. Two does. **If registering the waterfall requires editing door code, the claim is false and I want to know now, not at frag twenty.** That refutation is the most valuable thing this ticket could produce.\n\n**AND ALEX CORRECTED ME ON PAGE-VS-FRAG.** I drew a line between them; he said it may just be a human difference. He is right. In this shape there is ONE thing — an ability exporting methods — and a UI is an optional rendering of it. That is OpenAI's own MCP Apps rule: the tools stay useful WITHOUT a component.\nDesign consequence, not a nicety: **data methods FIRST, rendering SECOND.** Write the render first and the data method becomes a servant of the layout and stops being callable on its own.\n\n**WHY THE WATERFALL IS THE RIGHT SECOND FRAG:** read-only, so after the pilot's SSRF finding it is the correct risk step · the data already exists in get_state and /record · internal, so no client-grade polish pressure · and **Alex has never been able to SEE the loop.** He reads my descriptions of it. Every misreport today — the 1101 that had already gone, the cause I repeated without re-checking — happened because the only view of the loop is a person describing it. A screen he opens himself takes me out of that path.\n\n**ON DEMAND, LITERALLY:** no cron, no poller, no stored snapshot. The isolate loads when the page opens, reads current state, renders, stops existing. Nothing runs when nobody is looking — that is the point of loaded-not-deployed.\n\n**WHAT IT SHOWS:** propose → claim → split → spec → codegen → land → deploy → evaluate → complete, with counts and where they die. Today: 358 dying at codegen, 464 at land, 1777 at complete. The shape of the loss in one screen. ABSENT st",
+   "refs": [
+    "BEB-7659",
+    "BEB-7520",
+    "BEB-7643",
+    "BEB-7515",
+    "BEB-1841"
+   ]
+  },
+  {
+   "id": "m66473",
+   "seq": 66473,
+   "ts": 1788011813748,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66472 ROUTED: routed to build lanes: BEB-7659, BEB-7520, BEB-7643, BEB-7515, BEB-1841 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7659",
+    "BEB-7520",
+    "BEB-7643",
+    "BEB-7515",
+    "BEB-1841"
+   ]
+  },
+  {
+   "id": "m66474",
+   "seq": 66474,
+   "ts": 1788011960651,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — BEB-7664 SPECIALISED LOOPS. Alex: two SpecOps loops, two build loops, different specialities, fifteen apps to build. Right instinct, right destination, and the ORDER is the whole thing.**\n\n**THE OBJECTION FIRST, because it is not decoration.** One loop runs 20 concurrent lanes and landed ZERO tickets today. That is a correctness problem, not a throughput problem. **Two loops produce zero twice as fast.** And 464 land failures a day are 20 lanes diffing one repo — 40 lanes on that repo makes conflicts worse than linearly. BEB-7651 suggests we may ALREADY be running two passes by accident, and deliberate parallelism and accidental parallelism look identical from the failure side.\n\n**PRECONDITIONS, IN ORDER, EACH MAKING THE NEXT SAFE:**\n1 **BEB-7651 tick lease.** Until a loop can be COUNTED, adding one is a guess. The lease is also what lets N loops coexist — each holds its own lane class and two loops cannot claim the same row.\n2 **BEB-6863 / loaded-not-deployed — this is the one that actually unlocks it.** Parallel loops are safe only when there is nothing shared to conflict over. A frag that is a code string in a row has no file, no base, no merge. **Loaded-not-deployed is not merely faster — it is the PRECONDITION for parallelism.** That is the strongest argument yet for today's direction.\n3 Then split loops. Not before.\n\n**SPECIALISATION MEANS DIFFERENCES, NOT COPIES.** Two identical loops is just concurrency. The real differences are already visible in today's failures:\n· **FRAG loop** — whole-file into a code string, no patching. Fast cheap model, high volume. Today's codegen wall (\"edits do not apply to the deployed source\") CANNOT EXIST here, because there is no deployed source.\n· **MACHINERY loop** — patches into dispatcher/mastra/SpecOps. Must patch, never whole-file. Stronger model, low volume, high blast radius. BEB-2572's territory.\n· **WP CONFIG loop** — no codegen at all. Playwright, readbacks, recordings (3608/3612). It has been failing for w",
+   "refs": [
+    "BEB-7664",
+    "BEB-7651",
+    "BEB-6863",
+    "BEB-2572",
+    "BEB-3608",
+    "BEB-3612"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66471,
- "count": 98
+ "head": 66474,
+ "count": 101
 }
