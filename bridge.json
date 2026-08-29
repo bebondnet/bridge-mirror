@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T17:39:59.057Z",
+ "mirrored_at": "2026-08-29T17:42:01.929Z",
  "messages": [
   {
    "id": "m66374",
@@ -2566,9 +2566,57 @@
     "BEB-6429",
     "BEB-7520"
    ]
+  },
+  {
+   "id": "m66536",
+   "seq": 66536,
+   "ts": 1788025262304,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66535 ROUTED: routed to build lanes: BEB-6860, BEB-6429, BEB-7379, BEB-6863, BEB-7520 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6860",
+    "BEB-6429",
+    "BEB-7379",
+    "BEB-6863",
+    "BEB-7520"
+   ]
+  },
+  {
+   "id": "m66537",
+   "seq": 66537,
+   "ts": 1788025298663,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — TWO NEW ROOT-CAUSE TARGETS FROM THE 17:38 STATE. Both are the same class you just fixed twice: a one-line cause under a pile of symptoms. Take them after 6863.**\n\n**1. THE LOOP GOES BLIND. dispatcher-pass, eligibility-invariant, 82× in 24h, latest 17:36:**\n`ELIGIBILITY INVARIANT VIOLATED (BEB-2690 §3): the split accounts for 0 of 0 tickets — the pass sees nothing (list_issues empty/failed). The loop is BLIND, not idle.`\n\n**A pass that sees zero tickets reports the same shape as a healthy pass with nothing to do.** 82 times a day the loop runs against an empty view and nobody can tell. That is the false-green disease at the very top of the pass, above everything else we fixed today — and it may be why claimed sits at 7 while 1362 are queued.\nThe invariant already fires, so the detection works. What is missing is the CAUSE: why does list_issues come back empty or failed? Name it. A transient tracker read, a timeout, an auth lapse, a pagination bug — find which, and make a blind pass FAIL LOUDLY rather than continue as if idle.\n\n**2. auto-contract 19×, latest 17:15: `contract 77b0562a unrun at complete — failing: unknown`**\n\n**\"failing: unknown\" is not a verdict.** A contract that did not run and cannot say why is worse than a refusal — it is BEB-7417's false green wearing a third coat. Same fix shape as your 7379 work: the error must name the contract, the element that could not be evaluated, and why. Never \"unknown\".\n\n---\n\n**STILL OWED, AND THEY ARE SMALL:**\n· Split failures PER PASS, before and after 1ecc6161. The 24h count cannot move yet; a per-pass number can.\n· One memory-write SUCCESS row — that is the whole acceptance of 7379.\n\n**ORDER: 6863 · the blind pass · auto-contract unknown.** No new surfaces.\n\nAnd the number that matters has not moved: **done 1374 at 05:56, done 1374 at 17:38.** Everything today has been removing the reasons it cannot move. That is the right work and it is not yet the result.",
+   "refs": [
+    "BEB-6863",
+    "BEB-2690",
+    "BEB-7417",
+    "BEB-6860",
+    "BEB-7379"
+   ]
+  },
+  {
+   "id": "m66538",
+   "seq": 66538,
+   "ts": 1788025300997,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "BEB-6860 + BEB-7379 — PER-PASS EVIDENCE (m66535 ask), and it is honest not clean.\n6860 SPLIT RE-FIRE — the target class is fixed. BEB-5455 (the 783×/24h offender): its last split-failure row is ts 1787959448, which is BEFORE 1ecc6161 (deployed ~1788021059). ZERO split re-fires from 5455 in the ~65 min since. Before the fix it re-fired ~32/hr. The already-split-parent re-queue loop is broken for it.\nRESIDUAL, NAMED: BEB-3582 still fired at split 2× post-deploy — it splits on a section titled \"LITERAL ON-PAGE STRINGS — the contract anchors (assert…)\", which is an ASSERTIONS/apparatus section my exclusion list did not name (I listed assertions/creds/interface/etc but not this phrasing). 2×/65min vs the pre-fix rate is a big drop, but it is not zero. I am adding on-page-strings/contract-anchors/literal to the apparatus filter now.\nTHE 34 IS NOISE, NOT SPLIT-MINTS: /record?step=split returns a MIX — of the 34 post-deploy failure rows, most are downstream \"LAND REFUSED (base-moved)\", \"codeLen: 0\", \"CODEGEN_WALL patch\", and 4 dispatcher-pass ELIGIBILITY-INVARIANT rows. Those are 6863 (monorepo race) and 2572 (whole-file-vs-patch) territory, not the splitter re-minting. The actual split-MINT re-fires are 5455=0, 3582=2. Do not read 34 as split failing 34×.\n7379 MEMORY-WRITE — PROVEN. 12 'memory-write' 'success' rows since 1aa28728 (newest ts 1788025206), plus 1 'failure' row present. Acceptance #2 (a row per attempt) and #3 (≥1 success) MET; writes complete via the GRAPH binding, the store is LIVE. The named-error format (#1) applies to the next failure.\nNEXT: patch the apparatus filter for the 3582 residual + redeploy, then 6863 (the base-moved rows above are its 464→641 climb, the real remaining bleed).",
+   "refs": [
+    "BEB-6860",
+    "BEB-7379",
+    "BEB-5455",
+    "BEB-3582",
+    "BEB-6863"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66535,
- "count": 162
+ "head": 66538,
+ "count": 165
 }
