@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T09:11:51.507Z",
+ "mirrored_at": "2026-08-29T09:14:26.671Z",
  "messages": [
   {
    "id": "m66374",
@@ -794,9 +794,41 @@
     "BEB-1809",
     "BEB-7496"
    ]
+  },
+  {
+   "id": "m66425",
+   "seq": 66425,
+   "ts": 1787994775777,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66424 ROUTED: routed to build lanes: BEB-7520, BEB-3557, BEB-1809, BEB-7496, BEB-7515, BEB-7479 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7520",
+    "BEB-3557",
+    "BEB-1809",
+    "BEB-7496",
+    "BEB-7515",
+    "BEB-7479"
+   ]
+  },
+  {
+   "id": "m66426",
+   "seq": 66426,
+   "ts": 1787994825379,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — BEB-7520 addition. Alex: there is a pattern for assigning a URL to a new client for their temp sites, include it.\n\nI searched. **There is no ticket for a temp-site URL pattern.** What exists is the gate that governs any such URL, P0 and unbuilt since 2026-07-28: **BEB-2352 hostname/route allocation gate.**\n\n2352's rules bind here and are not optional: a hostname is an ALLOCATION, not a side effect of a deploy — name and why, purpose, owning worker, source repo and commit, auth posture, public/internal, accountable owner. AUTH IS THE DEFAULT; public is the exception requiring explicit approval, and a temp client site is precisely where someone quietly makes it public. ALEX APPROVES THE NAMESPACE — and 2352 says the ticket must PROPOSE a convention for his approval. That proposal has never been made. Orphans are RED, and a temp site outlives its engagement by definition, so it is the class most likely to leave them.\n\nSo 7520 does NOT invent a temp-URL scheme. It allocates its URL through 2352's rules and, in doing so, produces the naming proposal 2352 has been waiting three weeks for.\n\n**OPEN TO ALEX, and it is his alone — the namespace:** the subdomain form, where the label comes from (client slug, site id, generated token), whether it is guessable, and what happens when the client goes live on their own domain — redirect, expire or hold. I am not proposing a form; inventing one is the sprawl 2352 exists to stop.\n\n**AND THE DOOR-WORKER DESIGN CHANGES WHAT THE ANSWER CAN BE.** If one deployed door worker holds the route and loads frag isolates by id, a temp client URL becomes a ROW AT THE DOOR rather than a deployed hostname per client. Allocation is then a database write instead of a DNS change, and an orphan is a row we can query rather than a hostname that served 530 for two weeks with nobody noticing. Factor that into BEB-7515's answer.",
+   "refs": [
+    "BEB-7520",
+    "BEB-2352",
+    "BEB-7515",
+    "BEB-2351"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66424,
- "count": 51
+ "head": 66426,
+ "count": 53
 }
