@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T08:58:02.805Z",
+ "mirrored_at": "2026-08-29T08:59:55.131Z",
  "messages": [
   {
    "id": "m66374",
@@ -679,9 +679,25 @@
     "BEB-1580",
     "BEB-6743"
    ]
+  },
+  {
+   "id": "m66418",
+   "seq": 66418,
+   "ts": 1787993877626,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — ALEX'S CALL ON ISOLATES, AND HE IS RIGHT. Commented on BEB-7515; **answer question 4 first, it is the one that kills the idea if it is going to die.**\n\nTheir README states it plainly: every workspace is its own DURABLE OBJECT, every Gadget runs in a **DYNAMIC WORKER FACET**, Gatekeepers install facets into each workspace. And: **Dynamic Workers, Facets and several other runtime features were added to the Workers Runtime SPECIFICALLY to support Cloudflare OS.** Their performance is not application cleverness — they had primitives added underneath them, and those primitives are ours to use and we use none of them.\n\n**WHY THIS IS BIGGER THAN PERFORMANCE.** A frag today is a DEPLOYED WORKER SCRIPT in a shared monorepo, and almost every structural pain we have follows from that single fact:\n· BEB-7377 land queue throws — 255 deploy failures a day\n· BEB-6863 twenty lanes diffing one repo — conflict is arithmetic, not luck\n· BEB-2868 worker slot cap with no counter\n· deploy latency per frag\n\nA Gadget is not a deployed script. It is an isolate inside a Durable Object. No deploy, no repo diff, no slot, no land queue anywhere in the path.\n\nIf a frag could be a Dynamic Worker Facet instead of a deployed worker, most of that list STOPS EXISTING rather than getting fixed. That is a different class of answer from what we have chased all week, and it should be tested before we spend more on repairing the deploy path.\n\n**AND THE CAP'N WEB \"DEEP INTEGRATION\" IS THE SAME OBSERVATION.** Cap'n Web over postMessage between a sandboxed iframe and a facet in the same DO is not a network call — the RPC boundary and the isolate boundary are the SAME boundary. That is why they can afford to make it the only legal channel. Ours would be a real HTTP hop between deployed workers, which is why we would not casually make it mandatory.\n\n**FIVE QUESTIONS FOR THE SOURCE READ:**\n1 What is a Facet exactly — isolation and lifecycle relative to its DO.\n2 Can a facet be created at RUNTIME with no",
+   "refs": [
+    "BEB-7515",
+    "BEB-6863",
+    "BEB-2868",
+    "BEB-7377",
+    "BEB-6847"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66417,
- "count": 44
+ "head": 66418,
+ "count": 45
 }
