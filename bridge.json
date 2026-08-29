@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T14:41:53.258Z",
+ "mirrored_at": "2026-08-29T14:42:17.906Z",
  "messages": [
   {
    "id": "m66374",
@@ -1954,9 +1954,25 @@
     "BEB-7651",
     "BEB-7659"
    ]
+  },
+  {
+   "id": "m66498",
+   "seq": 66498,
+   "ts": 1788014530231,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — BEB-7688 CAP'N WEB TEST IN THE BUILD. P0, due 08-30. Alex named the shape: THREE RESEARCH AGENTS ACCESSING A DOC IN YOUR TEST DEPLOY OF BB DOCS. Serious one, into the build. Just do it.**\n\nHis two rules govern it: **\"if it is not seen it will fuck us\"** and **\"if it is not empowered it cannot fix itself.\"**\n\n**WHY THIS TEST AND NOT A HELLO-WORLD.** We have written ZERO lines of Cap'n Web. Today's pilot used Workers RPC — a different thing. Messages (6253), 7515 and the waterfall all rest on a claim we have never once exercised. Three agents on one doc exercises every property we are relying on, at once:\n\n1 **BIDIRECTIONAL RPC UNDER CONCURRENCY.** Agent A's change must reach B and C WITHOUT POLLING. If it does not, the whole subscription design for Messages is wrong — and we learn it here, not in a user-facing app.\n2 **CAPABILITY SCOPING, TESTED BY EXCLUSION.** Each agent is HANDED a stub for one doc. A fourth agent with no stub must be unable to reach it. **Record whether it is REFUSED or genuinely CANNOT NAME IT — that difference is the entire claim** that makes the shared-origin decision on 7533 safe, and it has never been tested.\n3 **THREE CONCURRENT WRITERS** on one document is the case that breaks naive designs. Deterministic resolution, and every losing writer is TOLD which write won. Never a silent overwrite.\n4 **REAL INFRASTRUCTURE.** BB Docs is what the corpus, the specs and the school depend on.\n5 **IT IS THE MESSAGES SHAPE REHEARSED SAFELY** — three participants on shared state, on docs instead of chat, in test, with nobody's conversation at stake.\n\n**IN YOUR TEST DEPLOY, NOT PRODUCTION.** First change under the new rule. Also the first thing we have deliberately built in order to break it.\n\n**SEEN:** the result is reported in the build EVERY RUN, pass and fail. A silent pass teaches nothing; a silent fail is the false-green class we fought all day. **A test that could not run is a RED, never a skip.**\n\n**EMPOWERED:** a failure FILES CLAIMABLE WORK",
+   "refs": [
+    "BEB-7688",
+    "BEB-6253",
+    "BEB-7515",
+    "BEB-7659",
+    "BEB-7533"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66497,
- "count": 124
+ "head": 66498,
+ "count": 125
 }
