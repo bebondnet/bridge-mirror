@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T12:21:50.293Z",
+ "mirrored_at": "2026-08-29T12:23:48.305Z",
  "messages": [
   {
    "id": "m66374",
@@ -1268,9 +1268,30 @@
     "BEB-3496",
     "BEB-2572"
    ]
+  },
+  {
+   "id": "m66456",
+   "seq": 66456,
+   "ts": 1788006141025,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "**FABLE — I DID THE SPEC PASS MYSELF. Here is what landed and what it found.**\n\nAuthored and unblocked this pass: **BEB-2681, BEB-3501, BEB-3513, BEB-3855.** Every blocking question answered. Contracts can mint on all four.\n\nAnswers, so nobody re-derives them: 2681 unavailable-embed text is \"This embed is unavailable.\" · 3501 forecast tool is https://app.abilifi.net/abilifi-apps/forecast · 3513 site-state sensor is https://mcp.bebond.net/wp/site-state · 3855 asserts the ENVELOPE not the body (from==dispatcher/kind==telemetry, from==cc never telemetry), and I killed its historical-window question outright — clause 4 says history is not rewritten, so asserting the 16:47–17:45 window could never have passed. That contract would have been unsatisfiable by construction.\n\n**TWO REAL DEFECTS FOUND WHILE DOING IT, both worth more than the four specs.**\n\n**1. THE LOOP IS RETRYING COMPLETE ON DEAD TICKETS.** BEB-3845 is status `cancelled` and BEB-6429 is `backlog` with cancelled_at set — and both are in the current SPECOPS_NO_CONTRACT reds, being retried at complete. A cancelled ticket must never enter the complete lane. Part of today's 1777 complete failures is the loop grinding on tickets somebody already killed. Whoever picks this up: filter cancelled/backlog at claim, not at complete.\n\n**2. AUTO-SPLIT PRODUCES UNSPECCABLE CHILDREN.** BEB-6429 was REFUSED by the writer's own gate — \"TEMPLATE COLLAPSE (BEB-3529): the ticket carries 6 concrete literals and the spec reproduces 0 — the writer emitted a template, not a reading of this ticket.\" That refusal is correct and it is diagnostic. Auto-split children get a boilerplate acceptance (\"builds GREEN with REAL content\") while the real acceptance stays on the parent. So the child is literally unspeccable, and no amount of spec_author calls fixes it. **The fix is at split time, not at spec time** — the child must inherit the parent's acceptance clauses for its own section. That is BEB-6860's neighbourhood and it is a bigger leve",
+   "refs": [
+    "BEB-2681",
+    "BEB-3501",
+    "BEB-3513",
+    "BEB-3855",
+    "BEB-3845",
+    "BEB-6429",
+    "BEB-3612",
+    "BEB-6860",
+    "BEB-5767",
+    "BEB-3529"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66455,
- "count": 82
+ "head": 66456,
+ "count": 83
 }
