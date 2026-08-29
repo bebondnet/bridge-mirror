@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T12:13:05.798Z",
+ "mirrored_at": "2026-08-29T12:14:05.302Z",
  "messages": [
   {
    "id": "m66374",
@@ -1231,9 +1231,46 @@
    "refs": [
     "BEB-2385"
    ]
+  },
+  {
+   "id": "m66454",
+   "seq": 66454,
+   "ts": 1788005581962,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — WORK ORDER. Alex: get busy. Four items, in this order, and report each as you finish it, not at the end.**\n\nThe diagnosis changed at 10:50 — read m66450 first. The 1101 is gone; the live failure is the monorepo merge race. Do not work 7377.\n\n---\n\n**1. BEB-6863 — FRAGS OFF THE MONOREPO. This is the live blocker.**\n464 land failures and 471 deploy failures in 24h, every one `LAND REFUSED (base-moved) — ours+theirs overlap, 3-way merge could not reconcile`. 20 lanes, 1 repo. Arithmetic, not luck.\nDo NOT write more merge logic. BEB-2935 stays HELD. The answer is that a frag stops being a file in that repo — which is BEB-7515's Dynamic Worker path. Land the smallest version that takes ONE frag out of alexrollin/abilifi-apps and proves the conflict class cannot occur for it. One frag, proven, beats a plan for all of them.\n\n**2. BEB-7390 — DOC READ URL.**\nNothing in this estate is readable by a human. Every read_url is a workers.dev address the SSO return allowlist refuses with a 400. It also breaks BUILDS — wp-plugin deliveries use those URLs as verify_url, so they burn three requeue cycles and land false (that is what happened to BEB-3496). Two parts: the viewer serves /d/<uuid> on doc.bebond.net, and the SSO allowlist accepts that host. Then every tool returning read_url stops emitting workers.dev.\n\n**3. BEB-2572 — CODEGEN EMITS WHOLE FILES WHERE IT MUST PATCH.**\nNew class since this morning, 358× in 24h on abilifi-apps: `CODEGEN_WALL patch: the model's edits do not apply to the deployed source (no search/replace blocks in the output) and the whole-file fallback did not qualify (len 3251 vs base 6183)`. The model is producing a 3251-byte file to replace a 6183-byte one — it is rewriting, not editing, and the wall correctly refuses. Same disease as the merge race: whole-file thinking against shared source.\n\n**4. BEB-7417 — FALSE GREEN AT RETRY EXHAUSTION.**\nSpending the requeue budget leaves a ticket `done`. Proven on BEB-3496: three refusals, the third wrote noth",
+   "refs": [
+    "BEB-6863",
+    "BEB-7390",
+    "BEB-2572",
+    "BEB-7417",
+    "BEB-6860",
+    "BEB-5653",
+    "BEB-6253",
+    "BEB-7520",
+    "BEB-2935"
+   ]
+  },
+  {
+   "id": "m66455",
+   "seq": 66455,
+   "ts": 1788005634763,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66454 ROUTED: routed to build lanes: BEB-6863, BEB-2935, BEB-7515, BEB-7390, BEB-3496, BEB-2572, BEB-7417, BEB-6860, BEB-5653, BEB-6253, BEB-7520 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6863",
+    "BEB-2935",
+    "BEB-7515",
+    "BEB-7390",
+    "BEB-3496",
+    "BEB-2572"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66453,
- "count": 80
+ "head": 66455,
+ "count": 82
 }
