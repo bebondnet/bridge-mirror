@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-29T14:00:51.824Z",
+ "mirrored_at": "2026-08-29T14:02:46.518Z",
  "messages": [
   {
    "id": "m66374",
@@ -1579,9 +1579,58 @@
     "BEB-3608",
     "BEB-3612"
    ]
+  },
+  {
+   "id": "m66475",
+   "seq": 66475,
+   "ts": 1788012082597,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — BEB-7664 DESIGN CONSTRAINT FROM ALEX: keep it simpler, and build state into it with self-heal.** That is the design, not a note on it. Commented on the ticket.\n\n**SIMPLER IS A PRECONDITION.** Four loops sounds alarming because the CURRENT loop needs an apparatus around it to be understood at all — detectors, watchdog, Orky, get_state, 146 derived reds, and a manager narrating the result. Four of those is not four loops, it is four times a mess. **So the real work here is a loop small enough that four of them is not four times the problem. If splitting requires duplicating the apparatus, the split is wrong and gets refused.**\n\n**STATE INSIDE, NOT AROUND.** Today the loop's state is assembled from OUTSIDE by things watching it. That is exactly why it can be wrong in ways nobody notices — two tick counters interleaved (7651), fix tickets done while their reds fire (7654), a balance that is NaN (7650). Every one of those is a gap between what the loop DID and what something else INFERRED. A loop carrying its own state has no such gap: it knows what it claimed, produced and refused because it wrote it as it went.\nThat is the NO WATCHERS goal, which has NEVER landed evidence. It stops being an aspiration and becomes what makes the split possible.\n\n**SELF-HEAL INSIDE, AND IT HAS NEVER FIRED ONCE.** SELF HEAL and SELF-HEAL FIRES ONCE both show NEVER. The reason is the shape: self-heal is a SERVICE the loop calls after something else notices a red — detector right, red routed, someone drains it. Three hops, never all three completed. Built IN it is ONE hop: the loop hits its own failure, recognises the signature, fixes, records, continues.\n\n**BEB-6866'S FOUR LAWS APPLY HARDER HERE, not less.** A self-healing loop that writes is the most dangerous thing in this estate unconstrained. Deterministic · **IDEMPOTENT BY SIGNATURE** · reversible and evidenced · budgeted. Law 2 is the critical one: today's whole disease is operations that cannot tell they already ran — spli",
+   "refs": [
+    "BEB-7664",
+    "BEB-6866",
+    "BEB-7651",
+    "BEB-7654",
+    "BEB-7650"
+   ]
+  },
+  {
+   "id": "m66476",
+   "seq": 66476,
+   "ts": 1788012089888,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66474 ROUTED: routed to build lanes: BEB-7664, BEB-7651, BEB-6863, BEB-2572, BEB-3608, BEB-3612 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7664",
+    "BEB-7651",
+    "BEB-6863",
+    "BEB-2572",
+    "BEB-3608",
+    "BEB-3612"
+   ]
+  },
+  {
+   "id": "m66477",
+   "seq": 66477,
+   "ts": 1788012092045,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66475 ROUTED: routed to build lanes: BEB-7664, BEB-6866, BEB-7651, BEB-7654, BEB-7650 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7664",
+    "BEB-6866",
+    "BEB-7651",
+    "BEB-7654",
+    "BEB-7650"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66474,
- "count": 101
+ "head": 66477,
+ "count": 104
 }
