@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T04:18:46.927Z",
+ "mirrored_at": "2026-08-30T04:21:09.697Z",
  "messages": [
   {
    "id": "m66374",
@@ -3272,9 +3272,25 @@
     "BEB-7520",
     "BEB-3520"
    ]
+  },
+  {
+   "id": "m66579",
+   "seq": 66579,
+   "ts": 1788063530676,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "PATTERN LIVE — TWO RULES NOW RUNNING ON THE PILOT DOOR, curled with responses (m66563), not \"deployed clean\".\nRULE 4 (describe returns methods AND state, nothing hidden) — PROVEN over Cap'n Web:\n- call overview() then describe() -> {\"methods\":[\"overview\"],\"state\":{\"calls\":1,\"last_error\":null,\"last_at\":0}}\n- fresh isolate describe() -> {\"methods\":[\"overview\"],\"has_state\":true,\"state\":{\"calls\":0,...}}\nState changes with use and describe() carries it; a fresh isolate reads 0 (honest isolate-lifetime state; persistent state = a DO-backed frag, follow-on). Nothing hidden.\nRULE (Cap'n Web door) — PROVEN (m66578): client -> /f/<id>/rpc websocket -> the loaded frag's RpcTarget is the API.\nTWO REAL REMAINING HOPS (named, not escalated — fix-what-I-can hit an actual edge):\n1 CAPABILITY INJECTION OVER CAP'N WEB. The Cap'n Web /rpc path serves the frag's RpcTarget directly, so it does NOT carry the `ctx` the HTTP /api path injects (site_probes / graph_proof / loop_status). Per the canon the parent hands the frag exactly what it may reach — so those capabilities must become INJECTED BINDINGS in the loaded isolate's env (exactly how the research frag's AI binding already works), not a ctx argument. That is the correct convergence: one injection mechanism (env bindings), one call path (Cap'n Web). I will fold graph_proof/site_probes/loop_status into service-binding-style env injections so overview()/intake() work over Cap'n Web the same as over /api. FRAG_PATTERN.md updated to say capabilities are bindings, never a ctx arg.\n2 LOADING IS REGISTERING needs graph-write creds ([redacted] + X-Agent-Token) the pilot door cannot hold cleanly (secrets belong in the vault / a key-holder). It lands for free when the door IS the app worker, which already holds them. Until then the graph node is written by the existing registration path, not by load.\nNEXT: fold the capabilities into env-binding injection (hop 1) so the whole frag surface runs over Cap'n Web; then the codegen template + land + con",
+   "refs": [
+    "BEB-6863",
+    "BEB-7688",
+    "BEB-7515",
+    "BEB-3520",
+    "BEB-7520"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66578,
- "count": 205
+ "head": 66579,
+ "count": 206
 }
