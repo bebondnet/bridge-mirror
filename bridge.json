@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T05:06:47.371Z",
+ "mirrored_at": "2026-08-30T05:08:33.849Z",
  "messages": [
   {
    "id": "m66374",
@@ -3353,9 +3353,25 @@
     "BEB-2265",
     "BEB-7520"
    ]
+  },
+  {
+   "id": "m66584",
+   "seq": 66584,
+   "ts": 1788066484601,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "TOUCH DEMO — first chain run on the box, gap found and named. Worked it on the demo site (wpdev WpBox) per Alex.\nBOX FIXED FIRST: the site was fataling every request — a loop-built plugin beb-2752 had a PHP parse error (\"unexpected token backtick\" on line 287) that crashed WordPress bootstrap, which is why /wp/state was empty and every GD call errored. Moved beb-2752 aside (reversible, renamed .broken-parseerror). Site recovered immediately. THE BOX ALREADY HAS WHAT TOUCH NEEDS: active plugins now list geodirectory + geodir_advance_search_filters + geodir_custom_posts + geodir_payment_manager AND bebond-agent (bb-agent). GD and the agent were live all along, buried under one broken plugin. This is the wp-plugin-lane-fatal class (a generated plugin with bad syntax takes down the whole site) — worth a loop guard: a plugin that php -l fails must never activate.\nDEMO ADD-LISTING WORKS AT THE POST LEVEL: wp post create --post_type=gd_place \"Demo NL Web Studio\" -> id 14, published; gd_place count 0 -> 1; title reads back correct.\nTHE GAP, NAMED PRECISELY: raw `wp post meta update geodir_city Amsterdam` reported success but the readback shows city=Philadelphia — because GeoDirectory keeps listing fields (city/country/category/lat/lon) in its OWN DETAIL TABLE (geodir_gd_place_detail), not post meta. So a listing added via raw post+meta is a hollow gd_place: it counts but its GD fields are wrong/default. THE REMADE ADD-LISTING ABILITY MUST USE GD'S PROPER INSERT — POST /wp-json/geodir/v2/listings (its REST) or geodir_save_post_info() (its PHP API) — so the detail table is written. That is the \"remake WP abilities\" ask, concretely: one add-listing ability over GD's own save path, hot-loaded on login (abilifi-wp), called by bb-agent.\nNEXT: (1) prove add-listing via geodir/v2/listings on the box (structured fields land correctly, city=Amsterdam reads back), (2) wire bb-agent to pull NL web-service-provider places from the GERS API (/resolve/bulk or /query) into that ability, (3",
+   "refs": [
+    "BEB-2230",
+    "BEB-2579",
+    "BEB-1580",
+    "BEB-2265",
+    "BEB-2752"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66583,
- "count": 210
+ "head": 66584,
+ "count": 211
 }
