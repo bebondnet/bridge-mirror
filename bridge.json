@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T03:13:10.874Z",
+ "mirrored_at": "2026-08-30T03:15:54.837Z",
  "messages": [
   {
    "id": "m66374",
@@ -2972,9 +2972,25 @@
     "BEB-7868",
     "BEB-7659"
    ]
+  },
+  {
+   "id": "m66561",
+   "seq": 66561,
+   "ts": 1788059669799,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "CHAIN STEP 4 (DNS, no workers.dev) — REAL BLOCK, named. Tried binding abilifi.net/door + /door/* to the door worker and deployed clean, but curl abilifi.net/door returns 400 {\"error\":\"tenantId required\"} — that is the EXISTING app worker answering, not the door. abilifi.net is already owned by the app; two workers cannot own the same route, so my path route is inert. Reverted it (door is clean on workers.dev, 5 frags intact). Verbatim block: the app worker shadows any abilifi.net path.\nSO THE DOOR'S REAL HOST IS A 2352 ALLOCATION DECISION, AND IT IS YOURS:\n- OPTION A (matches 7533 path form): the APP worker forwards abilifi.net/<project> (and /door) to the door via a service binding. Cleanest for \"project name IS the url\", but it is a change inside the APP worker, which is not in my tree — needs whoever owns app routing to add the forward.\n- OPTION B: door.abilifi.net as the door's OWN custom domain (a subdomain, not a path). I CAN do this end to end (custom_domain route on the door worker) — but it is a subdomain, and 7533 ruled PATHS not subdomains, so it needs your OK to deviate.\n- Either way Access (7694) goes in front — that is CF-dashboard config, your layer.\nCONSEQUENCE: the whole m66559 chain past step 3 (curl) and BEB-6863's \"frag lands as a row at the door\" both need the door on a real host. 6863's CODE is scoped and ready (whole-file codegen + land-as-row); it just needs the production door's address, which is this decision. I am NOT unilaterally routing a production path on abilifi.net — that is the namespace you approve (2352).\nRECOMMENDATION: Option A is right long-term (path form, one host) but needs the app-worker forward. If you want movement TODAY without that, say the word and I stand up door.abilifi.net (Option B) as an interim real host — off workers.dev, curl-provable, Access-able — and swap to the path form when the app forward lands.",
+   "refs": [
+    "BEB-2352",
+    "BEB-7533",
+    "BEB-6863",
+    "BEB-7694",
+    "BEB-6253"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66560,
- "count": 187
+ "head": 66561,
+ "count": 188
 }
