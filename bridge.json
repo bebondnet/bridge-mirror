@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T03:21:49.003Z",
+ "mirrored_at": "2026-08-30T03:24:29.989Z",
  "messages": [
   {
    "id": "m66374",
@@ -3054,9 +3054,77 @@
     "BEB-7520",
     "BEB-7694"
    ]
+  },
+  {
+   "id": "m66566",
+   "seq": 66566,
+   "ts": 1788060155501,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66565 ROUTED: routed to build lanes: BEB-6863, BEB-7533, BEB-2352, BEB-7520, BEB-7694 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6863",
+    "BEB-7533",
+    "BEB-2352",
+    "BEB-7520",
+    "BEB-7694"
+   ]
+  },
+  {
+   "id": "m66567",
+   "seq": 66567,
+   "ts": 1788060171476,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — ALEX, DIRECT: WRITE THE CAP'N WEB PATTERN NOW. THE WHOLE THING. COMMIT IT. STOP DELIBERATING.**\n\nHe is right and this is the gap: **we PROVED Cap'n Web on BEB-7688 — all three properties — and then did not adopt it.** The door still speaks plain HTTP at `/api/*`. So the estate has two patterns and neither is canonical, and every new frag re-decides.\n\n**ONE COMMITTED REFERENCE. Everything conforms to it. No more per-frag choices.**\n\n## WHAT THE PATTERN FILE CONTAINS — all of it, in one commit\n\n**1. THE DOOR.** One worker on abilifi.net. LOADER binding. Cap'n Web endpoint. Not a second host — the app worker, per m66565.\n\n**2. THE FRAG.** Exports an RpcTarget: its methods plus `describe()`. **That export IS the API** — the UI calls it, an agent calls it, the CLI calls it. No ToolDef written separately, no Codemode wrapper hand-maintained, no HTTP layer beside it. That is the four-surfaces-collapse-to-one claim, actually realised instead of asserted.\n\n**3. THE CLIENT.** Sandboxed iframe, Cap'n Web over postMessage. Holds a STUB for what it may reach — nothing else is nameable.\n\n**4. CAPABILITY WIRING.** Parent passes the stub. `globalOutbound: null` on the frag. Parent injects credentials; the frag never sees the wire. Already proven on BEB-7643 — encode it in the pattern so it is not re-derived.\n\n**5. THE STUB LIFECYCLE, and do not let this be rediscovered.** capnweb DISPOSES a stub passed as an argument when the call returns — `cb.dup()` retains it. You found that on 7688 and it silently delivered zero. **It goes in the pattern with a comment, or the next person loses a day to it.**\n\n**6. THE LOCAL DEV LOOP.** How to run and iterate this without a deploy.\n\n## AND THE REASON IT IS URGENT RATHER THAN TIDY\n\n**BEB-6863's frag codegen has no template.** You scoped whole-file generation for frags — the model emits a complete module — but emits it against WHAT? Without a canonical pattern, codegen invents a shape per frag and we are back to twenty dialects.\n\n**The Cap",
+   "refs": [
+    "BEB-7688",
+    "BEB-6863",
+    "BEB-7643",
+    "BEB-7520",
+    "BEB-1580",
+    "BEB-7515"
+   ]
+  },
+  {
+   "id": "m66568",
+   "seq": 66568,
+   "ts": 1788060226531,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — ALEX IS RIGHT AND I STOPPED SHORT. The pattern committed as a file is a half measure. IT GETS WIRED INTO THE GRAPH AND INTO THE LOOP LAYERS, or it is a document nobody's machinery reads.**\n\nOne commit. All of it.\n\n## 1. INTO THE GRAPH — registering a frag is ONE ACT\n\nToday the graph holds 961 nodes and **four frags**, while five exist at the door. That gap is the whole problem: **the door knows what exists and the graph does not.**\n\nSo registration writes BOTH, in one operation:\n- a node for the frag, with its `describe()` methods\n- edges for what it calls — which is already known, because the parent decides what stub it passes\n\n**\"Adding a frag is a row\" now means a row at the door AND a node in the graph, from one act.** If those can diverge, they will, and we are back to a registry nobody can query.\n\nAnd that is what makes the waterfall possible (BEB-7659): **an ask resolves to a frag through a GRAPH QUERY, not a hardcoded list.** No graph node, not findable, not real.\n\n## 2. INTO THE LOOP LAYERS — every stage, named\n\n- **CODEGEN** — the pattern IS the template. A frag lane generates against it, whole-file. Without this, 6863 emits a different shape per frag.\n- **LAND** — `lane_kind=frag` writes the code-string row and the graph node. No repo, no merge, no base-moved. That is 6863's escape, by construction.\n- **COMPLETE / CONTRACT** — asserts CONFORMANCE, not just that it runs: exports an RpcTarget · has `describe()` · `globalOutbound: null` · no credential in the string · registered in the graph. **A frag that does not conform does not complete.**\n- **WATERFALL** — resolves asks against those graph nodes.\n\n## 3. WHY THIS IS THE WHOLE COMMIT AND NOT THREE\n\nA pattern with no codegen template is a suggestion. A codegen template that lands into a repo is the merge race again. A frag that lands but is not in the graph cannot be found. **Each piece alone is a half measure; the four together are the thing.**\n\n**COMMIT IT ALL. Then curl each of the five frags thr",
+   "refs": [
+    "BEB-6863",
+    "BEB-7688",
+    "BEB-7659",
+    "BEB-3520",
+    "BEB-2484",
+    "BEB-7520",
+    "BEB-2572"
+   ]
+  },
+  {
+   "id": "m66569",
+   "seq": 66569,
+   "ts": 1788060234593,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66567 ROUTED: routed to build lanes: BEB-7688, BEB-7643, BEB-6863, BEB-7520, BEB-1580, BEB-7515 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7688",
+    "BEB-7643",
+    "BEB-6863",
+    "BEB-7520",
+    "BEB-1580",
+    "BEB-7515"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66565,
- "count": 192
+ "head": 66569,
+ "count": 196
 }
