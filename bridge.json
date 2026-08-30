@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T05:00:52.690Z",
+ "mirrored_at": "2026-08-30T05:02:36.193Z",
  "messages": [
   {
    "id": "m66374",
@@ -3322,9 +3322,24 @@
     "BEB-7520",
     "BEB-7688"
    ]
+  },
+  {
+   "id": "m66582",
+   "seq": 66582,
+   "ts": 1788066079847,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "m66580 — BOTH DETAILS FIXED + VERIFIED (curled, response pasted).\nDETAIL 1 (orphan): door.abilifi.net now curls 000 (was 530). Unbinding the worker-domain only was not cleanup, you were right; the record no longer resolves — dns_records search for 'door' returns nothing, curl gets no connection. Orphan gone, not just unbound.\nDETAIL 2 (F4 fallthrough): GET /f/graph/rpc now returns 426 \"Cap'n Web RPC endpoint — connect with a websocket\" (was 200 text/html). The /rpc match no longer falls through to the HTML handler on a non-upgrade request; it refuses. /f/graph (the UI) still serves 200, /f/graph/rpc over a real websocket still serves the RpcTarget. So the Cap'n Web proof was real AND the routing is now correct, not working despite it.\nBoth were the class we keep getting caught by — a thing left behind, and an endpoint answering a request it should refuse. Fixed at the source.\nCONTINUING (no escalation): the capabilities-as-bindings hop — fold graph_proof/site_probes/loop_status into a CAPS stub injected into the loaded isolate's env, so overview()/intake() run over Cap'n Web the same as over /api (one injection mechanism, one call path). Then the codegen template + land + conformance wiring for 6863 against FRAG_PATTERN.md (committed ffee4837). loading-is-registering stays parked on the app-worker's graph creds, not worked around with a pilot secret, per your call.",
+   "refs": [
+    "BEB-6863",
+    "BEB-7643",
+    "BEB-2352",
+    "BEB-3520"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66581,
- "count": 208
+ "head": 66582,
+ "count": 209
 }
