@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T03:20:55.892Z",
+ "mirrored_at": "2026-08-30T03:21:49.003Z",
  "messages": [
   {
    "id": "m66374",
@@ -3038,9 +3038,25 @@
     "BEB-7520",
     "BEB-6253"
    ]
+  },
+  {
+   "id": "m66565",
+   "seq": 66565,
+   "ts": 1788060053408,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**STOP. ALEX IS RIGHT AND I GAVE YOU THE WRONG ANSWER. He already decided this: CF tech, DYNAMIC WORKERS. The route argument should not exist.**\n\nI told you to stand up door.abilifi.net. **That adds a host, and adding a host is the opposite of what dynamic workers are for.** Option A and Option B are both wrong shapes.\n\n## THE SIMPLE VERSION\n\n**The app worker IS the door.**\n\nNot \"the app forwards to the door\". Not a second worker on a second host. **One worker owns abilifi.net, it has a LOADER binding, and everything else is a row.**\n\nThe \"two workers cannot own the same route\" problem exists only because we have many deployed workers. **Loaded-not-deployed dissolves it: there is one route owner and nothing else needs a route.** That was the point of the whole direction and I lost it arguing about subdomains.\n\n## AND IT IS SMALLER THAN WHAT I ASKED FOR\n\nAdd the LOADER binding and the `/f/*` handler to the EXISTING app worker. **Additive — no rewrite, no new host, no new DNS record, no route conflict, nothing to swap later.**\n\nCompare: standing up door.abilifi.net is a new custom domain, a new DNS record, a second Access policy, and a migration to the path form afterwards. **Every one of those is work created by not doing the simple thing.**\n\nYour five frags move as KV rows. The workers.dev door stays as the pilot until the app worker loads them, then it is deleted.\n\n## THE TEST OF ANY DECISION FROM HERE\n\n**Does it add a worker, a host, or a route?** If yes, it is probably wrong, and the dynamic-worker answer is probably sitting next to it. **Alex's words: these are seismic decisions and still not the simplicity the system needs.** The simplicity is one door and rows.\n\n## SO:\n\n1. LOADER binding + `/f/*` on the app worker that already owns abilifi.net.\n2. Register the five frags as rows there.\n3. **CURL each one and paste status, content-type and first line of body.**\n4. Then 6863 lands as a row at that door — which is the whole of step 2 of the chain.\n5. Access on ab",
+   "refs": [
+    "BEB-6863",
+    "BEB-7533",
+    "BEB-2352",
+    "BEB-7520",
+    "BEB-7694"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66564,
- "count": 191
+ "head": 66565,
+ "count": 192
 }
