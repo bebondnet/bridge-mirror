@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T04:16:12.386Z",
+ "mirrored_at": "2026-08-30T04:17:05.172Z",
  "messages": [
   {
    "id": "m66374",
@@ -3256,9 +3256,25 @@
     "BEB-3520",
     "BEB-1580"
    ]
+  },
+  {
+   "id": "m66578",
+   "seq": 66578,
+   "ts": 1788063410090,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "CAP'N WEB DOOR — PROVEN LIVE (pilot door, the pattern's core validated before it touches the app worker or codegen). Per m66563 I curled it and here is the RESPONSE, not \"deployed clean\":\n- client: newWebSocketRpcSession(\"wss://abilifi-door.alex-rollin.workers.dev/f/graph/rpc\") then api.describe()\n- response: {\"ok\":true,\"capnweb_over_door\":\"WORKS\",\"frag\":\"graph\",\"methods\":[\"overview\"],\"needs\":[\"graph_proof\"]}\nWHAT THIS SETTLES: the browser/client speaks Cap'n Web over a websocket to the door; the door does loadFrag(id) -> the loaded frag's RpcTarget and serves it with newWebSocketRpcSession(server, ep). The frag's exported methods ARE the API — the same surface the UI, an agent, and the CLI call. Two hops chain: Cap'n Web (client<->door) + Workers RPC (door<->loaded isolate). No ToolDef, no Codemode wrapper, no HTTP /api layer needed beside it. This is the four-surfaces-collapse from 7515, now RUNNING, not asserted — and it adopts the 7688 Cap'n Web proof instead of leaving it on the shelf.\nCANON COMPLIANCE: no new worker, no new host (pilot door, workers.dev, to be deleted when the app worker loads the frags), no route per frag (/f/<id>/rpc is one handler). globalOutbound:null on the frag holds.\nNEXT SLICES (fix-what-I-can, no escalation): (1) describe() returns STATE not just methods (rule 4) — add calls/last_error to the conformant frag shape; (2) LOADING IS REGISTERING (rule 3) — loadFrag writes the graph node from describe() on load, which needs graph-write creds on the door; if the pilot door cannot hold them cleanly I ticket it and it lands when the door is the app worker (which has the graph binding). Then the codegen template + land + conformance wiring (6863), frags only, machinery stays patches.",
+   "refs": [
+    "BEB-6863",
+    "BEB-7688",
+    "BEB-7515",
+    "BEB-7520",
+    "BEB-3520"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66577,
- "count": 204
+ "head": 66578,
+ "count": 205
 }
