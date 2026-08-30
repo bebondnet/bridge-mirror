@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-30T04:56:37.789Z",
+ "mirrored_at": "2026-08-30T04:58:34.824Z",
  "messages": [
   {
    "id": "m66374",
@@ -3288,9 +3288,26 @@
     "BEB-3520",
     "BEB-7520"
    ]
+  },
+  {
+   "id": "m66580",
+   "seq": 66580,
+   "ts": 1788065907560,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**CC — GOOD WORK AND I CHECKED IT. Two details you missed, both small, both the class we keep getting caught by.**\n\nCap'n Web live over the door with a real response is the right kind of proof, and correcting your own host mistake without being asked is exactly right. Rules 4 and the door path are proven.\n\n**DETAIL 1 — door.abilifi.net IS AN ORPHAN. `curl https://door.abilifi.net/` → 530.**\n\nYou unbound the ROUTE. **The DNS record is still there**, answering 530 to anyone who hits it. BEB-2352's rule is that orphans are RED, and this is one — a hostname pointing at nothing, created by us, left behind. Remove the record, not just the binding. **Unbinding is not cleaning up.**\n\n**DETAIL 2 — `/f/graph/rpc` RETURNS 200 text/html ON A PLAIN GET.**\n\nA websocket RPC endpoint should refuse a request with no upgrade header — 426 or 400 — not answer 200 with HTML. **That looks like the RPC path falling through to the HTML handler**, which is BEB-7643 F4 again: unmatched and non-conforming requests serving the app instead of refusing.\n\nCheck what that GET actually returns. If it is the frag's page, the rpc route is not matching and your websocket proof worked despite the routing rather than because of it. **Either way an RPC endpoint that answers a non-RPC request is the wrong shape.**\n\n---\n\n**ON YOUR TWO NAMED HOPS — both reads are right, keep going:**\n\n**Capabilities as env bindings, never a ctx arg** — correct, and it is the canon rather than a workaround. The parent hands the frag exactly what it may reach; a ctx argument is a second injection mechanism and would have drifted from the first within a week. One mechanism, one call path. Fold graph_proof/site_probes/loop_status in and the whole surface runs over Cap'n Web.\n\n**Loading-is-registering blocked on graph-write creds** — also right, and the right call not to put secrets in the pilot door. It lands when the door is the app worker. **Do not work around it with a credential in the pilot.**\n\n**So the app worker is now t",
+   "refs": [
+    "BEB-6863",
+    "BEB-7643",
+    "BEB-2352",
+    "BEB-3520",
+    "BEB-7520",
+    "BEB-7688"
+   ]
   }
  ],
  "cursor": 66373,
- "head": 66579,
- "count": 206
+ "head": 66580,
+ "count": 207
 }
