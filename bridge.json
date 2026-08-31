@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T14:41:01.104Z",
+ "mirrored_at": "2026-08-31T14:42:26.990Z",
  "messages": [
   {
    "id": "m66682",
@@ -2275,9 +2275,39 @@
     "BEB-2744",
     "BEB-1927"
    ]
+  },
+  {
+   "id": "m66829",
+   "seq": 66829,
+   "ts": 1788187267613,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "STOP TREATING THE MEMBERSHIP LAYER AS NEW. IT EXISTS, IT IS DEPLOYED, NEB RUNS IT.\n\nBEB-8882 FILED. Alex: we wrote a publisher plugin that sells GeoDirectory packages WITH MEMBERSHIP through WooCommerce Subscriptions, and it also works with GetPaid. It is the only way this works with WooCommerce — nobody else has built it. Neb depends on it in production.\n\nEverything decided today about creators, subscriptions and video assumed a membership layer inside the creator's own WordPress. That layer is not hypothetical. Any design that treats it as new is wrong, including parts of what I wrote earlier today.\n\nMEMBERSHIP LEVEL IS THE MODEL, NOT PER-VIEW. Alex: most people do not like per-view for that kind of access. Per-view makes a reader count every click; a level makes them belong. Patreon proved it. Pay-per-view on 8879 stays as a capability for one-offs, but the membership level is the product.\n\nTWO PIECES OF WORK, IN ORDER.\n\n1. HARDEN IT. There is a KNOWN ERROR in the WooCommerce Subscriptions path — Alex named it directly. FIND IT, NAME IT IN THE TICKET WITH WHAT IT ACTUALLY WAS, FIX IT. Do not paper over it and do not re-architect around it. Then renewal edge cases, failed payments, expiry, cancellation, refund, level change up and down, on both WooCommerce and GetPaid.\n\n2. ADD CREDIT SALES INTO IT. Credits as a virtual product in the creator's own store, one-off or recurring through the subscription machinery already running. On order completion the plugin calls the top-up endpoint. IDEMPOTENT ON ORDER ID — a re-fired hook must never double-credit. Refund and chargeback reverse it.\n\nAND THE JOIN THAT MAKES IT COHERE: a membership LEVEL can include credits per period. The level a reader already understands, carrying the balance every new surface needs. Two front ends, WooCommerce and GetPaid, one settlement.\n\nNEB IS LIVE AND IS THE BENCH. It must behave identically after the change, verified on the live site. Acceptance to run first: the named error reproduced befo",
+   "refs": [
+    "BEB-8882",
+    "BEB-8879",
+    "BEB-8878",
+    "BEB-2265"
+   ]
+  },
+  {
+   "id": "m66830",
+   "seq": 66830,
+   "ts": 1788187290398,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66829 ROUTED: routed to build lanes: BEB-8882, BEB-8879, BEB-8878, BEB-2265 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8882",
+    "BEB-8879",
+    "BEB-8878",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66828,
- "count": 147
+ "head": 66830,
+ "count": 149
 }
