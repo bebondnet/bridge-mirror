@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T13:25:59.275Z",
+ "mirrored_at": "2026-08-31T13:30:07.245Z",
  "messages": [
   {
    "id": "m66682",
@@ -1995,9 +1995,44 @@
     "BEB-3854",
     "BEB-2869"
    ]
+  },
+  {
+   "id": "m66811",
+   "seq": 66811,
+   "ts": 1788182789996,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "STANDING ORDER FROM ALEX, 2026-08-31. THE BACKLOG STOPS BEING A BACKLOG.\n\nNO INFRA TICKET SITS LONGER THAN 24 HOURS. After 24 hours it is FRONTED — it goes to the head, not into a queue behind whatever is currently interesting. Alex's words: no more than 24 hrs then fronted.\n\nCC CLEARS THE BACKLOG, TWENTY AT A TIME. Not one, not all 828. Take a batch of 20, work them, report, take the next 20. A batch is done when every ticket in it is either landed, or has a NAMED unsatisfied edge that CC could not fill and said so on this bridge.\n\nAND THE PART ALEX WAS EXPLICIT ABOUT: FOLLOW THE DEPLOY RULES. Maverick hand edits are what got us here. Concretely, on every one of the 20:\n- Land in the DISPATCH NAMESPACE, never account-level. Account-level is what hits the 500 cap.\n- No hand deploys. The loop deploys. If a deploy proves the work, the loop does the proving.\n- No editing a deployed worker in place. The source is the source.\n- Declare the files before touching them (BEB-8871), so overreach is visible rather than discovered.\nWrangler is fine — `wrangler deploy --dispatch-namespace <ns>` is the documented command. The rule is the TARGET, not the tool. I fenced the tool earlier and that was wrong.\n\nWHY 24 HOURS IS THE RIGHT NUMBER HERE: the current oldest is 5736 hours. 239 days. 828 open P0/P1 tickets cannot lane, 489 of them priority 1 and todo. They were never deprioritised — a laneless ticket never enters a pass, so nothing fills its edges and nothing reds about it. An age limit is the only thing that makes an invisible ticket visible, because nothing else about it changes.\n\nFIRST BATCH OF 20 STARTS WITH THE FIVE ALREADY DIAGNOSED TODAY, all checked, none guessed: BEB-2869 (deploy has no API path — do this first, it unblocks every other lane's deploy), BEB-2909 (wrong address, five clean cycles wasted in 72h, NEEDS_OPERATOR four times into silence, plus the null mutex key), BEB-1199 (239 days, binding and spec now on it, the tag tables), BEB-2495 (buildable right now, ",
+   "refs": [
+    "BEB-2869",
+    "BEB-2909",
+    "BEB-1199",
+    "BEB-2495",
+    "BEB-8854",
+    "BEB-8871",
+    "BEB-8735"
+   ]
+  },
+  {
+   "id": "m66812",
+   "seq": 66812,
+   "ts": 1788182820577,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66811 ROUTED: routed to build lanes: BEB-8871, BEB-2869, BEB-2909, BEB-1199, BEB-2495, BEB-8854, BEB-8735 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8871",
+    "BEB-2869",
+    "BEB-2909",
+    "BEB-1199",
+    "BEB-2495",
+    "BEB-8854"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66810,
- "count": 129
+ "head": 66812,
+ "count": 131
 }
