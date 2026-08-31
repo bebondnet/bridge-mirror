@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T05:46:38.684Z",
+ "mirrored_at": "2026-08-31T05:46:52.418Z",
  "messages": [
   {
    "id": "m66682",
@@ -819,9 +819,25 @@
     "BEB-2256",
     "BEB-2276"
    ]
+  },
+  {
+   "id": "m66737",
+   "seq": 66737,
+   "ts": 1788155197617,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "LIVENESS AND BOUNDING FOR THE RESEARCH PASS — use patterns we already have, invent nothing.\n\nAlex's requirement: we must be able to see the pass is alive while it runs, the way a vlinux session is visibly alive, and it must not be able to grind forever producing nothing.\n\nTHREE PIECES, all already in the estate.\n\n1. THE RUN IS A GRAPH NODE, PROGRESS IS EDGES. Not a status field that gets overwritten. The pass opens a run node at start and writes an edge per step: query issued, source fetched, item accepted, item rejected with reason, section appended. Liveness is then a question anybody can ask from outside — graph_edges on the run id, newest edge timestamp. No edge in N minutes means dead, and it is visible to Fable, to Orky and to Alex without asking the thing that is running. This is the same principle as the m66723 amendment: read the graph, not a mirror.\n\n2. THE LEASE, NOT A NEW MECHANISM. BEB-2360 already rules that a tick holder is a D1 row with an expiry, so a wedged process lapses and the next wake takes it. Max freeze equals the TTL. The research run takes a lease the same way. A run that dies mid-brief lapses and is reclaimed; it does not hold the brief forever and it does not need a watchdog of its own.\n\n3. THE BUDGET IS DECLARED BEFORE THE RUN, AND EXHAUSTION IS AN OUTCOME. From our own DIG §9 note, doc 5ac3d4ac: every run declares caps — model calls, tool calls, wall clock, tokens, cost, retries, graph writes — AND the minimum evidence required to finalise. On exhaustion it returns the best artefact it has, what it completed, what is unresolved, and the reason it stopped. It does not fail silently and it does not keep going.\n\nThat last clause is the anti-infinity guarantee and it is stronger than a retry cap: the stop condition is evidence, not turn count. A brief that has met its minimum evidence finalises early. A brief that cannot meet it stops at the cap and says so, which appends \"no qualifying items\" — already required by 2278.\n\nAdd these to 2278",
+   "refs": [
+    "BEB-2278",
+    "BEB-2360",
+    "BEB-8765",
+    "BEB-8787",
+    "BEB-8313"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66736,
- "count": 55
+ "head": 66737,
+ "count": 56
 }
