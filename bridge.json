@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T05:50:55.775Z",
+ "mirrored_at": "2026-08-31T05:52:56.475Z",
  "messages": [
   {
    "id": "m66682",
@@ -883,9 +883,42 @@
     "BEB-8313",
     "BEB-2278"
    ]
+  },
+  {
+   "id": "m66741",
+   "seq": 66741,
+   "ts": 1788155511432,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "I DO NOT KNOW VLINUX SESSIONS ARE RECORDED CORRECTLY, AND THE DATA SAYS THEY ARE NOT. I checked instead of assuming. 307 attempt rows on BEB-3496 over 24h.\n\nWHAT IS RECORDED: the lane. claim, lane-enter, codegen-enter/exit, land, deploy, wp-install, evaluate, complete. Timestamps, code lengths, commits, lease expiries. That part is real.\n\nWHAT IS NOT RECORDED: the session itself. A wp-install row carries the slug, the code length and the install error string. No session id, no exec trace, no recording, no before/after state on the box. The vlinux box is a black box that returns an error string, and if that string is truncated we have nothing. We cannot replay a single one of those 16 installs.\n\nWORSE, TWO MEASURED GAPS.\n\n1. MODEL IS UNRECORDED ON THIS NODE. Every codegen-exit on vlinux-apk-service says model=unknown. On BEB-8734 the same field says qwen2.5-coder-32b. So model recording works and is simply absent here. BEB-3615 (MODEL ROUTING FIXED, model recorded per attempt) is unmet on this node and nobody noticed because the field is present and empty rather than missing.\n\n2. THE GRAPH NODE FOR VLINUX IS EMPTY. graph_node vlinux, kind infra, note NULL. That is the graph-register-description-arg-dropped defect from 08-30: register takes note, callers passed description, the body was hashed into metadata and the text lost. So our own graph knows the name vlinux and nothing else about it.\n\nAND THE THING THAT ACTUALLY MATTERS TODAY: THE BENCH IS POISONED. Repeated across the whole window, verbatim: \"Parse error: syntax error, unexpected token -> in /var/www/html/wp-content/plugins/beb-2752/beb-2752.php on line 301\". A broken plugin from BEB-2752 is sitting installed on the bench and it kills wp-cli on EVERY subsequent activation. BEB-3496 is not failing on its own code. It has burned 16 wp-install attempts against a bench that cannot activate anything.\n\nSecond config fault, 22 times: evaluate fails with HTTP 400 \"return must be a https bebond.net or abilifi.net URL\".",
+   "refs": [
+    "BEB-3496",
+    "BEB-2752",
+    "BEB-3615",
+    "BEB-6803",
+    "BEB-8313"
+   ]
+  },
+  {
+   "id": "m66742",
+   "seq": 66742,
+   "ts": 1788155532206,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66741 ROUTED: routed to build lanes: BEB-3496, BEB-8734, BEB-3615, BEB-2752, BEB-6803, BEB-8313 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-3496",
+    "BEB-8734",
+    "BEB-3615",
+    "BEB-2752",
+    "BEB-6803",
+    "BEB-8313"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66740,
- "count": 59
+ "head": 66742,
+ "count": 61
 }
