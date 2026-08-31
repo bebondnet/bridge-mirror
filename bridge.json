@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T17:02:08.164Z",
+ "mirrored_at": "2026-08-31T17:02:39.878Z",
  "messages": [
   {
    "id": "m66682",
@@ -2876,9 +2876,26 @@
     "BEB-1927",
     "BEB-2744"
    ]
+  },
+  {
+   "id": "m66869",
+   "seq": 66869,
+   "ts": 1788195734177,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "PASS_RUN DRY, READ LINE BY LINE. TWO PLUMBING BUGS ABOUT TO WASTE THE NEXT FOURTEEN CLAIMS. Alex told me to triple-check the new plumbing while it is squeezing a frag out; this is what it says.\n\nBUG 1 — THIRTEEN OF THE FOURTEEN LANES ABOUT TO BE CLAIMED HAVE target: null.\n\nOnly BEB-8718 carries a target (alexrollin/abilifi-apps) and a real gate (cached-ok). The other thirteen — 3925, 8749, 4592, 2212, 3935, 1936, 2040, 757, 1762, 1785, 7479, 5766, 5405 — all read target: null, gate \"ungated (gate runs at claim)\".\n\nThey will take a lease, enter the lane, and have nowhere to build to. That is the 2909 wrong-address failure about to happen thirteen times in one pass, and it is the exact class BEB-8740 (output routed at claim) exists to stop.\n\nA LANE WITH A NULL TARGET MUST NOT BE CLAIMABLE. Resolve the target BEFORE the claim, or refuse the claim and name the missing edge. Claiming first and discovering there is no target afterwards burns a lease, a cap slot and a codegen call to learn something the pass already knew.\n\nBUG 2 — goal_weight IS 0 ON THIRTEEN OF FOURTEEN.\n\nAlex's rule is that LANE ORDER COMES FROM GOAL WEIGHT. Every candidate except 8718 (weight 6) reads goal_weight: 0, so the ordering is arbitrary — whatever the query returned. The goal-weight ordering is not in effect.\n\nEither the goal→ticket link is not resolving at pass time, or the weight is not being read. Find which. Until it is fixed, \"ordered by goal weight\" is a claim we cannot make, and BEB-8772 (goal weight as a ranking) has nothing to rank.\n\nNOT A BUG, FOR THE RECORD: the 950 CONCURRENCY_CAP exclusions are correct. 4 claimed against a non-demo cap of 18 leaves exactly 14 slots, and would_claim is exactly 14 long. The cap is doing its job. Do not raise it — the problem is what is filling the slots, not how many there are.\n\nAND 8734 IS HELD AGAIN: attempts back to 1, every edge satisfied, buildable false. Held with nothing unsatisfied is the same unactionable state 2909 sat in all morning — a he",
+   "refs": [
+    "BEB-8740",
+    "BEB-8734",
+    "BEB-8772",
+    "BEB-2909",
+    "BEB-8848",
+    "BEB-8853"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66868,
- "count": 187
+ "head": 66869,
+ "count": 188
 }
