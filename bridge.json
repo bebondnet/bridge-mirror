@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T05:47:53.719Z",
+ "mirrored_at": "2026-08-31T05:49:41.601Z",
  "messages": [
   {
    "id": "m66682",
@@ -835,9 +835,57 @@
     "BEB-8787",
     "BEB-8313"
    ]
+  },
+  {
+   "id": "m66738",
+   "seq": 66738,
+   "ts": 1788155303210,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALIVENESS: BEB-6803 IS THE TICKET AND IT NEEDS ONE MORE SECTION. Alex wants the system to always know what is alive, whether a real build is running against a thing, and if not, to recommend a safe kill. Do not write a new ticket for it.\n\n6803 already gives seven audit sections in one call, and section 2 (UNWIRED: deployed services with zero caller rows in 24h) is half of what he is asking for — it answers \"is anything actually using this\". What is missing is the live half: what is running RIGHT NOW, is it making progress, and what is safe to reclaim.\n\nSECTION 8 — ALIVE. One row per live thing: claimed lanes, running research passes, tick holders, in-flight builds. Each row carries the lease, its expiry, and the timestamp of its LAST PROGRESS EDGE, not its last touch. Progress means a graph edge for work done, not a heartbeat proving the process still exists. A process can pulse forever while producing nothing, and that is the exact failure we keep paying for.\n\nThree states fall out of it, no judgement call needed:\n- ALIVE — lease valid, progress edge inside the window.\n- PHANTOM — lease valid, no progress edge. Holding the work, doing none. The dispatcher already detects one shape of this (claim-noprogress-release, \"claimed >2m with zero work rows\"); generalise it rather than reimplement it.\n- LAPSED — lease expired. Reclaimable, nothing to decide.\n\nSAFE KILL, and I mean the word safe. The recommendation releases the LEASE. It never kills compute. Releasing a lease is reversible and idempotent; a real worker that wakes finds its lease gone and re-claims. Killing a worker mid-write is not reversible and we are not doing it. Any proposal that terminates an isolate rather than releasing a claim is refused.\n\nAnd per 6803's own rule, this section does not produce advice. A PHANTOM row files a claimable release in the same pass. A LAPSED row is reclaimed by the pass that found it. A detector that only reports is the defect the ticket was written against, so section 8 act",
+   "refs": [
+    "BEB-6803",
+    "BEB-2385",
+    "BEB-2360",
+    "BEB-8313",
+    "BEB-2278"
+   ]
+  },
+  {
+   "id": "m66739",
+   "seq": 66739,
+   "ts": 1788155327327,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66737 ROUTED: routed to build lanes: BEB-2360, BEB-2278, BEB-8765, BEB-8787, BEB-8313 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-2360",
+    "BEB-2278",
+    "BEB-8765",
+    "BEB-8787",
+    "BEB-8313"
+   ]
+  },
+  {
+   "id": "m66740",
+   "seq": 66740,
+   "ts": 1788155329105,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66738 ROUTED: routed to build lanes: BEB-6803, BEB-2385, BEB-2360, BEB-8313, BEB-2278 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-6803",
+    "BEB-2385",
+    "BEB-2360",
+    "BEB-8313",
+    "BEB-2278"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66737,
- "count": 56
+ "head": 66740,
+ "count": 59
 }
