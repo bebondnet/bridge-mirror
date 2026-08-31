@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T09:38:00.892Z",
+ "mirrored_at": "2026-08-31T09:41:05.131Z",
  "messages": [
   {
    "id": "m66682",
@@ -1489,9 +1489,74 @@
     "BEB-8845",
     "BEB-2930"
    ]
+  },
+  {
+   "id": "m66779",
+   "seq": 66779,
+   "ts": 1788169141197,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-8848 FILED, PRIORITY 1. Alex: the wiki-writer entity work is incredibly important to the business overall. He is right and I had it filed as tidying.\n\nIT IS THE CLIENT-SIDE PRODUCT, RUN ON OURSELVES FIRST. Every decision today — Freebase2, the niche graph service, the buurt calendar, the publication layer — rests on one mechanism: WRITING IS THE GRAPH WRITE. A person writes, statements land, nobody is asked to understand a model. If our own wiki writer does that, the product is proven on the one corpus we control before a client touches it.\n\nAnd it fixes what cost the whole morning. Every question I answered was answered by grep because the answers live in prose. This makes estate knowledge traversable instead of searchable.\n\nTHE WRITER ALREADY HAS THE SCHEMA. OKF frontmatter is already required (BEB-1199): type, title, description, tags, timestamp, refs, project, client, status. Nothing to invent. refs: [BEB-8845] is an edge waiting to be an edge. Tags are shared entities — two docs tagged the same thing are already joined and we throw it away. We are writing structure and storing it as text.\n\nDELIVERABLE: frontmatter becomes statements at write; body mentions resolve to ids where one exists (GERS, Q-id, else local); every statement carries its source doc or is refused; writing is the ONLY ingestion path, no second pipeline; and one traversal returns everything written about a ticket, doc or tag.\n\nACCEPTANCE I CARE ABOUT MOST, item 5: one question answered today by grep is answered by a single traversal instead, shown side by side — the call, the result, the row count.\n\nDEPENDENCY, AND IT IS THE BLOCKER: BEB-1199, OKF frontmatter enforced. Without it the input is unreliable. 1199 has NO LANE AT ALL — not queued, not parked, one row in 48h and it was a budget backfill. It cannot build: output_target and spec both unsatisfied, both fillable. Give it a target and let the gate author the spec.\n\nSequence: 1199 then 8848.",
+   "refs": [
+    "BEB-8848",
+    "BEB-1199",
+    "BEB-8742",
+    "BEB-8765",
+    "BEB-3812"
+   ]
+  },
+  {
+   "id": "m66780",
+   "seq": 66780,
+   "ts": 1788169142792,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "LANELESS_P01: 828 OPEN P0/P1 TICKETS CANNOT LANE, OLDEST 5736 HOURS. That is 239 days. The red names its own fix: they carry no estimate or cost_ceiling, and POST dispatcher /dispatch/backfill-budget prices them.\n\nAlex asked why infra tickets get treated badly. This is why, and it is not a priority problem — 489 of the 828 are priority 1 with status todo. They are not deprioritised, they are INVISIBLE. A ticket with no lane never enters a pass, so nothing ever fills its missing edges and nothing ever reds about it. It is not queued and not parked; it does not exist to the loop.\n\nBEB-1199 is the case in front of us: OKF frontmatter enforcement, filed 239 days ago, no lane, two unsatisfied edges (output_target, spec) BOTH MARKED FILLABLE. The machinery to fix it exists — BEB-8735 says the loop writes the missing edge rather than refusing — and it has never run on 1199 because 1199 never reaches a pass.\n\nTHREE THINGS, in order.\n\n1. RUN THE BACKFILL. POST /dispatch/backfill-budget. It is the fix the red itself names and it prices all 828. Report the count priced and the count still laneless afterwards.\n\n2. LANELESS IS A CLAIMABLE ROW, NOT A COUNTER. Per BEB-6803's rule, a detector that only reports is the defect. get_state has counted this number for weeks and nobody acted, which is the same failure as the research lane and the false-done on 2278. The pass must include laneless tickets, fill their fillable edges, and a ticket still laneless after that is a NAMED red with the unsatisfied edge on it.\n\n3. OLDEST-LANELESS RIDES THE WAKE REPORT with its age, the same as a dated goal. 239 days is not a backlog, it is an unwatched hole.\n\nThis is the same defect three times today in different clothes — research with no lane, a job class closed without registering, 828 tickets outside the loop. A thing that never runs cannot fail, so it never surfaces.",
+   "refs": [
+    "BEB-1199",
+    "BEB-8735",
+    "BEB-6803",
+    "BEB-8742",
+    "BEB-8848"
+   ]
+  },
+  {
+   "id": "m66781",
+   "seq": 66781,
+   "ts": 1788169247400,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66779 ROUTED: routed to build lanes: BEB-8848, BEB-1199, BEB-8845, BEB-8742, BEB-8765, BEB-3812 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8848",
+    "BEB-1199",
+    "BEB-8845",
+    "BEB-8742",
+    "BEB-8765",
+    "BEB-3812"
+   ]
+  },
+  {
+   "id": "m66782",
+   "seq": 66782,
+   "ts": 1788169249986,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66780 ROUTED: routed to build lanes: BEB-1199, BEB-8735, BEB-6803, BEB-8742, BEB-8848 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-1199",
+    "BEB-8735",
+    "BEB-6803",
+    "BEB-8742",
+    "BEB-8848"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66778,
- "count": 97
+ "head": 66782,
+ "count": 101
 }
