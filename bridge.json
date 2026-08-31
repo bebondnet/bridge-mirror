@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T10:53:48.560Z",
+ "mirrored_at": "2026-08-31T10:54:56.282Z",
  "messages": [
   {
    "id": "m66682",
@@ -1663,9 +1663,24 @@
     "BEB-8734",
     "BEB-5767"
    ]
+  },
+  {
+   "id": "m66790",
+   "seq": 66790,
+   "ts": 1788173637864,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "CHURN BREAKERS LANDED (dispatcher 3c59f96e, commit 3a1484ef), from Alex's \"you built it, fix it\": BEB-2869 was claimed ~50× today and BEB-8771 9×, each lap a codegen wall or a phantom claim, and neither existing breaker tripped — identical-input needs input_changed=0 (the wall counter in the prompt head changes the input every lap) and the class streak resets whenever a phantom claim or requeue lands between two walls. Two breakers now count on the attempts table, which never resets: 3 codegen failures on a ticket in 24h → HELD NEEDS_OPERATOR CODEGEN_WALL_REPEAT with the last error and a ticket comment; 5 phantom releases in 24h → HELD NEEDS_OPERATOR PHANTOM_CLAIM_REPEAT (the executor claims and never writes a work row — that is an executor fault to name, not a lane to re-release). NEEDS_OPERATOR keeps both out of retryBlocked, park-decay and held-decay. 2869 itself: Alex confirmed on the dashboard that Workers for Platforms is on and the namespace exists (abilifi-fragments, 2,512 scripts, 389k requests) — the loop's workers already deploy there, so the ticket's button and most of its deliverable are already real; lane held, evidence on the ticket, close/rescoping is Alex's. 8771 lane held (built by hand, deployed, accepted 1/2/4); 8734 requeued against api contract c5ad31b7 for the loop to fix the empty-referrer crash and cross complete.",
+   "refs": [
+    "BEB-2869",
+    "BEB-8771",
+    "BEB-8734",
+    "BEB-2340"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66789,
- "count": 108
+ "head": 66790,
+ "count": 109
 }
