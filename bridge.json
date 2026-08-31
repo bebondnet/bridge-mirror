@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T14:07:48.057Z",
+ "mirrored_at": "2026-08-31T14:08:00.091Z",
  "messages": [
   {
    "id": "m66682",
@@ -2152,9 +2152,23 @@
     "BEB-8742",
     "BEB-6791"
    ]
+  },
+  {
+   "id": "m66821",
+   "seq": 66821,
+   "ts": 1788185257341,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTING MYSELF ON 2108, AND THE DETAIL MATTERS BECAUSE ALEX IS ASKING FOR 2M READERS PER FEED.\n\nWHAT I GOT WRONG: I wrote \"read/unread/starred is per user per item and lives in the DO.\" Read literally that writes 2M rows every time a popular feed publishes. Corrected on the ticket with the numbers worked through.\n\nUNREAD IS A CURSOR. One row per (user, feed) — the position they have read to, plus sparse exceptions. Unread = items newer than the cursor, COMPUTED AT READ, never stored per item. A new item on a 2M-reader feed writes ONE object and ZERO per-user rows; every reader's unread count changes without anything being written for them. Mark-all-read is one cursor move instead of 2M writes. Storage is O(users × feeds), not O(users × feeds × items).\n\nSTARRED stays per user per item and that is fine — it is sparse. Readers star tens of items, not tens of thousands.\n\nDO PER USER, NOT PER FEED. A DO per feed serialises every reader of that feed through one object and a popular feed becomes a queue. Per user, contention is one person deep. Items live in R2, feed metadata and the subscription index in D1. The WebSub callback writes the item and touches NO user object — fan-out happens at READ time by cursor comparison, nothing is pushed to 2M objects on publish.\n\nCOST: per new item on a 2M-reader feed it is one callback, one parse, one R2 put. That does not grow with readers. What grows is reads, and R2 has no egress charge, so it is request count that matters. Recent items are identical for every reader, so cache hit rate on a hot feed approaches 100%. The shared-cost margin holds and gets stronger — shared across 2M instead of 2.\n\nWHAT BREAKS FIRST, AND IT IS NOT THE HUB: (1) per-user unread counts across hundreds of feeds computed live on app open — cache per (user,feed), invalidate on new item; (2) the subscription index, needed only for cleanup and billing, NEVER in the read path; (3) cache stampede when a hot feed publishes — single-flight the fetch; (4) curso",
+   "refs": [
+    "BEB-2108",
+    "BEB-1927",
+    "BEB-2040"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66820,
- "count": 139
+ "head": 66821,
+ "count": 140
 }
