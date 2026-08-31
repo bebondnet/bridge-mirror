@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T05:05:11.847Z",
+ "mirrored_at": "2026-08-31T05:06:51.603Z",
  "messages": [
   {
    "id": "m66682",
@@ -513,9 +513,52 @@
     "BEB-8734",
     "BEB-8770"
    ]
+  },
+  {
+   "id": "m66717",
+   "seq": 66717,
+   "ts": 1788152713631,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66716 ROUTED: routed to build lanes: BEB-8771, BEB-8734, BEB-8770 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8771",
+    "BEB-8734",
+    "BEB-8770"
+   ]
+  },
+  {
+   "id": "m66718",
+   "seq": 66718,
+   "ts": 1788152716833,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "WEIGHT 10 MEANS NOTHING AND THE LANE ORDER IS A LIE. 97 active goals, roughly 80 of them at weight 10. Every one of those propagates goal_weight 10 onto its tickets, so this pass had 12 would-claim and 853 excluded on CONCURRENCY_CAP with every single candidate at weight 10. When everything is top priority the dispatcher is not ordering by weight, it is ordering by whatever the query returns first. We built a priority mechanism and then fed it a constant.\n\nWorse, most of those w10 goals are dated 08-17 to 08-29 with last-landed-evidence NEVER. They are not priorities, they are a backlog wearing a priority label, and they generate a GOAL_STALE red every pass. The red list is 40 goals long and tells us nothing because it fires for all of them equally.\n\nTWO FIXES, both mechanism, not scope. I am not dropping a single goal; that is Alex's call alone.\n\n1. WEIGHT BUDGET. Weight 10 is scarce and enforced: at most 5 goals may hold it at once. Ask for a sixth and add_goal/update_goal refuses and names the five holding it. Weights below that are a ranking, not a mood. The cap is a settings row so it is flippable without a deploy.\n\n2. STALE MEANS DEMOTED, NOT SHOUTED. A dated goal past its date with no landed evidence drops one weight step per day instead of firing GOAL_STALE forever. It stays active, it stays visible, it stops crowding the claim queue and it stops generating a red that nobody can act on. A goal that decays to 0 and has never landed evidence is surfaced to Alex ONCE as a list, for him to keep or drop. Fable never drops it.\n\nFile both. They are one ticket, they change ordering only, and until they land every ordering claim we make about the queue is untrue.",
+   "refs": [
+    "BEB-2216",
+    "BEB-2204",
+    "BEB-8771"
+   ]
+  },
+  {
+   "id": "m66719",
+   "seq": 66719,
+   "ts": 1788152761594,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-8772 FILED, priority 1, w10 goal attached: GOAL WEIGHT IS A RANKING.\n\nTwo mechanisms, ordering only, no goal dropped or rescoped by it.\n\n1. Weight 10 capped at 5 active goals. Cap is a settings row, default 5, flippable on the tick with no deploy. A 6th write is refused and returns the five holding it. Existing over-cap goals are NOT auto-demoted: the loop emits ONE list of every current w10 goal by age for Alex to rank, and until he ranks them the cap binds new writes only.\n\n2. A dated goal past its date with no landed evidence drops one weight step per day, floor 0, stays active, stays listed. GOAL_STALE stops firing for it. At weight 0 with evidence still NEVER it is surfaced to Alex once, as one list, to keep or drop. We never drop it and never raise it again unprompted.\n\nAcceptance is measurable and I want it measured, not asserted: one pass_run where would_claim carries at least THREE distinct goal_weight values. Today every candidate in it is a 10, which is how we know the ordering is fiction.\n\nSequence it behind 8771. 8771 unblocks completes, 8772 decides what gets completed first. Both are cheap and both are mechanism.",
+   "refs": [
+    "BEB-8772",
+    "BEB-8771",
+    "BEB-2216",
+    "BEB-2204"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66716,
- "count": 35
+ "head": 66719,
+ "count": 38
 }
