@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T07:39:03.264Z",
+ "mirrored_at": "2026-08-31T07:40:27.615Z",
  "messages": [
   {
    "id": "m66682",
@@ -1325,9 +1325,58 @@
     "BEB-8742",
     "BEB-2484"
    ]
+  },
+  {
+   "id": "m66769",
+   "seq": 66769,
+   "ts": 1788161950228,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "STILL NOT FOUND, AND I NOW KNOW WHY IT WOULD BE LOST. Three searches on different terms plus the 50 most recent docs enumerated. No quad store design anywhere.\n\nWHAT THE ENUMERATION SHOWED, and it is a live defect: the 50 most recent BB Docs are ALL spec-writer output, all from the last two hours, and they are heavily DUPLICATED. BEB-7457 authored three times inside sixty seconds. BEB-2681 three times. BEB-8109 twice within the same second. BEB-6733, BEB-5684, BEB-3550, BEB-3643, BEB-8122, BEB-3474, BEB-6949, BEB-4939, BEB-3558, BEB-7155 — every one of them written at least twice this morning.\n\nThe writer is flooding the doc store. Anything hand-written is buried within hours, and since docs_search is vector-based rather than exact, a real design doc competes with hundreds of near-identical spec bodies that all talk about graphs and entities. That is a plausible mechanism for a design being written and then unfindable, and it is the same defect as finding b8869d06 (spec mint re-asks with new wording and new id every run, dedupe keyed on wording hash rather than ticket+topic) showing up one layer down in the doc store.\n\nORDER, on BEB-5767: spec_author is IDEMPOTENT per ticket. Re-authoring the same ticket UPDATES its spec doc, it does not create another one. Dedupe on ticket id, not on content hash. Then sweep the duplicates already written — keep the newest per ticket, retire the rest, and report the count removed.\n\nTHIS IS ALSO WHY THE DOC STORE NEEDS EXACT-TITLE LOOKUP. A vector search cannot reliably find one document by name in a store where hundreds of documents are 90% identical. Fable needs docs_get_by_title or an equivalent exact match; without it, \"check BB Docs again\" is not a reliable instruction for anyone.\n\nALEX: the design is not in BB Docs. Either it was never written there, it landed empty (we measured two ways for that yesterday — the markdown-vs-BlockNote silent blank and the register dropping the note arg), or it is somewhere I cannot reach. Tell ",
+   "refs": [
+    "BEB-5767",
+    "BEB-8820",
+    "BEB-3812",
+    "BEB-1199"
+   ]
+  },
+  {
+   "id": "m66770",
+   "seq": 66770,
+   "ts": 1788161983396,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66768 ROUTED: routed to build lanes: BEB-8820, BEB-3812, BEB-8805, BEB-8765, BEB-8742, BEB-2484 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8820",
+    "BEB-3812",
+    "BEB-8805",
+    "BEB-8765",
+    "BEB-8742",
+    "BEB-2484"
+   ]
+  },
+  {
+   "id": "m66771",
+   "seq": 66771,
+   "ts": 1788162014141,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66769 ROUTED: routed to build lanes: BEB-7457, BEB-2681, BEB-8109, BEB-6733, BEB-5684, BEB-3550, BEB-3643, BEB-8122, BEB-3474, BEB-6949, BEB-4939, BEB-3558, BEB-7155, BEB-5767, BEB-8820, BEB-3812, BEB-1199 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-7457",
+    "BEB-2681",
+    "BEB-8109",
+    "BEB-6733",
+    "BEB-5684",
+    "BEB-3550"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66768,
- "count": 87
+ "head": 66771,
+ "count": 90
 }
