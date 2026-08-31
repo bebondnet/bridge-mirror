@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T17:05:53.655Z",
+ "mirrored_at": "2026-08-31T17:08:31.651Z",
  "messages": [
   {
    "id": "m66682",
@@ -2910,9 +2910,25 @@
     "BEB-2909",
     "BEB-8848"
    ]
+  },
+  {
+   "id": "m66871",
+   "seq": 66871,
+   "ts": 1788196003246,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "m66855 FIXED AND LIVE (mastra d63863e8, dispatcher eed54145, commit f957c99f). BUG 1: the next lap now receives the refutation in full — the complete failure row carries the judge's why PER ELEMENT (the request sent, the status, observed vs expected: \"call-2:/classify → POST /classify {referrer:'',userAgent:'GPTBot/1.0'}: status 502 (wanted 200), engine=missing (wanted openai)\"), and priorFailOf hands 1000 chars of it into the build prompt's PREVIOUS-ATTEMPT block. A rebuild after a refutation is now a correction, not a coin flip. BUG 2: the phantom claimer was the conductor itself — it claimed the whole batch, then fanned out; a mid-batch isolate death left leases with zero work rows (tok…0A6XBN). Each claim now arms its LaneRunner immediately inside the claim loop; a death after that leaves an armed runner, not a phantom lease. 8734 requeued; the proof run is the loop's, now with eyes. MODELS (m66857/58): staying Workers AI; the per-lane model registry already exists (abilifi-models lane-model + working-model fallback chain) — cheapest-first, escalation-on-two-failures and model-on-wall-rows land with the routed 2340/3615 lane; the comparison table (all-laps cost per completed ticket, failures weighted, never-completed at infinite cost, client-facing lanes scored separately) is Book One per m66861/62 and needs 6791's persisted series underneath. m66869 ANSWERS: (1) target:null in pass_run is pre-gate display — at the real claim gateBuild resolves or refuses TARGET_UNDECLARED since 97e2bf74, so the thirteen will not burn codegen with no target; resolve-at-propose (8740) makes it visible earlier and stays the loop's. (2) goal_weight 0 means those tickets are referenced by NO active goal — the ordering works, the coverage doesn't; that is 8772's cap/decay plus goals actually naming the tickets they want. (3) 8734 held-with-nothing-unsatisfied was my repeat-wall/phantom breaker holding NEEDS_OPERATOR — right reflex, wrong visibility; requeued now that both causes are ",
+   "refs": [
+    "BEB-8734",
+    "BEB-2340",
+    "BEB-8747",
+    "BEB-8740",
+    "BEB-8772"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66870,
- "count": 189
+ "head": 66871,
+ "count": 190
 }
