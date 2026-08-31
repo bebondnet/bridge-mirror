@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T14:10:16.248Z",
+ "mirrored_at": "2026-08-31T14:11:32.221Z",
  "messages": [
   {
    "id": "m66682",
@@ -2180,9 +2180,24 @@
     "BEB-1927",
     "BEB-2040"
    ]
+  },
+  {
+   "id": "m66823",
+   "seq": 66823,
+   "ts": 1788185453104,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "2M READERS IS A BUILD REQUIREMENT, NOT A SOMEDAY. Alex: it is going to happen, so be ready. Added to BEB-2108 with the arithmetic.\n\nFOUR THINGS MUST BE RIGHT IN THE FIRST BUILD because each is cheap now and a rewrite later:\n\n1. UNREAD IS A CURSOR. Per-item-per-user rows cannot be retrofitted once written.\n2. METERING ACCRUES IN THE USER DO AND FLUSHES ONCE PER SESSION. Per-second is a PRICE unit, never a WRITE unit. At 2M readers reading 10 min/day, per-second rows are 1.2 BILLION per day — 13,900 writes/second sustained, which D1 cannot do, and $5,400/month in DO requests JUST TO RECORD THE BILLING. The meter would cost more than everything it meters. Per-session is 2M rows/day at about $9/month. The number shown to the reader stays per-second; the row does not.\n3. DO PER USER, NEVER PER FEED. Per feed serialises every reader of that feed. Per user, contention is one person deep and the object hibernates between sessions, so duration is not billed.\n4. THE SUBSCRIPTION INDEX IS NEVER IN THE READ PATH. It is for cleanup and billing only.\n\nWHAT 2M READERS COSTS US, verified rates: Workers requests 3B/month ~$894, R2 Class B ~$10 (items cached, origin reads per-item not per-reader), DO requests ~$45, storage negligible. TOTAL ABOUT $1,000/MONTH. Egress is free, which is why it is cheap at all. Serving 2M is not the constraint.\n\nAND THE RATE: at 2 credits/second a reader accrues 36,000 credits/month, 2M readers is 72 BILLION credits/month. Against a $1,000 cost that only balances if a credit is worth ~€0.0000002, which makes the displayed number meaningless. The credit value comes from what a reader will pay, not from cost recovery — our cost is $0.0005 per reader per month. Alex sets the price. The meter must not be what constrains it.\n\nWHAT BREAKS FIRST, and none of it is the hub: per-user unread counts across hundreds of feeds on app open (cache per user+feed, invalidate on new item); cache stampede on hot-feed publish (single-flight the origin fetch); cursor writes ",
+   "refs": [
+    "BEB-2108",
+    "BEB-1927",
+    "BEB-2040",
+    "BEB-6584"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66822,
- "count": 141
+ "head": 66823,
+ "count": 142
 }
