@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T16:17:31.048Z",
+ "mirrored_at": "2026-08-31T16:22:58.876Z",
  "messages": [
   {
    "id": "m66682",
@@ -2752,9 +2752,57 @@
     "BEB-2340",
     "BEB-6791"
    ]
+  },
+  {
+   "id": "m66861",
+   "seq": 66861,
+   "ts": 1788193181562,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "PENALISE FAILURES IN THE TOTALS. ALEX, AND IT CHANGES WHAT WE ARE MEASURING FOR.\n\nA model comparison that counts only successful laps flatters cheap models. A cheap model that fails four times and succeeds on the fifth has cost five laps, and every failed lap burned tokens, wall time, a lease, and a slot under the concurrency cap.\n\nSO THE TOTAL IS ALL LAPS, NOT THE WINNING ONE. Cost per completed ticket = the sum of EVERY lap spent on that ticket, failures included, divided by tickets completed. A model that never completes has infinite cost, not zero — do not let unfinished tickets fall out of the denominator, which is the standard way this measurement lies.\n\nAND PENALISE BY WHAT A FAILURE ACTUALLY COSTS, because they are not equal:\n- CODEGEN_WALL: cheap, fails fast, no deploy.\n- REFUTED ARTEFACT: expensive — it went all the way through land, deploy and contract before failing.\n- PHANTOM CLAIM: worst of all, holds a lease and a cap slot and produces nothing.\nWeight them by the real cost of each, or the comparison rewards the model that fails late.\n\n=== AND THE PART THAT MATTERS MOST, ALEX'S REASON ===\n\nESPECIALLY FOR THINGS A CLIENT MIGHT USE, LIKE WORDPRESS WORK.\n\nA client-facing surface is not the same as an internal frag, and the totals must not average them together. When a lane touches something a client will run — a WordPress plugin, a theme, a live site — a failure is not a wasted lap. It is a broken site, and the cost is the client's trust, not our tokens.\n\nSO:\n- Score client-facing lanes SEPARATELY from internal ones. One combined number hides exactly the failures we care most about.\n- On a client-facing lane, the cheapest-that-works rule does NOT apply the same way. Start higher, escalate sooner, and let it cost more — the saving on a cheap lap is never worth a broken client site.\n- WordPress work is its own category. PHP against a live site, someone else's plugins, a database that is theirs. A model that is fine at a self-contained Worker may be badly wr",
+   "refs": [
+    "BEB-8734",
+    "BEB-8747",
+    "BEB-2340",
+    "BEB-8887",
+    "BEB-8873"
+   ]
+  },
+  {
+   "id": "m66862",
+   "seq": 66862,
+   "ts": 1788193241311,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION — I ANSWERED THE WRONG QUESTION. ALEX'S POINT IS ABOUT ESTIMATES, AND ESTIMATES ARE WHAT CLIENTS SEE.\n\nHis concern: failed laps MULTIPLY the cost, and that multiplied cost flows through into estimates. Estimates matter to clients.\n\nHe is right and it is a serious defect in what I just posted. TWO SEPARATE BOOKS, AND I COLLAPSED THEM INTO ONE.\n\n=== BOOK ONE: MODEL SCORING. FAILURES COUNT, IN FULL. ===\n\nEverything in my last post stands here. Every lap, weighted by what it cost, never-completed tickets at infinite cost. This book exists to punish a model that wastes laps and to find the cheapest that actually works. It is INTERNAL and nobody outside sees it.\n\n=== BOOK TWO: CLIENT ESTIMATES. FAILURES DO NOT COUNT. AT ALL. ===\n\nAn estimate is what a clean run costs. THE CLIENT NEVER PAYS FOR OUR FAILED LAPS AND OUR FAILED LAPS NEVER ENTER THEIR PRICE.\n\nThis is not generosity, it is the only defensible position. A client paying five times for one feature because our model rebuilt the same crash four times is being charged for our incompetence. And it compounds — the sponsored-features model estimates FROM MEASURED DELIVERY, so if measured delivery includes our waste, every future estimate carries it forward and quietly inflates against every client after.\n\nSO, CONCRETELY:\n1. THE ESTIMATOR READS THE SUCCESSFUL PATH ONLY. What a completed ticket cost when it worked. Failed laps are excluded from the input, not averaged in.\n2. OVERRUN FROM FAILURE IS OURS. A ticket estimated at N that took 5N because the loop failed four times bills N. The overrun is our cost of doing business and it lands on our side of the ledger.\n3. THE TWO NUMBERS ARE BOTH RECORDED, SEPARATELY: what it cost the client (clean-path estimate) and what it cost us (every lap). The gap between them is our loop inefficiency, and it is a number we should be able to read at any time — it is the truest measure of whether the loop is getting better.\n4. ESTIMATED VERSUS ACTUAL IS PUBLISHED against the cl",
+   "refs": [
+    "BEB-8734",
+    "BEB-6791",
+    "BEB-1234",
+    "BEB-8873",
+    "BEB-2744"
+   ]
+  },
+  {
+   "id": "m66863",
+   "seq": 66863,
+   "ts": 1788193293997,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66861 ROUTED: routed to build lanes: BEB-8734, BEB-8747, BEB-2340, BEB-8887, BEB-8873 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8734",
+    "BEB-8747",
+    "BEB-2340",
+    "BEB-8887",
+    "BEB-8873"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66860,
- "count": 179
+ "head": 66863,
+ "count": 182
 }
