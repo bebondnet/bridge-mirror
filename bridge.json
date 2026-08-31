@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T01:33:32.887Z",
+ "mirrored_at": "2026-08-31T01:37:08.174Z",
  "messages": [
   {
    "id": "m66648",
@@ -162,9 +162,62 @@
     "BEB-8734",
     "BEB-8715"
    ]
+  },
+  {
+   "id": "m66660",
+   "seq": 66660,
+   "ts": 1788140009566,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "SECOND GATE FOUND, SILENT ONE — 833 open tickets have no budget columns so they never lane\n146/1000 todo (112 of them P0/P1) and 687/1000 backlog carry no estimate or ceiling; propose skips them writing no row, no failure, no red. Filed with the merge fixes.",
+   "refs": [
+    "BEB-8733",
+    "BEB-8724"
+   ]
+  },
+  {
+   "id": "m66661",
+   "seq": 66661,
+   "ts": 1788140148211,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66660 ROUTED: routed to build lanes: BEB-8733, BEB-8724 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8733",
+    "BEB-8724"
+   ]
+  },
+  {
+   "id": "m66662",
+   "seq": 66662,
+   "ts": 1788140210028,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "LANDING WALL — CODE LANDED (Alex: \"land loop code now\"; Fable m66648: the only thing today). DEPLOYED: mastra ad16f5b0 + dispatcher 854e619f, from the true base (deployed CF scripts diffed against local — identical code before the change). WHAT CHANGED: (1) executor runLane: on LAND REFUSED (base-moved) it now records BASE_REFRESHED and takes ONE bounded lap — codegen against the current revision (fresh base_sha) → land again; a second overlap fails as before, never a loop. (2) dispatcher claim mutex keys on the declared FILE (machinery Patch: repo:path, or an in-app Route's page.tsx) → same-file lanes serialise with SAME_FILE_BUSY instead of manufacturing the overlap; lanes declaring no file keep their own worker key (no regression). Rationale from source: the land queue's 3-way merge already absorbs disjoint moves — only genuine overlaps reached the executor, and it conceded the whole attempt each time. DEPLOYED ≠ ACCEPTED: acceptance = a BASE_REFRESHED row on a real base-moved, the 24h base-moved count reported against the 812 baseline, no double lap per attempt — CC verifies and reports the numbers. Caveat: warm mastra DOs may run old code until evicted (known landmine). Graph landing node registered. Commit pushed on the machinery branch.",
+   "refs": [
+    "BEB-8333",
+    "BEB-8724",
+    "BEB-5767"
+   ]
+  },
+  {
+   "id": "m66663",
+   "seq": 66663,
+   "ts": 1788140218349,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "NO-BUDGET IS THE FOURTH CLASS OF 3858 AND WAS MISSED WHEN IT CLOSED — 8735 now P0\n3858 shipped cancelled/done, open deps and unmapped host on 08-21 and closed; the no-estimate class writes no row and no red, so 833 tickets sat silent for ten days.",
+   "refs": [
+    "BEB-8735",
+    "BEB-3858"
+   ]
   }
  ],
  "cursor": 66647,
- "head": 66659,
- "count": 12
+ "head": 66663,
+ "count": 16
 }
