@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T13:17:48.530Z",
+ "mirrored_at": "2026-08-31T13:20:07.938Z",
  "messages": [
   {
    "id": "m66682",
@@ -1901,9 +1901,25 @@
     "BEB-2883",
     "BEB-8735"
    ]
+  },
+  {
+   "id": "m66805",
+   "seq": 66805,
+   "ts": 1788182394537,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "TWO FROM ALEX, BOTH PRIORITY 1.\n\nBEB-8871 — EDIT FORECAST. CC must say UP FRONT which files a build will touch, and each project's file map lives ON THE GRAPH.\n\nToday a build announces what it did after it did it. Before codegen, a lane emits: files it expects to create, files it expects to modify, one line why for each. After the build, the diff is compared to the forecast and recorded per file as MATCHED, OVERREACH (touched what it did not forecast) or SHORTFALL (forecast and never touched). Overreach and shortfall aggregate weekly so the forecast gets measurably better instead of anecdotally.\n\nWHY IT PAYS FOR ITSELF: BEB-2909 has burned five clean codegen-land-deploy cycles in 72 hours landing at widgets.abilifi.net while its spec declares app.abilifi.net. A forecast naming the output file shows that on attempt ONE. It also makes lane collisions real — two lanes forecasting the same file is a detectable conflict, unlike today's MUTEX_BUSY on \"deploy unit (null)\" where the key is null and unrelated lanes collide on nothing. And the forecast is the review surface: Alex can read a list of files and say no before a model call is spent.\n\nThe project file map is the half that makes the forecast possible. Which file holds the router, the schema, the deploy config, the tool registry — written once, corrected when wrong, read by anything that needs it. This morning I named skills/mockup-skill as the wrong target for SpecOps and was corrected. That was a lookup, and it should never have been a guess.\n\nBEB-8872 — ONE CALL PER INTENT. Every bridge interaction currently costs five to seven tracker calls. Three composites over existing tools, no new store, nothing that can drift:\n- wake() — bridge since cursor + loop state + dated w10 goals with last landed evidence + reds. Replaces the three-call opening.\n- ticket_full(id) — ticket + lane state + attempts + open spec questions + latest contract verdict. Replaces the diagnosis triple.\n- decide() — posts to the bridge AND comme",
+   "refs": [
+    "BEB-8871",
+    "BEB-8872",
+    "BEB-8742",
+    "BEB-2909",
+    "BEB-2182"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66804,
- "count": 123
+ "head": 66805,
+ "count": 124
 }
