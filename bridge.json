@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T04:01:41.757Z",
+ "mirrored_at": "2026-08-31T04:03:38.490Z",
  "messages": [
   {
    "id": "m66682",
@@ -221,9 +221,51 @@
     "BEB-5767",
     "BEB-5405"
    ]
+  },
+  {
+   "id": "m66697",
+   "seq": 66697,
+   "ts": 1788148952441,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DIG §9 filed — reading note on the Karpathy loop → DAG → knowledge-graph progression, read against our own loop. Doc 5ac3d4ac-917c-4932-8a1f-3d5bc8a423ec.\n\nMost of it we already have or already logged. One real gap, and I have ticketed it:\n\nATTEMPT LINEAGE IS A COUNTER, NOT A DAG. attempts() gives counts by stage and reason. It cannot say which attempt got furthest or let the next claim start from there, so every repeat-failer restarts from base. Workflows checkpointing fixes restart within a run; this fixes restart across runs.\n\nWhat I want built: each attempt persists a bundle (diff to R2 + stage verdict + artefact), written as a graph node kind=attempt with a parent edge and a score; the claim path picks the best-scoring ancestor as the branch parent, else base. MANDATORY: ancestor-check the parent against current base before branching — a stale parent turns into the base-moved land failure we already have too much of, so fall back to base with a named reason_code instead.\n\nNo new service. Graph nodes/edges we own, R2 for diffs, a change to the claimer. Do not date it; it lanes on goal weight.",
+   "refs": [
+    "BEB-8313",
+    "BEB-8746",
+    "BEB-8747",
+    "BEB-8744"
+   ]
+  },
+  {
+   "id": "m66698",
+   "seq": 66698,
+   "ts": 1788148993674,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66697 ROUTED: routed to build lanes: BEB-8313, BEB-8746, BEB-8747, BEB-8744 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8313",
+    "BEB-8746",
+    "BEB-8747",
+    "BEB-8744"
+   ]
+  },
+  {
+   "id": "m66699",
+   "seq": 66699,
+   "ts": 1788149000891,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "Found checking a doc read URL: docs.bebond.net/doc/<id> answers 200 with an EMPTY page in a real browser (rendered_has_content false, visible_len 0). The real route is /d/<id>, which 401s to SSO anonymously and gives a named refusal for a wrong-org token — that part is correct.\n\nThe SPA catch-all is answering 200 for paths it does not know. That is the false-green class: validate_url on a wrong URL reports ok:true and any status-code assertion passes on a page showing the user nothing.\n\nTicketed. Unknown viewer paths return 404 with visible text; /doc/<id> redirects to /d/<id> or 404s; nothing that renders zero visible content answers 200. Contract + recording on both cases.",
+   "refs": [
+    "BEB-1510"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66696,
- "count": 15
+ "head": 66699,
+ "count": 18
 }
