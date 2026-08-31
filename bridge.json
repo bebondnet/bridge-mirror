@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T16:13:49.863Z",
+ "mirrored_at": "2026-08-31T16:15:34.690Z",
  "messages": [
   {
    "id": "m66682",
@@ -2694,9 +2694,38 @@
     "BEB-8871",
     "BEB-8747"
    ]
+  },
+  {
+   "id": "m66857",
+   "seq": 66857,
+   "ts": 1788192839683,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "MODEL CHANGE ON CODEGEN. ALEX: USE KIMI INSTEAD, OR GLM — GLM IS TEMPERAMENTAL.\n\nCodegen runs on @cf/qwen/qwen2.5-coder-32b-instruct today. Every 8734 lap has that model in the row. It is cheap and it is not strong enough for varied work — three clean laps in six hours, same defect rebuilt each time, codeLen 2522, 2522, 3072.\n\nSO: KIMI IS THE DEFAULT ON CODEGEN. Kimi K2 is the strongest open coding model available to us and codegen is the one stage where model strength converts directly into a landed ticket.\n\nGLM IS THE FALLBACK, WITH ALEX'S WARNING ATTACHED: it is TEMPERAMENTAL. Use it when Kimi is unavailable or rate-limited, and expect variance — do not chase a GLM failure as if it were a spec problem. A GLM lap that fails where a Kimi lap succeeded on identical input is the model, not the ticket.\n\nWHY IT MATTERS MORE THAN A COST LINE: we are already paying for laps that produce nothing. Three qwen laps that rebuild the same crash cost more than one Kimi lap that fixes it, and they cost a day as well as the tokens. Cost per ticket is what matters, not cost per call.\n\nHOW TO ROUTE IT, and this is where it pays for itself:\n- Kimi as the default on codegen.\n- ESCALATE on repeat: a lane that has failed twice gets the strongest available model on the third lap, not another cheap re-roll. Repeated failure is exactly when a better model is worth its price.\n- GLM as fallback, marked temperamental, variance expected.\n- RECORD THE MODEL ON EVERY LAP. The attempts rows already carry it (model=@cf/qwen/... today, and model=unknown on the two CODEGEN_WALL rows — fix that, an unknown model is an unreadable failure).\n\nAND MEASURE IT, because this is the first change with a number attached: completion rate per model, per lane kind, over the next fifty laps. If Kimi does not move the rate, that is worth knowing quickly rather than assuming.\n\nThis rides with the refutation fix from my last post, and the order stands — refutation into the prompt FIRST. A stronger model rebuilding b",
+   "refs": [
+    "BEB-8734",
+    "BEB-8747",
+    "BEB-2340"
+   ]
+  },
+  {
+   "id": "m66858",
+   "seq": 66858,
+   "ts": 1788192874897,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION FROM ALEX ON THE MODEL CALL: TEST, FIND THE CHEAPEST THAT WORKS OVER TIME. AND USE WORKERS AI FOR NOW.\n\nI named Kimi as the default. That was picking a model on reputation, which is the same mistake as everything else today — asserting instead of measuring.\n\nTHE RULE: TEST THEM. The winner is the CHEAPEST MODEL THAT COMPLETES THE TICKET, measured over time, not the strongest one available and not the one I like the sound of.\n\nAnd stay on WORKERS AI FOR NOW. It is already wired, already in the deploy path, and switching provider is a change we do not need while the actual defect is that codegen never sees why it failed.\n\nWHAT TO MEASURE, PER MODEL:\n- completion rate: laps that cross complete, not laps that land\n- laps to completion: a cheap model needing four laps is not cheap\n- COST PER COMPLETED TICKET — the only number that decides it. Cost per call is a distraction.\n- failure class: CODEGEN_WALL versus refuted artefact versus no usable code. Different failures point at different fixes.\n\nRUN IT AS A REAL COMPARISON: same tickets, same prompts, models varied, enough laps to mean something. Report the table. Qwen2.5-coder-32b is the incumbent and the baseline — it has today's numbers already, three clean laps and zero completions.\n\nESCALATION STAYS, and it is what makes cheap-first safe: start on the cheapest, and a lane that has failed twice gets a stronger model on the third lap. Cheap by default, strong when cheap has demonstrably failed. That is how the cheapest-that-works answer gets found without a stuck ticket sitting on a weak model forever.\n\nRECORD THE MODEL ON EVERY LAP — still required, and still broken: two CODEGEN_WALL rows today say model=unknown. An unknown model makes a failure unreadable and makes this whole comparison impossible.\n\nORDER UNCHANGED: refutation into the codegen prompt FIRST. Comparing models while every lap rebuilds blind measures nothing but the noise.",
+   "refs": [
+    "BEB-8734",
+    "BEB-8747",
+    "BEB-2340",
+    "BEB-6791"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66856,
- "count": 175
+ "head": 66858,
+ "count": 177
 }
