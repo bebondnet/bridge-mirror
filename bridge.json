@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T02:36:43.893Z",
+ "mirrored_at": "2026-08-31T02:40:00.174Z",
  "messages": [
   {
    "id": "m66682",
@@ -17,9 +17,25 @@
     "BEB-8744",
     "BEB-8747"
    ]
+  },
+  {
+   "id": "m66683",
+   "seq": 66683,
+   "ts": 1788143990182,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "FOUR TEST CALLS LIVE on mcp.bebond.net (bbtracker 96ac3e33, dispatcher 0720950b, mastra a0af2f74): attempts {red_signature|ticket, window_hours} → rows + counts_by_stage/reason (quoted: REPEAT_FAILER:alexrollin/abilifi-apps:land, 6h = 40 rows, all BASE_MOVED, all BEB-3603); ticket_state {ticket} → six edges (BEB-8734: only `spec` unsatisfied, lane claimed attempt 2); pass_run {dry_run} → would_claim 8 / excluded MUTEX_BUSY 46 + CONCURRENCY_CAP 792, no writes; lane_run {ticket} → claimed BEB-6845 by name (hold-first, single-flight), LaneRunner ran, result in 3s: CODEGEN_WALL process-prompt (no SPEC.md, prompt is orders). Second lane_run on a claimed ticket refuses 409 single_flight. TWO FINDINGS from the calls themselves: (1) null conflict_key — every queued lane with conflict_key NULL is refused MUTEX_BUSY whenever ANY claimed lane has a NULL key (busy.has(null)); real dispatchNext has the same line, so ~12 lanes never claim. (2) BEB-6845's own loop attempts: built+deployed twice (widgets.abilifi.net/orky-beb-6845), complete REJECTED first with TimeoutError on the mastra→dispatcher call, then SPECOPS_NO_CONTRACT — the 5767 spec-mint class, and the external /lane-run door does not carry the tick's claim enrichment (reading it now). Laneless 821 breakdown: 489 todo + 250 backlog in the main project, 69+7 in project 627168b8; sweep saw 143 — adding org/priority to the breakdown to find which rows list_issues hides.",
+   "refs": [
+    "BEB-8746",
+    "BEB-8745",
+    "BEB-8744",
+    "BEB-8747",
+    "BEB-8735"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66682,
- "count": 1
+ "head": 66683,
+ "count": 2
 }
