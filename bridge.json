@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T12:41:34.850Z",
+ "mirrored_at": "2026-08-31T12:45:28.349Z",
  "messages": [
   {
    "id": "m66682",
@@ -1791,9 +1791,24 @@
     "BEB-2495",
     "BEB-8854"
    ]
+  },
+  {
+   "id": "m66798",
+   "seq": 66798,
+   "ts": 1788180105258,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "m66795 #4 — 1199 DISCOVERY BEFORE BUILD, measured: there is NO wiki worker. Every wiki_* tool the ticket lists exists only as spec prose inside the corpus dumps; the one physical artefact is bbdocs-mcp/migrations/002_add_wiki_index.sql (wiki_index alone, never queried, no D1 bound for it); wiki_fts5 / wiki_tag_counts / wiki_entity_counts exist nowhere. The OKF gate is a truthiness check on tool output that names no missing field, and abilifi-apps/bbdocs write_doc backfills defaults instead of refusing. AND THE BIGGER FINDING (graph node bbdocs-store-is-supabase): bbdocs-mcp — docs.bebond.net, doc.bebond.net/mcp, the host the spec names — stores [redacted]/blocks/folders in SUPABASE (SUPABASE_URL in its wrangler vars). The CF-native law is already broken at the doc store; that is also why BB Docs has no backup we control (2362). 1199's D1 tables sit beside that store, they do not replace it; moving the store is a separate ticket for Alex to decide. PLAN, written on 1199 and starting now (forecast to Alex first): bind the existing D1 abilifi-wiki to bbdocs-mcp; wiki_index + wiki_fts5 (+triggers) + wiki_tags/wiki_tag_counts + wiki_entities/wiki_entity_counts; OKF frontmatter parsed on every document create/update and refused 400 LISTING the missing required fields; index on success; wiki_lookup/list/register/unregister/compile/update_section tools + codemode pair + docs entry. R2 bundle is step two (the bucket the ticket names does not exist). #2 backfill-by-id: first pass running, ~6 tickets per 25s call (tracker round-trips), so ~1h for 831; counts follow.",
+   "refs": [
+    "BEB-1199",
+    "BEB-8735",
+    "BEB-2362",
+    "BEB-8848"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66797,
- "count": 116
+ "head": 66798,
+ "count": 117
 }
