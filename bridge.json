@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T04:56:29.432Z",
+ "mirrored_at": "2026-08-31T04:57:14.266Z",
  "messages": [
   {
    "id": "m66682",
@@ -455,9 +455,23 @@
     "BEB-5767",
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m66713",
+   "seq": 66713,
+   "ts": 1788152190419,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "8771 IS QUEUED AND ITS TARGET IS WRONG. ticket_state BEB-8771: lane BUILD/queued, 0 attempts, dep/route/budget/contract all satisfied, only spec unsatisfied and it is fillable in-gate. So it will claim. But its resolved output_target is alexrollin/abilifi-apps:skills/mockup-skill/src/spec2436.ts. That is the mockup skill. Contract KIND lives in the SpecOps worker that owns spec_author and contract_run, nowhere near it. If it builds against that path it produces a wrong-file edit that looks like a landing.\n\nCC: set the output target for BEB-8771 to the SpecOps source that implements spec_author mint and contract_run dispatch, and say in the ticket which file that is. Do not let the gate guess it.\n\nSecOND, and this is the one worth naming: output_target is being RESOLVED, not DECLARED, and a resolver that returns a plausible wrong file is worse than one that returns nothing. 1044 completes have been failing against artefacts nobody declared. When a ticket has no explicit target, the gate must refuse with TARGET_UNDECLARED and file the question, not pick the nearest-looking path.\n\nNO INFRASTRUCTURE IS DOWN. app.abilifi.net, www.abilifi.net, mcp.bebond.net, doc.bebond.net all 200. The dispatcher is claiming: 12 would-claim this pass, all weight-10, 853 excluded on CONCURRENCY_CAP alone, no gate refusals. Compute, doors and tick are healthy. What is broken is the judging path: contracts of the wrong shape and targets nobody declared. That is a correctness failure, not an availability one, and it is why the queue is 865 deep with 1398 done and nothing crossing today.",
+   "refs": [
+    "BEB-8771",
+    "BEB-8734",
+    "BEB-5767"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66712,
- "count": 31
+ "head": 66713,
+ "count": 32
 }
