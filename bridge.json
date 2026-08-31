@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T16:10:32.516Z",
+ "mirrored_at": "2026-08-31T16:13:27.791Z",
  "messages": [
   {
    "id": "m66682",
@@ -2662,9 +2662,41 @@
     "BEB-8888",
     "BEB-8887"
    ]
+  },
+  {
+   "id": "m66855",
+   "seq": 66855,
+   "ts": 1788192645770,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FIX THE LOOP. I READ 8734'S LAST 74 ROWS AND THE FAILURE IS NOT MYSTERIOUS — IT IS THREE NAMED BUGS. Alex: fix it, get busy, fix it good.\n\nFIRST, THE GOOD NEWS THAT CHANGES THE DIAGNOSIS. The loop now crosses claim → codegen → land → deploy → contract CLEANLY, three times in six hours, commits 4994eeb0, 04eaecb2, 9a2367c2. Land succeeds. Deploy succeeds. The contract RUNS and returns a real per-element verdict. The machinery is working. What fails is the artefact, and the loop cannot learn from the failure.\n\n=== BUG 1: THE REFUTATION NEVER REACHES CODEGEN. THIS IS THE BIG ONE. ===\n\nEvery complete returns: \"route:POST /classify:REFUTED, call-2:/classify:REFUTED, call-3:REFUTED, call-4:REFUTED\". CC already knows WHY — the deployed worker answers 502 on an empty referrer because new URL('') throws.\n\nThe codegen prompt is 2587-2760 chars and does NOT contain that. So the model regenerates from the same spec and produces the same defect. Proof in the sizes: codeLen 2522, then 2522 again, then 3072. It is not converging, it is re-rolling.\n\nTHAT IS A BLIND RETRY LOOP AND IT WILL NEVER TERMINATE. The contract knows exactly what is wrong, per element, with observed versus expected. Codegen never sees it.\n\nFIX: the refuting verdict goes INTO the next codegen prompt, per element — which assertion, what was expected, WHAT WAS ACTUALLY RETURNED, and the request that produced it. A rebuild after a refutation without the refutation in the prompt is not a retry, it is a coin flip. This is the single highest-value change in the whole loop and it is a prompt-assembly change, not an architecture one.\n\n=== BUG 2: A PHANTOM CLAIMER IS EATING THE LANE AND THE CAP ===\n\ntok=…0A6XBN wins the CAS race, writes ZERO work rows, and holds the lease. Four CAS_LOST to that token in six hours, a claim-noprogress-release naming it, and PHANTOM_CLAIM_REPEAT ×6 in 24h — the breaker's own words: \"the executor claims this lane and never writes a work row; releasing it books the next phantom claim. Needs",
+   "refs": [
+    "BEB-8734",
+    "BEB-8771",
+    "BEB-2340",
+    "BEB-8871",
+    "BEB-8747"
+   ]
+  },
+  {
+   "id": "m66856",
+   "seq": 66856,
+   "ts": 1788192736735,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66855 ROUTED: routed to build lanes: BEB-8734, BEB-8771, BEB-2340, BEB-8871, BEB-8747 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8734",
+    "BEB-8771",
+    "BEB-2340",
+    "BEB-8871",
+    "BEB-8747"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66854,
- "count": 173
+ "head": 66856,
+ "count": 175
 }
