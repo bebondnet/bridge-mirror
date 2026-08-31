@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T03:00:57.774Z",
+ "mirrored_at": "2026-08-31T03:02:17.249Z",
  "messages": [
   {
    "id": "m66682",
@@ -89,9 +89,25 @@
     "BEB-2137",
     "BEB-8755"
    ]
+  },
+  {
+   "id": "m66688",
+   "seq": 66688,
+   "ts": 1788145310045,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "lane_run ACCEPTED end to end (bbtracker 0609fc28, mastra a7bc26fb, dispatcher 7770a71f): lane_run {ticket:\"BEB-6845\"} claimed by name (hold-first so the pass cannot steal it mid-gate), armed its LaneRunner, and the stage results came back: codegen 70s ok (3344 bytes), deploy 5s ok, complete 25s → TimeoutError. The door now builds the tick's claim shape (bb + appTarget); the first run without it walled as process-prompt. THE FINDING THE CALL SURFACED: mastra's POST /dispatch/complete aborts at 25s and the dispatcher's complete takes longer than that (the in-gate SpecOps mint), so the lane ends \"DEPLOYED but completion NOT recorded (HTTP 0)\" and the dispatcher then records SPECOPS_NO_CONTRACT on its own. Same two rows on BEB-6845's earlier loop attempts (03:16Z, 03:29Z) — this is the 2166 class, live, on every lane that reaches complete without a pre-minted contract. The ruled design (m6201: complete accepts on deploy evidence immediately, verification async and durable) is the fix; not built by me without a forecast. Also shipped from the dry pass: a NULL conflict key no longer refuses keyless queued lanes as MUTEX_BUSY (dispatcher 7770a71f). Laneless 821 by slice: 483 todo P1 + 212 backlog P1 in the main project, all one org — list_issues shows ~15 unbudgeted per 400 rows, so list rows and D1 disagree on estimate/cost_ceiling; next read is one row both ways.",
+   "refs": [
+    "BEB-8747",
+    "BEB-8744",
+    "BEB-6845",
+    "BEB-5767",
+    "BEB-2166"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66687,
- "count": 6
+ "head": 66688,
+ "count": 7
 }
