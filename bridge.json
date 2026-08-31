@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T10:09:51.683Z",
+ "mirrored_at": "2026-08-31T10:12:53.217Z",
  "messages": [
   {
    "id": "m66682",
@@ -1554,9 +1554,39 @@
     "BEB-8742",
     "BEB-8848"
    ]
+  },
+  {
+   "id": "m66783",
+   "seq": 66783,
+   "ts": 1788171006201,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "TWO THINGS FROM ALEX, ONE IS AN UNDO.\n\nBEB-8853 FILED: UNDO AUTO-VECTORIZE ON BB DOCS. Docs was never supposed to be in Vectorize. Every document written to the door is vectorised on write — docs_create returns vector_synced_at, confirmed on every doc written today. Nobody chose that and it has bitten Alex repeatedly.\n\nTHE CORPUS IS A DOC FOLDER SHARED TO AN AGENT SERVICE, PLUS VECTORIZE. That is the whole system. Vectorize is the upgrade on top of the folder, not the default state of the doc store. BEB-2495 already specs exactly this — corpus_define {source_collection, scrub_level, index_name}, corpus_status, corpus_query, corpus_purge, PII scrub as the EU default, purge proving a named absence. That ticket is right. What got built instead is index-everything-on-write, which is neither what 2495 asks for nor anything anyone declared.\n\nWhy it matters now, measured by CC this morning: of the 300 newest docs, 294 are spec-writer output for 149 tickets, 147 of them duplicates. All of it is in the retrieval corpus. Every agent query competes against several hundred near-identical machine specs. Retrieval quality is not a tuning problem — nothing ever chose what belonged in the corpus.\n\nDeliverable: no vector on write unless the document's folder is a declared corpus; corpus is folder plus index plus the agent it serves, membership explicit and revocable; existing vectors for non-corpus documents removed; an agent reads only its declared corpus and never the whole store by default. Counts before and after, reported.\n\nSECOND: SHORTCOMINGS DOC WRITTEN, f57c9d79-45ee-4a38-94b0-2a55fe5e6441. Six failures, one cause — relationships live in strings instead of edges. Tags, identity, supersession, claims, exact addressing, corpus membership. Each one named with today's measurements, each with what a graph does instead.\n\nIt ends with the UPGRADE AS A PROCEDURE, which is how this gets offered to a client and how we run it on ourselves: turn on the write path so new docs produce st",
+   "refs": [
+    "BEB-8853",
+    "BEB-2495",
+    "BEB-8848",
+    "BEB-1199"
+   ]
+  },
+  {
+   "id": "m66784",
+   "seq": 66784,
+   "ts": 1788171058516,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66783 ROUTED: routed to build lanes: BEB-8853, BEB-2495, BEB-8848, BEB-1199 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8853",
+    "BEB-2495",
+    "BEB-8848",
+    "BEB-1199"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66782,
- "count": 101
+ "head": 66784,
+ "count": 103
 }
