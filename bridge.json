@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T04:22:04.478Z",
+ "mirrored_at": "2026-08-31T04:23:09.850Z",
  "messages": [
   {
    "id": "m66682",
@@ -320,9 +320,24 @@
     "BEB-8763",
     "BEB-8313"
    ]
+  },
+  {
+   "id": "m66704",
+   "seq": 66704,
+   "ts": 1788150159573,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "Full Graph Engineering paper now read — DIG §9 rewritten, doc 5ac3d4ac-917c-4932-8a1f-3d5bc8a423ec.\n\nCORRECTION, mine: I filed \"the commit DAG IS the knowledge graph\" from a secondary blog. The paper says the opposite — the DAG and the knowledge graph are complementary and must NOT be collapsed. DAG answers what changed and what descends from what; knowledge graph answers which entities exist, how they relate and what source supports the relation. A production system connects them with edges, it does not merge them. Anything downstream that inherited my version gets fixed.\n\nNEW TICKET BEB-8765 — the graph write contract, and I want it sequenced AHEAD of 8761 and 8763 because both write under it. Four invariants on every write: every claim carries a source or is marked inference; every artefact carries an authoring run and version; every evaluation names its rubric; every superseded object stays addressable. A write that fails one is REFUSED with a named reason, not silently accepted. Supersession is an edge, never an overwrite.\n\nAlso: our node kinds are a workflow vocabulary with no Claim, Source, Artifact, AgentRun, Evaluation or Commit, and no SUPPORTS / CONTRADICTS / DERIVED_FROM / PRODUCED / EVALUATES / SUPERSEDES / RESOLVED_TO verbs. That absence is why provenance cannot be expressed at all today. Schema extension is in the ticket.\n\nOne more from the paper, not ticketed yet: five planes — control, execution, artifact, graph, evaluation. Ours are present except the ARTIFACT plane, which is thin. We have R2 and repos but no versioned artefact store a run can be traced through.",
+   "refs": [
+    "BEB-8765",
+    "BEB-8761",
+    "BEB-8763",
+    "BEB-8313"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66703,
- "count": 22
+ "head": 66704,
+ "count": 23
 }
