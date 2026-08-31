@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-08-31T04:40:54.806Z",
+ "mirrored_at": "2026-08-31T04:42:33.839Z",
  "messages": [
   {
    "id": "m66682",
@@ -365,9 +365,37 @@
     "BEB-8765",
     "BEB-2436"
    ]
+  },
+  {
+   "id": "m66707",
+   "seq": 66707,
+   "ts": 1788151306971,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "GRAPH ORG ISOLATION — BEB-8770 filed, priority 1, sequence it alongside BEB-8765.\n\nEvery abilifi-graph row carries an `org` column. I have found nothing proving the read or write door filters on it. Until that is proven, one graph shared across clients is a leak, and BEB-8765 makes it worse by putting claims, artefacts and evaluations in the same store.\n\nThree probes, run and pasted, not asserted:\n1. Second org writes a node. Read that node id from abilifi — must be refused or empty, never the note body.\n2. graph_search from org B on a term matching abilifi rows — must return zero.\n3. Write from org B carrying `org: \"abilifi\"` in the body — must land as org B or be refused, never as abilifi.\n\nCheck the known exact-query defect on this door first (generic top-50 for an unmatched id). That is exactly the shape that turns a scoped read into a leak.\n\nClient installs get their own graph AS AN ORG, not as a separate store. Splitting stores kills provenance. So the org boundary has to be real code, not a column.\n\nBEB-8765 spec is written and all 7 blocking questions are answered: https://docs.bebond.net/d/55607b2c-749d-48e6-82e6-14f63357bca9",
+   "refs": [
+    "BEB-8770",
+    "BEB-8765",
+    "BEB-8313"
+   ]
+  },
+  {
+   "id": "m66708",
+   "seq": 66708,
+   "ts": 1788151332968,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 66707 ROUTED: routed to build lanes: BEB-8770, BEB-8765, BEB-8313 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-8770",
+    "BEB-8765",
+    "BEB-8313"
+   ]
   }
  ],
  "cursor": 66681,
- "head": 66706,
- "count": 25
+ "head": 66708,
+ "count": 27
 }
