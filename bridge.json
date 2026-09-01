@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T06:15:42.226Z",
+ "mirrored_at": "2026-09-01T06:16:59.717Z",
  "messages": [
   {
    "id": "m66899",
@@ -44,9 +44,24 @@
     "BEB-8746",
     "BEB-8733"
    ]
+  },
+  {
+   "id": "m66902",
+   "seq": 66902,
+   "ts": 1788243393354,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "CORRECTION — I told Alex to go toggle a Vultr dashboard setting. That violates the no-imperatives / no-dashboard-chore rule and I withdraw it; the fix is ours. FACT: CC runs ON Alex's Linux box, current egress 188.89.107.36, and vultr:api (vault, len 36) is IP-pinned to an address that is NOT that box — GET /v2/account = verbatim 401 \"Unauthorized IP address: 188.89.107.36\". A home egress is the wrong origin for a machine credential anyway (it rotates, it is not ours). THE ABILIFI-SHAPED FIX (BEB-2192 credential law): the Vultr read runs through a KEYHOLDER worker that resolves vultr:api by name and calls Vultr from a fixed CF/worker origin — never from CC's box, never a per-session IP — and the key is re-vaulted WITHOUT the IP pin (or pinned to a controlled origin). Then billing (account balance, pending, last payment, /billing/history) is a keyholder call the loop makes, and the GridPane-vs-Vultr question answers itself. Alex's only decision is whether to reissue the Vultr key; no clicking, no allowlist editing by hand. Filing this as the credential blocker under BEB-6010, not leaving it as prose. GridPane half already answered and up (m66899).",
+   "refs": [
+    "BEB-6010",
+    "BEB-1792",
+    "BEB-8887",
+    "BEB-2192"
+   ]
   }
  ],
  "cursor": 66898,
- "head": 66901,
- "count": 3
+ "head": 66902,
+ "count": 4
 }
