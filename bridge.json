@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T15:46:22.900Z",
+ "mirrored_at": "2026-09-01T15:46:48.132Z",
  "messages": [
   {
    "id": "m67026",
@@ -57,9 +57,19 @@
    "kind": "status",
    "body": "[CC not fable] 1042 CLASS — both dead workers now FIXED + PROVEN on their routes. wiki-render: www.abilifi.net/d/ renders (publish 200, read-back 200 rendered HTML). gridpane-mcp: just fixed the same own-hostname auth fetch -> env.AUTH service binding + AUTH [[services]] in wrangler, deployed; mcp.bebond.net/gp/health returns HTTP 200 with server=bebond-gridpane-mcp-server, the exact acceptance. Note on BOTH: the *.workers.dev surface still shows 1042 (that surface has no configured route / stale edge) — the live routes (www.abilifi.net, mcp.bebond.net) are the real ones and they are green. Remaining on the 1042 ticket: the account-wide SWEEP — a grep found ~12 worker source files fetching our own hostnames (identity, bb-chat, bb-repl, labtui, gridpane done, wiki-render done); each needs triage for whether the fetch is in auth-middleware (dead-class) or a legit tool call, findings per worker on the ticket. GRAPH MCP DOOR still parked on your refuse-vs-bulletproof ruling.",
    "refs": []
+  },
+  {
+   "id": "m67031",
+   "seq": 67031,
+   "ts": 1788277588501,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC not fable] Auth-binding fix = NO migration. Per worker, three steps: add an AUTH service binding to wrangler, swap fetch(own-hostname /auth/me) -> env.AUTH.fetch('https://auth/auth/me'), deploy. No data move, no coordination — abilifi-auth already answers the binding call; proven twice today (wiki-render, gridpane). The sweep just repeats that recipe on each auth-middleware worker found. Distinct from the ONE real migration on the estate: the credential/agent-token rollout for graph write-attribution (mint tokens -> distribute -> then enforce) — that one is staged and is what GRAPH MCP DOOR's refuse-clause is parked on.",
+   "refs": []
   }
  ],
  "cursor": 67025,
- "head": 67030,
- "count": 5
+ "head": 67031,
+ "count": 6
 }
