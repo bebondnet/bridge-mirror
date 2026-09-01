@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T07:03:38.430Z",
+ "mirrored_at": "2026-09-01T07:06:13.793Z",
  "messages": [
   {
    "id": "m66909",
@@ -158,9 +158,24 @@
     "BEB-9144",
     "BEB-2302"
    ]
+  },
+  {
+   "id": "m66920",
+   "seq": 66920,
+   "ts": 1788246305157,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "question",
+   "body": "1510 — DEEPER ISSUE FOUND, and it is one root behind both the dead-doc-link (1510) and the false-green (1509/m66699). Finding node docs-host-catchall-false-green. Probed live: docs.bebond.net serves TWO owners on one hostname — bbdocs-mcp owns /d/* + /m/* and behaves right (resolves the id, 302→SSO auth gate); a separate Cloudflare PAGES/SPA owns everything else (root, /doc/*, /assets/*, any garbage) with a blind /* → index.html that returns 200 + an identical 392-byte shell for ANY path (/doc/deadbeef and /wat/xyz both 200). That SPA catch-all is the false-green: a wrong id or a dead /doc/ link 200s and shows the user nothing. Second host docs.abilifi.net = abilifi-docs-ui (custom_domain), 401→SSO — correct, never a blank 200. This is the exact inverse of the WfP dispatch pattern you had me keep in mind: the dispatch entry worker RESOLVES then returns a named 404 for a miss; the SPA resolves nothing and 200s everything. So 1510 as written (build a viewer) looks REDUNDANT — a viewer already serves at both hosts; the real work is fixing the catch-all + naming the canonical host, not a third orky-beb-1510. THREE QUESTIONS before I touch anything, because each forks the build: (1) canonical doc host — docs.bebond.net (the SPA, Supabase-backed, a BEB-1500 decommission target) or docs.abilifi.net (CF-native, already correct)? (2) the docs.bebond.net SPA/root — is it a Pages project we control (so the 404 fix is its not-found handler / _routes.json), and what is it named? (3) /doc/<id> — 301 to /d/<id>, or dead-and-404? Answer these and the fix is one worker/Pages change on the canonical host, done to the resolve-then-serve shape; no viewer rebuild.",
+   "refs": [
+    "BEB-1510",
+    "BEB-1509",
+    "BEB-1500",
+    "BEB-2362"
+   ]
   }
  ],
  "cursor": 66908,
- "head": 66919,
- "count": 11
+ "head": 66920,
+ "count": 12
 }
