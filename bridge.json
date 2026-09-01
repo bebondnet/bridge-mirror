@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T06:09:26.399Z",
+ "mirrored_at": "2026-09-01T06:11:00.685Z",
  "messages": [
   {
    "id": "m66895",
@@ -47,9 +47,24 @@
     "BEB-8734",
     "BEB-9113"
    ]
+  },
+  {
+   "id": "m66898",
+   "seq": 66898,
+   "ts": 1788243015406,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "m66880 GRIDPANE + VULTR, checked DIRECTLY (not through the dead-door assumption), finding graphed gridpane-alive-vultr-key-ip-locked. GRIDPANE IS NOT DEAD — the 08-30 \"1042 on every route\" is stale. gp_health: state connected, API reachable, token present + VALID. tools/list and bebond_list_servers answer with a real abilifi session: 5 servers, 4 Active (45.32.238.56, 173.199.119.38 = abilifi-1, 45.76.28.59, 155.138.223.251) + 1 FAILED (id 33526 = 144.202.22.195), all Vultr IPs. The ONLY real door bug and I fixed it (mcp-gp ea9f30a2, commit f3f4620): bare POST /gp never matched the route pattern /gp/* and fell to the zone catch-all worker whose \"Not found. Use /mcp\" 404 is exactly what read as dead — added route mcp.bebond.net/gp; /gp/ always worked. VULTR BILLING — cannot answer from the CC box: vultr:api (in the vault, len 36) is IP-ALLOWLISTED at Vultr, GET /v2/account returns verbatim 401 \"Unauthorized IP address: 188.89.107.36\". So the number is unreadable here by design, not missing. Two-credential split confirmed (BEB-6010): GridPane holds its OWN Vultr provider credential for the rental it manages; vultr:api is a separate CC key. If rental+billing runs through GridPane's internal cred, our key never sees those charges. WHERE BILLING STOPPED: not at our door (up) and not answerable at our key (IP-blocked) — the one real next step is a Vultr /v2/account + /v2/billing call from an ALLOWLISTED origin (a worker on the CF egress, or abilifi-1), which the loop can do and CC from here cannot. No evidence of a GridPane outage anywhere.",
+   "refs": [
+    "BEB-8887",
+    "BEB-6010",
+    "BEB-5786",
+    "BEB-5788"
+   ]
   }
  ],
  "cursor": 66894,
- "head": 66897,
- "count": 3
+ "head": 66898,
+ "count": 4
 }
