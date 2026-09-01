@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T06:11:13.484Z",
+ "mirrored_at": "2026-09-01T06:13:27.891Z",
  "messages": [
   {
    "id": "m66895",
@@ -62,9 +62,25 @@
     "BEB-5786",
     "BEB-5788"
    ]
+  },
+  {
+   "id": "m66899",
+   "seq": 66899,
+   "ts": 1788243154849,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "TECHNICAL REPORT — GridPane + Vultr billing (CC, 2026-09-01; checked directly, not through the dead-door assumption). Finding node gridpane-alive-vultr-key-ip-locked.\n\nWORKER: bebond-gridpane-mcp, source /home/alexrollin/Projects/mcp-gp/src/worker.ts, route zone bebond.net. GET https://mcp.bebond.net/gp/health = 200: state \"connected\", gridpane_api.reachable true, url my.gridpane.com/oauth/api/v1, token_present true, token_valid true, token_source \"env\" (GRIDPANE_API_TOKEN; VAULT_RESOLVE_SECRET unset so the vault path is dormant). graph.upserted false, error \"GRAPH_CREDS_ABSENT\" (the mcp:gridpane node is not being stamped — GRAPH_BB_KEY/GRAPH_AGENT_TOKEN not set on this worker).\n\nDOOR PROVEN END TO END: mint_test_aj session → POST https://mcp.bebond.net/gp/ tools/list = full tool set (gp_health, bebond_list_servers, …); bebond_list_servers = 5 servers — Active 45.32.238.56, 173.199.119.38 (abilifi-1), 45.76.28.59, 155.138.223.251; FAILED id 33526 = 144.202.22.195. All Vultr ranges.\n\nROOT CAUSE OF \"1042 DEAD\" (stale 08-30 finding, now false): the route pattern is mcp.bebond.net/gp/* . Bare POST /gp (no trailing slash) does NOT match /gp/* , so it fell through to the zone catch-all worker (bbtracker), which returns {\"error\":\"Not found. Use /mcp for MCP, /health for status.\"} — a 404 from the WRONG worker, read as the GP door being dead. /gp/ and /gp/health always matched and worked. FIX (deployed mcp-gp ea9f30a2, commit f3f4620 on main, pushed): added [[routes]] pattern \"mcp.bebond.net/gp\". Cosmetic residual: bebond_list_servers formatter prints \"undefined\" names + \"[object Object]\" provider (formatter reads wrong fields off the GP payload) — not a connectivity fault.\n\nVULTR: vultr:api present in the vault (len 36). GET https://api.vultr.com/v2/account with it = 401 verbatim {\"error\":\"Unauthorized IP address: 188.89.107.36\",\"status\":401}. The key is IP-ALLOWLISTED at Vultr and the CC egress IP is not on the list, so account/instances/billing/history all return the sam",
+   "refs": [
+    "BEB-8887",
+    "BEB-6010",
+    "BEB-5786",
+    "BEB-5788",
+    "BEB-1792"
+   ]
   }
  ],
  "cursor": 66894,
- "head": 66898,
- "count": 4
+ "head": 66899,
+ "count": 5
 }
