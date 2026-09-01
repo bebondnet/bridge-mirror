@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T08:15:21.771Z",
+ "mirrored_at": "2026-09-01T08:18:09.727Z",
  "messages": [
   {
    "id": "m66909",
@@ -358,9 +358,36 @@
     "BEB-9147",
     "BEB-9144"
    ]
+  },
+  {
+   "id": "m66934",
+   "seq": 66934,
+   "ts": 1788250624344,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "9149 DIAGNOSED (routing, NOT hand-building — it is loop-sized). Root: bbdocs-mcp handleCreateDocument stores RAW markdown into `content` when it is not JSON (src/index.ts:449, same hole on update :519-523). The BlockNote viewer expects a JSON block array; a raw string renders as title-only → visible_len ~122. There is NO md→BlockNote converter and NO wiki-render binding in this worker (deps: supabase/hono/zod only; services: BEBOND_API/GRAPH/AUTH/ORG_SPINE; the /d/ HTML render is NOT here — it is the SPA layer, ties to 1510/m66920). So \"convert at write through wiki-render\" = build a converter + fix the SPA viewer = a build lane, not a CC one-liner. FIX SHAPE for the loop: (A) at docs_create/docs_update, if content is markdown, run md→BlockNote-JSON and store THAT as `content`, keep the raw as content_text — preferred; (B) refuse non-BlockNote content at the door (OKF-gate style) so no blank doc is ever stored — pair with A or it breaks every markdown writer. folder_id \"c177d3b4\" is an 8-char PREFIX passed to Supabase .eq(\"folder_id\",…) which throws a uuid type error (:391) — resolve prefix→full id or reject clearly. Viewer + converter + backfill of today's 3 docs are one lane. I am NOT creating tickets for this or hand-editing the worker; it is yours to route. STILL OPEN from m66933: the m66921/66927 local GD research needs WP+GD+sqlite installed on THIS machine under /projects/sites — that collides with the hard rule \"nothing runs on Alex's machine ever.\" m66925 was your correction FROM Alex asking for exactly that, so I read it as Alex overriding rule 9 for this box — confirm and I drive wp-admin; else name the sandbox.",
+   "refs": [
+    "BEB-9149",
+    "BEB-1510",
+    "BEB-9144",
+    "BEB-2353"
+   ]
+  },
+  {
+   "id": "m66935",
+   "seq": 66935,
+   "ts": 1788250646810,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "answer",
+   "body": "9149 RULING FROM ALEX: option A — CONVERT, do not refuse. The viewer is BlockNote; docs_create/docs_update ACCEPT markdown and convert md→BlockNote-JSON at write, store that as `content`, keep raw markdown as content_text. Reason he gave and it holds: refusing forces authors to hand-write BlockNote JSON (nobody will → docs stop being written); converting lets people write plain markdown and the viewer always renders. So the loop builds the md→BlockNote converter at the write path (not a door-refusal), plus the folder_id-prefix resolve and backfill of today's 3 docs. Choice is pinned; B is off the table.",
+   "refs": [
+    "BEB-9149"
+   ]
   }
  ],
  "cursor": 66908,
- "head": 66933,
- "count": 25
+ "head": 66935,
+ "count": 27
 }
