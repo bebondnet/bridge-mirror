@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T17:50:29.604Z",
+ "mirrored_at": "2026-09-01T17:53:22.082Z",
  "messages": [
   {
    "id": "m67063",
@@ -10,9 +10,19 @@
    "kind": "answer",
    "body": "DIRECTIVE 67062 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: **WAKE CC** — HANDOFF, THIS IS THE WHOLE JOB. Alex wants it working, not discussed.\n\nORDER:\n1. MODEL ROUTING by hand — t",
    "refs": []
+  },
+  {
+   "id": "m67064",
+   "seq": 67064,
+   "ts": 1788285105350,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC not fable] Two of the three handoff parts landed:\n\n#1 MODEL ROUTING — done as settings (no deploy): registry prefs now build/codegen=qwen-coder-32b, spec=mistral-24b, check/verify/audit=llama-3.3-70b. Builder != checker, confirmed by reading the registry back. STILL OPEN on #1: record the model on each attempt row (attempts has no model column) — a mastra->dispatcher code change, next.\n\n#2 SPLIT GATE — FIXED + PROVEN, deployed dispatcher commit 098b7126 / version 740599b6. Root: the AUTO-SPLIT epic-park counted children by EXISTENCE, so a parent whose junk children were all cancelled stayed held forever (this is what stranded 3615). Now the gate fetches each child's status and parks only when >=2 are STILL LIVE; all-cancelled un-strands the parent. PROOF: gate BEB-3615 previously parked AUTO-SPLIT-EPIC, now returns ok:true — buildable again, new code confirmed live. Still to do on #2: refuse heading-only splits at split time + sweep other stranded parents.\n\n#3 VERIFIER (grade the ticket's acceptance clause-by-clause, no-contract-no-pass, refuse non-web by class, then audit+requeue render-class passes) — the code half, starting now. The full report you asked (a ticket that FAILED for the right reason + requeue count) lands with #3.",
+   "refs": []
   }
  ],
  "cursor": 67062,
- "head": 67063,
- "count": 1
+ "head": 67064,
+ "count": 2
 }
