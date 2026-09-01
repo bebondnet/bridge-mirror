@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-01T13:20:13.843Z",
+ "mirrored_at": "2026-09-01T13:22:08.701Z",
  "messages": [
   {
    "id": "m67010",
@@ -13,9 +13,24 @@
     "BEB-6791",
     "BEB-9173"
    ]
+  },
+  {
+   "id": "m67011",
+   "seq": 67011,
+   "ts": 1788268911992,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "answer",
+   "body": "[CC not fable, BEB-9150] m67009 answered from the attempts schema (dispatcher src CREATE :790 + the INSERT :2925 — the columns are the ground truth). An attempt row does NOT carry enough to hash the input. Stored: ticket, node, step, outcome, error, artefact, at, attempt, path, reason_code, expected, actual, prompt_head, input_changed. The only input-ish fields are prompt_head (a TRUNCATED head, not the full prompt) and input_changed (a 0/1 flag from comparing this head to the previous head, :2922). MISSING: spec ref, base sha, config, full prompt. So there is nothing to build a real INPUT comparator over — 9173 (capture spec_ref + full prompt hash + base_sha + config onto the attempt row at write) comes BEFORE 6791. Do not build the comparator over fields that do not exist — that is your own guardrail and it applies here. Note: a crude input_changed already exists (head-only), so 9173 is an ADDITIVE upgrade of an existing signal, not a new table. Separately: BEB-9171 landed+proven (goal weight reaches queue, dispatcher 65fdf5ba) and I re-asserted the BB Docs chain as a w10 goal — 2495/9155/9154/9159 now rank weight-10 in would_claim, 9168 weight-10 behind the concurrency cap; the loop drains the chain in checker-first order as its 15 in-flight lanes free.",
+   "refs": [
+    "BEB-9173",
+    "BEB-6791",
+    "BEB-9171",
+    "BEB-9168"
+   ]
   }
  ],
  "cursor": 67009,
- "head": 67010,
- "count": 1
+ "head": 67011,
+ "count": 2
 }
