@@ -1,24 +1,24 @@
 {
- "mirrored_at": "2026-09-01T12:22:13.126Z",
- "ts": 1788265330446,
+ "mirrored_at": "2026-09-01T12:24:28.214Z",
+ "ts": 1788265465749,
  "loop": {
   "proposed_total": 6411,
   "by_state": {
-   "queued": 1012,
-   "claimed": 15,
+   "queued": 1025,
+   "claimed": 7,
    "done": 1492,
-   "held": 133,
-   "blocked": 13,
-   "parked": 425
+   "held": 126,
+   "blocked": 17,
+   "parked": 423
   },
   "by_lane": {
    "BUILD": {
-    "blocked": 2,
-    "claimed": 15,
+    "blocked": 6,
+    "claimed": 7,
     "done": 419,
-    "held": 125,
-    "parked": 418,
-    "queued": 997
+    "held": 118,
+    "parked": 416,
+    "queued": 1010
    },
    "REFINE": {
     "blocked": 2,
@@ -40,14 +40,14 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1788265309530,
-   "tally": "BEB-6791→BUILD[claimed], BEB-6803→BUILD[claimed], BEB-2935→BUILD[claimed], BEB-8742→BUILD[claimed], BEB-3595→BUILD[claimed], BEB-2917→BUILD[claimed], BEB-3557→BUILD[claimed], BEB-8718→BUILD[claimed], BEB-3641→BUILD[claimed], BEB-6120→BUILD[claimed], BEB-2752→BUILD, BEB-8746→BUILD, BEB-3603→BUILD[claimed], BEB-4456→BUILD[claimed], BEB-6815→BUILD[claimed], BEB-3856→BUILD[claimed], BEB-6714→BUILD"
+   "at": 1788265456977,
+   "tally": "BEB-6791→BUILD[blocked], BEB-6803→BUILD[claimed], BEB-8742→BUILD[blocked], BEB-2935→BUILD, BEB-3595→BUILD[claimed], BEB-2917→BUILD, BEB-3557→BUILD, BEB-8718→BUILD, BEB-6120→BUILD[claimed], BEB-8746→BUILD[blocked], BEB-4456→BUILD, BEB-6815→BUILD[claimed], BEB-3856→BUILD, BEB-6714→BUILD, BEB-5912→BUILD, BEB-9171→BUILD, BEB-9170→BUILD, BEB-9149→BUILD, BEB-9162→BUILD"
   },
   "reds": [
    {
     "code": "RECON_BALANCE_DRIFT",
     "severity": "red",
-    "since": 1788265170684,
+    "since": 1788265342883,
     "detail": "__probe__: credits 250c − settles 0c − meters 0c − standing 0c = 250c but balance is NaNc (delta NaNc)",
     "refs": [
      "BEB-5886"
@@ -61,7 +61,7 @@
    {
     "code": "RECON_BALANCE_DRIFT",
     "severity": "red",
-    "since": 1788265170684,
+    "since": 1788265342883,
     "detail": "test: credits 1400c − settles 50c − meters 502c − standing 0c = 848c but balance is 846c (delta -2c)",
     "refs": [
      "BEB-5886"
@@ -75,7 +75,7 @@
    {
     "code": "RECON_UNEVALUABLE",
     "severity": "red",
-    "since": 1788265170684,
+    "since": 1788265342883,
     "detail": "7 site(s) where an invariant cannot be evaluated over live data (balance_conservation: no_origin_credit_in_log): acme, alexwiki, op:0A6XBN, rpc-test, test-bill-cc, test-bill-cc-7201, wikitest",
     "refs": [
      "BEB-5886"
@@ -84,7 +84,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1788265170684,
+    "since": 1788265342883,
     "detail": "SPEC MINT LANDS — spec_author mints a contract from acceptance; a specced ticket completes with contract_id and the no-contract failure coun — last landed evidence NEVER",
     "refs": [
      "BEB-5767",
@@ -95,7 +95,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1788265170684,
+    "since": 1788265342883,
     "detail": "FIRST VIDEO THAT PLAYS — one real run rendered, captured, uploaded to Stream, playing from a plain URL. Real data, no fixtures. — last landed evidence NEVER",
     "refs": [
      "BEB-6842",
@@ -106,7 +106,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1788265170684,
+    "since": 1788265342883,
     "detail": "NO WATCHERS — every detector files claimable work in the same pass, and one audit() call returns the whole picture on demand. — last landed evidence NEVER",
     "refs": [
      "BEB-6803",
@@ -126,6 +126,21 @@
      "BEB-6790",
      "BEB-6789"
     ]
+   },
+   {
+    "code": "SILENT_REFUSAL",
+    "severity": "red",
+    "since": 1788265251121,
+    "detail": "BEB-6729 refused 3× in 30min — LATEST: AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "refs": [
+     "BEB-6729"
+    ],
+    "orky": {
+     "cls": "silent-refusal-loop",
+     "error": "AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112)",
+     "subject": "BEB-6729"
+    },
+    "fix_ticket": "BEB-2368"
    },
    {
     "code": "SILENT_REFUSAL",
@@ -1214,17 +1229,17 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1788178910676,
-    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-6803/index.js",
-    "detail": "alexrollin/abilifi-apps failing at complete 1939× in 24h — LATEST (09-01T12:16): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-6803 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1788178995402,
+    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8312/index.js",
+    "detail": "alexrollin/abilifi-apps failing at complete 1942× in 24h — LATEST (09-01T12:22): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8312 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-6803"
+     "BEB-8312"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-6803 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {ticket:\"BEB-6803\"} — then complete; not a codegen retry.\n[source: orky/orky-beb-6803/index.js]",
-     "subject": "BEB-6803",
-     "file": "orky/orky-beb-6803/index.js"
+     "error": "SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8312 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {ticket:\"BEB-8312\"} — then complete; not a codegen retry.\n[source: orky/orky-beb-8312/index.js]",
+     "subject": "BEB-8312",
+     "file": "orky/orky-beb-8312/index.js"
     }
    },
    {
@@ -1294,17 +1309,17 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1788178861950,
-    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-4595/index.js",
-    "detail": "alexrollin/abilifi-apps failing at split 545× in 24h — LATEST (09-01T05:19): sections: Creds required | Interface\nchildren: BEB-6812, BEB-6813 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1788179119761,
+    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-3508/index.js",
+    "detail": "alexrollin/abilifi-apps failing at split 544× in 24h — LATEST (09-01T05:19): sections: Creds required | Interface\nchildren: BEB-7199, BEB-7200",
     "refs": [
-     "BEB-4595"
+     "BEB-3508"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "sections: Creds required | Interface\nchildren: BEB-6812, BEB-6813\n[source: orky/orky-beb-4595/index.js]",
-     "subject": "BEB-4595",
-     "file": "orky/orky-beb-4595/index.js"
+     "error": "sections: Creds required | Interface\nchildren: BEB-7199, BEB-7200\n[source: orky/orky-beb-3508/index.js]",
+     "subject": "BEB-3508",
+     "file": "orky/orky-beb-3508/index.js"
     }
    },
    {
@@ -1582,9 +1597,9 @@
    {
     "code": "UNHEALABLE",
     "severity": "red",
-    "since": 1788178928836,
+    "since": 1788182435861,
     "source_ref": null,
-    "detail": "bebondnet/bebond-mcp failing at split 15× in 24h — LATEST (09-01T04:36): sections: Creds required | Interface\nchildren: BEB-8508, BEB-8509",
+    "detail": "bebondnet/bebond-mcp failing at split 14× in 24h — LATEST (09-01T04:36): sections: Creds required | Interface\nchildren: BEB-8508, BEB-8509",
     "refs": [
      "BEB-8313"
     ],
@@ -1647,7 +1662,7 @@
     "severity": "red",
     "since": 1788179163905,
     "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8245/index.js",
-    "detail": "n/a failing at complete 159× in 24h — LATEST (09-01T10:57): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8245 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at complete 160× in 24h — LATEST (09-01T12:22): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8245 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
      "BEB-8245"
     ],
@@ -1663,7 +1678,7 @@
     "severity": "red",
     "since": 1788184925621,
     "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-3641/index.js",
-    "detail": "n/a failing at deploy 7× in 24h — LATEST (09-01T10:26): codeLen: 2907\ndeploy error: LAND REFUSED (error): land queue unreachable: SyntaxError: Unexpected token 'e', \"error code: 1101\n\" is not valid JSON\ncommit: none\ntarget: n/a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "detail": "n/a failing at deploy 7× in 24h — LATEST (09-01T10:26): codeLen: 2907\ndeploy error: LAND REFUSED (error): land queue unreachable: SyntaxError: Unexpected token 'e', \"error code: 1101\n\" is not valid JSON\ncommit: none\ntarget: n/a · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
     "refs": [
      "BEB-3641"
     ],
@@ -2766,37 +2781,37 @@
   ],
   "wake_record": [
    {
-    "tick_n": 21492,
-    "ts": 1788265318270,
+    "tick_n": 32206,
+    "ts": 1788265464939,
     "step_reached": 5,
     "blocked_predicate": null,
     "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-9153 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-9153 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — [BEB-9153] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-6729 refused 3× in 30min — LATEST: AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112) · lane NOT held — a [BEB-6729] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
     "action_step": 5,
     "evidence_ref": null,
-    "report_hash": "962786425"
+    "report_hash": "3377144893"
    },
    {
-    "tick_n": 18970,
-    "ts": 1788265299517,
+    "tick_n": 18972,
+    "ts": 1788265426080,
     "step_reached": 5,
     "blocked_predicate": null,
     "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-9153 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-9153 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — [BEB-9153] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-6729 refused 3× in 30min — LATEST: AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112) · lane NOT held — a [BEB-6729] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
     "action_step": 5,
     "evidence_ref": null,
-    "report_hash": "2799135481"
+    "report_hash": "3148340992"
    },
    {
-    "tick_n": 32204,
-    "ts": 1788265280909,
+    "tick_n": 21493,
+    "ts": 1788265406277,
     "step_reached": 5,
     "blocked_predicate": null,
     "blocked_error": null,
     "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-9153 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-9153 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — [BEB-9153] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
     "action_step": 5,
     "evidence_ref": null,
-    "report_hash": "2799135481"
+    "report_hash": "2979425019"
    }
   ]
  },
@@ -2960,7 +2975,7 @@
   {
    "code": "RECON_BALANCE_DRIFT",
    "severity": "red",
-   "since": 1788265170684,
+   "since": 1788265342883,
    "detail": "__probe__: credits 250c − settles 0c − meters 0c − standing 0c = 250c but balance is NaNc (delta NaNc)",
    "refs": [
     "BEB-5886"
@@ -2974,7 +2989,7 @@
   {
    "code": "RECON_BALANCE_DRIFT",
    "severity": "red",
-   "since": 1788265170684,
+   "since": 1788265342883,
    "detail": "test: credits 1400c − settles 50c − meters 502c − standing 0c = 848c but balance is 846c (delta -2c)",
    "refs": [
     "BEB-5886"
@@ -2988,7 +3003,7 @@
   {
    "code": "RECON_UNEVALUABLE",
    "severity": "red",
-   "since": 1788265170684,
+   "since": 1788265342883,
    "detail": "7 site(s) where an invariant cannot be evaluated over live data (balance_conservation: no_origin_credit_in_log): acme, alexwiki, op:0A6XBN, rpc-test, test-bill-cc, test-bill-cc-7201, wikitest",
    "refs": [
     "BEB-5886"
@@ -2997,7 +3012,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1788265170684,
+   "since": 1788265342883,
    "detail": "SPEC MINT LANDS — spec_author mints a contract from acceptance; a specced ticket completes with contract_id and the no-contract failure coun — last landed evidence NEVER",
    "refs": [
     "BEB-5767",
@@ -3008,7 +3023,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1788265170684,
+   "since": 1788265342883,
    "detail": "FIRST VIDEO THAT PLAYS — one real run rendered, captured, uploaded to Stream, playing from a plain URL. Real data, no fixtures. — last landed evidence NEVER",
    "refs": [
     "BEB-6842",
@@ -3019,7 +3034,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1788265170684,
+   "since": 1788265342883,
    "detail": "NO WATCHERS — every detector files claimable work in the same pass, and one audit() call returns the whole picture on demand. — last landed evidence NEVER",
    "refs": [
     "BEB-6803",
@@ -3039,6 +3054,21 @@
     "BEB-6790",
     "BEB-6789"
    ]
+  },
+  {
+   "code": "SILENT_REFUSAL",
+   "severity": "red",
+   "since": 1788265251121,
+   "detail": "BEB-6729 refused 3× in 30min — LATEST: AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112) · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "refs": [
+    "BEB-6729"
+   ],
+   "orky": {
+    "cls": "silent-refusal-loop",
+    "error": "AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112)",
+    "subject": "BEB-6729"
+   },
+   "fix_ticket": "BEB-2368"
   },
   {
    "code": "SILENT_REFUSAL",
@@ -4127,17 +4157,17 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1788178910676,
-   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-6803/index.js",
-   "detail": "alexrollin/abilifi-apps failing at complete 1939× in 24h — LATEST (09-01T12:16): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-6803 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1788178995402,
+   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8312/index.js",
+   "detail": "alexrollin/abilifi-apps failing at complete 1942× in 24h — LATEST (09-01T12:22): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8312 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-6803"
+    "BEB-8312"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-6803 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {ticket:\"BEB-6803\"} — then complete; not a codegen retry.\n[source: orky/orky-beb-6803/index.js]",
-    "subject": "BEB-6803",
-    "file": "orky/orky-beb-6803/index.js"
+    "error": "SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8312 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {ticket:\"BEB-8312\"} — then complete; not a codegen retry.\n[source: orky/orky-beb-8312/index.js]",
+    "subject": "BEB-8312",
+    "file": "orky/orky-beb-8312/index.js"
    }
   },
   {
@@ -4207,17 +4237,17 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1788178861950,
-   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-4595/index.js",
-   "detail": "alexrollin/abilifi-apps failing at split 545× in 24h — LATEST (09-01T05:19): sections: Creds required | Interface\nchildren: BEB-6812, BEB-6813 · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1788179119761,
+   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-3508/index.js",
+   "detail": "alexrollin/abilifi-apps failing at split 544× in 24h — LATEST (09-01T05:19): sections: Creds required | Interface\nchildren: BEB-7199, BEB-7200",
    "refs": [
-    "BEB-4595"
+    "BEB-3508"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "sections: Creds required | Interface\nchildren: BEB-6812, BEB-6813\n[source: orky/orky-beb-4595/index.js]",
-    "subject": "BEB-4595",
-    "file": "orky/orky-beb-4595/index.js"
+    "error": "sections: Creds required | Interface\nchildren: BEB-7199, BEB-7200\n[source: orky/orky-beb-3508/index.js]",
+    "subject": "BEB-3508",
+    "file": "orky/orky-beb-3508/index.js"
    }
   },
   {
@@ -4495,9 +4525,9 @@
   {
    "code": "UNHEALABLE",
    "severity": "red",
-   "since": 1788178928836,
+   "since": 1788182435861,
    "source_ref": null,
-   "detail": "bebondnet/bebond-mcp failing at split 15× in 24h — LATEST (09-01T04:36): sections: Creds required | Interface\nchildren: BEB-8508, BEB-8509",
+   "detail": "bebondnet/bebond-mcp failing at split 14× in 24h — LATEST (09-01T04:36): sections: Creds required | Interface\nchildren: BEB-8508, BEB-8509",
    "refs": [
     "BEB-8313"
    ],
@@ -4560,7 +4590,7 @@
    "severity": "red",
    "since": 1788179163905,
    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8245/index.js",
-   "detail": "n/a failing at complete 159× in 24h — LATEST (09-01T10:57): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8245 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at complete 160× in 24h — LATEST (09-01T12:22): SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-8245 and the in-gate mint produced none (SpecOps slow/unreachable, or its ## Acceptance was never authored). Author it first — spec_author {t · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
     "BEB-8245"
    ],
@@ -4576,7 +4606,7 @@
    "severity": "red",
    "since": 1788184925621,
    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-3641/index.js",
-   "detail": "n/a failing at deploy 7× in 24h — LATEST (09-01T10:26): codeLen: 2907\ndeploy error: LAND REFUSED (error): land queue unreachable: SyntaxError: Unexpected token 'e', \"error code: 1101\n\" is not valid JSON\ncommit: none\ntarget: n/a · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "detail": "n/a failing at deploy 7× in 24h — LATEST (09-01T10:26): codeLen: 2907\ndeploy error: LAND REFUSED (error): land queue unreachable: SyntaxError: Unexpected token 'e', \"error code: 1101\n\" is not valid JSON\ncommit: none\ntarget: n/a · lane AUTO-HELD (m7418 — detection acts; /dispatch/requeue after the fix)",
    "refs": [
     "BEB-3641"
    ],
@@ -5685,37 +5715,37 @@
  ],
  "wake_record": [
   {
-   "tick_n": 21492,
-   "ts": 1788265318270,
+   "tick_n": 32206,
+   "ts": 1788265464939,
    "step_reached": 5,
    "blocked_predicate": null,
    "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-9153 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-9153 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — [BEB-9153] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-6729 refused 3× in 30min — LATEST: AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112) · lane NOT held — a [BEB-6729] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
    "action_step": 5,
    "evidence_ref": null,
-   "report_hash": "962786425"
+   "report_hash": "3377144893"
   },
   {
-   "tick_n": 18970,
-   "ts": 1788265299517,
+   "tick_n": 18972,
+   "ts": 1788265426080,
    "step_reached": 5,
    "blocked_predicate": null,
    "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-9153 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-9153 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — [BEB-9153] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-6729 refused 3× in 30min — LATEST: AUTO-SPLIT EPIC: BEB-6729 already split into 2 child lanes — the children build, the parent never builds again (BEB-9112) · lane NOT held — a [BEB-6729] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
    "action_step": 5,
    "evidence_ref": null,
-   "report_hash": "2799135481"
+   "report_hash": "3148340992"
   },
   {
-   "tick_n": 32204,
-   "ts": 1788265280909,
+   "tick_n": 21493,
+   "ts": 1788265406277,
    "step_reached": 5,
    "blocked_predicate": null,
    "blocked_error": null,
    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky SILENT_REFUSAL: BEB-9153 refused 3× in 30min — LATEST: BLOCKED-ON-SPEC (BEB-2647): no SPEC.md on branch ticket/BEB-9153 of alexrollin/abilifi-apps and the in-gate spec_author did not deliver one — [BEB-9153] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
    "action_step": 5,
    "evidence_ref": null,
-   "report_hash": "2799135481"
+   "report_hash": "2979425019"
   }
  ]
 }
