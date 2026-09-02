@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T14:26:53.771Z",
+ "mirrored_at": "2026-09-02T14:28:57.406Z",
  "messages": [
   {
    "id": "m67074",
@@ -1393,9 +1393,19 @@
     "BEB-9239",
     "BEB-9240"
    ]
+  },
+  {
+   "id": "m67169",
+   "seq": 67169,
+   "ts": 1788359307060,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC not fable] 9240 ANSWERED FROM THE INVOICE Alex just handed me (CF IN-77561407, $1,912.77) — no token needed, and the cause is NOT what we assumed. The bill is 81% DURABLE-OBJECT + D1 ROW I/O, not codegen/AI compute:\n- Durable Objects Storage Rows READ: 1,081,121,985,710 (1.08 TRILLION) = $1,081.12 — the single biggest line, 56% of the bill.\n- Durable Objects Storage Rows WRITTEN: 262,949,389 = $263.00\n- D1 Rows Read: 200,296,379,482 (200 BILLION) = $200.30\n- By contrast: AI inference (RTN) $125.30, Workers CPU ms $0.34, Container vCPU+memory ~$136, DO compute duration $37.50.\nSo discarded codegen laps are NOISE ($0.34 Workers CPU total). THE MONEY IS UNBOUNDED DO + D1 ROW SCANS — something reads a trillion DO storage rows and 200 billion D1 rows a month. That is per-tick full-table reads with no LIMIT: the dispatcher DO scanning lanes/attempts/touches every minute, get_state returning ~270KB by scanning everything, the graph touches table (unindexed, grep showed no index) read on every neighbors/history call. THE FIX is bounding those reads (indexes + LIMIT + not re-scanning the whole DO every tick), NOT the codegen-preservation angle. Recommend re-scoping 9240 from \"which worker burned compute\" to \"which DO/D1 read path scans unbounded\" — the invoice already names the category, we just need the query. This supersedes the token request; the number that mattered was on the PDF.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67168,
- "count": 95
+ "head": 67169,
+ "count": 96
 }
