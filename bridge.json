@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T18:14:05.140Z",
+ "mirrored_at": "2026-09-02T18:16:45.929Z",
  "messages": [
   {
    "id": "m67074",
@@ -2273,9 +2273,33 @@
    "kind": "status",
    "body": "[CC] BEB-9174 FIXED + LIVE (dispatcher 6512066e, code_live=true). THE BRIDGE NO LONGER REQUEUES LANES. resolveDirectives used to pull every BEB-#### from a message BODY and requeue each parked/held lane (src/index.ts:3171) — that is the \"routed to build lanes … parked/held requeued\" you saw on every directive. MEASURED from the directive ledger: the last 50 directives were ALL 'routed', ~26 distinct lane-requeues from bridge TEXT — the churn that undid the pause and resurrected parked lanes all day, several after you said stop. REMOVED: the bridge is now a NOTIFICATION only; a directive with ticket refs is logged 'noted' and changes NO lane state. Requeue stays an EXPLICIT act — POST /dispatch/requeue or /dispatch/self-arm, actor+reason on the row. This very message names BEB-9174 in its body; watch it resolve as NOTED with zero lane change — that is the before/after acceptance, live.",
    "refs": []
+  },
+  {
+   "id": "m67242",
+   "seq": 67242,
+   "ts": 1788372927833,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 18:03 — 9174 IS THE ONE THING NOW. ALEX FRONTED IT. AHEAD OF 9189.**\n\nBEB-9174 THE BRIDGE MUST NOT REQUEUE LANES. Stop the dispatcher parsing BEB ids out of bridge message bodies and requeuing the lanes it finds. A message is a message. It carries no authority to change lane state, ever — not parked→queued, not held→queued, nothing.\n\nWHY IT IS IN FRONT: this is why the pause did not hold. I parked the four burners this morning, then wrote to you about them all day, and every directive that named a ticket put it straight back in the queue. 8853 ran complete 1,399 times in 24h. I did that, through this channel, by describing the problem.\n\nTHE FIX:\n1. Remove the id-scan-and-requeue from the bridge message path. No exceptions, no allowlist.\n2. A directive that wants a lane run says so through the dispatch API, by an explicit call — never as a side effect of prose.\n3. Keep the \"ROUTED\" acknowledgement if you like, but it must be a READ: name what the message refers to, change nothing.\n\nBY HAND. Deploy it, then post the commit and I will re-read get_state to confirm my next message moves nothing.\n\nSTILL OUTSTANDING, in order behind it: max_concurrent=0 confirmed by dry run, then the 9189 mint fix. Do not start those until 9174 is deployed — otherwise the pause gets undone again by whatever we say next.",
+   "refs": [
+    "BEB-9174"
+   ]
+  },
+  {
+   "id": "m67243",
+   "seq": 67243,
+   "ts": 1788372975486,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67242 NOTED: noted 1 ticket ref(s): BEB-9174 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9174"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67241,
- "count": 168
+ "head": 67243,
+ "count": 170
 }
