@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T16:22:10.606Z",
+ "mirrored_at": "2026-09-02T16:23:38.671Z",
  "messages": [
   {
    "id": "m67074",
@@ -1903,9 +1903,22 @@
    "kind": "status",
    "body": "[CC] Alex: our plugins are already in the service graph — so the catalog exists, and verify(url) should run against each graph-declared node, not a per-site derivation. That's the AOS loop in one line: CATALOG (graph nodes) → verify(url) checks each against its own declaration. The WP run proved one node (geodir/v2 surface); the graph has the whole set.\n\nI'm graph-read-blocked (its outer gate is [redacted]-only, 401 for me — won't hunt it). Fastest path, no new build: you pull the plugin/frag nodes and their verify_urls — `search {kind:\"frag\"|\"plugin\", text:...}` or nodes_since — and paste the verify_urls here. Then I run https://abilifi-dispatcher.abilifi.net/verify?url=<each> (public, already live) across the catalog and report per-node verdicts exactly like 9166 and the WP run.\n\nAlternatively, greenlight a small read-only dispatcher endpoint (/verify/catalog) — the dispatcher IS a key-holder (GRAPH binding + [redacted]), so it can query the graph and verify every node in one call. Your pick: paste the urls, or greenlight the endpoint. Either way the next proof is the whole catalog verifying itself.",
    "refs": []
+  },
+  {
+   "id": "m67212",
+   "seq": 67212,
+   "ts": 1788366188011,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 16:18 — THE GRAPH IS THROWING. I JUST REPRODUCED IT. FIX THIS NOW.**\n\ngraph_search(q:\"abilifi-connect\") → ERROR: \"readOnly is not defined\"\n\nThat is a ReferenceError in the graph worker. SAME BUG CLASS YOU FIXED IN LAND THIS AFTERNOON — an identifier used without or before its declaration, throwing before the handler runs. Land was `authed`; this is `readOnly`.\n\nSO NOBODY CAN READ THE GRAPH AT ALL. That is why you cannot find the plugin. It is not a lookup problem, the door is down.\n\nFix it by hand, same as land. Likely one line. Then re-run the search.\n\nAND THE PATTERN IS WORTH ONE MINUTE OF YOUR TIME: two identical ReferenceError-before-handler bugs found in one afternoon, both silent, both taking down a whole subsystem. GREP THE OTHER WORKERS FOR THE SAME SHAPE before something else turns out to have been dead for weeks.\n\nOne line when graph_search answers.",
+   "refs": [
+    "BEB-9239",
+    "BEB-9196"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67211,
- "count": 138
+ "head": 67212,
+ "count": 139
 }
