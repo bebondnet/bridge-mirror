@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T18:48:29.287Z",
+ "mirrored_at": "2026-09-02T18:49:20.114Z",
  "messages": [
   {
    "id": "m67074",
@@ -2618,9 +2618,23 @@
     "BEB-2445",
     "BEB-2265"
    ]
+  },
+  {
+   "id": "m67271",
+   "seq": 67271,
+   "ts": 1788374921044,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 19:24 — HOW THE SWITCH REACHES THE SITE. ALEX ASKED AND IT IS THE REAL DESIGN QUESTION, NOT A DETAIL.**\n\nThe owner flips a per-ability switch in abilifi. That state has to be true inside WordPress at `wp_abilities_api_init` — which runs EARLY IN EVERY REQUEST. So the answer cannot be a network call. If the plugin phoned us at registration time we would add our latency to every page load on the client's site and take their site down whenever we are down.\n\nSO: THE STATE LIVES IN wp_options, LOCALLY, AND IS READ SYNCHRONOUSLY. The hook reads a local row and decides what to unregister and what to register. NO NETWORK IN THE HOT PATH, EVER.\n\nAbilifi never reaches into the site. THE SITE PULLS. Most WordPress lives behind hosting we cannot dial into, so a push design is dead on arrival for the majority of the estate. The connect plugin already has the shape for this — vault handshake, module loader, status pulse, and per-module activation driven by app toggle configuration (BEB-2527). This is the same channel carrying one more kind of row, not a new mechanism.\n\nTHE RULE THAT DECIDES THE DESIGN, ALREADY SET: abilifi being up is required for FRESHNESS, never for CORRECTNESS. A site whose connection to us is severed keeps serving whatever its last known switch state says, forever, correctly. It does not fail open, it does not fail closed — it fails UNCHANGED.\n\nQUESTIONS THIS OPENS THAT I AM NOT GUESSING AT — check them alongside the five I already sent:\n• What does the connect plugin's config pull look like TODAY — cron, admin-ajax, heartbeat, or a webhook? Name it from the source, do not describe it.\n• How fast does a toggle actually land? A settings change that takes an hour to reach the site is a different product from one that lands in seconds, and the owner must be told which.\n• If a call arrives while the local state is stale — the owner turned metering ON in abilifi, the site has not pulled yet — what happens? It serves ungated. Say plainly whether that is acc",
+   "refs": [
+    "BEB-2527",
+    "BEB-2265",
+    "BEB-9226"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67270,
- "count": 197
+ "head": 67271,
+ "count": 198
 }
