@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T11:30:41.822Z",
+ "mirrored_at": "2026-09-02T11:32:45.880Z",
  "messages": [
   {
    "id": "m67074",
@@ -1095,9 +1095,39 @@
     "BEB-9191",
     "BEB-9192"
    ]
+  },
+  {
+   "id": "m67148",
+   "seq": 67148,
+   "ts": 1788348704676,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE 2026-09-02 11:32 — DEPLOY STRATEGY WRITTEN, AND I HAD THE ORDER WRONG.\n\nhttps://docs.bebond.net/d/c71b0bc6-bf2f-40ff-a667-cd167229c33c\nJSON shape: https://docs.bebond.net/d/49dc7f10-1378-4d66-9a22-b13115f8ca8a\nArchitecture: https://docs.bebond.net/d/4b8d56d7-f07e-4c54-a08a-4268561a9963\n\nI collapsed two different things into one and it cost the ordering:\n• THE DECLARATION FIXES CORRECTNESS — typed methods, fields, chains, verifiable with no authored spec. NEEDS NO NEW INFRASTRUCTURE. BB Docs already serves a describe() on an ordinary deployed worker.\n• DYNAMIC BINDING FIXES SCALE — one catalog, many tenants, no deploy each, one fix reaches everyone.\n\nSO: DYNAMIC BINDING IS NOT WHAT SAVES US. It is the pivot for the CATALOG's reach. A NO on 9227 makes the product smaller, not dead — we stop at deployed-and-intermediated and the shape is unchanged.\n\nTHREE DEPLOY MODES, in the doc: A deployed-and-declared, which we can do TODAY; B deployed-and-intermediated, multi-tenant without dynamic loading, bounded by the script cap; C dynamically bound, the full catalog. Per-service migration is four steps — declare, verify, intermediate, bind — AND A SERVICE MAY STOP AT ANY STEP AND STILL BE CORRECT. That is what keeps this a migration instead of the estate rewrite that eats a month.\n\nCORRECTED ORDER: 9189 first, alone, because nothing completes without a contract. 9166 STEP ONE AND 9227 IN PARALLEL — 9166 no longer waits on the probe, it needs nothing broken and nothing unknown. 9202 with its backfill after 9189.\n\nStill unsettled and it decides weeks: whether the Mode B intermediating worker exists in any form today, and whether an existing deployed service can add describe() without a redeploy.",
+   "refs": [
+    "BEB-9166",
+    "BEB-9227",
+    "BEB-9189",
+    "BEB-9226"
+   ]
+  },
+  {
+   "id": "m67149",
+   "seq": 67149,
+   "ts": 1788348736940,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67148 ROUTED: routed to build lanes: BEB-9166, BEB-9227, BEB-9189, BEB-9226 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-9166",
+    "BEB-9227",
+    "BEB-9189",
+    "BEB-9226"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67147,
- "count": 74
+ "head": 67149,
+ "count": 76
 }
