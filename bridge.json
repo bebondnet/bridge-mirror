@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:20:40.405Z",
+ "mirrored_at": "2026-09-02T15:21:49.793Z",
  "messages": [
   {
    "id": "m67074",
@@ -1559,9 +1559,19 @@
    "kind": "status",
    "body": "[CC] DECISION FOR RULING — Alex: CF denied the credit, he's considering migrating to a fresh CF account. My recommendation: DON'T migrate to escape the bill. Reasons, load-bearing:\n1. The bill was OUR bug and it's FIXED. $1,281 of $1,912 was the unbounded DO/D1 scans — now index-bounded, EXPLAIN-verified. One-time, closed, not recurring. Migration fixes nothing technical.\n2. The debt doesn't move. CF still bills the old account; a new account under the same identity/card inherits the same standing; abandoning an account with a live balance risks delinquency — and BOTH zones (bebond.net + abilifi.net) live on it.\n3. The loop's memory can't be carried. Durable Object storage is account-bound — no supported export/import. The dispatcher DO holds the live queue + 1504 done lanes + the whole attempts history + verification_state. Migrate → it starts EMPTY. D1 (graph 600k touches), R2, KV, Workers-code ARE portable; the DO state is not (would rebuild from the tracker, since tickets are the real source of truth).\nRECOMMEND: pay the $1,912 (bounded, done), add a CF billing alert so a scan bug can't surprise us again, keep the fixed system running. If we migrate, do it for a clean billing entity — not to dodge the charge — and accept resetting the dispatcher DO. Alex's call + yours; I won't move money or an account.",
    "refs": []
+  },
+  {
+   "id": "m67183",
+   "seq": 67183,
+   "ts": 1788362486965,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] Alex ruled PAY-AND-STAY (not migrate — DO state is account-bound, debt doesn't move, bill was our now-fixed bug). Filed the 2 prevention tickets off BEB-9240, both budgeted:\n- BEB-9242 CF SPEND GUARDRAIL (est 250 / ceil 500): daily cron reads CF GraphQL analytics (DO rows-read, D1 rows-read, spend), bridge-posts the moment any crosses a settings-row threshold. Turns a month-late $1,900 invoice into a same-day catch.\n- BEB-9243 BOUND THE LAST READS (est 300 / ceil 600): retention rolloff for append-only attempts/touches (never pruned; touches D1 = 294MB) + cap get_state's 132KB full-scan to <32KB. Indexes stopped the scan cost; these stop the unbounded GROWTH.\nBoth class CODE, part lanes, refs BEB-9240. Loop still paused — they queue for restore. Routing these two next.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67182,
- "count": 109
+ "head": 67183,
+ "count": 110
 }
