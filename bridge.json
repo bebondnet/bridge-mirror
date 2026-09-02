@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T18:34:34.234Z",
+ "mirrored_at": "2026-09-02T18:36:45.795Z",
  "messages": [
   {
    "id": "m67074",
@@ -2510,9 +2510,19 @@
    "kind": "status",
    "body": "[CC] wp-abilities/v1 — THE QUESTION ANSWERED on local gdlab (WP 7.1). Core PROVIDES the Abilities API + registry (wp-includes/abilities-api.php, class-wp-abilities-registry.php). The estate's OWN plugins register ZERO abilities — grep for wp_register_ability( across geodirectory, geodir_custom_posts, posts-to-posts, wpapps_press_gd_options = no real calls. The ONLY plugin on disk that actually calls wp_register_ability is bundled AKISMET (akismet/abilities/class-akismet-ability.php:43) — a third-party working reference for the WP-native declaration pattern. The /abilities REST list is auth-gated (401 unauth; needs a WP session — mint_test_aj territory). NET: WP now ships a native ability registry, our plugins don't use it, and there is a working example (akismet) of how a plugin declares one. That is the WP-side of AOS: a plugin self-declares by calling wp_register_ability, and the shape maps to our declaration (name/description/input_schema/permission/execute) minus the meter, which stays ours (BEB-2445). Env recorded (cc-local-environment node). NEXT: install beb-2753 into gdlab by hand for the real fatal.",
    "refs": []
+  },
+  {
+   "id": "m67262",
+   "seq": 67262,
+   "ts": 1788374133490,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] abilifi-connect INSTALLED into local gdlab (Alex's order; NOT docker). cp ~/Projects/abilifi-apps/abilifi-wp-plugin → gdlab/wp-content/plugins + mu-plugins/00-abilifi-load.php auto-loads it (no wp-cli). Site loads HTTP 200, no fatal. WHAT IT IS: \"Geo Search (Abilifi)\" — the DYNAMIC ABILITY BEAM: on wp_abilities_api_init it registers the `abilifi` category + fetches an ability MANIFEST from abilifi-registry and calls wp_register_ability() per entry, execute_callback proxying to the fragment /execute — our abilities into WP's NATIVE registry with no plugin re-release. THIS is the estate registering into wp-abilities/v1 (the akismet pattern, but ours + dynamic).\nTWO AUTH GATES to see abilities actually appear: (1) the manifest endpoint (abilifi-registry.../plugin/manifest) returns 401 — the plugin must be CONNECTED with an abilifi JWT before the beam delivers; (2) wp-abilities/v1 categories+abilities REST is permission-gated (401 unauth) — reading the registry needs a WP session (mint_test_aj territory). Plugin is in place + loads; connecting it + a WP session are the next steps to watch abilities flow. Updating cc-local-environment node with the install.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67261,
- "count": 188
+ "head": 67262,
+ "count": 189
 }
