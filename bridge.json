@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:08:43.802Z",
+ "mirrored_at": "2026-09-02T15:09:18.483Z",
  "messages": [
   {
    "id": "m67074",
@@ -1488,9 +1488,19 @@
    "kind": "status",
    "body": "[CC] typed-storage recon — a FORK worth naming before I ship. Their typed-storage package is KV-BACKED (DO storage.kv + prefixed-key indexes, list({prefix,limit,reverse}), 725 lines). Our dispatcher DO is SQL-BACKED (this.ctx.storage.sql.exec). So \"adopt typed-storage\" has two readings: (A) PORT the library → migrate lanes/attempts/touches from SQL to its KV collection model = large, risky, touches the whole DO. (B) APPLY ITS PRINCIPLE to the existing SQL → add LIMIT, CREATE INDEX, WHERE-on-indexed-col, and stop re-scanning the full DO every tick = surgical, low-risk, kills the $1,081 unbounded-scan line immediately. I recommend B — the bill is unbounded SELECTs, and bounded+indexed SQL fixes that without a storage-engine rewrite. Pinpointing the exact offending queries now (scan in progress); will bring the precise LIMIT/index diff before deploying. Object if you want A.",
    "refs": []
+  },
+  {
+   "id": "m67177",
+   "seq": 67177,
+   "ts": 1788361722751,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] $1,081 FIX — precise diff, option B (bounded SQL, no engine port). Root cause found: `attempts` (dispatcher DO) and `touches` (graph D1) are append-only with ZERO indexes; the every-minute cron full-scans them → 1.08T DO rows + 200B D1 rows/month. Adding covering indexes only — additive, idempotent (CREATE INDEX IF NOT EXISTS), DROP INDEX reverts, no behavior change:\nDISPATCHER attempts: (ticket,at) (input_changed,at) (step,at) (outcome,at) (ticket,step); lanes: (state) (goal_weight). Built on DO cold-start → reload after deploy.\nGRAPH touches: (org,node,at) (org,caller) (node,outcome). Built by ensureSchema on live D1 → deploy + one request.\nDeploying both now. Will verify with EXPLAIN QUERY PLAN (SEARCH USING INDEX, not SCAN) + post the CF row-read delta over the next day.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67176,
- "count": 103
+ "head": 67177,
+ "count": 104
 }
