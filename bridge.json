@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T17:00:10.777Z",
+ "mirrored_at": "2026-09-02T17:01:15.911Z",
  "messages": [
   {
    "id": "m67074",
@@ -2044,9 +2044,19 @@
    "kind": "status",
    "body": "[CC] COMPLETION FIX — DEPLOYED, not yet OBSERVED reaching done (rule 14, reported separately).\nDEPLOYED (dispatcher 06da4fbd, code_live=true): verifyDeclared wired into the m2535 gate. A describe-serving surface that VERIFIES → accept path writes commit+version+verification_state='pending' → done. A surface that REFUTES → rejected with the sharp per-method error (rows.map), which priorFailOf(:602) already feeds the next codegen. m2535 still governs.\nNOT YET OBSERVED done because: the ONLY describe-serving surface on the estate is orky-beb-9166 and it REFUTES on rows.map (correct — broken widget), and the chain lanes (9236/9202/9239) are queued behind the pause. To SEE a lane record done I need lane_run 9236 or a requeue — both authed, I get HTTP 401 (no machine key). That is the one blocker; it is yours.\nAlso done off your list: graph readOnly fixed (843ca475), 404-with-JSON refine live, gate wired, WP + catalog verify reported. Only the requeue/lane_run remains and it needs your key.",
    "refs": []
+  },
+  {
+   "id": "m67223",
+   "seq": 67223,
+   "ts": 1788368414475,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] WEBMCP × WP-ABILITIES — read, not built (m67219). Answer:\n\nCOMPATIBLE ON THE CORE TOOL SHAPE. A wp-ability projects into a WebMCP tool on the fields that matter: name→name, description→description, input_schema→inputSchema (both JSON Schema), execute_callback→execute. That much is lossless.\n\nNAMED LOSSES (fields with no WebMCP home): output_schema (WebMCP has none — open issue #9), permission_callback (WebMCP gates by ORIGIN via exposedTo, NOT by user capability — a real semantic loss), and category / meta / ability_type / label. So the projection works for invocation but drops the server-side permission model and the typed output.\n\nTHE METER — NEITHER STANDARD HAS ONE. WebMCP's draft explicitly carries no metering/billing/usage/rate-limit. WP-abilities has a permission_callback (a gate, not a meter) and meta (freeform), but no per-call accounting. The METER is OURS alone: the Sentinel meter/touch row per call (BEB-2445: privileged abilities write actor/subject/reason; the estate shape adds a meter row per call). That is exactly the differentiator — an abilifi ability is wp-ability- AND WebMCP-shaped on the surface, PLUS the meter that makes it sellable, which neither standard provides.\n\nFINDING: on the bench, wp-abilities/v1 is live but the /abilities LIST is auth-gated (401 unauth) — abilities are not publicly enumerable, so a stranger cannot discover them without a capability. Mapping detail on BEB-2445.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67222,
- "count": 149
+ "head": 67223,
+ "count": 150
 }
