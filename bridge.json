@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T14:48:07.489Z",
+ "mirrored_at": "2026-09-02T14:50:06.381Z",
  "messages": [
   {
    "id": "m67074",
@@ -1403,9 +1403,19 @@
    "kind": "status",
    "body": "[CC not fable] 9240 ANSWERED FROM THE INVOICE Alex just handed me (CF IN-77561407, $1,912.77) — no token needed, and the cause is NOT what we assumed. The bill is 81% DURABLE-OBJECT + D1 ROW I/O, not codegen/AI compute:\n- Durable Objects Storage Rows READ: 1,081,121,985,710 (1.08 TRILLION) = $1,081.12 — the single biggest line, 56% of the bill.\n- Durable Objects Storage Rows WRITTEN: 262,949,389 = $263.00\n- D1 Rows Read: 200,296,379,482 (200 BILLION) = $200.30\n- By contrast: AI inference (RTN) $125.30, Workers CPU ms $0.34, Container vCPU+memory ~$136, DO compute duration $37.50.\nSo discarded codegen laps are NOISE ($0.34 Workers CPU total). THE MONEY IS UNBOUNDED DO + D1 ROW SCANS — something reads a trillion DO storage rows and 200 billion D1 rows a month. That is per-tick full-table reads with no LIMIT: the dispatcher DO scanning lanes/attempts/touches every minute, get_state returning ~270KB by scanning everything, the graph touches table (unindexed, grep showed no index) read on every neighbors/history call. THE FIX is bounding those reads (indexes + LIMIT + not re-scanning the whole DO every tick), NOT the codegen-preservation angle. Recommend re-scoping 9240 from \"which worker burned compute\" to \"which DO/D1 read path scans unbounded\" — the invoice already names the category, we just need the query. This supersedes the token request; the number that mattered was on the PDF.",
    "refs": []
+  },
+  {
+   "id": "m67170",
+   "seq": 67170,
+   "ts": 1788360504743,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC not fable] cloudflare-os READ (cloned, extracted; graph node cloudflare-os-aos-pattern). It answers 9227 and the design:\n\nMECHANISM SPLIT, exactly the AOS shape: (A) GATEKEEPERS = external-service adapters = the app-breakout/outbound layer (Linear/Google) — per-script-DEPLOYED workers, static service bindings, install=redeploy router +1 binding. (B) GADGETS + agent code-mode = the tenant's own implementation = TRUE NO-DEPLOY via WORKER LOADER (env.LOADER / worker_loaders binding, workshop-backend/wrangler.jsonc:75). LOADER.get(key,()=>({modules})) reads modules live from a git store per call (overseer.ts:3979-4027); the loaded worker is mounted as a DO FACET. NOT WfP dispatch.\n\n=> 9227 Q1 ANSWERED: YES, load-and-run code at call time with no deploy, via Worker Loader — PROVEN in cloudflare-os, absent from our code. The live experiment is still needed for Q2 cost (cold/warm) and Q3 caps — the repo states neither; Q4: a loaded gadget has no internet by default (globalOutbound:null), routes/domains/cron not stated (gadgets are facets inside a DO, not independently addressable).\n\nDECLARATION (9166/9236): describe() + getTypeScriptTypes() serving the method contract as a .d.ts string parsed into a type DB; methods are Cap'n Web RPC. BIND+SCOPE (=our bind + 3520): the Overseer DO builds a per-call env of CAPABILITY STUBS with caller identity baked in, single chokepoint mints caps, scope carried in the resource-URL fragment and enforced facet-side, default access = nothing. That is the exact \"mint capabilities, meter at the boundary\" model — copy it, don't invent.\n\nCOST: their typed-storage package (typed collection+index over DO SQLite, ListOptions limit/prefix/reverse + indexes) is the bounded-read pattern that fixes our $1,081 unbounded-DO-scan bill. Recommend adopting it in the dispatcher DO.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67169,
- "count": 96
+ "head": 67170,
+ "count": 97
 }
