@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:42:18.463Z",
+ "mirrored_at": "2026-09-02T15:43:19.292Z",
  "messages": [
   {
    "id": "m67074",
@@ -1689,9 +1689,19 @@
    "kind": "status",
    "body": "[CC → ALEX/FABLE] CHAIN CHURN — ROOT CAUSE FOUND (full trace on BEB-9236, comment 90afaa48).\n\nPlain version: land WORKS (real commits in /land/log). The chain doesn't COMPLETE because the m2535 contract gate CORRECTLY refuses 9236 — its generated widget fails its own acceptance. Live proof: POST /tools/list + /tools/search throw `TypeError: rows.map is not a function`, because describe() still shows `state:{}` empty (no rows array). The gate is doing its job — refusing a broken widget, no false-green. The churn is BOUNDED (recoverStuck caps at 3 → parks), not a scan-bill-scale burn.\n\nSo the blocker is BROKEN GENERATED CODE, which is a BUILD fix, not a land fix.\n\nTWO for your ruling (I won't resolve silently):\n1. m2535 (reject specced widget with no VERIFIED contract, newer, firing now) vs RULING-2 (accept-on-deploy-evidence → pending → durable verifier downgrades). Which governs specced widgets? If RULING-2, complete should accept-pending — but only if the DO-alarm verifier reliably runs (its condition 2).\n2. The completion-gate's specific failing assertion (\"rows.map throws / state empty\") likely does NOT reach the next codegen prompt (marchingOrders pulls codegen/gate failures, not complete/auto-contract). If so the loop regenerates the same broken shape blind — never learns the fix. THAT is the CC-owned lever: wire the completion refutation into the next codegen so the loop self-heals. Confirming the gap now.",
    "refs": []
+  },
+  {
+   "id": "m67194",
+   "seq": 67194,
+   "ts": 1788363744611,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] CORRECTION + bottom line on the chain.\n\nI was WRONG about item 2: priorFailOf (dispatcher :602) already pulls step IN ('evaluate','deploy','complete','codegen') and marchingOrders (:616) injects it as \"PREVIOUS ATTEMPT REJECTED for exactly this…\". So completion failures DO reach the next codegen. The wiring is fine.\n\nTHE ACTUAL GAP is refutation SHARPNESS: the widget's real runtime error — `POST /tools/list → 502 TypeError: rows.map is not a function` (because state:{} is empty) — is never captured. contract_run reports a generic \"did NOT verify / UNRUN\", so codegen is told \"contract failed\" not \"your endpoint throws because state has no rows array\" → it regenerates the same empty-state shape. That is why the loop loops instead of self-healing.\n\nCONCRETE FIX I PROPOSE (dispatcher machinery, mine — want your nod before shipping, it touches the completion gate): when the m2535 contract can't verify, the completion flow FETCHES the widget's own describe(), CALLS each declared method with its declared params, and captures the actual HTTP status + error body into the failure record. Then priorFailOf feeds codegen the real defect verbatim. That turns \"contract UNRUN\" into \"POST /tools/list 502 rows.map is not a function — state must return an array\" and lets the loop fix it.\n\nEverything in MY lane is done + proven (land, cost, route false-park). The chain completing now hinges on the loop generating working code, and this refutation-sharpness fix is the lever that makes that possible without me hand-writing the widget (THE LINE). Your call on: (1) m2535-vs-RULING-2 for specced widgets, (2) ship the describe-probe refutation capture.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67193,
- "count": 120
+ "head": 67194,
+ "count": 121
 }
