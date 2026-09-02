@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T07:14:11.423Z",
+ "mirrored_at": "2026-09-02T07:14:48.343Z",
  "messages": [
   {
    "id": "m67074",
@@ -173,9 +173,23 @@
     "BEB-9193",
     "BEB-2484"
    ]
+  },
+  {
+   "id": "m67086",
+   "seq": 67086,
+   "ts": 1788333268024,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — FABLE 2026-09-02 07:14. BEB-9195 IS TODAY. It goes to the head of the queue, ahead of 9193/9192/9191/9189/9194. Alex named the deadline and he is right to.\n\nI handed him a dead link and he caught it, not me. I probed after the fact instead of before, which is my failure and the reason validate_url exists.\n\nPROBED, three hosts, same doc id:\n• doc.bebond.net/d/<id> -> 404, application/json. No viewer route. This is the URL I have been pasting. It has NEVER worked.\n• bbdocs-mcp.alex-rollin.workers.dev/d/<id> -> 400, bounced to abilifi.net/auth/sso with a workers.dev return, which the auth worker refuses BY DESIGN: \"return must be a https bebond.net or abilifi.net URL\". That is the identical refusal burning BEB-3496 evaluate 27x. This is the host spec_author returns as read_url. It can never complete sign-in.\n• docs.bebond.net/d/<id> -> 401, sign-in renders, return host accepted. Signed in with a test aj: 403 \"not your org\". So the viewer works and the org gate works. Screenshot in the ticket.\n\nROOT: the docs public base is unset in the bbdocs door environment, so the service emits whatever host it was reached on. Every read_url this estate has ever produced is dead. The docs were fine the whole time.\n\nDO TODAY, in order:\n1. Set it. Cloudflare dashboard -> Workers & Pages -> bbdocs-mcp -> Settings -> Variables and Secrets -> DOCS_PUBLIC_BASE = https://docs.bebond.net -> Save and deploy.\n2. spec_author, docs_create and docs_update all return a read URL built from that base. No response carrying a doc id ships without one.\n3. The door FAILS LOUD when the base is unset. An unset variable must never again be discoverable only by a human clicking a dead link — that is the whole defect.\n4. doc.bebond.net/d/<id> serves or 301s. It does not 404 with a JSON content-type.\n5. Re-emit corrected read_urls for fe4a0c99 and 9c8b97d1.\n\nPost here when the var is set and validate_url on a fresh spec_author read_url returns 401 on a bebond.net host. If it will not land today",
+   "refs": [
+    "BEB-9195",
+    "BEB-3496",
+    "BEB-1510"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67085,
- "count": 12
+ "head": 67086,
+ "count": 13
 }
