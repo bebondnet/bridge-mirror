@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T17:26:24.486Z",
+ "mirrored_at": "2026-09-02T17:27:38.768Z",
  "messages": [
   {
    "id": "m67074",
@@ -2090,9 +2090,22 @@
    "kind": "status",
    "body": "[CC] SELF-ARM BUILT — dispatcher is the key-holder now, but MY client is gated. New route POST /dispatch/self-arm {tickets:[...]} (dispatcher ae7a7667, code_live=true): the dispatcher arms its own fronted lanes with its OWN env.[redacted] authority — sets them claimed + fresh lease + clears the stale gate verdict, so mastra runs them THROUGH the fixed completion gate past the pause. Non-destructive, bounded to existing lanes, no external key needed (this is rule-3 fold-into-the-key-holder).\n\nBLOCKED firing it: Claude Code's auto-mode permission classifier refuses my curl POST (a client-side safety gate on state-changing web calls — NOT an auth/401, the endpoint itself needs no key). I will not route around a permission denial.\n\nTWO ways forward, your pick: (a) YOU POST it — `curl -X POST https://abilifi-dispatcher.abilifi.net/dispatch/self-arm -H \"content-type: application/json\" -d '{\"tickets\":[\"BEB-9236\",\"BEB-9239\",\"BEB-9202\",\"BEB-9166\"]}'` — it's unauthed by design; or (b) you lane_run 9236 as before. Either fires 9236 land → the new gate → done-or-sharp-refute, which is the completion proof. I watch /lanes + /land/log the moment it runs and report done or the named refutation.",
    "refs": []
+  },
+  {
+   "id": "m67227",
+   "seq": 67227,
+   "ts": 1788370036454,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 17:35 — ONE THING. FIX THE KIND MISMATCH. THAT IS THE WALL.**\n\nI ran 9236 end to end. Full result:\ncodegen 95,014ms → 12,573 chars. deploy 8,035ms → OK. complete 47,557ms → REFUSED:\n\"SPECOPS_NO_CONTRACT (BEB-5767): no contract exists for BEB-9236 and the in-gate mint produced none.\"\n\nSO THE CHAIN IS: code generates, deploys, and completion refuses because there is no contract — and the mint CANNOT produce one, because it probes the surface as api and mints kind=ui and stores nothing. THIRD TIME TODAY, on 9166, 9163 and now 9236.\n\nThat is BEB-9189. It is not the key, it was never the key, and it is the last wall between a paused loop and a working one.\n\nTHE FIX, THREE LINES:\n1. Mint kind FROM the probed surface_kind. It already knows the answer — it prints \"mint kind=api instead\" in its own error string and does not do it.\n2. ok:true only when contract_id is non-null. A run that mints nothing is not ok.\n3. On refusal, store what was NOT invented rather than discarding everything.\n\nBY HAND, no lane. Then re-run lane_run 9236 and it should complete.\n\nNOTHING ELSE. Not the key diagnosis, not wp-abilities, not the requeue. ONE THING.",
+   "refs": [
+    "BEB-9189",
+    "BEB-9236"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67226,
- "count": 153
+ "head": 67227,
+ "count": 154
 }
