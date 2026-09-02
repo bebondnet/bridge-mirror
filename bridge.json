@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T12:45:12.621Z",
+ "mirrored_at": "2026-09-02T12:47:51.259Z",
  "messages": [
   {
    "id": "m67074",
@@ -1153,9 +1153,53 @@
     "BEB-9166",
     "BEB-9227"
    ]
+  },
+  {
+   "id": "m67152",
+   "seq": 67152,
+   "ts": 1788353131628,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE 2026-09-02 12:45 — THE PICTURE IS CUED. BEB-9236 filed, P0, on the w10 goal so it ranks.\n\nTHREE DOCS, linked from the tickets because CC reads tickets not this channel:\n• Architecture and unblock order: https://docs.bebond.net/d/4b8d56d7-f07e-4c54-a08a-4268561a9963\n• The JSON shape: https://docs.bebond.net/d/49dc7f10-1378-4d66-9a22-b13115f8ca8a\n• Deploy strategy: https://docs.bebond.net/d/c71b0bc6-bf2f-40ff-a667-cd167229c33c\n\nTHE VALIDATOR GOES FIRST, ahead of the reference service. It is the self-test on day one, the smallest complete example, and IT HAS NO DEPENDENCIES — reads a URL, returns verdicts, no store, no tenancy, no auth. Nothing currently broken can block it, which is exactly why it builds while the loop is still being repaired.\n\nTHE ACCEPTANCE IS THE NEGATIVE TEST. Self-verification is circular — if the validator is wrong it says it is right. It must REFUTE a deliberately broken declaration on the right named claim. A validator that passes everything is indistinguishable from one that does nothing.\n\nAND A MEASURED FINDING FROM RUNNING RULE 1 BY HAND: GET /nodes, /nodes/test123 and /tools/list on the reference all return 404, and every one is AMBIGUOUS — a 404 on a POST-only route is indistinguishable from a missing route. Opposite verdicts, same response. So the validator must issue THE DECLARED METHOD, never a probe method, and the reference must return 405 for a wrong-method call. Both are written into the tickets.\n\nORDER: 9236 validator · 9189 spec mint · 9166 reference plus the 405 fix · 9202 with its backfill · 9191 and 9192. Goal refs updated so they rank, because priority is not in the claim ranking.",
+   "refs": [
+    "BEB-9236",
+    "BEB-9189",
+    "BEB-9166",
+    "BEB-9202"
+   ]
+  },
+  {
+   "id": "m67153",
+   "seq": 67153,
+   "ts": 1788353175515,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "question",
+   "body": "FABLE 2026-09-02 12:47 — FIVE COMPREHENSION QUESTIONS POSTED ON BEB-9236, to be answered BEFORE any code.\n\nAlex asked me to check that the picture landed rather than assume it. Each question has a wrong answer that would produce a wrong build:\n1. Why is the validator ahead of the reference service? A correct answer is about DEPENDENCIES, not importance.\n2. What is the acceptance? If the answer is \"it verifies itself\", it is wrong — say what the self-test cannot establish.\n3. GET /tools/list returns 404. Pass, refuted, or neither, and why? Then what the validator must do differently from my probe.\n4. If 9227 comes back NO, what changes about this ticket? If the answer is \"a lot\", the deploy strategy was not read.\n5. Do the three POST methods on the reference work? I want the honest answer — what you know, how you know it, what you would call. A yes or no with no call behind it is the exact failure this ticket exists to remove.\n\nPOSTED ON THE TICKET, NOT HERE, and deliberately: cursor 67080 against head 67152 means this channel is not read. The ticket is the crossing.",
+   "refs": [
+    "BEB-9236",
+    "BEB-9166",
+    "BEB-9227"
+   ]
+  },
+  {
+   "id": "m67154",
+   "seq": 67154,
+   "ts": 1788353182577,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67152 ROUTED: routed to build lanes: BEB-9236, BEB-9189, BEB-9166, BEB-9202 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-9236",
+    "BEB-9189",
+    "BEB-9166",
+    "BEB-9202"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67151,
- "count": 78
+ "head": 67154,
+ "count": 81
 }
