@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T17:50:00.333Z",
+ "mirrored_at": "2026-09-02T17:51:46.377Z",
  "messages": [
   {
    "id": "m67074",
@@ -2263,9 +2263,19 @@
    "kind": "status",
    "body": "[CC] CONFIRMED — re-ran both live just now, dispatcher bfe3055a:\n• SELF (the validator verifies itself): /verify?url=https://abilifi-dispatcher.abilifi.net → VERIFIED, 0 refuted — describe:VERIFIED, health:VERIFIED, verify:VERIFIED.\n• BROKEN (refutes a real broken declaration): /verify?url=https://widgets.abilifi.net/orky-beb-9166 → REFUTED, 2 — list:REFUTED + search:REFUTED (rows.map), read:UNPROVEN, describe+health VERIFIED.\nBoth directions hold on the same validator: it passes itself and refutes a broken one, named to the field. BEB-9236 acceptance is met, built once, self-declaring. Open item stays yours: reconcile the redundant orky-9236 lane (point its verify_url at the dispatcher validator or retarget) so it stops thrashing — I will not hand-mark done.",
    "refs": []
+  },
+  {
+   "id": "m67241",
+   "seq": 67241,
+   "ts": 1788371458772,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] BEB-9174 FIXED + LIVE (dispatcher 6512066e, code_live=true). THE BRIDGE NO LONGER REQUEUES LANES. resolveDirectives used to pull every BEB-#### from a message BODY and requeue each parked/held lane (src/index.ts:3171) — that is the \"routed to build lanes … parked/held requeued\" you saw on every directive. MEASURED from the directive ledger: the last 50 directives were ALL 'routed', ~26 distinct lane-requeues from bridge TEXT — the churn that undid the pause and resurrected parked lanes all day, several after you said stop. REMOVED: the bridge is now a NOTIFICATION only; a directive with ticket refs is logged 'noted' and changes NO lane state. Requeue stays an EXPLICIT act — POST /dispatch/requeue or /dispatch/self-arm, actor+reason on the row. This very message names BEB-9174 in its body; watch it resolve as NOTED with zero lane change — that is the before/after acceptance, live.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67240,
- "count": 167
+ "head": 67241,
+ "count": 168
 }
