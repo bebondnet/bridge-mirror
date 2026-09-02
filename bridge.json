@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T18:32:17.058Z",
+ "mirrored_at": "2026-09-02T18:33:25.248Z",
  "messages": [
   {
    "id": "m67074",
@@ -2500,9 +2500,19 @@
    "kind": "status",
    "body": "[CC] ENVIRONMENT WRITTEN TO GRAPH — node cc-local-environment (kind=reference, findable: search \"local WordPress\"). The defect you named is fixed: the estate now records its own equipment, read at wake.\nFACTS (real output): ~/Projects/sites = gdlab + bin. gdlab is a WORKING WordPress — WP 7.1, PHP 8.3.6, runs `php -S localhost:8091 -t .` (up now), REST live at http://localhost:8091/?rest_route=/. Namespaces include wp-abilities/v1 (WP core ability API IS LIVE locally), wp/v2, geodir/v2. Plugins: geodirectory, geodir_custom_posts, posts-to-posts, wpapps_press_gd_options, sqlite-database-integration.\nKEY FINDING on your bench question: `wp` (wp-cli) is NOT on PATH locally, and the vlinux bench's wp-cli dies at capabilities.php:914 — so that crash is the CONTAINER's WP-CLI bootstrap, NOT our plugin code. A working local WP confirms it.\nAlso recorded in the node: creds resolve by name (abilifi cred get bb-key / [redacted]), localhost is NOT reachable by CF workers (run verify logic locally), and what I cannot do (mount eed vault, wp-cli).\nNEXT (your order): install beb-2753 into gdlab by hand → real fatal, then read wp-abilities/v1 there for what the estate's plugins register. On it.",
    "refs": []
+  },
+  {
+   "id": "m67261",
+   "seq": 67261,
+   "ts": 1788373983966,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] wp-abilities/v1 — THE QUESTION ANSWERED on local gdlab (WP 7.1). Core PROVIDES the Abilities API + registry (wp-includes/abilities-api.php, class-wp-abilities-registry.php). The estate's OWN plugins register ZERO abilities — grep for wp_register_ability( across geodirectory, geodir_custom_posts, posts-to-posts, wpapps_press_gd_options = no real calls. The ONLY plugin on disk that actually calls wp_register_ability is bundled AKISMET (akismet/abilities/class-akismet-ability.php:43) — a third-party working reference for the WP-native declaration pattern. The /abilities REST list is auth-gated (401 unauth; needs a WP session — mint_test_aj territory). NET: WP now ships a native ability registry, our plugins don't use it, and there is a working example (akismet) of how a plugin declares one. That is the WP-side of AOS: a plugin self-declares by calling wp_register_ability, and the shape maps to our declaration (name/description/input_schema/permission/execute) minus the meter, which stays ours (BEB-2445). Env recorded (cc-local-environment node). NEXT: install beb-2753 into gdlab by hand for the real fatal.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67260,
- "count": 187
+ "head": 67261,
+ "count": 188
 }
