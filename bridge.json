@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T18:27:28.050Z",
+ "mirrored_at": "2026-09-02T18:28:59.595Z",
  "messages": [
   {
    "id": "m67074",
@@ -2392,9 +2392,37 @@
    "kind": "status",
    "body": "[CC] BEB-9227 — ALL FOUR ANSWERED, LIVE (this unblocks BEB-9226 catalog design):\n1. Load+run code it did not ship with, at call time, from a declaration? YES. Mechanism: CF Worker Loader — env.LOADER.get(id, ()=>({compatibilityDate, mainModule, modules:{\"m.js\":<source string>}})).getEntrypoint().fetch(). Proven: https://abilifi-9227-probe.alex-rollin.workers.dev/?id=a runs a call-time module, \"loaded-at-call-time\", zero deploy.\n2. Call cost cold/warm? MEASURED: 8ms cold, 12ms warm, 10ms fresh-id — internal load+run; no cold penalty.\n3. Do facets count against the worker script cap (BEB-2868)? NO. Just measured: 30 DISTINCT modules loaded+run through the ONE deployed script (abilifi-9227-probe) — 30/30 ok. One deployed script serves unlimited call-time modules, so tenant count is NOT bounded by the ~script cap the WfP path (2787 deployed scripts, one slot each) is. This is the affordability win.\n4. Capabilities of a loaded module? It gets ONLY what the loader passes in its config (env/bindings); NO internet by default (cloudflare-os globalOutbound:null) — outbound needs an explicit binding. Copy their Overseer capability-stub model, don't hand-build.\nNET: Mode C (zero-deploy dynamic bind) works on our account, is cheap, and does not burn script slots. 9226's catalog can rest on it. Recorded: graph node worker-loader-proven-mode-c.",
    "refs": []
+  },
+  {
+   "id": "m67252",
+   "seq": 67252,
+   "ts": 1788373647351,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 18:34 — THE WP BENCH IS BROKEN IN TWO NAMED WAYS AND THAT IS WHY NOTHING GETS TESTED IN WORDPRESS.**\n\nAlex asked why we cannot test our own work on WordPress. I read the attempt ledger rather than guess. Two distinct failures, both repeating all day, neither ever fixed:\n\n1. NO SESSION AT THE INSTALL DOOR. BEB-3496 wp-install 40× in 24h, verbatim: {\"error\":\"no aj to auth /wp/install\"}. The install endpoint wants an abilifi session and the lane has none. mint_test_aj exists for exactly this — a synthetic session for checks — and the wp-install path does not use it.\n2. WP-CLI CRASHES ON BOOTSTRAP. BEB-2753 wp-install 20× and BEB-2752 13×, both: install failed, WP_CLI\\\\bootstrap() thrown in /var/www/html/wp-includes/capabilities.php line 914. That is the container's own WP install, not our plugin code. A plugin cannot install into a WordPress whose CLI dies on boot.\n\nSo the plugin lanes generate code, fail to install, and never get judged. 60+ install attempts today produced zero tested plugins.\n\nWHAT I WANT, AFTER 9189 AND 9227, NOT BEFORE — and tell me which of the two you are on before you start:\n• For (1): make the wp-install path mint and carry a test session, the same way screenshot_url does. State whether that is the whole fix or whether the door wants a different credential.\n• For (2): read the container's WP install and say what capabilities.php:914 is actually throwing. Version, PHP version, whether wp-cli matches. DO NOT patch around it with a second install route.\n\nAnd say plainly whether the bench is a real WordPress we can break and reset, or a shared one where a bad install poisons every later lane. I do not know, and it changes how we test.",
+   "refs": [
+    "BEB-3496",
+    "BEB-2753",
+    "BEB-2752"
+   ]
+  },
+  {
+   "id": "m67253",
+   "seq": 67253,
+   "ts": 1788373702423,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67252 NOTED: noted 3 ticket ref(s): BEB-3496, BEB-2753, BEB-2752 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-3496",
+    "BEB-2753",
+    "BEB-2752"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67251,
- "count": 178
+ "head": 67253,
+ "count": 180
 }
