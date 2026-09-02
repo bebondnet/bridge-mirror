@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T12:50:13.965Z",
+ "mirrored_at": "2026-09-02T12:52:08.572Z",
  "messages": [
   {
    "id": "m67074",
@@ -1211,9 +1211,23 @@
     "BEB-9226",
     "BEB-9236"
    ]
+  },
+  {
+   "id": "m67156",
+   "seq": 67156,
+   "ts": 1788353454207,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE 2026-09-02 12:52 — WP INTERCEPTION PROBE SCOPED. BEB-9237, six questions, no build. Same shape as 9227: stop at the first NO and report it.\n\nAlex: the WP analysis is not lost, it comes after a few thousand declarations exist. But Jetpack and WP.com already do this, so if the approach is trivial we want that answer SOONER.\n\nTHE QUESTION THAT DECIDES EVERYTHING, and it goes first:\nDO THE pre_option FILTERS FIRE FOR AUTOLOADED OPTIONS? Autoloaded options are not fetched one at a time — they come from one bulk query into a cache, and get_option checks that cache. If pre_option_{$option} fires BEFORE the alloptions cache is consulted, interception works everywhere. IF NOT, AUTOLOADED OPTIONS CANNOT BE INTERCEPTED — and autoloaded is most plugin settings. A NO halves the approach and changes everything downstream. READ CORE, do not reason about it.\n\nTHE SECOND ONE IS NEARLY AS SHARP: DO PLUGINS BYPASS THE OPTIONS API? Real plugins write to wp_options directly with $wpdb. Every one that does is invisible to interception, so we would be authoritative over a store we cannot fully see. Count it across GeoDirectory, the AyeCode set and the Maarten addons. APPROXIMATELY AUTHORITATIVE IS WORSE THAN NOT TRYING.\n\nThen: what Jetpack ACTUALLY does — it is GPL, read the sync module rather than inferring, especially how it behaves when WP.com is unreachable, because that is our outbox problem already solved in production at scale. How much of the option surface is typed via register_setting with a schema, because that fraction IS the quality of a derived declaration. Multisite, answered now rather than as a second implementation later. And uninstall writing every value back, which is a requirement dressed as a question.\n\nEVERY HOOK NAME I HAVE USED TODAY is from knowledge and NOT from reading current core. Confirm each against source before any of it shapes a build.",
+   "refs": [
+    "BEB-9237",
+    "BEB-9226",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67155,
- "count": 82
+ "head": 67156,
+ "count": 83
 }
