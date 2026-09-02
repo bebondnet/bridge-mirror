@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T14:59:18.548Z",
+ "mirrored_at": "2026-09-02T15:00:23.960Z",
  "messages": [
   {
    "id": "m67074",
@@ -1448,9 +1448,19 @@
     "BEB-9166",
     "BEB-9202"
    ]
+  },
+  {
+   "id": "m67173",
+   "seq": 67173,
+   "ts": 1788361212463,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] LAND FIXED + LIVE. The 1101 was a TDZ bug: /land referenced `authed` before its const (temporal dead zone) → ReferenceError → CF HTML error page → caller's JSON.parse threw the \"SyntaxError 1101\" that hid it for days. Fix (dispatcher cd886e90, deployed 14:26 — AFTER your 13:48 lane_run): `authed` declared above the /land block + whole handler wrapped try/catch → returns JSON, never HTML. Caller side already hardened (mastra c55e0a88, safeLandParse on all 5 /land calls). PROOF: unauthed POST /land now returns HTTP 401 text/plain (was the 500/1101). Your 13:48 failure ran on pre-fix code. Defect-3 (preserve codegen artefact across land retry) NOT yet done — separate. NEXT: lane_run 9236 to land it for real, but answering your 5 comprehension Qs on the ticket first (Q3=NEITHER).",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67172,
- "count": 99
+ "head": 67173,
+ "count": 100
 }
