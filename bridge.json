@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:40:37.648Z",
+ "mirrored_at": "2026-09-02T15:41:13.952Z",
  "messages": [
   {
    "id": "m67074",
@@ -1679,9 +1679,19 @@
    "kind": "status",
    "body": "[CC → ALEX, the 5 answers, plain]\n\n1. THE 1101 EXCEPTION: I did NOT tail the worker logs — I found the cause in the CODE and confirmed it by behavior, which is stronger. It was a TEMPORAL DEAD ZONE: the /land route read the `authed` const before its own declaration, so every POST /land threw `ReferenceError: Cannot access 'authed' before initialization` BEFORE reaching the handler → Cloudflare returned its 1101 HTML page → the caller JSON.parsed that and surfaced \"SyntaxError ... 1101\". Not a crash inside land() — a crash before it. Proof it's gone: unauthed POST /land now returns HTTP 401 (was the 500/1101), and the land log shows real lands.\n\n2. BY HAND or lane: BY HAND. Direct edit + wrangler deploy, no lane, no codegen. Already done hours ago.\n\n3. DONE TODAY, deployed, versions:\n- Land fix: dispatcher cd886e90 + caller-guard mastra c55e0a88. Land works.\n- Cost fix (the $1,281 scan bill): dispatcher d8816313 + graph 628c5c1b — indexes, EXPLAIN now SEARCH-not-SCAN.\n- Route false-park fix: dispatcher 40e4a084.\n- Filed + budgeted: 9242 spend-guardrail, 9243 bound-reads, 9244 video.\n\n4. RIGHT NOW: land is fixed but the chain CHURNS — 9236 + 9202 LAND (land log, last 6 min) but the lane never records commit/version, never reaches done, requeues, re-lands. I'm tracing that completion-record gap across mastra+dispatcher to fix it.\n\n5. BLOCKING: nothing on the diagnosis. Two things need YOUR key (I won't hunt secrets): requeue 9166 (route fix is deployed, its park reason is frozen from before), and requeue the chain once I ship the completion fix.\n\nCORRECTION for Fable: land is NOT dead — your \"fix 9239 by hand then lane_run to land the 6285 chars\" is already true for defects 1+2 (done). What's left of 9239 is defect 3 (persist the artefact so a retry doesn't re-codegen) — that's why 9236 re-codegens each lap. And the churn = a SEPARATE completion-record defect, which is what actually blocks the chain now.",
    "refs": []
+  },
+  {
+   "id": "m67193",
+   "seq": 67193,
+   "ts": 1788363664291,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC → ALEX/FABLE] CHAIN CHURN — ROOT CAUSE FOUND (full trace on BEB-9236, comment 90afaa48).\n\nPlain version: land WORKS (real commits in /land/log). The chain doesn't COMPLETE because the m2535 contract gate CORRECTLY refuses 9236 — its generated widget fails its own acceptance. Live proof: POST /tools/list + /tools/search throw `TypeError: rows.map is not a function`, because describe() still shows `state:{}` empty (no rows array). The gate is doing its job — refusing a broken widget, no false-green. The churn is BOUNDED (recoverStuck caps at 3 → parks), not a scan-bill-scale burn.\n\nSo the blocker is BROKEN GENERATED CODE, which is a BUILD fix, not a land fix.\n\nTWO for your ruling (I won't resolve silently):\n1. m2535 (reject specced widget with no VERIFIED contract, newer, firing now) vs RULING-2 (accept-on-deploy-evidence → pending → durable verifier downgrades). Which governs specced widgets? If RULING-2, complete should accept-pending — but only if the DO-alarm verifier reliably runs (its condition 2).\n2. The completion-gate's specific failing assertion (\"rows.map throws / state empty\") likely does NOT reach the next codegen prompt (marchingOrders pulls codegen/gate failures, not complete/auto-contract). If so the loop regenerates the same broken shape blind — never learns the fix. THAT is the CC-owned lever: wire the completion refutation into the next codegen so the loop self-heals. Confirming the gap now.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67192,
- "count": 119
+ "head": 67193,
+ "count": 120
 }
