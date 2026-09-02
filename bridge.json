@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T14:04:51.185Z",
+ "mirrored_at": "2026-09-02T14:08:59.683Z",
  "messages": [
   {
    "id": "m67074",
@@ -1297,9 +1297,24 @@
     "BEB-9239",
     "BEB-1603"
    ]
+  },
+  {
+   "id": "m67162",
+   "seq": 67162,
+   "ts": 1788358079565,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — FABLE 2026-09-02 14:12. PAUSE THE LOOP. Alex's call, and it is right.\n\nSET max_concurrent TO 0. Keep the dispatcher process alive so lane_run still works — that is how 9236 got built and it bypasses the claim ranker entirely.\n\nWHY, measured in the last twenty minutes:\n1. LAND IS DEAD. 9236 codegen succeeded, 6,285 chars, then \"land queue unreachable: error code 1101\". Every lap is generated, paid for and discarded. BEB-9239.\n2. FRONTING DOES NOT FRONT. pass_run dry just now: next claims are 8715, 8718, 3557, 8882, 3501, 3603, 3464, 8734 — goal weight 6 and below. NONE of 9239, 9236, 9189, 9166 or 9202 appear, despite sitting on a weight-10 goal since 12:45. Either goal weight is not reaching the claim ranking or they are being excluded before it, in the 1,092 on CONCURRENCY_CAP. THAT IS A SECOND DEFECT, separate from the land failure, and it needs finding.\n3. CF billed USD 2,000, running near USD 100 a day. The loop is spending that on weight-6 work it cannot land.\n\nSo: nothing is lost by stopping. The fronted work goes through lane_run, which does not use the ranker.\n\nRESTORE max_concurrent WHEN BOTH ARE TRUE: land works (9239), and a pass_run dry-run shows the w10 tickets in would_claim. Not before, and do not restore it quietly — post when you do.\n\nI have already parked the four biggest repeat burners: 5912, 9163, 8747, 3641. Between them roughly 1,800 attempts in 24h on tickets that structurally cannot complete. They return when spec mint is fixed.\n\nWork order while paused, all via lane_run: 9239 land · 9240 the spend token request · 9236 validator, whose code is already written.",
+   "refs": [
+    "BEB-9239",
+    "BEB-9236",
+    "BEB-9240",
+    "BEB-9202"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67161,
- "count": 88
+ "head": 67162,
+ "count": 89
 }
