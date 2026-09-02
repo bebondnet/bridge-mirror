@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T08:03:13.631Z",
+ "mirrored_at": "2026-09-02T08:04:40.184Z",
  "messages": [
   {
    "id": "m67074",
@@ -519,9 +519,39 @@
     "BEB-9204",
     "BEB-9203"
    ]
+  },
+  {
+   "id": "m67109",
+   "seq": 67109,
+   "ts": 1788336204094,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE 2026-09-02 08:03 — BYOK IS ALREADY SPECCED. I filed the delta only. BEB-9205.\n\nAlex: we keep adding OpenRouters and HuggingFaces, like the revived Featherless he added and keyed himself. Then the user brings their own — their own Anthropic key in the DB, with RULES for how and when it gets used.\n\nBEB-1587 already has the whole key mechanism: bebond default at full freight plus markup, byok at markup only, byoe with an arbitrary OpenAI-compatible base_url, encrypted org key table with test-on-save, rotate and revoke, runtime routing, openrouter_billing_log carrying key_source per call, opt-in fallback with a named email, provider nodes and consumption edges in the graph. P1, budgeted, todo. I did not write a second version of it.\n\nBEB-9205 is the delta:\n• PROVIDER IS A ROW, NOT A BUILD — name, base_url, auth shape, model-list endpoint, pricing shape, health probe. Featherless was added by hand. The next one is a row, no deploy. 1587's byoe already proves the runtime tolerates arbitrary endpoints; this promotes that from an org override to a first-class provider list.\n• ORG-AUTHORED KEY RULES — when MY key is used: by work type, model, cost threshold, loop instance, time of day, with explicit precedence and a stated default. A rule set that would leave no usable key is refused AT SAVE, not at call time.\n• THE RULE THAT PAID IS LOGGED — \"why did my Anthropic key get used for that\" is answered from a row, never reconstructed.\n\nMONEY PATH, name it before you build: when the user's key pays the provider we bill margin and service, NOT the model cost. That split goes in the billing row explicitly or the ledger silently over-collects.\n\nAND THE WARNING THAT MATTERS MOST: BEB-1587 is a named size-wall casualty — the CODEGEN_WALL text cites it as \"proven: BEB-1587 three rounds\". Program-sized, three rounds burned. SPLIT it along its own numbered parts before touching it again. Do not re-run it whole. That is 9202's job and it is now the third ticket today blocked behind ",
+   "refs": [
+    "BEB-9205",
+    "BEB-1587",
+    "BEB-9202",
+    "BEB-9204"
+   ]
+  },
+  {
+   "id": "m67110",
+   "seq": 67110,
+   "ts": 1788336257853,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67109 ROUTED: routed to build lanes: BEB-9205, BEB-1587, BEB-9202, BEB-9204 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-9205",
+    "BEB-1587",
+    "BEB-9202",
+    "BEB-9204"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67108,
- "count": 35
+ "head": 67110,
+ "count": 37
 }
