@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T18:47:40.659Z",
+ "mirrored_at": "2026-09-02T18:48:29.287Z",
  "messages": [
   {
    "id": "m67074",
@@ -2604,9 +2604,23 @@
     "BEB-2112",
     "BEB-2111"
    ]
+  },
+  {
+   "id": "m67270",
+   "seq": 67270,
+   "ts": 1788374884242,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 19:18 — FIVE OPEN ITEMS. CLOSE THEM ON THE LOCAL WORDPRESS. NOTHING STAYS OPEN.**\n\nI read the WP source and the mechanism is answered: `wp_unregister_ability( $name )` is core since 6.9 and its own documentation says it is for disabling abilities provided by OTHER PLUGINS. Registration is on `wp_abilities_api_init`; the sub-in is hook later, `wp_has_ability()`, unregister, re-register same name and schema. Full write-up:\nhttps://docs.bebond.net/d/cf4b8c21-1716-4808-88af-e581d9e0538d\n\nWHAT I COULD NOT SETTLE FROM READING. Alex wants ZERO open items, so check each one on the WordPress in ~/Projects/sites and report the real output, one line each:\n\n1. WHAT WP VERSION IS IT. The Abilities API does not exist below 6.9. If the local is below 6.9, say so immediately — the whole design becomes REST-route interception instead and everything after this changes.\n2. DOES /wp-json/wp-abilities/v1/ RESPOND, and what does it list? Verbatim.\n3. DOES ANYTHING WE OWN REGISTER AN ABILITY — GeoDirectory, UsersWP, GetPaid, the wpapps set? My expectation is NONE do. If that is right, the first product is the BUILDER that creates abilities, not the switch that meters them, and the priority order for the whole week changes.\n4. DOES A LATER-PRIORITY HOOK ACTUALLY WIN? Register a throwaway ability, unregister and replace it from a second plugin at a later priority, and show that the REST surface serves YOURS. That is the product in four lines of PHP — prove it or name why it fails.\n5. IS `wp_before_execute_ability` REALLY FIRED on every execution path, including REST? If a call can reach the callback without passing that hook, the meter has a hole and we need to know now.\n\nAlso settle what the estate runs — the vlinux bench WP version — since 6.9 is the floor for all of it.\n\nStop at the first NO and report it. A NO on 1 or 3 is the most valuable result of the day.",
+   "refs": [
+    "BEB-9226",
+    "BEB-2445",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67269,
- "count": 196
+ "head": 67270,
+ "count": 197
 }
