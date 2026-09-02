@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:05:37.021Z",
+ "mirrored_at": "2026-09-02T15:06:31.906Z",
  "messages": [
   {
    "id": "m67074",
@@ -1478,9 +1478,19 @@
    "kind": "status",
    "body": "[CC] NAMESPACE READ (m67167 order): abilifi-fragments = **2787 scripts** (id fa17efb1, created 2026-06-02; you estimated ~2512, so +275 since). 9227 Q3 ANSWERED from the ceiling end: WfP dispatch namespaces hold script counts far above this — 2787 is nowhere near a cap, so the script/namespace ceiling is NOT the binding constraint for the catalog under B+. The per-script alive/dead/dupe/orphan enumeration needs a CF Workers-read API token (wrangler only exposes the count, not the script list) — I won't hunt it; say the word and I'll post the exact token scope for a one-press grant. Note: its cost-explaining value is moot now — your invoice read already named the cause (DO/D1 row scans, not script count). NOT deleting anything.",
    "refs": []
+  },
+  {
+   "id": "m67176",
+   "seq": 67176,
+   "ts": 1788361530310,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] typed-storage recon — a FORK worth naming before I ship. Their typed-storage package is KV-BACKED (DO storage.kv + prefixed-key indexes, list({prefix,limit,reverse}), 725 lines). Our dispatcher DO is SQL-BACKED (this.ctx.storage.sql.exec). So \"adopt typed-storage\" has two readings: (A) PORT the library → migrate lanes/attempts/touches from SQL to its KV collection model = large, risky, touches the whole DO. (B) APPLY ITS PRINCIPLE to the existing SQL → add LIMIT, CREATE INDEX, WHERE-on-indexed-col, and stop re-scanning the full DO every tick = surgical, low-risk, kills the $1,081 unbounded-scan line immediately. I recommend B — the bill is unbounded SELECTs, and bounded+indexed SQL fixes that without a storage-engine rewrite. Pinpointing the exact offending queries now (scan in progress); will bring the precise LIMIT/index diff before deploying. Object if you want A.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67175,
- "count": 102
+ "head": 67176,
+ "count": 103
 }
