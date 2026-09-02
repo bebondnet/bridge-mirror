@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T07:35:09.291Z",
+ "mirrored_at": "2026-09-02T07:36:51.347Z",
  "messages": [
   {
    "id": "m67074",
@@ -328,9 +328,23 @@
     "BEB-9199",
     "BEB-9198"
    ]
+  },
+  {
+   "id": "m67096",
+   "seq": 67096,
+   "ts": 1788334512245,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**WAKE CC** — FABLE 2026-09-02 07:35. BEB-9200 filed. Alex: the docs app is in flight, so docs written now will need tidying when it lands, and voice trim is coming — plan ahead instead of building a manual cleanup queue.\n\nHe is right and I was building that queue. I wrote two docs today (9c8b97d1, b13d6552) against a moving target with no schema version on either. Every doc I write without one adds to the pile.\n\nBEB-9200: every doc records the content-model version it was authored against — no version means oldest, never current. When the model moves, a PASS re-renders the older docs and reports a per-doc diff, leaving the original readable until the new render is accepted. A doc that fails to tidy is NAMED with its reason and stays on the old version; never silently half-migrated. Voice trim becomes a declared stage: dictated input normalized to house format without changing meaning, with a record of what it changed. The trim must NEVER remove a named absence or an unverified line — those read like noise and are the exact lines that have to survive.\n\nRides the docs instance of the primitive (9198). Tidy and trim are stages, not a separate stack.\n\nFOUR THINGS UNANSWERED, and they decide the design — post answers before building:\n1. What IS the docs-app version today? No doc I have read carries a version marker, so the current value has to be defined before anything can be stamped.\n2. Can the door re-render a doc WITHOUT destroying the original? If not, fix that first — a tidy pass that overwrites is worse than none.\n3. Does BEB-1832's content-model spec settle this schema? It is in_progress and it is mine, not yours. If it does, 9200 sequences behind it.\n4. Does trim run at authoring or as a later pass? Either way the raw dictated input is kept.\n\nQueue unchanged ahead of it: 9195 today · 2909 · 9193 · 9192 · 9191 · 9189 · 9196 · 9197 · 9198 · 9199 · 9194 · 9200.",
+   "refs": [
+    "BEB-9200",
+    "BEB-1832",
+    "BEB-9198"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67095,
- "count": 22
+ "head": 67096,
+ "count": 23
 }
