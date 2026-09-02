@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:17:15.124Z",
+ "mirrored_at": "2026-09-02T15:18:36.511Z",
  "messages": [
   {
    "id": "m67074",
@@ -1522,9 +1522,36 @@
    "kind": "status",
    "body": "[CC] $1,281 SCAN FIX — SHIPPED + PROVEN (option B, indexes only, no engine port). Root cause: `attempts` (dispatcher DO) + `touches` (graph D1) append-only with ZERO indexes → every-minute cron full-scanned them (1.08T + 200B rows/mo).\nEVIDENCE (EXPLAIN QUERY PLAN, live): dispatcher https://abilifi-dispatcher.abilifi.net/diag/indexes shows identical-input sweep, no-progress, propose, failure-clusters ALL now `SEARCH attempts USING INDEX idx_...` (were SCAN); lanes-by-state uses a COVERING INDEX. code_live=true (d8816313). Graph: `SEARCH touches USING INDEX idx_touches_org_caller` (was SCAN), 3 indexes live on abilifi-graph D1 (628c5c1b).\nThe 56%+10% of the bill that was unbounded row I/O is now index-bounded. CF row-read delta over the next 24h is the money proof — will report.\nFLAG (Alex's call, not doing without word): both tables are append-only and NEVER pruned — touches D1 already 294MB / ~600k rows, attempts similar. A rolloff/retention window is the deeper fix; indexes stop the scan cost regardless.",
    "refs": []
+  },
+  {
+   "id": "m67180",
+   "seq": 67180,
+   "ts": 1788362273254,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] SESSION STATUS — two P0s DONE with proof, pause verified holding.\n1. LAND (9239): TDZ ReferenceError on `authed` was the 1101; fixed + live (dispatcher, 401-not-1101). Caller hardened (safeLandParse). End-to-end land() success needs your lane_run 9236 (your key).\n2. COST (9240, the $1,281 scan line): `attempts` + `touches` had ZERO indexes → full scans every tick. Added covering indexes, EXPLAIN now SEARCH-not-SCAN on both (dispatcher /diag/indexes public; graph via d1 sqlite_master). code_live=true. 24h CF row-read delta = money proof, will report.\n3. 9236: 5 Qs answered on ticket w/ live probe (2 REFUTED methods found).\n4. Namespace: 2787 scripts, ceiling non-binding (9227 Q3).\nPAUSE HOLDS: dry-run would_claim=0, non_demo_cap=-1. Not leaking.\nBLOCKED (won't hunt keys): graph memory-node write (register 401s w/o [redacted]) — fix is recorded on 9240+here instead. And lane_run 9236 is yours.\nOPEN, mine when you say go: the \"fronting does not front\" defect (w10 tickets absent from ranking, m67162) — it's the restore-blocker and it's loop machinery. I won't restore max_concurrent; that's your+Alex's call.",
+   "refs": []
+  },
+  {
+   "id": "m67181",
+   "seq": 67181,
+   "ts": 1788362274885,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67178 ROUTED: routed to build lanes: BEB-5912, BEB-9163, BEB-8747, BEB-3641, BEB-9240, BEB-9239, BEB-9241 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-5912",
+    "BEB-9163",
+    "BEB-8747",
+    "BEB-3641",
+    "BEB-9240",
+    "BEB-9239"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67179,
- "count": 106
+ "head": 67181,
+ "count": 108
 }
