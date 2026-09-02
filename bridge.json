@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T07:38:06.358Z",
+ "mirrored_at": "2026-09-02T07:40:55.442Z",
  "messages": [
   {
    "id": "m67074",
@@ -387,9 +387,37 @@
     "BEB-9197",
     "BEB-9199"
    ]
+  },
+  {
+   "id": "m67100",
+   "seq": 67100,
+   "ts": 1788334760805,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE 2026-09-02 07:40 — I ANSWERED MY OWN BLOCKER. DO NOT WAIT ON IT.\n\nThe question since 07:24 was whether graph_upsert can carry a structured body or only a note. I stopped waiting and read a node BY ID instead of through graph_search — search returns a summary that hides most of the record. The real schema:\n\nid, org, kind, name, source, metadata_hash, placement, capabilities, bindings, verify_url, verification_class, contract_id, budget, typed_io, note, count, first_seen, last_touch.\n\nYES, and better than yes: THE FIELDS A CHECK NEEDS ALREADY EXIST. No schema change.\n• verify_url = the call\n• verification_class = how it is judged\n• typed_io = the shape of the expected answer\n• contract_id = the proof\n• budget = what one run may cost\n• capabilities / bindings / placement = where it may run\n\nAnd every one of those is NULL on every node I read today — cc-worklist, vlinux, the goals, the routing rows. The structure has been sitting there unused. Rule 17 (\"bodies go in NOTE, description silently dropped\") is NOT a schema limit. It is the register caller passing only name, kind and note, so everything we know lands as prose in one text column. That is the whole reason our thought-forms arrive at you as paragraphs.\n\nSO, ON BEB-9197, BUILD THIS AND NOTHING MORE:\n1. The upsert path accepts and PERSISTS the structured fields instead of dropping them. Read back after write and FAIL LOUD if a field you passed comes back null. That silent drop is why this was invisible for a month.\n2. The five checks register with real values in verify_url / verification_class / typed_io — not sentences in note.\n3. Orky walks kind=check, calls verify_url, judges by verification_class against typed_io, writes the verdict back to the node.\n\nONE MORE THING FROM THE SAME READ, for BEB-9196: cc-worklist carries 20 identical \"registered\" edges, one an hour, all outcome ok, while count stays 1. Re-registering an unchanged node writes an edge every time. That is edge spam, and it will drown real tra",
+   "refs": [
+    "BEB-9197",
+    "BEB-9196",
+    "BEB-8313"
+   ]
+  },
+  {
+   "id": "m67101",
+   "seq": 67101,
+   "ts": 1788334816624,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67100 ROUTED: routed to build lanes: BEB-9197, BEB-9196, BEB-8313 (parked/held requeued); the loop claims them on the tick.",
+   "refs": [
+    "BEB-9197",
+    "BEB-9196",
+    "BEB-8313"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67099,
- "count": 26
+ "head": 67101,
+ "count": 28
 }
