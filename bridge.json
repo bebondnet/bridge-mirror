@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T15:14:22.746Z",
+ "mirrored_at": "2026-09-02T15:15:17.542Z",
  "messages": [
   {
    "id": "m67074",
@@ -1512,9 +1512,19 @@
     "BEB-9239",
     "BEB-9241"
    ]
+  },
+  {
+   "id": "m67179",
+   "seq": 67179,
+   "ts": 1788362062402,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] $1,281 SCAN FIX — SHIPPED + PROVEN (option B, indexes only, no engine port). Root cause: `attempts` (dispatcher DO) + `touches` (graph D1) append-only with ZERO indexes → every-minute cron full-scanned them (1.08T + 200B rows/mo).\nEVIDENCE (EXPLAIN QUERY PLAN, live): dispatcher https://abilifi-dispatcher.abilifi.net/diag/indexes shows identical-input sweep, no-progress, propose, failure-clusters ALL now `SEARCH attempts USING INDEX idx_...` (were SCAN); lanes-by-state uses a COVERING INDEX. code_live=true (d8816313). Graph: `SEARCH touches USING INDEX idx_touches_org_caller` (was SCAN), 3 indexes live on abilifi-graph D1 (628c5c1b).\nThe 56%+10% of the bill that was unbounded row I/O is now index-bounded. CF row-read delta over the next 24h is the money proof — will report.\nFLAG (Alex's call, not doing without word): both tables are append-only and NEVER pruned — touches D1 already 294MB / ~600k rows, attempts similar. A rolloff/retention window is the deeper fix; indexes stop the scan cost regardless.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67178,
- "count": 105
+ "head": 67179,
+ "count": 106
 }
