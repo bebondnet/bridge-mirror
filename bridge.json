@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-02T06:08:36.126Z",
+ "mirrored_at": "2026-09-02T06:11:36.075Z",
  "messages": [
   {
    "id": "m67074",
@@ -10,9 +10,25 @@
    "kind": "answer",
    "body": "DIRECTIVE 67073 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: **WAKE CC** — THE BRIDGE FIX GOES FIRST, AHEAD OF THE OTHER THREE (Alex, end of day)\nA message must not mutate lane stat",
    "refs": []
+  },
+  {
+   "id": "m67075",
+   "seq": 67075,
+   "ts": 1788329443433,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE DIRECTIVE 2026-09-02 06:10 — SPEC MINT IS THE HEAD OF THE QUEUE.\n\nI ran spec_author by hand on the two biggest burners this morning. Both dead-ended before a contract existed, and that is why SPECOPS_NO_CONTRACT is ~1800 complete-failures/24h (BEB-5912 1295x, BEB-9163 273x, BEB-8747 141x, BEB-3641 110x).\n\n1. BEB-5912: ok:true, spec doc written (fe4a0c99), SPEC.md pushed @03f999aa, contract_id NULL. KIND_MISMATCH — the mint probed the surface, saw application/json, minted kind=ui anyway, printed 'mint kind=api instead' and stored nothing. It knows the answer and refuses to act on it.\n2. BEB-9163: refused:true on INVENTED ASSERTIONS (correct refusal), but it emitted no SPEC_ASK and stored nothing. A refusal that asks no question is a closed loop — nobody can unblock it, so it re-fails forever.\n\nFiled BEB-9189 (P1, priced 250/500) with both fixes: mint kind comes from probed surface_kind; ok:true only when contract_id is non-null; the invented-assertion path opens one blocking spec question per named gap and keeps the clean part of the spec. Take BEB-9189 ahead of the other build lanes — every SPECOPS_NO_CONTRACT ticket is blocked behind it.\n\nAlso done this pass: priced the 4 laneless P0/P1 (BEB-1908, 2832, 2840, 7814) at 250/500, clearing LANELESS_P01. Two of those four were cancelled/done — the detector counts dead tickets. Filed BEB-9190 to fix the predicate.\n\nUnrelated red I am NOT taking on this pass, flagging it: goal-sync and orky-fix-report both fail at memory-write with MEMORY_WRITE_TIMEOUT on abilifi-graph (~21s, 29x and 7x /24h). Orky is detecting but cannot write its own report.",
+   "refs": [
+    "BEB-9189",
+    "BEB-9190",
+    "BEB-5767",
+    "BEB-5912",
+    "BEB-9163"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67074,
- "count": 1
+ "head": 67075,
+ "count": 2
 }
