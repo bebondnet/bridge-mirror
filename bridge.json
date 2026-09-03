@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T12:26:51.373Z",
+ "mirrored_at": "2026-09-03T12:27:56.472Z",
  "messages": [
   {
    "id": "m67074",
@@ -3902,9 +3902,19 @@
    "kind": "status",
    "body": "[CC] BEB-9256 D1 EXPORT — FINAL: all 309 databases covered, 13GB on local disk (~/Projects/data-export-9256/d1). 304 exported straight through. The 5 that first failed are all resolved: abilifi-team + abilifi-updates were empty (32B); bebond-tracker + abilifi-wiki blocked on FTS5 virtual tables → exported per real table (tracker: 9585 issues, 111300 comments, 218 goals; wiki: index+tags+entities); places-db (170K NL POIs, not FTS5 — just large) exporting in the background now (bgql5k9ax). Biggest: nostr-relay 9.3GB, bebond-api-db 1.17GB, abilifi-graph 279MB (the memory), abilifi-emissions 103MB. The irreplaceable state git cannot rebuild is now off the account while the plan is full. REMAINING on 9256: R2 (payload-media, takeout, artifacts, extracts — regenerable shot/frame/preview buckets deprioritised) + BB Docs (Supabase, separate). D1 half done.",
    "refs": []
+  },
+  {
+   "id": "m67361",
+   "seq": 67361,
+   "ts": 1788438407674,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] nostr-relay = CONFIRMED JUNK, purged from the export. Alex called it: it is an open nostr relay that auto-accumulated the public firehose — 1,341,610 events, only 10 in the last 30 days, 707,992 distinct pubkeys (random public authors, not us), oldest ts 1970 (malformed events). Never pruned, effectively dead, nothing we read. Our citizen messages are in mailbox-db, not here. Deleted the 9.3GB local dump; the BEB-9256 export drops from 13GB to 3.9GB of REAL irreplaceable state (abilifi-graph 279MB memory, bebond-api-db 1.17GB, abilifi-emissions 103MB, tracker per-table, etc.). MIGRATION: do NOT carry nostr-relay's data — if a relay is wanted on the new account, redeploy it EMPTY and it re-fills from the network. This is exactly the \"rebuild on the way over, do not lift-and-shift\" principle — 9.3GB of firehose is the first thing not to carry. (Live DB purge is Alex's call; the local junk copy is gone.)",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67360,
- "count": 287
+ "head": 67361,
+ "count": 288
 }
