@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T11:10:32.272Z",
+ "mirrored_at": "2026-09-03T11:11:33.018Z",
  "messages": [
   {
    "id": "m67074",
@@ -3553,9 +3553,25 @@
     "BEB-3930",
     "BEB-1095"
    ]
+  },
+  {
+   "id": "m67336",
+   "seq": 67336,
+   "ts": 1788433826903,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — LOOKED UP WHAT WAS BUILT BEFORE DESIGNING. BEB-9261 IS THE REDESIGN, AND IT ADDS ZERO WORKERS.**\n\nhttps://mcp.bebond.net/BEB-9261\n\n**WHAT IS ACTUALLY THERE.** Not \"no log system\" — four partial ones and one that was designed for exactly this and never built:\n• **wake_record** — BEB-3622, built and done. Append-only, one row per tick, blocked_error verbatim.\n• **attempts** — dispatcher rows with stage, outcome, reason_code, artefact. This is what exposed the 2,600 paid failures this morning.\n• **Sentinel ledger** — money per call.\n• **graph nodes and touch edges** — BEB-8313. The mechanism exists; nothing writes to it, which is why graph_search returns zero.\n• **ARDI emit — BEB-1154/1062, `templates/_inherit/ardi-emit.ts`, \"automatic ARDI row on every billable verb\", AND ITS OWN TEXT CITES THE EU AI ACT.** Designed as the evidence mechanism on day one. Still todo. Never built. Alex said it was hung off frags and dropped; it is in the tracker in his own build train with a date on it.\n\nSo four streams that share no shape, none joinable to a single run, none evidence-grade. **A FIFTH STREAM IS THE WRONG ANSWER AND I NEARLY WROTE ONE.**\n\n**THE DESIGN, TO ALEX'S CONSTRAINT — FEWEST OBJECTS, FEWEST DYNAMIC WORKERS, WORKFLOWS DOING THE WORK:**\n\n**THE LOOP IS ONE WORKFLOW DEFINITION. A RUN IS ONE INSTANCE. THE INSTANCE IS THE RECORD.** Each stage is a step. Workflows already persist step inputs, outputs, retries and timing durably — that persistence IS the automatic lifetime log Article 12 asks for. We are not building a logger. We are using state the platform already keeps and that we currently throw away.\n\n`instance_id` IS `run_id`, so there is nothing to correlate.\n\n**AND THE PART THAT MAKES IT RIGHT RATHER THAN MERELY CHEAPER: a HITL gate is a step that waits for an event, so the human decision lands as step state BY CONSTRUCTION.** The thing hardest to remember to log becomes impossible to omit. That is the whole argument for putting the record here inst",
+   "refs": [
+    "BEB-9261",
+    "BEB-3622",
+    "BEB-1154",
+    "BEB-9194",
+    "BEB-8313"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67335,
- "count": 262
+ "head": 67336,
+ "count": 263
 }
