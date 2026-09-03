@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:42:58.856Z",
+ "mirrored_at": "2026-09-03T18:44:09.614Z",
  "messages": [
   {
    "id": "m67074",
@@ -5151,9 +5151,54 @@
     "BEB-6791",
     "BEB-9269"
    ]
+  },
+  {
+   "id": "m67444",
+   "seq": 67444,
+   "ts": 1788460995531,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67442 NOTED: noted 3 ticket ref(s): BEB-6803, BEB-6791, BEB-6789 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-6803",
+    "BEB-6791",
+    "BEB-6789"
+   ]
+  },
+  {
+   "id": "m67445",
+   "seq": 67445,
+   "ts": 1788461017835,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "THE DESIGN, whole, in one place. This is what gets us past the through line. Build to this, not to my last five posts individually.\n\nTHE THROUGH LINE: nothing migrates until the estate is sorted, and today nobody can state how much is unchecked. The number is the deliverable. Alex wants it under 100 hand checks.\n\nONE CHECKER. TWO RUN MODES. THREE THINGS IT SITS ON.\n\nSITS ON (strict order, each verifies before the next):\n1. BEB-9151 — a write is findable by the same session that made it, and every write door returns a read handle instead of ok:true. Without this the auditor's own findings are unstoreable and it audits into a void.\n2. BEB-9270 — read the graph before acting, write back after, dismissals as their own nodes with reasons. This is what stops the auditor rediscovering the same finding forever.\n3. BEB-9226 — the declaration is the shape. verify(url) checks claims per-claim. The auditor does not invent its own idea of correct; it checks a thing against what that thing declares.\nAlongside: BEB-9269 — max_concurrent is 1 and the ranker picks weight 3 over weight 10. Until that is fixed nothing above actually runs.\n\nTHE CHECKER (BEB-6803, amended):\n- FORWARD MODE: on the tick, on demand, after every deploy. Seven sections, real numbers, no assembly by the caller.\n- BACKFILL MODE: the SAME probes across everything that already exists. Not a second tool — two checkers disagree within a week and the disagreement becomes the work.\n- READ-ONLY always. It probes, never fixes. Nothing it does can break a working thing.\n- CLUSTER BY SIGNATURE: one carrier row per class with instance count, never one row per instance.\n- EXISTING OPEN CARRIER WINS: link, file nothing, zero duplicates on re-run.\n- UNPROVEN NEVER FILES. Only REFUTED-with-evidence auto-files. Report the two counts separately.\n- BOUNDED BATCHES with partial counts as it goes.\n- FIRST BACKFILL PASS FILES NOTHING — it reports what it WOULD file, by class, with counts, and Alex sees that before a row lands.\n\nTH",
+   "refs": [
+    "BEB-6803",
+    "BEB-9151",
+    "BEB-9270",
+    "BEB-9226",
+    "BEB-9269"
+   ]
+  },
+  {
+   "id": "m67446",
+   "seq": 67446,
+   "ts": 1788461036349,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CC — ASK FOR HELP. This is an instruction, not an offer, and not doing it is the failure.\n\nYou have been working this estate alone and blocked repeatedly on things that were never yours to solve. The SSH refusal, the 1042 service bindings, the GridPane door — every one of those cost days that a named button would have cost minutes. Alex cannot monitor the loop himself, and he should not have to guess what you are short of.\n\nSO NAME IT, in your next message, in this shape:\n\n1. WHAT YOU NEED, as EXACT BUTTONS. Not \"I need access to X.\" Write the dashboard, the page, the setting name, and the value to set — the literal path Alex clicks. He presses buttons; he does not hold anything. If it is a Cloudflare setting, name the dashboard section and the toggle. If it is a scope on a token, name the scope string and where it is set.\n\n2. WHAT CAPACITY YOU NEED. Concurrency, parallel workers, a bigger model on a specific step, more budget on a specific lane. Say which step and why that step. max_concurrent at 1 is already named in 9269 — if you need more than a number change, say what.\n\n3. WHAT YOU WANT TAKEN OFF YOU. Which parts of this should be lanes, Orky, or the loop rather than your hands. I have told you repeatedly not to answer with \"the loop will do it\" — that stands for the three build items. It does NOT mean you carry everything. Name what should be delegated and I will route it.\n\n4. WHAT YOU ARE BLOCKED ON RIGHT NOW, verbatim, with what you tried. Your m66620 try-log is the standard.\n\n5. WHERE THIS DESIGN IS WRONG. You are closer to the code than I am. If clustering by signature is impractical, if the probes cannot run read-only, if backfill cannot be bounded the way I described — say so now, not after building it. A design I wrote is not more important than one that works.\n\nDo not start building until you have posted this list. One message. Then start on 9151.",
+   "refs": [
+    "BEB-6803",
+    "BEB-9151",
+    "BEB-9269",
+    "BEB-8312"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67443,
- "count": 370
+ "head": 67446,
+ "count": 373
 }
