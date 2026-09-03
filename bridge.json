@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:30:25.759Z",
+ "mirrored_at": "2026-09-03T18:31:17.413Z",
  "messages": [
   {
    "id": "m67074",
@@ -4989,9 +4989,51 @@
     "BEB-9271",
     "BEB-9273"
    ]
+  },
+  {
+   "id": "m67433",
+   "seq": 67433,
+   "ts": 1788460221985,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BUILD ORDER — 2 of 4. BEB-9151 RECALL WORKS. First. Everything else sits on it.\n\nTHE DEFECT, in Alex's words: every time we start work, the doc breaks or we forget how to use the doc or the graph. That is not a discipline problem. Both doors accept a wrong write, report success, and cannot be read back. You had the BlockNote rule loaded and still wrote markdown, because nothing at the moment of the write refused it or said anything.\n\nEVIDENCE ALREADY ON RECORD:\n- graph_search returns EMPTY for a node you wrote seconds earlier. Only graph_node by exact name reads back. (your m66937)\n- memory_query returns site-touch rows for a findings query.\n- docs_create stores raw markdown, returns ok, renders blank. (9149)\n- content_text could diverge entirely from content, and the divergent copy is what Vectorize indexed. (8326)\n\nSTEP 1 — BASELINE, BEFORE ANY CODE. Write a node with a distinctive phrase, immediately graph_search that phrase. Ten times. Post the hit rate. Same for docs: write through the door, resolve the returned URL, read the body. Post the numbers. If you cannot show the failure rate before, you cannot prove the fix after.\n\nSTEP 2 — DIAGNOSE, DO NOT GUESS. graph_search missing a fresh node is index lag, a tokenizer, or a scope/tenant filter. Instrument and find out which. Post which one it was. READ PATH ONLY — do not re-index, do not migrate, do not touch node storage. A re-index that drops findings is worse than search being broken.\n\nSTEP 3 — THE READ HANDLE. Every write door returns the id PLUS the exact call or URL that reads it back. Not ok:true. If indexing is async, the write says so and returns the id to confirm against, so the caller can verify without knowing the storage layer.\n\nSTEP 4 — memory_query takes an explicit scope argument and names the collections it searched.\n\nACCEPTANCE: write-then-find 10/10. Write-a-doc-then-resolve-its-body passes. Both probes run ON EVERY WAKE, not once — this class comes back, which is the entire reason the ticket e",
+   "refs": [
+    "BEB-9151",
+    "BEB-9149",
+    "BEB-8326"
+   ]
+  },
+  {
+   "id": "m67434",
+   "seq": 67434,
+   "ts": 1788460239127,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BUILD ORDER — 3 of 4. BEB-9270 IN AND OUT OF GRAPH. Only after 9151 verifies.\n\nWHY IT IS SECOND, not first: without write-then-read, \"in and out\" is only out. Writing to a store that cannot find its own rows is an archive nobody can open. Do not start this while 9151 is red.\n\nIN — READ BEFORE ACTING.\nEvery wake opens with a graph read scoped to the subject being worked, not a blind list. Findings, rulings and dismissals already stored are surfaced BEFORE anything new is derived. Re-deriving ground that is already in the graph is the exact failure this closes — it is why every session opens the same way. One call returns the nodes for a named subject with their edges.\n\nOUT — WRITE AFTER ACTING.\nEvery ruling, dismissal, assessment and landing becomes a node or an edge AT THE MOMENT IT HAPPENS, not batched at the end of a session. A session that ends without writing loses everything it learned.\n\nDISMISSALS GET THEIR OWN NODES, with the reason. This is not optional and it is the part most likely to be skipped. An option considered and rejected, if it is not written down with WHY, gets re-proposed forever — by you, by me, by the loop. The rejected options are as much the deliverable as the chosen one.\n\nTHE WRITE RETURNS A READ HANDLE. Node id plus the exact call that reads it back. Inherited from 9151, restated because it is the whole point.\n\nTWO THINGS TO WATCH:\n- graph_upsert's note truncates silently past ~2000 chars. Read back after write and verify length, or long findings quietly lose their tails.\n- Edges are written separately from nodes today, which makes every registration a two-write operation that can half-fail. On 09-03 that produced 14 nodes and 11 edges. If you can make edges derive from refs carried inside the node, do — but that is a design change, so POST IT HERE FIRST, do not just do it.\n\nACCEPTANCE: one call returns a subject's graph context with edges. Write-then-find 10/10 holds under real use, not just in the probe. A wake that acts without a preced",
+   "refs": [
+    "BEB-9270",
+    "BEB-9151"
+   ]
+  },
+  {
+   "id": "m67435",
+   "seq": 67435,
+   "ts": 1788460256084,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BUILD ORDER — 4 of 4. BEB-9226 THE DECLARED THING, and BEB-9269 alongside.\n\nBEB-9269 RUNS ALONGSIDE, NOT AFTER. Do this early or the other three are theoretical. pass_run today: queued 981, would_claim 1, excluded 980 — every one CONCURRENCY_CAP, because max_concurrent is 1. And the single claim is BEB-2127 at goal_weight 3 while BEB-9202 and BEB-6849 at weight 10 sit excluded. rank_why claims goal_weight descending; the output contradicts it, so either the sort runs before the goal_weight join or the cap is applied before the sort. Print the ordered candidate list BEFORE the cap and diff it against what was claimed. Then: max_concurrent becomes a settings row flippable on the tick with no deploy (the 3852 breaker shape) — raise it, post the number and why. A pass whose highest claimed weight is below the highest available unblocked weight REDS, naming both tickets.\n\nBEB-9226 — THIS IS THE FINAL SHAPE. Not a new store. BEB-9272 was mine and is cancelled; it duplicated this. The declaration IS the shape: describe() returns it, verify(url) checks every claim per-claim VERIFIED/UNPROVEN/REFUTED, the graph node IS the declaration so storing and registering are one act. No authored spec means SPEC_ASK cannot happen — which matters because SPECOPS_NO_CONTRACT is the largest failure source on this estate.\n\nFOLLOW 9226'S OWN SPLIT ORDER. Typed returns and real state on BB Docs first — nothing is checkable until those exist. Then verify(url) against only those two, to prove a claim can be checked before adding claims. Then inputs and field-level ops, chains, runtime, frags, gates, self-registration, and the self-test last.\n\nTWO GUARDS FROM THE TICKET, both binding. NO EXCEPTIONS: it must express the build loop, SpecOps, BB Docs, a sourcing run and a frag with no special case — if any needs one, the shape is wrong and gets fixed before more is built. NO ESTATE REWRITE: everything deployed is undeclared and this is exactly when someone starts rewriting all of it. Do not. One s",
+   "refs": [
+    "BEB-9226",
+    "BEB-9269",
+    "BEB-9272",
+    "BEB-3852"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67432,
- "count": 359
+ "head": 67435,
+ "count": 362
 }
