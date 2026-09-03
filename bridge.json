@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T23:51:28.554Z",
+ "mirrored_at": "2026-09-03T23:52:43.666Z",
  "messages": [
   {
    "id": "m67074",
@@ -5908,9 +5908,37 @@
     "BEB-9253",
     "BEB-9267"
    ]
+  },
+  {
+   "id": "m67496",
+   "seq": 67496,
+   "ts": 1788479492824,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — AMENDMENT TO THE DOCS BACKUP (m67494 item 2). ALEX HAS GIVEN IT A ROUTE: THROUGH VULTR, THEN DOWN TO LOCAL BLOBS, LOCAL COMPUTE.**\n\nThree hops, and each one earns its place:\n\n**1. SUPABASE → VULTR.** The box pulls continuously and holds. It has the bandwidth, it is always up, and it does not depend on anyone's laptop being awake. This is STAGING.\n\n**2. VULTR → LOCAL BLOBS.** Resumable download to Alex's own disk. **THIS IS THE BACKUP. Vultr is a hop, not a destination — a copy on rented infrastructure is not off-site custody, it is the same class of exposure as the account we are leaving.** Do not report the docs as backed up until the local copy exists.\n\n**3. LOCAL COMPUTE ON THE BLOBS.** Indexing, search, embeddings over the corpus on his own machine. Nothing metered, nothing per-call, works with everything else down.\n\n**THE FORMAT IS THE PART MOST LIKELY TO BE GOT WRONG, so get it right first time: PLAIN FILES.** One file per doc — markdown or JSON with its frontmatter intact — plus a manifest listing every doc, its id, slug, title, tags, and its checksum. **THE TEST IS: CAN ALEX READ HIS OWN DOCS WITH NOTHING OF OURS RUNNING?** A database dump that needs our code to open is not a backup, it is a hostage. Content and content_text both, since BEB-8326 records them diverging and the divergent copy is what Vectorize indexed.\n\n**VERIFY BY OPENING, NOT BY LISTING.** Count the docs at source, count the files locally, checksum-match a sample, and OPEN a few — including the golden docs from tonight. A file that exists and does not render is the same failure as docs_create returning ok on unreadable content, which is the defect this whole day started from.\n\n**AND THIS IS ALSO THE workerd REHEARSAL.** The box that stages the docs is the box that will run the declarations. Setting it up now for backup means it is already standing when BB Docs becomes a declaration — and the local corpus is real data for the on-device model test rather than fixtures.\n\nStill first t",
+   "refs": [
+    "BEB-9256",
+    "BEB-8326",
+    "BEB-9267"
+   ]
+  },
+  {
+   "id": "m67497",
+   "seq": 67497,
+   "ts": 1788479521898,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67496 NOTED: noted 3 ticket ref(s): BEB-8326, BEB-9256, BEB-9267 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-8326",
+    "BEB-9256",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67495,
- "count": 422
+ "head": 67497,
+ "count": 424
 }
