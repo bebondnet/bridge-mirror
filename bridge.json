@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T11:14:30.812Z",
+ "mirrored_at": "2026-09-03T11:17:01.740Z",
  "messages": [
   {
    "id": "m67074",
@@ -3585,9 +3585,55 @@
     "BEB-1154",
     "BEB-9194"
    ]
+  },
+  {
+   "id": "m67338",
+   "seq": 67338,
+   "ts": 1788434124325,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — TWO GRAPHS, NOT ONE. ALEX CORRECTED ME AND THE DISTINCTION IS LOAD-BEARING.**\n\nI merged two separate things in BEB-9261 and BEB-9262. They are not the same graph and never were.\n\n**GRAPH 1 — THE ESTATE GRAPH (BEB-8313).** Nodes and touch edges for what we run and what we have learned: workers, doors, findings, rules, proposals. Current, live, in use, and READ-ONLY from Fable's door. This is the one the evidence and compliance record relates to, and the one BEB-9262 is about. When I say a finding should become a node so nobody re-derives it, this is the graph I mean.\n\n**GRAPH 2 — THE ARDI GRAPH.** A separate PROJECT: a future support structure for the buurt. Expiry protocols on government decision periods, entitlement and subsidy qualification, an income stream for the coop. **NOT CURRENT. NOT THE COMPLIANCE LOG. NOT PART OF THIS WORK.**\n\nThey share the word \"graph\" and nothing else. Different purpose, different data, different timeline, different reason to exist. ARDI is for residents; the estate graph is for the machine's own memory.\n\n**WHAT THIS CHANGES, PRACTICALLY:**\n• BEB-9262 GRAPH WRITE ON THE DOOR is about the ESTATE graph only. Nothing in it touches ARDI.\n• BEB-9261 THE RUN IS THE RECORD is the evidence log. It does not borrow ARDI's name, its shape, or its rows.\n• BEB-1154's \"automatic ARDI row on every billable verb ... EU AI Act\" is a conflation IN THE TICKET ITSELF, written months ago. Anyone reading it for the evidence design will be led wrong. It needs correcting at the source, not just here.\n• Nobody builds anything ARDI-shaped as part of the compliance work. If a lane starts touching expiry protocols while working on the evidence record, it has gone wrong and should stop.\n\n**WHY I AM POSTING A VOCABULARY CORRECTION AS A DIRECTIVE:** because this is the exact failure Alex named an hour ago — forgetting and rediscovering. A distinction that lives only in a chat message gets re-merged next session. It goes on the bridge, on the tickets,",
+   "refs": [
+    "BEB-9262",
+    "BEB-9261",
+    "BEB-8313",
+    "BEB-1154"
+   ]
+  },
+  {
+   "id": "m67339",
+   "seq": 67339,
+   "ts": 1788434175074,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67338 NOTED: noted 4 ticket ref(s): BEB-9261, BEB-9262, BEB-8313, BEB-1154 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9261",
+    "BEB-9262",
+    "BEB-8313",
+    "BEB-1154"
+   ]
+  },
+  {
+   "id": "m67340",
+   "seq": 67340,
+   "ts": 1788434180712,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — HANDOFF TO CC. THIS IS THE WHOLE LIST, IN ORDER. GRAPH WRITE IS THE ONE I HAVE ASKED FOR THREE DAYS RUNNING AND IT GOES FIRST.**\n\nAlex's words: third day in a row. He is right, and the reason it keeps slipping is that it is infrastructure nobody feels the absence of until the next session starts from zero. It stops slipping today.\n\n**1. BEB-9262 — GRAPH WRITE ON THE DOOR. https://mcp.bebond.net/BEB-9262. DO THIS FIRST, WITH ME.**\nAll four graph tools on mcp.bebond.net are read. `graph_upsert` exists on the worker — it is in the goal-sync failure rows — and is not exposed. Expose it with the same auth and org scoping as the reads, plus an edge write, registered three-place. **CHECK THE STORE FIRST:** two memory-write reds are firing right now (goal-sync MEMORY_WRITE_ERROR, orky-fix-report MEMORY_WRITE_TIMEOUT at 26s against `abilifi-graph`). Do not expose a write onto a store that is already timing out — find out whether those are the store or the caller, and say which.\n**Scope: the ESTATE graph only.** Not ARDI. ARDI is a separate project for the buurt and nothing here touches it.\n\n**2. THE BRIDGE MOVES ONTO THE MEMORY PLUG. BEB-5756 is the carrier — https://mcp.bebond.net/BEB-5756 — and its own title already says it: the bridge is a log, not a queue.**\nThis is Alex's call and it is the right one. Look at what this bridge actually is today: I post a directive, the dispatcher replies \"NOTED, NO lane state changed\", and the content sits in prose that only survives if somebody reads it in order. Sixty-seven thousand messages and the estate still cannot answer \"what did we decide about X\" without me re-deriving it.\nThrough the memory plug it becomes: a directive writes a node, its refs become edges, and reading the bridge is traversing rather than scrolling. A decision stops being a message that scrolls away and becomes a thing with a name. That is also what makes BEB-3524 real — agents read before acting, register after landing.\nSequence it AFTER graph ",
+   "refs": [
+    "BEB-9262",
+    "BEB-5756",
+    "BEB-9256",
+    "BEB-9255",
+    "BEB-3524"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67337,
- "count": 264
+ "head": 67340,
+ "count": 267
 }
