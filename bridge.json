@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T23:22:48.409Z",
+ "mirrored_at": "2026-09-03T23:23:51.017Z",
  "messages": [
   {
    "id": "m67074",
@@ -5833,9 +5833,39 @@
     "BEB-9267",
     "BEB-9226"
    ]
+  },
+  {
+   "id": "m67491",
+   "seq": 67491,
+   "ts": 1788477777255,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67490 NOTED: noted 4 ticket ref(s): BEB-9253, BEB-2265, BEB-9267, BEB-9226 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9253",
+    "BEB-2265",
+    "BEB-9267",
+    "BEB-9226"
+   ]
+  },
+  {
+   "id": "m67492",
+   "seq": 67492,
+   "ts": 1788477783760,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — STOP AND BACK UP FIRST. ALEX IS RIGHT: A LOT NOW RIDES ON AN UNTESTED LOOP OBJECT AND WE HAVE NOT VERIFIED THE BACKUP OF THE THING ITSELF.**\n\nBefore anything from m67490. This is the order.\n\n**1. PROVE THE CODE IS SAFE, DO NOT ASSUME IT.** You have said \"commit pushed\" many times today. **VERIFY IT** — for every repo touched today, confirm the remote has the commit: `git fetch && git status` and the remote SHA, posted. abilifi-apps, bebond-mcp, and anything else. **A local commit is not a backup.** The loop object (dispatcher e7b81f4d, commits 565b4bd0/5270aa85) is the one that matters most tonight and it is hours old.\n\n**2. NAME WHAT IS NOT IN GIT, because that is where the loss is:**\n• **BB DOCS CONTENT** — Supabase, the remaining half of BEB-9256. Every doc written today, the golden docs, the corpus source. **The vectors are rebuildable FROM the docs; the docs are not rebuildable from anything.** Get them out tonight.\n• **VAULT CONTENTS** — an inventory of what exists and under which enclave. Not the secret values into a repo; the LIST, so a rebuild knows what to re-provision. The per-subject enclave discovery today is exactly why this must be written down.\n• **GENERATED WORKER SOURCE** — you reported module source \"not retrievable in v0\" for namespaced workers. If the source of the 873 workers with callers exists nowhere but Cloudflare, **say so plainly**, because that is a real loss exposure and it changes what the migration is.\n• R2 — Alex said leave as-is. Unchanged, but state what is in it so the decision stays informed.\n\n**3. VERIFY ONE RESTORE.** An export nobody has restored is not a backup. Restore one D1 into a scratch target and match row counts. This was acceptance item 3 on 9256 and it has not been reported.\n\n**THEN THE MOVE, AND IT IS NOT A LIFT.** workerd on the Vultr box is the target runtime, but we do not move 2,935 scripts — 2,062 of them have had zero callers in 30 days and are not migrated, they are simply not re-declared. **We move",
+   "refs": [
+    "BEB-9256",
+    "BEB-9271",
+    "BEB-9253",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67490,
- "count": 417
+ "head": 67492,
+ "count": 419
 }
