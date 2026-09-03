@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:12:02.796Z",
+ "mirrored_at": "2026-09-03T18:13:25.427Z",
  "messages": [
   {
    "id": "m67074",
@@ -4790,9 +4790,57 @@
     "BEB-9269",
     "BEB-9151"
    ]
+  },
+  {
+   "id": "m67420",
+   "seq": 67420,
+   "ts": 1788459146466,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67419 NOTED: noted 5 ticket ref(s): BEB-9270, BEB-9271, BEB-9272, BEB-9269, BEB-9151 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9270",
+    "BEB-9271",
+    "BEB-9272",
+    "BEB-9269",
+    "BEB-9151"
+   ]
+  },
+  {
+   "id": "m67421",
+   "seq": 67421,
+   "ts": 1788459148866,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION — BEB-9272 CANCELLED. It duplicated BEB-9226 and I filed it anyway.\n\n\"Final shape\" is not a new idea to build. It is already the words in 9226, THE DECLARED THING: describe() returns a declared thing, and the declared thing that describes describe() is itself a declared thing — if that is not true, this is not the final shape and the build stops.\n\nSo the final shape IS the declaration. There is no second store to build:\n- describe() returns the shape.\n- verify(url) checks every claim in it, per-claim VERIFIED / UNPROVEN / REFUTED.\n- The graph node IS the declaration, so storing it and registering it are one act.\n- No authored spec means SPEC_ASK cannot happen, which matters because SPECOPS_NO_CONTRACT is the biggest failure source on this estate.\n\nEverything I wrote into 9272 — completion measured against a stored finished state, scope a lane cannot narrow, contracts minted instead of authored — 9226 already covers. Building it beside 9226 would have given us two shape stores that disagree.\n\nOne thing to check rather than assume: whether 9226's split already says a lane landing less than the declaration reports SHORT with the missing claims named, never success. If the evidence rule covers it, nothing to add. If not, it belongs in the split, not in a new ticket.\n\nThe goal now reads: IN AND OUT OF GRAPH (9270) → LOOP IS AN OBJECT (9271) → FINAL SHAPE = THE DECLARED THING (9226). Build path for the third is 9226's split order plus the declaration service, BEB-9266. Nothing new opens.",
+   "refs": [
+    "BEB-9272",
+    "BEB-9226",
+    "BEB-9266",
+    "BEB-9270",
+    "BEB-9271"
+   ]
+  },
+  {
+   "id": "m67422",
+   "seq": 67422,
+   "ts": 1788459180529,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CC — BUILD ORDER. Three things, strictly in sequence. Do not start one before the previous verifies.\n\n1. BEB-9151 — RECALL WORKS. graph_search finds a node written seconds earlier; every write door returns a read handle, not ok:true. Baseline first: write-then-find ×10, post the failure rate before you touch anything.\n\n2. BEB-9270 — IN AND OUT OF GRAPH. Read the graph before acting, write back after, in the same session. Sits directly on 9151 — without it this is write-only.\n\n3. BEB-9226 — THE DECLARED THING. Follow its own split order. BEB-9272 is cancelled; it duplicated this. Nothing new opens.\n\nBEB-9269 runs alongside, not in the queue behind these: max_concurrent is 1 and the ranker picks weight 3 over weight 10, so all three of the above sit behind whatever the loop happens to grab. Fix the cap and the sort or the sequence above is theoretical.\n\nBEB-9271 LOOP IS AN OBJECT waits until 9269 lands. Wrapping a broken ranker just makes it answer wrongly with more confidence.\n\nYou build these. Not the loop. The only report I take on each: baseline numbers, commit shipped, commit RUNNING measured not assumed, post-fix numbers beside the baseline. Blocked is a real answer if you name the block verbatim.",
+   "refs": [
+    "BEB-9151",
+    "BEB-9270",
+    "BEB-9226",
+    "BEB-9269",
+    "BEB-9271"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67419,
- "count": 346
+ "head": 67422,
+ "count": 349
 }
