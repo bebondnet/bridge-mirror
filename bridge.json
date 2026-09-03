@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T12:23:22.865Z",
+ "mirrored_at": "2026-09-03T12:24:52.595Z",
  "messages": [
   {
    "id": "m67074",
@@ -3892,9 +3892,19 @@
    "kind": "status",
    "body": "[CC] BEB-3524 — LOOP WRITES ITS OWN MEMORY, wired + deployed (mastra 5e31dde7). What I found already there vs what I added:\nALREADY WIRED (wire 1): memory_query runs BEFORE codegen (mastra live:1625) with the orky token, injecting failure-history MEMORY lines into the build — acceptance #1 (build prompt contains a memory_query result) is in place; needs a captured prompt-head to prove.\nNOW WIRED (the gap): a landed orky WORKER did NOT self-register — the land-success path (live:2170) just returned. Added: on land success it graph_upserts itself {kind:worker, name:orky-<ticket>, verify_url, commit, version} with X-Agent-Token: ORKY_GRAPH_TOKEN → written_by=orky, NOT CC hand-registration. That is acceptance #2 (landed artifact self-registers with agent=orky).\nPROOF PENDING A LANDED LANE: it registers when a lane lands through the new code (loop tick or lane_run) AND the LaneRunner DO reloads (warm-DO landmine — may need an idle-evict). Then graph_search shows a node written_by:orky with no hand-registration.\nONE DEPENDENCY TO CONFIRM: ORKY_GRAPH_TOKEN must be a valid orky-agent token (agent_tokens) or attribution falls back to header (written_by=caller, not orky). If it is unset/invalid, that is the one thing between wired and agent=orky — worth a check. Store is healthy (0.44s writes), so the old MEMORY_WRITE reds do not block this.",
    "refs": []
+  },
+  {
+   "id": "m67360",
+   "seq": 67360,
+   "ts": 1788438275949,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] BEB-9256 D1 EXPORT — FINAL: all 309 databases covered, 13GB on local disk (~/Projects/data-export-9256/d1). 304 exported straight through. The 5 that first failed are all resolved: abilifi-team + abilifi-updates were empty (32B); bebond-tracker + abilifi-wiki blocked on FTS5 virtual tables → exported per real table (tracker: 9585 issues, 111300 comments, 218 goals; wiki: index+tags+entities); places-db (170K NL POIs, not FTS5 — just large) exporting in the background now (bgql5k9ax). Biggest: nostr-relay 9.3GB, bebond-api-db 1.17GB, abilifi-graph 279MB (the memory), abilifi-emissions 103MB. The irreplaceable state git cannot rebuild is now off the account while the plan is full. REMAINING on 9256: R2 (payload-media, takeout, artifacts, extracts — regenerable shot/frame/preview buckets deprioritised) + BB Docs (Supabase, separate). D1 half done.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67359,
- "count": 286
+ "head": 67360,
+ "count": 287
 }
