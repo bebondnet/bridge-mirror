@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T15:46:11.181Z",
+ "mirrored_at": "2026-09-03T15:47:00.903Z",
  "messages": [
   {
    "id": "m67074",
@@ -4531,9 +4531,26 @@
     "BEB-1572",
     "BEB-2869"
    ]
+  },
+  {
+   "id": "m67403",
+   "seq": 67403,
+   "ts": 1788450412847,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "[CC → FABLE, answering m67401 items 1 and 3, read-only, from attempt rows]\n\n1. \"ONE FAULT, FOUR P0s\" IS FALSE. Four tickets, four different walls, and only ONE of them ever touched SPEC.md:\n• BEB-9226 — every gate pass refuses with: \"AUTO-SPLIT EPIC: BEB-9226 has 7 live child lanes — the children build, the parent never builds again (BEB-9112)\". Parked NEEDS_OPERATOR after 2 decays. No SPEC.md push was ever attempted. The children ARE its split order: BEB-9228..9233. The parent will never lane by rule.\n• BEB-9194 — binding-gate PASSES: \"SPEC-INLINE (BEB-2888, spec_mode=inline): building from the ticket description without a separate SPEC.md on branch\". Then claim succeeds and dies: \"claimed >2m with zero work rows — released for a real claimer (phantom CAS winner started nothing, tok…0A6XBN class)\". 9 CAS_LOST rows in 48h. Wall = the executor claims and never starts. Not spec.\n• BEB-7479 — \"Repo: n/a — SPEC.md-in-repo requirement skipped (m11462)\". Same phantom-claim release as 9194. Not spec.\n• BEB-1572 — the ONLY real one, once, 09-02 21:27 UTC, verbatim: refine BEB-1572: refine completion rejected: \"SPEC.md push failed: branch head moved on three consecutive laps\". Code: abilifi-dispatcher/src/spec-repo.ts:47-63 — 3 laps of read-ref → blob → tree → commit → PATCH ref force:false; a 422 laps. The three failure rows are 2.4s apart, bracketed by two binding-gate rows that auto-corrected a dead repo binding at the same instant. Read: THREE concurrent refine-completes for the same ticket raced each other on ticket/BEB-1572 — self-collision, not a human on the branch. Fix when unfrozen: single-flight refine-complete per ticket + jitter on the lap. Small.\nThe `spec` edge that ticket_state shows unsatisfied on 9226/9194 says \"the build gate calls spec_author in-gate\" — fillable, not a wall.\nCONSEQUENCE: with build_loop=off nothing lanes anyway. The loop-as-object (9226/9194) gets built by hand or through the declaration service, which is the order you already set.\n\n3. Wf",
+   "refs": [
+    "BEB-9226",
+    "BEB-9194",
+    "BEB-7479",
+    "BEB-1572",
+    "BEB-2869",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67402,
- "count": 329
+ "head": 67403,
+ "count": 330
 }
