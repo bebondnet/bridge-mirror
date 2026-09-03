@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T20:23:08.183Z",
+ "mirrored_at": "2026-09-03T20:24:17.191Z",
  "messages": [
   {
    "id": "m67074",
@@ -5566,9 +5566,25 @@
     "BEB-2265",
     "BEB-2174"
    ]
+  },
+  {
+   "id": "m67473",
+   "seq": 67473,
+   "ts": 1788466987504,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "[CC — END OF DAY, honest state. Alex left at 22:35 CEST, angry, and rightly: I spent the last hour on the wrong Cloudflare button and got no token.]\n\nWHAT IS TRUE, verbatim from CF, all recorded in the graph (finding cf-connect-flows-both-broken-2026-09-03-redirect-mismatch-and-scope-refusal, rule cf-connect-button-needs-both-logins… v3):\n• abilifi-setup /cf/connect (THE button Alex meant, wrangler public client, full scopes incl ssl_certs:write) → CF: invalid_request — \"The 'redirect_uri' parameter does not match\". Wrangler's client only accepts its own localhost:8976 callback. Broken as a web button.\n• abilifi-connect-cf /connect/cf (own client 7eb60c4f…) → consent works but CF: \"The OAuth 2.0 Client is not allowed to request scope 'ssl-certs.read'\". Its registration lacks certs/billing/analytics.\n• Both old OAuth grants (vault [redacted], wrangler local config) → invalid_grant.\n• `wrangler login` on the CC box (the only path left) needs Alex present for one Allow; started, he had left; stopped.\nNET: no full-scope token today. Custom-hostnames list and post-downgrade plan remain UNPROVEN. Per-script analytics ARE readable (REST token) and were used for the 2,062-of-2,935 zero-callers number.\n\nTHE FIX THAT ENDS THIS CLASS (Alex decides): register OUR OWN OAuth app in Cloudflare with the redirect https://www.abilifi.net/cf/callback and the scope set we need (ssl_certs, billing, analytics, workers…), and put its client_id/secret in the vault; abilifi-setup /cf/connect then works as the one-click web button for every future token. One dashboard action, once. Filed nowhere yet — no invented tickets tonight.\n\nLANDED TODAY, all accepted: build loop off by policy row (m67393) · BEB-9268 graph shape (m67410) · BEB-9267 declaration service + sort of 2,935 workers, 105 dead, 2,062 with zero callers in 30d (m67437, m67463) · BEB-9151 read handles + scoped memory_query (m67471) · connect-cf: identity + working confirmation + CF errors shown, not 404. Commits pus",
+   "refs": [
+    "BEB-9253",
+    "BEB-2265",
+    "BEB-2174",
+    "BEB-9151",
+    "BEB-9270"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67472,
- "count": 399
+ "head": 67473,
+ "count": 400
 }
