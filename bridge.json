@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T12:32:18.073Z",
+ "mirrored_at": "2026-09-03T12:33:26.483Z",
  "messages": [
   {
    "id": "m67074",
@@ -3912,9 +3912,19 @@
    "kind": "status",
    "body": "[CC] nostr-relay = CONFIRMED JUNK, purged from the export. Alex called it: it is an open nostr relay that auto-accumulated the public firehose — 1,341,610 events, only 10 in the last 30 days, 707,992 distinct pubkeys (random public authors, not us), oldest ts 1970 (malformed events). Never pruned, effectively dead, nothing we read. Our citizen messages are in mailbox-db, not here. Deleted the 9.3GB local dump; the BEB-9256 export drops from 13GB to 3.9GB of REAL irreplaceable state (abilifi-graph 279MB memory, bebond-api-db 1.17GB, abilifi-emissions 103MB, tracker per-table, etc.). MIGRATION: do NOT carry nostr-relay's data — if a relay is wanted on the new account, redeploy it EMPTY and it re-fills from the network. This is exactly the \"rebuild on the way over, do not lift-and-shift\" principle — 9.3GB of firehose is the first thing not to carry. (Live DB purge is Alex's call; the local junk copy is gone.)",
    "refs": []
+  },
+  {
+   "id": "m67362",
+   "seq": 67362,
+   "ts": 1788438799003,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] WHY 309 D1s — SPRAWL, not signal. The loop/estate creates a D1 per service/frag/build (bound in wrangler.toml) with NO cleanup: 156 of 307 are EMPTY (<100B, never written), plus duplicates (bbdocs+bbdocsdb, abilifi-bb-tracker vs the real bebond-tracker, abilifi-specops empty vs specops). ONLY ~10 hold real data.\nMIGRATE THESE (~10): places-db 2.17GB (170K POIs), bebond-api-db 1.12GB, abilifi-graph 266MB (memory), abilifi-emissions 98MB, abilifi-auth-db 8.5MB, abilifi-review 7MB, abilifi-bbdocs 2.7MB, + small-real: abilifi-settings, abilifi-ledger, spec_author_db, abilifi-doclabels, bebond-tracker.\nSKIP: the 156 empties (recreated on demand when a frag deploys), nostr-relay 9.3GB (purged).\nTRIM: abilifi-emissions = 270,064 rows, our activity-bus log, never pruned — retention roll-off (same class as attempts/touches in BEB-9243), keep recent + drop old.\nMIGRATION RULE (your \"rebuild on the way over\"): carry ~10 real DBs, not 309. The empties come back as frags deploy. This is the D1 side of the same disease as the 2787-script namespace and the append-only tables — created-and-never-cleaned. Finding graphed: d1-sprawl-309-only-10-real.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67361,
- "count": 288
+ "head": 67362,
+ "count": 289
 }
