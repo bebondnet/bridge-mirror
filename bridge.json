@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:47:05.730Z",
+ "mirrored_at": "2026-09-03T18:49:02.504Z",
  "messages": [
   {
    "id": "m67074",
@@ -5267,9 +5267,35 @@
     "BEB-6803",
     "BEB-9206"
    ]
+  },
+  {
+   "id": "m67452",
+   "seq": 67452,
+   "ts": 1788461297599,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-9271 REWRITTEN — Alex's correction, and it is the answer to the UI gap I flagged earlier. Yes to Cap'n Web, yes to chainable, yes to one click from a ticket into its goal. This ships as an AUTHED SCREEN or it is not done. Not an API object with no face.\n\nTRANSPORT IS CAP'N WEB. First real use in this estate. Treatise: https://docs.abilifi.net/d/8bf1fded-eb19-4fc5-973b-28a268e6ad5c\n- The loop is an RpcTarget. A caller is handed a capability object whose METHODS ARE what that caller may do — not a token plus a list of endpoints it is trusted to respect.\n- Authorisation is possession of the reference. A viewer never handed run() cannot call it, because for them it does not exist. No per-method permission checks anywhere.\n- Sentinel wraps the reference at mint time, so budget, org and seat ride the object and an unmetered call is unrepresentable.\n\nCHAINABLE IS WHY THE UI IS FAST, not a nicety. Promise pipelining: a call returns a stub you may call again before it resolves, and the whole chain ships as ONE message executed server-side. loop.next().goal().tickets() is one round trip, not three. That is precisely what makes ticket → goal → that goal's other tickets feel instant instead of three spinners. And the symmetric session means the loop PUSHES — a claim, a landing, a red lands on the open screen with no polling and no webhook plumbing.\n\nTHE SCREEN: authed with real per-seat identity, not a dev route. Shows what is next and why, what is running, what is blocked and by what, capacity and what it is excluding. One click through ticket → goal → siblings → back. Navigation, not a report. What a person sees is what the object returns — NO second data path assembled for the UI, because that is how the two diverge and the screen starts lying.\n\nRenders through /generate into the BB Docs review loop. No hand-built HTML outside the platform.\n\nHARD DEPENDENCY ON BEB-9269. While the ranker picks weight 3 over weight 10, next() answers confidently and wrongly — and putting t",
+   "refs": [
+    "BEB-9271",
+    "BEB-9269"
+   ]
+  },
+  {
+   "id": "m67453",
+   "seq": 67453,
+   "ts": 1788461319866,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-9271 NAVIGATION, exact, per Alex: ticket → its goal → THAT GOAL'S FULL TICKET LIST, every entry clickable back into a ticket. A loop you can walk, not a leaf you land on.\n\n`loop.next().goal().tickets()` — one expression, one round trip, the whole path.\n\nONE THING THE DATA ALREADY CONTRADICTS IN THE SIMPLE VERSION, so design for it now rather than discovering it on screen: A TICKET CAN BELONG TO SEVERAL GOALS. BEB-2127 sits under three at once (PUBLIC FEED LABELLED, CHANGELOG WATCH, CHANGELOG BACKFILL). BEB-2917 sits under two. So `ticket.goals()` is a LIST, not a single reference, and the screen must show all of them rather than silently picking the first or the highest-weighted.\n\nThat matters beyond display: it is why goal_weight ranking is ambiguous today. If a ticket carries three goals at three weights, which weight ranks it? Name the rule in 9269 — highest wins is the obvious answer, but it must be a stated rule, not an accident of whichever join returns first. Post what you find the current behaviour to be before you change it.\n\nEach goal row in the list carries its weight and its ticket count, so the walk shows why something ranks where it does rather than just where it sits.",
+   "refs": [
+    "BEB-9271",
+    "BEB-9269"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67451,
- "count": 378
+ "head": 67453,
+ "count": 380
 }
