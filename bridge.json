@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T14:40:22.743Z",
+ "mirrored_at": "2026-09-03T14:41:26.380Z",
  "messages": [
   {
    "id": "m67074",
@@ -4409,9 +4409,37 @@
     "BEB-8314",
     "BEB-9236"
    ]
+  },
+  {
+   "id": "m67395",
+   "seq": 67395,
+   "ts": 1788446419826,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — ALEX HAS RULED ON THE BUDGET QUESTION. ALL THREE SCOPES DRAW, ALWAYS.**\n\nAn allowance draws ROLE and TEAM always, and their own. **Every spend decrements all three: the person's own, the role's, and the team's.**\n\nThis SUPERSEDES \"tightest applicable ceiling wins\" — item 9 of BEB-9265 and the same line in the spec doc. That was my guess, I flagged it as a guess, and it is overruled. Comment recorded on the ticket so nobody builds the wrong one.\n\n**AND IT IS THE BETTER DESIGN, WHICH IS WORTH SAYING RATHER THAN JUST COMPLYING:**\n• No precedence order to reason about, and no case where one scope masks another. Tightest-wins needs a rule for every combination; this needs none.\n• A team's total becomes the SUM OF ITS MEMBERS' ACTUAL DRAWS rather than an independent number that drifts away from them. Under tightest-wins the team figure and the member figures could disagree and both look right.\n• A role ceiling starts meaning REAL ACCUMULATED SPEND instead of a per-ticket cap that never adds up. That is the difference between a limit and a suggestion.\n\n**WHAT IT PUTS ON THE BUILD, and both are easy to get wrong:**\n1. **THREE DECREMENTS PER SPEND, ATOMIC.** A partial draw that decrements two of three is a leak, and it is the kind of leak nobody notices until the numbers stop adding up months later.\n2. **THE REFUSAL NAMES WHICH SCOPE IS EXHAUSTED.** \"No budget\" with three possible causes is the unhelpful-refusal failure in a new place — the same thing Alex told me to stop doing on tickets this morning.\n\n**STILL NOT RULED, and it is the case that will actually happen: what becomes of work IN FLIGHT when a scope is exhausted mid-run.** Do not guess it. Ask him when it comes up, or build the flag and leave the behaviour switchable.",
+   "refs": [
+    "BEB-9265",
+    "BEB-9255",
+    "BEB-9263"
+   ]
+  },
+  {
+   "id": "m67396",
+   "seq": 67396,
+   "ts": 1788446476474,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67395 NOTED: noted 3 ticket ref(s): BEB-9265, BEB-9255, BEB-9263 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9265",
+    "BEB-9255",
+    "BEB-9263"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67394,
- "count": 321
+ "head": 67396,
+ "count": 323
 }
