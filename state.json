@@ -1,12 +1,12 @@
 {
- "mirrored_at": "2026-09-03T20:08:11.746Z",
- "ts": 1788466088544,
+ "mirrored_at": "2026-09-03T20:09:25.213Z",
+ "ts": 1788466162354,
  "loop": {
   "proposed_total": 6528,
   "by_state": {
-   "queued": 991,
+   "queued": 990,
    "claimed": 0,
-   "done": 1570,
+   "done": 1571,
    "held": 132,
    "blocked": 11,
    "parked": 504
@@ -23,10 +23,10 @@
     "held": 1
    },
    "REPAIR": {
-    "done": 93,
+    "done": 94,
     "held": 2,
     "parked": 4,
-    "queued": 12
+    "queued": 11
    },
    "SPEC": {
     "blocked": 9,
@@ -38,7 +38,7 @@
   "max_concurrent": 20,
   "shadow": false,
   "last_pass": {
-   "at": 1788466059237,
+   "at": 1788466132233,
    "tally": "BEB-9202→BUILD, BEB-6849→BUILD, BEB-2917→BUILD, BEB-2753→BUILD, BEB-8715→BUILD, BEB-3557→BUILD, BEB-3641→BUILD, BEB-8882→BUILD, BEB-2752→BUILD, BEB-3603→BUILD, BEB-8734→BUILD, BEB-9253→BUILD, BEB-7367→BUILD, BEB-9029→BUILD, BEB-7903→BUILD, BEB-9160→BUILD, BEB-1356→BUILD, BEB-1114→BUILD, BEB-1168→BUILD, BEB-1101→BUILD"
   },
   "reds": [
@@ -46,13 +46,13 @@
     "code": "ZERO_CLAIM",
     "severity": "red",
     "since": 1788448512734,
-    "detail": "claimed=0, queued=991, 99 passes, max_concurrent=20",
+    "detail": "claimed=0, queued=991, 100 passes, max_concurrent=20",
     "refs": []
    },
    {
     "code": "RECON_BALANCE_DRIFT",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "__probe__: credits 250c − settles 0c − meters 0c − standing 0c = 250c but balance is NaNc (delta NaNc)",
     "refs": [
      "BEB-5886"
@@ -66,7 +66,7 @@
    {
     "code": "RECON_BALANCE_DRIFT",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "test: credits 1400c − settles 50c − meters 502c − standing 0c = 848c but balance is 846c (delta -2c)",
     "refs": [
      "BEB-5886"
@@ -80,7 +80,7 @@
    {
     "code": "RECON_UNEVALUABLE",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "7 site(s) where an invariant cannot be evaluated over live data (balance_conservation: no_origin_credit_in_log): acme, alexwiki, op:0A6XBN, rpc-test, test-bill-cc, test-bill-cc-7201, wikitest",
     "refs": [
      "BEB-5886"
@@ -89,7 +89,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "SPEC MINT LANDS — spec_author mints a contract from acceptance; a specced ticket completes with contract_id and the no-contract failure coun — last landed evidence NEVER",
     "refs": [
      "BEB-5767",
@@ -100,7 +100,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "FIRST VIDEO THAT PLAYS — one real run rendered, captured, uploaded to Stream, playing from a plain URL. Real data, no fixtures. — last landed evidence NEVER",
     "refs": [
      "BEB-6842",
@@ -111,7 +111,7 @@
    {
     "code": "GOAL_STALE",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "NO WATCHERS — every detector files claimable work in the same pass, and one audit() call returns the whole picture on demand. — last landed evidence NEVER",
     "refs": [
      "BEB-6803",
@@ -549,19 +549,21 @@
     }
    },
    {
-    "code": "UNHEALABLE",
+    "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1788379613629,
-    "source_ref": null,
-    "detail": "alexrollin/abilifi-apps failing at codegen 48× in 24h — LATEST (09-03T13:42): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 24 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
+    "since": 1788382426554,
+    "source_ref": "alexrollin/abilifi-apps:wp-plugins/beb-2753/beb-2753.php",
+    "detail": "alexrollin/abilifi-apps failing at codegen 47× in 24h — LATEST (09-03T13:42): verdict: codegen produced no usable code\ncodeLen: 4032\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 74: register_rest_route('wpp-rollup/v1', '/recompute/(?P< · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-6851"
+     "BEB-2753"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 24 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)\n[SELF_HEAL UNRESOLVABLE (BEB-6786): node 'alexrollin/abilifi-apps' is a repo, not a worker — fix the source; do NOT substitute a file]",
-     "subject": "BEB-6851"
-    }
+     "error": "verdict: codegen produced no usable code\ncodeLen: 4032\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 74: register_rest_route('wpp-rollup/v1', '/recompute/(?P<id>\\d+) · line 85: register_rest_route('wpp-rollup/v1', '/smoke', [. File scope may only register hooks/defines/declarations; put logic inside hooked functions.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)\n[source: wp-plugins/beb-2753/beb-2753.php]",
+     "subject": "BEB-2753",
+     "file": "wp-plugins/beb-2753/beb-2753.php"
+    },
+    "fix_ticket": "BEB-2460"
    },
    {
     "code": "REPEAT_FAILER",
@@ -598,17 +600,17 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1788379653301,
-    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-9166/index.js",
-    "detail": "alexrollin/abilifi-apps failing at evaluate 344× in 24h — LATEST (09-03T14:33): declared-route probe: 5/7 route(s) the ticket DECLARES do not exist on the deploy — GET /nodes/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"nodes\",\"detail\":\"Error: Worker not found.\"})  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1788379694883,
+    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8718/index.js",
+    "detail": "alexrollin/abilifi-apps failing at evaluate 343× in 24h — LATEST (09-03T14:33): declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /tickets/BEB-8715 → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tickets\",\"detail\":\"Error: Worker not fou",
     "refs": [
-     "BEB-9166"
+     "BEB-8718"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "declared-route probe: 5/7 route(s) the ticket DECLARES do not exist on the deploy — GET /nodes/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"nodes\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /describe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"describe\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /tools/list → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tools\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /tools/search → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tools\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.\n[source: orky/orky-beb-9166/index.js]",
-     "subject": "BEB-9166",
-     "file": "orky/orky-beb-9166/index.js"
+     "error": "declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /tickets/BEB-8715 → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tickets\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.\n[source: orky/orky-beb-8718/index.js]",
+     "subject": "BEB-8718",
+     "file": "orky/orky-beb-8718/index.js"
     }
    },
    {
@@ -822,17 +824,17 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1788379663574,
-    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8972/index.js",
-    "detail": "n/a failing at auto-contract 96× in 24h — LATEST (09-03T14:33): describe: GET /describe → HTTP 404 but no methods[] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1788380304595,
+    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8986/index.js",
+    "detail": "n/a failing at auto-contract 95× in 24h — LATEST (09-03T14:33): describe: GET /describe → HTTP 404 but no methods[] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-8972"
+     "BEB-8986"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "describe: GET /describe → HTTP 404 but no methods[]\n[source: orky/orky-beb-8972/index.js]",
-     "subject": "BEB-8972",
-     "file": "orky/orky-beb-8972/index.js"
+     "error": "describe: GET /describe → HTTP 404 but no methods[]\n[source: orky/orky-beb-8986/index.js]",
+     "subject": "BEB-8986",
+     "file": "orky/orky-beb-8986/index.js"
     }
    },
    {
@@ -854,17 +856,17 @@
    {
     "code": "REPEAT_FAILER",
     "severity": "red",
-    "since": 1788379663574,
-    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8972/index.js",
-    "detail": "n/a failing at complete 123× in 24h — LATEST (09-03T14:33): DESCRIBE_REFUTED (BEB-9236 verify): BEB-8972 failed verify(url) at https://widgets.abilifi.net/orky-beb-8972 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed metho · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+    "since": 1788380304595,
+    "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8986/index.js",
+    "detail": "n/a failing at complete 122× in 24h — LATEST (09-03T14:33): DESCRIBE_REFUTED (BEB-9236 verify): BEB-8986 failed verify(url) at https://widgets.abilifi.net/orky-beb-8986 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed metho · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
     "refs": [
-     "BEB-8972"
+     "BEB-8986"
     ],
     "orky": {
      "cls": "repeat-failer",
-     "error": "DESCRIBE_REFUTED (BEB-9236 verify): BEB-8972 failed verify(url) at https://widgets.abilifi.net/orky-beb-8972 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed methods, and make every declared method answer by its declared method and return its declared shape.\n[source: orky/orky-beb-8972/index.js]",
-     "subject": "BEB-8972",
-     "file": "orky/orky-beb-8972/index.js"
+     "error": "DESCRIBE_REFUTED (BEB-9236 verify): BEB-8986 failed verify(url) at https://widgets.abilifi.net/orky-beb-8986 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed methods, and make every declared method answer by its declared method and return its declared shape.\n[source: orky/orky-beb-8986/index.js]",
+     "subject": "BEB-8986",
+     "file": "orky/orky-beb-8986/index.js"
     }
    },
    {
@@ -902,7 +904,7 @@
    {
     "code": "PROPOSED_NEVER_CLAIMED",
     "severity": "red",
-    "since": 1788465912677,
+    "since": 1788466092672,
     "detail": "BEB-9253 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
     "refs": [
      "BEB-9253"
@@ -1071,6 +1073,16 @@
     "refs": [
      "BEB-2524",
      "complete"
+    ]
+   },
+   {
+    "code": "FIX_BURIED",
+    "severity": "red",
+    "since": 1786885194180,
+    "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+    "refs": [
+     "BEB-2460",
+     "codegen"
     ]
    },
    {
@@ -1416,30 +1428,30 @@
   ],
   "wake_record": [
    {
+    "tick_n": 23470,
+    "ts": 1788466150438,
+    "step_reached": 5,
+    "blocked_predicate": null,
+    "blocked_error": null,
+    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+    "action_step": 5,
+    "evidence_ref": null,
+    "report_hash": "2702637480"
+   },
+   {
+    "tick_n": 23469,
+    "ts": 1788466089920,
+    "step_reached": 5,
+    "blocked_predicate": null,
+    "blocked_error": null,
+    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+    "action_step": 5,
+    "evidence_ref": null,
+    "report_hash": "28866280"
+   },
+   {
     "tick_n": 21438,
     "ts": 1788466080842,
-    "step_reached": 5,
-    "blocked_predicate": null,
-    "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-    "action_step": 5,
-    "evidence_ref": null,
-    "report_hash": "28866280"
-   },
-   {
-    "tick_n": 34294,
-    "ts": 1788466072135,
-    "step_reached": 5,
-    "blocked_predicate": null,
-    "blocked_error": null,
-    "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-    "action_step": 5,
-    "evidence_ref": null,
-    "report_hash": "28866280"
-   },
-   {
-    "tick_n": 23468,
-    "ts": 1788466031542,
     "step_reached": 5,
     "blocked_predicate": null,
     "blocked_error": null,
@@ -1593,13 +1605,13 @@
    "code": "ZERO_CLAIM",
    "severity": "red",
    "since": 1788448512734,
-   "detail": "claimed=0, queued=991, 99 passes, max_concurrent=20",
+   "detail": "claimed=0, queued=991, 100 passes, max_concurrent=20",
    "refs": []
   },
   {
    "code": "RECON_BALANCE_DRIFT",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "__probe__: credits 250c − settles 0c − meters 0c − standing 0c = 250c but balance is NaNc (delta NaNc)",
    "refs": [
     "BEB-5886"
@@ -1613,7 +1625,7 @@
   {
    "code": "RECON_BALANCE_DRIFT",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "test: credits 1400c − settles 50c − meters 502c − standing 0c = 848c but balance is 846c (delta -2c)",
    "refs": [
     "BEB-5886"
@@ -1627,7 +1639,7 @@
   {
    "code": "RECON_UNEVALUABLE",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "7 site(s) where an invariant cannot be evaluated over live data (balance_conservation: no_origin_credit_in_log): acme, alexwiki, op:0A6XBN, rpc-test, test-bill-cc, test-bill-cc-7201, wikitest",
    "refs": [
     "BEB-5886"
@@ -1636,7 +1648,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "SPEC MINT LANDS — spec_author mints a contract from acceptance; a specced ticket completes with contract_id and the no-contract failure coun — last landed evidence NEVER",
    "refs": [
     "BEB-5767",
@@ -1647,7 +1659,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "FIRST VIDEO THAT PLAYS — one real run rendered, captured, uploaded to Stream, playing from a plain URL. Real data, no fixtures. — last landed evidence NEVER",
    "refs": [
     "BEB-6842",
@@ -1658,7 +1670,7 @@
   {
    "code": "GOAL_STALE",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "NO WATCHERS — every detector files claimable work in the same pass, and one audit() call returns the whole picture on demand. — last landed evidence NEVER",
    "refs": [
     "BEB-6803",
@@ -2096,19 +2108,21 @@
    }
   },
   {
-   "code": "UNHEALABLE",
+   "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1788379613629,
-   "source_ref": null,
-   "detail": "alexrollin/abilifi-apps failing at codegen 48× in 24h — LATEST (09-03T13:42): verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 24 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized",
+   "since": 1788382426554,
+   "source_ref": "alexrollin/abilifi-apps:wp-plugins/beb-2753/beb-2753.php",
+   "detail": "alexrollin/abilifi-apps failing at codegen 47× in 24h — LATEST (09-03T13:42): verdict: codegen produced no usable code\ncodeLen: 4032\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 74: register_rest_route('wpp-rollup/v1', '/recompute/(?P< · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-6851"
+    "BEB-2753"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "verdict: codegen produced no usable code\ncodeLen: 0\ngenError: CODEGEN_WALL size: the spec carries 24 enumerated DELIVERABLE items (acceptance excluded) and 0 table rows — program-sized, not lane-sized. One-shot codegen produces a shell at this size (proven: BEB-1587 three rounds, BEB-2527/2530/2531 all deployed 2-char \"OK\"). SPLIT into child lanes along the spec's own sections, each with its own acceptance, then build those.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)\n[SELF_HEAL UNRESOLVABLE (BEB-6786): node 'alexrollin/abilifi-apps' is a repo, not a worker — fix the source; do NOT substitute a file]",
-    "subject": "BEB-6851"
-   }
+    "error": "verdict: codegen produced no usable code\ncodeLen: 4032\ngenError: WP_PLUGIN FILE-SCOPE CALL (BEB-3522): the plugin executes at load time — line 74: register_rest_route('wpp-rollup/v1', '/recompute/(?P<id>\\d+) · line 85: register_rest_route('wpp-rollup/v1', '/smoke', [. File scope may only register hooks/defines/declarations; put logic inside hooked functions.\ntarget: alexrollin/abilifi-apps\ncodegen prompt head (what the MODEL received): (not captured)\n[source: wp-plugins/beb-2753/beb-2753.php]",
+    "subject": "BEB-2753",
+    "file": "wp-plugins/beb-2753/beb-2753.php"
+   },
+   "fix_ticket": "BEB-2460"
   },
   {
    "code": "REPEAT_FAILER",
@@ -2145,17 +2159,17 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1788379653301,
-   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-9166/index.js",
-   "detail": "alexrollin/abilifi-apps failing at evaluate 344× in 24h — LATEST (09-03T14:33): declared-route probe: 5/7 route(s) the ticket DECLARES do not exist on the deploy — GET /nodes/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"nodes\",\"detail\":\"Error: Worker not found.\"})  · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1788379694883,
+   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8718/index.js",
+   "detail": "alexrollin/abilifi-apps failing at evaluate 343× in 24h — LATEST (09-03T14:33): declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /tickets/BEB-8715 → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tickets\",\"detail\":\"Error: Worker not fou",
    "refs": [
-    "BEB-9166"
+    "BEB-8718"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "declared-route probe: 5/7 route(s) the ticket DECLARES do not exist on the deploy — GET /nodes/probe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"nodes\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; GET /describe → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"describe\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /tools/list → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tools\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour; POST /tools/search → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tools\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.\n[source: orky/orky-beb-9166/index.js]",
-    "subject": "BEB-9166",
-    "file": "orky/orky-beb-9166/index.js"
+    "error": "declared-route probe: 1/1 route(s) the ticket DECLARES do not exist on the deploy — GET /tickets/BEB-8715 → 502 SERVER ERROR ({\"error\":\"fragment threw\",\"name\":\"tickets\",\"detail\":\"Error: Worker not found.\"}) — the handler threw; a 5xx on a declared route is never the intended behaviour. A worker missing its own declared routes is a shell, whatever the root returns.\n[source: orky/orky-beb-8718/index.js]",
+    "subject": "BEB-8718",
+    "file": "orky/orky-beb-8718/index.js"
    }
   },
   {
@@ -2369,17 +2383,17 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1788379663574,
-   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8972/index.js",
-   "detail": "n/a failing at auto-contract 96× in 24h — LATEST (09-03T14:33): describe: GET /describe → HTTP 404 but no methods[] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1788380304595,
+   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8986/index.js",
+   "detail": "n/a failing at auto-contract 95× in 24h — LATEST (09-03T14:33): describe: GET /describe → HTTP 404 but no methods[] · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-8972"
+    "BEB-8986"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "describe: GET /describe → HTTP 404 but no methods[]\n[source: orky/orky-beb-8972/index.js]",
-    "subject": "BEB-8972",
-    "file": "orky/orky-beb-8972/index.js"
+    "error": "describe: GET /describe → HTTP 404 but no methods[]\n[source: orky/orky-beb-8986/index.js]",
+    "subject": "BEB-8986",
+    "file": "orky/orky-beb-8986/index.js"
    }
   },
   {
@@ -2401,17 +2415,17 @@
   {
    "code": "REPEAT_FAILER",
    "severity": "red",
-   "since": 1788379663574,
-   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8972/index.js",
-   "detail": "n/a failing at complete 123× in 24h — LATEST (09-03T14:33): DESCRIBE_REFUTED (BEB-9236 verify): BEB-8972 failed verify(url) at https://widgets.abilifi.net/orky-beb-8972 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed metho · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
+   "since": 1788380304595,
+   "source_ref": "alexrollin/abilifi-apps:orky/orky-beb-8986/index.js",
+   "detail": "n/a failing at complete 122× in 24h — LATEST (09-03T14:33): DESCRIBE_REFUTED (BEB-9236 verify): BEB-8986 failed verify(url) at https://widgets.abilifi.net/orky-beb-8986 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed metho · lane NOT held — all failure evidence predates the last requeue (post-fix attempt allowed, m11351)",
    "refs": [
-    "BEB-8972"
+    "BEB-8986"
    ],
    "orky": {
     "cls": "repeat-failer",
-    "error": "DESCRIBE_REFUTED (BEB-9236 verify): BEB-8972 failed verify(url) at https://widgets.abilifi.net/orky-beb-8972 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed methods, and make every declared method answer by its declared method and return its declared shape.\n[source: orky/orky-beb-8972/index.js]",
-    "subject": "BEB-8972",
-    "file": "orky/orky-beb-8972/index.js"
+    "error": "DESCRIBE_REFUTED (BEB-9236 verify): BEB-8986 failed verify(url) at https://widgets.abilifi.net/orky-beb-8986 — describe: GET /describe → HTTP 404 but no methods[]. Serve GET /describe with typed methods, and make every declared method answer by its declared method and return its declared shape.\n[source: orky/orky-beb-8986/index.js]",
+    "subject": "BEB-8986",
+    "file": "orky/orky-beb-8986/index.js"
    }
   },
   {
@@ -2449,7 +2463,7 @@
   {
    "code": "PROPOSED_NEVER_CLAIMED",
    "severity": "red",
-   "since": 1788465912677,
+   "since": 1788466092672,
    "detail": "BEB-9253 proposed on 6 consecutive passes and has NEVER been claimed (zero claim-success rows, all time), lane queued",
    "refs": [
     "BEB-9253"
@@ -2618,6 +2632,16 @@
    "refs": [
     "BEB-2524",
     "complete"
+   ]
+  },
+  {
+   "code": "FIX_BURIED",
+   "severity": "red",
+   "since": 1786885194180,
+   "detail": "fix BEB-2460 for codegen has not moved in 24h while its subject red REPEAT_FAILER is STILL FIRING — lane REPAIR/queued",
+   "refs": [
+    "BEB-2460",
+    "codegen"
    ]
   },
   {
@@ -2969,30 +2993,30 @@
  ],
  "wake_record": [
   {
+   "tick_n": 23470,
+   "ts": 1788466150438,
+   "step_reached": 5,
+   "blocked_predicate": null,
+   "blocked_error": null,
+   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+   "action_step": 5,
+   "evidence_ref": null,
+   "report_hash": "2702637480"
+  },
+  {
+   "tick_n": 23469,
+   "ts": 1788466089920,
+   "step_reached": 5,
+   "blocked_predicate": null,
+   "blocked_error": null,
+   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
+   "action_step": 5,
+   "evidence_ref": null,
+   "report_hash": "28866280"
+  },
+  {
    "tick_n": 21438,
    "ts": 1788466080842,
-   "step_reached": 5,
-   "blocked_predicate": null,
-   "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-   "action_step": 5,
-   "evidence_ref": null,
-   "report_hash": "28866280"
-  },
-  {
-   "tick_n": 34294,
-   "ts": 1788466072135,
-   "step_reached": 5,
-   "blocked_predicate": null,
-   "blocked_error": null,
-   "action": "STEPS 2/3 reds ROUTED (not held), pass continues to DEPLOY: S3 orky REPEAT_FAILER: BEB-1618 failing at park-escalate 4× in 24h — LATEST (09-03T14:11): NEEDS_OPERATOR after 2 park-decays — cause survives fresh codegen, not build-lane [BEB-1618] — Orky/self-heal owns them; claiming goal-ordered and draining the queue.",
-   "action_step": 5,
-   "evidence_ref": null,
-   "report_hash": "28866280"
-  },
-  {
-   "tick_n": 23468,
-   "ts": 1788466031542,
    "step_reached": 5,
    "blocked_predicate": null,
    "blocked_error": null,
