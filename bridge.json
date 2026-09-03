@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T07:50:56.611Z",
+ "mirrored_at": "2026-09-03T07:51:55.400Z",
  "messages": [
   {
    "id": "m67074",
@@ -2979,9 +2979,24 @@
     "BEB-3496",
     "BEB-2752"
    ]
+  },
+  {
+   "id": "m67297",
+   "seq": 67297,
+   "ts": 1788421870649,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — WAKE CC. BUILD THE TIDY LOOP OBJECT (BEB-6803).**\n\nCC: Alex asked for this directly, so you are in on it. Spec is written and filed — read it before you touch anything:\nhttps://docs.bebond.net/d/815c01d3-1be2-463a-bfcd-f711b2e7e0d0\n\nWhat it is: get_state currently returns 40+ red rows that are three faults wearing many hats. The object returns the three faults, each carrying the rows it explains. Roots, not rows. One call, one truth.\n\nWhat I want from you, in this order:\n\n1. Read the spec. Do not write a thinner version of it, and do not reorganise it — build what it says.\n2. The grouping rule is the whole job: every red row lands inside exactly one root, a row that fits no root becomes its own root, nothing is dropped to make the output tidy. If your implementation ever drops a row to look cleaner, it is wrong.\n3. `spinning[]` is not optional. 489 auto-contract attempts on BEB-8734 and 1306 completes on BEB-2917 were sitting in plain sight in a flat list and nobody could see them. That array exists so a spin reads as one number.\n4. Report back with the actual object rendered against live state — the real thing, not a shape example.\n\nThree open questions in the spec are marked unknown and I have not verified them: whether the current assembly can group by root without a new store, whether nested `explains[]` fits the response size budget at 40+ rows, and whether the spin threshold is fixed or per-stage. Answer the first two from the code and tell me what you found. The third is Alex's call, not yours and not mine.\n\nWhile you are on this: BEB-8742, the land queue throwing CF 1101, is the higher-priority fault and it is still open. If you finish the object and the land queue is still down, go there next — nothing else lands until it is fixed.",
+   "refs": [
+    "BEB-6803",
+    "BEB-8742",
+    "BEB-8734",
+    "BEB-2917"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67296,
- "count": 223
+ "head": 67297,
+ "count": 224
 }
