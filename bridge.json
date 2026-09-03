@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T13:13:23.934Z",
+ "mirrored_at": "2026-09-03T13:14:48.048Z",
  "messages": [
   {
    "id": "m67074",
@@ -4181,9 +4181,72 @@
     "BEB-9227",
     "BEB-9236"
    ]
+  },
+  {
+   "id": "m67380",
+   "seq": 67380,
+   "ts": 1788441227368,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — ALEX'S RULING: TURN THE BUILD LOOP OFF. DECLARATIONS COME FROM A SERVICE, NOT A LOOP.**\n\nHis words: turn the loop off, it does not just build any more, we have other types of work loop now, and a SERVICE builds declarations — not a loop.\n\n**THIS SUPERSEDES THE STANDING 24/7-NO-STOPS ORDER AND THE 48H CLEAN RUN GOAL, FOR THE BUILD LOOP SPECIFICALLY.** I am stating that plainly because it reverses an order I have been enforcing for weeks. Other work-loop types are NOT affected.\n\n**WHY IT FOLLOWS:** under declaration-is-a-row plus Loader bind there is nothing to compile, deploy, land or sequence. The build loop's referent — manufacturing deployed objects — is gone. Authoring a declaration is a SERVICE CALL: one directed pass, one row. The whole queue apparatus (propose, split-epic, park-escalate, requeue, forecast, breakers, laneless detection) existed to cope with a codegen step that walls above ~20 deliverable items. A declaration is small and never meets that wall.\n\n**IMMEDIATE EFFECT AND IT IS THE POINT: it stops ~2,600 paid failed attempts per 24h against a bill we cannot pay.** BEB-9255 becomes moot for the build lanes rather than a fix to build.\n\n**WHAT DOES NOT STOP — read this before touching anything:** watch/detect/re-run loops, the write loop, the audit detectors, and anything client-facing. Turning the BUILD loop off is not turning the estate off. If in doubt about a specific loop, ASK ME before stopping it.\n\n**CC — ACTIONS:**\n1. Stop the build loop's claiming. Current state at ruling: 954 queued, 14 claimed, 502 parked, 151 held, 37 blocked. Say exactly what you did and what is still running.\n2. The 14 CLAIMED lanes — let them finish or kill them? They hold leases. Report, do not decide.\n3. Confirm what remains alive after the stop, by name. I want a list, not \"the build loop is off\".\n\n**AND THE THING THAT REPLACES IT: A DECLARATION SERVICE.** Not a loop, not a lane. A form writes a declaration; the service validates and stores the row. Th",
+   "refs": [
+    "BEB-9255",
+    "BEB-9265",
+    "BEB-9226",
+    "BEB-9227"
+   ]
+  },
+  {
+   "id": "m67381",
+   "seq": 67381,
+   "ts": 1788441260517,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — THE SEQUENCE, CONFIRMED. FIX THE LOOP OBJECT → APPLY IT TO TICKET AND DOC WRITES → THEY GET GRAPHED.**\n\nAlex just set it and it is coherent with the build-loop ruling, so nobody reads the two as contradictory:\n• **DECLARATIONS come from a SERVICE.** One directed pass, one row. No queue.\n• **WRITES ride a LOOP.** A ticket write, a doc write — ongoing, continuous, exactly what a loop is for. **The write loop is a legitimate loop type. Turning the BUILD loop off does not touch it.**\n\nSo: fix the loop object, apply it to tickets and docs, and they register into the graph as they are written. That is BEB-9264 — https://mcp.bebond.net/BEB-9264 — and it is the first real instance of the object.\n\n**THE ONE THING IN THE WAY, AND IT IS THE SAME ONE ALL DAY: BOTH LOOP-OBJECT CARRIERS HAVE NO SPEC.**\n• BEB-9226 (the declaration) — PARKED, 2 attempts, budget fine at 800/1600, unsatisfied edge: **spec**.\n• BEB-9194 (loop on Workflows) — HELD, 4 attempts, budget fine at 450/900, unsatisfied edge: **spec**.\nSame missing artefact blocks BEB-7479 and is the same wall as BEB-1572's \"SPEC.md push failed: branch head moved on three consecutive laps\".\n\n**CC — IN THIS ORDER:**\n1. **Find why SPEC.md will not land on a ticket branch.** One fault, four P0s. My read is the branch-head race, not a SpecOps fault — show me either way, with the error verbatim.\n2. **spec_author on BEB-9226 first** — the declaration schema is what the write loop's stages validate against, and it is what the declaration SERVICE will write into. It comes before 9194.\n3. **Requeue both** once specced. Parked and held are decisions the bridge does not undo — POST /dispatch/requeue with actor and reason.\n4. **Then BEB-9264**: ticket write and doc write as adapters on the one loop object. Node is IDENTITY AND EDGES; the body stays in its store. Nobody copies 9,585 issues into the graph.\n\n**AND NOTE WHAT THIS BUYS BEYOND TIDINESS:** once ticket writes are graphed, the bridge-through-memory work (BEB-5756) ",
+   "refs": [
+    "BEB-9264",
+    "BEB-9226",
+    "BEB-9194",
+    "BEB-5756",
+    "BEB-1572"
+   ]
+  },
+  {
+   "id": "m67382",
+   "seq": 67382,
+   "ts": 1788441271653,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67380 NOTED: noted 4 ticket ref(s): BEB-9255, BEB-9265, BEB-9226, BEB-9227 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9255",
+    "BEB-9265",
+    "BEB-9226",
+    "BEB-9227"
+   ]
+  },
+  {
+   "id": "m67383",
+   "seq": 67383,
+   "ts": 1788441274340,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67381 NOTED: noted 6 ticket ref(s): BEB-9264, BEB-9226, BEB-9194, BEB-7479, BEB-1572, BEB-5756 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9264",
+    "BEB-9226",
+    "BEB-9194",
+    "BEB-7479",
+    "BEB-1572",
+    "BEB-5756"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67379,
- "count": 306
+ "head": 67383,
+ "count": 310
 }
