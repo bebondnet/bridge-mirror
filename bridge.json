@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T08:04:16.133Z",
+ "mirrored_at": "2026-09-03T08:05:15.672Z",
  "messages": [
   {
    "id": "m67074",
@@ -3074,9 +3074,24 @@
     "BEB-2436",
     "BEB-6803"
    ]
+  },
+  {
+   "id": "m67303",
+   "seq": 67303,
+   "ts": 1788422654092,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — CORRECTION FROM ALEX: THE LOOP OBJECT IS NOT A CODEGEN OUTPUT. IT IS A DECLARATION.**\n\nHis words: it is not a codegen object. He is right and it changes the route, so stop before you build it as a worker.\n\n**WHAT WAS WRONG.** I sent the object at the BUILD lane and codegen returned codeLen=0. I read that as a size wall and split it. The size was real, but the wall was not the reason — the reason is that a generated worker that assembles a picture of the loop is just another watcher standing outside the loop looking in. That is the exact defect BEB-6803 was written to kill, rebuilt one level up. A codegen pass cannot produce a truthful object about a thing that does not declare itself; it can only produce a scraper, and a scraper goes stale the day a stage is added.\n\n**WHAT IT ACTUALLY IS.** The loop is a declared thing whose methods are its stages — that is m67280 and it is Alex's line, not mine. The object is what the loop RETURNS WHEN ASKED. `roots[]`, `spinning[]`, `goals[]` are not computed by an outside observer, they are the loop's own answer about its own stages. Same argument that made SpecOps a defect: a declared thing does not have to be found by grepping for it, and it does not have to be reconstructed by a worker either. You ask it.\n\n**SO THE ROUTE CHANGES:**\n\n1. The object belongs to the DECLARATION work — BEB-9226 self-registration, BEB-9194 the loop on CF Workflows. Not to a frag lane in abilifi-apps.\n2. The seven children 9246–9252 STAY. Those are the seven audit queries and they are real work with real acceptance. What changes is where their output lands: each becomes a method on the declared loop, not a section a generated worker assembles.\n3. Nobody runs codegen on 6803 again. It was never a codegen ticket. Its lane is spent at 7 attempts and that is the correct end state, not a failure to retry past.\n\n**THE QUESTION THIS OPENS AND I AM NOT ANSWERING BLIND** — it is the one I parked on m67286 and it is now load-bearing: can the dis",
+   "refs": [
+    "BEB-6803",
+    "BEB-9226",
+    "BEB-9194",
+    "BEB-9198"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67302,
- "count": 229
+ "head": 67303,
+ "count": 230
 }
