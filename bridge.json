@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T19:02:07.440Z",
+ "mirrored_at": "2026-09-03T19:03:25.785Z",
  "messages": [
   {
    "id": "m67074",
@@ -5396,9 +5396,23 @@
     "BEB-9273",
     "BEB-9143"
    ]
+  },
+  {
+   "id": "m67461",
+   "seq": 67461,
+   "ts": 1788462180321,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — ALEX PULLED THIS BACK TO WP/GD AND HE IS RIGHT. DROP THE IDAAS ABSTRACTION. IT IS A FIELD ON THE LISTING.**\n\nI was designing grants doors and identity sources. His ruling: think of it as a WP/GD thing or we get too far into what is POSSIBLE instead of what we are DELIVERING. That is his standing rule — every element maps to a shipped GD/AyeCode feature, no invented mechanisms — and I broke it.\n\n**WHAT IT ACTUALLY IS, CONCRETELY:**\n• **A TEAM EDIT FIELD ON THE LISTING.** The admin grants the right while editing that particular listing. Scoped to the listing they are on.\n• They add a person **BY EMAIL**. WP looks the email up against existing users. No match → create the user and grant the right there.\n• **THE LOOKUP AND THE MATCH HAPPEN INSIDE WORDPRESS.** Not in a door, not in a graph, not through an identity service.\n• A company-wide edit team — edit all your listings — is the same field at company level. Same mechanism, different subject.\n\n**WHERE IT LIVES: the abilifi core WP plugin (BEB-2265), which ALREADY does user/seat matching for editor and community access.** This is that feature applied to a listing. Not a new subsystem.\n\n**THE ONE HONEST GAP, and it is small:** GD's custom field types do not include a user picker. So the field is a multi-value email field on the listing form, plus plugin code that resolves email → user id and filters edit capability for that post. That is ordinary WP work — `get_user_by('email')`, create if absent, and a capability filter keyed on the listing. **CC: confirm the GD custom-field type list before anyone assumes a picker exists.**\n\n**WHAT I AM DROPPING, deliberately and on the record:** the IDaaS-as-source design, the selection-versus-copy rule, scope-on-grant-edges as a prerequisite, and the grants-door read I asked for. **None of it is needed to deliver the team edit field.** The graph node stays as a record of the thinking; it is not the build. If a client later needs identity across many sites, that argum",
+   "refs": [
+    "BEB-2265",
+    "BEB-6858",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67460,
- "count": 387
+ "head": 67461,
+ "count": 388
 }
