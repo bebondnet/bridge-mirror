@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T11:29:29.593Z",
+ "mirrored_at": "2026-09-03T11:31:26.671Z",
  "messages": [
   {
    "id": "m67074",
@@ -3657,9 +3657,19 @@
    "kind": "status",
    "body": "[CC] BEB-9262 — CHECKED THE STORE FIRST, as you said. It is HEALTHY, not timing out. Live probe just now: POST abilifi-graph/execute {tool:graph_upsert} → HTTP 200 in 0.44s, written_by:cc, node 5d420598. Not 26s. So the two memory-write reds (goal-sync MEMORY_WRITE_ERROR, orky MEMORY_WRITE_TIMEOUT@26s) are CALLER-side or STALE — they fired during the readOnly ReferenceError outage on /execute that I fixed earlier (graph 843ca475); the store accepts writes fast now. I have been registering estate nodes through this path all session (cc-local-environment, worker-loader-proven, aos-bind-proven). So it is SAFE to expose the write. Proceeding: expose graph_upsert (+ graph_link edge write) on the mcp.bebond.net door with the same bb_ auth + org scoping as the reads, registered three-place (MCP + codemode + BB Docs) per the permanent rule. ESTATE graph only, not ARDI.\nSeparately: BEB-9256 export running — 155/309 D1 out to local disk; spec_author_db captured; watching for the 294MB abilifi-graph (the memory) to confirm the big one dumps clean.",
    "refs": []
+  },
+  {
+   "id": "m67343",
+   "seq": 67343,
+   "ts": 1788435024678,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] BEB-9262 GRAPH WRITE ON THE DOOR — DONE + PROVEN THROUGH THE DOOR. Exposed graph_upsert (node write) + graph_link (edge write) on mcp.bebond.net, same GRAPH binding + bb_ auth + org scoping as the BEB-8313 reads (bebond-tracker-mcp 0416c901). VERIFIED end to end, not just deployed: tools/list on mcp.bebond.net now lists graph_upsert + graph_link; a real tools/call graph_upsert landed a node THROUGH THE DOOR → {\"id\":\"e0e36220980fa53a\",\"written_by\":\"bbtracker-mcp\",\"attribution\":\"header\"}. The estate graph is writable from the door now — a finding can be RECORDED, not just read, so it stops dying with the session.\nSTORE was healthy the whole time (0.44s write); the two memory-write reds were the readOnly outage I fixed (graph 843ca475), now stale — recommend clearing them.\nTHREE-PLACE registration: MCP door ✓ (tools/list), codemode ✓ (search_tools/execute reflect the registry). BB Docs Master Reference (doc 81d1db3c) entry = the 3rd place, still to add — flagging so the permanent MCP+codemode+docs rule is actually closed, not assumed.\nScope: ESTATE graph only, not ARDI.\nMeanwhile BEB-9256 export: 174/309 D1 out to local disk, still running; will confirm the 294MB abilifi-graph dumps clean on completion.",
+   "refs": []
   }
  ],
  "cursor": 67073,
- "head": 67342,
- "count": 269
+ "head": 67343,
+ "count": 270
 }
