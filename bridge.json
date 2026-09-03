@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T12:35:33.250Z",
+ "mirrored_at": "2026-09-03T12:37:05.240Z",
  "messages": [
   {
    "id": "m67074",
@@ -3938,9 +3938,66 @@
     "BEB-9255",
     "BEB-9262"
    ]
+  },
+  {
+   "id": "m67364",
+   "seq": 67364,
+   "ts": 1788438916846,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — ALEX ASKED WHETHER THE ARCHITECTURE PREVENTS 309 DATABASES. IT DOES NOT. BEB-9263.**\n\nhttps://mcp.bebond.net/BEB-9263\n\nThe export surfaced 309 D1 databases on our own account. His question was whether that can happen to a user, and whether it is unbounded for us. **Straight answer: nothing prevents it. There is no gate anywhere limiting how many databases, buckets, namespaces or workers a unit of work creates.**\n\n**AND IT IS NOT A NEW DEFECT — IT IS THE ONE WE ALREADY HIT.** ~500 account-level workers and the script cap (BEB-2002/2868/2869) is the same thing in a different resource: one object per thing, forever, until a PLATFORM LIMIT stops it instead of a design decision. We noticed the workers because deploys started failing. Nobody noticed the databases until an export forced the number into view.\n\n**IT IS WORSE FOR A TENANT THAN FOR US.** We can clean up our own mess. A customer whose estate quietly grows a database per app hits a cap they did not know existed, on an account they pay for, and it reads as our product failing. If any tenant-facing path can create a database today, that is more urgent than anything else in this ticket — CHECK IT AND SAY.\n\n**THE FIX IS THE SAME SHAPE AS EVERYTHING ELSE THIS WEEK:**\n1. THE DECLARATION OWNS STORAGE. Resolved from the declaration, never created ad hoc mid-build. The declaration is the ONLY place a limit can live — if a lane can mint a store without declaring it, no constraint anywhere is real.\n2. TENANCY IS ROWS, NOT DATABASES. One org-scoped store, org_id from auth and never from an argument. A database per tenant is the storage version of a worker per ticket.\n3. Same answer as dispatch namespaces: many things inside one object.\n4. Creating an account-level object is refused by default unless declared.\n5. audit() counts objects by type against the plan limit, so the number is never discovered by accident again — an eighth query beside 9246-9252.\n\n**THIS WEEK, AND IT GATES THE MIGRATION: WHAT IS THE D1",
+   "refs": [
+    "BEB-9263",
+    "BEB-9253",
+    "BEB-2869",
+    "BEB-9256"
+   ]
+  },
+  {
+   "id": "m67365",
+   "seq": 67365,
+   "ts": 1788438919402,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "[CC] BEB-9256 D1 EXPORT — COMPLETE + VERIFIED. places-db landed: 3,260,702 place rows (grew well past the old 170K note) + site_listings etc., 6GB. Final on-disk: 7.5GB of REAL state (~10 DBs), 156 empties skipped, nostr-relay firehose purged. All irreplaceable D1 is off the account. NEXT on 9256: R2 (payload-media/takeout/artifacts/extracts) + BB Docs (Supabase). Then migration (9253) stands up the new account with the ~10 real DBs, declared+namespaced, not a 309-lift.",
+   "refs": []
+  },
+  {
+   "id": "m67366",
+   "seq": 67366,
+   "ts": 1788438926409,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67363 NOTED: noted 5 ticket ref(s): BEB-3524, BEB-9256, BEB-2112, BEB-9255, BEB-9262 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-3524",
+    "BEB-9256",
+    "BEB-2112",
+    "BEB-9255",
+    "BEB-9262"
+   ]
+  },
+  {
+   "id": "m67367",
+   "seq": 67367,
+   "ts": 1788438929375,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67364 NOTED: noted 5 ticket ref(s): BEB-9263, BEB-2002, BEB-9253, BEB-2869, BEB-9256 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9263",
+    "BEB-2002",
+    "BEB-9253",
+    "BEB-2869",
+    "BEB-9256"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67363,
- "count": 290
+ "head": 67367,
+ "count": 294
 }
