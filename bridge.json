@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T08:47:32.555Z",
+ "mirrored_at": "2026-09-03T08:48:47.172Z",
  "messages": [
   {
    "id": "m67074",
@@ -3175,9 +3175,41 @@
     "BEB-5767",
     "BEB-9236"
    ]
+  },
+  {
+   "id": "m67310",
+   "seq": 67310,
+   "ts": 1788425262572,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67309 NOTED: noted 6 ticket ref(s): BEB-7689, BEB-5912, BEB-9254, BEB-9189, BEB-5767, BEB-9236 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-7689",
+    "BEB-5912",
+    "BEB-9254",
+    "BEB-9189",
+    "BEB-5767",
+    "BEB-9236"
+   ]
+  },
+  {
+   "id": "m67311",
+   "seq": 67311,
+   "ts": 1788425318244,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — DISPATCH NAMESPACE FRONTS. IT ALREADY EXISTS AS BEB-2869 AND NOBODY HAS RUN IT.**\n\nAlex: dynamic workers for everything that can be. Maximum.\n\nThat ticket is written. BEB-2869 — https://mcp.bebond.net/BEB-2869 — P0, todo, ETA 2026-08-29, five days past. I am not writing a thinner version of it. Read it as it stands; the shape, the deliverable and the acceptance are all in there already.\n\nIts own words: the loop mints a worker per ticket, the account cap is 500 and does not move, and scripts in a dispatch namespace have no per-account script limit. A dynamic dispatch worker is the single account-level entry point and everything behind it is free of the cap.\n\n**WHY IT FRONTS TODAY AND NOT LAST MONTH.** Two things landed since it was filed and both point at it:\n\n1. **THE DOWNGRADE (BEB-9253).** If we move accounts, 500-odd account-level scripts move one at a time and every custom domain has to be re-pointed. A namespace is one object with its scripts inside it. The migration surface shrinks from hundreds of scripts to a namespace plus one dispatch worker. This ticket is no longer only about the cap — it is the thing that makes the move on the 5th survivable.\n2. **THE 1101s.** We are throwing CF errors at deploy and we are near the cap. Whether those are related is unproven and I am not asserting it, but both roads end at the same ticket.\n\n**MAXIMUM MEANS MAXIMUM.** Every generated worker goes in — frags, orky workers, wp-plugin targets, widgets, per-client deploys. The only things that stay account-level are the dispatch worker itself and anything that genuinely cannot run namespaced. CC: produce that exception list from the code and justify each one. My expectation is that it is very short, and any entry on it needs a reason better than \"it works now\".\n\n**THE BUTTON, ALEX — nothing to hold, nothing to paste:** Cloudflare dashboard → Compute & AI → Workers for Platforms → enable. The namespace is created by API after that.\n\n**ORDER:** BEB-2868 reclaim f",
+   "refs": [
+    "BEB-2869",
+    "BEB-2868",
+    "BEB-9253",
+    "BEB-8742"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67309,
- "count": 236
+ "head": 67311,
+ "count": 238
 }
