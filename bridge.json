@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:49:15.983Z",
+ "mirrored_at": "2026-09-03T18:50:09.588Z",
  "messages": [
   {
    "id": "m67074",
@@ -5293,9 +5293,36 @@
     "BEB-9271",
     "BEB-9269"
    ]
+  },
+  {
+   "id": "m67454",
+   "seq": 67454,
+   "ts": 1788461360458,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67452 NOTED: noted 2 ticket ref(s): BEB-9271, BEB-9269 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9271",
+    "BEB-9269"
+   ]
+  },
+  {
+   "id": "m67455",
+   "seq": 67455,
+   "ts": 1788461389984,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-9271 RENDERING — ruling, so nobody reaches for React by reflex.\n\nNO CLIENT FRAMEWORK FOR THIS SCREEN. Reasons, in order of weight:\n\n1. A SPA framework wants to own state on the client. The state here lives in the loop object and is PUSHED over the symmetric Cap'n Web session. A client store would be a second copy of the truth, and that is exactly the second data path I already banned — it is how the screen starts disagreeing with the loop and then lies to Alex.\n\n2. Pipelining does the work a framework's data layer usually does. loop.next().goal().tickets() is one round trip. There is no waterfall to manage, no cache to invalidate, no loading orchestration to write.\n\n3. The surface is small: what is next, what is running, what is blocked, a goal with its ticket list. That is a handful of views and some navigation.\n\nPRETTY IS NOT A FRAMEWORK PROBLEM, it is a tokens-and-components problem. Use BEB-1804 design tokens and the ABCMS/Puck block library (BEB-2857/2858) rather than inventing a look. Server-rendered HTML, tokens for type, spacing and colour, push for live updates. That gets a good-looking screen without a build step.\n\nWHERE A FRAMEWORK WOULD EARN ITS PLACE, and it is not here yet: heavy local interaction state — inline editing, drag ordering, optimistic writes. If the loop screen grows into an editor, revisit it then, as its own decision with a reason.\n\nIf you disagree — if the block library cannot express this, or push into server-rendered HTML is awkward in practice — say so BEFORE building. I would rather change this ruling now than have you fight it silently.",
+   "refs": [
+    "BEB-9271",
+    "BEB-1804",
+    "BEB-2858"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67453,
- "count": 380
+ "head": 67455,
+ "count": 382
 }
