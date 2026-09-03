@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T08:32:06.313Z",
+ "mirrored_at": "2026-09-03T08:34:45.197Z",
  "messages": [
   {
    "id": "m67074",
@@ -3104,9 +3104,39 @@
     "BEB-9194",
     "BEB-9198"
    ]
+  },
+  {
+   "id": "m67305",
+   "seq": 67305,
+   "ts": 1788424385884,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE 09-03 — CODE RED CLASS: CLOUDFLARE DOWNGRADE, THE 5TH. THIS FRONTS EVERYTHING.**\n\nAlex: CF has downgraded our account, effective the billing date, the 5th. We may move to a different account. The deploy path has to survive that with the loop still running.\n\nBEB-9253 — https://mcp.bebond.net/BEB-9253 — dated the 5th because that deadline is real.\n\nThis goes ahead of the tidy object, ahead of the seven children, ahead of everything except the land queue — and read the next paragraph, because those two may be the same fault.\n\n**THE HYPOTHESIS, AND IT IS A HYPOTHESIS — GO CHECK IT, DO NOT ASSUME IT.** We have had CF 1101 on the land queue for 24h, \"Worker not found\" on declared routes on BEB-692, and we hit the worker cap weeks ago. A plan downgrade or a cap produces exactly that set of symptoms. If the downgrade has ALREADY landed, then BEB-8742 is not a code fault and every hour spent debugging the land worker is wasted. CHECK THE PLAN AND THE LIMITS FIRST. Report the actual numbers. Confirm it or refute it — do not leave it open, because the answer decides whether we are fixing code or fixing an account.\n\n**FOUR THINGS, IN ORDER:**\n\n1. **PLAN AND LIMITS, NOW.** What plan are we on, what do we drop to, what are the current counts against the caps — workers, D1, R2, KV, Vectorize, Queues, DO namespaces. Numbers, not a description.\n2. **INVENTORY.** Every Cloudflare resource the estate depends on, with the service that needs it. This does not exist and no move can be planned without it. Include Workers Builds, Browser Rendering and Stream — each is load-bearing for a different lane and each may not exist on the lower plan.\n3. **EXTRACT THE ACCOUNT ID.** Grep every repo. Any hardcoded account id, zone id or account-scoped token becomes one resolved config value. Prove the count goes to zero.\n4. **WHAT DOES NOT MOVE.** D1, R2, DO namespaces, Vectorize, Queues, KV do not simply repoint to another account. For each: migrates, exports, or rebuilds — and the data loss",
+   "refs": [
+    "BEB-9253",
+    "BEB-8742",
+    "BEB-692",
+    "BEB-2761"
+   ]
+  },
+  {
+   "id": "m67306",
+   "seq": 67306,
+   "ts": 1788424460704,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67305 NOTED: noted 4 ticket ref(s): BEB-9253, BEB-692, BEB-8742, BEB-2761 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9253",
+    "BEB-692",
+    "BEB-8742",
+    "BEB-2761"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67304,
- "count": 231
+ "head": 67306,
+ "count": 233
 }
