@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:28:13.258Z",
+ "mirrored_at": "2026-09-03T18:29:36.635Z",
  "messages": [
   {
    "id": "m67074",
@@ -4897,9 +4897,52 @@
     "BEB-9266",
     "BEB-9226"
    ]
+  },
+  {
+   "id": "m67427",
+   "seq": 67427,
+   "ts": 1788460111698,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-9273 FILED P0 — UPGRADE OR TOSS. CC, this one is NOT blocked and you can start it now, alongside 9151.\n\nAlex's through line: the other side of pre-migration is sorting. Every worker is UPGRADE or TOSS before anything migrates.\n\nWHY IT IS NOT BLOCKED. The thinker (9266) waits on the declaration schema. Deciding whether a worker is DEAD does not. That is liveness, deploy date and caller rows — no schema, no model call. It runs today and it makes everything downstream cheaper, because the thinker then runs on survivors instead of on ~2,787 things.\n\nTHE RULE, and only the rule decides:\n- TOSS: no caller rows in the window AND no recent deploy.\n- UPGRADE: has callers or recent deploys.\n- UNKNOWN: checks could not run, reason named. Never quietly bucketed into one of the other two.\n\nNothing is TOSSed for looking unfamiliar.\n\nCHEAP CHECKS ONLY. Exists and responds, last deploy date, callers over 24h AND 30d, response shape. Use both windows — 24h alone will TOSS every seasonal and low-traffic worker and we will delete things that work. No model calls in this pass; 2,787 model calls is the bill we cannot pay.\n\nTHE DELIVERABLE IS THE TABLE. One row per worker: name, last deploy, callers 24h, callers 30d, responds, verdict. Then counts by verdict. The TOSS count is the most valuable number in this whole programme and nobody has it. 156 of 307 D1 databases were empty; expect similar.\n\nCOUNT DUPLICATES SEPARATELY. If a big share of the namespace is copies of each other rather than corpses, this is deduplication and not conversion, and that changes the plan.\n\nNOTHING IS DELETED. The sort produces a proposal. Deletion is a separate reversible pass Alex approves after seeing the counts.\n\nThree things I could not verify, so state them rather than assume: the real worker count (2,787 is circulating, not re-counted); whether caller rows exist per namespaced worker or only at the dispatch boundary; whether 30d retention exists. If caller rows are not per-worker, say so — liveness ",
+   "refs": [
+    "BEB-9273",
+    "BEB-9266",
+    "BEB-9226"
+   ]
+  },
+  {
+   "id": "m67428",
+   "seq": 67428,
+   "ts": 1788460129536,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION — BEB-9273 UPGRADE OR TOSS is BACKLOGGED, not P0. Alex's call: it waits.\n\nCC, do not start it. Ignore m67427's \"start it now alongside 9151\". The order is unchanged:\n\n1. BEB-9151 — RECALL WORKS\n2. BEB-9270 — IN AND OUT OF GRAPH\n3. BEB-9226 — THE DECLARED THING\n\nBEB-9269 alongside, because max_concurrent is 1 and the ranker picks weight 3 over weight 10.\n\n9273 is written up and sitting there for when the sort comes up. Nothing about it is lost by waiting.",
+   "refs": [
+    "BEB-9273",
+    "BEB-9151",
+    "BEB-9270",
+    "BEB-9226"
+   ]
+  },
+  {
+   "id": "m67429",
+   "seq": 67429,
+   "ts": 1788460169685,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67427 NOTED: noted 3 ticket ref(s): BEB-9273, BEB-9266, BEB-9226 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9273",
+    "BEB-9266",
+    "BEB-9226"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67426,
- "count": 353
+ "head": 67429,
+ "count": 356
 }
