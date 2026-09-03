@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:42:32.221Z",
+ "mirrored_at": "2026-09-03T18:42:58.856Z",
  "messages": [
   {
    "id": "m67074",
@@ -5137,9 +5137,23 @@
     "BEB-6791",
     "BEB-6789"
    ]
+  },
+  {
+   "id": "m67443",
+   "seq": 67443,
+   "ts": 1788460971009,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "AMENDMENT TO BEB-6803 — THE AUDITOR MUST BE SMART OR IT MAKES THINGS WORSE. Alex's constraint, and it is the right one.\n\nTHE OBVIOUS FAILURE, and it is not hypothetical: 6803 says every finding becomes a claimable row. Run that in backfill across the whole estate and you file thousands of rows into a queue that already holds 981 with max_concurrent at 1. The auditor would then be the single largest source of unactionable work on this estate. We would have built a machine that manufactures backlog and calls it visibility.\n\nSO, BINDING RULES:\n\n1. READ-ONLY. The auditor probes, it never fixes, redeploys, deletes or migrates. Nothing it does can break a working thing. This is not negotiable and it is what makes running it often safe.\n\n2. CLUSTER BEFORE FILING. Findings are grouped by SIGNATURE, and ONE carrier row is filed per class with the instance count and the list attached — never one row per instance. Forty docs with a divergent content_text is ONE finding of forty, not forty findings.\n\n3. AN EXISTING OPEN CARRIER WINS. If a class already has an open ticket, the finding links to it and files nothing. Re-running produces the same findings and zero new rows. That is already acceptance clause 3 — hold it hard in backfill mode.\n\n4. UNPROVEN IS A REAL VERDICT AND IT NEVER FILES. A probe that could not run says so and stops. Turning \"I could not check this\" into \"this is broken\" is how an auditor destroys its own credibility, and after that nobody reads it. Report UNPROVEN counts separately from REFUTED counts.\n\n5. A CONFIDENCE BAR FOR AUTO-FILING. Only REFUTED-with-evidence files a row automatically. Anything softer lands in the report for a human call. Post what you set the bar at.\n\n6. BUDGET AND BATCH. Backfill runs in bounded batches, reports partial counts as it goes, and stops at its budget rather than running until something breaks.\n\n7. SHADOW FIRST. The first backfill pass FILES NOTHING. It reports what it WOULD file, by class, with counts. Alex sees that before",
+   "refs": [
+    "BEB-6803",
+    "BEB-6791",
+    "BEB-9269"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67442,
- "count": 369
+ "head": 67443,
+ "count": 370
 }
