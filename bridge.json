@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:07:18.023Z",
+ "mirrored_at": "2026-09-03T18:09:17.423Z",
  "messages": [
   {
    "id": "m67074",
@@ -4742,9 +4742,24 @@
     "BEB-9265",
     "BEB-9267"
    ]
+  },
+  {
+   "id": "m67417",
+   "seq": 67417,
+   "ts": 1788458949995,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BEB-9269 FILED P0, ETA 2026-09-02 — NEXT IS THE RIGHT NEXT. Front it.\n\nAlex asked a simple question: can he say \"what's next\" and get an answer that respects his priority order. The machinery for that exists — pass_run answers it. I ran it. The answer it gives today is wrong, twice, and both are visible in one dry run.\n\nQUEUED 981. WOULD_CLAIM 1. EXCLUDED 980, every one of them CONCURRENCY_CAP. max_concurrent is 1.\n\nThe queue is not deep because the work is hard. It is deep because the loop does one thing at a time.\n\nWorse — the ONE thing it picked is BEB-2127 at goal_weight 3. Waiting behind it in excluded: BEB-9202 at weight 10 (BB DOCS REWRITE CHAIN), BEB-6849 at weight 10 (FIRST VIDEO THAT PLAYS), BEB-3468 at 8, BEB-2917 at 7. rank_why says goal_weight descending. The output contradicts it. Either the sort runs before the goal_weight join or the cap is applied before the sort — instrument it, print the ordered candidate list BEFORE the cap and diff it against what was claimed. Do not guess.\n\nAnd the weights have stopped discriminating: 99 active goals, six at w10, sixty-odd at w4. 8772's own goal says at most five hold w10 and a pass must show three distinct weights in would_claim. A pass that claims one row cannot ever satisfy that.\n\nWHAT I WANT:\n1. max_concurrent as a settings row, flippable on the tick, no deploy — the 3852 breaker shape. Raise it. Post the number you set and why.\n2. Sort by goal_weight BEFORE the cap. Prove it: pass_run returns the top 20 ranked candidates with weights, in order, separate from what got claimed.\n3. A pass whose highest claimed weight is below the highest available unblocked weight REDS, naming both tickets.\n4. pass_run answers \"what is next\" in one line: ticket, weight, goal text, why it ranks there.\n\nThis is the one that makes every other goal move, because right now goal weight is decorative.",
+   "refs": [
+    "BEB-9269",
+    "BEB-8772",
+    "BEB-3852",
+    "BEB-2216"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67416,
- "count": 343
+ "head": 67417,
+ "count": 344
 }
