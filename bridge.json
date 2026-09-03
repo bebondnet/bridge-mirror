@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-03T18:29:36.635Z",
+ "mirrored_at": "2026-09-03T18:30:25.759Z",
  "messages": [
   {
    "id": "m67074",
@@ -4940,9 +4940,58 @@
     "BEB-9266",
     "BEB-9226"
    ]
+  },
+  {
+   "id": "m67430",
+   "seq": 67430,
+   "ts": 1788460171828,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67428 NOTED: noted 5 ticket ref(s): BEB-9273, BEB-9151, BEB-9270, BEB-9226, BEB-9269 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9273",
+    "BEB-9151",
+    "BEB-9270",
+    "BEB-9226",
+    "BEB-9269"
+   ]
+  },
+  {
+   "id": "m67431",
+   "seq": 67431,
+   "ts": 1788460205914,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BUILD ORDER — 1 of 4. THE ORDER AND THE RULES. Read all four before starting anything.\n\nTHE ORDER, strict. Nothing starts before its predecessor verifies.\n1. BEB-9151 RECALL WORKS\n2. BEB-9270 IN AND OUT OF GRAPH\n3. BEB-9226 THE DECLARED THING, by its own split order\nAlongside, not queued behind: BEB-9269 NEXT IS THE RIGHT NEXT.\nNot now: BEB-9271 (waits on 9269), BEB-9273 (Alex backlogged it), BEB-9266 (waits on 9226 step 1).\n\nYOU BUILD THESE. Not the loop. Do not reply with a ticket number or \"routed to the lane\" — Alex has heard that on this exact pair of defects for weeks and the docs are still unreadable. If you find yourself typing that the lane will handle it, that is the moment to build it instead.\n\nRULES FOR EVERY ONE OF THESE, non-negotiable:\n\nADDITIVE ONLY. Add response fields, never remove, rename or retype one. `ok` stays. New fields sit beside it. Assume callers exist that you have not found.\n\nBASELINE BEFORE YOU TOUCH ANYTHING. Measure and post the failure rate first. A fix without a before-number is not provable.\n\nONE WORKER PER DEPLOY. Record last-known-good first. Then VERIFY THE RUNNING COMMIT — BEB-9143 is open, a deploy does not reload the DO, so old code can serve while you report success. Say which you measured.\n\nNEVER LOSE AN AUTHOR'S TEXT. Any conversion that fails stores the raw and returns a named reason. Never throw, never silently drop.\n\nSTOP AND POST HERE before any schema change, migration, re-index, or second worker. Do not decide that alone.\n\nDELIVERABLE, every time: contract_run per-element verdicts plus the recording, into BB Docs on docs.abilifi.net. Alex never tests and never records — SpecOps produces the recording.\n\nTHE ONLY REPORT I TAKE: baseline numbers, commit shipped, commit RUNNING measured not assumed, post-fix numbers beside the baseline, and a URL you resolved and read yourself. Blocked is a real answer if you name the block verbatim and what you tried.",
+   "refs": [
+    "BEB-9151",
+    "BEB-9270",
+    "BEB-9226",
+    "BEB-9269",
+    "BEB-9143"
+   ]
+  },
+  {
+   "id": "m67432",
+   "seq": 67432,
+   "ts": 1788460216496,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67431 NOTED: noted 8 ticket ref(s): BEB-9151, BEB-9270, BEB-9226, BEB-9269, BEB-9271, BEB-9273, BEB-9266, BEB-9143 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9151",
+    "BEB-9270",
+    "BEB-9226",
+    "BEB-9269",
+    "BEB-9271",
+    "BEB-9273"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67429,
- "count": 356
+ "head": 67432,
+ "count": 359
 }
