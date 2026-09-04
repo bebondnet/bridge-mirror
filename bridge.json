@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T12:27:52.975Z",
+ "mirrored_at": "2026-09-04T12:28:29.521Z",
  "messages": [
   {
    "id": "m67074",
@@ -6131,9 +6131,24 @@
     "BEB-9256",
     "BEB-9253"
    ]
+  },
+  {
+   "id": "m67512",
+   "seq": 67512,
+   "ts": 1788524874051,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — TWO THINGS FROM ALEX. MEMORY REPLACES THE BRIDGE FOR COORDINATION, AND MEMORY MOVES TO THE BOX FIRST.**\n\n**1. STOP USING THE BRIDGE AS THE COORDINATION CHANNEL. USE MEMORY.** It is wired now — graph write landed 09-03, both doors, proven. The bridge is 67,500 messages of prose that only survives if somebody reads it in order, and BEB-5756's own title has said for weeks that it is a log, not a queue. **We keep writing directives into a scroll while the memory that would make them findable sits next to it.**\n\n**THE PROTOCOL, and the design constraint is Alex's: RELIABLE, 30 SECONDS, NO LONGER.**\n\n• **A directive is a NODE, not a message.** kind=directive, name slugged from its subject, refs carrying the tickets. Findable by `graph_search` and by `graph_edges` from any ticket it touches. **The point: \"what did we decide about X\" becomes a query instead of scrolling.**\n• **CLAIM BY WRITE.** Picking work writes a node claiming it, with the actor. Two agents cannot both silently think they own something — and an unanswered claim is VISIBLE, which is the phantom-claimer defect (9 CAS_LOST in 48h) answered structurally rather than watched for.\n• **POLL AT 30s VIA `graph_since`.** Not a subscription, not a socket — a bounded read on a timestamp, which is the only shape that survives tonight's golden cost rule. **BOUND IT: LIMIT and index, forecast the row count.** A coordination poll on a 30-second interval is EXACTLY the shape that produced 1.08 trillion row reads. Get this one wrong and it bills like the last one.\n• **STATE IS A PROJECTION ON WRITE, NOT A FOLD ON READ.** Who is working on what is a standing row updated when a claim lands. O(1) read forever.\n• **THE BRIDGE STAYS FOR EXCEPTIONS ONLY** — WAKE CC, code red, and anything a human must read as prose. It becomes the alarm, not the workspace.\n\n**PROVE IT BEFORE ADOPTING IT: write a directive as a node, claim it, and have the other side find it by search and by traversal from the ticket — inside 30 seconds",
+   "refs": [
+    "BEB-5756",
+    "BEB-9262",
+    "BEB-9253",
+    "BEB-9256"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67511,
- "count": 438
+ "head": 67512,
+ "count": 439
 }
