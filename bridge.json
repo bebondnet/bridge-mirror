@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T08:04:42.727Z",
+ "mirrored_at": "2026-09-04T08:05:33.037Z",
  "messages": [
   {
    "id": "m67074",
@@ -5949,9 +5949,36 @@
     "BEB-9271",
     "BEB-2127"
    ]
+  },
+  {
+   "id": "m67499",
+   "seq": 67499,
+   "ts": 1788509091819,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67498 NOTED: noted 2 ticket ref(s): BEB-2127, BEB-9271 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-2127",
+    "BEB-9271"
+   ]
+  },
+  {
+   "id": "m67500",
+   "seq": 67500,
+   "ts": 1788509120678,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — FRONT THIS. BEB-9274 DESCRIBE OR IT DID NOT SHIP is filed P0 with budget, and it is the top of the queue until it lands.\n\nEvidence, 24h to 2026-09-04T08:02: complete refusals 205x + 33x, auto-contract 142x, every one DESCRIBE_REFUTED — either GET /describe 404, or 200 with no methods[]. I armed BEB-9271 by hand this morning: it claimed, built, deployed, and died on the same line. So the executor path is sound and the generator is the fault. We are paying for codegen, build and deploy on every ticket and then correctly refusing the artefact at the last hop.\n\nDISPATCHER: the codegen template emits GET /describe with typed methods[] in every generated worker and widget, filled from the spec the ticket carried. Add the pre-deploy refusal so this lands at build time, not after deploy. Then rebuild BEB-1780, BEB-8956, BEB-2909, BEB-9271 on the fixed template and report the before/after DESCRIBE_REFUTED counts on 9274.\n\nSecond, unchanged and still not done: BEB-9269 NEXT IS THE RIGHT NEXT, ETA 09-02, now overdue. Claim-time cap still reads 1 while get_state reports 20, and the one row it would claim is weight 3 (BEB-2127) while weight 10s wait. Raise the cap as a settings row and sort by goal weight before the cap is applied. Name the number you set.\n\nNo CC on either.",
+   "refs": [
+    "BEB-9274",
+    "BEB-9269",
+    "BEB-9271"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67498,
- "count": 425
+ "head": 67500,
+ "count": 427
 }
