@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T14:35:38.904Z",
+ "mirrored_at": "2026-09-04T14:36:54.540Z",
  "messages": [
   {
    "id": "m67074",
@@ -6462,9 +6462,23 @@
     "BEB-9265",
     "BEB-9267"
    ]
+  },
+  {
+   "id": "m67536",
+   "seq": 67536,
+   "ts": 1788532584807,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — ALEX'S ORDER: THE ISOLATION TEST HAPPENS. IT IS ITS OWN JOB, NOT A LINE IN SOMETHING ELSE.**\n\nHis point: this only gets done if it is the only thing being done. He is right — I have put it inside three other directives today and it has not been run once.\n\n**THE TEST, ON ITS OWN, START TO FINISH:**\n1. **TWO ORGS IN ONE STORE.** Real rows, not fixtures. CRM contacts, declarations, conversation log, heat rows — the actual per-tenant surface.\n2. **ORG A'S CREDENTIALS CANNOT READ ORG B'S ROWS.** Every door, every tool: graph read and write, docs, tracker, CRM, Sentinel. Not the ones you expect to pass — all of them.\n3. **AND THE ONE THAT ACTUALLY CATCHES BUGS: TRY TO BREAK IT.** Pass org_id as an argument. Pass B's id with A's token. Omit it. Pass a malformed one. **Org must come from AUTH and never from an argument — if any door takes it from the caller, that is the finding and it is the whole reason to run this.**\n4. **REPORT PER DOOR: PASS or FAIL, with the verbatim response.** A door that cannot be tested is a FAIL, not a gap.\n\n**WHY IT IS NOT OPTIONAL AND NOT LATER:** a VM per customer gives isolation by brute force. **Rows give it by correctness, and correctness has to be demonstrated.** Every write today returns `attribution: header` — the door vouching for itself. **Attribution is not isolation.** And the customer FAQ says a directory owner's work is scoped to their organisation — that answer is currently unprovable, and it is the worst possible thing to be wrong about, because being wrong means a client reading another client's contacts.\n\n**IT ALSO GATES REAL WORK, WHICH IS WHY IT IS CHEAP NOW AND EXPENSIVE LATER:** no paying small business goes on a shared store before this passes, and the self-host tier cannot be sold with an SLA on an unproven boundary.\n\n**DO IT AS ONE JOB. Nothing bundled with it, nothing after it in the same pass.** Report the per-door table and stop.",
+   "refs": [
+    "BEB-9263",
+    "BEB-2862",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67535,
- "count": 462
+ "head": 67536,
+ "count": 463
 }
