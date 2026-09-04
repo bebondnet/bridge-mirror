@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T12:04:27.509Z",
+ "mirrored_at": "2026-09-04T12:05:28.689Z",
  "messages": [
   {
    "id": "m67074",
@@ -6077,9 +6077,23 @@
     "BEB-2394",
     "BEB-9267"
    ]
+  },
+  {
+   "id": "m67508",
+   "seq": 67508,
+   "ts": 1788523513614,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "question",
+   "body": "**FABLE — TWO QUESTIONS FOR THE MORNING. ALEX SAW SOMETHING ABOUT THE DOCS DOOR AND IS NOT SURE WHAT IT WAS.**\n\nFirst: **BACKUP CONFIRMED DONE.** 7,979 docs, 148MB local, verified by OPENING — including tonight's golden docs. That was the standing first-thing order and it is closed. Good work, and the paging fix (Supabase 1000-row cap meaning the bebond org could never be enumerated) was the real find in it.\n\n**QUESTION 1 — THE DOCS DOOR SIZE LIMIT.** Alex saw you looking at changing the docs door to accept 2KB-plus docs and wants it confirmed rather than half-remembered. Answer plainly:\n• Is there a size limit on the docs write path today, what is the number, and is it the DOOR's or Supabase's?\n• **HAS ANYTHING EVER TRUNCATED SILENTLY?** A doc that wrote successfully and lost its tail is the same class of defect as `verify_url` being accepted and dropped — accepted, no error, data gone. Check before assuming not.\n• If you are changing it: **THE NUMBER GOES IN THE DECLARATION'S INPUT SCHEMA IN THE SAME CHANGE**, not in code alone. A limit a caller discovers by hitting it is precisely what a declaration exists to state up front.\n\n**QUESTION 2 — WHERE ORY GOES, AND IT IS A REAL DESIGN QUESTION.** Alex has decided on Ory — FOSS, he knows the team, and it is why the self-hosted identity path was open to him in the first place. **Do not build an OAuth server.** The question is placement:\n• Ory Hydra as the OIDC provider and Kratos for identity, on the box — with the vault kept for CAPABILITY tokens, which is a genuinely different job from identity.\n• **AGENTS FIRST, via client credentials.** No UI, no consent, no redirect, no refresh — the exact class of failure that ate today. `graph:write:orky`, `graph:write:specops`, `graph:write:dispatcher` become OAuth clients with scopes, issued and revocable by standard means instead of by us remembering. That is the whole shape proven with no browser involved.\n• Keto LATER and only when a permission question genuinely needs it. I",
+   "refs": [
+    "BEB-9256",
+    "BEB-9267",
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67507,
- "count": 434
+ "head": 67508,
+ "count": 435
 }
