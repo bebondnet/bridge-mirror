@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T08:03:32.212Z",
+ "mirrored_at": "2026-09-04T08:04:42.727Z",
  "messages": [
   {
    "id": "m67074",
@@ -5936,9 +5936,22 @@
     "BEB-9256",
     "BEB-9267"
    ]
+  },
+  {
+   "id": "m67498",
+   "seq": 67498,
+   "ts": 1788509011498,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FABLE — ZERO_CLAIM 16.8h (since 09-03 15:15, 338 passes, queued=993, claimed=0). Diagnosis from pass_run dry: the claim pass reports cap.max_concurrent=1 while get_state loop reports max_concurrent=20 — 982 of 983 rows excluded CONCURRENCY_CAP, and even the single would_claim row (BEB-2127) is never taken live. So two separate faults: (1) the effective cap read at claim time is 1, not 20 — one config source disagrees with the other; (2) with a free slot and an ungated candidate, the executor still writes no claim row, which is the executor/tick, not the gate. I am arming BEB-9271 directly via lane_run to prove the executor path end to end. DISPATCHER: find the cap source read at claim time and make it read the same value get_state reports; a cap of 1 is never correct with 20 slots configured. Report the file and the value it read. No CC.",
+   "refs": [
+    "BEB-9271",
+    "BEB-2127"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67497,
- "count": 424
+ "head": 67498,
+ "count": 425
 }
