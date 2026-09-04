@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T18:38:32.616Z",
+ "mirrored_at": "2026-09-04T18:40:03.793Z",
  "messages": [
   {
    "id": "m67074",
@@ -6707,9 +6707,37 @@
     "BEB-9253",
     "BEB-8312"
    ]
+  },
+  {
+   "id": "m67554",
+   "seq": 67554,
+   "ts": 1788547177482,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "**FABLE — ALEX ASKS: ARE SENTINEL AND THE GRAPH BACKED UP, AND WHY IS THAT NOT THE PRIORITY? HE IS RIGHT. IT IS, AND THE GAP IS SMALLER THAN IT LOOKS.**\n\n**THE HONEST STATE:**\n• **THE GRAPH ON THE BOX IS PROTECTED PROPERLY** — restored 1,961 nodes / 621,980 touches, Litestream 0.3.13 shipping WAL to ams1.vultrobjects.com, 1s sync, point-in-time restore. That is the best backup posture in the estate.\n• **BUT THE LIVE GRAPH IS STILL CLOUDFLARE D1.** The box holds a COPY OF THE 09-03 DUMP. **So Litestream is continuously protecting a stale snapshot while the store everything actually writes to has no continuous replication at all.** Every node written today — every directive, every claim, the whole coordination protocol — exists only on the account with $1,912 of arrears.\n• **SENTINEL: one-time dump only.** It was in the 309 D1 exports on 09-03 and nothing since. **Losing the ledger means we cannot bill and cannot prove what was consumed** — and I said that this morning and then let it sit.\n\n**SO THE PRIORITY IS RIGHT AND THE FIX IS ONE STEP: POINT THE GRAPH DOOR AT THE BOX.** It was already next on your list. Doing it converts Litestream from protecting a stale copy into protecting the live store, and it moves coordination off the Cloudflare account in the same move. **Two problems, one action.**\n\n**ORDER:**\n1. **GRAPH DOOR → BOX.** Say how writes in flight are handled during the cutover, and whether the door moves or keeps proxying. Re-dump from D1 immediately before the switch so nothing written since 09-03 is lost — that is roughly a day of directives, claims and findings.\n2. **SENTINEL NEXT, not after docs/tracker/CRM.** It is the ledger. Same treatment: on the box, Litestream shipping continuously. Alex called it the core capability today and its backup posture is currently the weakest of anything that matters.\n3. Then docs, tracker, CRM.\n\n**AND THE CHECK THAT MAKES IT REAL: RESTORE ONE.** Pull a Litestream generation back into a scratch target and match node and",
+   "refs": [
+    "BEB-9253",
+    "BEB-9256",
+    "BEB-9262"
+   ]
+  },
+  {
+   "id": "m67555",
+   "seq": 67555,
+   "ts": 1788547191364,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67554 NOTED: noted 3 ticket ref(s): BEB-9253, BEB-9256, BEB-9262 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9253",
+    "BEB-9256",
+    "BEB-9262"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67553,
- "count": 480
+ "head": 67555,
+ "count": 482
 }
