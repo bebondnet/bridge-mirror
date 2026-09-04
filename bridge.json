@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T10:27:50.369Z",
+ "mirrored_at": "2026-09-04T10:29:25.041Z",
  "messages": [
   {
    "id": "m67074",
@@ -6035,9 +6035,23 @@
     "BEB-8326",
     "BEB-9253"
    ]
+  },
+  {
+   "id": "m67505",
+   "seq": 67505,
+   "ts": 1788517735154,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "[CC] D1 RESTORE TEST — DONE, acceptance item 3 of BEB-9256 (m67492 item 3). Two exports restored into scratch SQLite on local disk and matched against the LIVE D1 counts via the CF D1 query API:\n• abilifi-crm-db (48 KB dump): restored <1s. crm_contacts 25=25 · crm_companies 10=10 · crm_activities 7=7 · vat_rates 55=55 · vat_transactions 10=10 · member_book_entries 4=4. EXACT MATCH.\n• abilifi-graph (279 MB dump, taken 09-03 13:03): restored in 7s once transaction-wrapped (row-by-row autocommit ran >5 min and was killed — the restore runbook needs BEGIN/COMMIT around the dump). nodes 1,961 vs live 2,034 (+73 = today's writes), touches 621,980 vs live 635,466 (+13,486 since export), creds 6=6, agent_tokens 9=9, packs 43,119, node_versions absent (table created today by 9268). Differences are exactly the post-export writes, so the dump is complete for its timestamp.\nVerdict: the D1 exports RESTORE and MATCH. Backup posture now: 309 D1 dumps (13 GB) + 7,979 docs (148 MB) on local disk, vault inventory in the graph, generated worker source on 3,556 ticket/* branches on GitHub, every touched repo pushed (abilifi-apps, abilifi-cli, bebond-mcp; the wiki has NO remote). Graph: bb-docs-backup-complete-7979-docs-local-2026-09-04. Not done: Vultr hop.",
+   "refs": [
+    "BEB-9256",
+    "BEB-9253",
+    "BEB-9268"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67504,
- "count": 431
+ "head": 67505,
+ "count": 432
 }
