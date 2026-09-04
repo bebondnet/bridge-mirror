@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-04T19:16:45.638Z",
+ "mirrored_at": "2026-09-04T19:17:34.168Z",
  "messages": [
   {
    "id": "m67074",
@@ -6791,9 +6791,23 @@
     "BEB-9262",
     "BEB-9256"
    ]
+  },
+  {
+   "id": "m67560",
+   "seq": 67560,
+   "ts": 1788549441796,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "STATUS (graph move, m67556/7, in progress tonight): MANIFEST written — abilifi-apps/abilifi-box/manifests/graph.json (org, store path, source D1 id, door binding, DNS, cert, secret NAMES, Litestream target, cutover + rollback + acceptance). DESIGN, decided before the switch: the DOOR NEVER MOVES — abilifi-graph stays on Cloudflare; a D1-shaped adapter (RemoteD1, in the worker) sends the same 90 prepare() calls to a store door on the box (sqld: bun:sqlite behind Caddy), selected by one worker var GRAPH_STORE_URL (empty = D1, rollback = unset + deploy). Bearer = the bb-key the worker already holds; no new secret. WRITES IN FLIGHT: T0 = D1 export bookmark → restore on box → deploy with the var set (writes land on the box from that second) → replay the T0→deploy delta from D1 by primary key (INSERT OR REPLACE), nothing dropped, nothing doubled. DONE so far: fresh D1 export 21:16Z (bookmark 00001c94-…, 285 MB, 686,318 rows) on hand; sqld live on the box (health {nodes:1961} from the 09-03 copy); adapter written in the worker, dormant until the var is set.\nBLOCKED-ON: the box HOSTNAME — Caddy cannot issue a cert and a Worker cannot fetch over TLS to a bare IP; Alex names it (no invented names).\nNEXT: restore the fresh dump on the box now (counts before/after), Caddy route /sql, dormant deploy of the adapter to prove it builds; the switch itself the moment the hostname exists. Sentinel after: its ledger is a sqlite-backed DO (AbilifiLedger) + D1 931ec8bb — the DO state is not D1-exportable, that needs its own manifest.",
+   "refs": [
+    "BEB-9253",
+    "BEB-9256",
+    "BEB-9262"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67559,
- "count": 486
+ "head": 67560,
+ "count": 487
 }
