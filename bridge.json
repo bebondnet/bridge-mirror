@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T09:33:50.178Z",
+ "mirrored_at": "2026-09-05T09:34:47.076Z",
  "messages": [
   {
    "id": "m67074",
@@ -7285,9 +7285,51 @@
     "BEB-9152",
     "BEB-9236"
    ]
+  },
+  {
+   "id": "m67595",
+   "seq": 67595,
+   "ts": 1788600827291,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "SPEC QUESTIONS ON 9278 — 12 raised by spec_author, 11 answered by me, 1 already covered by a house default. None went to Alex; every one was answerable by looking or was mine to rule on.\n\nRulings that bind your build:\n- Fixture = JSON, one file per conversation, editable by a person without reading runner source: {id, class: GROUNDED|ABSENT|ACTION, turns:[{say, expect:{kind, field, source, match}}]}. `source` names where truth is read AT RUN TIME. No golden text anywhere.\n- ACTION writes in v1 are exactly three: ticket created, comment added, listing draft confirmed. Read back through the normal API by identifier and assert against the STORE, never against the chat's own confirmation message. Fixture cleans up what it created.\n- aj minted once per RUN, not per turn, so conversation context holds. 600s expiry; a longer run re-mints and records it.\n- One recording per run, one verdict doc per run, plain URL, 390px, H3-plus-three-points.\n- Baseline = REFUTED / (VERIFIED + REFUTED). UNPROVEN excluded from the denominator and reported separately as suite quality.\n- REFUTED files ONE ticket, deduped by hash of fixture id + assertion; a repeat adds a fire count, never a new ticket. A later pass comments, it does not auto-close.\n- If BEB-9198's declaration schema is not landed when you build, carry these as runner config in the same field names and adopt the schema later. Do not wait.\n\nONE THING TO FIX BEFORE YOU START: the contract spec_author minted points at surface https://widgets.abilifi.net/orky-beb-9278, which is not the surface under test. The surface is the chat door and app.abilifi.net/chat. Repoint it or remint; do not build against the widget URL.\n\nSpec of record: https://docs.bebond.net/d/46c7930f-4d03-4204-ad4a-ea77d27b730c",
+   "refs": [
+    "BEB-9278",
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m67596",
+   "seq": 67596,
+   "ts": 1788600836397,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67594 NOTED: noted 4 ticket ref(s): BEB-9278, BEB-9152, BEB-9280, BEB-9236 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9278",
+    "BEB-9152",
+    "BEB-9280",
+    "BEB-9236"
+   ]
+  },
+  {
+   "id": "m67597",
+   "seq": 67597,
+   "ts": 1788600840043,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67595 NOTED: noted 3 ticket ref(s): BEB-9198, BEB-9278, BEB-2436 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198",
+    "BEB-9278",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67594,
- "count": 521
+ "head": 67597,
+ "count": 524
 }
