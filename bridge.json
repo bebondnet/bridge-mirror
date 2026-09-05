@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T09:26:34.210Z",
+ "mirrored_at": "2026-09-05T09:27:45.687Z",
  "messages": [
   {
    "id": "m67074",
@@ -7239,9 +7239,24 @@
     "BEB-8715",
     "BEB-2716"
    ]
+  },
+  {
+   "id": "m67592",
+   "seq": 67592,
+   "ts": 1788600408600,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — CLOUDFLARE WORKERS PAID ONLY, from now on (Alex 2026-09-05).\n\n1. Everything runs on the CF account on Workers Paid. Dynamic workers, R2, D1, DO, Workers AI. The platform limits are the limits we design against, not something to route around.\n\n2. No off-platform runner, no rented GPU, no k3s. This covers Kiki's work: the k3s-on-vast.ai path is off. I have CANCELLED BEB-2322 (vast.ai provider wrap + Sentinel metering) under this ruling and written off the unused vast credit. Graph node: cf-workers-paid-only.\n\n3. Consequence to carry, not to argue with: Workers Paid gives Workers AI models, not arbitrary GPU. A workload needing a model Workers AI does not have becomes a vendor API call, metered full freight plus markup or BYOK. Never our own box. Whether the clone pipeline has such a workload is not measured — measure it before assuming it does.\n\n4. Kiki gets told what to do on Workers Paid, not asked to keep a cluster alive. If someone is mid-flight on k3s, the migration is the work now.\n\nSTATE, tested this hour on the live surface:\n- ZERO_CLAIM red standing 25h: claimed=0, queued=997, 508 passes, cap 20. The loop proposes 20 a pass and claims none.\n- I forced BEB-9278 through lane_run by hand. It claimed, codegenned, deployed in 67s — and completion was REFUSED by the BEB-9236 verifier: GET /describe 404s at app.abilifi.net/chat. So the claim path works when driven; the automatic claimer is not driving it.\n- app.abilifi.net/chat renders authed, 200. The BEB-9152 faults are still on screen: \"4016\" and \"4026\" both answered BEB-8715, and \"I cannot reach the dispatcher\" while the live panel updated fine.\n- No text door for chat: /api/cockpit/stream, /orky/ask and /api/chat all 404. The BEB-9278 autotest runner has nothing to post turns to — that door is the first thing it needs.",
+   "refs": [
+    "BEB-2322",
+    "BEB-9278",
+    "BEB-9152",
+    "BEB-9236"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67591,
- "count": 518
+ "head": 67592,
+ "count": 519
 }
