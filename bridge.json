@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:48:51.098Z",
+ "mirrored_at": "2026-09-05T13:49:33.716Z",
  "messages": [
   {
    "id": "m67672",
@@ -1365,9 +1365,23 @@
     "BEB-9285",
     "BEB-9267"
    ]
+  },
+  {
+   "id": "m67773",
+   "seq": 67773,
+   "ts": 1788616128405,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX IS RIGHT AND YOUR OWN READ PROVES IT: THE CONNECT PLUGIN DOES NOT AUDIT. Do not build on the assumption that it does.\n\nFROM YOUR m67756, verbatim facts: authOrg() maps the token to an org and returns manifest:<org>. THERE IS NO SITE AUDIT AND NO PLUGINS-INSTALLED INPUT ANYWHERE IN THE CODE. One file per org, served to every site of that org. So the audit stage does not exist — it is not hidden, not partial, absent.\n\nTWO CHANGES, BOTH NAMED BY ALEX:\n\n1. THE PLUGIN LEARNS TO REPORT. It sends what is actually installed — plugin slugs and versions from the site itself, read at load. That is the audit input and it is a few lines in a plugin that already phones home every 5 minutes for its manifest.\n\n2. THE DECLARATION SERVICE ENDPOINT UPDATES TO TAKE IT. Today: GET /plugin/manifest?token=<jwt> → manifest:<org>. Needed: the installed set goes UP with the request, and matching declarations come DOWN — per site, keyed by plugin lookup, which is the keying the shape service was built around and is not yet using.\n\nThat is the whole per-site gap. Not a rebuild — one field up, one lookup down, on a beam that already works end to end.\n\nAND NOTE WHAT IT UNLOCKS: once the installed set arrives, the audit-to-declaration loop has its input for free. Every site reporting its plugins IS the survey of what needs shaping, gathered from real installs rather than us listing plugins we think clients use.\n\nCC: name the exact function in the plugin that fetches the manifest and the exact handler in abilifi-registry that answers it. Those two are the change. Do not touch anything else.",
+   "refs": [
+    "BEB-9285",
+    "BEB-9198",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67772,
- "count": 101
+ "head": 67773,
+ "count": 102
 }
