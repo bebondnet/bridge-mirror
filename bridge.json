@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T11:36:53.619Z",
+ "mirrored_at": "2026-09-05T11:37:30.191Z",
  "messages": [
   {
    "id": "m67633",
@@ -301,9 +301,39 @@
     "BEB-1945",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67655",
+   "seq": 67655,
+   "ts": 1788608213169,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67654 NOTED: noted 4 ticket ref(s): BEB-2046, BEB-1999, BEB-1945, BEB-9283 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-2046",
+    "BEB-1999",
+    "BEB-1945",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67656",
+   "seq": 67656,
+   "ts": 1788608238803,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX: there is no existing REVIEW of what orgs must do — get that first, before any org UI. It is a doc, not a ticket. What it must settle, and nothing more:\n\n1. WHAT AN ORG IS, in one sentence that holds in all three stores. Today the word means three different things — tracker orgs, docs orgs (dev-org vs bebond), Sentinel tenants — and nothing binds them.\n2. WHO CREATES ONE and what creating one grants.\n3. WHETHER A PERSON HAS A PERSONAL ORG or is a member of one.\n4. WHAT CROSSES an org boundary, by what mechanism, visible to whom.\n5. Where each rule is ENFORCED, server-side, with the door named. A rule nobody enforces is not a rule.\n\nAND ALEX'S QUESTION, which the review has to answer: how does he see all docs across personal orgs if his users are all in one org? My recommendation, to be argued with in the review, not adopted silently:\n\n- PERSONAL ORGS ARE FOR TENANTS, not for team members. A client is an org. A colleague is a MEMBER of one.\n- So the team lives in ONE org. Private work is a visibility flag on the doc inside that org, not a separate org. Alex sees everything because he owns the org — one scope, one query, no cross-org read.\n- Where he genuinely must see into a CLIENT org, that is BEB-1978: his subject mapped into that org as platform_operator, a spine ROW, revoked by deleting the row, every action audited and VISIBLE TO THE CLIENT. Access by membership, never by a query that spans orgs.\n\nWHY THIS IS NOT THEORETICAL: it already bit us. Docs split across dev-org and the bebond org meant the connector listed 256 docs while 7,723 sat in the other one — Alex could not see his own corpus, and it took a paging fix and an export to find out. Personal orgs per person is that same failure, once per colleague.",
+   "refs": [
+    "BEB-2046",
+    "BEB-9283",
+    "BEB-1978",
+    "BEB-1945"
+   ]
   }
  ],
  "cursor": 67632,
- "head": 67654,
- "count": 22
+ "head": 67656,
+ "count": 24
 }
