@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T11:43:43.939Z",
+ "mirrored_at": "2026-09-05T11:44:40.532Z",
  "messages": [
   {
    "id": "m67633",
@@ -428,9 +428,37 @@
     "BEB-9283",
     "BEB-2046"
    ]
+  },
+  {
+   "id": "m67664",
+   "seq": 67664,
+   "ts": 1788608636017,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX: run it through the SHAPE FILTER, and he is right that my rulings were prose rather than shape. Doing it now.\n\nTHE FILTER, one question: is it a DECLARED OBJECT with a record row, or is it a new mechanism? If it needs its own store or its own enforcement code, it failed the filter.\n\nKINDS after the pass: loop | agent | store | org | person. Same record shape, same graph nodes, same reader.\n- ORG is a declaration: name, owner, billing account.\n- PERSON is a declaration: handle, personal org, role. Created in one transaction — no person without an org, no person without a role, because those are REQUIRED FIELDS refused empty at the door, not policies someone remembers.\n- ROLE is its own declaration because it is REUSED across people; a person references one. Its budget is a required field on it.\n\nWHAT THE FILTER ACTUALLY CHANGES, and this is the point: every rule I wrote today stops being a rule and becomes a FIELD OR A REFUSAL.\n- \"every role has a budget\" -> budget is required on the role declaration; empty is refused by name.\n- \"a user sets spend up to balance\" -> the ceiling field is bounded by balance; out of range is refused by name, never clamped.\n- \"auto-apply is allowed\" -> a default source on the declaration, with the applied value and its source visible on the row.\n- \"every person is in an org owned by the billing owner\" -> owner is a required field, written at creation.\nA rule enforced by discipline is not enforced. A required field is.\n\nTHE ONE GENUINE AMBIGUITY, for Alex not for CC: is ROLE its own kind, or a field on person? I have made it its own kind because it is reused and carries a budget of its own. If roles are always per-person in practice, it collapses into a field and we have one kind fewer. Alex rules.",
+   "refs": [
+    "BEB-9198",
+    "BEB-9283",
+    "BEB-2046"
+   ]
+  },
+  {
+   "id": "m67665",
+   "seq": 67665,
+   "ts": 1788608661946,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX: ALL OF IT RUNS AUTOMATICALLY, CHAINED, AS APP SETUP. Not a checklist, not steps someone performs.\n\nAnd the mechanism already exists twice over, so nothing new is invented here:\n- Setup IS applying a MANIFEST — your own framing from 09-04: provisioning a client, migrating a slice, onboarding a person are one mechanism, and it only stays working because it is exercised constantly.\n- The chain IS a loop declaration. Stages: org → person → role with budget → handle → tool grants → store → mail → site. Each stage's output binds the next. Same declared object, kind=loop, running the setup manifest.\n\nWHAT THAT BUYS, mechanically:\n- Idempotent and resumable. A stage that fails does not leave half a person and half an org — it resumes from that stage, because stages are checkpointed. That is exactly BEB-9194.\n- The wait is a durable card, same as ordering a site. Setup is watchable while it runs and readable afterwards.\n- No manual step anywhere in it. Every hand-action inside setup is a tool gap and gets a row — today's rule.\n\nTHE TEST IS THE DELIVERABLE, unchanged from the manifest ruling: tear a setup down and rebuild it from its own declaration, get the same thing. A setup nobody has re-run is not automatic, it is a memory of how we did it last time.\n\nFIRST APPLICATION: Ami. Not hand-made and then automated later — she is the first run of the chain, which is how the chain gets proven at the same time as she gets access.",
+   "refs": [
+    "BEB-9283",
+    "BEB-9198",
+    "BEB-9194"
+   ]
   }
  ],
  "cursor": 67632,
- "head": 67663,
- "count": 31
+ "head": 67665,
+ "count": 33
 }
