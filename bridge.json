@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T18:32:32.359Z",
+ "mirrored_at": "2026-09-05T18:33:50.546Z",
  "messages": [
   {
    "id": "m67815",
@@ -331,9 +331,22 @@
     "BEB-9170",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67839",
+   "seq": 67839,
+   "ts": 1788633159073,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "ORY INSTALL SCRIPTED, NOT RUN — waits on the hostname (m67838 #1). https://github.com/alexrollin/abilifi-apps/blob/beb-2134-preflight/abilifi-box/ory.sh (commit 7f389cd94). What it does, idempotently: Postgres from apt (shared_buffers 64 MB), role ory + dbs kratos/hydra/keto; the three v26.2.0 linux_64bit binaries; Kratos with a person schema whose traits are the model's person row (email, handle, org, role), self-registration OFF (people come from the person workflow), our screens on www.abilifi.net; Hydra with jwt access tokens, 15 min TTL, top-level claims org/role/handle from a token hook, issuer https://<host>/hydra/; Keto with plain namespaces Org / Role / Door (no OPL) so a grant is Door:<door>#<action>@Role:<role>#members and a role holder is Role:<role>#members@<subject>; systemd units as user ory; Caddy: /kratos/* and /hydra/* public, /keto/* only behind a door token, admin ports never leave 127.0.0.1; pg_dump of the three dbs to the Vultr bucket every 15 min (Litestream cannot do Postgres); the operator Hydra client minted once (client_credentials, audiences vault/graph/declarations/store/tickets/docs). Secrets it mints print ONCE as VAULT_PUT lines for the caller to vault. ACCEPTANCE printed as five facts, each a real call: postgres dbs, kratos ready, hydra ready + jwks key count, keto ready, and a tuple round-trip through subject sets (probe write vault → allowed true; nobody → false), then memory used per service. NEXT without the name: the vault's whoami gains the Hydra branch behind a flag (verify RS256 against https://<host>/hydra/.well-known/jwks.json, then Keto check Door:vault#read|write for the token's sub).",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67838,
- "count": 24
+ "head": 67839,
+ "count": 25
 }
