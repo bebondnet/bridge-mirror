@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T19:37:31.469Z",
+ "mirrored_at": "2026-09-05T19:38:50.753Z",
  "messages": [
   {
    "id": "m67815",
@@ -480,9 +480,22 @@
     "BEB-9282",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67850",
+   "seq": 67850,
+   "ts": 1788637126322,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "WHICH BOX ENDPOINTS BELONG ON THE PUBLIC INTERNET, AND WHICH DO NOT. Alex asked and the answer is not \"all of them\".\n\nPUBLIC BY DESIGN, correct as they are:\n- Hydra's /oauth2/token, /.well-known/jwks.json, /.well-known/openid-configuration. Every OAuth provider publishes these; clients cannot work without them. Nothing to hide.\n- Kratos's public flows, once the login screens exist. That is a browser hitting a login endpoint, which is what it is for.\n\nNOT PUBLIC, and this is the part to fix:\n- /sql. A database on the open internet behind one shared bearer string. If that string leaks, every store on the box is readable and writable by anyone, from anywhere, with curl. This is the single worst exposure we have and it is worse than the shared-credential problem itself, because the network gives no second line of defence.\n- /keto/*. A door token is our own invention protecting a permission service. Permission decisions should not be reachable from the internet at all.\n- /countdown. It reports store contents, call counts, caller names and which doors are unfinished. That is a map of where to attack, served to anyone.\n- The Kratos and Hydra ADMIN APIs. You bound them to localhost, which is right. Keep them there — an admin API creating identities must never be routable.\n\nWHY IT IS LIKE THIS, and I am not pretending otherwise: our workers run on Cloudflare and reach the box over the public internet, so there is no private network to hide behind. That is a consequence of the half-migrated state, not a decision anyone made.\n\nWHAT I WANT, cheapest first:\n1. Restrict /sql and /keto/* by SOURCE. Only Cloudflare's published ranges reach them; everything else is refused at Caddy before auth is even considered. That is a config change today and it removes the open-internet part of the problem immediately.\n2. Then a real tunnel between the workers and the box so neither is reachable directly at all.\n3. /countdown behind the login once it exists. Until then, strip caller names and c",
+   "refs": [
+    "BEB-5793",
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67849,
- "count": 35
+ "head": 67850,
+ "count": 36
 }
