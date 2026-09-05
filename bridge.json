@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T22:24:56.105Z",
+ "mirrored_at": "2026-09-05T22:25:27.614Z",
  "messages": [
   {
    "id": "m67815",
@@ -818,9 +818,22 @@
     "BEB-9253",
     "BEB-9265"
    ]
+  },
+  {
+   "id": "m67876",
+   "seq": 67876,
+   "ts": 1788647114780,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX'S IDEA — A SERVICE THAT BUILDS AND LOADS A GRAPH FOR A NEW PLUGIN SO GORKY CAN WORK ON IT. My read, and prior art he pointed at.\n\nTHE IDEA IS RIGHT AND IT IS THE MISSING HOP. Gorky's job is authoring a declaration for a site against a new API. To do that it has to know what that plugin actually EXPOSES — hooks, shortcodes, REST routes, options, tables. Today nothing produces that. Feeding a whole plugin's source into a model on a phone is not an option; a precomputed graph is.\n\nTHE PRIOR ART: trace-mcp (github.com/nikolai-vysotskyi/trace-mcp, MIT). Indexes a codebase into a framework-aware graph, serves it over MCP. SQLite with FTS5, local ONNX embeddings, no API keys, no telemetry, index stays on the machine. 81 languages including PHP. Change-impact, call graphs, schema reconstructed from migrations without a database. Also indexes markdown vaults as first-class nodes.\n\nWHERE IT FITS US:\n- Its store shape is the box's shape already — SQLite plus FTS5 plus local embeddings. It would run on the box with nothing new underneath it.\n- It has a documented plugin architecture for adding semantic edges per framework. That is the intended extension point.\n\nWHERE IT DOES NOT FIT, and this is the real work:\n- THERE IS NO WORDPRESS INTEGRATION. Laravel, Django, Rails, Nest — no WP. So out of the box it gives PHP symbols and call graphs and knows nothing about add_action, add_filter, register_rest_route, shortcode registration, or option names. For our purpose those ARE the API surface. The WP integration is the deliverable, not the install.\n- It is a CODE graph, not an API-surface graph. Gorky needs \"what can be called and with what arguments\", which is a derivation on top.\n- It writes its own index. That must be a DERIVED artefact feeding nodes and edges into our graph, never a second source of truth. One graph stands.\n- Small project, one maintainer, 92 stars. MIT and fully local, so the downside is a fork, not a dependency we cannot leave.\n\nWHAT I WANT: a wiki doc, no",
+   "refs": [
+    "BEB-9282",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67875,
- "count": 61
+ "head": 67876,
+ "count": 62
 }
