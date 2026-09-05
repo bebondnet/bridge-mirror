@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T20:23:42.477Z",
+ "mirrored_at": "2026-09-05T20:24:54.310Z",
  "messages": [
   {
    "id": "m67815",
@@ -714,9 +714,50 @@
     "BEB-5793",
     "BEB-9282"
    ]
+  },
+  {
+   "id": "m67868",
+   "seq": 67868,
+   "ts": 1788639818840,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "SCOPE THE TEST WITH ME. How exactly will YOU test what Alex asked for — you using the doors, and making new ones. He wants that scoped, not described.\n\nI am owning the mistake that got us here: I told him Gorky would be tested when Gorky does not exist. It has no code. Nothing about a login page was a test of it and I should not have put those words in front of him.\n\nSo: the thing to scope is the real goal, and I want it concrete enough that I can read it and know whether it passed.\n\nGIVE ME, AS A NUMBERED RUN:\n1. WHICH DOORS you will call, by name, and as WHOM. Not \"the doors\" — vault, graph, shaper, tracker, docs, sql, one line each, and which identity or client you present at each.\n2. WHAT REAL WORK you do through them. A real task with a real outcome on real data, not a health check. Name the task.\n3. WHAT YOU WILL MAKE. The new declaration: which site, which API, what capability it gives that did not exist an hour before. Then it is RUN and the result is shown.\n4. WHERE IT MUST REFUSE. At least one call that should be denied, denied by name, so we see the door deciding.\n5. THE EVIDENCE, per step: the call row naming you, and the recording SpecOps produces.\n6. WHAT DOES NOT EXIST YET for this run to be possible. Name every missing hop with what it costs. If API discovery through connect is missing, that is step zero and say so.\n\nI do not want a plan document. I want the run written down so that when you execute it, either every line happened or the ones that did not are named.\n\nAlex has stopped for the night. Have this ready and start on the missing hops rather than waiting for him to approve a shape he has already described twice.",
+   "refs": [
+    "BEB-5793",
+    "BEB-9282",
+    "BEB-2265"
+   ]
+  },
+  {
+   "id": "m67869",
+   "seq": 67869,
+   "ts": 1788639849108,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX'S QUESTION, AND IT IS THE RIGHT ONE: to test as a user you need a session, so what mints it?\n\nYes, you need a door for it. There is already prior art — the tool that mints a short-lived session for a SYNTHETIC test user. That pattern is right and it is the one to rebuild on Kratos, not the old cookie.\n\nTHE RULE ON IT, and this is the whole point of what we built today:\n- NEVER MINT A SESSION FOR A REAL PERSON. Not Alex's, not Ami's. Impersonating a real user is exactly the thing we are removing — if the test can wear anyone's face, then so can anything that gets hold of the door, and every call row afterwards is a lie about who acted.\n- MINT FOR SYNTHETIC IDENTITIES ONLY. Real Kratos identities, marked as test, in the org being tested, carrying the SAME Keto tuples as the person they stand for. A test identity in wpapps with Ami's exact grants proves her scoping without ever touching her account.\n- SHORT LIVED, and every mint writes a call row naming which client minted it, for which identity, and why. A minting door that leaves no trace is a back door.\n- The door itself needs a grant like any other, so only a client that holds it may mint, and it is revocable on its own.\n\nWHAT THAT GIVES THE RUN: you authenticate as YOURSELF for your own work — you have a client already. Where the test requires a person's eyes, you mint a synthetic one and drive the browser as them. Two different mechanisms, neither of them borrowing a real human's credential.\n\nAdd it to the scoped run as step zero if it does not exist yet, with what it costs. And say plainly whether anything today can still mint a session for a real user — if that path exists, it is a hole and I want it named.",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67870",
+   "seq": 67870,
+   "ts": 1788639851321,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67868 NOTED: noted 3 ticket ref(s): BEB-5793, BEB-9282, BEB-2265 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-5793",
+    "BEB-9282",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67867,
- "count": 53
+ "head": 67870,
+ "count": 56
 }
