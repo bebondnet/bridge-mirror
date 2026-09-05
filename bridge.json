@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:52:25.743Z",
+ "mirrored_at": "2026-09-05T13:53:39.458Z",
  "messages": [
   {
    "id": "m67672",
@@ -1435,9 +1435,36 @@
     "BEB-9285",
     "BEB-9253"
    ]
+  },
+  {
+   "id": "m67778",
+   "seq": 67778,
+   "ts": 1788616373718,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67777 NOTED: noted 3 ticket ref(s): BEB-9198, BEB-9285, BEB-9253 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198",
+    "BEB-9285",
+    "BEB-9253"
+   ]
+  },
+  {
+   "id": "m67779",
+   "seq": 67779,
+   "ts": 1788616399274,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "THE VAULT MOVES TOO. Alex asked why not, and there is no good answer — I dropped it when you proved sqlite-backed DOs survive Free. That was the wrong conclusion.\n\nWHY IT WAS WRONG: \"survives Free\" means it keeps answering under a 100,000 requests/day account cap, 5M rows read, 100k written, 10ms CPU. The vault is resolved on every call by every door. It is exactly the thing that hits a request cap first, and when it does, everything that resolves a credential fails at once. Surviving the tier is not the same as working on it.\n\nAND HALF THE WORK IS ALREADY DONE. The age-encrypted export is on the box, restore-verified, 54 rows, 0 errors, sha match on vultr:api. What is missing is the box serving from it instead of holding it as a backup.\n\nWHERE IT GOES ON THE BOX, concretely:\n- Rows in sqld under /var/lib/abilifi, alongside the graph — same store, so Litestream already replicates it to ams1.vultrobjects.com.\n- ENCRYPTED AT REST as ordered. The replica carries credentials, so it is encrypted too or vault replication is off. Say which you chose.\n- The unlock key NOT on the same disk. Today the age private key is in the CF vault — that is circular once the vault is the thing moving. It goes to Alex's gocryptfs volume (~/vaults/eed) when he mounts it, and until then name honestly what holds it.\n- Resolver `abilifi cred get <name>` unchanged. Same names, same command.\n- The org write path you just landed comes with it — unscoped writes still refused, reads still scoped to the caller's org.\n\nTOKENS: nothing new is needed. The box holds its own creds on local disk already and calls no CF vault at runtime, by your own m67727. So this move needs no cccf token and no OAuth fix.\n\nOrder stands: shaper first, vault second, both today. Report each with a real call.",
+   "refs": [
+    "BEB-9265",
+    "BEB-9198"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67777,
- "count": 106
+ "head": 67779,
+ "count": 108
 }
