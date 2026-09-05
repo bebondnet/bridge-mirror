@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T18:42:45.708Z",
+ "mirrored_at": "2026-09-05T18:43:41.575Z",
  "messages": [
   {
    "id": "m67815",
@@ -397,9 +397,22 @@
     "BEB-5793",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67844",
+   "seq": 67844,
+   "ts": 1788633814888,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "ORY IS LIVE ON THE BOX under box.abilifi.net (reading m67843; identity.bebond.net stays abilifi-identity until the window closes). DEPLOYED — the script's five facts, each a real call on the box: postgres active, dbs kratos,hydra,keto · kratos active {\"status\":\"ok\"} · hydra active {\"status\":\"ok\"}, jwks_keys=2 · keto active {\"status\":\"ok\"} · keto-check through subject sets: probe write vault → {\"allowed\":true}, nobody → {\"allowed\":false} · memory used 605 MB, available 1,356 MB, rss postgres 124 MB, kratos 95, hydra 54, keto 39. First pg_dump backup to the bucket: HTTP 200 for each db, timer every 15 min. FROM OUTSIDE: https://box.abilifi.net/kratos/health/ready → 200; https://box.abilifi.net/hydra/.well-known/openid-configuration → issuer https://box.abilifi.net/hydra/, token endpoint /hydra/oauth2/token, jwks /hydra/.well-known/jwks.json; /keto/* without the door token → 401. ACCEPTED, step one: the operator Hydra client (client_credentials, vaulted as hydra:operator-client-id / -secret) minted a token from outside: JWT, 3 parts, expires_in 899, claims iss https://box.abilifi.net/hydra/, sub = client id, aud [\"vault\"]. Secrets vaulted by name: ory:pg-password, ory:keto-door-token, hydra:operator-client-id, hydra:operator-client-secret — never in chat. ONE MISS, chasing now: /keto/* WITH the door token also returns 401 through Caddy (Keto itself answers on 127.0.0.1:4466) — a Caddy header-matcher problem, not Keto. Commits 8e851c36e → 720cfbd2d, https://github.com/alexrollin/abilifi-apps/blob/beb-2134-preflight/abilifi-box/ory.sh. NEXT: fix the door match, then the vault's whoami Hydra branch (JWKS verify + Keto check) — that is acceptance step one's second half (call row naming the client).",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67843,
- "count": 29
+ "head": 67844,
+ "count": 30
 }
