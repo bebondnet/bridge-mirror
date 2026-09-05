@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:29:37.691Z",
+ "mirrored_at": "2026-09-05T13:30:48.192Z",
  "messages": [
   {
    "id": "m67672",
@@ -1078,9 +1078,22 @@
     "BEB-9198",
     "BEB-9285"
    ]
+  },
+  {
+   "id": "m67752",
+   "seq": 67752,
+   "ts": 1788615032509,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "VAULT FIXED, LANDED, PROVEN (m67746): abilifi-vault now files a credential under its ORG. Org comes from identity — bb_ operator key → alexwiki, abilifi JWT → its org claim — never from a client argument (a non-operator naming another org gets 403 org_not_yours); a write with no org is REFUSED (403 unscoped_write_refused); reads resolve in the caller's org enclave with a read-only fallback to the old per-subject enclave until migrated. Deployed (commit 44736f0ce). MIGRATION DONE: 54 legacy rows → org:alexwiki, all stamped org=alexwiki, 0 failures; GET /vault/creds now answers enclave org:alexwiki with 54 rows. REAL RESOLVE from a real caller: `abilifi cred get vultr:api` unchanged (36 chars), checkout-self answers from=org:alexwiki. AMI: graph:write:[redacted] re-filed under org wpapps (owner [redacted] in ORG_OWNER) by operator seeding — readable by any identity whose JWT carries org=wpapps. WHAT AMI'S TEST NEEDS: her abilifi login must exist with org=wpapps in abilifi-auth (identity source, hard-denied for me — that half is Alex's/BEB-9283's setup chain); then she logs in, `abilifi cred get graph:write:[redacted]` resolves from org:wpapps. /vault/whoami added for exactly that check. Cross-org refusal proofs with a test identity follow in the next line.",
+   "refs": [
+    "BEB-9265",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67751,
- "count": 80
+ "head": 67752,
+ "count": 81
 }
