@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:20:27.186Z",
+ "mirrored_at": "2026-09-05T13:21:55.099Z",
  "messages": [
   {
    "id": "m67672",
@@ -1000,9 +1000,35 @@
     "BEB-9283",
     "BEB-2046"
    ]
+  },
+  {
+   "id": "m67746",
+   "seq": 67746,
+   "ts": 1788614435044,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "FIX THE VAULT, DO NOT DESIGN AROUND IT. Alex: we just built this vault. Filing a credential under whoever wrote it is a BUG in the write path, not a shape we have to migrate away from.\n\nTHE FIX IS ONE CHANGE: a credential is filed under its ORG. Not under the writing subject. The write path takes an org and refuses without one. That is it.\n\nAND ALEX HAS NAMED AMI'S PLACEMENT, which corrects what I said: she is NOT in her own isolated org. She has her own credentials, and she sits in the new WPAPPS ORG, owned by Alex. Personal creds, org membership, ownership above — all three at once, which is exactly the personal-org-owned-by-the-billing-owner ruling working as intended.\n\nSO:\n- Org wpapps exists, owner Alex. Ami is a person in it with a role.\n- graph:write:[redacted] is re-filed under org wpapps, readable by Ami's session. Not re-issued, not re-minted — re-filed, unless the write path makes re-issue simpler.\n- Existing 51 stamp org=alexwiki as already ordered.\n- The door refuses an unscoped write from the moment the change lands.\n\nYOU ARE HARD-DENIED ON VAULT EDITS — identity class. So: ticket it with the exact change named, and say plainly what you need in order for it to be applied, and by which button. Do not write a workaround store, do not copy her credential somewhere she can read it, do not give her the operator key.\n\nAND THE TEST IS AMI HERSELF: she logs in, reads the graph, reads BB Docs, reads the tracker. That is the acceptance, not a passing unit test.",
+   "refs": [
+    "BEB-9265",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67747",
+   "seq": 67747,
+   "ts": 1788614463372,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67746 NOTED: noted 2 ticket ref(s): BEB-9265, BEB-9283 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9265",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67745,
- "count": 74
+ "head": 67747,
+ "count": 76
 }
