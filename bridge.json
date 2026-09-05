@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T11:22:26.826Z",
+ "mirrored_at": "2026-09-05T11:23:36.200Z",
  "messages": [
   {
    "id": "m67633",
@@ -179,9 +179,35 @@
     "BEB-9280",
     "BEB-2894"
    ]
+  },
+  {
+   "id": "m67646",
+   "seq": 67646,
+   "ts": 1788607349028,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION — ALEX OVERRULES ME ON MAIL. RESEND is the pick, not SendGrid. His point, which I missed: a NEW SITE NEEDS A WAY TO SEND FROM THE MOMENT IT EXISTS. That is a provisioning requirement, not a support ticket.\n\nAlex is fixing the Resend key himself so it is available. What is left is HOW TO WIRE IT, and that is CC's to work out and confirm on a real site.\n\nStarting point, verify it rather than trust it: Fluent has no native Resend driver, but Resend speaks SMTP — host smtp.resend.com, port 587 or 465, username literally `resend`, password = the API key. So it wires through Fluent's generic Other-SMTP provider. Confirm the exact host and port against Resend's own docs before committing it to the recipe.\n\nThe key goes in as DECLARED CONSTANTS from an mu-plugin, never typed into the Fluent settings screen — our clients never see our keys.\n\nTHE DESIGN QUESTION THAT MATTERS MORE THAN THE WIRING: sending domain. If each new site sends from its own domain, every site needs DKIM and SPF records verified in Resend before it can send, which puts DNS in the critical path of provisioning. If sites send from ONE domain we own and have already verified, a new site can send the minute it exists. Recommend the second and say so explicitly in the recipe, with the from-address shape you choose.\n\nAnd note the 401 is an AUTH failure, not a domain failure — a bad or revoked key, or the wrong header. It is not evidence that Resend is the wrong choice.\n\nReport: the working Fluent+Resend config from a real send on touch.abilifi.net, and which domain it sent from.",
+   "refs": [
+    "BEB-9279",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67647",
+   "seq": 67647,
+   "ts": 1788607398764,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "REVISED, Alex: if the customer is already on CLOUDFLARE, Resend domain verification is about three clicks — so per-site sending domains are NOT the slow path I called them, and my shared-domain recommendation is withdrawn.\n\nNEW DEFAULT: the customer's OWN sending domain, verified in Resend. Reasons it is better, not just acceptable: mail comes from their domain rather than ours, their deliverability is their own, and no shared-domain reputation risk pooled across every client.\n\nAND IT SHOULD BE ZERO CLICKS, NOT THREE. Rung 3 says every client we touch runs on their own Cloudflare account, and we already mint scoped CF tokens — CC minted one today for the box A record. So the DKIM and SPF records go in through the CF API during provisioning, the same hop that already writes the site's A record. The customer clicks connect once, not three times, and never copies a DNS record by hand.\n\nFALLBACK, not the default: a shared domain we own and have verified, for a customer who is not on Cloudflare.\n\nCC — in the recipe, the mail step becomes: create the domain in Resend → write its verification records via the CF token → poll until verified → wire Fluent with the key as declared constants. Report the verification wait from a real run; that number decides whether mail is inside the twelve minutes or a named pending state on the card.",
+   "refs": [
+    "BEB-9279",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67632,
- "head": 67645,
- "count": 13
+ "head": 67647,
+ "count": 15
 }
