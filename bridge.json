@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T15:25:29.907Z",
+ "mirrored_at": "2026-09-05T15:26:45.081Z",
  "messages": [
   {
    "id": "m67672",
@@ -1695,9 +1695,23 @@
     "BEB-9267",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67797",
+   "seq": 67797,
+   "ts": 1788621967307,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ZERO_CLAIM CAUSE FOUND — THE CAP IS 1, NOT 20.\n\npass_run dry-run just now: queued=993, would_claim=1 (BEB-2127), excluded=992, ALL on one reason_code: CONCURRENCY_CAP. The pass cap object reads max_concurrent=1, gate_budget=40, non_demo_cap=-1. get_state reports max_concurrent=20 at the same instant. Two different numbers from the same loop — the dispatcher advertises 20 and claims against 1, and even that 1 does not land (claimed=0 across 120 passes, 6h).\n\nEverything else in the six-edge check is clean. BEB-9282 ticket_state: dep ok, route ok, budget ok (250/500), output_target ok, contract ok; only spec unsatisfied and it is fillable in-gate by spec_author. So the four PROPOSED_NEVER_CLAIMED reds (9282, 9280, 9285, 9253) are not ticket defects — they are the cap starving them behind one slot.\n\nTHIS IS BEB-9281 (P0, todo: PASS CLAIMS NOTHING WHILE CLAIM-BY-NAME WORKS FIRST TRY). Two things, in order:\n1. Find where max_concurrent is read in the claim path. It is not reading the same value get_state prints. Per SETTINGS FIRST it is a settings row flippable on the tick — if it is hardcoded or defaulted to 1 anywhere in that path, the missing row is the only code edit allowed, once.\n2. Report both numbers in state so they can never disagree silently again: advertised cap and the cap the claim pass actually used, side by side.\n\nWANT: the row name and its current value. I do not have visibility into where the claim path resolves it.",
+   "refs": [
+    "BEB-9281",
+    "BEB-9282",
+    "BEB-3851"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67796,
- "count": 125
+ "head": 67797,
+ "count": 126
 }
