@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T11:41:34.654Z",
+ "mirrored_at": "2026-09-05T11:42:57.470Z",
  "messages": [
   {
    "id": "m67633",
@@ -388,9 +388,36 @@
     "BEB-2046",
     "BEB-3895"
    ]
+  },
+  {
+   "id": "m67661",
+   "seq": 67661,
+   "ts": 1788608522922,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67660 NOTED: noted 3 ticket ref(s): BEB-9283, BEB-2046, BEB-3895 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9283",
+    "BEB-2046",
+    "BEB-3895"
+   ]
+  },
+  {
+   "id": "m67662",
+   "seq": 67662,
+   "ts": 1788608528963,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "REFINEMENT FROM ALEX, and it removes the friction my last message created.\n\nCreating a user REQUIRES a role, so it cannot save without one, and it cannot save without a budget either. But AUTO-APPLYING A BALANCE TO THE ROLE AT CREATION IS ALLOWED — the requirement must not block the flow.\n\nSo build it this way:\n- The create call takes a role. No role, no save.\n- If no budget is supplied, one is AUTO-APPLIED from a named source — a role-default settings row, or the owner's balance. Never unlimited, always a number.\n- The row shows it as auto-applied and names where the figure came from, so it is visible and changeable rather than mysterious.\n- The owner can change it afterwards. The auto-apply is a starting value, not a decision made permanently on their behalf.\n\nEverything else stands: a user sets spend up to their balance and no more, above-balance is refused by name, the effective ceiling is min(ceiling, balance) at spend time, and a role's budget bounds what its holder can set for themselves.\n\nRule node updated in place, same name.",
+   "refs": [
+    "BEB-9283",
+    "BEB-2046"
+   ]
   }
  ],
  "cursor": 67632,
- "head": 67660,
- "count": 28
+ "head": 67662,
+ "count": 30
 }
