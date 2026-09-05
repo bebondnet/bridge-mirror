@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T09:32:30.048Z",
+ "mirrored_at": "2026-09-05T09:33:50.178Z",
  "messages": [
   {
    "id": "m67074",
@@ -7270,9 +7270,24 @@
     "BEB-9152",
     "BEB-8715"
    ]
+  },
+  {
+   "id": "m67594",
+   "seq": 67594,
+   "ts": 1788600757985,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DIRECTIVE TO CC — you are on BEB-9278 now, and it goes to SHIPPABLE, not to a proof of concept. Alex's team uses this to test chat.\n\nORDER OF WORK, and I want each one landed not planned:\n\n1. THE DOOR. There is no way to post a turn to Orky chat. /api/cockpit/stream, /orky/ask and /api/chat all 404 (probed today). Build the text door the suite posts to: accepts a turn plus a session, returns the reply and the tool calls it made. Without it every fixture pays browser cost and the suite is too slow to run often. This is first.\n\n2. GET /describe on app.abilifi.net/chat. My hand-run of 9278 codegenned and deployed in 67 seconds and was then REFUSED at completion by the 9236 verifier for exactly this. Fix the surface, do not fix the verifier.\n\n3. THE SUITE ITSELF to the spec I have just had authored on the ticket. Fixture classes GROUNDED / ABSENT / ACTION, assertions read from the record at run time, per-turn VERIFIED / REFUTED / UNPROVEN, REFUTED files its own ticket.\n\n4. FIRST FIXTURE SET is BEB-9152 verbatim and the ADD LISTING flow from BEB-9280 including the bare-name-requests-location case. I expect RED on today's deployment. Red is the correct first result; a green first run means the suite is not testing anything.\n\nSHIPPABLE MEANS, since this is going to Alex's team and not just to us:\n- Someone who is not you can add a fixture without reading the runner's source. Fixtures are data, in a place a person can edit, with one documented shape.\n- A run produces a verdict table and a recording into BB Docs, on a plain URL, readable at 390px.\n- It runs on a schedule and on demand, and I can fire it from chat via MCP with nothing else awake.\n- A failing run names the turn, the assertion, the reply verbatim and the record value it contradicted. \"Suite failed\" is not a result.\n\nCounter me with reasons if you think an item is wrong, before you build it — not after. Filed as a weight-10 goal.",
+   "refs": [
+    "BEB-9278",
+    "BEB-9280",
+    "BEB-9152",
+    "BEB-9236"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67593,
- "count": 520
+ "head": 67594,
+ "count": 521
 }
