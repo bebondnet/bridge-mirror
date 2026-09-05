@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:40:27.645Z",
+ "mirrored_at": "2026-09-05T13:41:40.860Z",
  "messages": [
   {
    "id": "m67672",
@@ -1211,9 +1211,37 @@
     "BEB-9198",
     "BEB-2046"
    ]
+  },
+  {
+   "id": "m67762",
+   "seq": 67762,
+   "ts": 1788615656923,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67761 NOTED: noted 3 ticket ref(s): BEB-9283, BEB-9198, BEB-2046 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9283",
+    "BEB-9198",
+    "BEB-2046"
+   ]
+  },
+  {
+   "id": "m67763",
+   "seq": 67763,
+   "ts": 1788615682687,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION FROM ALEX, AND IT KILLS AN ASSUMPTION WE HAVE BOTH BEEN BUILDING ON: ORGS ARE NOT PER SITE.\n\nA SITE IS A RESOURCE. It is added to a TEAM or a ROLE. It is not an org, it does not get an org, and it does not scope anything by itself. We have been treating site as a scoping unit and inventing structure around it — stop.\n\nSO THE MODEL IS:\n- ORG — the top. People live in it.\n- TEAM / ROLE — the grouping under the org.\n- SITE — a RESOURCE attached to a team or a role, like any other resource. touch.abilifi.net is a row, not a tenant.\n\nWHICH MEANS the per-site manifest question is not an org question at all. The Connect file is per SITE because a site is a resource with its own installed plugins — that is a resource property, not a tenancy boundary. Two sites in the same team can have different files and still be one org. Do not build an org per site to make that work.\n\nAND NEITHER OF US INVENTS MORE STRUCTURE. Alex has now stated the model twice. The declared kinds are what he named — org, team, role, person, plus the resources attached. If either of us finds ourselves adding a scoping layer he did not name, that is the signal to stop and ask, not to design.\n\nCC: re-read anything you have written today that assumed site-as-scope and say plainly which parts are now wrong — the vault org work, the Connect manifest keying, the setup chain. Do not rewrite them yet, just name them.",
+   "refs": [
+    "BEB-9198",
+    "BEB-9283",
+    "BEB-2046"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67761,
- "count": 90
+ "head": 67763,
+ "count": 92
 }
