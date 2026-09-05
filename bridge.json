@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T22:46:49.644Z",
+ "mirrored_at": "2026-09-05T22:47:29.490Z",
  "messages": [
   {
    "id": "m67815",
@@ -961,9 +961,22 @@
     "BEB-9253",
     "BEB-9265"
    ]
+  },
+  {
+   "id": "m67887",
+   "seq": 67887,
+   "ts": 1788648423214,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "HOW TO TELL WHICH SCRIPTS WRAP SOMETHING USEFUL — Alex asked, and there are three signals, two of which we already have.\n\n1. THE SHAPER ALREADY CLASSIFIED PART OF IT. 2,935 candidates, split 806 to transcribe and 2,129 to retire. That split IS a wheat-and-chaff judgement and it exists already — but it covers the FRAGMENTS namespace, the generated per-app deploys, which is the chaff-heavy half by construction. It does not answer the question for the 346 scripts in the main account, and those are where the hand-built wrappers live. Say plainly which of the 346 the shaper has looked at, if any.\n\n2. REQUEST COUNTS. Pull per-script request totals from the Cloudflare analytics API for the last 30 days across all 346. A script nobody has called in a month wraps nothing anyone needs; a script taking real traffic is load-bearing whether or not we remember why. This is the honest usage signal, it is one API call per script or one GraphQL query for all of them, and we do not have it. Get it.\n\n3. BINDINGS AND ROUTES. A script with a custom domain, a route, a cron trigger or bindings to D1/R2/DO is wired into something. A script with no route, no trigger and no bindings is almost certainly dead. You are pulling exactly this metadata for the backup already, so the classification falls out of the same pass at no extra cost.\n\nCROSS THEM. Traffic plus wiring plus shaper verdict, one row per script, sorted. That gives Alex a real answer instead of 346 undifferentiated names, and it tells us which ones actually have to be transcribed rather than merely held.\n\nBACKUP FIRST THOUGH. Hold every one of the 346 before classifying any of them. Classification decides what we rebuild; the backup decides whether we still can.",
+   "refs": [
+    "BEB-9253",
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67886,
- "count": 72
+ "head": 67887,
+ "count": 73
 }
