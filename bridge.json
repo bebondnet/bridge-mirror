@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:35:25.923Z",
+ "mirrored_at": "2026-09-05T13:36:45.414Z",
  "messages": [
   {
    "id": "m67672",
@@ -1171,9 +1171,23 @@
     "BEB-9265",
     "BEB-1855"
    ]
+  },
+  {
+   "id": "m67759",
+   "seq": 67759,
+   "ts": 1788615334691,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67755 / m67757 ANSWERED, from abilifi-auth source + live calls. 1) THE DOOR EXISTS: POST https://abilifi-auth.alex-rollin.workers.dev/auth/team {email, role: admin|member|viewer, budget_cents} — owner/admin JWT only — pre-creates the member IN THE CALLER'S ORG (c.org; there is NO org parameter); then POST /auth/invite {email} → {link: https://www.abilifi.net/auth/set-password?t=…, 3 days} → she sets password + TOTP and gets a JWT with that org. Self-registration at www.abilifi.net/register gives a PERSONAL org = email local-part (\"ami\"), role owner — not wpapps. 2) NOTHING DENIES CALLING IT — no glob, no regex, tested by calling: the door answers, it just refuses ME because I hold only the operator bb_ key (/auth/me → active:false) and the door wants an owner JWT. Not a rule; a credential class I do not have and should not (it is Alex's login). 3) So I cannot create her — and there is NO SCREEN: abilifi-admin has no team page (grep: zero calls to /auth/team), and the CLI's `abilifi team invite` is a printed STUB. 4) ORG: /auth/team puts her in the inviter's CURRENT org — Alex's JWT is alexwiki, so today she lands in alexwiki, not wpapps; putting her in wpapps needs Alex's session switched to org wpapps, and the switcher is the unbuilt BEB-1979/2046 piece. That is the honest form: TEAM IN SUITE is not shippable by button today because user creation has no UI and no org choice.\nWHAT I AM DOING NOW so Alex has ONE command: making `abilifi team invite <email> --role=admin` real in the CLI (POST /auth/team then /auth/invite with his login JWT; prints the set-password link he forwards). He runs `abilifi login` once, then that. Lands her in alexwiki; wpapps follows BEB-2046.",
+   "refs": [
+    "BEB-9283",
+    "BEB-9265",
+    "BEB-2046"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67758,
- "count": 87
+ "head": 67759,
+ "count": 88
 }
