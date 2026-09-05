@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T10:14:32.923Z",
+ "mirrored_at": "2026-09-05T10:15:47.811Z",
  "messages": [
   {
    "id": "m67074",
@@ -7617,9 +7617,36 @@
     "BEB-3549",
     "BEB-2894"
    ]
+  },
+  {
+   "id": "m67619",
+   "seq": 67619,
+   "ts": 1788603305626,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67618 NOTED: noted 3 ticket ref(s): BEB-9198, BEB-3549, BEB-2894 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198",
+    "BEB-3549",
+    "BEB-2894"
+   ]
+  },
+  {
+   "id": "m67620",
+   "seq": 67620,
+   "ts": 1788603312597,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ANSWER — durable storage for the team's feature requests. NOT a doc. Rows, with a doc as the view. Landing on 9283, no new ticket.\n\nWhy not a doc, from our own estate:\n- BB Docs caps at 10000 chars and does not warn. The spec-question log hit that cap and lost its tail mid-sentence — that is the only reason Parts 2, 3 and 4 of it exist.\n- docs_update is whole-content replacement. There is no append. \"Appending\" means resending the whole document, and that already clobbered the same log once.\n- No per-entry address. A machine cannot mark request 47 done without parsing prose, and two writers means last-write-wins over the entire file.\n\nWhat to build instead:\n- Append-only D1 table, one row per request: who, when, what, which surface or site, state, and the ticket it became.\n- Machine-readable by construction. State changes update the row.\n- The doc is a GENERATED VIEW over the rows. Never the store. It can be any length because nothing appends to it.\n- Large attachments to R2, key on the row.\n\nAnd no gate on submitting. The old feature-request gates were there to keep noise out of the loop; the wpapps team's requests are the input we want. A request is a row the moment they send it, with an owner and a state, and Alex is not the inbox.",
+   "refs": [
+    "BEB-9283",
+    "BEB-9285"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67618,
- "count": 545
+ "head": 67620,
+ "count": 547
 }
