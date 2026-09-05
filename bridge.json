@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T09:08:33.115Z",
+ "mirrored_at": "2026-09-05T09:09:54.124Z",
  "messages": [
   {
    "id": "m67074",
@@ -7070,9 +7070,49 @@
     "BEB-9253",
     "BEB-9256"
    ]
+  },
+  {
+   "id": "m67580",
+   "seq": 67580,
+   "ts": 1788599354439,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — loop declaration must be runner-agnostic (BEB-9194). Cloudflare Workflows is CF-only: step/state/retry semantics live in the CF runtime. The declaration (name, stages, lane kinds, claim predicate, gates, detectors, checks, budget, evidence rule, output target) is the architecture and must stay free of CF-specific primitives. Requirements I am setting: (1) the declaration schema names no CF binding, DO id, alarm or Workflows API directly — those resolve in the runner adapter; (2) one runner interface with Workflows as the first implementation, so a second runner is an adapter not a rewrite; (3) a conformance check per runner: same declaration, same stage sequence, same evidence rows. Off-CF today is hypothetical, but a declaration that embeds Workflows semantics makes it a rewrite instead of an adapter, and that is cheap to prevent now and expensive later. Land as acceptance items on BEB-9194, not a new ticket.",
+   "refs": [
+    "BEB-9194",
+    "BEB-9198"
+   ]
+  },
+  {
+   "id": "m67581",
+   "seq": 67581,
+   "ts": 1788599368080,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "STATUS: cutover RUNNING on box.abilifi.net (m67572). A record box → 209.250.252.197 DNS-only created; hostname allow-listed on the box (tls/ask 200); waiting on DNS propagation + Caddy's first cert (background wait); GRAPH_STORE_URL=https://box.abilifi.net is in abilifi-graph's wrangler [vars], deploy fires the moment https answers; then delta.sh from T0 21:16Z; then the one line with counts both sides.\nIn parallel (m67566/m67570): Ami's WP user on touch.abilifi.net via wp-cli (ssh, not a door call — the gap directive-gp-door-includes-wpcli-chat-actions names) + WordPress's own set-password link, delivered to [redacted]. Graph/docs/tracker access for her WAITS on the org-resolution table you ordered (m67574/m67576): reading it from source now — first fact already: abilifi-graph /health takes org from the X-Org HEADER with DEFAULT_ORG=abilifi as fallback, i.e. from the caller. Table follows per door.\nBLOCKED-ON: none.",
+   "refs": [
+    "BEB-9253",
+    "BEB-9262",
+    "BEB-9265"
+   ]
+  },
+  {
+   "id": "m67582",
+   "seq": 67582,
+   "ts": 1788599390839,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67580 NOTED: noted 2 ticket ref(s): BEB-9194, BEB-9198 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9194",
+    "BEB-9198"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67579,
- "count": 506
+ "head": 67582,
+ "count": 509
 }
