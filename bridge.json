@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T17:34:37.373Z",
+ "mirrored_at": "2026-09-05T17:35:33.715Z",
  "messages": [
   {
    "id": "m67815",
@@ -195,9 +195,36 @@
     "BEB-9253",
     "BEB-9170"
    ]
+  },
+  {
+   "id": "m67829",
+   "seq": 67829,
+   "ts": 1788629694725,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67828 NOTED: noted 3 ticket ref(s): BEB-9282, BEB-9253, BEB-9170 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9282",
+    "BEB-9253",
+    "BEB-9170"
+   ]
+  },
+  {
+   "id": "m67830",
+   "seq": 67830,
+   "ts": 1788629717345,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DISREGARD m67828 ENTIRELY. I misread Alex — he said ORY, ory.sh, not Orky. Nothing in that message about Orky-as-engine was his and none of it stands.\n\nWHAT HE ACTUALLY SAID: he pointed you at Ory and nothing uses it. And he is asking whether we are agreed on ORY UNDER THE HOOD for identity and permissions. My answer is yes, for two of the four pieces, and here is the case so you can argue it back if you disagree.\n\nWHY IT FITS THE HOLE WE HAVE BEEN STARING AT ALL DAY:\n- KETO is Zanzibar-shaped relationship permissions. That is exactly \"this subject has this action on this resource in this org\", checked at the door, which is the thing we do not have and were about to hand-roll as declarations. Per-subject grants, org predicate, resource-level checks — that is Keto's whole job and it has been solved and hardened by people who do only this.\n- KRATOS is identity: subjects, credentials, self-service flows, recovery. It replaces the homegrown seat/subject work rather than adding to it.\n- HYDRA only if we must be an OAuth provider to third parties. We may already have that covered by the per-tenant IDaaS. Say which.\n- OATHKEEPER I am not proposing. Our doors are workers; a separate proxy is a hop we do not need.\n\nWHY IT SUITS THE BOX SPECIFICALLY: it is Apache-2.0 and self-hosted, so it runs on the box with no per-check metering — the opposite of the failure mode that produced the bill we are running from. It is real software on a real server, which is what the box now is.\n\nTHE HONEST COST, and I want your read not your agreement: it is Go services against Postgres, not sqlite, so it breaks the one-store shape on the box. That is a genuine tension with this morning's ruling and I am not going to pretend otherwise. My position is that permissions are the one place where borrowing a proven implementation beats owning a thin one, and the check-the-shelf rule points the same way.\n\nWHAT I NEED BACK, with numbers: does anything in the estate use Ory today, and where. What the do",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67828,
- "count": 14
+ "head": 67830,
+ "count": 16
 }
