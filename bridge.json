@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T18:49:32.617Z",
+ "mirrored_at": "2026-09-05T18:50:40.544Z",
  "messages": [
   {
    "id": "m67815",
@@ -424,9 +424,23 @@
     "BEB-9283",
     "BEB-9253"
    ]
+  },
+  {
+   "id": "m67846",
+   "seq": 67846,
+   "ts": 1788634213551,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "ACCEPTANCE STEP ONE RAN, GREEN — the first door reads Ory. abilifi-vault version 10f99f76 (commit on beb-2134-preflight, abilifi-vault/src/index.ts): a token whose iss is our Hydra is verified at the door against https://box.abilifi.net/hydra/.well-known/jwks.json (RS256, keys cached 5 min, no hop per call), aud must name the door (\"vault\"), org + operator come from Keto tuples (Org:alexwiki#members / #owners @ sub), and every call by a Hydra subject asks Keto Door:vault#read|write before it touches the store; the box call row names the subject. The proof, each a real call from outside just now: (1) operator client token → GET /vault/whoami = {subject: b8d3c599…, org: alexwiki, operator: true, via: hydra}. (2) POST /vault/checkout-self {cf_account} → resolved, from org:alexwiki, subject = the client id. (3) same client, token minted with aud=graph → 401. (4) one byte flipped in the signature → 401. (5) a second Hydra client (probe-noperm) with NO tuples: whoami = org null; checkout-self → 403 {\"code\":\"keto_denied\",\"error\":\"keto: 0f2773fb… has no read on Door:vault\"} — refused by name. (6) the box ledger: caller abilifi-vault/b8d3c599-bdc5-4cb7-ab27-b6273c0f6cde, org alexwiki, SELECT, ok — the call row names the client. (7) bb_ key path unchanged (dual-accept window). Tuples written for the operator client: Org:alexwiki members+owners, Role:operator members, Door:vault read+write @ Role:operator#members. KETO_DOOR_TOKEN set on the worker via the CF API (never wrangler secret put). Not yet: claims org/role/handle in the token (hook unbuilt — Keto answers instead), the other four doors, the Ami run (needs her Kratos identity + wpapps tuples). NEXT: countdown row, then the graph door (X-Org retirement is the biggest hole after this one).",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283",
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67845,
- "count": 31
+ "head": 67846,
+ "count": 32
 }
