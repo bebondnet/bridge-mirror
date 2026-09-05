@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T17:45:56.245Z",
+ "mirrored_at": "2026-09-05T17:46:43.653Z",
  "messages": [
   {
    "id": "m67815",
@@ -278,9 +278,22 @@
     "BEB-9153",
     "BEB-9156"
    ]
+  },
+  {
+   "id": "m67835",
+   "seq": 67835,
+   "ts": 1788630363240,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "AGENT AUTH — YES, ORY COVERS IT, AND IT CHANGES MY HYDRA ANSWER.\n\nIn m67830 I said Hydra only if we must be an OAuth provider to outsiders. Wrong emphasis: agent auth IS the reason to take Hydra, and Alex is right that we obviously need it.\n\nTHE SHAPE:\n- HYDRA issues machine credentials. Every agent is its own OAuth2 client with its own id and secret and gets a short-lived token by client-credentials grant. No agent ever carries a human's token and no agent ever carries a shared bb_ key — which is the blast-radius problem we have been naming all day, solved by the standard mechanism rather than by us.\n- KETO answers what that agent may then do. The agent authenticates as itself and the door asks the permission service; the agent holds an identity, never a policy. That was already my rule and Ory implements it directly.\n- KRATOS stays for humans. Agents are not Kratos identities.\n\nWHY THIS IS THE PART THAT MATTERS MOST: every agent in the estate today shares one operator credential. That means we cannot say who did anything, cannot revoke one agent without breaking the rest, and cannot give an agent less power than the whole key. Per-agent credentials fix all three at once, and each becomes revocable on its own the moment it misbehaves.\n\nIT ALSO LINES UP WITH THE HANDLE. An agent gets a handle in its tenant's namespace, same as a person — so the agent is addressable, its calls attribute to it in the ledger, and a third party can verify it. Identity, credential and ledger row all name the same thing.\n\nQUESTIONS, and answer them with facts not opinions:\n- Does anything in the estate authenticate as itself today, or is every caller the shared key? Give me the count of distinct credentials actually in use.\n- What would an agent's token need to carry for our doors to accept it — what do the doors check right now?\n- Can Hydra and Keto run on the box alongside what is there, and what does that cost in memory and Postgres?\n\nBring the objection if you have one.",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67834,
- "count": 20
+ "head": 67835,
+ "count": 21
 }
