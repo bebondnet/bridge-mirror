@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T15:35:26.868Z",
+ "mirrored_at": "2026-09-05T15:37:05.990Z",
  "messages": [
   {
    "id": "m67672",
@@ -1795,9 +1795,60 @@
     "BEB-5793",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67804",
+   "seq": 67804,
+   "ts": 1788622564231,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "BOX WORK STARTS NOW — INFERENCE SIDE ONLY, NO DOORS.\n\nAlex asked whether we start on the box now. Yes, for everything that does not touch a door, and that is a real chunk of BEB-9282:\n\nSTART NOW on the wpapps box:\n- LiteRT-LM + Gemma running locally, PWA surface, reply generated with no inference call leaving the device — proven by the network log showing zero inference requests.\n- The measured numbers Alex requires: which Gemma variant, what it weighs, cold-load time, tokens/sec on that machine. Measured on the box, not estimated.\n- Fallback named on screen when the device cannot hold the model. No silent downgrade, no blank box.\n- Dutch quality measured early — the Gilbeot demo was Korean and it decides how far this carries.\n\nDOES NOT START, per Alex's sequence ruling (m67803):\n- Any tool call from Gorky to any door.\n- Any credential on that box. Nothing carries a bb_ token there.\n- Any grant to Ami.\n\nSo the box gets a model that talks and cannot yet reach the truth. That is the correct half to build first — it is the half with no permission dependency, and it fails safe.\n\nNote for the builder: 9282's description still says WebLLM/WebGPU in the browser. Alex corrected that today — LiteRT-LM on device, PWA. Build the corrected path (my comment on 9282).",
+   "refs": [
+    "BEB-9282",
+    "BEB-5793"
+   ]
+  },
+  {
+   "id": "m67805",
+   "seq": 67805,
+   "ts": 1788622588201,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67803 NOTED: noted 2 ticket ref(s): BEB-5793, BEB-9283 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67806",
+   "seq": 67806,
+   "ts": 1788622613928,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67804 NOTED: noted 2 ticket ref(s): BEB-9282, BEB-5793 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9282",
+    "BEB-5793"
+   ]
+  },
+  {
+   "id": "m67807",
+   "seq": 67807,
+   "ts": 1788622615397,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION FROM ALEX — GEMMA IS IN THE PWA, NOT ON THE BOX.\n\nMy m67804 said \"LiteRT-LM + Gemma running locally on the wpapps box\". Wrong, and build it the corrected way:\n\n- The MODEL LIVES IN THE PWA. Gemma loads into the PWA and runs on whatever device opens it — Ami's machine, a phone, whatever. Nothing generates on the box.\n- The BOX SERVES THE PWA and nothing else. It is a static origin: the app shell, the service worker, the weights. No inference process, no model runtime, no GPU dependency on the box.\n- Weights ship as bytes from R2 behind the CDN, cached by the service worker after first load — once per device per version, not per message. The box does not need to hold them either.\n\nWhy it matters beyond wording: if the model sits on the box, every user shares one machine's inference and we are hosting inference again, which is the exact thing this design removes. In the PWA it is the user's hardware, costs nothing per call, and works with the network off.\n\nSo the box-side task is: serve the PWA, install cleanly, service worker caches the weights, offline start works. The model task is inside the app.\n\nMeasured numbers still required, now per DEVICE not per box: variant, size, cold-load on a first visit, tokens/sec on a mid-range machine, Dutch quality early.\n\nUnchanged: no credential on that box, no tool call from the PWA, no grant to Ami until scoping lands (m67803).",
+   "refs": [
+    "BEB-9282"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67803,
- "count": 132
+ "head": 67807,
+ "count": 136
 }
