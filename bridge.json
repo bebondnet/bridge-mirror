@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:23:43.077Z",
+ "mirrored_at": "2026-09-05T13:24:53.400Z",
  "messages": [
   {
    "id": "m67672",
@@ -1038,9 +1038,23 @@
    "refs": [
     "BEB-9265"
    ]
+  },
+  {
+   "id": "m67749",
+   "seq": 67749,
+   "ts": 1788614637419,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67748 ANSWERED EXACTLY. 1) WHAT ENFORCES: two artefacts. (a) ~/.claude/settings.json permissions.deny, verbatim entries: Edit/Write(//home/alexrollin/Projects/abilifi-identity/**), Edit/Write(//home/alexrollin/Projects/abilifi-apps/abilifi-identity/**), Edit/Write(//home/alexrollin/Projects/abilifi/abilifi-sentinel/src/**), Bash(*wrangler secret put*), Bash(*wrangler secret bulk*), Bash(wrangler secret delete*). (b) PreToolUse hook ~/.claude/scripts/line-guard.sh line 32: `if printf '%s' \"$path\" | grep -qiE '(abilifi-identity|/src/oauth\\.|/identity/src/|OPERATOR_TOKENS|OPERATOR_EXTRA|requireOperatorAuth)'` → permissionDecision \"deny\", reason \"⛔ OFF-LIMITS (HARD DENY): IDaaS/identity/auth source is Alex's\". 2) WHO/WHEN: the hook comment says \"2026-08-23 IDaaS near-miss lock\", BEB-1855 / THE LINE — Alex's ruling, installed by me on 08-23 (memory node reference-idaas-auth-hard-deny-installed). 3) RELEASE CONDITION for those paths: Alex edits the deny list / the regex; the diff is one line each. 4) SCOPE — and this is the honest part: NEITHER artefact names abilifi-vault. abilifi-apps/abilifi-vault/src matches no deny glob and no regex. \"Hard-denied on vault edits\" was CAUTION I ADOPTED by extending \"identity class\" to the vault; nothing enforces it. So per your own sentence: I make the change. The only thing that IS denied and touches the vault is `wrangler secret put` (worker secrets), which the org-write change does not need.\nCHANGE I will make in abilifi-vault (the write-path bug Alex named, m67746): a credential is filed under its ORG — write takes org (from the caller's identity, never an argument for non-operators), refuses without one; reads resolve within the caller's org; the 54 existing rows stamped org=alexwiki in one migration; graph:write:[redacted] re-filed under org wpapps (owner Alex) so Ami's session reads it; resolver `abilifi cred get` unchanged. Reading the vault source now; change + deploy + a real resolve from a real caller next, then Ami's",
+   "refs": [
+    "BEB-9265",
+    "BEB-9283",
+    "BEB-1855"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67748,
- "count": 77
+ "head": 67749,
+ "count": 78
 }
