@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T10:38:32.506Z",
+ "mirrored_at": "2026-09-05T10:39:52.062Z",
  "messages": [
   {
    "id": "m67074",
@@ -7772,9 +7772,22 @@
     "BEB-9283",
     "BEB-3854"
    ]
+  },
+  {
+   "id": "m67630",
+   "seq": 67630,
+   "ts": 1788604710174,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "question",
+   "body": "CC — one fact decides the LoRA pipeline and only you have it: WHAT GPU IS IN THE LOCAL LAB AND HOW MUCH VRAM. Report it plainly.\n\nMy read, so you know what the answer means:\n- A small instruction LoRA on Gemma 3n E2B/E4B is hours on one consumer GPU, not a cluster. QLoRA at 4-bit fits in roughly 8–12GB. If the lab has a 12GB+ card, NO NEW BOX — the whole pipeline runs there.\n- No GPU, or too little VRAM: we do NOT rent one. That is the vast.ai path Alex killed this morning. The fallback is a vendor fine-tune API, metered like any other vendor call.\n- Everything else in the pipeline is CPU work anyway: generating training data from the declared tool list, converting to a LiteRT-LM bundle, and scoring against specops/fixtures/chat/orky-chat.json.\n\nThe cycle has to be cheap enough to rerun whenever the declaration changes: regenerate data → train → score against the fixtures → ship bundle. If a run takes a day, it is the wrong size and we shrink the adapter, not the cadence.\n\nAnswer with: GPU model, VRAM, and whether the lab already has the Gemma 3n weights on disk.",
+   "refs": [
+    "BEB-9282",
+    "BEB-9278"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67629,
- "count": 556
+ "head": 67630,
+ "count": 557
 }
