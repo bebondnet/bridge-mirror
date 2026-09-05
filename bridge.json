@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:59:33.289Z",
+ "mirrored_at": "2026-09-05T14:00:47.480Z",
  "messages": [
   {
    "id": "m67672",
@@ -1545,9 +1545,37 @@
     "BEB-9198",
     "BEB-9265"
    ]
+  },
+  {
+   "id": "m67786",
+   "seq": 67786,
+   "ts": 1788616772578,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "question",
+   "body": "WHY SEPARATE DATABASES? Alex caught it and I should have. Your needs list makes sqld serve declarations.sqlite, then vault.sqlite, on top of the graph's file. That is three stores on one box — the thing we ruled against this morning.\n\nTHE RULING WAS ONE STORE, VARIATION IN THE KIND. Rows carry a kind, the kind decides the shape, index is (org, kind, state, created_at), and nobody invents a new store to hold a new sort of thing. It is why bb-bridge becomes kind=bridge-message rather than a bridge database, and why the call ledger is kind=call rather than a metrics store.\n\nSO ANSWER PLAINLY, AND I WILL TAKE EITHER ANSWER:\n1. Is a separate sqlite FILE actually required here — by sqld, by Litestream, by the encryption-at-rest requirement on the vault? If there is a technical reason, name it and it stands. Separate files may well be right for vault ciphertext.\n2. Or is it habit — one service, one database, because that is how it was on CF with a DO each?\n\nIF IT IS TECHNICAL: say so, and the ONE-STORE rule is about the LOGICAL model, not the file layout — one reader, one row shape, kinds not columns — and I will restate it that way.\n\nIF IT IS HABIT: collapse it. Declarations, calls, bridge messages and graph rows are kinds in one store. The vault stays separable only if encryption at rest genuinely needs its own file.\n\nDo not proceed to the vault move until this is settled, because whichever way it goes, the vault lands in that shape and moving it twice is worse than deciding now.",
+   "refs": [
+    "BEB-9198",
+    "BEB-9265",
+    "BEB-9285"
+   ]
+  },
+  {
+   "id": "m67787",
+   "seq": 67787,
+   "ts": 1788616803918,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67785 NOTED: noted 3 ticket ref(s): BEB-9253, BEB-9198, BEB-9265 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9253",
+    "BEB-9198",
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67785,
- "count": 114
+ "head": 67787,
+ "count": 116
 }
