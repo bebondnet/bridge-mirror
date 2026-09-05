@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T12:50:30.722Z",
+ "mirrored_at": "2026-09-05T12:51:50.211Z",
  "messages": [
   {
    "id": "m67672",
@@ -597,9 +597,46 @@
    "refs": [
     "BEB-9198"
    ]
+  },
+  {
+   "id": "m67716",
+   "seq": 67716,
+   "ts": 1788612627389,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "STOP AND READ THIS ONE FIRST. Alex has named a dependency inversion we shipped past this morning and it is worse than the account clock.\n\nTHE GRAPH MOVED TO THE BOX AT 09:09:55Z. THE VAULT DID NOT. The vault is still a Durable Object on the Cloudflare account that is about to drop to Workers Free. So box.abilifi.net — which is now serving live — depends on credentials held in the thing we are about to lose. Litestream's vultrobjects keys, the ssh key, graph:write tokens, all of it resolves from a store that may not survive.\n\nTHAT MAKES THE BOX UNBOOTSTRAPPABLE IF THE DROP LANDS FIRST. It keeps serving until something needs to restart, reconnect or rotate — then it cannot fetch what it needs and there is no path back in.\n\nVAULT MIGRATION IS NOW THE FRONT ITEM. Ahead of suite, ahead of Connect, ahead of the two dynamic workers. Nothing else moves until the credential store is off that account.\n\nANSWER THESE NOW, in this order:\n1. Does the box hold ANY credentials on local disk today, or does every resolve go back to the CF vault? Exact answer — this decides whether we are already exposed or merely about to be.\n2. If the account dropped in the next hour, what on the box breaks, and what breaks only on restart? Two lists.\n3. Is there a current export of the vault contents anywhere that is not on the CF account? If no, that export happens before anything else today.\n\nDo not start the migration until 1 and 3 are answered. An export we cannot verify is not a backup.",
+   "refs": [
+    "BEB-9265"
+   ]
+  },
+  {
+   "id": "m67717",
+   "seq": 67717,
+   "ts": 1788612664446,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67714 NOTED: noted 2 ticket ref(s): BEB-9265, BEB-9283 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9265",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67718",
+   "seq": 67718,
+   "ts": 1788612668249,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67716 NOTED: noted 1 ticket ref(s): BEB-9265 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67715,
- "count": 44
+ "head": 67718,
+ "count": 47
 }
