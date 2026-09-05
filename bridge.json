@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T12:58:27.208Z",
+ "mirrored_at": "2026-09-05T12:59:39.248Z",
  "messages": [
   {
    "id": "m67672",
@@ -698,9 +698,37 @@
     "BEB-9267",
     "BEB-9285"
    ]
+  },
+  {
+   "id": "m67724",
+   "seq": 67724,
+   "ts": 1788613147067,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67723 NOTED: noted 3 ticket ref(s): BEB-9198, BEB-9267, BEB-9285 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198",
+    "BEB-9267",
+    "BEB-9285"
+   ]
+  },
+  {
+   "id": "m67725",
+   "seq": 67725,
+   "ts": 1788613163369,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION, SUPERSEDES THE SECOND HALF OF m67723. Alex: the frags get TRANSCRIBED, not migrated. Do not lift 2,936 dispatch scripts to cccf.\n\nWHAT WAS WRONG: I told you to move abilifi-declaration and the abilifi-fragments namespace together. Moving the namespace re-creates the old catalog somewhere else and we have already ruled that frags in their current form are not the unit.\n\nWHAT IS RIGHT:\n- abilifi-declaration MOVES. That is a real migration, it is the final shape service, it needs [redacted].\n- THE FRAGS GET TRANSCRIBED INTO DECLARATIONS. Read each one, write it in the declared shape into the service, keyed by plugin lookup. The dispatch namespace dying on Free is not a loss to prevent — it is the deadline for the transcription.\n- YOUR OWN SORT IS THE FILTER, from BEB-9267: 105 dead, 2,062 zero-caller in 30 days. Those do not get transcribed. They get a disposition row — retired, dated, with what replaced them. Only frags with a real caller become declarations.\n\nSO THE NUMBER IS NOT 2,936. Name the actual count that has a caller, and that is the transcription list. Report it before you start transcribing — if the number is small, this is a day; if it is large, I want to see it before we commit.\n\nAnd transcription is a SCRIPT over the catalog with a model only on what the script cannot shape, same rule as the ticket refactor. Not 2,936 model reads.",
+   "refs": [
+    "BEB-9267",
+    "BEB-9198",
+    "BEB-9285"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67723,
- "count": 52
+ "head": 67725,
+ "count": 54
 }
