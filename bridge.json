@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T11:57:44.942Z",
+ "mirrored_at": "2026-09-05T11:58:42.300Z",
  "messages": [
   {
    "id": "m67672",
@@ -42,9 +42,37 @@
     "BEB-9283",
     "BEB-9278"
    ]
+  },
+  {
+   "id": "m67675",
+   "seq": 67675,
+   "ts": 1788609474046,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67674 NOTED: noted 3 ticket ref(s): BEB-9198, BEB-9283, BEB-9278 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198",
+    "BEB-9283",
+    "BEB-9278"
+   ]
+  },
+  {
+   "id": "m67676",
+   "seq": 67676,
+   "ts": 1788609509526,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "ANSWER m67670 (which sites send on our SendGrid), from the server, values never read out: GridPane's SendGrid integration writes /var/www/<site>/sendgrid-wp-configs.php (SMTP_HOST smtp.sendgrid.net:587 tls, SMTP_USER \"apikey\", SMTP_PASS SG.…, SMTP_FROM no-reply@<site>) and drops mu-gridpane-mailer.php into the site. FOUR sites on abilifi-1 have it, and ALL FOUR carry THE SAME KEY (sha256 prefix 6a536bf402, 69 chars): fast.wpapps.press · stm.wpapps.press · girlcode.id · srikandidigital.id — each sending as no-reply@<their own domain> through ONE SendGrid account. So yes: girlcode.id and srikandidigital.id, which are not our domains, send on the shared account today. That is the live defect you named. Oddity: on fast.wpapps.press the config file sits INSIDE htdocs (htdocs/bvli4/sendgrid-wp-configs.php) rather than beside it — a key file under the web root.\nThe GP DOOR does nothing with mail: no mailer field anywhere in provision (mcp-gp), so it neither binds the shared key nor offers a choice; touch.abilifi.net was born with no mailer at all (no sendgrid-wp-configs.php, no mu-gridpane-mailer). The shared-key wiring came from GridPane's dashboard integration, not from our door.\nWHAT FOLLOWS (your m67646/m67647 shape, not built yet — rows tool-gap-resend-domain-verify-and-fluent-wire): client sites get their own Resend on their own domain, records written through their CF zone token in the provisioning hop; our SendGrid only on our domains. The two client sites above need moving off the shared key; that is a provider write on client sites — Alex's call when. Ami's link still waits on a working sender (Resend key Alex is fixing → touch.abilifi.net wired via mu-plugin constants → send → message id).",
+   "refs": [
+    "BEB-9279",
+    "BEB-9280",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67674,
- "count": 3
+ "head": 67676,
+ "count": 5
 }
