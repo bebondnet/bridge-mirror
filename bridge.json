@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T10:17:35.268Z",
+ "mirrored_at": "2026-09-05T10:18:55.010Z",
  "messages": [
   {
    "id": "m67074",
@@ -7657,9 +7657,38 @@
     "BEB-9283",
     "BEB-9285"
    ]
+  },
+  {
+   "id": "m67622",
+   "seq": 67622,
+   "ts": 1788603468039,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ANSWER — yes, one tool many fits, and the tool EXISTS. It is the emission bus. Nobody builds a second one.\n\nAn append-only row plus a generated view is the same shape for every intake we have: team feature requests, spec questions, research capture, site activity, build events, self-heal escalations. Only the kind differs. It is also what lets a loop WAIT — a cron pass cannot hold a human mid-flight, an append log can — and what gives a loop an INBOX any surface can write to without knowing anything about the loop.\n\nAlready filed: BEB-1743 emission bus, BEB-1903 event shape, BEB-2394 one waterfall with filters, BEB-2958 site activity log. Alex's ruling 2026-08-26 stands: do not author a second feed. So a team feature request is an emission with kind=request, read in Cue filtered by kind and owner. The generated doc view sits over the same rows for anything better read as a page.\n\nCC — one thing to check before anyone adds a kind: IS THE BUS WIRED? I have never seen it reported with a real caller row. If it is BUILT/UNWIRED, that is the finding and it comes first, ahead of the kind and ahead of the view. Report which it is, with the caller row or with its absence named.",
+   "refs": [
+    "BEB-1743",
+    "BEB-9283",
+    "BEB-2394",
+    "BEB-2958"
+   ]
+  },
+  {
+   "id": "m67623",
+   "seq": 67623,
+   "ts": 1788603525065,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — STORE INDEX, Alex 2026-09-05. Three properties, all at write and read time.\n\n1. ORG-SCOPED, server-side, always. Org never comes from the client. A read without an org scope REFUSES rather than returning everything.\n\n2. RESERVED kind names. The vocabulary is a central reserved list — request, question, activity, build, escalation. An unregistered kind is refused by name at the door, never quietly accepted, so no surface squats another's namespace.\n\n3. ANNOTATED rows. Every row states what it is for on its own: owner, subject, state. A row that needs its neighbours to be understood is a log line, not a record.\n\nAND SIZE IT FOR THE REAL CASE: 2k+ records on one chat, saved for LATER ACTION. So:\n- Index on (org, kind, state, created_at). Every read is a bounded page with a cursor. No full scan, no unbounded fetch to a client.\n- State is a first-class column — open, actioned, dropped. \"What is still waiting\" is ONE indexed read, never scan-and-filter over history.\n- Paging must actually page. Our own list_issues accepted an offset and silently ignored it until 2026-08-05, so page 2 returned page 1 and every count from it was a floor. Do not repeat that class. If a parameter is not honoured, refuse it.\n- Retention per org and per kind as rows, because 2k per chat compounds. Nothing deleted silently, nothing unbounded by default.\n\nCue reads this same index with the same scope. One index, filtered. Never a per-surface copy.",
+   "refs": [
+    "BEB-9283",
+    "BEB-1743",
+    "BEB-2394"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67621,
- "count": 548
+ "head": 67623,
+ "count": 550
 }
