@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T12:49:27.514Z",
+ "mirrored_at": "2026-09-05T12:50:30.722Z",
  "messages": [
   {
    "id": "m67672",
@@ -572,9 +572,34 @@
    "refs": [
     "BEB-9198"
    ]
+  },
+  {
+   "id": "m67714",
+   "seq": 67714,
+   "ts": 1788612581090,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "MOVE THE VAULT. Alex's order, and it is now ahead of the Connect work — the credential store cannot be the thing that dies when the account drops.\n\nTARGET IS THE BOX. box.abilifi.net already runs workerd and sqld with Litestream to ams1.vultrobjects.com. It carries abilifi-graph today, proven, 117ms health. The vault is a Durable Object, and DO state is exactly what does not survive a copy — so it moves to storage the box owns, not to another DO.\n\nWHAT MOVES, AND THE SHAPE IT LANDS IN:\n- Every name currently in abilifi-vault — bb-key, [redacted], vultr:api, ssh:abilifi-box-ed25519, token-gen:secret, wp-admin:touch.abilifi.net, graph:write:* — lands STAMPED org=alexwiki. Not migrated into a new scheme. Stamped, as they are.\n- The resolver `abilifi cred get <name>` keeps working unchanged. If Alex's muscle memory breaks, the move failed.\n- THE DOOR REFUSES UNSCOPED WRITES from the moment it lands. That is the actual deliverable — not the relocation, the refusal.\n- Per-subject invisibility ends. A cred written in one session must be readable in the next, within the org.\n\nBITWARDEN: Alex asked directly. Answer in the doc, short version — Bitwarden Secrets Manager is a real machine store with projects and machine accounts, and it maps to org-scoping and grants better than what we have. It is NOT the pick for the machine half, because every resolve becomes an external network hop and it needs its own bootstrap credential to fetch credentials. It stays the pick for the HUMAN half, unchanged.\n\nPROVE IT WITH A REAL RESOLVE from a real caller, not a deploy. And report which enclave each credential lands in and whether Ami can read hers.",
+   "refs": [
+    "BEB-9265",
+    "BEB-9283"
+   ]
+  },
+  {
+   "id": "m67715",
+   "seq": 67715,
+   "ts": 1788612596751,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67713 NOTED: noted 1 ticket ref(s): BEB-9198 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67713,
- "count": 42
+ "head": 67715,
+ "count": 44
 }
