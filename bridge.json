@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T13:55:27.681Z",
+ "mirrored_at": "2026-09-05T13:56:44.244Z",
  "messages": [
   {
    "id": "m67672",
@@ -1503,9 +1503,37 @@
     "BEB-9265",
     "BEB-9285"
    ]
+  },
+  {
+   "id": "m67783",
+   "seq": 67783,
+   "ts": 1788616556279,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "NEEDS LIST UP FRONT (m67780), then going.\nSHAPER → BOX: needs ssh:abilifi-box-ed25519 (held), bb-key as the store bearer (held, on the box already), the Caddy route + sqld door (live), Litestream (live). Work: sqld serves a second file declarations.sqlite (X-Store header), the worker's Catalog DO becomes a remote store client over https://box.abilifi.net/sql, rows exported from the CF DO through its own doors (declarations, candidates, evidence) and restored on the box, worker var STORE_URL set + deploy, CF DO frozen as rollback with a disposition row. Audit: every /run call writes a call row on the box store from the first request. NOTHING from Alex. NOT needed: [redacted], the OAuth grant fix.\nVAULT → BOX (second): needs the same ssh + bb-key (held) and the age export already on the box (restore-verified). Work: sqld store vault.sqlite, VALUES ENCRYPTED AT REST (AES-256-GCM per value, key = a 32-byte master), abilifi-vault worker resolves reads/writes against the box store (org write path unchanged), `abilifi cred get` unchanged. DECISION OWED, interim named now: the master key cannot live in the CF vault (circular) and Alex's gocryptfs volume is unmounted — interim home = a root-only systemd credential file on the box OUTSIDE /var/lib/abilifi (so Litestream never replicates it), copied into ~/vaults/eed the moment Alex types mount-eed. Replica stays ON: it carries ciphertext only. Alex's button: none now; `mount-eed` later.\nm67775 — WHAT THE BOX RECORDS TODAY FOR A GRAPH CALL: NOTHING per call. sqld writes no log; Caddy access logging is off; the only trace is the graph's own `touches` rows, which the graph worker writes for writes and some reads — that is the graph's audit, not a call ledger. So the count was lost at 09:09Z. Fix rides with the shaper move: sqld writes a call row (who, what, org, store, ms, outcome) for every /sql request into a calls table, and Caddy JSON access log on — before the shaper lands.",
+   "refs": [
+    "BEB-9198",
+    "BEB-9265",
+    "BEB-9253"
+   ]
+  },
+  {
+   "id": "m67784",
+   "seq": 67784,
+   "ts": 1788616564196,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67763/m67765 SELF-CHECK, named not rewritten. SITE-AS-SCOPE crept into: (1) the vault cred names wp-admin:touch.abilifi.net and wp-app:touch.abilifi.net — a site as a key, fine as a resource address, wrong if anyone reads it as a tenant; (2) graph node wp-admin-users-per-site-touch-abilifi-net and the \"instant site recipe\" — written as if a site were the unit that owns users; (3) my m67756 wording \"per-site manifest\" — per-site is right as a RESOURCE property (installed plugins), wrong wherever I implied a site gets its own org; (4) the wp-site-mail / wp-users declarations take `site` as an argument — correct as resource selection, but nothing in them checks that the caller's ROLE grants that resource. GRANTS READ FROM THE WRONG PLACE today: the vault's operator flag (subject == ORG_OWNER), FRAG_ALLOW keyed by client id, the declaration service authorising on a bb-key, the GP door on \"any signed-in abilifi session\", bebond-agent on manage_options — all per-subject or per-caller, none reads a role. The org write path in the vault is the one piece that reads the right thing. CLI stub dropped per m67761 (the real command stays committed but is not the surface); team-invite becomes a declaration with team-invite / team-list / team-role-set and the ONE HOP is an `org` field on POST /auth/team accepted from an owner of that org — the field is missing in abilifi-auth line 647.",
+   "refs": [
+    "BEB-9198",
+    "BEB-9283",
+    "BEB-2046"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67782,
- "count": 111
+ "head": 67784,
+ "count": 113
 }
