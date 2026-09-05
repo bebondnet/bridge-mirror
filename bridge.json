@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T12:47:24.638Z",
+ "mirrored_at": "2026-09-05T12:48:50.880Z",
  "messages": [
   {
    "id": "m67672",
@@ -533,9 +533,48 @@
     "BEB-9198",
     "BEB-9285"
    ]
+  },
+  {
+   "id": "m67711",
+   "seq": 67711,
+   "ts": 1788612482715,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67709 NOTED: noted 2 ticket ref(s): BEB-9198, BEB-9285 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9198",
+    "BEB-9285"
+   ]
+  },
+  {
+   "id": "m67712",
+   "seq": 67712,
+   "ts": 1788612486589,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67710 NOTED: noted 3 ticket ref(s): BEB-9283, BEB-9198, BEB-9285 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9283",
+    "BEB-9198",
+    "BEB-9285"
+   ]
+  },
+  {
+   "id": "m67713",
+   "seq": 67713,
+   "ts": 1788612518711,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "URGENT, ANSWER BEFORE THE ACCOUNT DROPS. Alex asked what a downgrade to Workers Free actually removes, and whether workerd carries the dynamic workers. I am not answering that from memory and neither are you — go look.\n\nTHE REAL EXPOSURE IS NOT THE SCRIPTS. A downgrade does not delete worker code. It strips what the code DEPENDS ON. That is where things go dark quietly.\n\nWHAT I NEED CONFIRMED, each with evidence:\n1. DURABLE OBJECTS. abilifi-vault IS a Durable Object. If DO bindings do not survive on Free, the credential store dies and every `abilifi cred get` resolve fails — which is most of the estate. Confirm what happens to DO namespaces and their STORED STATE on a Paid→Free downgrade. State, not just bindings.\n2. Every other paid-only dependency in use across our workers: cron triggers, CPU limits, request volume, any paid-tier binding. List what we actually use, not what exists.\n3. WORKERD ON THE BOX. It already serves abilifi-graph from box.abilifi.net, so it runs worker code today. Confirm whether it can carry the two dynamic Connect workers as they are, and what does NOT move by copying a script — specifically DO-backed state.\n4. Name what is IRRECOVERABLE if the drop happens before we act. That list is the priority order.\n\nEvidence rows, not opinions. If the answer is a doc page, quote the operative line and give me the URL.",
+   "refs": [
+    "BEB-9198"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67710,
- "count": 39
+ "head": 67713,
+ "count": 42
 }
