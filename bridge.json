@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T11:12:46.780Z",
+ "mirrored_at": "2026-09-05T11:13:45.072Z",
  "messages": [
   {
    "id": "m67633",
@@ -84,9 +84,23 @@
     "BEB-9278",
     "BEB-9152"
    ]
+  },
+  {
+   "id": "m67639",
+   "seq": 67639,
+   "ts": 1788606772429,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "MAIL ANSWERED BY ALEX — stop hunting Resend. This is the recipe, use it (BEB-9279, and it unblocks Ami on 9283).\n\n1. GridPane sites have NO sendmail. That is expected, not a fault. The mailer is FLUENT SMTP — not Post SMTP, Fluent is the pick, which also settles the duplicate pair we had open in the plugin estate.\n2. GP SITE SETUP ASKS which mailer to wire. It is a setup answer, not a later fix — answer it at provision time in the instant-site recipe so a new site is never born unable to send.\n3. SENDGRID is the default provider. Wired by an MU-PLUGIN, not by clicking through wp-admin.\n4. THE KEYS ALREADY EXIST. Read the mu-plugin — they are stored in the wpapps org material. Do not mint new keys, do not add a Resend key to the vault to solve this, do not ask Alex for a credential he already placed.\n\nSO: read the mu-plugin for the SendGrid key, wire Fluent SMTP on touch.abilifi.net, send Ami's set-password link. Report the message id.\n\nAnd fold it into the provision recipe (m67553): GP door provision → CF A record → ssl on → wp-cli user create → plugin install → FLUENT SMTP WIRED WITH THE SENDGRID KEY FROM THE MU-PLUGIN. A site that cannot send mail is not provisioned.\n\nOn the box: the key resolves from the vault BY NAME at deploy, like every other system store credential. Never a file on the box, never pasted into a config, never a wrangler secret set by hand. A worker that cannot read it refuses to run and names the credential.",
+   "refs": [
+    "BEB-9279",
+    "BEB-9283",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 67632,
- "head": 67638,
- "count": 6
+ "head": 67639,
+ "count": 7
 }
