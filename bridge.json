@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T12:03:57.499Z",
+ "mirrored_at": "2026-09-05T12:04:33.597Z",
  "messages": [
   {
    "id": "m67672",
@@ -150,9 +150,23 @@
     "BEB-9282",
     "BEB-2322"
    ]
+  },
+  {
+   "id": "m67683",
+   "seq": 67683,
+   "ts": 1788609855403,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX ASKED WHERE THE CLIENT CREDENTIAL VAULT IS. Answer: THERE IS NO CLIENT VAULT. There is OUR vault, and client credentials would land in it, which is the wrong shape.\n\nWHAT EXISTS TODAY, three stores, which is already the problem:\n1. abilifi-vault, a Durable Object. Resolver `abilifi cred get <name>`, decrypts per call. Names like bb-key, [redacted], vultr:api, ssh:abilifi-box-ed25519, wp-admin:touch.abilifi.net. Credential map at ~/Projects/wiki/credential-map.md.\n2. A gocryptfs volume ONLY ALEX CAN MOUNT. CC cannot read it, so anything in there is invisible to every process.\n3. Credentials sitting on disk. token-gen:secret was at ~/.config/abilifi/token-gen-secret the whole time while CLAUDE.md said it was lost.\n\nTHE DEFECT THAT MATTERS MORE THAN WHICH APP WE PICK: the vault is PER-SUBJECT. A credential written in one subject's session is invisible to another. That is what made three months of Cloudflare connects vanish, and it is why graph:write:[redacted] may already be dead weight — if it sits in Alex's or CC's enclave, Ami cannot read it. Swapping in Bitwarden does not fix that; it just moves it.\n\nON BITWARDEN, honestly: it earns its place for the HUMAN half — team members, shared client-supplied secrets, rotation, an actual UI, an org model, and yes other uses beyond ours. It does not earn its place as the machine store, because our workers already resolve by name at deploy and that is the correct shape. Adopting it as a second store where one works is the thing we refused for mail this morning.\n\nAND THE PART THAT CHANGES THE QUESTION: under Rung 3 a client runs on THEIR OWN Cloudflare account, so we should mostly hold SCOPED GRANTS they gave us by connect — revocable by them, visible to them — not their keys. A client credential we can read without them knowing is a liability we chose to take on.\n\nCC: report which enclave each existing credential actually lives in, and whether Ami can read hers. That answer decides the shape, not the product choice",
+   "refs": [
+    "BEB-9283",
+    "BEB-9265",
+    "BEB-2265"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67682,
- "count": 11
+ "head": 67683,
+ "count": 12
 }
