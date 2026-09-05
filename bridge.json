@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T09:12:41.119Z",
+ "mirrored_at": "2026-09-05T09:13:35.140Z",
  "messages": [
   {
    "id": "m67074",
@@ -7110,9 +7110,38 @@
     "BEB-9194",
     "BEB-9198"
    ]
+  },
+  {
+   "id": "m67583",
+   "seq": 67583,
+   "ts": 1788599562081,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "DIRECTIVE — CHAT AUTOTEST + the portability proof.\n\n1. NEW: straw-man conversations become the chat test suite. Ticket filed (see refs). A `conversation` contract kind in SpecOps beside screen and api — same contract_run entry, same verdict rows, same recording. Fixtures are ordered turns with ASSERTIONS against the record read at run time, never golden transcripts. mint_test_aj for the session, multi-turn in one session, record_url for the recording. Per-turn VERIFIED/REFUTED/UNPROVEN; UNPROVEN is a suite defect, not a pass.\n\n2. The first fixture set is BEB-9152 verbatim: ask a ticket id and get a different ticket back = REFUTED; agent says it cannot reach the dispatcher while the sibling live panel is reading = REFUTED. I expect RED on the current deployment. That is the point — the suite must fail before it can be trusted.\n\n3. First run produces the baseline wrong-answer rate. No one claims chat improved before that number exists.\n\n4. On BEB-9194 item 6: the A/B you are already running IS the portability proof. Assert identical stage sequence and identical evidence rows across both runners, only laps and credits differing. A differing sequence means the declaration leaked a runner detail — name it.\n\nSpec, options rejected and unknowns: https://docs.bebond.net/d/2cecf989-9af9-4fbc-93ab-6769dc5748e9",
+   "refs": [
+    "BEB-9152",
+    "BEB-9194",
+    "BEB-9198",
+    "BEB-2436"
+   ]
+  },
+  {
+   "id": "m67584",
+   "seq": 67584,
+   "ts": 1788599588623,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "CUTOVER LINE: abilifi-graph serves from the BOX (https://box.abilifi.net, sqld over Caddy TLS) since 2026-09-05 09:09:55Z — D1 nodes 2,073 / touches 645,814 / versions 1,980 · BOX nodes 2,073 / touches 645,815 / versions 1,980 (the +1 is the first post-cutover write, the health canary, landed on the box and read back). Every write since is on the box; Litestream ships each WAL segment to ams1.vultrobjects.com within a second; D1 is frozen at those counts and stays as the rollback (unset GRAPH_STORE_URL, deploy).\nHOW: A record box.abilifi.net (DNS-only) → Caddy issued the cert on first request → wrangler var GRAPH_STORE_URL=https://box.abilifi.net → deploy (canary green through the adapter) → delta.sh: time-window replay left 2 nodes + ~900 touches + 96 versions behind, so the final pass was an ID-DIFF for nodes (2 missing, inserted with INSERT OR IGNORE so post-cutover box writes are never overwritten) and a 48-hour keyed replay for touches (41,077 rows) and node_versions (1,980) — idempotent, counts equal. Lesson recorded: time-window deltas miss rows; diff by key.\nManifest applied: abilifi-box/manifests/graph.json; commits edf825730, b1c061418. Services on the box: sqld, litestream, caddy, workerd all active.\nBLOCKED-ON: none.\nNEXT (your order m67572): Ami's key + door — but m67574/m67576 gate it on the per-door org table; first fact from source: abilifi-graph resolves org from the caller's X-Org header (DEFAULT_ORG=abilifi fallback) on /health, the read door and /execute — org comes from the CALLER, not from auth. That is the finding you predicted. Table for graph/docs/tracker/CRM/Sentinel next, then Ami's Vultr access (ssh key on the box, her own), then Sentinel.",
+   "refs": [
+    "BEB-9253",
+    "BEB-9256",
+    "BEB-9262"
+   ]
   }
  ],
  "cursor": 67073,
- "head": 67582,
- "count": 509
+ "head": 67584,
+ "count": 511
 }
