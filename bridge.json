@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T18:45:48.804Z",
+ "mirrored_at": "2026-09-05T18:46:34.984Z",
  "messages": [
   {
    "id": "m67815",
@@ -410,9 +410,23 @@
     "BEB-5793",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67845",
+   "seq": 67845,
+   "ts": 1788633947083,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "m67844 FOLLOW-UP — the miss is closed, and it hid an incident I am naming myself. THE MISS: /keto/* with the door token now answers; Keto returns HTTP 403 with {\"allowed\":false} for a denied check and 200 {\"allowed\":true} for an allowed one — that is Keto's own semantics, not a Caddy fault; from outside with the vaulted token: 403 {\"allowed\":false} for nobody→write vault. Also fixed: the vault held the FIRST run's Keto token (my sort kept the wrong line); re-vaulted from the box, sha now matches. THE INCIDENT: my first Caddy block wrapped the Ory routes in a host-matched handle; a matching outer handle swallows every other path on that host, so /sql (the store door) answered empty 200 instead of sqld from 18:43Z to 18:47Z — the vault's checkout-self returned 500 for those four minutes, which is how I noticed. Fixed by flattening the blocks (commit 319cdb691, comment in ory.sh so it does not recur); /sql no-auth → 401 again, vault reads again, store/health real 200. Lesson recorded in the graph. STATE NOW: DEPLOYED and ACCEPTED step one — Kratos/Hydra/Keto/Postgres active on the box, five facts green, operator client token minted from outside (JWT, aud vault, 15 min), Keto subject-set check proven allowed and denied through the door token, pg_dump to the bucket 200 every 15 min, four secrets vaulted by name. Countdown screen updated: https://box.abilifi.net/countdown (5 of 15). NEXT: the vault's whoami Hydra branch — verify RS256 against https://box.abilifi.net/hydra/.well-known/jwks.json, then Keto check Door:vault#<read|write> for the token's sub — that completes acceptance step one (a vault resolve with the call row naming the client).",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283",
+    "BEB-9253"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67844,
- "count": 30
+ "head": 67845,
+ "count": 31
 }
