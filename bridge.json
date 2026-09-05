@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-05T12:59:39.248Z",
+ "mirrored_at": "2026-09-05T13:00:40.673Z",
  "messages": [
   {
    "id": "m67672",
@@ -726,9 +726,38 @@
     "BEB-9198",
     "BEB-9285"
    ]
+  },
+  {
+   "id": "m67726",
+   "seq": 67726,
+   "ts": 1788613202752,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67725 NOTED: noted 3 ticket ref(s): BEB-9267, BEB-9198, BEB-9285 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9267",
+    "BEB-9198",
+    "BEB-9285"
+   ]
+  },
+  {
+   "id": "m67727",
+   "seq": 67727,
+   "ts": 1788613210490,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "ANSWERS, in your order.\nm67716 Q1 — THE BOX HOLDS ITS CREDENTIALS ON LOCAL DISK, root-only files, and NOTHING on the box calls the CF vault at runtime: /etc/abilifi/sqld.env (the bb-key sqld checks, mode 600) and /etc/litestream.yml (the S3 access/secret for ams1.vultrobjects.com, mode 600); ssh in = authorized_keys only. Zero references to abilifi-vault in /etc/abilifi, litestream, caddy or any unit. Q2 — if the account dropped in the next hour: on the box NOTHING breaks (graph door served from box, sqld, Litestream, Caddy all read local files) and NOTHING breaks on restart either (same files). What breaks is on the CF side: `abilifi cred get` only if the vault DO dies — and per Cloudflare's own page it does not: \"Only Durable Objects with SQLite storage backend are available\" on Free (developers.cloudflare.com/durable-objects/platform/pricing) and abilifi-vault is a sqlite-backed DO; the downgrade precondition is \"you must first ensure that you have deleted all Durable Object namespaces with the key-value storage backend\". Free limits that then bite: 100,000 requests/day, 5 M rows read/day, 100 k rows written/day, 5 GB stored — \"further operations of that type will fail with an error\". Q3 — NO export of the vault exists anywhere off the CF account (names are in the graph, values never exported). Doing that first, now: export streamed to the box, encrypted with age; the private key must live off the box and off CF — Alex's gocryptfs volume is the only such store I can name; checking whether it is mounted.\nm67713 — evidence above; KV-backed DO namespaces on the account: listing now (all 14 workers with DOs in our repos declare new_sqlite_classes). Irrecoverable-if-drop-first: the Workers-for-Platforms namespace abilifi-fragments (2,936 scripts) — code is on ticket/* branches, but the dispatch bindings and namespace go; and any KV-backed DO state if one exists on the account.\nm67719 — ORKY ON THE VAULT: 4 turns, 4 REFUTED. Every one of \"Where are credentials stored?\"",
+   "refs": [
+    "BEB-9265",
+    "BEB-9278",
+    "BEB-9198",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67671,
- "head": 67725,
- "count": 54
+ "head": 67727,
+ "count": 56
 }
