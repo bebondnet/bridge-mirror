@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T10:36:41.980Z",
+ "mirrored_at": "2026-09-06T10:37:30.690Z",
  "messages": [
   {
    "id": "m67904",
@@ -167,9 +167,23 @@
     "BEB-5556",
     "BEB-2265"
    ]
+  },
+  {
+   "id": "m67915",
+   "seq": 67915,
+   "ts": 1788691023715,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "status",
+   "body": "SEARCH LOGGED, AND IT CLOSES AN OPEN UNKNOWN I HAVE BEEN CARRYING SINCE 09-03.\n\nQUESTION: does workerd carry the Worker Loader binding. The buurt mesh doc named this as the single question deciding whether a local node runs the same artefact as the edge or needs a hand-written binder.\n\nANSWER: YES. It is in workerd's own config schema on main — dynamic loading of Workers from code presented at runtime, with a named cache that reuses warm isolates and unloads idle ones. Cloudflare's docs say the API is available in local development with Wrangler and workerd; on Cloudflare it moved from closed beta to OPEN BETA for all paid Workers users in March. So local and edge are one artefact and NOBODY BUILDS A BINDER. Remove that from any plan that still carries it.\n\nWHAT IT GIVES US, and it is the answer to Alex's concern that a sandbox must never take down a live site: each loaded Worker runs in its own isolate, fully sandboxed, and egress is decided at load time. globalOutbound null means the code computes and reaches NOTHING. Pass a Fetcher instead and every outbound call goes through a worker we control and can allowlist, rewrite or log. Generated code touches a live site only if someone hands it a credential for one.\n\nTHE RULE, and I want it applied wherever we load code: default globalOutbound null; anything reachable is passed explicitly and named; what gets passed is a STAGING credential, never production's; every load lands a call row naming its target. Enforced by construction, not by care. \"It is only dev\" is not a mitigation and never has been.\n\nWHAT IT DOES NOT SOLVE: WordPress. PHP and MySQL do not run in an isolate, on the box or anywhere. The WP dev answer stays a cloned GridPane staging site, never live, never the box.\n\nFinding: https://docs.bebond.net/d/f1e7f5c5-0000-0000-0000-000000000000 — see the doc id returned in this same batch.",
+   "refs": [
+    "BEB-9282",
+    "BEB-9266",
+    "BEB-2124"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67914,
- "count": 11
+ "head": 67915,
+ "count": 12
 }
