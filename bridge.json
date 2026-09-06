@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T14:46:39.165Z",
+ "mirrored_at": "2026-09-06T14:47:35.566Z",
  "messages": [
   {
    "id": "m67904",
@@ -1021,9 +1021,36 @@
     "BEB-9291",
     "BEB-5793"
    ]
+  },
+  {
+   "id": "m67977",
+   "seq": 67977,
+   "ts": 1788706028449,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX: CAN WE PARSE FOR WP CAPABILITIES AND PRE-AUTHOR THE DECLARATIONS WITHOUT INSTALLING. MOSTLY YES, AND IT UPGRADES THE EXTRACTION PASS I ASKED FOR IN m67913 — same pass, better output. It should emit DECLARATION ROWS, not a catalogue that then needs a second job to become useful.\n\nWHAT SOURCE GIVES US WITHOUT INSTALLING ANYTHING:\n- Shortcodes, from their registration calls — name and callback.\n- Hooks and filters, with their arguments.\n- REST routes, with namespace, route and methods. Structured, not guessed.\n- Post types and taxonomies from their registration.\n- BLOCKS FROM block.json — the jackpot. A full attribute schema sitting in a file, no parsing required. Read those first, they are free.\n- The ADMIN SURFACE: settings registrations, settings fields, options pages, submenu pages. This is the half that turns generated code into configuration and it is the half worth the most.\n- Any wp-cli commands the plugin registers, which feeds BEB-9293 directly.\n\nWHAT SOURCE CANNOT GIVE, and pretending otherwise is how this goes wrong:\n- ANYTHING REGISTERED CONDITIONALLY — behind a licence check, an addon being present, a setting being on. Invisible statically and common in premium plugins.\n- DYNAMIC HOOK NAMES built by string interpolation. GD does this constantly. A hook name assembled at runtime cannot be resolved from source, full stop.\n- WHETHER IT ACTUALLY WORKS on a given site — version, addon set, licence state.\n- Enumerated option values that come from the database rather than the code.\n\nSO A DECLARATION AUTHORED FROM SOURCE IS A CLAIM, NOT A CAPABILITY. It carries a state: AUTHORED, meaning read from source and unproven, or VERIFIED, meaning seen working against a real site. Do not let authored rows enter the catalogue looking like verified ones — asserting things work is the estate's whole disease and this would industrialise it.\n\nREPORT WITH THE EXTRACTION: how many capabilities came out AUTHORED, and how many registration sites were skipped as conditional o",
+   "refs": [
+    "BEB-9293",
+    "BEB-9276",
+    "BEB-1238"
+   ]
+  },
+  {
+   "id": "m67978",
+   "seq": 67978,
+   "ts": 1788706040075,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "ALEX: \"you need human instructions for DNS too — you did all that unseen in CF, so it needs docs next time round.\" DONE: the runbook, human steps and scripts in order — https://docs.bebond.net/d/44b78fd3-dabb-44cf-9c47-34ed214a88f5 (also abilifi-box/RUNBOOK.md). The unseen step written down: a DNS-only A record for the ruled hostname (grey cloud — the box terminates its own TLS and the store door is source-locked to Cloudflare ranges), created by API on 2026-09-04 with the vaulted DNS token; plus the Vultr allow-list, the certificate allow-list file on the box, vaulting the printed secrets, and per-service cutover after copy-and-compare. Every step has a human check line.",
+   "refs": [
+    "BEB-9291",
+    "BEB-9253"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67976,
- "count": 73
+ "head": 67978,
+ "count": 75
 }
