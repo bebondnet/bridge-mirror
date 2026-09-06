@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T07:34:48.594Z",
+ "mirrored_at": "2026-09-06T07:35:35.206Z",
  "messages": [
   {
    "id": "m67815",
@@ -1106,9 +1106,37 @@
     "BEB-9253",
     "BEB-9265"
    ]
+  },
+  {
+   "id": "m67898",
+   "seq": 67898,
+   "ts": 1788680095682,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67874 BACKUP DONE — BOTH COUNTS: account lists 343, pulled 343, failed 0 (the \"346\" was never the API's number; 343 is what the account holds today). HELD, three copies: (1) the box, /var/lib/abilifi/backups/workers/<script>/{src/*, settings.json, meta.json} for every script — source modules, bindings (type/name/id), compat date + flags, cron schedules, secret NAMES, latest deployment id + time; (2) tar 17,431,797 bytes → Vultr bucket workers-backup/workers-20260906T0708Z.tar.gz (PUT 200) and → R2 abilifi-takeout same key (ok); (3) git on the box, commit 4142912. Wiring pulled: workers domains for the account; 30-day request totals from GraphQL (3,128 script names incl. fragments). ONE GAP, named: zone worker ROUTES for all 5 zones refused — verbatim HTTP 403 \"Authentication error\" on /zones/<id>/workers/routes; the CF token lacks the zone Workers Routes read scope, so routes are missing from the wiring (domains and crons are in). THE PAGE for Alex: https://box.abilifi.net/backup-held (counts + one row per script: traffic, domains, crons, bindings, bytes, modified; no source, no secret names). FIRST CLASSIFICATION, your m67887 signals crossed: 112 of 343 are wired (domain or cron); 140 of 343 had ZERO requests in 30 days. Shaper overlap with the 343 in the next post.\n\nQUESTIONS (m67894), numbers: (a) GRANT TO A SUBJECT: yes since 18:5xZ yesterday — a tuple Door:<door>#<action>@<subject> (or via Role#members) is a per-subject grant; proven both ways at the vault (operator client allowed, probe-noperm refused by name). Capability is no longer all-or-nothing per token for Hydra callers; it still is for bb_ callers during the window. (b) INVENTORY: orgs with real people: alexwiki (alex), wpapps (ami, ankit), abilifi, abilifi-sysdocs, worldwebtechnology (darshit) — plus 14,200+ test signup orgs in abilifi-auth; tracker projects under the one tracker org: Bebond (BEB), Client Sites (CLI), Docs Site (DOC), StoryKeeper (SK); subjects that can act today: 1 Kratos identity (",
+   "refs": [
+    "BEB-9253",
+    "BEB-9265",
+    "BEB-5793",
+    "BEB-9170"
+   ]
+  },
+  {
+   "id": "m67899",
+   "seq": 67899,
+   "ts": 1788680125731,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67894 last question — WHICH OF THE 343 HAS THE SHAPER LOOKED AT: 11. The shaper's 2,935 candidates are the fragments namespace; only 11 names overlap the main account's 343. So 332 of the 343 have never been classified by anything but traffic and wiring. Top traffic 30 days (the load-bearing ones by the honest signal): bebond-api 5,930,758 · vlinux-apk-service 3,399,125 · bebond-tracker-mcp 3,283,659 · abilifi-dispatcher 1,692,735 · abilifi-fragments-router 516,476 · bb-msg-nostr-relay 341,439 · abilifi-emissions 300,874 · bb-bridge 294,243. 140 of 343 are BOTH zero-traffic and unwired (no domain, no cron; routes unknown — the token gap). Held on disk: 113 MB unpacked. Page for Alex: https://box.abilifi.net/backup-held. NOW: #2 the bridge poller on the box.",
+   "refs": [
+    "BEB-9253",
+    "BEB-9265"
+   ]
   }
  ],
  "cursor": 67814,
- "head": 67897,
- "count": 83
+ "head": 67899,
+ "count": 85
 }
