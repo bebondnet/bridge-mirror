@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T10:27:35.871Z",
+ "mirrored_at": "2026-09-06T10:28:44.292Z",
  "messages": [
   {
    "id": "m67904",
@@ -76,9 +76,39 @@
     "BEB-5793",
     "BEB-9253"
    ]
+  },
+  {
+   "id": "m67909",
+   "seq": 67909,
+   "ts": 1788690484428,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67903 ROOT CAUSE, file and line. (1) THE CAP IS A PAUSE, NOT A BUG IN THE CAP. The live policy row max_concurrent = \"0\", written 2026-09-01 22:49Z by \"cc-pause-loop-m67162\" — the loop was deliberately paused that night. abilifi-dispatcher/src/index.ts:5664 polNum() reads the row (parseInt → 0); :5055 (dry run) and :3506 (real claim) do Math.max(1, polNum('max_concurrent', MAX_CONCURRENT)) — the floor of 1 turns \"paused\" into \"cap 1\". get_state at :5884 and /lanes at :5904 report the CONST MAX_CONCURRENT (=20, defined :170), never the policy row — that is the second path and why state says 20. Also note :3429 and :5322 compare active against the const, not the row. So: three readers of \"the cap\", two truths. The fix is one reader: a getter that returns the row (0 = paused, shown as paused, not as cap 1), used by 3429/3506/5055/5322/5884/5904. I have NOT flipped the row — un-pausing restarts 20 lanes of spend and m67162 paused it on purpose; that is your call or Alex's. (2) WEIGHT IS NOT INVERTED BY THE ORDERING — it is bypassed by the DEMO RESERVE. The queue is ordered goal_weight DESC at :5049 (dry run) and :3439 (claim) — weight leads. But :5056 nonDemoCap = MAX_CONC − DEMO_RESERVE(2) when a demo list exists = 1 − 2 = −1 → :5060 free = 0 → :5069 excludes EVERY non-demo ticket as CONCURRENCY_CAP regardless of weight, while :5069's `!demoSet.has(t)` lets a ticket on the stored demo_tickets list (:3445/:5051, written by POST /dispatch/reserve-demo :6464) skip the cap entirely. BEB-2127 at weight 3 got the slot because it is on the demo list, not because it outranked weight 10. With the row at 0 the reserve is larger than the cap, so the demo list is the ONLY thing that can claim. Fix: reserve = min(DEMO_RESERVE, cap), and a paused loop (row 0) claims nothing, demo or not. Both fixes are dispatcher code (the loop's own machinery — CC may bootstrap); say go and I ship them with a dry run before/after as the acceptance.",
+   "refs": [
+    "BEB-9281",
+    "BEB-2124",
+    "BEB-3852"
+   ]
+  },
+  {
+   "id": "m67910",
+   "seq": 67910,
+   "ts": 1788690504742,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67868 THE SCOPED RUN — \"CC using the doors and making a new one\", written as numbered real calls. Every line either happens or is named as not happened.\n\n0. STEP ZERO, MISSING HOPS, with cost: (a) a door to touch.abilifi.net's WordPress — today the shaper's wp-users/wp-site-mail methods point at GridPane-door tools that do not exist (declared-untested); the GP door has wp-cli behind it (gp CLI on abilifi-1) but no tool exposes `wp plugin list/install` or `wp user list` → 1 day (BEB-9276 is the ticket). (b) session mint for SYNTHETIC identities on Kratos, with a Keto grant Door:auth#mint and a call row per mint → 3 h; BEB-9286 covers refusing real people. (c) tracker and docs doors do not read Hydra → their call rows will say bb_, not me → 4 h each, after this run. (d) the shaper's /author forwards the bearer to the graph door, so a Hydra token SHOULD now pass through — unproven → 1 h to prove. Connect's API discovery: you are right it is the thin one; for THIS run the API is wp-cli through the GP door, discovered by hand, and the declaration records that as its data_source.\n\n1. DOORS, AS WHOM: vault — as the operator Hydra client (aud vault): resolve gp:api and ssh:gridpane. graph — as the same client (aud graph): read the touch site node, write the run's evidence node. shaper — as the same client through the graph door: /validate, /author, /run. GridPane door (mcp-gp) — bb_ key (no Hydra branch; named). tracker — bb_ (named). sqld — never directly; every row arrives through a door. A synthetic person \"[redacted]\" in org wpapps, created by ory-person with Ami's exact tuples (Org:wpapps#members, Role:member) — never Ami's account.\n\n2. REAL WORK: read touch.abilifi.net's real plugin list and WP user list through the new door and record them as graph rows on the site node (site = resource attached to wpapps). Outcome: the site's installed plugins, with versions, in the graph, written by me.\n\n3. WHAT I MAKE: declaration wp-site-plugins 0.1.0 (kind service",
+   "refs": [
+    "BEB-5793",
+    "BEB-9282",
+    "BEB-2265",
+    "BEB-9276",
+    "BEB-9286"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67908,
- "count": 5
+ "head": 67910,
+ "count": 7
 }
