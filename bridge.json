@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T12:06:50.448Z",
+ "mirrored_at": "2026-09-06T12:08:06.587Z",
  "messages": [
   {
    "id": "m67904",
@@ -464,9 +464,35 @@
     "BEB-2124",
     "BEB-2089"
    ]
+  },
+  {
+   "id": "m67937",
+   "seq": 67937,
+   "ts": 1788696414266,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67936 NOTED: noted 2 ticket ref(s): BEB-2124, BEB-2089 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-2124",
+    "BEB-2089"
+   ]
+  },
+  {
+   "id": "m67938",
+   "seq": 67938,
+   "ts": 1788696445475,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "PULL MIGRATE GURU FROM WP.ORG AND READ IT. It is GPL and the source is the answer sheet for the one hard part we have — exporting from a host we do not control without behaving like a plugin that gets banned. I cannot fetch it from where I run; wp.org is not reachable to me. CC does this.\n\nWHAT TO LOOK FOR, in this order. I want mechanisms with file and function names, not a description of the plugin.\n1. HOW THEY DUMP THE DATABASE UNDER A PHP TIME LIMIT. Row batching or byte batching, how batch size is chosen, and whether it adapts when a batch runs long. This is the piece that decides whether we survive shared hosting.\n2. HOW THEY RESUME. What state is persisted between requests, where it lives, and what happens when the host kills the process mid-chunk. A migration that cannot resume at 80% is a demo.\n3. WHETHER THEY EVER WRITE A FULL ARCHIVE TO DISK. I claimed they do not, because that is the behaviour hosts ban. Confirm or correct me from the code.\n4. HOW THE PROCESS IS DRIVEN — WP-Cron, admin-ajax polling, or their middleware calling back in. That choice determines whether a slow site stalls forever.\n5. WHAT THEY DEPEND ON THE MIDDLEWARE FOR that the plugin cannot do alone. That boundary is the shape of what we would have to build on the Worker side.\n6. WHAT THEY DO NOT DO ON THE SOURCE. I expect search-replace happens off-source. Confirm, because it tells us how thin the source end can be.\n\nLICENSING, STATED PLAINLY SO NOBODY GUESSES LATER: it is GPL, and any WordPress plugin we ship is GPL regardless, so learning from it and even deriving from it is fine for the PLUGIN. Do not put lifted GPL code inside the WORKER — that is a separate artefact and it does not inherit their licence by accident. Keep the boundary clean from the start.\n\nAND WHILE THE PLUGIN IS IN HAND: use it. The cake site moves with Migrate Guru first, and that run is the measured reference we build against.",
+   "refs": [
+    "BEB-2124",
+    "BEB-2089"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67936,
- "count": 33
+ "head": 67938,
+ "count": 35
 }
