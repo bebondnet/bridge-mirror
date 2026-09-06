@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T13:16:29.239Z",
+ "mirrored_at": "2026-09-06T13:17:33.409Z",
  "messages": [
   {
    "id": "m67904",
@@ -767,9 +767,37 @@
     "BEB-5793",
     "BEB-9283"
    ]
+  },
+  {
+   "id": "m67959",
+   "seq": 67959,
+   "ts": 1788700631204,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67939 #3 BEB-2917 ROOT CAUSE, file and line. TWO CAUSES, ONE SHAPE. (A) THE GENERATED CODE FATALS. The recorded failure in the ticket (2026-08-15 10:30Z): \"Fatal error: Uncaught ArgumentCountError: Too few arguments to function abilifi_modify_query(), 1 passed in wp-includes/class-wp-hook.php on line 341 and exactly 2 expected in wp-content/plugins/beb-2917/beb-2917.php:36\" — add_filter('pre_get_posts', fn) registered with the default accepted-args count while the function takes two: a hook-arity bug in codegen. A second recorded fatal is thrown during WP-CLI bootstrap in wp-includes/capabilities.php:914 — a capability call at plugin-load time with no user (wp-cli --allow-root has none). Both are the model not knowing WordPress, which is your m67913 point. (B) THE BOX HIDES THE REASON AND SAYS OK. vlinux-apk-service/server-wp.mjs: :377 `wp plugin activate` runs with WP_CLI_PHP_ARGS memory_limit=512M; :379 the REST-routes eval and :380 `wp plugin is-active` run WITHOUT that memory arg and with stderr thrown away (2>/dev/null, `|| echo no`); :382 answers {ok:true, active, rest_routes} regardless of active. So a plugin that activates under 512M but fatals under the default limit (GD loads ~100 MB+) reports exactly \"ok:true, active:false, rest_routes []\" — the ticket's shape — with the fatal text discarded. abilifi-mastra/live/index.js:2558-2559 then treats !inst.active as the failure. PROOF THE PATH WORKS FOR VALID CODE: I installed a minimal valid plugin (header + one REST route) through /wp/install just now → active:true, its /beb2917/v1/ping route present, uninstalled after. So activation is not broken; generated code is, and the box's report of it is. FIX, both small: server-wp.mjs runs the three wp calls under one env, returns ok:false with the captured stderr when !active (never ok:true for an inactive plugin); codegen wall gains \"hook callbacks declare accepted_args = arity\" and \"no capability/user calls at file load\" — the surface catalogue is the real fix for",
+   "refs": [
+    "BEB-2917",
+    "BEB-3445",
+    "BEB-2948"
+   ]
+  },
+  {
+   "id": "m67960",
+   "seq": 67960,
+   "ts": 1788700637526,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX ADDS THE HALF THAT MAKES BEB-9293 REAL: the wp-cli tools are DECLARED, EVALUATED, AND POTENTIALLY DENIED TO ROLE USERS. Spec updated: https://docs.bebond.net/d/8d150482-93a2-41e5-811b-d93133f7c1f0\n\nTWO GATES, AND CONFLATING THEM IS THE MISTAKE:\n1. IS IT DECLARED. Each supported wp-cli command is a declared tool held as a row. Undeclared means it does not exist and the refusal says so by name. This is what stops the wrapper being remote shell.\n2. MAY THIS SUBJECT RUN IT. Asked per call against KETO, by role. A command can be fully declared and still DENIED to the caller in front of it.\n\nPassing gate one tells you nothing about gate two. Both are asked, every call, in that order.\n\nPERMISSION IS KETO'S ANSWER, NEVER OURS. Each declared command is a Keto object; the door asks may-this-subject-run-this per call. No permission in our tables, none computed in the wrapper, and the shaper's filter stays a SHAPE CHECK — it does not quietly become an authorisation check. That is the same rule as every other door and there is no WP exception.\n\nDENIAL IS NAMED. The refusal states which command was denied to which subject and lands a call row. A generic or silent refusal is a bug — unreadable refusals have cost us weeks before.\n\nSTILL EXCLUDED BY RULE, no role and no grant reaches them: wp eval, wp eval-file, wp db query, wp db cli, and any user create/update granting administrator.\n\nAND THE HOLE I WANT ANSWERED BEFORE THE CONFIGURE SET IS ENABLED: argument checking is not designed. The declared set covers the VERB, so a role permitted `wp option update` can update ANY option. Propose how arguments get constrained before that command is switched on — do not build past it quietly.",
+   "refs": [
+    "BEB-9293",
+    "BEB-9276",
+    "BEB-5793"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67958,
- "count": 55
+ "head": 67960,
+ "count": 57
 }
