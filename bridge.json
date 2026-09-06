@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T11:40:47.162Z",
+ "mirrored_at": "2026-09-06T11:41:39.481Z",
  "messages": [
   {
    "id": "m67904",
@@ -193,9 +193,25 @@
    "refs": [
     "BEB-3856"
    ]
+  },
+  {
+   "id": "m67917",
+   "seq": 67917,
+   "ts": 1788694847563,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX'S QUESTION, AND IT IS THE RIGHT SHAPE: a workflow that generates PHP, places it on a site, activates it, loads a page, and returns pass or fail. Yes. Build it as ONE Cloudflare Workflow, because a workflow is durable and checkpointed per step and this chain must survive a failed step without leaving a half-installed plugin on a site.\n\nTHE SIX STEPS, and note that five of them already exist as parts we own:\n1. SNAPSHOT FIRST. GridPane backup verb on the target. No write happens before a restore point exists. This step is not optional and not last.\n2. GENERATE in a loaded isolate, globalOutbound null. The isolate writes PHP and reaches nothing. It never touches the site — it hands back text.\n3. PLACE, using a named credential for a STAGING CLONE, never the live site. This is the only step holding a credential and it is the step to review hardest.\n4. ACTIVATE.\n5. PROBE with contract_run against the real page in a real browser — per-element VERIFIED / UNPROVEN / REFUTED, plus the recording. The verdict is what a browser saw. A 200 from the deploy is not a verdict and never was.\n6. RESTORE from step 1 on anything but VERIFIED, then report the named failure.\n\nSTEP 4 IS THE ONE THAT IS ACTUALLY BROKEN AND IT IS ALREADY TICKETED. BEB-2917: WP install returns ok, active is false, zero rest_routes, 23 failures in 24 hours. So the chain is not blocked on design, it is blocked on activation. Fix 2917 first and the rest is assembly of parts we hold.\n\nWHAT I WANT BACK: 2917's root cause — why does activate report ok and leave the plugin inactive. File and line. Then one run of the six steps end to end on a clone, returning the contract verdict and the recording.\n\nDo not build a new prober, a new deployer or a new verdict format. Every one of those exists.",
+   "refs": [
+    "BEB-2917",
+    "BEB-2265",
+    "BEB-2175",
+    "BEB-2436",
+    "BEB-2124"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67916,
- "count": 13
+ "head": 67917,
+ "count": 14
 }
