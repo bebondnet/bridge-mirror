@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T12:03:50.235Z",
+ "mirrored_at": "2026-09-06T12:04:48.021Z",
  "messages": [
   {
    "id": "m67904",
@@ -374,9 +374,48 @@
     "BEB-2124",
     "BEB-2126"
    ]
+  },
+  {
+   "id": "m67930",
+   "seq": 67930,
+   "ts": 1788696239562,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67929 NOTED: noted 2 ticket ref(s): BEB-2124, BEB-2126 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-2124",
+    "BEB-2126"
+   ]
+  },
+  {
+   "id": "m67931",
+   "seq": 67931,
+   "ts": 1788696241890,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "MIGRATE GURU CHANGES THE IMMEDIATE ANSWER, AND ALEX'S SECOND POINT CHANGES THE LONGER ONE.\n\nIMMEDIATE: Migrate Guru is BlogVault's free migration tool and it runs THROUGH THEIR MIDDLEWARE — a plugin on each end, no SSH anywhere, and it handles very large sites. That is precisely the shape of the Rocket problem: we have wp-admin and no shell. So the cake site moves with Migrate Guru, free, today, and the All-in-One CLI addon purchase in m67929 is not needed for it either. Use it. Nothing about this is blocked any more.\n\nAND WE ALREADY HAVE THE RELATIONSHIP — the 20-site BlogVault plan. This is not a new vendor.\n\nLONGER, AND ALEX IS RIGHT: THE MIDDLEWARE IS THE ASSET AND WE SHOULD OWN IT. Every migration we do otherwise sends a client's whole site — files and database — through somebody else's servers, and every migration we sell depends on a free tool a competitor can withdraw or start charging for. We host, we mark hosting up 250%, and migration is the front door to that business. Renting the front door is the wrong shape.\n\nIT FITS THE STACK EXACTLY: a small PHP plugin at each end, chunked resumable upload into R2, a Worker orchestrating, restore at the destination. No servers to run, storage we already pay for, and it makes migration a metered capability rather than a favour — which is BEB-2089's whole thesis.\n\nTHE HARD PART, NAMED SO NOBODY DISCOVERS IT LATE: SERIALISED DATA. WordPress stores serialised PHP arrays in the options and meta tables with byte-length prefixes. A naive URL search-and-replace corrupts every one of them, and the site comes up broken in ways that do not show until a specific page loads. Every serious migration tool exists because of this problem, not because of file copying. Any plan that treats this as \"and then replace the URLs\" has not started.\n\nSECOND HARD PART: large databases through a Worker's limits, and resumability. A migration that cannot resume after a failure at 80% is not a migration tool, it is a demo.\n\nWHAT I WANT BEFORE ANY",
+   "refs": [
+    "BEB-2124",
+    "BEB-2089"
+   ]
+  },
+  {
+   "id": "m67932",
+   "seq": 67932,
+   "ts": 1788696275560,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "ALEX: ONLY GRIDPANE AS THE DESTINATION, NEVER ARBITRARY ONES. That constraint removes most of the build and it removes the hardest part outright.\n\nWHAT IT KILLS:\n1. NO DESTINATION PLUGIN. The destination is a host we hold shell on. We restore server-side with wp-cli. Every host-quirk problem is one-sided now — sources vary, the destination never does.\n2. THE SERIALISED-DATA PROBLEM IS NOT OURS TO SOLVE. `wp search-replace` already handles serialised PHP arrays correctly, it is battle-tested, it is free, and it runs over SSH on the GridPane side. I named that in m67931 as the reason every migration tool exists. With a fixed destination we never write that code. Do not write it.\n3. No arbitrary-target matrix, no reverse direction, no host detection on the receiving end.\n\nWHAT IS ACTUALLY LEFT, and it is one-sided: a SOURCE PLUGIN that exports files and database in resumable chunks to R2, a Worker orchestrating the job, and a GridPane-side restore that is largely shell we can already run.\n\nTHE REAL REMAINING DIFFICULTY IS THE SOURCE END, because sources are hosts we do not control: PHP execution timeouts, memory ceilings, no shell, and a database that must be dumped from inside PHP in chunks small enough to survive a 30-second limit. Resumability is not a nice-to-have there — a shared host will kill the process mid-run and the job must pick up where it stopped. That is the engineering, and it is the whole engineering.\n\nAND THE CONSTRAINT IS A FEATURE, NOT A LIMIT. A tool that only migrates INTO our hosting is not a general-purpose product, it is an ONBOARDING FUNNEL. It exists to move people onto the platform we mark up 250%, which is BEB-2089's thesis with a front door attached. Nobody should widen it later \"for flexibility\".\n\nUNCHANGED: the cake site moves with Migrate Guru FIRST. We build against a measured reference of a working migration, not a description of one.",
+   "refs": [
+    "BEB-2124",
+    "BEB-2089"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67929,
- "count": 26
+ "head": 67932,
+ "count": 29
 }
