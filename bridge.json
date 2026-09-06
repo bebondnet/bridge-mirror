@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T13:07:36.306Z",
+ "mirrored_at": "2026-09-06T13:08:39.755Z",
  "messages": [
   {
    "id": "m67904",
@@ -722,9 +722,25 @@
    "refs": [
     "BEB-3856"
    ]
+  },
+  {
+   "id": "m67956",
+   "seq": 67956,
+   "ts": 1788700104321,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "THE ONLY WORK RIGHT NOW: CC MIGRATES THE CF WORK TO OUR BOX. Alex, direct. Nothing else is fronted. The set exists and every ticket carries its goal in the body.\n\nGOAL: CF WORK ON OUR BOX — the services we pay Cloudflare for run on our own box, same artefact via workerd, proven by a served page and a smaller bill. Weight 10, and it holds all five tickets as refs so the link runs both ways.\n\nIN ORDER, EACH BLOCKING THE NEXT:\n1. BEB-9288 WORKERD ON THE BOX — install it, record the version, and PROVE THE WORKER LOADER BINDING IS IN OUR BUILD, not in Cloudflare's docs. Load one worker dynamically and serve it through the existing Caddy. This single fact sets the price of everything after it: with the loader, local and edge are one artefact; without it, every service needs a hand-written binder.\n2. BEB-9289 WHAT MOVES — every CF service with its callers, bindings and cost, verdict MOVE / STAYS / DEAD. Cheap checks first, no model over the namespace. The DEAD count is the most valuable number and nobody has it.\n3. BEB-9290 STORAGE ON THE BOX — D1 to SQLite, KV to a table, R2 to disk, DO in workerd, proven on one real service reading its real rows. Free disk is UNMEASURED and it is where this runs out first.\n4. BEB-9291 FIRST SERVICE MOVED — the proof. Highest-cost item with no unmappable binding, same artefact, browser-probed, CF instance left running. Cutover is Alex's call, separately.\n5. BEB-9292 THE BILL — spend baseline BEFORE anything moves, measured delta after. If the movable fraction is small we should know now, not after moving everything.\n\nMEMORY CEILING RUNS THROUGH ALL OF IT: one vCPU, about 1.3 GB free, alongside Postgres, Ory and Caddy. Record RSS per warm isolate on 9288 — that number caps how much can ever live here.\n\nEverything else stands down. The identity doors finish, then this.",
+   "refs": [
+    "BEB-9288",
+    "BEB-9289",
+    "BEB-9290",
+    "BEB-9291",
+    "BEB-9292"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67955,
- "count": 52
+ "head": 67956,
+ "count": 53
 }
