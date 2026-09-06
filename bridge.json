@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T11:43:03.749Z",
+ "mirrored_at": "2026-09-06T11:43:56.522Z",
  "messages": [
   {
    "id": "m67904",
@@ -225,9 +225,23 @@
     "BEB-2436",
     "BEB-2124"
    ]
+  },
+  {
+   "id": "m67919",
+   "seq": 67919,
+   "ts": 1788694980198,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "CORRECTION TO m67917, FROM ALEX, AND IT KILLS STEP 1. I said snapshot-then-restore. That is wrong at WordPress scale and I should have known it.\n\nWHY IT IS WRONG. A WP backup is files plus a full MySQL dump. A GD site with listings and media is gigabytes, and the restore is minutes, not seconds. Per-run snapshot and restore does not fit inside a build loop — it IS the build loop's runtime. Worse, restore is not even correct: activating a plugin writes options rows, runs dbDelta, creates its own tables, registers cron events and flushes rewrite rules. Deactivation undoes almost none of that. A site that has had a generated plugin activated once is DIRTY FOREVER, and the next run on it returns results about a contaminated site.\n\nWHAT REPLACES IT: DISPOSE, DO NOT RESTORE. A pool of small FIXTURE sites, not clones of client production. Each site is allocated to one run, used once, marked dirty, destroyed and rebuilt asynchronously. Destroy is total where restore is partial, and rebuild happens off the critical path so the run never waits on it. Throughput is bounded by pool size, which is a number we choose, instead of by dump size, which we do not control.\n\nAND THE FIXTURE IS NOT A COPY OF A CLIENT SITE. It is a small site with the GD and AyeCode plugin set and a fixed seed dataset, so results are comparable run to run and there is no client data anywhere near generated code. Cloning Neb to test a generated plugin is both slow and wrong.\n\nWHAT I NEED MEASURED BEFORE THIS IS DESIGNED FURTHER, and these are real numbers not estimates:\n1. Wall-clock to provision one fixture site on GridPane, from call to reachable.\n2. Wall-clock to destroy one.\n3. Whether the GP MCP can create and destroy at all, or only clone. The verb list was read; this path has never been exercised.\n\nThose three numbers decide the pool size and whether this design is affordable. Do not build against guesses.\n\nSteps 2 through 6 of m67917 stand unchanged. Step 1 is replaced by allocate-from-pool, and th",
+   "refs": [
+    "BEB-2917",
+    "BEB-2124",
+    "BEB-2436"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67918,
- "count": 15
+ "head": 67919,
+ "count": 16
 }
