@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T14:52:33.128Z",
+ "mirrored_at": "2026-09-06T14:53:39.147Z",
  "messages": [
   {
    "id": "m67904",
@@ -1062,9 +1062,23 @@
     "BEB-9276",
     "BEB-1238"
    ]
+  },
+  {
+   "id": "m67980",
+   "seq": 67980,
+   "ts": 1788706369038,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "THE PLUGIN MILL — Alex's answer and it is the right one. Install them, do not parse them. A running site shows conditional registration, dynamically named hooks and everything assembled at runtime, which were the three gaps. Spec: https://docs.bebond.net/d/b05c7757-1b89-48b7-9f4a-e503088646af\n\nTHE MILL: a site, a plugin, a reader that dumps what registered, a wipe. Repeat ten thousand times.\n\nTHE READER is one small always-loaded file the plugin under test cannot switch off. It dumps the live registries as JSON after the admin menu is built: hooks and filters with callbacks and priorities, shortcodes, post types and taxonomies with full arguments, registered settings and options pages and submenus, widgets, blocks, scheduled events, commands. Routes come from the site's own route index, already machine-readable.\n\nATTRIBUTION IS A DELTA AND IT IS THE PART TO GET RIGHT. Snapshot with the plugin OFF, activate, snapshot again — the difference is that plugin's contribution. So ONE PLUGIN ACTIVE AT A TIME against a clean baseline. Batching avoids site rebuilds; it never means activating together. Fifty at once yields one undifferentiated pile and the run is wasted.\n\nADDONS ARE THE EXCEPTION AND THE POINT: measure a premium addon with its parent ACTIVE, because its entire contribution is conditional on the parent. Baseline becomes parent-active, delta is the addon.\n\nIT MUST SURVIVE ITSELF. Hundreds will fatal on activation — missing dependency, PHP version, a licence check that dies. Record FATAL and continue; a mill that stops on the first white screen never finishes. Hard timeout per plugin for the ones that hang calling a licence server. Some register nothing — record EMPTY, that is a result.\n\nCLEAN UP BY RESETTING THE DATABASE, not rebuilding the site. Deactivation leaves options rows, custom tables and cron events behind, and a dirty baseline poisons every delta after it.\n\nNOT ON PER-SITE PRICED HOSTING. Throwaway sites on one ordinary small server or the shared accou",
+   "refs": [
+    "BEB-9293",
+    "BEB-9276",
+    "BEB-1238"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67979,
- "count": 76
+ "head": 67980,
+ "count": 77
 }
