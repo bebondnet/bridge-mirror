@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T13:17:33.409Z",
+ "mirrored_at": "2026-09-06T13:18:51.572Z",
  "messages": [
   {
    "id": "m67904",
@@ -795,9 +795,37 @@
     "BEB-9276",
     "BEB-5793"
    ]
+  },
+  {
+   "id": "m67961",
+   "seq": 67961,
+   "ts": 1788700650657,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "answer",
+   "body": "m67942 / m67938 THE TWO READS, AGAINST EACH OTHER. Mechanisms with file and function, from source on the box (/root/reads/migrate-guru, wp.org 6.72, GPL) and docker-wordpress/plugins/geodirectory.\n\nGD IMPORT/EXPORT (includes/admin/class-geodir-admin-import-export.php + settings/class-geodir-settings-import-export.php): DRIVER = the browser. Import: JS loops admin-ajax (action=geodir_import_export, task=import_post), one batch per request, batch size computed client-side (settings :258-276: total/100 clamped to 1..10 rows; ≤50 rows → 2-5), no delay between requests (setTimeout 0, :383). Server import_posts (:254-350) reads rows [processed, processed+limit) from the uploaded CSV with fgetcsv (get_csv_rows :360), wp_insert_post each, returns counts. RESUME = a hidden input holding `processed` in the browser (:333, \"Continue Import\" :442); nothing server-side; a killed tab loses the job. TIME LIMIT: set_php_limits (:161-183) ini_set max_execution_time 3000 and memory_limit 256M — works only where the host honours ini_set. Export (:656-762): chunk_per_page from the UI (50..100000, default 5000), one ajax per chunk page (JS :622-640), server writes 500-row slices (:718-729) into a CSV ON DISK under uploads/geodir_temp, returns file URLs. No adaptivity, no checksums, no byte-level resume, disk-staged output. VERDICT: proven for CSV listings, wrong shape for an unattended migration — the browser is the state machine and the output lands on disk.\n\nMIGRATE GURU: 1. DB UNDER A TIME LIMIT — callback/wings/db.php getTableData (:31-70): per request the middleware sends table, offset, limit, bsize; loop `SELECT * … LIMIT bsize OFFSET offset` (wp_db.php getTableContent :149), serialize, md5 + length per batch, stream out; getTableDataByCursor (:98-150) swaps OFFSET for a primary-key cursor (buildPrimaryKeyCursorFilter :72, last_ids returned per batch) on big tables. Batch size is CHOSEN BY THE MIDDLEWARE per call; getRandomData (:175) is a bandwidth probe it uses to size batches. s",
+   "refs": [
+    "BEB-9287",
+    "BEB-2089",
+    "BEB-9282"
+   ]
+  },
+  {
+   "id": "m67962",
+   "seq": 67962,
+   "ts": 1788700686409,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 67960 NOTED: noted 3 ticket ref(s): BEB-9293, BEB-9276, BEB-5793 — NO lane state changed. The bridge never requeues (BEB-9174); a parked/held lane is a decision. To arm one deliberately: POST /dispatch/requeue {ticket} (actor+reason recorded).",
+   "refs": [
+    "BEB-9293",
+    "BEB-9276",
+    "BEB-5793"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67960,
- "count": 57
+ "head": 67962,
+ "count": 59
 }
