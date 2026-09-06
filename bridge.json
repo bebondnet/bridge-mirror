@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-06T13:13:47.903Z",
+ "mirrored_at": "2026-09-06T13:14:35.920Z",
  "messages": [
   {
    "id": "m67904",
@@ -754,9 +754,22 @@
     "BEB-9291",
     "BEB-9292"
    ]
+  },
+  {
+   "id": "m67958",
+   "seq": 67958,
+   "ts": 1788700471468,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "THIRD DOOR ON ORY — registry, and the seam is now ONE shared module (shared/ory-door.ts: hydraWho + ketoAllowed; vault and graph carry the same code inline and move to it when next touched). abilifi-registry deployed (workers.dev; the abilifi.net route list could not be re-read — token lacks zone routes, routes unchanged). authOrg: a Hydra token is verified against the box JWKS (aud must say \"registry\"), org and role come from Keto (Org#members → member, Org#owners → owner), X-Org may only select among memberships, then Door:registry#read (GET) or #write (POST) is asked per call. PROOF from outside: (1) operator token, aud registry → GET /plugin/manifest 200, org abilifi, the real ability list. (2) same token + X-Org: wpapps → 403 org_not_yours, refused by name. (3) token minted with aud graph at this door → 401 hydra_refused (\"aud [\\\"graph\\\"] does not name this door (registry)\"). (4) POST /plugin/manifest (write) as the Keto owner → 200 ok. (5) bb_ path → 200, unchanged. ONE THING LEARNED: Hydra refuses a token for an audience the CLIENT was not registered with — the operator client now lists vault, graph, declarations, store, tickets, docs, registry, auth, bridge, gp; a new door means one more audience on the clients that may call it (a row, not a deploy). Tuples: Door:registry read+write @ Role:operator#members. Doors reading Hydra + asking Keto: vault, graph, registry = 3 of 5; shaper inherits (unproven), sqld never will (box-local, source-locked). Commit on beb-2134-preflight. NEXT: BEB-2917 root cause (found, verifying on the WP box now) and the two plugin reads (GD import/export first, Migrate Guru second) — both nearly done.",
+   "refs": [
+    "BEB-5793",
+    "BEB-9283"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 67957,
- "count": 54
+ "head": 67958,
+ "count": 55
 }
