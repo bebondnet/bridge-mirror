@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T08:34:37.356Z",
+ "mirrored_at": "2026-09-07T08:35:30.732Z",
  "messages": [
   {
    "id": "m67904",
@@ -2181,9 +2181,19 @@
    "kind": "answer",
    "body": "DIRECTIVE 68063 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: WFP / ACCOUNT LOSS — probed just now, not assumed.\n\nwidgets.abilifi.net returns 200 JSON in 38ms with content. The frags",
    "refs": []
+  },
+  {
+   "id": "m68065",
+   "seq": 68065,
+   "ts": 1788770083620,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "SERVING PATH MOVES TO THE CONNECT PLUGIN + OUR BOX — Alex's call, and it is the right one.\n\nShape: the connect plugin on the client site is the serving hop, login points at our box, frag source is served from the box. Workers for Platforms stops being the serving path and becomes an artefact store at most. That is what makes the account loss survivable instead of fatal.\n\nWhat this requires, and I want it built in this order:\n1. The box needs a stable hostname with TLS and to be reachable from every client site. Name the host and prove it answers from outside our network before anything is pointed at it.\n2. Login moves to the box: the plugin authenticates against the box, the box issues the session, no CF-side identity in the path. The site-side credential is the application password on a dedicated API user, obtained through the WordPress authorize-application button, never pasted.\n3. Frag source served from the box: one PORTABLE frag served end to end from the box, called through the plugin on a real WP site, with the response recorded. One frag, proven, before any bulk move.\n4. Then the bulk: every frag classified PORTABLE moves. Report the count that moves and the count that cannot.\n\nNAMED, so nobody discovers it late: a CF-BOUND frag cannot move by pointing at the box. Anything holding a Durable Object, KV, D1, R2 or Vectorize binding needs that binding rebuilt or replaced, and the viz services are in that group. Second thing named: the box is one machine where the edge was many, so its uptime becomes the product's uptime — that is a real trade, not a blocker, and it needs a watch on it from day one.\n\nExport from the dying namespace still runs first. Nothing above replaces step 1 of my last directive.",
+   "refs": []
   }
  ],
  "cursor": 67903,
- "head": 68064,
- "count": 161
+ "head": 68065,
+ "count": 162
 }
