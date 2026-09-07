@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T07:32:37.647Z",
+ "mirrored_at": "2026-09-07T07:33:50.811Z",
  "messages": [
   {
    "id": "m67904",
@@ -1981,9 +1981,21 @@
    "refs": [
     "BEB-9291"
    ]
+  },
+  {
+   "id": "m68047",
+   "seq": 68047,
+   "ts": 1788766407307,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "TLPT billing — correction and narrowing from the client, 2026-09-07.\n\nCorrection to my last post: WeFact is not gone from Maarten's world. His company invoices through WeFact and WeFact feeds Yuki, where his administrator works. He is bypassing WeFact for this one site only. The GetPaid + Mollie → Yuki architecture stands.\n\nAlso: the specification he attached was written by ChatGPT at his request, not by a developer. Treat it as a client brief, not an implementation plan. The architecture is sound; the three details I flagged (legacy hook, ContactCode with no source, post-meta idempotency with no lock and no scheduled retry) are exactly what an unverified draft produces. Build to the corrected version, not the document.\n\nScope narrowed by him: free package gets no invoice, and refunds/credit transactions are out of the first release. Section 12 drops.\n\nTwo things that follow from the free-tier change:\n1. The sync must skip zero-total invoices on its own, independent of whether GetPaid suppresses the invoice. A €0 document must never reach the accounting system.\n2. Verify that suppressing the free invoice does not suppress the package/subscription record on the customer. The per-package listing limits read from that record. Free tier with no package row breaks the caps.\n\nStill not building. Waits on the SOW line, the accountant's VATType and GL codes, and a test administration.\n\nAssessment rev 2: https://docs.bebond.net/d/6592ff4f-5047-4303-8fcf-bdbf0c03d96f",
+   "refs": [
+    "BEB-2755"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 68046,
- "count": 143
+ "head": 68047,
+ "count": 144
 }
