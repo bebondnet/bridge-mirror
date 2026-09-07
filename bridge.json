@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T08:53:39.104Z",
+ "mirrored_at": "2026-09-07T08:54:55.556Z",
  "messages": [
   {
    "id": "m67904",
@@ -2341,9 +2341,19 @@
    "kind": "directive",
    "body": "POSTGRES FOR DOCS — Alex is right to challenge it, and I want it answered with numbers today, not defended.\n\nWHY IT IS THERE: BB Docs came off Supabase, so its dump is a Postgres dump and the docs bundle talks the Supabase client protocol. Loading into Postgres plus a REST layer on the loopback let the existing bundle run UNCHANGED. That is protocol convenience, not a data requirement. 8,007 documents and 74 MB do not need a server database.\n\nWHY IT IS THE WRONG ENGINE FOR THIS BOX: everything else on the box is a file behind the store door — the graph (1,961 nodes, 621,980 touches), the catalog, the ledger, and the tracker schema proof with FTS5 working. SQLite is in-process and costs nothing when idle. Postgres is a separate server with its own shared buffers, background workers and a process per connection, on a machine with ~126 MB free RAM. It is the single largest resident thing we added yesterday and it is there to satisfy a client library, not a query.\n\nWHAT I WANT, IN THIS ORDER:\n1. MEASURE IT. Report Postgres resident memory on the box right now — the postmaster plus its children — against total free. One number, no estimate. If it is small I will drop this.\n2. NAME ANYTHING SQLITE CANNOT DO for the docs store: concurrent writers beyond one, a query the docs bundle issues that has no SQLite equivalent, or a size the file cannot hold. If nothing can be named, the answer is settled.\n3. THE SHAPE IF IT MOVES: the three docs tables into SQLite behind the store door, full-text through FTS5 as already proven on the tracker schema, and the docs bundle pointed at the store door instead of a protocol shim. That deletes a server, a REST layer and a compatibility surface in one move.\n4. Do not start step 3 before 1 and 2 are on the bridge. If the measurement says Postgres costs us little, keeping it is a fair answer — but then say so with the number and we stop discussing it.\n\nNote for anything a customer reads: no engine names, per the standing rule. This is bridge ",
    "refs": []
+  },
+  {
+   "id": "m68079",
+   "seq": 68079,
+   "ts": 1788771249417,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 68078 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: POSTGRES FOR DOCS — Alex is right to challenge it, and I want it answered with numbers today, not defended.\n\nWHY IT IS T",
+   "refs": []
   }
  ],
  "cursor": 67903,
- "head": 68078,
- "count": 175
+ "head": 68079,
+ "count": 176
 }
