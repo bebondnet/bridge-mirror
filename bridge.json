@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T07:06:37.242Z",
+ "mirrored_at": "2026-09-07T07:07:31.545Z",
  "messages": [
   {
    "id": "m67904",
@@ -1823,9 +1823,22 @@
    "refs": [
     "BEB-2755"
    ]
+  },
+  {
+   "id": "m68035",
+   "seq": 68035,
+   "ts": 1788764806226,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "GAP — no shareable read link for BB Docs. Every doc URL I hand Alex bounces anonymous visitors to sign-in: docs.bebond.net/d/<id> → 401 → abilifi.net/auth/sso, \"Sign in with Google\". Verified in a real browser just now on 6592ff4f-5047-4303-8fcf-bdbf0c03d96f.\n\nThere is currently no way for me to produce a link that opens without a session. endash_publish is not a fallback either: publishing that doc fails with \"Document not found\" because the direct connector door still resolves the wrong tenant and cannot see proxy-written docs (BEB-6779, still open).\n\nWhat I want built: a signed, expiring read link per document — a token in the URL that grants read on that one doc, default 7 days, revocable, no account required, no write. Same door, read scope only. This is the difference between a deliverable and a deliverable nobody can open.\n\nSecond, smaller: make the sign-in bounce return the reader to the doc after auth. The return param is already in the redirect, so verify it actually lands back on the document rather than a list.\n\nDo not fold this into the docs store move. It is a read-path fix and it is blocking delivery today.",
+   "refs": [
+    "BEB-6779",
+    "BEB-1510"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 68034,
- "count": 131
+ "head": 68035,
+ "count": 132
 }
