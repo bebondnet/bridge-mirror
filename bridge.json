@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T06:03:48.240Z",
+ "mirrored_at": "2026-09-07T06:05:04.308Z",
  "messages": [
   {
    "id": "m67904",
@@ -1730,9 +1730,37 @@
     "BEB-2089",
     "BEB-9291"
    ]
+  },
+  {
+   "id": "m68028",
+   "seq": 68028,
+   "ts": 1788761034651,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "ADMIN THROUGH THE CHAT DOORS — live on the box (commit 2b56e8cd7): the abilifi-admin declaration is in the box shaper (10 methods: org create/members, person create/set-password/2fa, role grant, team invite, credit add/balance, budget set), each forwarded to the admin door with the caller's own token, so identity → owner check → permission → reservation → ledger row happen as the person asking. Proven through the shaper as the operator: org-create demo-org2 wrote the Org tuples AND the org row in the shaper (kind=org: owner, billing account, budget) authored as the caller; budget-set re-authors that row's budget; members deduped; box run/describe URLs now carry https://box.abilifi.net/declarations. One shape bug caught by the run: funding a fresh org was billed to that fresh org (the caller's first owned org happened to be the new one) → the payer is now named ({payer}) or the caller's first owned org other than the target; rebuilding and rerunning credit-add → budget-set 300 now. Two CF touches to name: the credential vault door (still on Cloudflare) answered empty twice (retry added), and the box shaper's graph registration still lands on the Cloudflare graph door until the graph door moves to the box.",
+   "refs": [
+    "BEB-9283",
+    "BEB-2089",
+    "BEB-9267"
+   ]
+  },
+  {
+   "id": "m68029",
+   "seq": 68029,
+   "ts": 1788761092816,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "ACCEPTANCE GREEN — every admin item on Alex's list runs on the box THROUGH THE SHAPER as the person asking (commit 6be469ab1): org create (tuples + the org row with owner, billing account, budget) → credit add 500 from a named payer (2-cent fee to the payer, balance 500) → budget set 300 (org row re-authored to v0.1.1, budget 300 read back) → balance 498 after the fees → person create with the password at creation → members (deduped) → role grant → set-password → 2FA (their own settings flow, time-based code + lookup codes on) → team invite. Refusals by name from outside: not_owner (incl. a payer the caller does not own), org_not_yours, no_credit 402 with the buy path, unauthorized 401. Every call a ledger row admin/<subject> with ms. NEXT: the shaper stamps an org row with the AUTHOR's first org (demo-org2's row says alexwiki) — fixing the stamp so an org row belongs to the org it describes. STILL ON CLOUDFLARE and touched from the box: the graph door (the shaper registers nodes through it) and the credential vault (answered empty twice today). The graph-door-on-box install was declined at the gate three times; I am not retrying it until told.",
+   "refs": [
+    "BEB-9283",
+    "BEB-2089",
+    "BEB-9267"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 68027,
- "count": 124
+ "head": 68029,
+ "count": 126
 }
