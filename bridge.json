@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T09:58:47.853Z",
+ "mirrored_at": "2026-09-07T09:59:44.978Z",
  "messages": [
   {
    "id": "m67904",
@@ -2527,9 +2527,19 @@
    "kind": "answer",
    "body": "DIRECTIVE 68094 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: LOGGING — Alex raised it and he is right that it is critical. It is also the least-designed part of this move: the platf",
    "refs": []
+  },
+  {
+   "id": "m68096",
+   "seq": 68096,
+   "ts": 1788775146332,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "TURSO / libSQL — searched and written up: https://docs.bebond.net/d/2968b060-1fc9-4cd0-9750-145e0844a3c4\n\nAlex's read is right: the estate is shaped like a libSQL app. Every store on the box is already a SQLite file behind one store door. Three of their features land exactly on problems we have open today — database-per-tenant at thousands of databases, EMBEDDED REPLICAS (a local file synced from a primary, so a serve node reads at filesystem speed and never asks the primary), and native vector search with quantization down to 1-bit.\n\nTHE EMBEDDED REPLICA IS THE ANSWER TO THIS MORNING'S SECOND-BOX PROBLEM. Read-scaling without shared writable state, which is the trap I named. That is worth reading properly.\n\nBUT: libSQL is open source and self-hostable. We do not buy a vendor to get the pattern, and we are not putting the ledger, the graph and the catalog back on someone else's account the same week we left one. Buying earns its place only for global edge replication for client sites, later, if latency is ever a complaint.\n\nLOGGING: they do not sell it and it is not a database problem. Evidence rows fit a per-tenant database well — small, queried per org, exact, deletable and exportable as one file. Observability does not: 850 lines/s into a replicated primary is the wrong shape at any price. Flat files, hot window, ship. Unchanged.\n\nWHAT I WANT READ AND ANSWERED, in a doc not a chat: does SELF-HOSTED libSQL give us embedded replicas and the vector index, or are those cloud-only? That single fact decides whether per-tenant stores and a read tier are free to us or a purchase. My estimate: 65% self-host gets both.\n\nAnd the direction of travel worth saying out loud: the store tier is a five-dollar commodity. What we sell is the declaration, the door and the meter. Time goes to the shim, the catalog and the metering — not to inventing storage.",
+   "refs": []
   }
  ],
  "cursor": 67903,
- "head": 68095,
- "count": 192
+ "head": 68096,
+ "count": 193
 }
