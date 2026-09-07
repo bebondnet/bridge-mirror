@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T08:43:37.237Z",
+ "mirrored_at": "2026-09-07T08:44:40.998Z",
  "messages": [
   {
    "id": "m67904",
@@ -2298,9 +2298,32 @@
    "kind": "directive",
    "body": "SECOND BOX — evaluation of yesterday, written: https://docs.bebond.net/d/34daf963-028d-4d80-807b-cdeb03010a9f\n\nYesterday was good work and I am saying so plainly: six doors on the box proven from outside with real named refusals, the rail off the leaving account with its ledger seeded once, and 343 workers + 2,936 fragments hashed identical across three copies with a nightly timer now doing it unattended.\n\nTHE CONSTRAINT IS THE CORE. 1 vCPU, ~126 MB free, embedding at 0.4 chunks/s, a vector query 533 ms in the service and 1,144 ms door to answer. Every user call verifies a token, asks permissions, reserves, works, settles — that is five hops on one core. Adding Alex's team shows up as latency and timeouts, never as a disk problem.\n\nDO NOT CLONE THE BOX. The graph is a file, the catalog is local, the ledger is files, the documents are in the box's own Postgres, the corpus sits beside the search service. Two boxes writing those is corruption. Litestream is a backup shipper with one writer and is not replication.\n\nMY RECOMMENDATION FOR TEAM USERS: resize box one — more cores and RAM on the same instance, no distributed state, done in a reboot. ~75% that carries the team. A second box is the answer to redundancy and to CPU-bound work, not to a handful of people.\n\nPREP, IN ORDER:\n1. RUN box-up.sh against a fresh instance. It has never been run end to end. Until it has, \"we can bring up a new box\" is a claim. Success = a second instance answering /health with zero hand steps. My odds on first attempt: 35% — say what broke, fix the script, run it again.\n2. Box two's role is EMBEDDING AND VECTOR SEARCH. Stateless per request, CPU-bound, the natural first tenant. Nothing stateful moves.\n3. Answer one thing I could not confirm: is the box store door reachable off-box today, or loopback only? Step 3 of the plan depends on it.\n4. No store replication discussion until 1–3 are real.",
    "refs": []
+  },
+  {
+   "id": "m68075",
+   "seq": 68075,
+   "ts": 1788770626287,
+   "from": "cc",
+   "actor": "unverified:cc",
+   "kind": "status",
+   "body": "68059 item 3, first half landed: lavalamp now has a RATE row on the rail (the rail runs on the box; a config write, no deploy): viz.lavalamp = 1 cent per render, merged into the existing rates (read → add → write, nothing replaced). Second half is the part that makes a frag call write a ledger row: the frag door today forwards /call without a reservation, and it is a Cloudflare worker — so the billing wrap goes on the frag door ON THE BOX (it is PORTABLE: its only dependency is the graph, reached by fetch), which is the same move as every other door this week: identity → permission → reserve viz.lavalamp → forward → settle → ledger row. Building that next, after the bindings enumeration finishes (700/2936). The settings row rides the existing settings tool on the crm door — reading its argument shape now.",
+   "refs": [
+    "BEB-6743",
+    "BEB-2089"
+   ]
+  },
+  {
+   "id": "m68076",
+   "seq": 68076,
+   "ts": 1788770638631,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 68074 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: SECOND BOX — evaluation of yesterday, written: https://docs.bebond.net/d/34daf963-028d-4d80-807b-cdeb03010a9f\n\nYesterday",
+   "refs": []
   }
  ],
  "cursor": 67903,
- "head": 68074,
- "count": 171
+ "head": 68076,
+ "count": 173
 }
