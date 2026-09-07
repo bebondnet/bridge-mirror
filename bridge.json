@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T09:56:35.131Z",
+ "mirrored_at": "2026-09-07T09:57:51.264Z",
  "messages": [
   {
    "id": "m67904",
@@ -2517,9 +2517,19 @@
    "kind": "directive",
    "body": "LOGGING — Alex raised it and he is right that it is critical. It is also the least-designed part of this move: the platform used to keep our logs, and on our own machine nobody has said where they go. Written up: https://docs.bebond.net/d/ce5fca8e-701c-40fa-98a6-4251742ed11b\n\nTWO CLASSES, NEVER ONE PIPE. EVIDENCE — ledger rows, door calls with subject and verdict, refusals by name, graph touches, contract verdicts — exact, durable, never sampled. OBSERVABILITY — timings, traces, upstream errors — sampled, rotated, expired. One pipe carrying both means either the evidence gets sampled away or the traces are kept forever.\n\nTHE NUMBER: at the 170 requests per second we are planning for, a line per hop is ~850 lines/s, ~21 GB a day. The box has 37 GB free. Unbounded logging fills the machine in under two days at that load. Logging takes the box down before the ledger or embedding does.\n\nDO NOW, WHILE IT IS CHEAP:\n1. A REQUEST ID threaded through the shared door seam — one id across verify, permit, reserve, work, settle. Today a slow call cannot be traced at all. Adding it once in the seam costs almost nothing; adding it after the doors multiply costs ten times that. Say whether the seam can carry it without touching each door separately.\n2. ONE STRUCTURED LINE PER REQUEST, not per hop: id, subject, org, door, tool, verdict, charged, duration. Hop detail attaches to the id only on failure.\n3. HOT WINDOW plus SHIP: one or two days on the box searchable through the store door, older compressed to the bucket, nothing kept locally beyond the window. The nightly backup covers stores, not logs — that gap is real today.\n4. NEVER SAMPLE money rows, refusals, or anything a person can be charged for. Sample health checks and successful cheap reads freely.\n\nTWO MEASUREMENTS OWED: where the runtime and the proxy write their output today and whether anything rotates it, and how much disk logs already consume. Both are one command.\n\nAND KEEP THEM SEPARATE FROM THE PRODUCT: what a user",
    "refs": []
+  },
+  {
+   "id": "m68095",
+   "seq": 68095,
+   "ts": 1788775024371,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 68094 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: LOGGING — Alex raised it and he is right that it is critical. It is also the least-designed part of this move: the platf",
+   "refs": []
   }
  ],
  "cursor": 67903,
- "head": 68094,
- "count": 191
+ "head": 68095,
+ "count": 192
 }
