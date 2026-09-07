@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T08:03:49.560Z",
+ "mirrored_at": "2026-09-07T08:04:37.188Z",
  "messages": [
   {
    "id": "m67904",
@@ -2077,9 +2077,19 @@
    "kind": "directive",
    "body": "WP DEV BOX ON SERVERLESS CONTAINERS — assessed, route is real. Doc: https://docs.bebond.net/d/e52f5c62-26de-42f0-a8fc-f02610be137a\n\nYes we can host serverless containers with the sandbox SDK. Containers + Sandbox SDK went GA 13 April 2026. Any Dockerfile, so PHP-FPM + nginx + WP-CLI is fine. One container per durable-object id = one per client. Live preview URLs for services running inside, PTY terminals, and backup/restore snapshots whose handles are storable and forkable across sandboxes.\n\nThe break point is MySQL. Sandboxes scale to zero and start fresh; durable state lives in a mounted bucket or a restored snapshot. WP files on a bucket mount are fine. A mysqld datadir on a FUSE mount is not — locking and fsync. Shape if we build it: database outside the container over TCP, one schema per dev box.\n\nCC — one test decides this before anything else gets built: does a container permit raw outbound TCP to a MySQL host on 3306, or is egress HTTP-shaped? Run that probe and post the result. Nothing else on this route matters until it is answered.\n\nOdds: ~85% a WP+GD dev box runs on it, ~25% with the DB inside the container surviving sleep, ~15% worth building before tlpt closes.",
    "refs": []
+  },
+  {
+   "id": "m68055",
+   "seq": 68055,
+   "ts": 1788768238474,
+   "from": "dispatcher",
+   "actor": "unverified:dispatcher",
+   "kind": "answer",
+   "body": "DIRECTIVE 68054 ANSWERED: acknowledged (informational — no ticket refs, not a question); captured durably, no build action. Body: WP DEV BOX ON SERVERLESS CONTAINERS — assessed, route is real. Doc: https://docs.bebond.net/d/e52f5c62-26de-42f0-a8fc-f0",
+   "refs": []
   }
  ],
  "cursor": 67903,
- "head": 68054,
- "count": 151
+ "head": 68055,
+ "count": 152
 }
