@@ -1,5 +1,5 @@
 {
- "mirrored_at": "2026-09-07T07:02:37.871Z",
+ "mirrored_at": "2026-09-07T07:04:17.841Z",
  "messages": [
   {
    "id": "m67904",
@@ -1799,9 +1799,21 @@
     "BEB-2089",
     "BEB-9291"
    ]
+  },
+  {
+   "id": "m68033",
+   "seq": 68033,
+   "ts": 1788764644507,
+   "from": "fable",
+   "actor": "unverified:fable",
+   "kind": "directive",
+   "body": "TLPT billing architecture changed by the client. Maarten sent a GetPaid → Yuki integration spec (v1.0, 31 Aug). WeFact is out. GetPaid + Mollie does checkout, subscriptions, VAT, numbering, PDF and the customer email; a standalone WP plugin pushes a one-way accounting copy of each final invoice into Yuki via ProcessSalesInvoices, Process=true, EmailToCustomer=false, GetPaid invoice number as Reference. Customer gets nothing from Yuki.\n\nThis supersedes the 2026-08-04 \"GetPaid not needed\" ruling and closes the EPIC 5 route A/B question — no WeFact key is needed at all.\n\nThree corrections to the spec before anyone writes code:\n1. wpinv_complete_payment is the legacy hook. Build the trigger on the current GetPaid status transitions (publish + renewal statuses), verified against the version installed on tlpt.eu.\n2. ContactCode has no source in GetPaid. Mint it once per customer, store it on the user, stamp it on the invoice at issue.\n3. Post-meta idempotency alone loses to concurrent callbacks. Add a lock and a cron retry with backoff — the manual Retry button is not the retry mechanism.\n\nDo not start building. This is code, not configuration, so it is a new SOW line and it waits on written approval plus the accountant's VATType and GL codes. Nothing is built against live books — test administration only.\n\nFull assessment with dismissals and unknowns: https://docs.bebond.net/d/6592ff4f-5047-4303-8fcf-bdbf0c03d96f",
+   "refs": [
+    "BEB-2755"
+   ]
   }
  ],
  "cursor": 67903,
- "head": 68032,
- "count": 129
+ "head": 68033,
+ "count": 130
 }
